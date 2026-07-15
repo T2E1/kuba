@@ -51,6 +51,9 @@ export default defineConfig({
     minify: false,
     outDir: 'dist',
     rollupOptions: {
+      output: {
+        exports: 'named',
+      },
       plugins: [
         terser({
           format: {
