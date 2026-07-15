@@ -24,6 +24,7 @@
   "exports": {
     ".": "./dist/kuba.js",
     "./cookie": "./dist/cookie.js",
+    "./http": "./dist/http.js",
     "./directive": "./dist/directive.js",
     "./dom": "./dist/dom.js",
     "./echo": "./dist/echo.js",

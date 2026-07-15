@@ -15,6 +15,7 @@ export default defineConfig({
       '@form': r('packages/form'),
       '@layout': r('packages/layout'),
       '@cookie': r('packages/cookie'),
+      '@http': r('packages/http/index.js'),
       '@directive': r('packages/directive'),
       '@dom': r('packages/dom'),
       '@echo': r('packages/echo'),
@@ -46,6 +47,7 @@ export default defineConfig({
         result: r('packages/result/index.js'),
         router: r('packages/router/index.js'),
         spark: r('packages/spark/index.js'),
+        http: r('packages/http/index.js'),
         storage: r('packages/storage/index.js'),
       },
       formats: ['es'],
@@ -58,7 +60,13 @@ export default defineConfig({
         exports: 'named',
       },
       plugins: [
-        terser({ compress: true, mangle: true, format: { comments: false } }),
+        terser({
+          compress: true,
+          mangle: true,
+          format: {
+            comments: false,
+          },
+        }),
       ],
     },
   },

@@ -10,6 +10,7 @@
       "@form/*": ["packages/form/*"],
       "@layout/*": ["packages/layout/*"],
       "@cookie/*": ["packages/cookie/*"],
+      "@http": ["packages/http/index.js"],
       "@directive/*": ["packages/directive/*"],
       "@dom/*": ["packages/dom/*"],
       "@echo/*": ["packages/echo/*"],

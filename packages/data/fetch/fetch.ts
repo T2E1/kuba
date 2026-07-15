@@ -1,9 +1,9 @@
 import interpolate from '@behavior/render/interpolate'
 import { attributeChanged, define } from '@directive'
 import Echo from '@echo'
+import http from '@http'
 import { after, before } from '@middleware'
 import { Headless } from '@mixin'
-import http from './http'
 import { abort, dispatch } from './interface'
 
 @define('k-fetch')
