@@ -22,63 +22,21 @@
     "dist"
   ],
   "exports": {
-    ".": {
-      "import": "./dist/kuba.js",
-      "require": "./dist/kuba.cjs"
-    },
-    "./cookie": {
-      "import": "./dist/cookie.js",
-      "require": "./dist/cookie.cjs"
-    },
-    "./directive": {
-      "import": "./dist/directive.js",
-      "require": "./dist/directive.cjs"
-    },
-    "./dom": {
-      "import": "./dist/dom.js",
-      "require": "./dist/dom.cjs"
-    },
-    "./echo": {
-      "import": "./dist/echo.js",
-      "require": "./dist/echo.cjs"
-    },
-    "./event": {
-      "import": "./dist/event.js",
-      "require": "./dist/event.cjs"
-    },
-    "./middleware": {
-      "import": "./dist/middleware.js",
-      "require": "./dist/middleware.cjs"
-    },
-    "./mixin": {
-      "import": "./dist/mixin.js",
-      "require": "./dist/mixin.cjs"
-    },
+    ".": "./dist/kuba.js",
+    "./cookie": "./dist/cookie.js",
+    "./directive": "./dist/directive.js",
+    "./dom": "./dist/dom.js",
+    "./echo": "./dist/echo.js",
+    "./event": "./dist/event.js",
+    "./middleware": "./dist/middleware.js",
+    "./mixin": "./dist/mixin.js",
     "./pixel": "./packages/pixel/index.css",
-    "./polyfill": {
-      "import": "./dist/polyfill.js",
-      "require": "./dist/polyfill.cjs"
-    },
-    "./renderer": {
-      "import": "./dist/renderer.js",
-      "require": "./dist/renderer.cjs"
-    },
-    "./result": {
-      "import": "./dist/result.js",
-      "require": "./dist/result.cjs"
-    },
-    "./router": {
-      "import": "./dist/router.js",
-      "require": "./dist/router.cjs"
-    },
-    "./spark": {
-      "import": "./dist/spark.js",
-      "require": "./dist/spark.cjs"
-    },
-    "./storage": {
-      "import": "./dist/storage.js",
-      "require": "./dist/storage.cjs"
-    }
+    "./polyfill": "./dist/polyfill.js",
+    "./renderer": "./dist/renderer.js",
+    "./result": "./dist/result.js",
+    "./router": "./dist/router.js",
+    "./spark": "./dist/spark.js",
+    "./storage": "./dist/storage.js"
   },
   "repository": {
     "type": "git",

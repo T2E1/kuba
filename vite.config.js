@@ -46,7 +46,7 @@ export default defineConfig({
         spark: r('packages/spark/index.js'),
         storage: r('packages/storage/index.js'),
       },
-      formats: ['es', 'cjs'],
+      formats: ['es'],
     },
     minify: false,
     outDir: 'dist',
