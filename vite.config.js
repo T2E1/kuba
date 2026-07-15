@@ -4,7 +4,31 @@ import { defineConfig } from 'vite'
 
 const r = (p) => resolve(__dirname, p)
 
+function minifyCSS(css) {
+  return css
+    .replace(/\/\*[\s\S]*?\*\//g, '')
+    .replace(/\s+/g, ' ')
+    .replace(/\s*([{}:;,>~+])\s*/g, '$1')
+    .replace(/;}/g, '}')
+    .trim()
+}
+
+function minifyCSSTemplateLiterals() {
+  return {
+    name: 'minify-css-template-literals',
+    transform(code, id) {
+      if (!/\.(js|ts)$/.test(id)) return null
+      const result = code.replace(
+        /\bcss`([\s\S]*?)`/g,
+        (_, css) => `css\`${minifyCSS(css)}\``,
+      )
+      return result !== code ? { code: result, map: null } : null
+    },
+  }
+}
+
 export default defineConfig({
+  plugins: [minifyCSSTemplateLiterals()],
   resolve: {
     alias: {
       '@behavior': r('packages/behavior'),
