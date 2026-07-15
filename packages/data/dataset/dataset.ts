@@ -1,5 +1,6 @@
 import { attributeChanged, define } from '@directive'
 import Echo from '@echo'
+import { customEvent } from '@event'
 import { around } from '@middleware'
 import { Headless } from '@mixin'
 import { dispatch } from './interface'
@@ -30,9 +31,7 @@ class Dataset extends Echo(Headless(HTMLElement)) {
   }
 
   [dispatch]() {
-    const init = { bubbles: true, cancelable: true, detail: this.value }
-    const event = new CustomEvent('change', init)
-    this.dispatchEvent(event)
+    this.dispatchEvent(customEvent('change', this.value))
     return this
   }
 

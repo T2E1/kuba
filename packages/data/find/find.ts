@@ -1,5 +1,6 @@
 import { attributeChanged, define } from '@directive'
 import Echo from '@echo'
+import { customEvent } from '@event'
 import { around } from '@middleware'
 import { Headless } from '@mixin'
 import { dispatch } from './interfaces'
@@ -33,9 +34,7 @@ class Find extends Echo(Headless(HTMLElement)) {
     const detail = this.parentElement.value.find(
       ({ [this.key]: value }) => value === this.value,
     )
-    const init = { bubbles: true, cancelable: true, detail }
-    const event = new CustomEvent('find', init)
-    this.parentElement.dispatchEvent(event)
+    this.parentElement.dispatchEvent(customEvent('find', detail))
     return this
   }
 }

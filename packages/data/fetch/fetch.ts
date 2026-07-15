@@ -1,6 +1,7 @@
 import interpolate from '@behavior/render/interpolate'
 import { attributeChanged, define } from '@directive'
 import Echo from '@echo'
+import { customEvent } from '@event'
 import http from '@http'
 import { after, before } from '@middleware'
 import { Headless } from '@mixin'
@@ -34,8 +35,8 @@ class Fetch extends Echo(Headless(HTMLElement)) {
     requestIdleCallback(async () => {
       const { data, error } = await response
       error
-        ? this.dispatchEvent(new CustomEvent('error', { detail: data }))
-        : this.dispatchEvent(new CustomEvent('ok', { detail: data }))
+        ? this.dispatchEvent(customEvent('error', data))
+        : this.dispatchEvent(customEvent('ok', data))
     })
     return this
   }
