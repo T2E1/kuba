@@ -6,6 +6,21 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) and 
 
 ---
 
+## [0.1.0-alpha.4] — 2026-07-15
+
+### Added
+
+- `packages/data/fetch/` — headless HTTP component with AbortController and ok/error events
+- `packages/http/` — standalone fluent HTTP builder with subpath export `@t2e1/kuba/http`
+
+### Changed
+
+- `dataset` — rewritten with in-memory Storage (Map), push/delete/reset/upsert pattern
+- `find` — rewritten to query `parentElement.value` (in-memory), dispatches `find` event
+- `filter` — rewritten to query `parentElement.value` (in-memory), dispatches `filter` event
+- All `new CustomEvent(...)` replaced with `customEvent` from `@event`
+- Tags renamed to `k-` prefix (`k-dataset`, `k-find`, `k-filter`, `k-fetch`)
+
 ## [0.1.0-alpha.3] — 2026-07-15
 
 ### Fixed
