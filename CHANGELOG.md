@@ -6,6 +6,14 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) and 
 
 ---
 
+## [0.1.0-alpha.2] — 2026-07-15
+
+### Changed
+
+- Drop CJS output, ESM only
+- Remove IIFE output
+- Simplify subpath exports in package.json
+
 ## [0.1.0-alpha.1] — 2026-07-15
 
 ### Added
