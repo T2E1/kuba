@@ -1,41 +1,9 @@
 import { resolve } from 'node:path'
 import terser from '@rollup/plugin-terser'
 import { defineConfig } from 'vite'
+import minifyTemplateLiterals from './plugins/minify-template-literals.js'
 
 const r = (p) => resolve(__dirname, p)
-
-function minifyCSS(css) {
-  return css
-    .replace(/\/\*[\s\S]*?\*\//g, '')
-    .replace(/\s+/g, ' ')
-    .replace(/\s*([{}:;,>~+])\s*/g, '$1')
-    .replace(/;}/g, '}')
-    .trim()
-}
-
-function minifyHTML(html) {
-  return html
-    .replace(/<!--[\s\S]*?-->/g, '')
-    .replace(/\s+/g, ' ')
-    .replace(/\s*(<[^>]+>)\s*/g, '$1')
-    .trim()
-}
-
-function minifyTemplateLiterals() {
-  return {
-    name: 'minify-template-literals',
-    transform(code, id) {
-      if (!/\.(js|ts)$/.test(id)) return null
-      const result = code
-        .replace(/\bcss`([\s\S]*?)`/g, (_, css) => `css\`${minifyCSS(css)}\``)
-        .replace(
-          /\bhtml`([\s\S]*?)`/g,
-          (_, html) => `html\`${minifyHTML(html)}\``,
-        )
-      return result !== code ? { code: result, map: null } : null
-    },
-  }
-}
 
 export default defineConfig({
   plugins: [minifyTemplateLiterals()],
