@@ -1,25 +1,17 @@
 import { attributeChanged, define } from '@directive'
 import Echo from '@echo'
-import { customEvent } from '@event'
+import { around } from '@middleware'
 import { Headless } from '@mixin'
-import DB from '@storage'
+import { dispatch } from './interface'
+import { Storage } from './storage'
 
-@define('m-dataset')
-class Dataset extends Headless(Echo(HTMLElement)) {
-  #store
+@define('k-dataset')
+class Dataset extends Echo(Headless(HTMLElement)) {
+  #storage = Storage.from(this)
   #upsert
 
-  get store() {
-    return (this.#store ??= '')
-  }
-
-  @attributeChanged('store')
-  set store(value) {
-    this.#store = value
-  }
-
   get upsert() {
-    return (this.#upsert ??= 'id')
+    return this.#upsert
   }
 
   @attributeChanged('upsert')
@@ -27,35 +19,33 @@ class Dataset extends Headless(Echo(HTMLElement)) {
     this.#upsert = value
   }
 
-  async add(data) {
-    const db = await DB.open()
-    const { data: created, error } = await db[this.store].add(data)
-    error
-      ? this.dispatchEvent(customEvent('failed', error))
-      : this.dispatchEvent(customEvent('created', created))
+  get value() {
+    return this.#storage.values
+  }
+
+  @around(dispatch)
+  delete(key) {
+    this.#storage.delete(key)
     return this
   }
 
-  async delete(id) {
-    const db = await DB.open()
-    const { data: removed, error } = await db[this.store].delete(id)
-    error
-      ? this.dispatchEvent(customEvent('failed', error))
-      : this.dispatchEvent(customEvent('removed', removed))
+  [dispatch]() {
+    const init = { bubbles: true, cancelable: true, detail: this.value }
+    const event = new CustomEvent('change', init)
+    this.dispatchEvent(event)
     return this
   }
 
-  async put(data) {
-    const db = await DB.open()
-    const id = data[this.upsert]
+  @around(dispatch)
+  push(data) {
+    this.#storage.push(data)
+    return this
+  }
 
-    delete data[this.upsert]
-
-    const { data: saved, error } = await db[this.store].put(id, data)
-
-    error
-      ? this.dispatchEvent(customEvent('failed', error))
-      : this.dispatchEvent(customEvent('saved', saved))
+  @around(dispatch)
+  reset() {
+    this.#storage.clear()
+    return this
   }
 }
 
