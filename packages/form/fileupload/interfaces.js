@@ -1,0 +1,5 @@
+export const change = Symbol('change')
+export const dispatch = Symbol('dispatch')
+export const reflectable = Symbol('reflectable')
+export const reportable = Symbol('reportable')
+export const validatable = Symbol('validatable')
