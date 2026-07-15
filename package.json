@@ -54,10 +54,7 @@
       "import": "./dist/mixin.js",
       "require": "./dist/mixin.cjs"
     },
-    "./pixel": {
-      "import": "./dist/pixel.js",
-      "require": "./dist/pixel.cjs"
-    },
+    "./pixel": "./packages/pixel/index.css",
     "./polyfill": {
       "import": "./dist/polyfill.js",
       "require": "./dist/polyfill.cjs"

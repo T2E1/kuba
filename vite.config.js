@@ -14,7 +14,6 @@ export default defineConfig({
         event: resolve(__dirname, 'packages/event/index.js'),
         middleware: resolve(__dirname, 'packages/middleware/index.js'),
         mixin: resolve(__dirname, 'packages/mixin/index.js'),
-        pixel: resolve(__dirname, 'packages/pixel/index.js'),
         polyfill: resolve(__dirname, 'packages/polyfill/index.js'),
         renderer: resolve(__dirname, 'packages/renderer/index.js'),
         result: resolve(__dirname, 'packages/result/index.js'),
