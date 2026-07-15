@@ -89,7 +89,9 @@ export default defineConfig({
       output: {
         exports: 'named',
       },
-      plugins: [terser({ format: { comments: false } })],
+      plugins: [
+        terser({ compress: true, mangle: true, format: { comments: false } }),
+      ],
     },
   },
 })
