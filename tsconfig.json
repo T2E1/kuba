@@ -1,0 +1,29 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "experimentalDecorators": true,
+    "target": "ES2019",
+    "paths": {
+      "@behavior/*": ["packages/behavior/*"],
+      "@component/*": ["packages/component/*"],
+      "@data/*": ["packages/data/*"],
+      "@form/*": ["packages/form/*"],
+      "@layout/*": ["packages/layout/*"],
+      "@cookie/*": ["packages/cookie/*"],
+      "@directive/*": ["packages/directive/*"],
+      "@dom/*": ["packages/dom/*"],
+      "@echo/*": ["packages/echo/*"],
+      "@event/*": ["packages/event/*"],
+      "@middleware/*": ["packages/middleware/*"],
+      "@mixin/*": ["packages/mixin/*"],
+      "@pixel/*": ["packages/pixel/*"],
+      "@polyfill/*": ["packages/polyfill/*"],
+      "@renderer/*": ["packages/renderer/*"],
+      "@result/*": ["packages/result/*"],
+      "@router/*": ["packages/router/*"],
+      "@spark/*": ["packages/spark/*"],
+      "@storage": ["packages/storage/index.js"],
+      "@storage/*": ["packages/storage/*"]
+    }
+  }
+}
