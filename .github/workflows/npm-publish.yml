@@ -1,0 +1,25 @@
+name: 🚀 Publish Package to npmjs
+
+on:
+  workflow_call:
+  push:
+    branches:
+      - main
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: latest
+      - run: bun install
+      - run: bun run test
+      - run: bun run build
+      - run: npm publish --access public
+        env:
+          NPM_TOKEN: ${{secrets.NPM_TOKEN}}
