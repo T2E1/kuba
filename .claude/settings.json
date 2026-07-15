@@ -1,0 +1,33 @@
+{
+  "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": true,
+  "permissions": {
+    "allow": [
+      "Bash(bun install)",
+      "Bash(bun run build:*)",
+      "Bash(bun run dev:*)",
+      "Bash(bun run format:*)",
+      "Bash(bun run lint:*)",
+      "Bash(bun run check:*)",
+      "Bash(bun run test:*)",
+      "Bash(bun run prepare:*)",
+      "Bash(bun lint-staged:*)",
+      "Bash(bun commitlint:*)",
+      "Bash(bunx biome:*)",
+      "Bash(bunx husky init)",
+      "Bash(git rm:*)",
+      "Bash(git mv:*)",
+      "Bash(git status)",
+      "Bash(git branch *)",
+      "Bash(git fetch *)",
+      "Bash(git pull *)",
+      "Bash(git checkout *)",
+      "Bash(git merge *)",
+      "Bash(git add *)",
+      "Bash(git diff *)",
+      "Bash(git commit *)",
+      "Bash(git push *)",
+      "Bash(git log *)",
+      "Bash(node -p *)"
+    ]
+  }
+}
