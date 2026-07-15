@@ -1,0 +1,52 @@
+:root {
+  --color-master-darkest: light-dark(#0a0a0a, #f5f5f5);
+  --color-master-darker: light-dark(#1a1a1a, #e1e1e1);
+  --color-master-dark: light-dark(#2c2c2c, #c9c9c9);
+  --color-master: light-dark(#626262, #a3a3a3);
+  --color-master-light: light-dark(#e6e6e6, #5c5c5c);
+  --color-master-lighter: light-dark(#f0f0f0, #3d3d3d);
+  --color-master-lightest: light-dark(#fafafa, #1f1f1f);
+
+  --color-primary-darker: light-dark(#413768, #b8acf3);
+  --color-primary-dark: light-dark(#5b4d91, #9d88e6);
+  --color-primary: light-dark(#6d5cae, #7a5ed1);
+  --color-primary-light: light-dark(#8a7dbe, #6750c4);
+  --color-primary-lighter: light-dark(#e2deef, #34257d);
+
+  --color-complete-darker: light-dark(#2b6a94, #91d6ff);
+  --color-complete-dark: light-dark(#3c93ce, #75bfff);
+  --color-complete: light-dark(#48b0f7, #5daaf7);
+  --color-complete-light: light-dark(#6dc0f9, #4a90cc);
+  --color-complete-lighter: light-dark(#daeffd, #3c7fb3);
+
+  --color-success-darker: light-dark(#0a7c71, #a3f8df);
+  --color-success-dark: light-dark(#0dad9e, #88e6cc);
+  --color-success: light-dark(#10cfbd, #66d4b8);
+  --color-success-light: light-dark(#40d9ca, #52c0a5);
+  --color-success-lighter: light-dark(#cff5f2, #3da591);
+
+  --color-warning-darker: light-dark(#957d32, #ffe3aa);
+  --color-warning-dark: light-dark(#cfae45, #ffd480);
+  --color-warning: light-dark(#f8d053, #ffc658);
+  --color-warning-light: light-dark(#f9d975, #e6b44e);
+  --color-warning-lighter: light-dark(#fef6dd, #b5913e);
+
+  --color-danger-darker: light-dark(#933432, #ffb3b0);
+  --color-danger-dark: light-dark(#cd4945, #ff8f8c);
+  --color-danger: light-dark(#f55753, #ff6b68);
+  --color-danger-light: light-dark(#f77975, #e6615e);
+  --color-danger-lighter: light-dark(#fddddd, #b94d4b);
+
+  --color-info-darker: light-dark(#232b31, #b0c4cc);
+  --color-info-dark: light-dark(#313b44, #97abb4);
+  --color-info: light-dark(#3b4752, #7f929b);
+  --color-info-light: light-dark(#626c75, #656f77);
+  --color-info-lighter: light-dark(#d8dadc, #4b565e);
+
+  --color-menu-dark: light-dark(#21252d, #2f333b);
+  --color-menu: light-dark(#2b303b, #383c44);
+  --color-menu-light: light-dark(#929aac, #6d727a);
+
+  --color-pure-white: #fff;
+  --color-pure-black: #000;
+}

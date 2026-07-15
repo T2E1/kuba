@@ -1,0 +1,5 @@
+body {
+  background-color: var(--color-master-lightest);
+  color: var(--color-master-dark);
+  color-scheme: light;
+}
