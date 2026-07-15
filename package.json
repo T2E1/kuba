@@ -92,7 +92,7 @@
     "node": ">=20.0.0"
   },
   "scripts": {
-    "build": "vite build && vite build --config vite.iife.config.js",
+    "build": "vite build",
     "dev": "vite build --watch",
     "format": "biome format --write .",
     "lint": "biome lint --write .",
