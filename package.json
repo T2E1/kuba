@@ -1,0 +1,116 @@
+{
+  "name": "@t2e1/kuba",
+  "version": "0.1.0-alpha.1",
+  "description": "Lightweight Web Components primitives and custom elements",
+  "type": "module",
+  "license": "MIT",
+  "author": {
+    "name": "Cleber de M. Goncalves",
+    "email": "cleber.demgoncalves@gmail.com",
+    "url": "https://github.com/deMGoncalves"
+  },
+  "keywords": [
+    "web-components",
+    "custom-elements",
+    "primitives",
+    "declarative",
+    "dom",
+    "router",
+    "reactive"
+  ],
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    ".": {
+      "import": "./dist/kuba.js",
+      "require": "./dist/kuba.cjs"
+    },
+    "./cookie": {
+      "import": "./dist/cookie.js",
+      "require": "./dist/cookie.cjs"
+    },
+    "./directive": {
+      "import": "./dist/directive.js",
+      "require": "./dist/directive.cjs"
+    },
+    "./dom": {
+      "import": "./dist/dom.js",
+      "require": "./dist/dom.cjs"
+    },
+    "./echo": {
+      "import": "./dist/echo.js",
+      "require": "./dist/echo.cjs"
+    },
+    "./event": {
+      "import": "./dist/event.js",
+      "require": "./dist/event.cjs"
+    },
+    "./middleware": {
+      "import": "./dist/middleware.js",
+      "require": "./dist/middleware.cjs"
+    },
+    "./mixin": {
+      "import": "./dist/mixin.js",
+      "require": "./dist/mixin.cjs"
+    },
+    "./pixel": {
+      "import": "./dist/pixel.js",
+      "require": "./dist/pixel.cjs"
+    },
+    "./polyfill": {
+      "import": "./dist/polyfill.js",
+      "require": "./dist/polyfill.cjs"
+    },
+    "./renderer": {
+      "import": "./dist/renderer.js",
+      "require": "./dist/renderer.cjs"
+    },
+    "./result": {
+      "import": "./dist/result.js",
+      "require": "./dist/result.cjs"
+    },
+    "./router": {
+      "import": "./dist/router.js",
+      "require": "./dist/router.cjs"
+    },
+    "./spark": {
+      "import": "./dist/spark.js",
+      "require": "./dist/spark.cjs"
+    },
+    "./storage": {
+      "import": "./dist/storage.js",
+      "require": "./dist/storage.cjs"
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/T2E1/kuba.git"
+  },
+  "bugs": {
+    "url": "https://github.com/T2E1/kuba/issues"
+  },
+  "homepage": "https://github.com/T2E1/kuba#readme",
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "scripts": {
+    "build": "vite build",
+    "dev": "vite build --watch",
+    "format": "biome format --write .",
+    "lint": "biome lint --write .",
+    "check": "biome check --write .",
+    "prepare": "husky",
+    "test": "exit 0"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^2.4.15",
+    "@commitlint/cli": "^19.6.1",
+    "@commitlint/config-conventional": "^19.6.0",
+    "@rollup/plugin-terser": "^0.4.4",
+    "husky": "^9.1.7",
+    "lint-staged": "^15.2.11",
+    "typescript": "^5.8.3",
+    "vite": "^6.3.5"
+  }
+}
