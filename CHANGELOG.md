@@ -6,6 +6,13 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) and 
 
 ---
 
+## [0.1.0-alpha.3] — 2026-07-15
+
+### Fixed
+
+- Enable terser compress and mangle for proper JS minification
+- Minify CSS and HTML inside tagged template literals
+
 ## [0.1.0-alpha.2] — 2026-07-15
 
 ### Changed
