@@ -13,22 +13,32 @@ function minifyCSS(css) {
     .trim()
 }
 
-function minifyCSSTemplateLiterals() {
+function minifyHTML(html) {
+  return html
+    .replace(/<!--[\s\S]*?-->/g, '')
+    .replace(/\s+/g, ' ')
+    .replace(/\s*(<[^>]+>)\s*/g, '$1')
+    .trim()
+}
+
+function minifyTemplateLiterals() {
   return {
-    name: 'minify-css-template-literals',
+    name: 'minify-template-literals',
     transform(code, id) {
       if (!/\.(js|ts)$/.test(id)) return null
-      const result = code.replace(
-        /\bcss`([\s\S]*?)`/g,
-        (_, css) => `css\`${minifyCSS(css)}\``,
-      )
+      const result = code
+        .replace(/\bcss`([\s\S]*?)`/g, (_, css) => `css\`${minifyCSS(css)}\``)
+        .replace(
+          /\bhtml`([\s\S]*?)`/g,
+          (_, html) => `html\`${minifyHTML(html)}\``,
+        )
       return result !== code ? { code: result, map: null } : null
     },
   }
 }
 
 export default defineConfig({
-  plugins: [minifyCSSTemplateLiterals()],
+  plugins: [minifyTemplateLiterals()],
   resolve: {
     alias: {
       '@behavior': r('packages/behavior'),
