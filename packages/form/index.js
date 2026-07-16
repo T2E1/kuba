@@ -1,6 +1,5 @@
 import './fileupload'
 import './form'
 import './input'
-import './label'
 import './textarea'
 import './validity'

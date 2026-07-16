@@ -28,7 +28,7 @@ export default defineConfig({
       '@result': r('packages/result'),
       '@router': r('packages/router'),
       '@spark': r('packages/spark'),
-      '@storage': r('packages/storage/index.js'),
+      '@typography': r('packages/typography'),
     },
   },
   build: {
@@ -48,7 +48,6 @@ export default defineConfig({
         router: r('packages/router/index.js'),
         spark: r('packages/spark/index.js'),
         http: r('packages/http/index.js'),
-        storage: r('packages/storage/index.js'),
       },
       formats: ['es'],
     },
