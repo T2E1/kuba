@@ -6,6 +6,18 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) and 
 
 ---
 
+## [0.1.0-alpha.7] — 2026-07-16
+
+### Changed
+
+- Simplified type distribution to a single root `types.d.ts` that self-registers each subpath via `declare module '@t2e1/kuba/<name>'`, so `package.json` `exports` no longer needs a `types` condition per subpath — only `.` does
+- `mixin` types now declare `Hidden`/`Headless` inline instead of importing them, avoiding a TypeScript restriction where a file mixing a plain `import` with a `declare module` block fails resolution for consumers
+
+### Removed
+
+- `tsconfig.types.json` and the `typecheck:types` script (validated via the build + an external consumer check instead)
+- `types/kuba.d.ts` and the `types/` directory, replaced by the root `types.d.ts`
+
 ## [0.1.0-alpha.6] — 2026-07-16
 
 ### Added

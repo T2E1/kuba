@@ -1,22 +1,24 @@
-export type ComponentTemplate = (target: HTMLElement) => string
-export type StyleTemplate = (target: HTMLElement) => CSSStyleSheet
+declare module '@t2e1/kuba/dom' {
+  export type ComponentTemplate = (target: HTMLElement) => string
+  export type StyleTemplate = (target: HTMLElement) => CSSStyleSheet
 
-export declare function html(
-  strings: TemplateStringsArray,
-  ...values: unknown[]
-): string
+  export function html(
+    strings: TemplateStringsArray,
+    ...values: unknown[]
+  ): string
 
-export declare function css(
-  strings: TemplateStringsArray,
-  ...values: unknown[]
-): CSSStyleSheet
+  export function css(
+    strings: TemplateStringsArray,
+    ...values: unknown[]
+  ): CSSStyleSheet
 
-export declare function paint(
-  component: ComponentTemplate,
-  ...styles: StyleTemplate[]
-): ClassDecorator
+  export function paint(
+    component: ComponentTemplate,
+    ...styles: StyleTemplate[]
+  ): ClassDecorator
 
-export declare const didPaint: MethodDecorator
-export declare const willPaint: MethodDecorator
-export declare const repaint: MethodDecorator
-export declare const retouch: MethodDecorator
+  export const didPaint: MethodDecorator
+  export const willPaint: MethodDecorator
+  export const repaint: MethodDecorator
+  export const retouch: MethodDecorator
+}

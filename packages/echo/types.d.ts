@@ -1,12 +1,14 @@
-// biome-ignore lint/suspicious/noExplicitAny: mixin constructor type requires any[] per TS handbook
-type Constructor<T = HTMLElement> = new (...args: any[]) => T
+declare module '@t2e1/kuba/echo' {
+  // biome-ignore lint/suspicious/noExplicitAny: mixin constructor type requires any[] per TS handbook
+  type Constructor<T = HTMLElement> = new (...args: any[]) => T
 
-declare function Echo<T extends Constructor>(Base: T): T
+  function Echo<T extends Constructor>(Base: T): T
 
-export default Echo
+  export default Echo
 
-export declare function dispatchEvent(eventName: string): MethodDecorator
+  export function dispatchEvent(eventName: string): MethodDecorator
 
-export declare const on: 'on'
-export declare const echoConnectedCallback: unique symbol
-export declare const echoDisconnectedCallback: unique symbol
+  export const on: 'on'
+  export const echoConnectedCallback: unique symbol
+  export const echoDisconnectedCallback: unique symbol
+}

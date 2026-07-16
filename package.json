@@ -1,6 +1,6 @@
 {
   "name": "@t2e1/kuba",
-  "version": "0.1.0-alpha.6",
+  "version": "0.1.0-alpha.7",
   "description": "Lightweight Web Components primitives and custom elements",
   "type": "module",
   "license": "MIT",
@@ -20,68 +20,29 @@
   ],
   "files": [
     "dist",
-    "types",
+    "types.d.ts",
     "packages/**/types.d.ts"
   ],
-  "types": "./types/kuba.d.ts",
+  "types": "./types.d.ts",
   "exports": {
     ".": {
-      "types": "./types/kuba.d.ts",
+      "types": "./types.d.ts",
       "default": "./dist/kuba.js"
     },
-    "./cookie": {
-      "types": "./packages/cookie/types.d.ts",
-      "default": "./dist/cookie.js"
-    },
-    "./http": {
-      "types": "./packages/http/types.d.ts",
-      "default": "./dist/http.js"
-    },
-    "./directive": {
-      "types": "./packages/directive/types.d.ts",
-      "default": "./dist/directive.js"
-    },
-    "./dom": {
-      "types": "./packages/dom/types.d.ts",
-      "default": "./dist/dom.js"
-    },
-    "./echo": {
-      "types": "./packages/echo/types.d.ts",
-      "default": "./dist/echo.js"
-    },
-    "./event": {
-      "types": "./packages/event/types.d.ts",
-      "default": "./dist/event.js"
-    },
-    "./middleware": {
-      "types": "./packages/middleware/types.d.ts",
-      "default": "./dist/middleware.js"
-    },
-    "./mixin": {
-      "types": "./packages/mixin/types.d.ts",
-      "default": "./dist/mixin.js"
-    },
+    "./cookie": "./dist/cookie.js",
+    "./http": "./dist/http.js",
+    "./directive": "./dist/directive.js",
+    "./dom": "./dist/dom.js",
+    "./echo": "./dist/echo.js",
+    "./event": "./dist/event.js",
+    "./middleware": "./dist/middleware.js",
+    "./mixin": "./dist/mixin.js",
     "./pixel": "./packages/pixel/index.css",
-    "./polyfill": {
-      "types": "./packages/polyfill/types.d.ts",
-      "default": "./dist/polyfill.js"
-    },
-    "./renderer": {
-      "types": "./packages/renderer/types.d.ts",
-      "default": "./dist/renderer.js"
-    },
-    "./result": {
-      "types": "./packages/result/types.d.ts",
-      "default": "./dist/result.js"
-    },
-    "./router": {
-      "types": "./packages/router/types.d.ts",
-      "default": "./dist/router.js"
-    },
-    "./spark": {
-      "types": "./packages/spark/types.d.ts",
-      "default": "./dist/spark.js"
-    }
+    "./polyfill": "./dist/polyfill.js",
+    "./renderer": "./dist/renderer.js",
+    "./result": "./dist/result.js",
+    "./router": "./dist/router.js",
+    "./spark": "./dist/spark.js"
   },
   "repository": {
     "type": "git",
@@ -101,8 +62,7 @@
     "lint": "biome lint --write .",
     "check": "biome check --write .",
     "prepare": "husky",
-    "test": "exit 0",
-    "typecheck:types": "tsc -p tsconfig.types.json"
+    "test": "exit 0"
   },
   "devDependencies": {
     "@biomejs/biome": "^2.4.15",

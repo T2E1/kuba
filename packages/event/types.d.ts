@@ -1,21 +1,23 @@
-export type EventFilter = (event: Event) => unknown
+declare module '@t2e1/kuba/event' {
+  export type EventFilter = (event: Event) => unknown
 
-type EventBinder = (
-  selector: string,
-  ...filters: EventFilter[]
-) => MethodDecorator
+  type EventBinder = (
+    selector: string,
+    ...filters: EventFilter[]
+  ) => MethodDecorator
 
-declare const on: Record<string, EventBinder>
+  const on: Record<string, EventBinder>
 
-export default on
+  export default on
 
-export declare function customEvent(type: string, detail?: unknown): CustomEvent
-export declare function dataset(event: Event): DOMStringMap
-export declare function detail(event: CustomEvent): unknown
-export declare function files(event: Event): FileList | null
-export declare function formData(
-  event: SubmitEvent,
-): Record<string, FormDataEntryValue>
-export declare function prevent(event: Event): Event
-export declare function stop(event: Event): Event
-export declare function value(event: Event): string
+  export function customEvent(type: string, detail?: unknown): CustomEvent
+  export function dataset(event: Event): DOMStringMap
+  export function detail(event: CustomEvent): unknown
+  export function files(event: Event): FileList | null
+  export function formData(
+    event: SubmitEvent,
+  ): Record<string, FormDataEntryValue>
+  export function prevent(event: Event): Event
+  export function stop(event: Event): Event
+  export function value(event: Event): string
+}
