@@ -4,7 +4,7 @@ import component from './component'
 import { slottable } from './interface'
 import style from './style'
 
-@define('m-label')
+@define('kb-label')
 @paint(component, style)
 class Label extends HTMLElement {
   constructor() {

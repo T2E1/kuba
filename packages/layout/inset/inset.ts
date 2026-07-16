@@ -5,7 +5,7 @@ import { Height, Hidden, Width } from '@mixin'
 import component from './component'
 import style from './style'
 
-@define('m-inset')
+@define('kb-inset')
 @paint(component, style)
 class Inset extends Echo(Height(Hidden(Width(HTMLElement)))) {
   #direction

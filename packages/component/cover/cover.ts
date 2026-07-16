@@ -4,7 +4,7 @@ import Echo from '@echo'
 import component from './component.js'
 import style from './style.js'
 
-@define('m-cover')
+@define('kb-cover')
 @paint(component, style)
 class Cover extends Echo(HTMLElement) {
   #alt

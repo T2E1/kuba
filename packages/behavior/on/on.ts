@@ -2,7 +2,7 @@ import { attributeChanged, connected, define } from '@directive'
 import { Headless } from '@mixin'
 import { connectArc, setter } from './interfaces'
 
-@define('m-on')
+@define('kb-on')
 class On extends Headless(HTMLElement) {
   #value
 

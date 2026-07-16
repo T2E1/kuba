@@ -6,7 +6,7 @@ function component() {
       <container>
         <leading>
           <slot name="leading">
-            <m-logo></m-logo>
+            <kb-logo></kb-logo>
           </slot>
         </leading>
         <trailing>

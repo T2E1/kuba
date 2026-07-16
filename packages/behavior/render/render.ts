@@ -6,7 +6,7 @@ import component from './component'
 import interpolate from './interpolate'
 import style from './style'
 
-@define('m-render')
+@define('kb-render')
 @paint(component, style)
 class Render extends Echo(Hidden(Template(HTMLElement))) {
   #textContent

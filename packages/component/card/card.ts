@@ -6,7 +6,7 @@ import { Height, Hidden, Width } from '@mixin'
 import component from './component'
 import style from './style'
 
-@define('m-card')
+@define('kb-card')
 @paint(component, style)
 class Card extends Echo(Height(Hidden(Width(HTMLElement)))) {
   #direction

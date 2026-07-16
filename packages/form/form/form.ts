@@ -9,7 +9,7 @@ import { rendered, resetted, submitted } from './interfaces'
 import interpolate from './interpolate'
 import style from './style'
 
-@define('m-form')
+@define('kb-form')
 @paint(component, style)
 class Form extends Echo(Hidden(Template(HTMLElement))) {
   #autorender

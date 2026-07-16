@@ -5,7 +5,7 @@ import component from './component'
 import { reflectable, resettable, slottable, validatable } from './interfaces'
 import style from './style'
 
-@define('m-validity')
+@define('kb-validity')
 @paint(component, style)
 class Validity extends Echo(HTMLElement) {
   #controller

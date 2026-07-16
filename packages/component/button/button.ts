@@ -8,7 +8,7 @@ import component from './component.js'
 import { variantable } from './interfaces.js'
 import style from './style.js'
 
-@define('m-button')
+@define('kb-button')
 @paint(component, style)
 class Button extends Echo(Hidden(Value(Width(HTMLElement)))) {
   #color

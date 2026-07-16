@@ -3,7 +3,7 @@ import { paint } from '@dom'
 import component from './component.js'
 import style from './style.js'
 
-@define('m-footer')
+@define('kb-footer')
 @paint(component, style)
 class Footer extends HTMLElement {
   constructor() {

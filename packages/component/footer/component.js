@@ -6,7 +6,7 @@ function component() {
       <container>
         <leading>
           <slot name="leading">
-            <m-text size="xxxs">© 2025 Memoize. Todos os direitos reservados.</m-text>
+            <kb-text size="xxxs">© 2025 Memoize. Todos os direitos reservados.</kb-text>
           </slot>
         </leading>
         <trailing>

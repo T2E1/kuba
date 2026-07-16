@@ -5,7 +5,7 @@ import { Height, Hidden, Width } from '@mixin'
 import component from './component.js'
 import style from './style.js'
 
-@define('m-stack')
+@define('kb-stack')
 @paint(component, style)
 class Stack extends Hidden(Width(Height(Echo(HTMLElement)))) {
   #align

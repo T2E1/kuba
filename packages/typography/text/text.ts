@@ -4,7 +4,7 @@ import Echo from '@echo'
 import component from './component.js'
 import style from './style.js'
 
-@define('m-text')
+@define('kb-text')
 @paint(component, style)
 class Text extends Echo(HTMLElement) {
   #align

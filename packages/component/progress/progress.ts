@@ -4,7 +4,7 @@ import Echo from '@echo'
 import component from './component.js'
 import style from './style.js'
 
-@define('m-progress')
+@define('kb-progress')
 @paint(component, style)
 class Progress extends Echo(HTMLElement) {
   #value

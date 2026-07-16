@@ -4,7 +4,7 @@ import Echo from '@echo'
 import component from './component.js'
 import style from './style.js'
 
-@define('m-icon')
+@define('kb-icon')
 @paint(component, style)
 class Icon extends Echo(HTMLElement) {
   #color

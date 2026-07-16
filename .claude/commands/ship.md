@@ -54,7 +54,7 @@ Versão atual:
    git commit -m "$(cat <<'EOF'
    tipo: descrição concisa no imperativo
 
-   Co-Authored-By: deMGoncalves <noreply@github.com>
+   Co-Authored-By: Cleber de M. Goncalves <cleber.engineer@gmail.com>
    EOF
    )"
    ```

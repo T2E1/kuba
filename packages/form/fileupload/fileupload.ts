@@ -15,7 +15,7 @@ import {
 } from './interfaces'
 import style from './style'
 
-@define('m-fileupload')
+@define('kb-fileupload')
 @paint(component, style)
 class FileUpload extends Echo(Hidden(Width(HTMLElement))) {
   #base64
@@ -118,7 +118,7 @@ class FileUpload extends Echo(Hidden(Width(HTMLElement))) {
     return this.internals.reportValidity()
   }
 
-  @on.clicked('m-button', prevent)
+  @on.clicked('kb-button', prevent)
   @formReset
   @around(reflectable)
   @repaint

@@ -18,7 +18,7 @@ import {
 } from './interfaces'
 import style from './style'
 
-@define('m-textarea')
+@define('kb-textarea')
 @paint(component, style)
 class Textarea extends Echo(Hidden(Width(HTMLElement))) {
   #controller

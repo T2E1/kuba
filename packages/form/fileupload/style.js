@@ -63,7 +63,7 @@ function style(fileupaload) {
           width: 100%;
         }
 
-        m-button {
+        kb-button {
           background-color: var(--color-master-lightest);
           border-radius: var(--border-radius-circular);
           position: absolute;

@@ -3,7 +3,7 @@ import { paint } from '@dom'
 import component from './component.js'
 import style from './style.js'
 
-@define('m-main')
+@define('kb-main')
 @paint(component, style)
 class Main extends HTMLElement {
   constructor() {

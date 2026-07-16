@@ -3,7 +3,7 @@ import Echo from '@echo'
 import { Headless } from '@mixin'
 import { urlFor } from '@router'
 
-@define('m-redirect')
+@define('kb-redirect')
 class Redirect extends Headless(Echo(HTMLElement)) {
   #href
   #route

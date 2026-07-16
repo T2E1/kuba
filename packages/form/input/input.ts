@@ -17,7 +17,7 @@ import {
 } from './interfaces'
 import style from './style'
 
-@define('m-input')
+@define('kb-input')
 @paint(component, style)
 class Input extends Echo(Hidden(Width(HTMLElement))) {
   #controller

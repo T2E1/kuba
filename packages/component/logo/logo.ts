@@ -3,7 +3,7 @@ import { paint } from '@dom'
 import component from './component.js'
 import style from './style.js'
 
-@define('m-logo')
+@define('kb-logo')
 @paint(component, style)
 class Logo extends HTMLElement {
   constructor() {

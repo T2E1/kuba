@@ -3,7 +3,7 @@ import { paint } from '@dom'
 import component from './component.js'
 import style from './style.js'
 
-@define('m-header')
+@define('kb-header')
 @paint(component, style)
 class Header extends HTMLElement {
   constructor() {

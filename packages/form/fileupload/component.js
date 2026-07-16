@@ -5,18 +5,18 @@ const component = (fileupload) =>
     <label>
       <input type="file" accept="image/*" ${fileupload.required ? 'required' : ''} />
       <icon>
-        <m-icon use="cloud_upload" size="md" color="primary"></m-icon>
+        <kb-icon use="cloud_upload" size="md" color="primary"></kb-icon>
       </icon>
-      <m-stack direction="column" spacing="quarck" align="center">
+      <kb-stack direction="column" spacing="quarck" align="center">
         <slot name="label"></slot>
         <slot name="helper"></slot>
-      </m-stack>
+      </kb-stack>
     </label>
     <preview>
       <img src="${fileupload.file}" loading="lazy" />
-      <m-button color="danger" variant="icon">
-        <m-icon use="delete" size="sm"></m-icon>
-      </m-button>
+      <kb-button color="danger" variant="icon">
+        <kb-icon use="delete" size="sm"></kb-icon>
+      </kb-button>
     </preview>
     <slot name="validity"></slot>
   `

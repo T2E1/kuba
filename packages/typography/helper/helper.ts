@@ -4,7 +4,7 @@ import component from './component'
 import { slottable } from './interface'
 import style from './style'
 
-@define('m-helper')
+@define('kb-helper')
 @paint(component, style)
 class Helper extends HTMLElement {
   constructor() {
