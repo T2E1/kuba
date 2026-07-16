@@ -1,5 +1,5 @@
 ---
-description: "Prepara mudanças, cria commit Conventional Commits, ajusta a versão em package.json conforme o tipo do commit e envia para remoto. Usar após completar Feature, Task ou Quick fix."
+description: "Prepara mudanças, cria commit Conventional Commits, ajusta a versão em package.json e o CHANGELOG.md conforme o tipo do commit, e envia para remoto. Usar após completar Feature, Task ou Quick fix."
 allowed-tools: Bash(git add *), Bash(git status), Bash(git diff *), Bash(git commit *), Bash(git push *), Bash(git log *), Read, Edit
 ---
 
@@ -47,9 +47,15 @@ Versão atual:
 
 5. Se houver bump, atualizar o campo `version` em `package.json` (via Edit) e incluir o arquivo no mesmo commit.
 
-6. Preparar arquivos com `git add` específico (evitar `git add -A` com arquivos sensíveis) — incluindo `package.json` se a versão mudou
+6. Se houver bump, atualizar `CHANGELOG.md` (via Edit) no mesmo commit:
+   - Adicionar uma nova seção `## [<versão>] — <data de hoje, AAAA-MM-DD>` no topo, logo abaixo da linha `---`.
+   - Agrupar as mudanças em `### Added`, `### Changed`, `### Fixed` ou `### Removed` conforme o conteúdo do commit (usar só as seções necessárias).
+   - Descrever o que mudou em linguagem de usuário/API (não apenas colar a mensagem do commit).
+   - Não reescrever entradas de versões já publicadas.
 
-7. Criar commit com HEREDOC:
+7. Preparar arquivos com `git add` específico (evitar `git add -A` com arquivos sensíveis) — incluindo `package.json` e `CHANGELOG.md` se a versão mudou
+
+8. Criar commit com HEREDOC:
    ```bash
    git commit -m "$(cat <<'EOF'
    tipo: descrição concisa no imperativo
@@ -59,9 +65,9 @@ Versão atual:
    )"
    ```
 
-8. Enviar: `git push`
+9. Enviar: `git push`
 
-9. Confirmar: `git status`
+10. Confirmar: `git status`
 
 ## Observações
 

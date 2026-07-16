@@ -6,6 +6,24 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) and 
 
 ---
 
+## [0.1.0-alpha.6] — 2026-07-16
+
+### Added
+
+- Hand-authored `types.d.ts` for every package and custom element, linked per subpath in `package.json` `exports` so TypeScript consumers (including `strict: true`) get full type checking and `HTMLElementTagNameMap` autocomplete for all `kb-*`/`k-*` custom elements
+- `tsconfig.types.json` and `npm run typecheck:types` to validate the declaration files
+
+## [0.1.0-alpha.5] — 2026-07-16
+
+### Added
+
+- `typography` package grouping text-rendering components (`text`, `label`, `helper`) that previously lived in `component`, `form`, and `behavior`
+- Project rules and Claude Code commands under `.claude/`
+
+### Changed
+
+- `load` moved from `behavior` to `data` group, then removed as unused
+
 ## [0.1.0-alpha.4] — 2026-07-15
 
 ### Added
