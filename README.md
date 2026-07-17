@@ -21,62 +21,31 @@ This is not a regression to the past. It is a return to what the web was always 
 
 ---
 
-## The gap kuba closes
+## Two schools of thought, and the gap between them
 
-Two schools of thought dominate today, and each solves half the problem:
+Modern frontend development has converged on two competing philosophies, and each one solves only half of the problem.
 
-- **React / Vue / Angular** give you rich client-side dataflow — but pull the DOM out of the picture. State lives in JavaScript, HTML becomes a compilation target, and every interaction is mediated by a runtime, a diffing engine, and a build step.
-- **htmx** keeps HTML as the application, but has no dataflow *in the client*. Two components on the same page can't talk to each other; every interaction is a request back to the server for a new fragment.
+**React, Vue, and Angular** treat the DOM as an implementation detail to be abstracted away. State lives in JavaScript. The UI is a pure function of that state, re-rendered through a virtual DOM and reconciled back into real elements. This gives teams a genuinely powerful dataflow model — components can react to each other, compose, and update predictably. But the cost is a parallel universe: a runtime that must be shipped to the browser, a build step that must compile JSX or templates into JavaScript, and a state model that has nothing to do with the DOM it eventually produces. The HTML the browser receives is no longer the application; it is a rendering target.
 
-kuba is the piece both are missing: **Web Components that communicate through real, native DOM events** — no virtual DOM, no bundler-mediated state, and no round-trip to the server required just to let one element react to another.
+**htmx** goes the opposite direction. It restores HTML as the application: the server renders markup, the client swaps fragments of it in place, and no client-side state model is needed at all. This is a return to the web's original request/response model, and it is a legitimate rejection of frontend complexity. But it comes with a real limitation: htmx has no dataflow *inside the client*. Two elements on the same page cannot react to one another without a trip back to the server for a new fragment. Interactivity that should be instantaneous and local — a filter reacting to an input, a counter reacting to a toggle — is modeled as a network request, because there is no other channel available.
 
-| | React / Vue / Angular | htmx | **kuba** |
-|---|---|---|---|
-| State lives in | JS runtime (useState, stores…) | The server | **The DOM (native events)** |
-| Client-to-client dataflow | Yes, via framework APIs | No — server round-trip only | **Yes — zero-config, via `on`** |
-| Components | JS-first, compiled | HTML-first, templated | **Web Components (native)** |
-| Build required to run | Yes | No | **No** |
-| Backend agnostic | Yes | Yes | **Yes** |
-| Design system included | No | No | **Yes** |
-
-kuba is not a framework. It is the layer that sits between your HTML and your server — invisible, composable, and replaceable piece by piece.
+The gap between these two schools is exactly the gap kuba closes: **client-side dataflow without leaving HTML, and without a JavaScript state runtime to maintain it.**
 
 ---
 
-## The same feature, three ways
+## How kuba resolves the gap
 
-A search box that filters a list, live, without reloading the page.
+The browser has had a dataflow mechanism since 1995: the DOM event system. Every element can dispatch an event; every element can listen for one. Frameworks reinvented this capability in userland (props, stores, observables) because raw DOM events, on their own, are too unstructured to compose an application from — there is no shared vocabulary for *which* element should react to *which* event, or *how*.
 
-**React** — state lives in JS, every keystroke re-renders:
-```jsx
-function Search() {
-  const [query, setQuery] = useState('')
-  const results = useMemo(() => data.filter(matches(query)), [query])
-  return (
-    <>
-      <input onChange={(e) => setQuery(e.target.value)} />
-      <List items={results} />
-    </>
-  )
-}
-```
+kuba's answer is to standardize that vocabulary, not replace the mechanism. Every kuba custom element understands a declarative wiring attribute that describes, in plain markup, which source element's event should drive which sink property, method, or attribute on itself. The browser's native `CustomEvent` system does the actual delivery; kuba only supplies the grammar for expressing intent.
 
-**htmx** — state lives on the server, every keystroke is a network request:
-```html
-<input name="q" hx-get="/search" hx-trigger="keyup changed delay:200ms" hx-target="#results">
-<div id="results"></div>
-```
+The consequence is a dataflow model that is:
 
-**kuba** — state lives in the DOM, wired declaratively, no server round-trip and no JS to write:
-```html
-<k-dataset upsert="id">
-  <k-filter key="name"></k-filter>
-</k-dataset>
+- **Client-side**, like React/Vue/Angular — components react to each other instantly, with no server round-trip required for local interactivity.
+- **HTML-first**, like htmx — the wiring lives in markup, not in a JavaScript state tree; there is nothing to compile, hydrate, or reconcile.
+- **Native**, unlike either — there is no framework-specific event bus underneath; it is the DOM's own event system, exposed rather than hidden.
 
-<kb-input name="q" on="*/change:setter/value"></kb-input>
-```
-
-The `on` attribute wires the input's `change` event straight into `k-filter`'s `value` setter — no store, no controller, no request. `k-filter` re-filters `k-dataset`'s collection and dispatches its own `filter` event, which any other element on the page can wire into next.
+This is why kuba is best understood as an evolution rather than a third alternative sitting beside the other two: it takes the dataflow ambition of the component frameworks and the platform-fidelity of htmx, and satisfies both with the one mechanism the browser already shipped for exactly this purpose.
 
 ---
 
@@ -85,74 +54,6 @@ The `on` attribute wires the input's `change` event straight into `k-filter`'s `
 ```sh
 npm install @t2e1/kuba
 ```
-
----
-
-## Usage
-
-### Custom elements (full design system)
-
-```js
-import '@t2e1/kuba'
-```
-
-This registers all kuba custom elements in the browser. Drop them in any HTML page, with any backend.
-
-```html
-<kb-button>Click me</kb-button>
-<kb-card>
-  <kb-text>Hello, world.</kb-text>
-</kb-card>
-```
-
-### Utilities (tree-shakeable)
-
-Each utility is available as a subpath export:
-
-```js
-import { html, css } from '@t2e1/kuba/dom'
-import { router }    from '@t2e1/kuba/router'
-import { spark }     from '@t2e1/kuba/spark'
-import http          from '@t2e1/kuba/http'
-```
-
----
-
-## The Dataflow Model
-
-kuba does not have a state management library. It has the DOM.
-
-Every kuba custom element understands an `on` attribute — an "arc" describing how it reacts to events from other elements on the page, with no JavaScript required:
-
-```
-source/event:type/sink
-```
-
-- `source` — where the event comes from: `*` (anywhere), `#id`, a `name`, or a tag name.
-- `event` — the DOM event type to listen for.
-- `type` — how `sink` is applied: `method`, `attribute`, or `setter`.
-- `sink` — the method, attribute, or property to invoke on this element.
-
-```html
-<kb-input id="q" name="q"></kb-input>
-
-<k-dataset upsert="id">
-  <k-filter on="#q/change:setter/value" key="name"></k-filter>
-</k-dataset>
-```
-
-Every `<kb-input>` change re-dispatches through the shared event bus; `<k-filter>` picks it up because its `on` arc matches `#q`, sets its own `value`, and re-filters the dataset it lives in — all three elements never reference each other in JavaScript.
-
-For imperative cases, the same bus is available directly:
-
-```js
-import { echo, on } from '@t2e1/kuba/echo'
-
-echo('user:login', { id: 42 })
-on('user:login', ({ detail }) => console.log(detail.id))
-```
-
-No stores. No subscriptions to manage. No framework lifecycle to fight. Just events — the same model the browser has used since 1995, now wired declaratively in markup.
 
 ---
 
