@@ -28,9 +28,8 @@ type KUBAOnValueAttribute =
  * Only meaningful as a direct child of a kuba custom element — the wiring
  * targets `parentElement`, so nesting it under a plain HTML element or using
  * it standalone has no effect. This is a usage contract, not something
- * TypeScript can enforce: `JSX.IntrinsicElements` types each tag's own props,
- * not which tags may nest inside which — that would require a typed
- * `children` prop per parent, which this element doesn't declare.
+ * TypeScript can enforce: parent/child element nesting has no compile-time
+ * representation in plain HTML markup.
  *
  * @example
  * ```html
@@ -60,11 +59,5 @@ export default class KUBAOnElement extends HTMLElement {
 declare global {
   interface HTMLElementTagNameMap {
     'kb-on': KUBAOnElement
-  }
-
-  namespace JSX {
-    interface IntrinsicElements {
-      'kb-on': KUBAIntrinsicElementProps<KUBAOnElement>
-    }
   }
 }

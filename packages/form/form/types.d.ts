@@ -52,10 +52,4 @@ declare global {
   interface HTMLElementTagNameMap {
     'kb-form': KUBAFormElement
   }
-
-  namespace JSX {
-    interface IntrinsicElements {
-      'kb-form': KUBAIntrinsicElementProps<KUBAFormElement>
-    }
-  }
 }

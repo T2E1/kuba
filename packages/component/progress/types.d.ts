@@ -20,10 +20,4 @@ declare global {
   interface HTMLElementTagNameMap {
     'kb-progress': KUBAProgressElement
   }
-
-  namespace JSX {
-    interface IntrinsicElements {
-      'kb-progress': KUBAIntrinsicElementProps<KUBAProgressElement>
-    }
-  }
 }

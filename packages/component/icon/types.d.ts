@@ -33,10 +33,4 @@ declare global {
   interface HTMLElementTagNameMap {
     'kb-icon': KUBAIconElement
   }
-
-  namespace JSX {
-    interface IntrinsicElements {
-      'kb-icon': KUBAIntrinsicElementProps<KUBAIconElement>
-    }
-  }
 }

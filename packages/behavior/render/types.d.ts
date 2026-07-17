@@ -36,10 +36,4 @@ declare global {
   interface HTMLElementTagNameMap {
     'kb-render': KUBARenderElement
   }
-
-  namespace JSX {
-    interface IntrinsicElements {
-      'kb-render': KUBAIntrinsicElementProps<KUBARenderElement>
-    }
-  }
 }

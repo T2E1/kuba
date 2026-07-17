@@ -16,10 +16,4 @@ declare global {
   interface HTMLElementTagNameMap {
     'kb-label': KUBALabelElement
   }
-
-  namespace JSX {
-    interface IntrinsicElements {
-      'kb-label': KUBAIntrinsicElementProps<KUBALabelElement>
-    }
-  }
 }

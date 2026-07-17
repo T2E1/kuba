@@ -29,10 +29,4 @@ declare global {
   interface HTMLElementTagNameMap {
     'k-filter': KUBAFilterElement
   }
-
-  namespace JSX {
-    interface IntrinsicElements {
-      'k-filter': KUBAIntrinsicElementProps<KUBAFilterElement>
-    }
-  }
 }
