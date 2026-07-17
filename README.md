@@ -21,18 +21,62 @@ This is not a regression to the past. It is a return to what the web was always 
 
 ---
 
-## Why kuba?
+## The gap kuba closes
+
+Two schools of thought dominate today, and each solves half the problem:
+
+- **React / Vue / Angular** give you rich client-side dataflow — but pull the DOM out of the picture. State lives in JavaScript, HTML becomes a compilation target, and every interaction is mediated by a runtime, a diffing engine, and a build step.
+- **htmx** keeps HTML as the application, but has no dataflow *in the client*. Two components on the same page can't talk to each other; every interaction is a request back to the server for a new fragment.
+
+kuba is the piece both are missing: **Web Components that communicate through real, native DOM events** — no virtual DOM, no bundler-mediated state, and no round-trip to the server required just to let one element react to another.
 
 | | React / Vue / Angular | htmx | **kuba** |
 |---|---|---|---|
-| State management | In JS (useState, Vuex…) | On the server | **DOM events** |
-| Components | JS-first | HTML-first | **Web Components** |
-| Build required | Yes | No | **No** |
+| State lives in | JS runtime (useState, stores…) | The server | **The DOM (native events)** |
+| Client-to-client dataflow | Yes, via framework APIs | No — server round-trip only | **Yes — zero-config, via `on`** |
+| Components | JS-first, compiled | HTML-first, templated | **Web Components (native)** |
+| Build required to run | Yes | No | **No** |
 | Backend agnostic | Yes | Yes | **Yes** |
 | Design system included | No | No | **Yes** |
-| Ecosystem | Framework-specific | Minimal | **Composable primitives** |
 
 kuba is not a framework. It is the layer that sits between your HTML and your server — invisible, composable, and replaceable piece by piece.
+
+---
+
+## The same feature, three ways
+
+A search box that filters a list, live, without reloading the page.
+
+**React** — state lives in JS, every keystroke re-renders:
+```jsx
+function Search() {
+  const [query, setQuery] = useState('')
+  const results = useMemo(() => data.filter(matches(query)), [query])
+  return (
+    <>
+      <input onChange={(e) => setQuery(e.target.value)} />
+      <List items={results} />
+    </>
+  )
+}
+```
+
+**htmx** — state lives on the server, every keystroke is a network request:
+```html
+<input name="q" hx-get="/search" hx-trigger="keyup changed delay:200ms" hx-target="#results">
+<div id="results"></div>
+```
+
+**kuba** — state lives in the DOM, wired declaratively, no server round-trip and no JS to write:
+```html
+<k-dataset upsert="id">
+  <k-filter key="name"></k-filter>
+</k-dataset>
+
+<kb-input name="q" on="*/change:setter/value"></kb-input>
+```
+
+The `on` attribute wires the input's `change` event straight into `k-filter`'s `value` setter — no store, no controller, no request. `k-filter` re-filters `k-dataset`'s collection and dispatches its own `filter` event, which any other element on the page can wire into next.
 
 ---
 
@@ -55,10 +99,10 @@ import '@t2e1/kuba'
 This registers all kuba custom elements in the browser. Drop them in any HTML page, with any backend.
 
 ```html
-<k-button>Click me</k-button>
-<k-card>
-  <k-text>Hello, world.</k-text>
-</k-card>
+<kb-button>Click me</kb-button>
+<kb-card>
+  <kb-text>Hello, world.</kb-text>
+</kb-card>
 ```
 
 ### Utilities (tree-shakeable)
@@ -69,8 +113,46 @@ Each utility is available as a subpath export:
 import { html, css } from '@t2e1/kuba/dom'
 import { router }    from '@t2e1/kuba/router'
 import { spark }     from '@t2e1/kuba/spark'
-import { echo }      from '@t2e1/kuba/echo'
+import http          from '@t2e1/kuba/http'
 ```
+
+---
+
+## The Dataflow Model
+
+kuba does not have a state management library. It has the DOM.
+
+Every kuba custom element understands an `on` attribute — an "arc" describing how it reacts to events from other elements on the page, with no JavaScript required:
+
+```
+source/event:type/sink
+```
+
+- `source` — where the event comes from: `*` (anywhere), `#id`, a `name`, or a tag name.
+- `event` — the DOM event type to listen for.
+- `type` — how `sink` is applied: `method`, `attribute`, or `setter`.
+- `sink` — the method, attribute, or property to invoke on this element.
+
+```html
+<kb-input id="q" name="q"></kb-input>
+
+<k-dataset upsert="id">
+  <k-filter on="#q/change:setter/value" key="name"></k-filter>
+</k-dataset>
+```
+
+Every `<kb-input>` change re-dispatches through the shared event bus; `<k-filter>` picks it up because its `on` arc matches `#q`, sets its own `value`, and re-filters the dataset it lives in — all three elements never reference each other in JavaScript.
+
+For imperative cases, the same bus is available directly:
+
+```js
+import { echo, on } from '@t2e1/kuba/echo'
+
+echo('user:login', { id: 42 })
+on('user:login', ({ detail }) => console.log(detail.id))
+```
+
+No stores. No subscriptions to manage. No framework lifecycle to fight. Just events — the same model the browser has used since 1995, now wired declaratively in markup.
 
 ---
 
@@ -80,11 +162,12 @@ import { echo }      from '@t2e1/kuba/echo'
 
 | Group | Elements |
 |-------|----------|
-| `component` | `button`, `card`, `cover`, `footer`, `header`, `icon`, `logo`, `progress`, `stack`, `text` |
-| `form` | `form`, `input`, `label`, `textarea`, `validity`, `fileupload` |
-| `data` | `dataset`, `filter`, `find` |
+| `component` | `button`, `card`, `cover`, `footer`, `header`, `icon`, `logo`, `progress`, `stack` |
+| `form` | `form`, `input`, `textarea`, `validity`, `fileupload` |
+| `data` | `dataset`, `filter`, `find`, `fetch` |
 | `layout` | `main`, `inset` |
-| `behavior` | `on`, `redirect`, `render`, `load`, `helper` |
+| `behavior` | `on`, `redirect`, `render` |
+| `typography` | `text`, `label`, `helper` |
 
 ### Utilities
 
@@ -92,39 +175,18 @@ import { echo }      from '@t2e1/kuba/echo'
 |---------|-------------|
 | `dom` | HTML and CSS template tag helpers, paint lifecycle |
 | `router` | Client-side routing via URL and params |
-| `echo` | DOM event dispatcher and listener primitives |
+| `echo` | DOM event dispatcher and listener primitives (the dataflow bus) |
 | `event` | Custom event factories and detail helpers |
+| `http` | Fluent HTTP request builder |
 | `spark` | Pure functional utilities (equals, diff, add…) |
 | `middleware` | Composable function pipelines (before, after, around) |
 | `mixin` | Class mixins for common element behaviors |
 | `directive` | Attribute-based directives for custom elements |
 | `renderer` | Low-level rendering primitives |
 | `result` | Result type for error handling without exceptions |
-| `storage` | Reactive localStorage/IndexedDB abstraction |
 | `cookie` | Cookie read/write utilities |
 | `polyfill` | Browser compatibility shims |
 | `pixel` | Responsive design utilities |
-
----
-
-## The Dataflow Model
-
-kuba does not have a state management library. It has the DOM.
-
-Components communicate exclusively through **native DOM events**. A `k-button` dispatches a `click`. A `k-form` listens and reacts. The `echo` package provides the primitives to wire this up without coupling components together.
-
-```js
-import { echo } from '@t2e1/kuba/echo'
-import { on }   from '@t2e1/kuba/echo'
-
-// dispatch
-echo('user:login', { id: 42 })
-
-// listen
-on('user:login', ({ detail }) => console.log(detail.id))
-```
-
-No stores. No subscriptions to manage. No framework lifecycle to fight. Just events — the same model the browser has used since 1995, now first-class.
 
 ---
 
