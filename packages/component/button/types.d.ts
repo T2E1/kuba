@@ -43,4 +43,10 @@ declare global {
   interface HTMLElementTagNameMap {
     'kb-button': KUBAButtonElement
   }
+
+  namespace JSX {
+    interface IntrinsicElements {
+      'kb-button': KUBAIntrinsicElementProps<KUBAButtonElement>
+    }
+  }
 }

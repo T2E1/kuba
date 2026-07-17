@@ -76,4 +76,10 @@ declare global {
   interface HTMLElementTagNameMap {
     'kb-textarea': KUBATextareaElement
   }
+
+  namespace JSX {
+    interface IntrinsicElements {
+      'kb-textarea': KUBAIntrinsicElementProps<KUBATextareaElement>
+    }
+  }
 }

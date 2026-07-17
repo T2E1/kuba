@@ -69,4 +69,10 @@ declare global {
   interface HTMLElementTagNameMap {
     'kb-fileupload': KUBAFileUploadElement
   }
+
+  namespace JSX {
+    interface IntrinsicElements {
+      'kb-fileupload': KUBAIntrinsicElementProps<KUBAFileUploadElement>
+    }
+  }
 }

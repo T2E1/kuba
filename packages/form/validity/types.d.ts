@@ -36,4 +36,10 @@ declare global {
   interface HTMLElementTagNameMap {
     'kb-validity': KUBAValidityElement
   }
+
+  namespace JSX {
+    interface IntrinsicElements {
+      'kb-validity': KUBAIntrinsicElementProps<KUBAValidityElement>
+    }
+  }
 }

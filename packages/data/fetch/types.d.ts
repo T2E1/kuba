@@ -68,4 +68,10 @@ declare global {
   interface HTMLElementTagNameMap {
     'k-fetch': KUBAFetchElement
   }
+
+  namespace JSX {
+    interface IntrinsicElements {
+      'k-fetch': KUBAIntrinsicElementProps<KUBAFetchElement>
+    }
+  }
 }

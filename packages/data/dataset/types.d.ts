@@ -53,4 +53,10 @@ declare global {
   interface HTMLElementTagNameMap {
     'k-dataset': KUBADatasetElement
   }
+
+  namespace JSX {
+    interface IntrinsicElements {
+      'k-dataset': KUBAIntrinsicElementProps<KUBADatasetElement>
+    }
+  }
 }

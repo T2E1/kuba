@@ -15,4 +15,10 @@ declare global {
   interface HTMLElementTagNameMap {
     'kb-header': KUBAHeaderElement
   }
+
+  namespace JSX {
+    interface IntrinsicElements {
+      'kb-header': KUBAIntrinsicElementProps<KUBAHeaderElement>
+    }
+  }
 }

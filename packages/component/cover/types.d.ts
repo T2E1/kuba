@@ -34,4 +34,10 @@ declare global {
   interface HTMLElementTagNameMap {
     'kb-cover': KUBACoverElement
   }
+
+  namespace JSX {
+    interface IntrinsicElements {
+      'kb-cover': KUBAIntrinsicElementProps<KUBACoverElement>
+    }
+  }
 }

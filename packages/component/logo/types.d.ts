@@ -13,4 +13,10 @@ declare global {
   interface HTMLElementTagNameMap {
     'kb-logo': KUBALogoElement
   }
+
+  namespace JSX {
+    interface IntrinsicElements {
+      'kb-logo': KUBAIntrinsicElementProps<KUBALogoElement>
+    }
+  }
 }

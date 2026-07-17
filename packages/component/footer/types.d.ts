@@ -15,4 +15,10 @@ declare global {
   interface HTMLElementTagNameMap {
     'kb-footer': KUBAFooterElement
   }
+
+  namespace JSX {
+    interface IntrinsicElements {
+      'kb-footer': KUBAIntrinsicElementProps<KUBAFooterElement>
+    }
+  }
 }

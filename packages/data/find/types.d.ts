@@ -29,4 +29,10 @@ declare global {
   interface HTMLElementTagNameMap {
     'k-find': KUBAFindElement
   }
+
+  namespace JSX {
+    interface IntrinsicElements {
+      'k-find': KUBAIntrinsicElementProps<KUBAFindElement>
+    }
+  }
 }

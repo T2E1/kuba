@@ -93,4 +93,10 @@ declare global {
   interface HTMLElementTagNameMap {
     'kb-input': KUBAInputElement
   }
+
+  namespace JSX {
+    interface IntrinsicElements {
+      'kb-input': KUBAIntrinsicElementProps<KUBAInputElement>
+    }
+  }
 }

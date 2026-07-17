@@ -45,4 +45,10 @@ declare global {
   interface HTMLElementTagNameMap {
     'kb-redirect': KUBARedirectElement
   }
+
+  namespace JSX {
+    interface IntrinsicElements {
+      'kb-redirect': KUBAIntrinsicElementProps<KUBARedirectElement>
+    }
+  }
 }

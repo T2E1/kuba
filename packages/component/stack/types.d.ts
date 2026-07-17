@@ -49,4 +49,10 @@ declare global {
   interface HTMLElementTagNameMap {
     'kb-stack': KUBAStackElement
   }
+
+  namespace JSX {
+    interface IntrinsicElements {
+      'kb-stack': KUBAIntrinsicElementProps<KUBAStackElement>
+    }
+  }
 }

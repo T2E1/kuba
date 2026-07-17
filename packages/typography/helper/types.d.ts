@@ -17,4 +17,10 @@ declare global {
   interface HTMLElementTagNameMap {
     'kb-helper': KUBAHelperElement
   }
+
+  namespace JSX {
+    interface IntrinsicElements {
+      'kb-helper': KUBAIntrinsicElementProps<KUBAHelperElement>
+    }
+  }
 }

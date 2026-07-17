@@ -33,4 +33,10 @@ declare global {
   interface HTMLElementTagNameMap {
     'kb-inset': KUBAInsetElement
   }
+
+  namespace JSX {
+    interface IntrinsicElements {
+      'kb-inset': KUBAIntrinsicElementProps<KUBAInsetElement>
+    }
+  }
 }
