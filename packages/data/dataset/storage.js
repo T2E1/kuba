@@ -17,6 +17,9 @@ export class Storage {
     return this
   }
 
+  // Accepts a single record or an array. Records are merged (not replaced) into any existing
+  // entry sharing the same upsert key, so partial updates don't drop previously stored fields.
+  // Records without an upsert key value get a generated uuid, so they are always inserted as new.
   push(payload) {
     ;[].concat(payload).forEach((data) => {
       const key = data[this.#dataset.upsert] ?? uuid()

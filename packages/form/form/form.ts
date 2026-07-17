@@ -9,6 +9,12 @@ import { rendered, resetted, submitted } from './interfaces'
 import interpolate from './interpolate'
 import style from './style'
 
+/**
+ * Wraps a native `<form>` in the shadow root, re-dispatching its `reset`
+ * and `submit` events as `resetted`/`submitted` custom events carrying the
+ * parsed `FormData`. Content can optionally be rendered from a `<template>`
+ * (via the `Template` mixin) interpolated with data passed to `render()`.
+ */
 @define('kb-form')
 @paint(component, style)
 class Form extends Echo(Hidden(Template(HTMLElement))) {
@@ -44,6 +50,7 @@ class Form extends Echo(Hidden(Template(HTMLElement))) {
     return this
   }
 
+  /** Auto-invokes `render()` on connect when `autorender` is set, before any explicit data is available. */
   @connected
   [rendered]() {
     if (this.autorender) this.render()

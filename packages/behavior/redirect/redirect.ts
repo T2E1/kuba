@@ -26,6 +26,12 @@ class Redirect extends Headless(Echo(HTMLElement)) {
     this.#route = value
   }
 
+  /**
+   * Navigates via `history.pushState`, without triggering a page reload.
+   * `route` takes precedence over `href`: when set, the target URL is
+   * resolved through `urlFor` (interpolating `params` into the named
+   * route); otherwise the raw `href` is used as-is and `params` is ignored.
+   */
   go(params) {
     this.route
       ? history.pushState({}, '', urlFor(this.route, params))

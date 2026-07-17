@@ -12,6 +12,8 @@ class Label extends HTMLElement {
     this.attachShadow({ mode: 'open' })
   }
 
+  // Runs on connect so consumers can nest <kb-label> without setting the slot
+  // attribute themselves; targets the `label` slot exposed by the host component.
   @connected
   [slottable]() {
     this.setAttribute('slot', 'label')

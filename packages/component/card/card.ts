@@ -41,6 +41,9 @@ class Card extends Echo(Height(Hidden(Width(HTMLElement)))) {
     this.attachShadow({ mode: 'open', delegatesFocus: true })
   }
 
+  // Intercepts both native "click" and re-dispatched "clicked" events from
+  // descendants (stopping them), then re-emits a single "clicked" event
+  // carrying `this.value`, so a card acts as one clickable unit.
   @on.click('*', stop)
   @on.clicked('*', stop)
   click() {

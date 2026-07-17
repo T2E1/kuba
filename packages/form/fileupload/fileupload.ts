@@ -15,6 +15,11 @@ import {
 } from './interfaces'
 import style from './style'
 
+/**
+ * Form-associated file upload element. Reads the selected file as a base64
+ * data URL (via `FileReader`) and stores it internally so it can be
+ * previewed and re-submitted with the owning form's `FormData`.
+ */
 @define('kb-fileupload')
 @paint(component, style)
 class FileUpload extends Echo(Hidden(Width(HTMLElement))) {

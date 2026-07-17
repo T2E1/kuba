@@ -1,5 +1,9 @@
 import { controller } from './interfaces'
 
+// Fluent builder consumed by event.js's method-decorator proxy. It wraps a
+// custom element's connectedCallback/disconnectedCallback to add/remove a
+// delegated listener on shadowRoot scoped to an AbortController, so the
+// listener is torn down automatically when the element disconnects.
 const listen = (type) => ({
   on: (selector) => ({
     with: (...filters) => ({

@@ -29,6 +29,9 @@ const Echo = (Klass) => {
       return this
     }
 
+    // Every dispatch is echoed onto the shared `target` bus, wrapped with
+    // enough identity info (id/name/tag) for other hosts' arcs to match
+    // against their `source` segment.
     dispatchEvent(event) {
       super.dispatchEvent?.(event)
 
@@ -46,6 +49,15 @@ const Echo = (Klass) => {
       )
     }
 
+    // Parses one arc string of the form `source/event:type/sink|filters` —
+    // e.g. `#panel/change:method/refresh|debounce=200` — and subscribes to
+    // the shared bus for it. `source` may be `*` (any), `#id`, `name`, or
+    // tag name; `type` selects how `sink` is invoked (method/attribute/setter);
+    // `filters` is a `|`-separated list of `name=value` pairs, each resolved
+    // via `spark.get(name)` into a transform function applied in sequence.
+    // A dedicated AbortController per arc scopes the listener so a later
+    // `disconnectArc` (or attribute change) can tear down just that wiring
+    // without affecting other arcs on the same host.
     [connectArc](arc) {
       this.#controllers[arc] = new AbortController()
 

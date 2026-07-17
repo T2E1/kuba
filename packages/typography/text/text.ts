@@ -4,6 +4,8 @@ import Echo from '@echo'
 import component from './component.js'
 import style from './style.js'
 
+// Echo(HTMLElement) adds the event-dispatch mixin used elsewhere in the codebase;
+// it is not exercised directly by this component but is required by the base class chain.
 @define('kb-text')
 @paint(component, style)
 class Text extends Echo(HTMLElement) {
@@ -14,6 +16,8 @@ class Text extends Echo(HTMLElement) {
   #size
   #weight
 
+  // Each setter below is wired to its matching HTML attribute via @attributeChanged
+  // and triggers a @repaint (re-runs style/component) whenever the attribute changes.
   get align() {
     return (this.#align ??= 'left')
   }

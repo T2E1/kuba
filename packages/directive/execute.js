@@ -1,3 +1,10 @@
+/**
+ * Wraps a custom element lifecycle callback (e.g. `connectedCallback`) in a
+ * `Proxy` so `target[method]` runs after the original callback, without
+ * overwriting any implementation already present on `target`. Used as the
+ * shared engine behind `connected`, `disconnected`, `adopted`,
+ * `formAssociated`, `formDisabled`, `formReset` and `formStateRestore`.
+ */
 const execute = (method) => ({
   on: (target) => ({
     after: (event) => {

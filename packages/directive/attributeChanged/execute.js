@@ -1,3 +1,10 @@
+/**
+ * Registers `attribute` in `target.constructor.observedAttributes` and
+ * wraps `attributeChangedCallback` in a `Proxy` so that, whenever `attribute`
+ * changes, `newValue` (piped through `filters`, left to right) is assigned to
+ * `context[property]`. Any pre-existing `attributeChangedCallback` still
+ * runs first, unmodified.
+ */
 const execute = (property) => ({
   with: (filters) => ({
     from: (target) => ({

@@ -1,5 +1,9 @@
 const app = document.querySelector('app')
 
+/**
+ * Replaces the root `<app>` element's content, wrapping the DOM write in a
+ * View Transition so the swap animates instead of flashing.
+ */
 function renderer(content) {
   document.startViewTransition(() => {
     app.innerHTML = content

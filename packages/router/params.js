@@ -1,3 +1,12 @@
+/**
+ * Extracts named `:segment` values from `path` against the current pathname
+ * and refreshes them onto this same function object (see `args.js` for why
+ * this module mutates itself instead of returning a value).
+ *
+ * Uses named capture groups (`(?<name>...)`) so extraction stays in sync with
+ * the matching rule built in `matching.js`, which uses the equivalent
+ * unnamed-group pattern to test for a match.
+ */
 const params = (path) => {
   if (!path) return
 

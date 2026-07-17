@@ -25,6 +25,13 @@ class Render extends Echo(Hidden(Template(HTMLElement))) {
     this.attachShadow({ mode: 'open', delegatesFocus: true })
   }
 
+  /**
+   * Replaces `textContent` by interpolating the element's template against
+   * `data`. A single item is coerced into a one-item list so the same
+   * mapping logic renders one or many entries; results are concatenated in
+   * order. `@repaint` triggers a re-render of the shadow DOM after this
+   * runs.
+   */
   @repaint
   render(data) {
     this.#textContent = []

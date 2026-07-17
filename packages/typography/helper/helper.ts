@@ -12,6 +12,8 @@ class Helper extends HTMLElement {
     this.attachShadow({ mode: 'open' })
   }
 
+  // Runs on connect so consumers can nest <kb-helper> without setting the slot
+  // attribute themselves; targets the `helper` slot exposed by the host component.
   @connected
   [slottable]() {
     this.setAttribute('slot', 'helper')

@@ -1,5 +1,11 @@
 import { isPainted } from '@dom/interfaces'
 
+/**
+ * Wraps the host `<kb-input>` in a `Proxy` that transparently reads/writes
+ * either the host itself (before first paint) or its shadow-rendered
+ * `<input>` element (after paint), so properties can be set on the host
+ * before the shadow DOM exists without losing them once it does.
+ */
 const element = {
   from(input) {
     function get(target, key) {

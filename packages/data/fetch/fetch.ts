@@ -25,12 +25,15 @@ class Fetch extends Echo(Headless(HTMLElement)) {
     this.#url = value
   }
 
+  // Cancels any in-flight request before a new one starts, then replaces the controller
+  // so the aborted signal isn't reused for the next request.
   [abort](payload) {
     this.controller.abort()
     this.#controller = new AbortController()
     return payload
   }
 
+  // Deferred via requestIdleCallback so event dispatch doesn't block the response handling.
   [dispatch](response) {
     requestIdleCallback(async () => {
       const { data, error } = await response

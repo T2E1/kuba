@@ -1,5 +1,6 @@
 import attributeChanged from '@directive/attributeChanged'
 
+/** Adds a `value` property that stays in sync with the `value` attribute. */
 const Value = (Super) => {
   class C extends Super {
     #value

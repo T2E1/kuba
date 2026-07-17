@@ -1,3 +1,6 @@
+// Any property access (e.g. http.get, http.post) is treated as the HTTP
+// method name and returns a request builder for that verb — there is no
+// fixed list of supported methods.
 const http = new Proxy(
   {},
   {
@@ -16,6 +19,8 @@ const http = new Proxy(
             return this
           },
 
+          // Never rejects: both network failures and non-2xx responses
+          // resolve to a { data, error } result instead of throwing.
           json() {
             return fetch(url, init)
               .then(async (response) => {

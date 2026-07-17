@@ -29,6 +29,8 @@ class Find extends Echo(Headless(HTMLElement)) {
     this.#value = value
   }
 
+  // Waits for the parent custom element to upgrade before reading its `value`, since
+  // finding relies on the parent already exposing a records collection (e.g. k-dataset).
   async [dispatch]() {
     await customElements.whenDefined(this.parentElement?.localName)
     const detail = this.parentElement.value.find(

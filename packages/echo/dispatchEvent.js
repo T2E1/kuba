@@ -1,3 +1,6 @@
+// Decorator factory: wraps a setter or method so that, after it runs, the
+// host re-dispatches its new value/return as a bubbling CustomEvent, letting
+// Echo's shared `target` bus pick it up and route it through arc wiring.
 const dispatchEvent = (eventName) => (_target, _propertyKeyKey, descriptor) => {
   if (descriptor.set) {
     const originalSet = descriptor.set ?? (() => undefined)

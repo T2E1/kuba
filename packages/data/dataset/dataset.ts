@@ -6,6 +6,7 @@ import { Headless } from '@mixin'
 import { dispatch } from './interface'
 import { Storage } from './storage'
 
+// `upsert` names the key field used by Storage#push to merge records instead of duplicating them.
 @define('k-dataset')
 class Dataset extends Echo(Headless(HTMLElement)) {
   #storage = Storage.from(this)
@@ -24,6 +25,7 @@ class Dataset extends Echo(Headless(HTMLElement)) {
     return this.#storage.values
   }
 
+  // @around(dispatch) fires a 'change' event after the mutation completes.
   @around(dispatch)
   delete(key) {
     this.#storage.delete(key)

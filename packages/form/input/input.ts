@@ -17,6 +17,12 @@ import {
 } from './interfaces'
 import style from './style'
 
+/**
+ * Form-associated text input element. Delegates most native input
+ * attributes/properties to the shadow-rendered `<input>` (via `Element`)
+ * and mirrors its validity into `ElementInternals` so the host participates
+ * in the owning form's constraint validation as a single unit.
+ */
 @define('kb-input')
 @paint(component, style)
 class Input extends Echo(Hidden(Width(HTMLElement))) {
@@ -263,6 +269,7 @@ class Input extends Echo(Hidden(Width(HTMLElement))) {
     return this
   }
 
+  /** Mirrors the native `<input>`'s own validity/message into `ElementInternals`, since the host itself has no validation logic of its own. */
   @didPaint
   [reflectable]() {
     const { validationMessage, validity } = this.element

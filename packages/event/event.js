@@ -1,5 +1,8 @@
 import listen from './listen'
 
+// Property access (e.g. event.click) returns a decorator factory:
+// event.click(selector, ...filters) produces a method decorator that binds
+// a delegated 'click' listener to the decorated method via listen().
 const event = new Proxy(
   {},
   {

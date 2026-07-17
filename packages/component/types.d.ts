@@ -1,3 +1,8 @@
+/**
+ * Aggregates the ambient `HTMLElementTagNameMap` augmentations declared by
+ * each component's `types.d.ts`, so consumers get typed custom elements by
+ * importing this package once.
+ */
 import './button/types'
 import './card/types'
 import './cover/types'

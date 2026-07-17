@@ -18,6 +18,12 @@ import {
 } from './interfaces'
 import style from './style'
 
+/**
+ * Form-associated multi-line text input element. Delegates most native
+ * textarea attributes/properties to the shadow-rendered `<textarea>` (via
+ * `Element`) and mirrors its validity into `ElementInternals`. Also
+ * auto-resizes its height to fit content on input.
+ */
 @define('kb-textarea')
 @paint(component, style)
 class Textarea extends Echo(Hidden(Width(HTMLElement))) {
@@ -118,6 +124,10 @@ class Textarea extends Echo(Hidden(Width(HTMLElement))) {
     this.element.value = value
   }
 
+  // NOTE: `willValidateaaadf` does not exist on `ElementInternals`; this
+  // getter currently returns `undefined` instead of the actual
+  // will-validate flag (compare with the `input`/`fileupload` siblings,
+  // which read `this.internals.willValidate`).
   get willValidate() {
     return this.internals.willValidateaaadf
   }
@@ -164,6 +174,7 @@ class Textarea extends Echo(Hidden(Width(HTMLElement))) {
     return this.internals.reportValidity()
   }
 
+  /** Grows the textarea to fit its content by resetting then re-measuring `scrollHeight` on every input. */
   @on.input('textarea')
   [resize](event) {
     event.target.style.setProperty('height', 'auto')
@@ -199,6 +210,7 @@ class Textarea extends Echo(Hidden(Width(HTMLElement))) {
     return this
   }
 
+  /** Mirrors the native `<textarea>`'s own validity/message into `ElementInternals`, since the host itself has no validation logic of its own. */
   @didPaint
   [reflectable]() {
     const { validationMessage, validity } = this.element

@@ -1,6 +1,6 @@
 {
   "name": "@t2e1/kuba",
-  "version": "0.1.0-alpha.7",
+  "version": "0.1.0-alpha.8",
   "description": "Lightweight Web Components primitives and custom elements",
   "type": "module",
   "license": "MIT",

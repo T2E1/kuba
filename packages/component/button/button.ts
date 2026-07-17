@@ -8,6 +8,12 @@ import component from './component.js'
 import { variantable } from './interfaces.js'
 import style from './style.js'
 
+/**
+ * `variant` is validated by the `variantable` middleware (see `before`)
+ * before being assigned, and the resulting element state is toggled via
+ * `#internals.states` (rather than a class/attribute) so CSS can target it
+ * with `:host(:state(...))`.
+ */
 @define('kb-button')
 @paint(component, style)
 class Button extends Echo(Hidden(Value(Width(HTMLElement)))) {
@@ -55,6 +61,8 @@ class Button extends Echo(Hidden(Value(Width(HTMLElement)))) {
     this.#internals = this.attachInternals()
   }
 
+  // Intercepts and stops any inner click, then re-dispatches it as a single
+  // "clicked" event (via @dispatchEvent) carrying `this.value` as detail.
   @on.click('*', stop)
   @dispatchEvent('clicked')
   click() {
@@ -69,6 +77,9 @@ class Button extends Echo(Hidden(Value(Width(HTMLElement)))) {
     return this.value
   }
 
+  // Invoked by the `before(variantable)` middleware on `set variant` prior
+  // to assignment; swaps the previous variant's custom state for the new
+  // one so only one `:state(...)` variant is ever active at a time.
   [variantable](variant) {
     this.#internals.states.delete(this.variant)
     this.#internals.states.add(variant)

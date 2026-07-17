@@ -14,6 +14,9 @@ import { prop } from './prop'
 import { subtract } from './subtract'
 import { truthy } from './truthy'
 
+// Maps operator names (as used in declarative expressions, e.g. filter/condition
+// strings) to their implementation. Looked up by name in `spark.js`; entries can be
+// overridden or extended at runtime via `spark.set(name, fn)`.
 export const registry = {
   always,
   add,
