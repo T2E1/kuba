@@ -3,10 +3,10 @@ import attributeChanged, { booleanAttribute } from '@directive/attributeChanged'
 import { paint, repaint } from '@dom'
 import Echo from '@echo'
 import on, { customEvent, formData, prevent, stop } from '@event'
+import interpolate from '@interpolate'
 import { Hidden, Template } from '@mixin'
 import component from './component'
 import { rendered, resetted, submitted } from './interfaces'
-import interpolate from './interpolate'
 import style from './style'
 
 /**

@@ -15,6 +15,7 @@
       "@dom/*": ["packages/dom/*"],
       "@echo/*": ["packages/echo/*"],
       "@event/*": ["packages/event/*"],
+      "@interpolate": ["packages/interpolate/index.js"],
       "@middleware/*": ["packages/middleware/*"],
       "@mixin/*": ["packages/mixin/*"],
       "@pixel/*": ["packages/pixel/*"],

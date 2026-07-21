@@ -1,3 +1,5 @@
+// Queried once at module load; the root <app> element must already exist in
+// the page by then, or every renderer() call becomes a no-op.
 const app = document.querySelector('app')
 
 /**

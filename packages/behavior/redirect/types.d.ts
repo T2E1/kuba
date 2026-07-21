@@ -2,7 +2,8 @@
  * Shape of the `href` attribute of {@link KUBARedirectElement} — an
  * absolute URL, an absolute path, or a fragment/query starting with `#`
  * or `?`, since a bare relative segment (e.g. `profile`) is easy to
- * mistake for a `route` name.
+ * mistake for a `route` name. May contain `{path.to.value}` placeholders
+ * (see `go()`), which are free-form text as far as this shape is concerned.
  *
  * This only constrains the shape TypeScript can express through a
  * template literal type; it does not validate that the host/path is
@@ -54,13 +55,15 @@ type KUBARedirectOnAttribute =
 export default class KUBARedirectElement extends HTMLElement {
   /**
    * Target URL used when `route` is not set. Reflects the `href`
-   * attribute.
+   * attribute. May contain `{path.to.value}` placeholders, resolved
+   * against the `params` passed to `go()`.
    *
    * @default '#'
    *
    * @example
    * ```ts
    * element.href = '/profile'     // ok
+   * element.href = '/user/{id}'   // ok — interpolated by go({ id: 42 })
    * element.href = 'profile'      // type error: missing leading `/`, `#`, `?`, or scheme
    * ```
    */
@@ -88,11 +91,18 @@ export default class KUBARedirectElement extends HTMLElement {
   on: KUBARedirectOnAttribute | (string & {})
 
   /**
-   * Navigates to `route` (resolved with `params`) if set, otherwise to
-   * `href`. `params` is ignored when `route` is empty.
+   * Navigates to `route` (resolved with `params` via `urlFor`) if set,
+   * otherwise to `href`, interpolating `{path.to.value}` placeholders in
+   * `href` against `params` (e.g. `href="/user/{id}"`).
    *
-   * @param params - Values to interpolate into the named route's URL.
+   * @param params - Values to interpolate into the target URL, whether
+   *   resolved from `route` or from placeholders in `href`.
    * @returns This element, for chaining.
+   * @example
+   * ```ts
+   * element.href = '/user/{id}'
+   * element.go({ id: 42 }) // navigates to '/user/42'
+   * ```
    */
   go(params?: Record<string, string>): this
 }

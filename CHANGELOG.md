@@ -6,6 +6,23 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) and 
 
 ---
 
+## [0.1.0-alpha.12] — 2026-07-21
+
+### Added
+
+- `@t2e1/kuba/interpolate` package: a single `interpolate(text, data)` utility replacing the `{path.to.value}` placeholder logic that was previously duplicated between `<kb-render>` and `<kb-form>` (and reached into cross-package by `<k-fetch>`). No longer uses `new Function` internally — path lookups are resolved with a plain `reduce`, and a missing value now resolves to `''` instead of the literal `"undefined"`
+- `<kb-redirect>`'s `href` now supports `{path.to.value}` placeholders, interpolated against the `params` passed to `go()` when `route` isn't set (e.g. `href="/user/{id}"` with `go({ id: 42 })` navigates to `/user/42`)
+- `<kb-render>`'s `types.d.ts` now documents its `on` (Echo wiring), `layout` (`'list' | 'grid'`), and `template` (id-reference to an external `<template>`, or its own `<template>` child when unset) attributes
+- `:host(:state(hidden))` style rule on `<kb-render>`, so the `hidden` custom state toggled by the `Hidden` mixin actually hides the element
+
+### Changed
+
+- `<k-fetch>`, `<kb-render>`, and `<kb-form>` now import `interpolate` from `@interpolate` instead of a local/cross-package file
+
+### Fixed
+
+- `<kb-render>`'s documented example, which incorrectly showed the `template` attribute holding template text directly (`template="Hello, {name}!"`) instead of an id reference — replaced with the correct `<template>`-as-child usage
+
 ## [0.1.0-alpha.11] — 2026-07-20
 
 ### Added

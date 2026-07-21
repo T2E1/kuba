@@ -16,6 +16,10 @@ function style() {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
     }
+
+    :host(:state(hidden)) {
+      display: none;
+    }
   `
 }
 

@@ -1,9 +1,9 @@
 import { define } from '@directive'
 import { paint, repaint } from '@dom'
 import Echo from '@echo'
+import interpolate from '@interpolate'
 import { Hidden, Template } from '@mixin'
 import component from './component'
-import interpolate from './interpolate'
 import style from './style'
 
 @define('kb-render')
