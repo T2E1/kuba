@@ -17,6 +17,27 @@ type KUBARedirectHrefAttribute =
   | `?${string}`
 
 /**
+ * How `sink` is applied on {@link KUBARedirectElement}, within its `on`
+ * attribute.
+ */
+type KUBARedirectOnAttributeSink = 'method' | 'attribute' | 'setter'
+
+/**
+ * Shape of the `on` attribute of {@link KUBARedirectElement} — an arc
+ * string in the form `source/event:type/sink`, optionally followed by one
+ * or more `|filter=value` pairs. Inherited from the `Echo` mixin.
+ *
+ * This only constrains the shape (the four `/`/`:`-separated segments and
+ * the `type` segment); `source`, `event`, `sink`, and filter contents remain
+ * free-form strings, since TypeScript cannot validate the full grammar (e.g.
+ * arbitrary characters, filter repetition) through a template literal type.
+ * The check only applies to string literals — a value assigned from a plain
+ * `string` variable falls back to unchecked `string`.
+ */
+type KUBARedirectOnAttribute =
+  `${string}/${string}:${KUBARedirectOnAttributeSink}/${string}${'' | `|${string}`}`
+
+/**
  * Custom element (`<kb-redirect>`) that navigates the browser via
  * `history.pushState` when its `go()` method is invoked, without
  * triggering a page reload. Also an Echo host: its `on` attribute can
@@ -53,6 +74,18 @@ export default class KUBARedirectElement extends HTMLElement {
    * @default ''
    */
   route: string
+
+  /**
+   * Arc string wiring an event from another element to this host, in the
+   * form `source/event:type/sink` (see {@link KUBARedirectOnAttribute}).
+   * Inherited from the `Echo` mixin. Reflects the `on` attribute.
+   *
+   * @example
+   * ```ts
+   * element.on = '#to-profile/clicked:method/go' // ok
+   * ```
+   */
+  on: KUBARedirectOnAttribute | (string & {})
 
   /**
    * Navigates to `route` (resolved with `params`) if set, otherwise to

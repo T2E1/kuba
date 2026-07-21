@@ -6,6 +6,17 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) and 
 
 ---
 
+## [0.1.0-alpha.11] — 2026-07-20
+
+### Added
+
+- `on` property on `<kb-redirect>`'s `types.d.ts`, typed with a component-local `KUBARedirectOnAttribute`/`KUBARedirectOnAttributeSink` arc-string shape, documenting the Echo wiring already supported by the element
+- `types-standard` skill (`.claude/skills/types-standard/`), codifying how `types.d.ts` files are structured and named for KUBA custom elements: per-package isolation (no cross-package type imports), flattening of mixin-contributed members onto the component's class, and the `KUBA<Name>...` naming taxonomy
+
+### Changed
+
+- `/annotate` command now runs in two ordered phases: first structures any missing `types.d.ts` using the `types-standard` skill, then documents everything with `jsdoc-standard` — so JSDoc is never written against a type contract that's still being shaped
+
 ## [0.1.0-alpha.10] — 2026-07-17
 
 ### Removed
