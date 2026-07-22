@@ -10,6 +10,26 @@ import { Meta } from '@storybook/addon-docs/blocks'
 
 Instead of managing state in JavaScript, kuba embraces the browser's native event system as its dataflow layer. Components speak to each other through DOM events. The server remains the source of truth. No virtual DOM, no hydration, no build step required to run.
 
+## Install
+
+Via npm:
+
+```sh
+npm install @t2e1/kuba
+```
+
+```js
+import '@t2e1/kuba'
+```
+
+Or straight from a CDN, no build step:
+
+```html
+<script type="module" src="https://cdn.jsdelivr.net/npm/@t2e1/kuba/+esm"></script>
+```
+
+Either way, importing the package registers every custom element — drop the tags (`<kb-button>`, `<kb-redirect>`, ...) directly into your HTML.
+
 ## How to read this Storybook
 
 - **Components** — every custom element, one story per package, with live controls mapped to its `types.d.ts` contract.
