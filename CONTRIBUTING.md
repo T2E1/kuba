@@ -14,7 +14,8 @@ Read the [README](./README.md) first. Understand the HDA model and why it matter
 git clone https://github.com/T2E1/kuba.git
 cd kuba
 bun install
-bun run build
+bun run dev        # Storybook — component docs and usage examples
+bun run release    # builds dist/, the actual published package
 ```
 
 ---

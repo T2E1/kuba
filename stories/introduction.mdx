@@ -1,0 +1,18 @@
+import { Meta } from '@storybook/addon-docs/blocks'
+
+<Meta title="Introduction" />
+
+# kuba
+
+> The web platform is the framework.
+
+**kuba** is a lightweight ecosystem of Web Components primitives built around a single idea: the DOM already knows how to communicate — you just need to listen.
+
+Instead of managing state in JavaScript, kuba embraces the browser's native event system as its dataflow layer. Components speak to each other through DOM events. The server remains the source of truth. No virtual DOM, no hydration, no build step required to run.
+
+## How to read this Storybook
+
+- **Components** — every custom element, one story per package, with live controls mapped to its `types.d.ts` contract.
+- **Guides** — composed examples ("micro apps") showing multiple components wired together declaratively, the way a real page would use them.
+
+See the [README](https://github.com/T2E1/kuba#readme) for the full architectural rationale (the HDA model).

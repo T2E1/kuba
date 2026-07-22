@@ -2,35 +2,14 @@ import { resolve } from 'node:path'
 import terser from '@rollup/plugin-terser'
 import { defineConfig } from 'vite'
 import minifyTemplateLiterals from './plugins/minify-template-literals.js'
+import aliases from './vite.aliases.js'
 
 const r = (p) => resolve(__dirname, p)
 
 export default defineConfig({
   plugins: [minifyTemplateLiterals()],
   resolve: {
-    alias: {
-      '@behavior': r('packages/behavior'),
-      '@component': r('packages/component'),
-      '@data': r('packages/data'),
-      '@form': r('packages/form'),
-      '@layout': r('packages/layout'),
-      '@cookie': r('packages/cookie'),
-      '@http': r('packages/http/index.js'),
-      '@directive': r('packages/directive'),
-      '@dom': r('packages/dom'),
-      '@echo': r('packages/echo'),
-      '@event': r('packages/event'),
-      '@interpolate': r('packages/interpolate/index.js'),
-      '@middleware': r('packages/middleware'),
-      '@mixin': r('packages/mixin'),
-      '@pixel': r('packages/pixel'),
-      '@polyfill': r('packages/polyfill'),
-      '@renderer': r('packages/renderer'),
-      '@result': r('packages/result'),
-      '@router': r('packages/router'),
-      '@spark': r('packages/spark'),
-      '@typography': r('packages/typography'),
-    },
+    alias: aliases,
   },
   build: {
     lib: {
