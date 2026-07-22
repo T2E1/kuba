@@ -6,7 +6,6 @@ function component() {
       <container>
         <leading>
           <slot name="leading">
-            <kb-logo></kb-logo>
           </slot>
         </leading>
         <trailing>
