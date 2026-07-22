@@ -7,6 +7,8 @@ import { after, before } from '@middleware'
 import { Headless } from '@mixin'
 import { abort, dispatch } from './interface'
 
+// `url` may contain `{path.to.value}` placeholders resolved against `payload` by
+// @interpolate (dot-path lookup, missing/nullish segments become an empty string).
 @define('k-fetch')
 class Fetch extends Echo(Headless(HTMLElement)) {
   #controller

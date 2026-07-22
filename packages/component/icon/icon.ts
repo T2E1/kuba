@@ -11,6 +11,9 @@ class Icon extends Echo(HTMLElement) {
   #size
   #use
 
+  // Unlike the other getters here, the fallback isn't a stored default
+  // (`??=`): an unset color must resolve to `currentColor` so the icon
+  // inherits from its surrounding text, not from a fixed palette entry.
   get color() {
     return this.#color ? `var(--color-${this.#color})` : 'currentColor'
   }
