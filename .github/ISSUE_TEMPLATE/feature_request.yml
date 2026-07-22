@@ -1,0 +1,35 @@
+name: ✨ Feature request
+description: Propose a new capability, attribute, or package for kuba.
+labels: [enhancement]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        kuba is small and opinionated on purpose (see [CONTRIBUTING.md](../../CONTRIBUTING.md)).
+        Proposals that add complexity without a clear, concrete use case are likely to be declined —
+        a real use case makes this much easier to evaluate.
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: What problem does this solve?
+      description: Describe the concrete use case you hit — not a hypothetical future need.
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed API
+      description: How would this look from the consumer's side? A snippet of markup/JS is ideal.
+      render: html
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+      description: Can this be achieved today by composing existing packages/custom elements?
+    validations:
+      required: false
