@@ -18,7 +18,7 @@ import style from './style.js'
 @paint(component, style)
 class Button extends Echo(Hidden(Value(Width(HTMLElement)))) {
   #color
-  #internals
+  #internals = this.attachInternals()
   #type
   #variant
 
@@ -58,7 +58,6 @@ class Button extends Echo(Hidden(Value(Width(HTMLElement)))) {
   constructor() {
     super()
     this.attachShadow({ mode: 'open', delegatesFocus: true })
-    this.#internals = this.attachInternals()
   }
 
   // Intercepts and stops any inner click, then re-dispatches it as a single

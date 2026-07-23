@@ -23,9 +23,9 @@ export const MultipleArcsOnOneHost = {
     </kb-render>
 
     <p>
-      <code>&lt;kb-render&gt;</code> has no <code>on</code> attribute of its
+      <code>kb-render</code> has no <code>on</code> attribute of its
       own here — both subscriptions are expressed as
-      <code>&lt;kb-on&gt;</code> children, each wiring a different button's
+      <code>kb-on</code> children, each wiring a different button's
       <code>clicked</code> event (whose payload is the button's
       <code>value</code>) to the same <code>render()</code> method. The
       empty <code>{}</code> placeholder interpolates the whole payload

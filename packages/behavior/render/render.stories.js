@@ -51,13 +51,13 @@ export const WiredToADataset = {
       <kb-on value="users/change:method/render"></kb-on>
     </kb-render>
     <p>
-      <code>&lt;k-dataset&gt;</code> is the publisher: every
+      <code>k-dataset</code> is the publisher: every
       <code>push()</code> dispatches <code>change</code> with the full
-      record list as payload. <code>&lt;kb-render&gt;</code> subscribes via
-      <code>&lt;kb-on&gt;</code> and re-renders its template — one
+      record list as payload. <code>kb-render</code> subscribes via
+      <code>kb-on</code> and re-renders its template — one
       interpolation per array entry — with zero manual DOM updates. The
       records below were added by calling <code>push()</code> on the
-      dataset once this story mounted; <code>&lt;kb-render&gt;</code> never
+      dataset once this story mounted; <code>kb-render</code> never
       received them directly.
     </p>
   `,

@@ -18,7 +18,7 @@ export const ButtonWiredToRedirect = {
     <p>
       Clicking the button dispatches a <code>clicked</code> event; the
       <code>on</code> attribute routes it straight to
-      <code>&lt;kb-redirect&gt;</code>'s <code>go()</code> method — no
+      <code>kb-redirect</code>'s <code>go()</code> method — no
       JavaScript listener was written for this page.
     </p>
   `,

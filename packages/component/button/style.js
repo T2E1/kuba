@@ -3,6 +3,7 @@ import { css } from '@dom'
 function style(self) {
   return css`
     :host {
+      display: inline-flex;
       width: ${self.width};
 
       button {

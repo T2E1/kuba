@@ -54,10 +54,10 @@ export const AddAndDeleteRecords = {
     </k-dataset>
 
     <p>
-      <code>&lt;kb-form&gt;</code> publishes <code>submitted</code> with its
-      parsed form data; <code>&lt;k-dataset&gt;</code>
+      <code>kb-form</code> publishes <code>submitted</code> with its
+      parsed form data; <code>k-dataset</code>
       subscribes and calls <code>push()</code>, which publishes
-      <code>change</code> in turn; <code>&lt;kb-render&gt;</code>
+      <code>change</code> in turn; <code>kb-render</code>
       subscribes to that and re-renders the list, including a
       <code>name="delete"</code> button per row whose <code>value</code>
       was interpolated to that row's <code>id</code>. The dataset also

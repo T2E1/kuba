@@ -6,6 +6,23 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) and 
 
 ---
 
+## [0.1.0-alpha.13] — 2026-07-23
+
+### Added
+
+- `<kb-button>`'s `types.d.ts` now documents its full attribute surface: `on` (Echo wiring, `KUBAButtonOnAttribute`), `hidden` (`Hidden` mixin, with the boolean-attribute coercion rules), `value` (`Value` mixin), and `width` (`Width` mixin, `KUBAButtonWidthAttribute` matching the `resizing` filter's normalization) — previously only `color`, `type`, and `variant` were typed
+- `color` and `variant` on `<kb-button>` are now typed as closed unions (`KUBAButtonColorAttribute` matching the tokens in `packages/pixel/tokens/color.css`, `KUBAButtonVariantAttribute` matching the states in `style.js`) instead of plain `string`
+- `button.stories.js` now exposes controls for `on`, `hidden`, `value`, and `width`, with `color`/`variant` as `select` controls backed by the same closed unions, and declares `parameters.actions.handles: ['clicked']`
+
+### Changed
+
+- `.storybook/preview.js`'s `docs.source` now derives the "Show code" panel by calling each story's own `render` with its current args (via a `transform`), instead of showing the raw source text of the story export — which, for stories relying on the meta-level `render`, was just `{}`
+
+### Fixed
+
+- `<kb-button>`'s `width` attribute had no visible effect: `:host` in `style.js` didn't set `display`, so it fell back to the default `inline`, on which CSS `width` has no effect — added `display: inline-flex`
+- `button.stories.js`'s `Outline` story passed `variant: 'outline'`, which was never a valid value (the actual states in `style.js` are `naked`/`ghost`/`link`/`icon`) — replaced with a `Naked` story using a real variant
+
 ## [0.1.0-alpha.12] — 2026-07-21
 
 ### Added
