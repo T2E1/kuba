@@ -56,7 +56,12 @@ não documentado para quem consome.
 `args`, `argTypes`, e a lista de stories — não escreva também uma página
 `.mdx` à mão para o mesmo componente que só reafirma a mesma tabela de
 controles. Escreva `.mdx` só para prosa que não tem lugar natural numa
-página de docs gerada: `stories/introduction.mdx` (posicionamento/getting
-started) e qualquer futuro `stories/foundations/*.mdx` (tokens de design,
-prosa sobre *por que* um token existe) são os únicos usos atuais de
-`.mdx` neste repositório.
+página de docs gerada: `stories/introduction.mdx` (hub/getting started) e
+`stories/foundations/*.mdx` (conceitos — posicionamento, arquitetura HDA,
+o bus `Echo`, princípios de design, mapa de pacotes) são os usos atuais de
+`.mdx` neste repositório. `title: 'Foundations/<Nome>'`, sempre com prosa
+que assume nenhum conhecimento prévio e termina apontando para as páginas
+relacionadas (Foundations se referenciam entre si e para as categorias de
+componentes) — cada página nova de Foundations deve ser adicionada também
+à lista "Read this next" de `stories/introduction.mdx`, senão fica
+inalcançável a partir do hub.

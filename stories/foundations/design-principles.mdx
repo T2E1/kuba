@@ -1,0 +1,38 @@
+import { Meta } from '@storybook/addon-docs/blocks'
+
+<Meta title="Foundations/Design Principles" />
+
+# Design principles
+
+These are the rules kuba is built to uphold — not aspirational, but the
+standard a change is measured against before it ships.
+
+- **Platform-first** — if the browser can do it, kuba does not reinvent
+  it. Form validation, event dispatch, history navigation: kuba wraps and
+  standardizes the platform API, it doesn't replace it with a parallel
+  implementation.
+- **Zero opinion on your backend** — works with Rails, Laravel, Django,
+  Go, or a static file server. Nothing in kuba assumes a specific server
+  framework, template language, or API shape; it only assumes the server
+  sends HTML.
+- **Progressive** — add as little or as much as you need. A page can use
+  a single `<kb-button>` for its styling, or wire an entire CRUD screen
+  through the `Echo` bus (see **Guides/User CRUD**) — neither commits you
+  to the other.
+- **Composable** — every primitive is independently usable. `packages/echo`,
+  `packages/router`, `packages/spark` and the rest can be imported and used
+  on their own, without pulling in custom elements you don't need.
+- **Accessible by default** — custom elements are built on semantic HTML
+  and native form-association APIs, not reimplemented from `<div>`s. Every
+  component story in this Storybook ships an Accessibility panel
+  (`a11y` addon) so a violation is visible at the point of use, not
+  discovered later.
+
+## How this shapes what you'll find (and won't) in this Storybook
+
+These principles are why this Storybook has no state-management story, no
+"data fetching library" comparison page, and no framework integration
+guides: kuba's dataflow model (**Foundations/Dataflow**) and the HDA
+architecture it enables (**Foundations/Architecture**) are the whole
+answer to those questions, arrived at by explicitly not solving problems
+the platform already solves.

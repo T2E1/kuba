@@ -1,0 +1,48 @@
+import { Meta } from '@storybook/addon-docs/blocks'
+
+<Meta title="Foundations/Architecture" />
+
+# The HDA architecture
+
+kuba is designed around **Hypermedia-Driven Applications (HDA)** — an
+architectural pattern where HTML is not a template, but the application
+itself.
+
+In an HDA:
+
+- The server sends hypermedia (HTML) as the response.
+- The client renders it directly — no JSON parsing, no state
+  reconciliation.
+- Custom elements progressively enhance the document without owning it.
+
+This is not a regression to the past. It is a return to what the web was
+always meant to be — and a step forward for teams who want predictable,
+accessible, and fast applications without the complexity tax of modern
+JavaScript frameworks.
+
+## What "progressively enhance without owning" means in practice
+
+A kuba custom element never becomes the source of truth for data that the
+server already sent. `<kb-input>` wraps a native `<input>` and forwards
+its own validity into the Constraint Validation API rather than
+reimplementing form semantics; `<k-dataset>` holds client-side state only
+for data that genuinely needs local, instantaneous reactions (a filtered
+list, a running total) — it is not a client-side cache of the server's
+database. The server remains authoritative. kuba's job stops at the
+boundary of "what should react to what, right now, without a network
+round-trip" — see **Foundations/Positioning** for why that boundary is
+exactly the gap between the two dominant frontend schools of thought.
+
+## Where this leaves the build step
+
+Because there's no virtual DOM to reconcile and no compile step required
+to produce valid custom element registrations, a kuba page works by
+loading the library and writing markup — see the **Introduction** page
+(first item in the sidebar) for both the npm and the CDN install path. A
+bundler (this repository uses Vite) is a convenience for authoring kuba's
+own source, not a requirement for consuming it.
+
+See **Foundations/Design Principles** for the concrete rules this
+architecture is built to uphold, and **Foundations/Dataflow** for the
+mechanism — the `Echo` bus — that makes client-side reactivity possible
+without abandoning any of the above.

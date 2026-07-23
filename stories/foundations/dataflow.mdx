@@ -1,0 +1,104 @@
+import { Meta } from '@storybook/addon-docs/blocks'
+
+<Meta title="Foundations/Dataflow" />
+
+# The bus: publishers and subscribers
+
+kuba has no central store, no virtual DOM diffing, and no framework-level
+data-binding layer. State lives in whichever element owns it (often
+`<k-dataset>`), and every other element that cares about a change to that
+state **subscribes** to it declaratively. The mechanism behind this is the
+`Echo` mixin, shared by every custom element listed under **Behavior** in
+this Storybook.
+
+## Publisher / subscriber, not parent / child
+
+- A **publisher** is any `Echo` host that dispatches an event. `Echo`
+  overrides `dispatchEvent` so that every dispatch — whatever the event name
+  — is echoed onto a shared, in-memory bus, tagged with the publisher's
+  `id`, `name`, and tag name. The publisher never knows who, if anyone, is
+  listening.
+- A **subscriber** is any `Echo` host that carries an `on="..."` attribute
+  (or one or more `<kb-on value="...">` children, when more than one
+  subscription is needed — an element can only have a single `on`
+  attribute). Setting `on` registers a listener **on the shared bus**, not
+  on a specific DOM node — so a publisher and its subscriber don't need to
+  be siblings, or even know about each other's existence in the tree.
+
+This is why two elements anywhere on the page — not necessarily adjacent,
+not necessarily related by nesting — can be wired together with zero
+JavaScript written by the page author.
+
+## Arc string syntax
+
+A subscription is called an **arc**, written as:
+
+```
+source/event:type/sink
+source/event:type/sink|filter=value
+source/event:type/sink|filter=value|filter2=value2
+```
+
+| Segment | Meaning |
+|---|---|
+| `source` | Which publisher(s) this arc reacts to: `*` (any), `#id`, a bare `name`, or a bare tag name. |
+| `event` | The event name to listen for on the bus (e.g. `clicked`, `change`, `submit`). |
+| `type` | How `sink` is applied on the subscriber: `method` (`this[sink](payload)`), `attribute` (`this.setAttribute(sink, payload)`), or `setter` (`this[sink] = payload`). |
+| `sink` | The method, attribute, or property name being targeted. |
+| `filter=value` (optional, repeatable) | A named transform (resolved from `@spark`, e.g. `len`, `equals`, `not`) applied to the payload, in declaration order, before it reaches `sink`. |
+
+```html
+<kb-button id="to-profile">View profile</kb-button>
+<kb-redirect on="#to-profile/clicked:method/go" href="/profile"></kb-redirect>
+```
+
+Here `kb-button` is the publisher (it dispatches `clicked`), `kb-redirect`
+is the subscriber (`source: #to-profile`, `event: clicked`, `type: method`,
+`sink: go`).
+
+A filter example — disable a button until a dataset has at least one
+record:
+
+```html
+<kb-button name="save" disabled>
+  Save
+  <kb-on value="users/change:attribute/disabled|len|equals=0"></kb-on>
+</kb-button>
+```
+
+`len` reduces the `change` event's payload (the dataset's full record list)
+to a count; `equals=0` turns that count into a boolean — `disabled` is set
+to `true` only while the dataset is empty.
+
+## One attribute, or many arcs via `<kb-on>`
+
+`on="..."` covers a single arc. When a host needs more than one subscription
+— e.g. a modal that must both *show* on one event and *hide* on another —
+each extra arc is expressed as a `<kb-on value="...">` child instead:
+
+```html
+<kb-modal>
+  <!-- ...modal content... -->
+  <kb-on value="add/click:method/show"></kb-on>
+  <kb-on value="user/submit:method/hide"></kb-on>
+</kb-modal>
+```
+
+`<kb-on>` renders nothing — it waits for its parent custom element to
+upgrade, then calls the same internal `connectArc` the parent's own `on`
+attribute would have called. The wiring always lands on the **parent**, not
+on `<kb-on>` itself.
+
+## Where the listener actually lives
+
+It's worth being explicit about this, since it's easy to assume events are
+scoped to the DOM tree the way native bubbling is: they are not. `Echo`'s
+shared bus is a single `EventTarget` module-level singleton. Setting `on`
+registers a listener on *that* singleton, filtered by matching `source`
+against the publisher's `id`/`name`/tag via a small regex test at dispatch
+time — not by DOM position. Two unrelated `<k-dataset>` elements on the
+same page never cross-talk only because their `name`/`id` differ, not
+because of any tree boundary.
+
+See **Behavior/On**, **Behavior/Redirect**, and **Behavior/Render** for
+each piece individually, and **Guides** for composed examples.

@@ -1,0 +1,54 @@
+import { Meta } from '@storybook/addon-docs/blocks'
+
+<Meta title="Foundations/Packages Overview" />
+
+# Packages overview
+
+kuba ships as one npm package (`@t2e1/kuba`) but is internally organized
+as many small, independently-meaningful packages under `packages/`. This
+page is a map of that tree — each custom element group below has its own
+category in this Storybook's sidebar, with one story per element.
+
+## Custom elements
+
+| Group | Elements | Sidebar category |
+|---|---|---|
+| `component` | `button`, `card`, `cover`, `footer`, `header`, `icon`, `logo`, `progress`, `stack` | **Components** |
+| `form` | `form`, `input`, `textarea`, `validity`, `fileupload` | **Form** |
+| `data` | `dataset`, `filter`, `find`, `fetch` | *(headless — no visual category; see below)* |
+| `layout` | `main`, `inset` | **Layout** |
+| `typography` | `text`, `label`, `helper` | **Typography** |
+| `behavior` | `on`, `redirect`, `render` | **Behavior** |
+
+`packages/data/*` elements (`k-dataset`, `k-filter`, `k-find`, `k-fetch`)
+are headless — they hold or fetch data and publish events on the `Echo`
+bus, but render nothing themselves. They're demonstrated composed with a
+visual element in **Guides**, rather than as standalone catalog stories —
+see **Guides/User CRUD** for `k-dataset` in context.
+
+## Utilities
+
+These are the primitives the custom elements above are built from — each
+independently importable, per the Composable principle
+(**Foundations/Design Principles**).
+
+| Package | Description |
+|---|---|
+| `echo` | The dataflow bus itself: DOM event dispatcher/listener primitives — see **Foundations/Dataflow**. |
+| `dom` | HTML and CSS template tag helpers, paint lifecycle. |
+| `router` | Client-side routing via URL and params. |
+| `event` | Custom event factories and detail helpers. |
+| `http` | Fluent HTTP request builder. |
+| `interpolate` | `{path.to.value}` placeholder substitution, shared by `<kb-render>`, `<kb-form>`, and `<kb-redirect>`. |
+| `spark` | Pure functional utilities (`equals`, `len`, `add`...) — the transform functions usable as `on` attribute filters. |
+| `middleware` | Composable function pipelines (`before`, `after`, `around`). |
+| `mixin` | Class mixins for common element behaviors (`Hidden`, `Width`, `Height`, `Value`, `Template`, `Headless`). |
+| `directive` | Attribute-based directives for custom elements (`@define`, `@attributeChanged`, `@connected`). |
+| `renderer` | Low-level rendering primitives. |
+| `result` | Result type for error handling without exceptions. |
+| `cookie` | Cookie read/write utilities. |
+| `polyfill` | Browser compatibility shims. |
+| `pixel` | Responsive design utilities. |
+
+See the [README](https://github.com/T2E1/kuba#readme) for install
+instructions per subpath export.

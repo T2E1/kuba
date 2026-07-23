@@ -8,9 +8,10 @@
 
 ## Título / hierarquia
 
-- Stories de componente: `title: 'Components/<PascalName>'` para `packages/component/*`, `'Form/<PascalName>'` para `packages/form/*`, `'Layout/<PascalName>'` para `packages/layout/*`, `'Typography/<PascalName>'` para `packages/typography/*` — o segmento antes da barra bate com a categoria do `packages/`, em inglês simples, para que o sidebar agrupe pela mesma taxonomia da árvore de código-fonte.
-- `packages/behavior/*` e outros elementos headless/não-visuais geralmente não ganham story de componente (não há estado visual para pré-visualizar) — ver a nota sobre elementos headless em `references/argtypes-and-events.md` antes de escrever uma mesmo assim.
-- Exemplos compostos: `title: 'Guides/<descrição em Title Case>'`, ex.: `'Guides/Declarative navigation'`.
+- Stories de componente: `title: 'Components/<PascalName>'` para `packages/component/*`, `'Form/<PascalName>'` para `packages/form/*`, `'Layout/<PascalName>'` para `packages/layout/*`, `'Typography/<PascalName>'` para `packages/typography/*`, `'Behavior/<PascalName>'` para `packages/behavior/*` — o segmento antes da barra bate com a categoria do `packages/`, em inglês simples, para que o sidebar agrupe pela mesma taxonomia da árvore de código-fonte.
+- `packages/behavior/*` sempre ganha story, mesmo os elementos headless (`<kb-on>`, `<kb-redirect>`) — mas a story deles é uma demonstração de wiring (conectado a um publisher real via `on`/`<kb-on>`), não um catálogo de `argTypes`. Ver a nota sobre `packages/behavior/*` em `references/argtypes-and-events.md`.
+- Exemplos compostos: `title: 'Guides/<descrição em Title Case>'`, ex.: `'Guides/Declarative navigation'`, `'Guides/User CRUD'`.
+- Prosa conceitual sem componente vivo (o modelo pub/sub do `Echo`, a gramática do arco) fica em `stories/foundations/<slug>.mdx` — ver `stories/foundations/dataflow.mdx`. `title: 'Foundations/<Nome>'`.
 - Nunca invente uma hierarquia mais profunda (`'Components/Buttons/Primary/Solid'`) — um nível abaixo da categoria já basta para o tamanho atual deste repositório; aninhar mais fundo é prematuro (`.claude/rules/064_proibicao-overengineering.md`).
 
 ## Forma do meta em CSF3

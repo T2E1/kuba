@@ -70,10 +70,31 @@ os dois seria configuração redundante para o mesmo comportamento.
 
 ## Uma nota sobre `packages/behavior/*`
 
-Elementos headless (mixin `Headless`, ex.: `<kb-on>`) não renderizam nada —
-não há estado visual para uma story pré-visualizar, então tipicamente não
-ganham story de componente nenhuma. Um elemento que mixa `Echo` mas ainda
-renderiza conteúdo visível (ex.: `<kb-render>`, `<kb-form>`) *ganha* uma
-story de componente normal; o atributo `on` que ele herda do `Echo`
-continua seguindo a linha de template literal da tabela de mapeamento
-acima (`control: 'text'`, restrição explicada em `description`).
+Elementos headless (mixin `Headless`, ex.: `<kb-on>`, `<kb-redirect>`) não
+renderizam nada — não há `argTypes`/estado visual para expor como controle
+convencional, então **não ganham a story de catálogo padrão** (meta com
+`argTypes`/`args` transcritos do `types.d.ts`). Isso não significa que
+ficam sem story: como o valor de todo `packages/behavior/*` é o papel que
+exerce no barramento pub/sub do `Echo` (ver `stories/foundations/dataflow.mdx`
+e `.claude/rules/`), a story desses pacotes é sempre uma demonstração de
+wiring — o elemento aparece conectado a pelo menos um publisher real via
+`on`/`<kb-on>`, com a prosa explicando qual segmento do arco faz o quê. Ver
+`packages/behavior/on/on.stories.js` e `packages/behavior/redirect/redirect.stories.js`
+como referência de forma. Um elemento que mixa `Echo` mas ainda renderiza
+conteúdo visível (ex.: `<kb-render>`, `<kb-form>`) *ganha* uma story de
+componente normal (meta com `argTypes`), além de, quando fizer sentido, uma
+story adicional de wiring — o atributo `on` que herda do `Echo` continua
+seguindo a linha de template literal da tabela de mapeamento acima
+(`control: 'text'`, restrição explicada em `description`).
+
+Se o `render()` de um elemento só produz efeito depois do pintura inicial
+(ex.: `<kb-render>`/`<kb-form>` usam `@repaint`, guardado por um estado
+interno "já pintado" que só fica verdadeiro após `connectedCallback`),
+chamar esse método a partir de um nó criado mas ainda não inserido no DOM é
+um no-op silencioso — e um `<script>` dentro da string retornada por
+`render()` nunca executa (inserção via `innerHTML` não roda `<script>`).
+Para semear dados de forma que realmente dispare o efeito, use a função
+`play` do CSF3 (`play: async ({ canvasElement }) => { ... }`), que roda
+depois que Storybook já montou o markup da story no canvas real — ver
+`packages/behavior/render/render.stories.js` e
+`stories/examples/user-crud.stories.js`.

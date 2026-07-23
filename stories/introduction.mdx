@@ -6,9 +6,14 @@ import { Meta } from '@storybook/addon-docs/blocks'
 
 > The web platform is the framework.
 
-**kuba** is a lightweight ecosystem of Web Components primitives built around a single idea: the DOM already knows how to communicate — you just need to listen.
+**kuba** is a lightweight ecosystem of Web Components primitives built
+around a single idea: the DOM already knows how to communicate — you just
+need to listen.
 
-Instead of managing state in JavaScript, kuba embraces the browser's native event system as its dataflow layer. Components speak to each other through DOM events. The server remains the source of truth. No virtual DOM, no hydration, no build step required to run.
+Instead of managing state in JavaScript, kuba embraces the browser's
+native event system as its dataflow layer. Components speak to each other
+through DOM events. The server remains the source of truth. No virtual
+DOM, no hydration, no build step required to run.
 
 ## Install
 
@@ -28,11 +33,31 @@ Or straight from a CDN, no build step:
 <script type="module" src="https://cdn.jsdelivr.net/npm/@t2e1/kuba/+esm"></script>
 ```
 
-Either way, importing the package registers every custom element — drop the tags (`<kb-button>`, `<kb-redirect>`, ...) directly into your HTML.
+Either way, importing the package registers every custom element — drop
+the tags (`<kb-button>`, `<kb-redirect>`, ...) directly into your HTML.
 
-## How to read this Storybook
+## Read this next
 
-- **Components** — every custom element, one story per package, with live controls mapped to its `types.d.ts` contract.
-- **Guides** — composed examples ("micro apps") showing multiple components wired together declaratively, the way a real page would use them.
+This Storybook is kuba's documentation site, not just a component
+preview — it's organized so you can go as deep as you need and stop:
 
-See the [README](https://github.com/T2E1/kuba#readme) for the full architectural rationale (the HDA model).
+- **Foundations/Positioning** — why kuba exists: the gap between
+  component frameworks (React/Vue/Angular) and htmx, and how kuba closes
+  it.
+- **Foundations/Architecture** — the HDA (Hypermedia-Driven Applications)
+  model kuba is built around.
+- **Foundations/Dataflow** — the `Echo` bus: how elements publish and
+  subscribe to each other's events declaratively, and the full `on`
+  attribute/arc-string grammar.
+- **Foundations/Design Principles** — the concrete rules every change is
+  measured against.
+- **Foundations/Packages Overview** — a map of every package, custom
+  element and utility alike.
+- **Components / Form / Layout / Typography / Behavior** — one story per
+  custom element, with live controls mapped to its `types.d.ts` contract.
+- **Guides** — composed examples ("micro apps") showing multiple elements
+  wired together declaratively, the way a real page would use them.
+
+If you only read one more page before writing markup, make it
+**Foundations/Dataflow** — the `on` attribute is what every other page
+assumes you already understand.
