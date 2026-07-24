@@ -1,0 +1,53 @@
+import { Canvas, Controls, Meta } from '@storybook/addon-docs/blocks'
+import * as OnStories from './on.stories.js'
+
+<Meta of={OnStories} />
+
+# On
+
+`<kb-on>` attaches one additional arc (`source/event:type/sink`) to a
+parent Echo host — it never renders anything itself, and it never wires
+anything on its own behalf. If a host only needs a single subscription,
+use its own `on="..."` attribute (inherited from the `Echo` mixin)
+instead of `<kb-on>` — see `Foundations/Dataflow` for the arc string
+syntax shared by both.
+
+<Canvas of={OnStories.MultipleArcsOnOneHost} />
+<Controls />
+
+## When to use
+
+- A host needs a **second (or third...) subscription** beyond what its own
+  `on` attribute can express — an element can only carry one `on="..."`
+  attribute, so any additional arc has to be a `<kb-on>` child instead.
+- Keeping each subscription visible and independently readable in markup,
+  rather than concatenating multiple arcs into one attribute value.
+
+## When not to use
+
+- **A single subscription** — set the host's own `on="..."` attribute
+  directly; a `<kb-on>` child adds an extra element and an extra upgrade
+  step (see Composition below) for no benefit over the attribute form.
+- **Wiring that isn't event-driven** — `<kb-on>` only bridges a
+  `CustomEvent` dispatched on the shared Echo bus to a method, attribute,
+  or property on its parent; it has no role outside that bus.
+
+## Composition
+
+- **Can contain**: nothing — `<kb-on>` has no slot and renders no shadow
+  DOM; it exists purely for its `value` attribute and its side effect on
+  `parentElement`.
+- **Can be a child of**: any custom element built with the `Echo` mixin
+  (i.e. one that exposes `[connectArc]`) — placing it under a plain HTML
+  element or a non-Echo custom element has no effect, since wiring
+  targets `parentElement` directly. `<kb-on>` waits for
+  `customElements.whenDefined(parentElement.localName)` before wiring, so
+  it's safe to declare before the parent has upgraded.
+
+## Do's and don'ts
+
+| Do | Don't |
+|---|---|
+| Use the host's own `on="..."` attribute for a single subscription | Wrap a single arc in a `<kb-on>` child when the attribute form would do |
+| Add one `<kb-on>` per extra arc needed on the same host | Concatenate multiple arcs into one `on="..."` attribute — the grammar only supports one |
+| Nest `<kb-on>` directly under the Echo host it wires | Place `<kb-on>` under a non-Echo element expecting it to still work |

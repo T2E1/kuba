@@ -1,6 +1,5 @@
 export default {
   title: 'Behavior/Render',
-  tags: ['autodocs'],
   parameters: {
     a11y: { test: 'todo' },
   },
@@ -10,10 +9,24 @@ export default {
       options: ['list', 'grid'],
       description:
         "`'list'` stacks slotted content in a single flex column, `'grid'` arranges it in a two-column grid.",
+      table: { defaultValue: { summary: 'list' } },
+    },
+    template: {
+      control: 'text',
+      description:
+        'Id reference to a `<template>` element elsewhere in the document, resolved once and cached. When left unset, the element looks for its own `<template>` child instead.',
+      table: { defaultValue: { summary: '' } },
+    },
+    on: {
+      control: 'text',
+      description:
+        "Arc string wiring an event from another element to this host, in the form `source/event:type/sink` (optionally `|filter=value`). Inherited from the `Echo` mixin — commonly used to wire a data source's `change` event to `render()`.",
     },
   },
   args: {
     layout: 'list',
+    template: '',
+    on: '',
   },
 }
 
