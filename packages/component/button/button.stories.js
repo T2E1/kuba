@@ -1,6 +1,8 @@
 export default {
   title: 'Components/Button',
-  tags: ['autodocs'],
+  // Docs page is authored by hand in button.mdx (usage guidance), which
+  // attaches to this CSF file via `<Meta of={ButtonStories} />` — tagging
+  // this file 'autodocs' too would generate a second, conflicting page.
   parameters: {
     actions: { handles: ['clicked'] },
     a11y: { test: 'todo' },
@@ -22,16 +24,19 @@ export default {
       ],
       description:
         'Semantic color, resolved against the `--color-{value}` CSS custom property.',
+      table: { defaultValue: { summary: 'primary' } },
     },
     variant: {
       control: { type: 'select' },
       options: ['solid', 'naked', 'ghost', 'link', 'icon'],
       description: 'Visual style, exposed to CSS as a custom element state.',
+      table: { defaultValue: { summary: 'solid' } },
     },
     type: {
       control: { type: 'select' },
       options: ['submit', 'reset'],
       description: 'Native button behavior inside a `<form>`.',
+      table: { defaultValue: { summary: 'submit' } },
     },
     value: {
       control: 'text',
@@ -42,11 +47,13 @@ export default {
       control: 'text',
       description:
         'Width of the button, normalized by the `resizing` filter: numeric `px`/`%` values pass through, `hug` becomes `auto`, `fill` becomes `100%`, anything else defaults to `auto`.',
+      table: { defaultValue: { summary: 'auto' } },
     },
     hidden: {
       control: 'boolean',
       description:
         'Whether the button is hidden. `"false"`/`"0"`/absent read as `false`; any other attribute value reads as `true`.',
+      table: { defaultValue: { summary: 'false' } },
     },
     on: {
       control: 'text',
@@ -75,4 +82,8 @@ export const Naked = {
 
 export const Danger = {
   args: { color: 'danger', label: 'Delete' },
+}
+
+export const Icon = {
+  args: { variant: 'icon', label: '<kb-icon use="home"></kb-icon>' },
 }

@@ -1,6 +1,36 @@
 import '../packages/pixel/index.css'
 import '../index.js'
 
+/**
+ * Pretty-prints the flat markup string returned by a story's `render`
+ * (single line, no whitespace) into indented HTML for the "Show code"
+ * panel. An empty element's opening/closing tags (e.g. `<kb-icon
+ * use="home"></kb-icon>`) are kept on one line instead of split.
+ */
+function formatMarkup(html) {
+  const tokens = html.match(/<[^>]+>|[^<]+/g) ?? []
+  let depth = 0
+  const lines = []
+  for (let i = 0; i < tokens.length; i++) {
+    const token = tokens[i].trim()
+    if (!token) continue
+    const isClosing = token.startsWith('</')
+    const isSelfClosing = token.endsWith('/>')
+    const isOpening = /^<[a-zA-Z]/.test(token) && !isClosing && !isSelfClosing
+    const nextToken = tokens[i + 1]?.trim()
+    const collapsesWithNext = isOpening && nextToken?.startsWith('</')
+    if (isClosing) depth = Math.max(depth - 1, 0)
+    let line = '  '.repeat(depth) + token
+    if (collapsesWithNext) {
+      line += nextToken
+      i++
+    }
+    lines.push(line)
+    if (isOpening && !collapsesWithNext) depth++
+  }
+  return lines.join('\n')
+}
+
 /** @type {import('@storybook/web-components-vite').Preview} */
 const preview = {
   parameters: {
@@ -24,7 +54,8 @@ const preview = {
     docs: {
       source: {
         type: 'code',
-        transform: (_code, { originalStoryFn, args }) => originalStoryFn(args),
+        transform: (_code, { originalStoryFn, args }) =>
+          formatMarkup(originalStoryFn(args)),
       },
     },
   },

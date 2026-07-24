@@ -50,18 +50,35 @@ finalizada mantém `autodocs` ligado; este Storybook *é* a documentação do
 kuba, então um componente sem página de docs é, na prática, um componente
 não documentado para quem consome.
 
-## MDX vs autodocs — não duplique
+## MDX vs autodocs — duas formas, nunca as duas ao mesmo tempo no mesmo componente
 
-`tags: ['autodocs']` já gera uma página de docs completa a partir de
-`args`, `argTypes`, e a lista de stories — não escreva também uma página
-`.mdx` à mão para o mesmo componente que só reafirma a mesma tabela de
-controles. Escreva `.mdx` só para prosa que não tem lugar natural numa
-página de docs gerada: `stories/introduction.mdx` (hub/getting started) e
-`stories/foundations/*.mdx` (conceitos — posicionamento, arquitetura HDA,
-o bus `Echo`, princípios de design, mapa de pacotes) são os usos atuais de
-`.mdx` neste repositório. `title: 'Foundations/<Nome>'`, sempre com prosa
-que assume nenhum conhecimento prévio e termina apontando para as páginas
-relacionadas (Foundations se referenciam entre si e para as categorias de
-componentes) — cada página nova de Foundations deve ser adicionada também
-à lista "Read this next" de `stories/introduction.mdx`, senão fica
-inalcançável a partir do hub.
+`tags: ['autodocs']` gera uma página de docs a partir de `args`,
+`argTypes`, e a lista de stories — suficiente enquanto a única pergunta
+que a página precisa responder é "quais atributos existem". Isso continua
+sendo o **default** para um componente novo (Regra 4 do `SKILL.md`).
+
+Um componente pode evoluir para um `<name>.mdx` colocado (Regra 5 do
+`SKILL.md`, `references/usage-doc.md`) quando o pedido for por orientação
+de uso — hierarquia de variantes, semântica de cor, composição
+pai/filho, do's/don'ts — que não cabe em `description` de `argTypes`. O
+`.mdx` se conecta ao mesmo arquivo de stories via `<Meta of={XStories} />`
+(`import * as XStories from './x.stories.js'`) e reconstrói o mesmo
+playground com `<Canvas of={XStories.Primary} />` + `<Controls />` antes
+da prosa — a página nunca perde a tabela de controles, só ganha contexto
+ao redor dela. Quando isso acontece, **remova** `tags: ['autodocs']` do
+meta do `.stories.js`: Storybook trata uma página com `<Meta of={...}/>`
+mais um CSF marcado `autodocs` como duas páginas conflitantes para o mesmo
+título e falha o build com "you created a component docs page [...] but
+also tagged the CSF file with 'autodocs'". Ver `packages/component/button/`
+(`button.mdx` + `button.stories.js`) como referência.
+
+Prosa conceitual sem componente vivo continua em `stories/introduction.mdx`
+(hub/getting started) e `stories/foundations/*.mdx` (posicionamento,
+arquitetura HDA, o bus `Echo`, princípios de design, mapa de pacotes) —
+`title: 'Foundations/<Nome>'`, sempre assumindo nenhum conhecimento prévio
+e terminando por apontar para as páginas relacionadas; cada página nova de
+Foundations deve ser adicionada também à lista "Read this next" de
+`stories/introduction.mdx`, senão fica inalcançável a partir do hub. A
+diferença para um `<name>.mdx` de componente: Foundations não tem
+`<Meta of={...}/>` apontando pra um CSF (é uma página autônoma, sem
+`argTypes` para reconstruir), enquanto um `.mdx` de componente sempre tem.

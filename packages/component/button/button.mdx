@@ -1,0 +1,112 @@
+import { Canvas, Controls, Meta } from '@storybook/addon-docs/blocks'
+import * as ButtonStories from './button.stories.js'
+
+<Meta of={ButtonStories} />
+
+# Button
+
+A button triggers a synchronous action owned by the page it's on — form
+submission, form reset, or a `clicked` event other elements can subscribe
+to via `on`/`<kb-on>`. It never changes the URL. If the outcome of the
+interaction is a new location, use `<kb-redirect>` (wired to the button's
+`clicked` event) instead of putting that logic in the button itself — see
+`Guides/Declarative navigation`.
+
+<Canvas of={ButtonStories.Primary} />
+<Controls />
+
+## When to use
+
+- Submitting or resetting a `<form>` (`type="submit"` / `type="reset"`).
+- Triggering an action local to the page — opening a dialog, adding a row,
+  deleting a record — where the response is a `clicked` event, not a URL
+  change.
+
+## When not to use
+
+- **Navigating to a different route or URL** — use a plain `<a>` for
+  external/full-page navigation, or `<kb-redirect>` wired to a button's
+  `clicked` event for in-app navigation (`kb-button` itself has no
+  concept of a destination).
+
+## Composition
+
+<Canvas of={ButtonStories.Icon} />
+
+- **Can contain**: plain text (the button's label), `<kb-icon>` (icon-only
+  or icon+label buttons), and `<kb-on>` (one or more, for wiring
+  additional subscriptions beyond the single `on` attribute — see
+  `Foundations/Dataflow`). Anything else slotted in still renders, but
+  `pointer-events: none` is applied to slotted content, so it can't
+  intercept the click meant for the button itself.
+- **Can be a child of**: anything — `kb-button` has no parent
+  requirement. It's commonly placed inside `<kb-form>` (as the submit
+  control), `<kb-card>`, or standalone.
+
+## Variants and hierarchy
+
+`variant` expresses emphasis, not decoration — pick by how important the
+action is relative to its siblings, not by taste:
+
+| Variant | Emphasis | Use for |
+|---|---|---|
+| `solid` (default) | Highest | The one primary action in a given area (e.g. "Save" in a form). Avoid more than one `solid` button per area — if two actions compete for attention, neither reads as primary. |
+| `naked` | Medium | A secondary action next to a `solid` one (e.g. "Cancel" next to "Save"). |
+| `ghost` | Medium-low | An action inside a filled surface (e.g. a toolbar row) where a bordered button would compete with the surface. |
+| `link` | Lowest | An action that reads more like a text link than a button — inline in prose or a table cell. |
+| `icon` | Compact | An icon-only action where space is constrained (toolbars, table rows). Always pair with an accessible label — see Accessibility below. |
+
+## Color
+
+`color` carries meaning — it's not a styling knob:
+
+- `primary` — the default; use for ordinary actions.
+- `danger` — reserve for actions that are destructive or hard to undo
+  (delete, remove, discard). Don't use `danger` for emphasis alone.
+- `master`, `complete`, `success`, `warning`, `info`, `menu` — use only
+  when the action's outcome genuinely matches that semantic (e.g.
+  `success` for an action that finalizes/confirms something positive).
+
+## Sizing
+
+`width` controls how the button fills its container, not its visual
+weight:
+
+- `auto` (default) — the button hugs its label; use inline, next to other
+  buttons or content.
+- `fill` — the button spans its container; use for a single, full-width
+  action (e.g. the only button in a narrow form or a mobile layout).
+- `hug` — explicit synonym for `auto`.
+- A numeric `px`/`%` value — only when a design spec calls for a fixed
+  width; prefer `auto`/`fill` otherwise, since a fixed width doesn't adapt
+  to label translation length.
+
+## Content
+
+The label (slotted text) should be a short, specific verb phrase —
+`"Save"`, `"Delete file"`, `"Add row"` — not a vague `"OK"` or `"Submit"`.
+Keep it to one or two words when possible; long labels wrap rather than
+truncate, since `kb-button` doesn't clip text.
+
+## States and accessibility
+
+- `hidden` removes the button from layout and interaction — prefer it
+  over conditionally not rendering the element when the button's
+  presence/absence should stay easy to find in the DOM (e.g. for a `play`
+  function or a screen reader walking the tree).
+- An `icon`-variant button with no text label needs an accessible name
+  from context — wrap it with an element that provides one, or give the
+  slotted `<kb-icon>` a surrounding `aria-label` on `kb-button` itself,
+  since the icon glyph alone conveys nothing to assistive tech.
+- `type="submit"` only does something meaningful inside a `<form>` — a
+  standalone `kb-button` with `type="submit"` and no owning form is a
+  silent no-op on click.
+
+## Do's and don'ts
+
+| Do | Don't |
+|---|---|
+| Use exactly one `solid` button per area for the primary action | Use two or more `solid` buttons side by side — neither reads as primary |
+| Reserve `color="danger"` for destructive/irreversible actions | Use `danger` just to make a button stand out |
+| Pair an `icon`-only button with an accessible name | Ship an `icon`-only button with no label anywhere for assistive tech |
+| Use `width="fill"` for the single action in a narrow form | Fix `width` to a `px` value for a label that can grow (e.g. translated text) |

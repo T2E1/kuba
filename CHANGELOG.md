@@ -6,6 +6,24 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) and 
 
 ---
 
+## [0.1.0-alpha.14] — 2026-07-23
+
+### Added
+
+- `packages/component/button/button.mdx`: a hand-authored usage page for `<kb-button>` — when to use/not use it, composition (valid children: text, `<kb-icon>`, `<kb-on>`; valid parents: any), `variant` hierarchy, `color` semantics, `width` sizing guidance, content rules, states/accessibility notes, and a do's/don'ts table. Replaces the auto-generated autodocs page for this component, with the same live playground (`<Canvas>` + `<Controls>`) reproduced at the top
+- `storybook-story-standard` skill: new Rule 5 and `references/usage-doc.md`, codifying the `<name>.mdx` usage-page pattern (piloted on `<kb-button>`) as an opt-in evolution of autodocs for components that need "when/how to use" guidance, not just an attribute catalog
+- `.storybook/preview-head.html`: loads the Google Fonts stylesheets (`Material Symbols Rounded`, `Roboto`/`Roboto Condensed`) that `<kb-icon>` and `packages/pixel/tokens/fontFamily.css` already depended on, previously missing from the Storybook preview
+- `button.stories.js`'s `argTypes` now set `table.defaultValue.summary` for every attribute with a documented `@default`, populating the "Default" column in the Controls panel (previously blank)
+
+### Changed
+
+- `.storybook/preview.js`'s `docs.source.transform` now pretty-prints the markup returned by a story's `render` (previously a single unindented line) before showing it in the "Show code" panel
+- `.storybook/main.js` now indexes `packages/**/*.mdx`, enabling per-component usage pages colocated with their `.stories.js`
+
+### Fixed
+
+- `<kb-button>`'s `hidden` attribute had no visual effect: the `Hidden` mixin reads `this.internals.states` (a public property), but `Button` only exposed a private `#internals` field — `this.internals` was `undefined`, so the mixin's deferred state toggle silently threw and never added the `hidden` custom state. Added a public `get internals()` getter (matching `<kb-card>`'s existing pattern) and documented it in `types.d.ts`
+
 ## [0.1.0-alpha.13] — 2026-07-23
 
 ### Added

@@ -3,7 +3,11 @@ import aliases from '../vite.aliases.js'
 
 /** @type {import('@storybook/web-components-vite').StorybookConfig} */
 const config = {
-  stories: ['../stories/**/*.mdx', '../packages/**/*.stories.js'],
+  stories: [
+    '../stories/**/*.mdx',
+    '../packages/**/*.mdx',
+    '../packages/**/*.stories.js',
+  ],
   framework: '@storybook/web-components-vite',
   addons: ['@storybook/addon-a11y', '@storybook/addon-docs'],
   // MDX3 (used by addon-docs) doesn't parse GFM tables by default — without

@@ -1,6 +1,6 @@
 ---
 name: storybook-story-standard
-description: Escreve e revisa stories do Storybook (.stories.js) para custom elements do kuba — argTypes espelhando o types.d.ts do componente, conexão de eventos via parameters.actions.handles, convenções de título/hierarquia e defaults de acessibilidade. Use quando o usuário pedir para "criar uma story", "adicionar uma story do Storybook", "escrever stories para este componente", "documentar este componente no Storybook", ou quando um pacote em packages/**/ tiver types.d.ts mas nenhum *.stories.js colocado ao lado.
+description: Escreve e revisa stories do Storybook (.stories.js) e páginas de uso (.mdx) para custom elements do kuba — argTypes espelhando o types.d.ts do componente, conexão de eventos via parameters.actions.handles, convenções de título/hierarquia, defaults de acessibilidade, e orientação de quando/como usar (hierarquia de variantes, semântica de cor, composição pai/filho, do's/don'ts). Use quando o usuário pedir para "criar uma story", "adicionar uma story do Storybook", "escrever stories para este componente", "documentar este componente no Storybook", "documentar quando usar/quando não usar", "documentar variantes/cores/tamanhos", ou quando um pacote em packages/**/ tiver types.d.ts mas nenhum *.stories.js colocado ao lado.
 ---
 
 # Storybook Story Standard
@@ -17,6 +17,12 @@ story — cobre onde o arquivo fica, a forma do CSF3, e `args` vs `render`.
 Leia `references/argtypes-and-events.md` quando o componente tiver
 atributos para expor como controles ou disparar um `CustomEvent`. Leia
 `references/accessibility-and-docs.md` para os defaults de a11y/autodocs.
+Leia `references/usage-doc.md` quando o pedido for para documentar *quando
+e como usar* o componente (hierarquia de variantes, semântica de cor,
+composição pai/filho, do's/don'ts) — não só catalogar seus atributos.
+`packages/component/button/` (`button.mdx` + `button.stories.js`) é a
+referência viva desse padrão; use-a como modelo de forma, não copie a
+prosa.
 
 ## Os dois fatos que moldam todas as regras aqui
 
@@ -90,6 +96,22 @@ para o caminho de promoção de `'todo'` para `'error'`). Nunca omita o
 parâmetro de a11y silenciosamente; um parâmetro omitido não é a mesma coisa
 que um `'todo'` deliberado.
 
+## Regra 5 — Página de uso (`<name>.mdx`) é a evolução do autodocs, não um adendo
+
+Um catálogo de `argTypes` (o que o autodocs gera sozinho) responde "quais
+atributos existem". Ele não responde "qual variante uso aqui", "essa cor
+é permitida nesse caso", ou "o que pode ser filho disso" — perguntas que
+todo design system maduro (Material, Carbon, Atlassian, Polaris) documenta
+à parte, como prosa de uso ao lado do catálogo, nunca em vez dele. Quando
+o pedido pedir esse nível de orientação (não só "crie uma story"), escreva
+`packages/<categoria>/<nome>/<nome>.mdx` seguindo `references/usage-doc.md`
+— ele *substitui* a página de autodocs (remova `tags: ['autodocs']` do
+`.stories.js` quando isso acontecer; manter os dois gera um erro de índice
+duplicado no build do Storybook) e recria o mesmo playground
+(`<Canvas>`/`<Controls>`) no topo, antes da prosa. Nem todo componente
+precisa disso de imediato — é uma evolução deliberada por pedido, não um
+passo obrigatório do fluxo abaixo.
+
 ## Fluxo de trabalho
 
 1. Leia o `types.d.ts` do componente por inteiro — liste cada atributo
@@ -100,41 +122,58 @@ que um `'todo'` deliberado.
 3. Escreva o meta (`export default { title, tags: ['autodocs'], render,
    argTypes, args, parameters }`) conforme `references/story-structure.md`.
 4. Preencha `argTypes` conforme a Regra 2 /
-   `references/argtypes-and-events.md`.
+   `references/argtypes-and-events.md`, incluindo `table.defaultValue.summary`
+   para todo atributo com `@default` documentado — sem isso a coluna
+   "Default" do painel de Controls fica em branco.
 5. Adicione `parameters.actions.handles` conforme a Regra 3, se o
    componente dispara eventos.
 6. Adicione o parâmetro de a11y conforme a Regra 4.
 7. Escreva pelo menos uma story para cada estado significativamente
    distinto documentado no `types.d.ts` (não toda permutação de atributo —
    ver `references/story-structure.md` § "Quantas stories").
-8. Rode `bun run build` (build estático do Storybook) para confirmar que a
-   story compila antes de considerar a tarefa concluída.
+8. Se o pedido incluir orientação de uso (Regra 5), escreva o
+   `<name>.mdx` conforme `references/usage-doc.md` e remova
+   `tags: ['autodocs']` do meta.
+9. Rode `bun run build` (build estático do Storybook) para confirmar que a
+   story (e o `.mdx`, se houver) compila antes de considerar a tarefa
+   concluída.
 
 ## Exemplo rápido
 
-Dado que `packages/component/button/types.d.ts` documenta `color: string`,
-`variant: string`, `type: 'submit' | 'reset'`, e um método `click()` que
+Dado que `packages/component/card/types.d.ts` documenta
+`direction: 'row' | 'column'`, `value: string`, e um método `click()` que
 "dispara um evento `clicked`":
 
 ```js
 export default {
-  title: 'Components/Button',
+  title: 'Components/Card',
   tags: ['autodocs'],
   parameters: {
     actions: { handles: ['clicked'] },
     a11y: { test: 'todo' },
   },
-  render: ({ color, variant, type, label }) =>
-    `<kb-button color="${color}" variant="${variant}" type="${type}">${label}</kb-button>`,
+  render: ({ direction, value, content }) =>
+    `<kb-card direction="${direction}" value="${value}">${content}</kb-card>`,
   argTypes: {
-    color: { control: 'text', description: 'Semantic color, resolved against the `--color-{value}` CSS custom property.' },
-    variant: { control: 'text', description: 'Visual style, exposed to CSS as a custom element state.' },
-    type: { control: { type: 'select' }, options: ['submit', 'reset'], description: 'Native button behavior inside a `<form>`.' },
-    label: { control: 'text' },
+    direction: {
+      control: { type: 'select' },
+      options: ['row', 'column'],
+      description: "Flex layout direction for the card's content.",
+      table: { defaultValue: { summary: 'column' } },
+    },
+    value: {
+      control: 'text',
+      description: 'Arbitrary payload sent as the detail of the `clicked` event.',
+    },
+    content: { control: 'text' },
   },
-  args: { color: 'primary', variant: 'solid', type: 'submit', label: 'Save' },
+  args: { direction: 'column', value: '42', content: 'Card content' },
 }
 
-export const Primary = {}
-export const Outline = { args: { variant: 'outline' } }
+export const Column = {}
+export const Row = { args: { direction: 'row' } }
 ```
+
+Para o padrão completo, incluindo uma página `<name>.mdx` de uso (Regra 5),
+ver `packages/component/button/` — `types.d.ts`, `button.stories.js`, e
+`button.mdx` juntos, e `references/usage-doc.md` para a estrutura da prosa.

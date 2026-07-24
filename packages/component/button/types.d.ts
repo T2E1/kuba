@@ -75,6 +75,11 @@ export default class KUBAButtonElement extends HTMLElement {
   color: KUBAButtonColorAttribute | (string & {})
 
   /**
+   * The element's `ElementInternals`, attached on construction.
+   */
+  readonly internals: ElementInternals
+
+  /**
    * Whether the button is hidden (reflects the `hidden` attribute). The
    * attribute value `"false"` or `"0"` (or the attribute being absent)
    * reads as `false`; any other value — including `""`, as in
