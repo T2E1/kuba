@@ -25,6 +25,12 @@ class Render extends Echo(Hidden(Template(HTMLElement))) {
     this.attachShadow({ mode: 'open', delegatesFocus: true })
   }
 
+  @repaint
+  clear() {
+    this.#textContent = ''
+    return this
+  }
+
   /**
    * Replaces `textContent` by interpolating the element's template against
    * `data`. A single item is coerced into a one-item list so the same

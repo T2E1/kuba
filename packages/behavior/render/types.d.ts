@@ -93,6 +93,15 @@ export default class KUBARenderElement extends HTMLElement {
    * @returns This element, for chaining.
    */
   render(data: unknown | unknown[]): this
+
+  /**
+   * Empties the element's rendered `textContent`, without touching its
+   * template. Commonly wired to an error/empty event (e.g. a fetch's
+   * `error`) via `on`/`<kb-on>`, as the counterpart to `render()`.
+   *
+   * @returns This element, for chaining.
+   */
+  clear(): this
 }
 
 declare global {

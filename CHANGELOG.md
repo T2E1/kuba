@@ -6,6 +6,18 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) and 
 
 ---
 
+## [0.1.0-alpha.15] — 2026-07-24
+
+### Added
+
+- `<kb-render>` now has a `clear()` method, emptying its rendered `textContent` without touching its template — the natural counterpart to `render()`, commonly wired to an error/empty event (e.g. `<kb-on value="api/error:method/clear">` next to `<kb-on value="api/ok:method/render">`)
+- `render.mdx` documents `clear()` alongside `render()` in the "Data and re-rendering" section
+
+### Changed
+
+- `render.stories.js` replaces the `List`/`Grid`/`WiredToADataset` stories with a single `WiredToAFetch` story, demonstrating `<kb-render>` wired to `<kb-input>` and `<k-fetch>` (search-as-you-type against a real API), with a `play` function that types into the input and asserts the rendered results
+- `WiredToAFetch`'s markup is now also passed explicitly via `parameters.docs.source.code`, so the "Show code" panel shows it verbatim instead of the DOM-extraction-based auto-formatter mangling inline elements (`<strong>`, direct text) across multiple lines
+
 ## [0.1.0-alpha.14] — 2026-07-23
 
 ### Added

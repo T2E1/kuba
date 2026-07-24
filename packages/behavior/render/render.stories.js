@@ -1,3 +1,5 @@
+import { expect, userEvent, waitFor } from 'storybook/test'
+
 export default {
   title: 'Behavior/Render',
   parameters: {
@@ -30,54 +32,58 @@ export default {
   },
 }
 
-// `render()` only takes effect once the host has completed its initial
-// paint (guarded by `@repaint`'s `isPainted` check) — calling it on a node
-// that isn't connected to the DOM yet is a silent no-op. `play` runs after
-// Storybook has mounted the story's markup into the canvas, so this is the
-// only place seeding data actually works.
-const renderSeededTemplate = ({ layout }) =>
-  `<kb-render layout="${layout}"><template>{name} — {age}</template></kb-render>`
+// Handed to `docs.source.code` as-is (Regra: docs mostra exatamente esta
+// string, sem re-formatar) — o painel "Show code" do addon-docs, quando
+// não recebe um `code` explícito, extrai o DOM já renderizado e o passa
+// por um beautifier HTML que não entende elementos inline (`<strong>`,
+// texto direto), quebrando cada um em três linhas.
+const wiredToAFetchMarkup = `<kb-stack direction="column">
+  <kb-input name="dog" width="fill">
+    <kb-label>Dog Breed Search</kb-label>
+  </kb-input>
 
-const seedTwoRecords = async ({ canvasElement }) => {
-  canvasElement.querySelector('kb-render').render([
-    { name: 'Ada Lovelace', age: 36 },
-    { name: 'Alan Turing', age: 41 },
-  ])
-}
+  <kb-render layout="grid">
+    <template>
+      <kb-card>
+        <kb-inset side="top">
+          <kb-cover src="{image.url}"></kb-cover>
+        </kb-inset>
+        <kb-text family="highlight" weight="medium" size="xs" color="primary">{name}</kb-text>
+        <kb-stack direction="column" spacing="quarck">
+          <kb-text size="xxxs"><strong>Bred for:</strong> {bred_for}</kb-text>
+          <kb-text size="xxxs"><strong>Life span:</strong> {life_span}</kb-text>
+          <kb-text size="xxxs"><strong>Temperament:</strong> {temperament}</kb-text>
+        </kb-stack>
+      </kb-card>
+    </template>
+    <kb-on value="api/ok:method/render"></kb-on>
+    <kb-on value="api/error:method/clear"></kb-on>
+  </kb-render>
+</kb-stack>
 
-export const List = {
-  render: renderSeededTemplate,
-  play: seedTwoRecords,
-}
+<k-fetch name="api" url="https://api.thedogapi.com/v1/breeds/search?q={}">
+  <kb-headers key="x-api-key" value="DEMO-API-KEY"></kb-headers>
+  <kb-on value="dog/change:method/get"></kb-on>
+</k-fetch>`
 
-export const Grid = {
-  render: renderSeededTemplate,
-  args: { layout: 'grid' },
-  play: seedTwoRecords,
-}
-
-export const WiredToADataset = {
-  render: () => `
-    <k-dataset name="users" upsert="id"></k-dataset>
-    <kb-render layout="grid">
-      <template>{name} ({age})</template>
-      <kb-on value="users/change:method/render"></kb-on>
-    </kb-render>
-    <p>
-      <code>k-dataset</code> is the publisher: every
-      <code>push()</code> dispatches <code>change</code> with the full
-      record list as payload. <code>kb-render</code> subscribes via
-      <code>kb-on</code> and re-renders its template — one
-      interpolation per array entry — with zero manual DOM updates. The
-      records below were added by calling <code>push()</code> on the
-      dataset once this story mounted; <code>kb-render</code> never
-      received them directly.
-    </p>
-  `,
+export const WiredToAFetch = {
+  render: () => wiredToAFetchMarkup,
+  parameters: {
+    docs: {
+      source: { code: wiredToAFetchMarkup },
+    },
+  },
   play: async ({ canvasElement }) => {
-    canvasElement.querySelector('k-dataset').push([
-      { id: 1, name: 'Grace Hopper', age: 85 },
-      { id: 2, name: 'Margaret Hamilton', age: 87 },
-    ])
+    const input = canvasElement.querySelector('kb-input')
+    const innerInput = await waitFor(
+      () => input.shadowRoot.querySelector('input') ?? Promise.reject(),
+    )
+
+    await userEvent.type(innerInput, 'american')
+
+    const render = canvasElement.querySelector('kb-render')
+    await waitFor(() => expect(render.textContent).toContain('American'), {
+      timeout: 10000,
+    })
   },
 }

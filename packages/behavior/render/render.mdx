@@ -6,13 +6,14 @@ import * as RenderStories from './render.stories.js'
 # Render
 
 `<kb-render>` renders its shadow DOM content by interpolating a template
-against arbitrary data, supplied via `render()`. It's also an Echo host:
-its `on` attribute (or a `<kb-on>` child) can wire `render()` to another
-element's event — e.g. re-rendering whenever a data source dispatches
-`change` — so updates happen declaratively, without a manual event
+against arbitrary data, supplied via `render()`, and emptied again via
+`clear()`. It's also an Echo host: its `on` attribute (or a `<kb-on>`
+child) can wire either method to another element's event — e.g.
+re-rendering whenever a data source dispatches `change`, or clearing on
+an `error` — so updates happen declaratively, without a manual event
 listener or a framework's reactivity system.
 
-<Canvas of={RenderStories.List} />
+<Canvas of={RenderStories.WiredToAFetch} />
 <Controls />
 
 ## When to use
@@ -21,7 +22,7 @@ listener or a framework's reactivity system.
   whose data changes — one `{name} — {age}`-style template, re-rendered
   against a new data array each time.
 - **Wiring rendering to an event** instead of writing a manual
-  `addEventListener` + DOM update — see `WiredToADataset` below.
+  `addEventListener` + DOM update — see `WiredToAFetch` below.
 
 ## When not to use
 
@@ -33,8 +34,6 @@ listener or a framework's reactivity system.
   own beyond "one interpolation per array entry."
 
 ## Composition
-
-<Canvas of={RenderStories.WiredToADataset} />
 
 - **Can contain**: a single `<template>` child (read once via
   `this.querySelector('template')` when the `template` attribute is
@@ -77,6 +76,13 @@ styling:
   over calling it manually whenever possible — it keeps the update
   declarative and colocated with the markup instead of scattered in page
   script.
+- `clear()` empties the rendered `textContent` without touching the
+  template, so a later `render()` call still has a template to
+  interpolate against. It's the natural counterpart to wire to an
+  error/empty event — e.g. `<kb-on value="api/error:method/clear">` next
+  to `<kb-on value="api/ok:method/render">`, as shown in the playground
+  above, so a failed request clears stale results instead of leaving them
+  on screen.
 
 ## Do's and don'ts
 
