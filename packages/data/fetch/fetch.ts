@@ -5,18 +5,16 @@ import http from '@http'
 import interpolate from '@interpolate'
 import { after, before } from '@middleware'
 import { Headless } from '@mixin'
-import { abort, dispatch } from './interface'
+import Controller from './controller'
+import { abort, dispatch, setHeader } from './interface'
 
 // `url` may contain `{path.to.value}` placeholders resolved against `payload` by
 // @interpolate (dot-path lookup, missing/nullish segments become an empty string).
 @define('k-fetch')
 class Fetch extends Echo(Headless(HTMLElement)) {
-  #controller
+  #controller = new Controller()
+  #headers = {}
   #url
-
-  get controller() {
-    return (this.#controller ??= new AbortController())
-  }
 
   get url() {
     return (this.#url ??= '')
@@ -27,11 +25,18 @@ class Fetch extends Echo(Headless(HTMLElement)) {
     this.#url = value
   }
 
+  // Called by a `<kb-headers>` child once upgraded — sets one entry in the
+  // plain object handed to `http.<verb>(...).headers(...)`, which forwards
+  // it to the native `Headers` constructor.
+  [setHeader](key, value) {
+    this.#headers[key] = value
+    return this
+  }
+
   // Cancels any in-flight request before a new one starts, then replaces the controller
   // so the aborted signal isn't reused for the next request.
   [abort](payload) {
-    this.controller.abort()
-    this.#controller = new AbortController()
+    this.#controller.abort()
     return payload
   }
 
@@ -51,7 +56,8 @@ class Fetch extends Echo(Headless(HTMLElement)) {
   delete(payload) {
     return http
       .delete(interpolate(this.url, payload))
-      .signal(this.controller.signal)
+      .headers(this.#headers)
+      .signal(this.#controller.signal)
       .json()
   }
 
@@ -60,7 +66,8 @@ class Fetch extends Echo(Headless(HTMLElement)) {
   get(payload) {
     return http
       .get(interpolate(this.url, payload))
-      .signal(this.controller.signal)
+      .headers(this.#headers)
+      .signal(this.#controller.signal)
       .json()
   }
 
@@ -70,7 +77,8 @@ class Fetch extends Echo(Headless(HTMLElement)) {
     return http
       .post(interpolate(this.url, payload))
       .body(payload)
-      .signal(this.controller.signal)
+      .headers(this.#headers)
+      .signal(this.#controller.signal)
       .json()
   }
 
@@ -80,7 +88,8 @@ class Fetch extends Echo(Headless(HTMLElement)) {
     return http
       .put(interpolate(this.url, payload))
       .body(payload)
-      .signal(this.controller.signal)
+      .headers(this.#headers)
+      .signal(this.#controller.signal)
       .json()
   }
 }

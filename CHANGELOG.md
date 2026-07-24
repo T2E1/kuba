@@ -6,6 +6,18 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) and 
 
 ---
 
+## [0.1.0-alpha.16] — 2026-07-24
+
+### Added
+
+- `<kb-headers>` (`packages/data/headers/`): a headless child element that sets one HTTP header key/value pair on its parent `<k-fetch>` once the parent has upgraded — nest one per header (e.g. `<kb-headers key="Authorization" value="Bearer abc123">`)
+- `<k-fetch>` now accepts headers set via `<kb-headers>` children, forwarding them to every request (`get`/`post`/`put`/`delete`)
+- `packages/http/http.js`: the HTTP request-builder Proxy, extracted out of `packages/http/index.js` (now a thin re-export) so it can be imported/tested independently
+
+### Changed
+
+- `<k-fetch>`'s abort-controller handling moved into a dedicated `Controller` class (`packages/data/fetch/controller.js`), replacing manual `AbortController` recreation on every abort
+
 ## [0.1.0-alpha.15] — 2026-07-24
 
 ### Added
