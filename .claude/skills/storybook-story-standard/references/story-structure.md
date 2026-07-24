@@ -64,13 +64,21 @@ render: ({ direction, value, content }) =>
 
 ## Quantas stories
 
-Escreva uma story por estado que seja significativo para alguém decidindo
-como usar o componente — não uma varredura combinatória de todo valor de
-atributo. Para `<kb-button>` (`color`, `variant`, `type`): `Primary` (o
-default), `Outline` (a outra `variant`), e `Danger` (um `color`
-semanticamente distinto) já basta; uma matriz
-`PrimarySolidSubmit`/`PrimarySolidReset`/`PrimaryOutlineSubmit`/... é
-cobertura especulativa que ninguém pediu
-(`.claude/rules/023_proibicao-funcionalidade-especulativa.md`). Adicione
-uma story nova quando um caso de uso real precisar dela, não
+**Sem uma página de uso (`<name>.mdx`, Regra 5 do `SKILL.md`):** escreva
+uma story por estado que seja significativo para alguém decidindo como
+usar o componente — não uma varredura combinatória de todo valor de
+atributo. Para `<kb-card>` (`direction`, `value`): `Column` (o default) e
+`Row` (a outra `direction`) já bastam; uma matriz
+`ColumnWithLongValue`/`RowWithLongValue`/... é cobertura especulativa que
+ninguém pediu (`.claude/rules/023_proibicao-funcionalidade-especulativa.md`).
+Adicione uma story nova quando um caso de uso real precisar dela, não
 preventivamente.
+
+**Com uma página de uso:** os exports nomeados só de catálogo somem — a
+página `.mdx` mostra cada variação como um bloco `<Canvas><Story
+of={XStories.ClickDispatchesEvent} args={{ ... }} /></Canvas>` na seção de prosa que a
+explica, sem precisar de um export dedicado no `.stories.js` (ver
+`references/usage-doc.md` § "Variações inline sem export novo"). O
+`.stories.js` mantém só `export default` e os cenários de teste da
+Regra 6 — ver `packages/component/button/` (`button.stories.js` +
+`button.mdx`) como referência dessa forma.

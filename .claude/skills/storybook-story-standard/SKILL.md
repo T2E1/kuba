@@ -1,6 +1,6 @@
 ---
 name: storybook-story-standard
-description: Escreve e revisa stories do Storybook (.stories.js) e páginas de uso (.mdx) para custom elements do kuba — argTypes espelhando o types.d.ts do componente, conexão de eventos via parameters.actions.handles, convenções de título/hierarquia, defaults de acessibilidade, e orientação de quando/como usar (hierarquia de variantes, semântica de cor, composição pai/filho, do's/don'ts). Use quando o usuário pedir para "criar uma story", "adicionar uma story do Storybook", "escrever stories para este componente", "documentar este componente no Storybook", "documentar quando usar/quando não usar", "documentar variantes/cores/tamanhos", ou quando um pacote em packages/**/ tiver types.d.ts mas nenhum *.stories.js colocado ao lado.
+description: Escreve e revisa stories do Storybook (.stories.js), páginas de uso (.mdx), e testes de interação (play) para custom elements do kuba — argTypes espelhando o types.d.ts do componente, conexão de eventos via parameters.actions.handles, stories com play que exercitam de verdade cada evento disparado, convenções de título/hierarquia, defaults de acessibilidade, e orientação de quando/como usar (hierarquia de variantes, semântica de cor, composição pai/filho, do's/don'ts). Use quando o usuário pedir para "criar uma story", "adicionar uma story do Storybook", "escrever stories para este componente", "documentar este componente no Storybook", "documentar quando usar/quando não usar", "documentar variantes/cores/tamanhos", "testar interação/clique/evento no Storybook", "escrever um play para esta story", ou quando um pacote em packages/**/ tiver types.d.ts mas nenhum *.stories.js colocado ao lado.
 ---
 
 # Storybook Story Standard
@@ -19,10 +19,14 @@ atributos para expor como controles ou disparar um `CustomEvent`. Leia
 `references/accessibility-and-docs.md` para os defaults de a11y/autodocs.
 Leia `references/usage-doc.md` quando o pedido for para documentar *quando
 e como usar* o componente (hierarquia de variantes, semântica de cor,
-composição pai/filho, do's/don'ts) — não só catalogar seus atributos.
+composição pai/filho, do's/don'ts) — não só catalogar seus atributos. Leia
+`references/interactions.md` quando o componente disparar um evento
+documentado — cada um ganha uma story com `play` que o exercita de verdade
+(clique real, evento capturado, `detail` verificado), não só uma
+declaração passiva em `actions.handles`.
 `packages/component/button/` (`button.mdx` + `button.stories.js`) é a
-referência viva desse padrão; use-a como modelo de forma, não copie a
-prosa.
+referência viva de todos esses padrões; use-a como modelo de forma, não
+copie a prosa.
 
 ## Os dois fatos que moldam todas as regras aqui
 
@@ -112,6 +116,44 @@ duplicado no build do Storybook) e recria o mesmo playground
 precisa disso de imediato — é uma evolução deliberada por pedido, não um
 passo obrigatório do fluxo abaixo.
 
+**Quando um componente tem essa página, o `.stories.js` para de ser um
+catálogo.** Sem `.mdx`, os exports nomeados (`Primary`, `Naked`, `Danger`,
+...) são o único lugar onde uma variação existe para alguém navegar — ver
+`references/story-structure.md` § "Quantas stories". Com `.mdx`, cada
+exemplo visual vira um bloco `<Canvas><Story of={XStories.ClickDispatchesEvent}
+args={{ variant: 'icon', ... }} /></Canvas>` dentro da prosa da seção que
+ele ilustra (`args` sobrescreve só para aquele bloco, sem criar um export
+novo) — repetir a mesma variação como export nomeado *e* como bloco no
+`.mdx` é a mesma informação em dois lugares (`.claude/rules/021_proibicao-duplicacao-logica.md`).
+Nesse caso o `.stories.js` mantém só `export default` e os cenários de
+teste da Regra 6 (`play`) — nenhum export "só pra mostrar visualmente".
+
+## Regra 6 — Todo evento documentado ganha uma story com `play`, exportada normalmente
+
+`actions.handles` (Regra 3) só torna o evento *visível* no painel Actions
+quando alguém clica manualmente. Isso não prova que o evento funciona —
+só que, se disparar, o painel mostra. Para cada evento que o `types.d.ts`
+documenta como disparado, escreva também uma story exportada
+normalmente (`export const NomeDoEvento = { ... }` — nunca omitida do
+`export`, mesmo sendo "só um teste") cujo `play` (ver
+`references/interactions.md`):
+
+1. Localiza o elemento renderizado.
+2. Registra um `fn()` como listener do evento.
+3. Simula a interação real que deveria dispará-lo (`userEvent.click`,
+   `userEvent.type`, etc. — nunca `element.dispatchEvent(...)` manual, que
+   testaria o event bus e não o componente).
+4. Faz `expect` de que o listener foi chamado e de que `detail` carrega o
+   valor esperado.
+
+Isso é um teste funcional de verdade, executado na aba Interactions
+(PASS/FAIL por passo) — e é o que teria pego, antes de qualquer revisão
+manual, o bug em que `<kb-button>` não expunha `internals` publicamente
+para o mixin `Hidden` (a story `hidden` do painel de Controls "funcionava"
+visualmente até alguém clicar em `True` e notar que nada acontecia; um
+`play` que afirma `hidden === true` depois de setar o atributo teria
+falhado imediatamente).
+
 ## Fluxo de trabalho
 
 1. Leia o `types.d.ts` do componente por inteiro — liste cada atributo
@@ -131,12 +173,15 @@ passo obrigatório do fluxo abaixo.
 7. Escreva pelo menos uma story para cada estado significativamente
    distinto documentado no `types.d.ts` (não toda permutação de atributo —
    ver `references/story-structure.md` § "Quantas stories").
-8. Se o pedido incluir orientação de uso (Regra 5), escreva o
+8. Para cada evento documentado, escreva a story de interação da Regra 6
+   conforme `references/interactions.md`, exportada como qualquer outra
+   story do arquivo.
+9. Se o pedido incluir orientação de uso (Regra 5), escreva o
    `<name>.mdx` conforme `references/usage-doc.md` e remova
    `tags: ['autodocs']` do meta.
-9. Rode `bun run build` (build estático do Storybook) para confirmar que a
-   story (e o `.mdx`, se houver) compila antes de considerar a tarefa
-   concluída.
+10. Rode `bun run build` (build estático do Storybook) para confirmar que
+    a story (e o `.mdx`, se houver) compila antes de considerar a tarefa
+    concluída.
 
 ## Exemplo rápido
 

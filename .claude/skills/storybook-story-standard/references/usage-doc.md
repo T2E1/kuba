@@ -43,7 +43,7 @@ repo-wide; não precisa ser refeito por componente.
 2. **Playground** — logo após o parágrafo de propósito, antes de qualquer
    `##`:
    ```js
-   <Canvas of={ButtonStories.Primary} />
+   <Canvas of={ButtonStories.ClickDispatchesEvent} />
    <Controls />
    ```
    `<Controls />` sem `of=` herda a story ancorada pelo `<Meta of={...}/>`
@@ -69,8 +69,9 @@ repo-wide; não precisa ser refeito por componente.
    - **Can be a child of**: restrições reais de onde o componente pode
      ser colocado, ou "anything" quando não há restrição — não deixe
      implícito.
-   Um `<Canvas of={...}/>` mostrando um caso de composição real (não o
-   `Primary`) ajuda mais aqui do que só prosa.
+   Um bloco `<Canvas>` mostrando um caso de composição real (ver
+   "Variações inline sem export novo" abaixo) ajuda mais aqui do que só
+   prosa.
 6. **Seções específicas do contrato do componente** — uma por atributo
    que carrega uma *regra*, não apenas uma *opção*. Nomeie pela pergunta
    que responde, não pelo nome do atributo cru:
@@ -95,7 +96,35 @@ repo-wide; não precisa ser refeito por componente.
    importa; não liste toda combinação inválida possível
    (`.claude/rules/023_proibicao-funcionalidade-especulativa.md`).
 
-## O que não escrever aqui
+## Variações inline sem export novo
+
+Uma vez que o componente tem `.mdx`, o `.stories.js` para de acumular um
+export nomeado por variação visual (ver `SKILL.md` Regra 5 e
+`references/story-structure.md` § "Quantas stories") — cada exemplo vira
+um bloco na própria seção de prosa que ele ilustra, usando `<Story>` com
+`args` sobrescrevendo só aquele bloco, sem criar uma nova story:
+
+```js
+import { Canvas, Controls, Meta, Story } from '@storybook/addon-docs/blocks'
+import * as ButtonStories from './button.stories.js'
+```
+
+```jsx
+<Canvas>
+  <Story
+    of={ButtonStories.ClickDispatchesEvent}
+    args={{ variant: 'icon', label: '<kb-icon use="home"></kb-icon>' }}
+  />
+</Canvas>
+```
+
+`of` aponta para *qualquer* export existente no `.stories.js` — na
+prática, quase sempre o cenário de teste da Regra 6 (`ClickDispatchesEvent` em
+`button.stories.js`), já que ele costuma ser o único export além do
+`default` — e `args` sobrescreve só os campos citados, herdando o resto
+do `args` do meta. O playground do topo da página (passo 2 acima) é o
+único lugar que usa `<Canvas of={XStories.ClickDispatchesEvent} />` sem override —
+mostra o estado default do componente.
 
 - Não repita a mecânica de normalização/coerção de um atributo (isso já
   está em `description` do `argType`, transcrita do `types.d.ts` — Regra

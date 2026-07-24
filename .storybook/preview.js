@@ -1,5 +1,40 @@
+import { action } from 'storybook/actions'
+import { useEffect } from 'storybook/preview-api'
 import '../packages/pixel/index.css'
 import '../index.js'
+
+/**
+ * Wires `parameters.actions.handles` to the Actions panel by listening on
+ * `#storybook-root` — same targeting as Storybook's own (deprecated, still
+ * undocumented-replacement) `withActions` decorator from
+ * `storybook/actions/decorator`. Reimplemented rather than reused because
+ * that one logs the raw event object: every kuba event is a `CustomEvent`
+ * whose payload lives in `.detail`, and `.detail` is an inherited
+ * accessor, not an own enumerable property, so it's dropped when the
+ * event crosses the iframe→manager channel — the panel showed only
+ * `isTrusted`/`__className__` stubs, never the actual value. Logging
+ * `event.detail` directly keeps the payload intact.
+ */
+function withDomActions(storyFn, context) {
+  const handles = context.parameters?.actions?.handles
+  useEffect(() => {
+    const root = document.getElementById('storybook-root')
+    if (!handles || !root) return undefined
+
+    const listeners = handles.map((eventName) => {
+      const handler = (event) => action(eventName)(event.detail)
+      root.addEventListener(eventName, handler)
+      return { eventName, handler }
+    })
+
+    return () =>
+      listeners.forEach(({ eventName, handler }) =>
+        root.removeEventListener(eventName, handler),
+      )
+  }, [handles])
+
+  return storyFn()
+}
 
 /**
  * Pretty-prints the flat markup string returned by a story's `render`
@@ -33,6 +68,10 @@ function formatMarkup(html) {
 
 /** @type {import('@storybook/web-components-vite').Preview} */
 const preview = {
+  // The Actions panel is a built-in core panel (shows up with no addon
+  // registered), but nothing listens for `parameters.actions.handles`
+  // event names without a decorator wiring it up — see `withDomActions`.
+  decorators: [withDomActions],
   parameters: {
     controls: {
       matchers: {

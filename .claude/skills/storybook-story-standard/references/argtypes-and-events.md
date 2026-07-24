@@ -68,6 +68,16 @@ Não adicione uma conexão em estilo `control: 'action'` como `argType` para
 esses casos — `actions.handles` é o mecanismo completo e correto; adicionar
 os dois seria configuração redundante para o mesmo comportamento.
 
+Isso é declarado uma vez por componente, no `.stories.js` — não precisa
+(nem deve) ser reconfigurado em `.storybook/preview.js`, que já tem o
+decorator (`withDomActions`) que ouve `#storybook-root` para qualquer
+`handles` declarado e loga `event.detail` (não o `CustomEvent` inteiro —
+`.detail` é um accessor herdado, não uma propriedade própria, e se perde
+na serialização entre o iframe e o painel Actions se você logar o evento
+cru). O painel Actions mostra o evento para inspeção humana; para afirmar
+que ele realmente dispara com o valor certo, escreva uma story com `play`
+— ver `references/interactions.md` (Regra 6).
+
 ## Uma nota sobre `packages/behavior/*`
 
 Elementos headless (mixin `Headless`, ex.: `<kb-on>`, `<kb-redirect>`) não

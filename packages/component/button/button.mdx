@@ -1,4 +1,4 @@
-import { Canvas, Controls, Meta } from '@storybook/addon-docs/blocks'
+import { Canvas, Controls, Meta, Story } from '@storybook/addon-docs/blocks'
 import * as ButtonStories from './button.stories.js'
 
 <Meta of={ButtonStories} />
@@ -12,7 +12,7 @@ interaction is a new location, use `<kb-redirect>` (wired to the button's
 `clicked` event) instead of putting that logic in the button itself — see
 `Guides/Declarative navigation`.
 
-<Canvas of={ButtonStories.Primary} />
+<Canvas of={ButtonStories.ClickDispatchesEvent} />
 <Controls />
 
 ## When to use
@@ -31,7 +31,12 @@ interaction is a new location, use `<kb-redirect>` (wired to the button's
 
 ## Composition
 
-<Canvas of={ButtonStories.Icon} />
+<Canvas>
+  <Story
+    of={ButtonStories.ClickDispatchesEvent}
+    args={{ variant: 'icon', label: '<kb-icon use="home"></kb-icon>' }}
+  />
+</Canvas>
 
 - **Can contain**: plain text (the button's label), `<kb-icon>` (icon-only
   or icon+label buttons), and `<kb-on>` (one or more, for wiring
