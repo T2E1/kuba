@@ -1,0 +1,59 @@
+import { Meta } from '@storybook/addon-docs/blocks'
+
+<Meta title="Guidelines/Naming" />
+
+# Naming
+
+We don't use Atomic Design. We tried it early on, but spending energy
+sorting what was an "atom", "molecule", or "organism" didn't fit what
+Kuba actually is: native custom elements, not a React composition tree. We
+kept the mindset and chose to simplify, landing on our own approach —
+three layers.
+
+## Tag prefix
+
+| Prefix | Meaning | Examples |
+|---|---|---|
+| `kb-` | Visual element — renders something on screen. | `<kb-button>`, `<kb-card>`, `<kb-input>` |
+| `k-` | Headless element — holds or fetches data and publishes events on `Echo`, but renders nothing itself. | `<k-dataset>`, `<k-filter>`, `<k-find>`, `<k-fetch>` |
+
+The tag alone tells you whether an element has a visual presence — the
+prefix is the first naming cue, before you even open `types.d.ts`.
+
+## Design Tokens
+
+The semantic style variables, mirrored 100% between design and
+technology — see **Guidelines/Design Tokens**. Every token follows
+`--{group}-{scale}`, e.g. `--spacing-md` or `--color-primary-dark`. The
+name never describes _where_ a token is used, only _what_ it represents —
+which is what lets you reuse it in any component without the name ever
+becoming misleading.
+
+## Elements
+
+The indivisible components — the smallest parts of an interface: a button,
+an input, a label. Each maps to a single `packages/*/*`, with a
+`types.d.ts`, a `style.js`, and, when visual, a story. They're built
+purely from combinations of Design Tokens — no loose values.
+
+## Blocks
+
+The more complex components, assembled by composing several Elements. A
+`<kb-card>` grouping `<kb-text>`, `<kb-label>`, and `<kb-button>` is a
+Block. We use the spacing Design Tokens (`--spacing-*`, `--spacing_inset-*`)
+to govern these compositions, so the rhythm between Elements inside a
+Block is always predictable.
+
+## What + Semantics + Variant
+
+The practice for naming both Design Tokens and the attributes/properties
+in a `types.d.ts`: start with the _what_ (the concept), follow with the
+_semantics_ (the variation), and, when needed, a _variant_ of intensity.
+It applies to tokens (`color` + `primary` + `dark`) as much as to the
+components themselves — it isn't mandatory, it only kicks in when there's
+a real need to differentiate.
+
+For example, you might have just one `<kb-card>`, but eventually need a
+"card with image" — in that case, before creating a new element, check
+whether it isn't simply a different composition of the same `<kb-card>`
+(a Block, not a new Element).

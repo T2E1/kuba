@@ -6,8 +6,7 @@
  * `change`, re-renders a list), and per-row `<kb-button>`s (publish
  * `clicked`, subscribed to by the dataset itself for delete). Every
  * connection is an `on`/`<kb-on>` arc — zero JavaScript event listeners
- * are written for this page. See Foundations/Dataflow for the underlying
- * publisher/subscriber model.
+ * are written for this page.
  */
 export default {
   title: 'Guides/User CRUD',

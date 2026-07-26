@@ -78,6 +78,40 @@ const preview = {
         color: /(background|color)$/i,
       },
     },
+    // The Guidelines subtree follows a deliberate reading order (concept →
+    // tokens → mechanics), not alphabetical. Without this, renaming an MDX
+    // file would silently reshuffle the sidebar. `'*'` lets every other
+    // category (Components, Form, …) keep its default alphabetical order.
+    options: {
+      storySort: {
+        order: [
+          'Guidelines',
+          [
+            'Introduction',
+            'Core Values',
+            'Design Principles',
+            'Design Tokens',
+            [
+              'Design Tokens',
+              'Typography',
+              'Border',
+              'Opacity',
+              'Shadows',
+              'Spacing',
+              'Colors',
+            ],
+            'Technologies',
+            'Naming',
+            'Principles',
+            'Themes',
+            'Icons',
+            'Use & Collaborate',
+            'Try Kuba',
+          ],
+          '*',
+        ],
+      },
+    },
     // Storybook's AUTO source mode falls back to DYNAMIC for any story that
     // uses `args` — DYNAMIC is documented as "currently React only" and, for
     // this web-components renderer, captures a live-DOM snapshot instead of

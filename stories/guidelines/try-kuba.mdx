@@ -1,0 +1,70 @@
+import { Meta } from '@storybook/addon-docs/blocks'
+
+<Meta title="Guidelines/Try Kuba" />
+
+# Try Kuba
+
+This page gathers everything you need to use Kuba and start building your
+product on top of it. It's simple — use it to understand what day-to-day
+work looks like with a large-scale architecture and Design System, to show
+the advantages to stakeholders, or just to focus on your own studies.
+
+## Installation
+
+Via npm:
+
+```sh
+npm install @t2e1/kuba
+```
+
+```js
+import '@t2e1/kuba'
+```
+
+Or straight from a CDN, no build step:
+
+```html
+<script type="module" src="https://cdn.jsdelivr.net/npm/@t2e1/kuba/+esm"></script>
+```
+
+Either path registers every custom element — just drop the tags
+(`<kb-button>`, `<kb-redirect>`, ...) directly into your HTML.
+
+## Project configuration
+
+For most of the configuration, the reference file is `package.json` — the
+per-subpath `exports` (`@t2e1/kuba/echo`, `@t2e1/kuba/router`,
+`@t2e1/kuba/http`, among others) let you import only the utility you need,
+without pulling in the whole package. That was a deliberate choice to keep
+the number of configuration files a project needs to a minimum.
+
+## Build your product from Kuba
+
+Not sure where to start? Kuba's repository is open on GitHub for you to
+clone and kick off your product from it. You can clone the project to your
+local machine and use it freely, or fork it to your own GitHub account and
+keep receiving the improvements the community and we ship.
+
+To clone the project onto your machine:
+
+```sh
+git clone https://github.com/T2E1/kuba.git
+```
+
+Once cloned:
+
+```sh
+npm install
+npm run dev
+```
+
+That brings up Storybook locally at `http://localhost:6006` — the same
+environment this documentation runs in, with interactive controls and
+accessibility tests for every component.
+
+## Collaborate on Kuba
+
+We count on the community's support. Feel free to browse the code on
+[GitHub](https://github.com/T2E1/kuba) and send your contributions via PR
+and/or issue. Remember that PRs must be documented (`types.d.ts` + story,
+when visual) to keep review smooth. Have fun.

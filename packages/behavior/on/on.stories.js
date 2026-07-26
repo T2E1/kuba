@@ -38,12 +38,11 @@ export const MultipleArcsOnOneHost = {
   // string syntax.
   render: () => `
     <kb-button name="approve" value="Approved">Approve</kb-button>
-    <kb-button name="reject" value="Rejected" variant="outline" color="danger">Reject</kb-button>
+    <kb-button name="reject" value="Rejected" variant="naked" color="danger">Reject</kb-button>
 
-    <kb-render layout="list">
+    <kb-render>
       <template>Last action: {}</template>
-      <kb-on value="approve/clicked:method/render"></kb-on>
-      <kb-on value="reject/clicked:method/render"></kb-on>
+      <kb-on value="*/clicked:method/render"></kb-on>
     </kb-render>
   `,
   play: async ({ canvasElement }) => {

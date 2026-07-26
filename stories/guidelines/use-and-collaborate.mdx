@@ -1,0 +1,48 @@
+import { Meta } from '@storybook/addon-docs/blocks'
+
+<Meta title="Guidelines/Use & Collaborate" />
+
+# Use & collaborate
+
+Kuba is at version `0.1.0-alpha` and under active development. Use it,
+give lots of feedback, and contribute to that evolution. The
+**Guidelines** section explains how you can use Kuba to design and build
+your products, or even craft your own architecture on top of it.
+
+Kuba is distributed under the **MIT** license — you can use it for any
+purpose, commercial included; just keep the credits in the
+[`LICENSE`](https://github.com/T2E1/kuba/blob/main/LICENSE).
+
+## Send your feedback
+
+Found something that could be better? Don't hold back the suggestion —
+open an [issue on GitHub](https://github.com/T2E1/kuba/issues). Positive
+feedback is welcome too: knowing what's working helps as much as knowing
+what isn't.
+
+## GitHub
+
+The repository is open at
+[github.com/T2E1/kuba](https://github.com/T2E1/kuba), with the `README`
+covering the main instructions. There you'll find the Design Tokens that
+power Kuba's demo brand and every component listed in this Storybook.
+
+## Contribute a change
+
+Every contribution follows [Conventional
+Commits](https://www.conventionalcommits.org/) — enforced by `commitlint`
+on each commit — and passes `npm run check` (lint and formatting via
+Biome) before being accepted. A new component needs, at minimum, a
+documented `types.d.ts` and, if visual, a story — see **Guidelines/Naming**
+for where it fits (Element or Block).
+
+## Duplicate and use freely
+
+Starting your own product and want to use Kuba as its foundation? Go ahead.
+Install via `npm install @t2e1/kuba`, or clone the repository and use the
+package structure as a starting point — see **Guidelines/Try Kuba**. Adapt
+the Design Tokens to your brand's variables and adjust the components as
+needed.
+
+**Important**: in that case, just remember to keep the license credits, as
+required by the MIT license.

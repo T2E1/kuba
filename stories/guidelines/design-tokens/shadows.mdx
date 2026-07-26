@@ -1,0 +1,23 @@
+import { Meta } from '@storybook/addon-docs/blocks'
+
+<Meta title="Guidelines/Design Tokens/Shadows" />
+
+# Shadows
+
+Variables that define shadow levels for depth. Defined in
+`packages/pixel/tokens/shadow.css`.
+
+| Token | Variable | Y | Blur |
+|---|---|---|---|
+| Level 0 | `--shadow-level-0` | — | `none` |
+| Level 1 | `--shadow-level-1` | 1px | 3px |
+| Level 2 | `--shadow-level-2` | 3px | 8px |
+| Level 3 | `--shadow-level-3` | 6px | 18px |
+| Level 4 | `--shadow-level-4` | 8px | 14px |
+| Level 5 | `--shadow-level-5` | 12px | 22px |
+
+Each level is a composite `box-shadow` (several stacked layers, not a
+single value) to simulate depth more convincingly than a flat shadow. The
+higher the level, the more the element should read as sitting "above" the
+surface — `Level 0` (`none`) is the resting default for most components;
+higher levels are reserved for floating elements like menus and dialogs.

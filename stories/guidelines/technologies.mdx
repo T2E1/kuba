@@ -1,0 +1,54 @@
+import { Meta } from '@storybook/addon-docs/blocks'
+
+<Meta title="Guidelines/Technologies" />
+
+# Technology
+
+Kuba is written in **plain JavaScript**, with zero runtime dependencies —
+check `package.json`: the `dependencies` section is empty. That wasn't for
+lack of options; it's a direct consequence of the principles in
+**Guidelines/Design Principles**:
+
+1. Web Components are native — they need no framework to exist or to
+   register themselves.
+2. One fewer dependency is one fewer supply chain to audit, update, and
+   have break in production.
+3. A gentler learning curve — anyone who knows the DOM and `CustomEvent`
+   can already read Kuba's source.
+4. Every front-end developer knows JavaScript, whichever framework they
+   reach for day to day.
+
+Styling is applied via `CSS in JS` (the `css` helper from `packages/dom`),
+not a global stylesheet — each element carries its own `style.js`,
+isolated by the Shadow DOM.
+
+## Tooling
+
+What lives in `devDependencies` isn't for consuming Kuba — it's for
+building it:
+
+| Tool | Role |
+|---|---|
+| `vite` | Bundler that produces `dist/` on `npm run release`. |
+| `storybook` (`@storybook/web-components-vite`, `addon-docs`, `addon-a11y`) | Component catalog, interaction tests, and the documentation site you're reading right now. |
+| `typescript` | Compiles nothing — used only to type-check against the `types.d.ts` files that document each element's public surface. |
+| `@biomejs/biome` | Lint and formatting (`npm run check`). |
+| `husky` + `lint-staged` + `commitlint` | Enforce lint and Conventional Commits before any commit reaches history. |
+
+## Beyond JavaScript
+
+Kuba also relies on specific native APIs, not on libraries:
+
+- **Constraint Validation API** — native form validation, used by
+  `packages/form/*`.
+- **`ElementInternals`** — form association and `:invalid`/`:disabled`
+  states without reimplementing `<form>` semantics.
+- **CSS `light-dark()`** — light/dark theme resolution in the color
+  Design Tokens, with no duplicated stylesheets — see
+  **Guidelines/Themes**.
+- **History API** — client-side navigation in `packages/router` and
+  `<kb-redirect>`.
+
+None of these is an installable dependency: they're capabilities the
+browser already ships, which Kuba exposes through a declarative API
+instead of hiding behind an abstraction of its own.

@@ -1,0 +1,62 @@
+import { Meta } from '@storybook/addon-docs/blocks'
+
+<Meta title="Guidelines/Core Values" />
+
+# Four things we believe
+
+## Trust the platform before reinventing it
+
+Every new element starts with the same question: "does the browser
+already solve this?" `<kb-input>` delegates validation to the Constraint
+Validation API. `<kb-redirect>` uses the History API. `Echo` uses native
+`dispatchEvent`. We only write code when the platform genuinely doesn't
+offer the behavior — never out of stylistic preference.
+
+## Be creative, but stay accountable
+
+We document behavior before considering it done — a `types.d.ts` with no
+implementation isn't a contract, and an implementation with no
+`types.d.ts` isn't a public component. That boundary exists so that
+experimenting inside a package never turns into instability for whoever
+consumes it.
+
+## Every interaction matters
+
+This holds across every layer: how an event is named, the wording of a
+validation error message, the `aria-*` attribute missing from an element.
+Small decisions, kept consistent across the whole package, add up to a
+coherent experience — both for the person using the interface and for the
+person reading the code.
+
+## Don't treat a constraint as an excuse
+
+A hard requirement is no reason to carve out an exception in the
+architecture. When a scenario doesn't fit the current model —
+publisher/subscriber over `Echo`, HTML as the source of truth — the way
+forward is to understand _why_ the model resists, not to route around it.
+That's what keeps the principles in **Guidelines/Design Principles**
+trustworthy over time.
+
+---
+
+## Why Kuba exists
+
+### Purpose
+
+Shrink the distance between "the server delivers HTML" and "the interface
+reacts as if a framework were behind it" — without forcing whoever builds
+the product to learn a state runtime, a build step, or a new templating
+language.
+
+### Mission
+
+Offer a small, cohesive set of primitives — custom elements and
+utilities — that any team can adopt progressively: a single `<kb-button>`
+on an existing page, or an entire screen orchestrated through the `Echo`
+bus.
+
+### Vision
+
+That product teams treat the DOM as a legitimate dataflow layer, not an
+implementation detail to be hidden behind a Virtual DOM — and that the
+HTML the server sends remains, in fact, the application.
