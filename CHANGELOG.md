@@ -6,6 +6,21 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) and 
 
 ---
 
+## [0.1.0-alpha.17] — 2026-07-27
+
+### Added
+
+- Importing `@t2e1/kuba` now also applies the `pixel` stylesheet (CSS reset + design tokens) and installs the browser polyfills automatically — the main entry pulls in `@pixel/index.css` and `@polyfill`, so consumers no longer need to import them separately
+
+### Changed
+
+- All imports in the main entry (`index.js`) now use path aliases (`@behavior`, `@component`, …) instead of relative `./packages/*` paths
+- CDN usage is documented as an ES module import (`import 'https://cdn.jsdelivr.net/npm/@t2e1/kuba/+esm'`) instead of a `<script type="module">` tag, in both the README and the "Try Kuba" guide
+
+### Removed
+
+- `vite.aliases.js` — the shared path-alias map now lives in `vite.config.js` as a named `aliases` export, consumed directly by the Storybook config
+
 ## [0.1.0-alpha.16] — 2026-07-24
 
 ### Added

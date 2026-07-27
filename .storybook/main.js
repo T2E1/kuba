@@ -1,5 +1,5 @@
 import remarkGfm from 'remark-gfm'
-import aliases from '../vite.aliases.js'
+import { aliases } from '../vite.config.js'
 
 /** @type {import('@storybook/web-components-vite').StorybookConfig} */
 const config = {

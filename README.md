@@ -34,8 +34,8 @@ import '@t2e1/kuba'
 
 Or straight from a CDN, no build step:
 
-```html
-<script type="module" src="https://cdn.jsdelivr.net/npm/@t2e1/kuba/+esm"></script>
+```js
+import 'https://cdn.jsdelivr.net/npm/@t2e1/kuba/+esm'
 ```
 
 Either way, importing the package registers every custom element — drop the tags directly into your HTML.
