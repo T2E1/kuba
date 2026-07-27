@@ -2,7 +2,7 @@
 
 Thank you for your interest in contributing. kuba is a small, opinionated project — contributions that align with its design principles are welcome; contributions that add complexity without clear benefit are not.
 
-Read the [README](./README.md) first. Understand the HDA model and why it matters before proposing changes.
+Read the [README](./README.md) and the [documentation](https://t2e1.github.io/kuba/) first — especially the **Guidelines** section (design principles, naming, design tokens). Understand the HDA model and why it matters before proposing changes.
 
 ---
 
@@ -14,7 +14,8 @@ Read the [README](./README.md) first. Understand the HDA model and why it matter
 git clone https://github.com/T2E1/kuba.git
 cd kuba
 bun install
-bun run dev        # Storybook — component docs and usage examples
+bun run dev        # Storybook — the docs site, on http://localhost:6006
+bun run check      # Biome lint + format (also runs on pre-commit)
 bun run release    # builds dist/, the actual published package
 ```
 
@@ -24,20 +25,23 @@ bun run release    # builds dist/, the actual published package
 
 ```
 packages/
-├── behavior/    custom elements — behavioral (on, redirect, render…)
+├── behavior/    custom elements — behavioral (on, redirect, render)
 ├── component/   custom elements — visual components
-├── data/        custom elements — data binding
+├── typography/  custom elements — text (text, label, helper)
 ├── form/        custom elements — form controls
 ├── layout/      custom elements — layout primitives
+├── data/        custom elements — headless data (k-* prefix)
 │
 ├── dom/         utility — template helpers
-├── echo/        utility — event primitives
+├── echo/        utility — the dataflow bus (event primitives)
 ├── router/      utility — client-side routing
-├── spark/       utility — pure functions
+├── spark/       utility — pure functions (usable as `on` filters)
 └── ...
 ```
 
 Each package is self-contained. Changes to one package should not require changes to another.
+
+A visual custom element lives in one `packages/<group>/<name>/` folder with, at minimum, an implementation, a hand-authored `types.d.ts` (its public contract), a `style.js`, and a `<name>.stories.js`. See the **Guidelines/Naming** page in the docs for how Elements, Blocks, and Design Tokens relate.
 
 ---
 
@@ -59,8 +63,9 @@ Commits are linted automatically via `commitlint` on every `git commit`.
 
 - One concern per PR
 - Include a clear description of *why*, not just *what*
-- Do not add dependencies unless strictly necessary
+- Do not add runtime dependencies — kuba ships with zero, by design
 - Do not break subpath exports or change the public API without discussion
+- A new or changed custom element ships with its `types.d.ts` and story updated in the same PR
 
 Open an issue first for anything beyond a small bug fix or typo.
 

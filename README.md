@@ -8,6 +8,49 @@ Instead of managing state in JavaScript, kuba embraces the browser's native even
 
 ---
 
+## Documentation
+
+The full documentation lives in Storybook — it's the single source of truth for how kuba behaves and why: **[t2e1.github.io/kuba](https://t2e1.github.io/kuba/)**.
+
+Start with the **Guidelines** section (Introduction → Design Principles → Design Tokens → Naming), then browse one live, controllable story per custom element under **Components**, **Form**, **Layout**, **Typography**, and **Behavior**. The **Guides** show multiple elements wired together into small apps.
+
+To run it locally, see [Contributing](#contributing).
+
+---
+
+## Installation
+
+```sh
+npm install @t2e1/kuba
+```
+
+```js
+import '@t2e1/kuba'
+```
+
+Or straight from a CDN, no build step:
+
+```html
+<script type="module" src="https://cdn.jsdelivr.net/npm/@t2e1/kuba/+esm"></script>
+```
+
+Either way, importing the package registers every custom element — drop the tags directly into your HTML.
+
+---
+
+## Quick start
+
+Two elements, no JavaScript written by you. A button publishes a `clicked` event; a redirect subscribes to it and navigates — the wiring lives entirely in the `on` attribute:
+
+```html
+<kb-button id="to-profile">View profile</kb-button>
+<kb-redirect on="#to-profile/clicked:method/go" href="/profile"></kb-redirect>
+```
+
+The `on` value is an **arc**: `source/event:type/sink`. Here `#to-profile` is the publisher, `clicked` the event, and `go` the method it drives on the redirect. Any kuba element can publish, and any can subscribe — they never need to reference each other in code. See the **Behavior** section of the docs for the full grammar.
+
+---
+
 ## The HDA Architecture
 
 kuba is designed around **Hypermedia-Driven Applications (HDA)** — an architectural pattern where HTML is not a template, but the application itself.
@@ -37,7 +80,7 @@ The gap between these two schools is exactly the gap kuba closes: **client-side 
 
 The browser has had a dataflow mechanism since 1995: the DOM event system. Every element can dispatch an event; every element can listen for one. Frameworks reinvented this capability in userland (props, stores, observables) because raw DOM events, on their own, are too unstructured to compose an application from — there is no shared vocabulary for *which* element should react to *which* event, or *how*.
 
-kuba's answer is to standardize that vocabulary, not replace the mechanism. Every kuba custom element understands a declarative wiring attribute that describes, in plain markup, which source element's event should drive which sink property, method, or attribute on itself. The browser's native `CustomEvent` system does the actual delivery; kuba only supplies the grammar for expressing intent.
+kuba's answer is to standardize that vocabulary, not replace the mechanism. Every kuba custom element understands a declarative wiring attribute (`on`) that describes, in plain markup, which source element's event should drive which sink property, method, or attribute on itself. The browser's native `CustomEvent` system does the actual delivery; kuba only supplies the grammar for expressing intent.
 
 The consequence is a dataflow model that is:
 
@@ -49,45 +92,44 @@ This is why kuba is best understood as an evolution rather than a third alternat
 
 ---
 
-## Installation
-
-```sh
-npm install @t2e1/kuba
-```
-
----
-
 ## Packages
 
+kuba ships as one npm package (`@t2e1/kuba`) but is internally organized as many small, independently-meaningful packages under `packages/`.
+
 ### Custom elements
+
+Visual elements use the `kb-` prefix; headless elements (state/data, no rendering) use `k-`.
 
 | Group | Elements |
 |-------|----------|
 | `component` | `button`, `card`, `cover`, `footer`, `header`, `icon`, `logo`, `progress`, `stack` |
 | `form` | `form`, `input`, `textarea`, `validity`, `fileupload` |
-| `data` | `dataset`, `filter`, `find`, `fetch` |
+| `typography` | `text`, `label`, `helper` |
 | `layout` | `main`, `inset` |
 | `behavior` | `on`, `redirect`, `render` |
-| `typography` | `text`, `label`, `helper` |
+| `data` *(headless)* | `dataset`, `filter`, `find`, `fetch`, `headers` |
 
 ### Utilities
 
+Each utility is independently importable via its subpath export (e.g. `import { css } from '@t2e1/kuba/dom'`).
+
 | Package | Description |
 |---------|-------------|
-| `dom` | HTML and CSS template tag helpers, paint lifecycle |
+| `echo` | The dataflow bus: DOM event dispatcher/listener primitives |
+| `dom` | HTML and CSS tagged-template helpers, paint lifecycle |
 | `router` | Client-side routing via URL and params |
-| `echo` | DOM event dispatcher and listener primitives (the dataflow bus) |
 | `event` | Custom event factories and detail helpers |
 | `http` | Fluent HTTP request builder |
-| `spark` | Pure functional utilities (equals, diff, add…) |
-| `middleware` | Composable function pipelines (before, after, around) |
+| `interpolate` | `{path.to.value}` placeholder substitution (shared by `<kb-render>`, `<kb-form>`, `<kb-redirect>`) |
+| `spark` | Pure functional utilities (`equals`, `len`, `not`, `add`…) — usable as `on` filters |
+| `middleware` | Composable function pipelines (`before`, `after`, `around`) |
 | `mixin` | Class mixins for common element behaviors |
 | `directive` | Attribute-based directives for custom elements |
 | `renderer` | Low-level rendering primitives |
 | `result` | Result type for error handling without exceptions |
 | `cookie` | Cookie read/write utilities |
 | `polyfill` | Browser compatibility shims |
-| `pixel` | Responsive design utilities |
+| `pixel` | CSS reset and design tokens (colors, spacing, typography…), imported as a stylesheet |
 
 ---
 
@@ -103,7 +145,7 @@ npm install @t2e1/kuba
 
 ## Contributing
 
-See [CONTRIBUTING.md](./CONTRIBUTING.md).
+kuba is written in plain JavaScript with zero runtime dependencies. See [CONTRIBUTING.md](./CONTRIBUTING.md) for the development setup and guidelines.
 
 ## Code of Conduct
 

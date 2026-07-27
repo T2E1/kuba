@@ -16,6 +16,7 @@ Closes #
 
 - [ ] One concern per PR (unrelated changes are in a separate PR)
 - [ ] `bun run check` passes locally (Biome — the pre-commit hook already enforces this)
-- [ ] No new dependency added, or its necessity is explained above
+- [ ] No new runtime dependency added, or its necessity is explained above
 - [ ] No subpath export or public API changed without prior discussion (issue/discussion linked above)
+- [ ] Custom-element changes update the matching `types.d.ts` and story
 - [ ] Commit messages follow [Conventional Commits](https://www.conventionalcommits.org/)
