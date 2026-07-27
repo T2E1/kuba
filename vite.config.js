@@ -3,7 +3,7 @@ import terser from '@rollup/plugin-terser'
 import { defineConfig } from 'vite'
 import minifyTemplateLiterals from './plugins/minify-template-literals.js'
 
-const r = (p) => resolve(__dirname, p)
+const r = (p) => resolve(import.meta.dirname, p)
 
 /**
  * Path aliases shared between the library build below and the Storybook build

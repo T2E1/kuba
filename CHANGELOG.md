@@ -6,6 +6,12 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) and 
 
 ---
 
+## [0.1.0-alpha.18] — 2026-07-27
+
+### Fixed
+
+- `npm run dev` (Storybook) no longer crashes with `ReferenceError: __dirname is not defined`: `vite.config.js` now resolves its path aliases via `import.meta.dirname` instead of `__dirname`, so importing the config as ESM (as the Storybook `main.js` does) works
+
 ## [0.1.0-alpha.17] — 2026-07-27
 
 ### Added
