@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="https://avatars.githubusercontent.com/u/305539252?s=200&v=4" alt="kuba logo" width="120" height="120">
+</p>
+
 # kuba
 
 > The web platform is the framework.
@@ -40,14 +44,46 @@ Either way, importing the package registers every custom element — drop the ta
 
 ## Quick start
 
-Two elements, no JavaScript written by you. A button publishes a `clicked` event; a redirect subscribes to it and navigates — the wiring lives entirely in the `on` attribute:
+A complete feature — search dog breeds as you type and render the results — wired entirely in HTML, with no JavaScript written by you:
 
 ```html
-<kb-button id="to-profile">View profile</kb-button>
-<kb-redirect on="#to-profile/clicked:method/go" href="/profile"></kb-redirect>
+<kb-stack direction="column">
+  <kb-input name="dog" width="fill">
+    <kb-label>Dog Breed Search</kb-label>
+  </kb-input>
+
+  <kb-render layout="grid">
+    <template>
+      <kb-card>
+        <kb-inset side="top">
+          <kb-cover src="{image.url}"></kb-cover>
+        </kb-inset>
+        <kb-text family="highlight" weight="medium" size="xs" color="primary">{name}</kb-text>
+        <kb-stack direction="column" spacing="quarck">
+          <kb-text size="xxxs"><strong>Bred for:</strong> {bred_for}</kb-text>
+          <kb-text size="xxxs"><strong>Life span:</strong> {life_span}</kb-text>
+          <kb-text size="xxxs"><strong>Temperament:</strong> {temperament}</kb-text>
+        </kb-stack>
+      </kb-card>
+    </template>
+    <kb-on value="api/ok:method/render"></kb-on>
+    <kb-on value="api/error:method/clear"></kb-on>
+  </kb-render>
+</kb-stack>
+
+<k-fetch name="api" url="https://api.thedogapi.com/v1/breeds/search?q={}">
+  <kb-headers key="x-api-key" value="DEMO-API-KEY"></kb-headers>
+  <kb-on value="dog/change:method/get"></kb-on>
+</k-fetch>
 ```
 
-The `on` value is an **arc**: `source/event:type/sink`. Here `#to-profile` is the publisher, `clicked` the event, and `go` the method it drives on the redirect. Any kuba element can publish, and any can subscribe — they never need to reference each other in code. See the **Behavior** section of the docs for the full grammar.
+Every connection is an **arc** — `source/event:type/sink`:
+
+- `<kb-input name="dog">` publishes a `change` event; `<k-fetch>` subscribes with `dog/change:method/get` and fetches `…/search?q={the typed value}`.
+- `<k-fetch name="api">` publishes `ok` (or `error`); `<kb-render>` subscribes with `api/ok:method/render` to paint its `<template>` once per result, and with `api/error:method/clear` to empty it.
+- The `{name}`, `{image.url}`, `{temperament}`… placeholders in the template are filled from each result object.
+
+No component references another in code — they only agree on event names. **[See it live →](https://t2e1.github.io/kuba/?path=/docs/behavior-render--docs)**
 
 ---
 
