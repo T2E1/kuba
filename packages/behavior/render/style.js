@@ -8,13 +8,13 @@ function style() {
       container-type: inline-size;
       display: flex;
       flex-direction: column;
-      gap: var(--spacing_inset-xs);
+      gap: var(--render-space-gap, var(--spacing_inset-xs));
       width: 100%;
     }
 
     :host([layout="grid"]) {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: repeat(var(--render-grid-columns, 2), 1fr);
     }
 
     :host(:state(hidden)) {

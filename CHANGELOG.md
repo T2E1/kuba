@@ -6,6 +6,16 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) and 
 
 ---
 
+## [0.1.0-alpha.19] — 2026-07-28
+
+### Added
+
+- `<kb-button>` and `<kb-render>` now expose their visual decisions as overridable CSS custom properties (`--button-*`, `--render-*`), each defaulting to a global `pixel` token — re-style a component by setting these on the element or any ancestor, without reaching into its shadow DOM. Each component's Storybook usage page documents the full set of properties and their defaults
+
+### Changed
+
+- Hardcoded values in `<kb-button>` (`40px` height/min-width, `0.38px` letter-spacing, `0.2s` transition) and `<kb-render>` (`2` grid columns) are now token defaults instead of magic constants — no visual change
+
 ## [0.1.0-alpha.18] — 2026-07-27
 
 ### Fixed

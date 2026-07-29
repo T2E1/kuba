@@ -93,6 +93,45 @@ The label (slotted text) should be a short, specific verb phrase —
 Keep it to one or two words when possible; long labels wrap rather than
 truncate, since `kb-button` doesn't clip text.
 
+## Styling
+
+Every visual decision is exposed as a `--button-*` CSS custom property with
+a default that aliases a global token from `packages/pixel/tokens/`. Because
+custom properties inherit through the shadow boundary, you re-style a button
+by setting these on the element (or any ancestor) — never by reaching into
+its shadow DOM. Override a token, not the internals.
+
+| Custom property | Default | Controls |
+|---|---|---|
+| `--button-color-accent` | `var(--color-{color})` | Accent that fills `solid` and colors the text/border of every other variant. Its default follows the `color` attribute; set this to break away from the semantic palette. |
+| `--button-color-text` | `var(--color-pure-white)` | Label color on the `solid` variant. |
+| `--button-color-background-ghost` | `var(--color-master-lighter)` | Background of the `ghost` variant. |
+| `--button-font-family` | `var(--font-family-base)` | Label typeface. |
+| `--button-font-size` | `var(--font-size-xxs)` | Label size. |
+| `--button-font-weight` | `var(--font-weight-medium)` | Label weight. |
+| `--button-line-height` | `var(--line-height-default)` | Label line height. |
+| `--button-letter-spacing` | `0.38px` | Label tracking. |
+| `--button-size-height` | `40px` | Button height, and the square side of the `icon` variant. |
+| `--button-size-min-width` | `40px` | Minimum width, so short labels stay tappable. |
+| `--button-space-inline` | `var(--spacing_inset-xs)` | Horizontal padding. |
+| `--button-space-gap` | `var(--spacing_inset-nano)` | Gap between label and a slotted icon. |
+| `--button-border-width` | `var(--border-width-thin)` | Border thickness across all variants. |
+| `--button-border-radius` | `var(--border-radius-sm)` | Corner radius. |
+| `--button-transition` | `all 0.2s ease-out` | Transition applied on interaction. |
+
+Prefer overriding these over one-off inline styles — a token override is the
+same knob the component uses internally, so it stays consistent across every
+variant and state:
+
+```css
+/* A larger, pill-shaped call to action, scoped to one area */
+.checkout kb-button {
+  --button-size-height: 56px;
+  --button-border-radius: var(--border-radius-pill);
+  --button-font-size: var(--font-size-xs);
+}
+```
+
 ## States and accessibility
 
 - `hidden` removes the button from layout and interaction — prefer it

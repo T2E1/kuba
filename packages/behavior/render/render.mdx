@@ -84,6 +84,27 @@ styling:
   above, so a failed request clears stale results instead of leaving them
   on screen.
 
+## Styling
+
+The two layout decisions are exposed as `--render-*` CSS custom properties,
+each defaulting to a global token from `packages/pixel/tokens/` (or a plain
+value). Custom properties inherit through the shadow boundary, so re-style a
+`<kb-render>` by setting these on the element (or any ancestor) — never by
+reaching into its shadow DOM.
+
+| Custom property | Default | Controls |
+|---|---|---|
+| `--render-space-gap` | `var(--spacing_inset-xs)` | Gap between rendered items, in both `list` and `grid` layouts. |
+| `--render-grid-columns` | `2` | Number of columns in the `grid` layout. No effect on `list`. |
+
+```css
+/* A denser, three-column gallery, scoped to one area */
+.gallery kb-render {
+  --render-grid-columns: 3;
+  --render-space-gap: var(--spacing_inset-nano);
+}
+```
+
 ## Do's and don'ts
 
 | Do | Don't |
