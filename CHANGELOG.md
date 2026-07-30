@@ -6,6 +6,18 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) and 
 
 ---
 
+## [0.1.0-alpha.20] — 2026-07-30
+
+### Added
+
+- `<kb-card>` now exposes its visual decisions as overridable CSS custom properties (`--card-*`), each defaulting to a global `pixel` token — re-style a card by setting these on the element or any ancestor, without reaching into its shadow DOM. A `card.mdx` Storybook usage page documents the component, its variants, and the full set of properties
+- `<kb-card>`'s public types (`types.d.ts`) and Storybook controls now surface the `height`, `width`, and `on` attributes it inherits from the `Height`, `Width`, and `Echo` mixins
+
+### Changed
+
+- Hardcoded values in `<kb-card>` are now token defaults instead of magic constants — no visual change
+- The global CSS reset (`@pixel/reset`) is temporarily disabled: its `@import` in `pixel/index.css` is commented out, so consuming pages no longer receive the box-sizing/margin/padding, scrollbar, `:defined`, and body resets
+
 ## [0.1.0-alpha.19] — 2026-07-28
 
 ### Added

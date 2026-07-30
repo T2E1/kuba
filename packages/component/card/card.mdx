@@ -1,0 +1,124 @@
+import { Canvas, Controls, Meta, Story } from '@storybook/addon-docs/blocks'
+import * as CardStories from './card.stories.js'
+
+<Meta of={CardStories} />
+
+# Card
+
+A card groups related content into a single surface and can act as one
+clickable unit — clicking anywhere inside it absorbs the inner
+click/`clicked` event and re-dispatches a single `clicked` event carrying
+its `value`. It's a layout-and-grouping primitive, not a control: on its own
+it has no focus ring, cursor, or role, so if the whole card is meant to be
+actionable you must give it an accessible affordance (see Accessibility
+below) or put a real `<kb-button>`/`<a>` inside it instead.
+
+<Canvas of={CardStories.ClickDispatchesEvent} />
+<Controls />
+
+## When to use
+
+- **Grouping related content** — a heading, some text, and an action —
+  into one visually contained surface, laid out in a row or column.
+- **Making a whole region emit a single `clicked` event** (e.g. a
+  result tile that selects itself), wired to a publisher/consumer via
+  `on`/`<kb-on>` — see `Foundations/Dataflow`.
+
+## When not to use
+
+- **A single action** — use `<kb-button>`, which is a real
+  form-associated control with the right affordances and keyboard
+  behavior, not a container that happens to be clickable.
+- **Navigating to a URL** — put an `<a>` (or a `<kb-button>` wired to
+  `<kb-redirect>`) inside the card; `kb-card` has no concept of a
+  destination.
+
+## Composition
+
+- **Can contain**: anything — `kb-card` renders a single `<slot>`, so any
+  markup (text, other kuba elements, plain HTML) is laid out by the card's
+  flex container. A click on any descendant is absorbed and re-emitted as
+  the card's own `clicked` (via `@on.click`/`@on.clicked` in `card.ts`), so
+  an interactive child and the card compete for the same gesture — keep a
+  card either a passive group **or** a single clickable unit, not both.
+- **Can be a child of**: anything — `kb-card` has no parent requirement.
+  It's commonly placed inside a `<kb-render>` list/grid or a layout region.
+
+The playground above is exactly that: an edge-to-edge image via
+`<kb-inset side="top">` + `<kb-cover>`, a highlight title, and a
+`<kb-stack>` of details — all laid out by the card's own column flow, the
+same per-record template you'd nest inside a `<kb-render>`.
+
+## Direction
+
+`direction` controls how the slotted content is stacked, not its styling:
+
+| Direction | Arrangement | Use for |
+|---|---|---|
+| `column` (default) | Vertical stack | The common case — heading over body over actions. |
+| `row` | Horizontal row | Content meant to sit side by side (e.g. a thumbnail next to a label). |
+
+<Canvas>
+  <Story of={CardStories.ClickDispatchesEvent} args={{ direction: 'row' }} />
+</Canvas>
+
+## Variants
+
+`variant` is a styling attribute read directly by CSS (there is no
+`variant` JS property) — it expresses surface treatment, not emphasis:
+
+| Variant | Surface | Use for |
+|---|---|---|
+| `filled` (default) | Subtle filled background (`--color-master-lighter`) | The default card on a plain page background. |
+| `outlined` | White background with a hairline border | A card that sits **on** a filled surface, where a filled card would blend into its background. |
+
+<Canvas>
+  <Story of={CardStories.ClickDispatchesEvent} args={{ variant: 'outlined' }} />
+</Canvas>
+
+## Styling
+
+Every visual decision is exposed as a `--card-*` CSS custom property with a
+default that aliases a global token from `packages/pixel/tokens/`. Because
+custom properties inherit through the shadow boundary, you re-style a card by
+setting these on the element (or any ancestor) — never by reaching into its
+shadow DOM. Override a token, not the internals.
+
+| Custom property | Default | Controls |
+|---|---|---|
+| `--card-color-background` | `var(--color-master-lighter)` | Background of the default (`filled`) card. |
+| `--card-color-background-outlined` | `var(--color-pure-white)` | Background of the `outlined` variant. |
+| `--card-color-border` | `var(--color-master-light)` | Border color of the `outlined` variant. |
+| `--card-border-width` | `var(--border-width-hairline)` | Border thickness of the `outlined` variant. |
+| `--card-border-radius` | `var(--border-radius-md)` | Corner radius, both variants. |
+| `--card-space-gap` | `var(--spacing_inset-xs)` | Gap between slotted children. |
+| `--card-space-inset` | `var(--spacing_inset-xs)` | Inner padding on all sides. |
+
+```css
+/* A flatter, tighter card, scoped to one area */
+.summary kb-card {
+  --card-border-radius: var(--border-radius-sm);
+  --card-space-inset: var(--spacing_inset-nano);
+}
+```
+
+## States and accessibility
+
+- `hidden` (from the `Hidden` mixin) removes the card from layout and
+  interaction — prefer it over conditionally not rendering the element when
+  the card's presence/absence should stay easy to find in the DOM.
+- A clickable card is **not** exposed to assistive technology by default:
+  `kb-card` adds no `role`, `tabindex`, or keyboard handler, so the
+  `clicked` behavior is mouse-only and invisible to screen readers. If the
+  whole card must be actionable, give it a `role="button"` + `tabindex="0"`
+  and wire keyboard activation, or — better — nest a real `<kb-button>`/`<a>`
+  and let the card stay a passive group.
+
+## Do's and don'ts
+
+| Do | Don't |
+|---|---|
+| Keep a card either a passive group or a single clickable unit | Nest an interactive child **and** rely on the card's own `clicked` — the two fight for the same click |
+| Use `outlined` for a card sitting on a filled surface | Use `outlined` on a plain background where the default `filled` reads fine |
+| Nest a real `<kb-button>`/`<a>` for an actionable card | Rely on the whole card's `clicked` as the only affordance for keyboard/AT users |
+| Override `--card-*` tokens to re-skin a card | Reach into the card's shadow DOM to change its background or padding |
