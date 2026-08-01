@@ -1,0 +1,108 @@
+import { Canvas, Controls, Meta, Story } from '@storybook/addon-docs/blocks'
+import * as CoverStories from './cover.stories.js'
+
+<Meta of={CoverStories} />
+
+# Cover
+
+A cover renders a single cropped, aspect-ratio-constrained image from a
+`src`/`alt` pair. It's a display primitive, not a general container: it has
+no `<slot>`, so nothing can be composed inside it, and it carries no click
+behavior of its own — wrap it (e.g. in a `<kb-card>`) if the image needs to
+be part of an interactive unit.
+
+<Canvas of={CoverStories.RendersImage} />
+<Controls />
+
+## When to use
+
+- **A cropped, fixed-aspect image** — a banner, a hero image, or a
+  thumbnail — where the surrounding layout needs a predictable width/height
+  ratio regardless of the source image's own dimensions.
+- **The image slot of a card**, typically wrapped in `<kb-inset side="top">`
+  for an edge-to-edge look — see the breed card example in `Components/Card`.
+
+## When not to use
+
+- **Content that isn't purely an image** — `kb-cover` has no `<slot>`; use
+  `<kb-card>` (or plain markup) for anything that mixes an image with text,
+  actions, or other elements.
+- **Responsive art direction** (multiple sources per viewport, native lazy
+  loading) — `kb-cover` only accepts a single `src`; use a plain `<img>` or
+  `<picture>` directly when you need `srcset`/`loading`/`sizes`.
+
+## Composition
+
+- **Can contain**: nothing — `kb-cover` renders a single internal `<img>`
+  built from `src` and `alt` (see `component.js`); it has no `<slot>`, so
+  anything placed between its tags is ignored.
+- **Can be a child of**: anything — `kb-cover` has no parent requirement.
+  It's commonly nested inside `<kb-inset>` inside a `<kb-card>`.
+
+## Orientation
+
+`orientation` sets the aspect ratio the image is cropped to, via
+`object-fit: cover` on the internal `<img>` — it doesn't touch `src`, so the
+same image can be reused at either ratio:
+
+| Orientation | Aspect ratio | Use for |
+|---|---|---|
+| `landscape` (default) | 16/9 | Wide banners, hero images, thumbnails in a horizontal layout. |
+| `portrait` | 4/5 | Tall images — portrait photos, mobile-first cards, vertical thumbnails. |
+
+<Canvas>
+  <Story
+    of={CoverStories.RendersImage}
+    args={{ orientation: 'portrait', src: 'https://picsum.photos/450/560' }}
+  />
+</Canvas>
+
+## Content
+
+`alt` should describe the image for anyone who can't see it — leave it
+empty (`alt=""`) only when the image is purely decorative and a nearby
+text already conveys the same information; never omit it or repeat the
+surrounding caption verbatim.
+
+## Styling
+
+Every visual decision is exposed as a `--cover-*` CSS custom property with a
+default that aliases a global token from `packages/pixel/tokens/` (or, for
+the two aspect ratios, a plain ratio value). Because custom properties
+inherit through the shadow boundary, you re-style a cover by setting these
+on the element (or any ancestor) — never by reaching into its shadow DOM.
+Override a token, not the internals.
+
+| Custom property | Default | Controls |
+|---|---|---|
+| `--cover-aspect-ratio-landscape` | `16/9` | Aspect ratio when `orientation="landscape"` (the default). |
+| `--cover-aspect-ratio-portrait` | `4/5` | Aspect ratio when `orientation="portrait"`. |
+| `--cover-color-background` | `var(--color-pure-white)` | Background visible while the image loads (or if it fails to load). |
+| `--cover-border-radius` | `var(--border-radius-md)` | Corner radius of the host and its cropped image. |
+
+```css
+/* A near-square thumbnail, scoped to one area */
+.gallery kb-cover {
+  --cover-aspect-ratio-landscape: 1/1;
+  --cover-border-radius: var(--border-radius-sm);
+}
+```
+
+## States and accessibility
+
+- `kb-cover` has no `hidden` attribute or custom states — it doesn't use
+  the `Hidden` mixin, so conditionally remove the element itself (or wrap
+  it) when it needs to disappear from layout.
+- The internal `<img>` has no explicit `role` beyond the native one — a
+  missing or empty `alt` on a meaningful image makes it invisible to
+  screen readers, so always pass a real `alt` unless the image is
+  decorative (see Content above).
+
+## Do's and don'ts
+
+| Do | Don't |
+|---|---|
+| Write a real `alt` describing the image | Leave `alt` empty for an image that carries meaning |
+| Pick `orientation` for the layout's aspect ratio, not the source image's own shape | Rely on a specific `src` always matching the chosen `orientation` — `object-fit: cover` crops either way |
+| Wrap `kb-cover` in `<kb-card>`/`<a>` when the image must be clickable | Expect `kb-cover` itself to dispatch a click/`clicked` event |
+| Override `--cover-*` tokens to re-skin a cover | Reach into the cover's shadow DOM to change its background or radius |
