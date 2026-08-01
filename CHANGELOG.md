@@ -6,6 +6,19 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) and 
 
 ---
 
+## [0.1.0-alpha.21] — 2026-08-01
+
+### Added
+
+- `<kb-cover>` now exposes its visual decisions as overridable CSS custom properties (`--cover-*`), each defaulting to a global `pixel` token (or a plain aspect-ratio value for `landscape`/`portrait`) — re-style a cover by setting these on the element or any ancestor, without reaching into its shadow DOM
+- `<kb-cover>`'s public types (`types.d.ts`) and Storybook controls now surface the `on` attribute it inherits from the `Echo` mixin
+- A `cover.mdx` Storybook usage page documents `<kb-cover>` — when to use it, composition, orientations, the full set of `--cover-*` properties, and accessibility guidance for `alt`
+
+### Changed
+
+- Hardcoded values in `<kb-cover>` are now token defaults instead of magic constants — no visual change
+- `<kb-cover>`'s Storybook page now renders from `cover.mdx` instead of auto-generated docs; the catalog-only `Landscape`/`Portrait` stories were replaced by an interaction-tested `RendersImage` story
+
 ## [0.1.0-alpha.20] — 2026-07-30
 
 ### Added
