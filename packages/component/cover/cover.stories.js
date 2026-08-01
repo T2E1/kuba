@@ -15,7 +15,9 @@ async function clickInnerButton(host) {
 
 export default {
   title: 'Components/Cover',
-  tags: ['autodocs'],
+  // Docs page is authored by hand in cover.mdx (usage guidance), which
+  // attaches to this CSF file via `<Meta of={CoverStories} />` — tagging
+  // this file 'autodocs' too would generate a second, conflicting page.
   parameters: {
     a11y: { test: 'todo' },
   },
@@ -25,10 +27,12 @@ export default {
     src: {
       control: 'text',
       description: 'Image URL rendered by the underlying `<img>`.',
+      table: { defaultValue: { summary: "''" } },
     },
     alt: {
       control: 'text',
       description: 'Alternative text for the underlying `<img>`.',
+      table: { defaultValue: { summary: "''" } },
     },
     orientation: {
       control: { type: 'select' },
@@ -51,10 +55,20 @@ export default {
   },
 }
 
-export const Landscape = {}
+export const RendersImage = {
+  // kb-cover's only job is to project `src`/`alt` onto an internal <img> —
+  // `@paint` (see packages/dom/paint/render.js) defers the first shadow DOM
+  // write to a requestAnimationFrame, so the <img> may not exist yet when
+  // `play` starts.
+  play: async ({ canvasElement, args }) => {
+    const cover = canvasElement.querySelector('kb-cover')
+    const img = await waitFor(
+      () => cover.shadowRoot.querySelector('img') ?? Promise.reject(),
+    )
 
-export const Portrait = {
-  args: { orientation: 'portrait', src: 'https://picsum.photos/450/560' },
+    await expect(img.src).toBe(args.src)
+    await expect(img.alt).toBe(args.alt)
+  },
 }
 
 export const WiredViaOnAttribute = {
