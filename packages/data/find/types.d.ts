@@ -1,15 +1,15 @@
 /**
- * `<k-find>` custom element. Finds the first record in the `value` collection exposed
- * by its parent element (e.g. `<k-dataset>`) whose `key` field matches `value`, then
+ * `<kb-find>` custom element. Finds the first record in the `value` collection exposed
+ * by its parent element (e.g. `<kb-dataset>`) whose `key` field matches `value`, then
  * dispatches a `find` event on the parent with the matching record.
  *
  * @example
  * ```html
- * <k-dataset upsert="id">
- *   <k-find key="id" value="1"></k-find>
- * </k-dataset>
+ * <kb-dataset upsert="id">
+ *   <kb-find key="id" value="1"></kb-find>
+ * </kb-dataset>
  * <script>
- *   const dataset = document.querySelector('k-dataset')
+ *   const dataset = document.querySelector('kb-dataset')
  *   dataset.addEventListener('find', (event) => console.log(event.detail))
  * </script>
  * ```
@@ -27,6 +27,6 @@ export default class KUBAFindElement extends HTMLElement {
 
 declare global {
   interface HTMLElementTagNameMap {
-    'k-find': KUBAFindElement
+    'kb-find': KUBAFindElement
   }
 }

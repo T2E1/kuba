@@ -5,7 +5,7 @@ import { setHeader, setter } from './interfaces'
 
 /**
  * Declarative child that sets one HTTP header key/value pair on its parent
- * `<k-fetch>`. Wiring happens on the parent, not on this element — see
+ * `<kb-fetch>`. Wiring happens on the parent, not on this element — see
  * `[setter]` below.
  */
 @define('kb-headers')

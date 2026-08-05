@@ -1,7 +1,7 @@
 /**
  * A composed Guide, not a component catalog entry: a small user-management
  * screen built from five independent custom elements that never reference
- * each other directly — `<k-dataset>` (state, the source of truth),
+ * each other directly — `<kb-dataset>` (state, the source of truth),
  * `<kb-form>` (publishes `submitted`), `<kb-render>` (subscribes to
  * `change`, re-renders a list), and per-row `<kb-button>`s (publish
  * `clicked`, subscribed to by the dataset itself for delete). Every
@@ -47,14 +47,14 @@ export const AddAndDeleteRecords = {
       <kb-on value="users/change:method/render"></kb-on>
     </kb-render>
 
-    <k-dataset name="users" upsert="id">
+    <kb-dataset name="users" upsert="id">
       <kb-on value="user-form/submitted:method/push"></kb-on>
       <kb-on value="delete/clicked:method/delete"></kb-on>
-    </k-dataset>
+    </kb-dataset>
 
     <p>
       <code>kb-form</code> publishes <code>submitted</code> with its
-      parsed form data; <code>k-dataset</code>
+      parsed form data; <code>kb-dataset</code>
       subscribes and calls <code>push()</code>, which publishes
       <code>change</code> in turn; <code>kb-render</code>
       subscribes to that and re-renders the list, including a
@@ -67,7 +67,7 @@ export const AddAndDeleteRecords = {
     </p>
   `,
   play: async ({ canvasElement }) => {
-    canvasElement.querySelector('k-dataset').push([
+    canvasElement.querySelector('kb-dataset').push([
       { id: 1, name: 'Ada Lovelace', age: 36 },
       { id: 2, name: 'Alan Turing', age: 41 },
     ])

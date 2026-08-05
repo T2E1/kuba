@@ -21,12 +21,12 @@ type KUBAHeadersOnAttribute =
 
 /**
  * Headless (never rendered) child element that sets one HTTP header
- * key/value pair on its parent `<k-fetch>`, once the parent has upgraded.
- * Since a `<k-fetch>` needs one header entry per name, nest one
+ * key/value pair on its parent `<kb-fetch>`, once the parent has upgraded.
+ * Since a `<kb-fetch>` needs one header entry per name, nest one
  * `<kb-headers>` per header.
  *
  * @remarks
- * Only meaningful as a direct child of `<k-fetch>` (or another element
+ * Only meaningful as a direct child of `<kb-fetch>` (or another element
  * exposing the same `setHeader` contract) — the wiring targets
  * `parentElement`, so nesting it under a plain HTML element or using it
  * standalone has no effect. This is a usage contract, not something
@@ -35,9 +35,9 @@ type KUBAHeadersOnAttribute =
  *
  * @example
  * ```html
- * <k-fetch url="/api/users">
+ * <kb-fetch url="/api/users">
  *   <kb-headers key="Authorization" value="Bearer abc123"></kb-headers>
- * </k-fetch>
+ * </kb-fetch>
  * ```
  */
 export default class KUBAHeadersElement extends HTMLElement {

@@ -5,7 +5,7 @@ import { around } from '@middleware'
 import { Headless } from '@mixin'
 import { dispatch } from './interfaces'
 
-@define('k-find')
+@define('kb-find')
 class Find extends Echo(Headless(HTMLElement)) {
   #key
   #value
@@ -30,7 +30,7 @@ class Find extends Echo(Headless(HTMLElement)) {
   }
 
   // Waits for the parent custom element to upgrade before reading its `value`, since
-  // finding relies on the parent already exposing a records collection (e.g. k-dataset).
+  // finding relies on the parent already exposing a records collection (e.g. kb-dataset).
   async [dispatch]() {
     await customElements.whenDefined(this.parentElement?.localName)
     const detail = this.parentElement.value.find(

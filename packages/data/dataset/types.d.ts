@@ -1,13 +1,13 @@
 /**
- * `<k-dataset>` custom element. Holds an in-memory collection of records, keyed by the
+ * `<kb-dataset>` custom element. Holds an in-memory collection of records, keyed by the
  * field named in the `upsert` attribute, and dispatches a `change` event whenever the
  * collection is mutated via `push`, `delete`, or `reset`.
  *
  * @example
  * ```html
- * <k-dataset upsert="id"></k-dataset>
+ * <kb-dataset upsert="id"></kb-dataset>
  * <script>
- *   const dataset = document.querySelector('k-dataset')
+ *   const dataset = document.querySelector('kb-dataset')
  *   dataset.addEventListener('change', (event) => console.log(event.detail))
  *   dataset.push({ id: 1, name: 'Ada' })
  * </script>
@@ -51,6 +51,6 @@ export default class KUBADatasetElement extends HTMLElement {
 
 declare global {
   interface HTMLElementTagNameMap {
-    'k-dataset': KUBADatasetElement
+    'kb-dataset': KUBADatasetElement
   }
 }

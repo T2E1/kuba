@@ -14,11 +14,14 @@ three layers.
 
 | Prefix | Meaning | Examples |
 |---|---|---|
-| `kb-` | Visual element — renders something on screen. | `<kb-button>`, `<kb-card>`, `<kb-input>` |
-| `k-` | Headless element — holds or fetches data and publishes events on `Echo`, but renders nothing itself. | `<k-dataset>`, `<k-filter>`, `<k-find>`, `<k-fetch>` |
+| `kb-` | Every Kuba custom element, visual or headless. | `<kb-button>`, `<kb-card>`, `<kb-input>`, `<kb-dataset>`, `<kb-fetch>` |
 
-The tag alone tells you whether an element has a visual presence — the
-prefix is the first naming cue, before you even open `types.d.ts`.
+A single prefix keeps the tag namespace predictable and makes any Kuba
+element recognizable at a glance in someone else's markup. Whether an
+element renders anything is told by its `types.d.ts` and by whether it has
+a story — not by the tag. Headless elements (`<kb-dataset>`, `<kb-filter>`,
+`<kb-find>`, `<kb-fetch>`, `<kb-headers>`, `<kb-on>`, `<kb-redirect>`) hold
+or fetch data and publish events on `Echo`, but render nothing themselves.
 
 ## Design Tokens
 

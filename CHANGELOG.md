@@ -6,6 +6,14 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) and 
 
 ---
 
+## [0.1.0-alpha.26] — 2026-08-05
+
+### Changed
+
+- **Breaking:** the four headless data elements moved to the `kb-` prefix — `<k-dataset>`, `<k-fetch>`, `<k-filter>` and `<k-find>` are now `<kb-dataset>`, `<kb-fetch>`, `<kb-filter>` and `<kb-find>`. Markup, `document.querySelector` calls and `HTMLElementTagNameMap` entries using the old tags must be updated; the old names are no longer registered
+- Every Kuba custom element now shares a single `kb-` prefix. The Naming guideline no longer splits prefixes by visual presence — `<kb-headers>`, `<kb-on>` and `<kb-redirect>` were already headless elements on `kb-`, so the split had stopped describing the library
+- Fixed the Echo arcs left pointing at `<kb-input>`'s old `change` event in the README example and in the `<kb-render>` story — both now wire `dog/changed:method/get`
+
 ## [0.1.0-alpha.25] — 2026-08-05
 
 ### Changed

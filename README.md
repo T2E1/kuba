@@ -71,16 +71,16 @@ A complete feature — search dog breeds as you type and render the results — 
   </kb-render>
 </kb-stack>
 
-<k-fetch name="api" url="https://api.thedogapi.com/v1/breeds/search?q={}">
+<kb-fetch name="api" url="https://api.thedogapi.com/v1/breeds/search?q={}">
   <kb-headers key="x-api-key" value="DEMO-API-KEY"></kb-headers>
-  <kb-on value="dog/change:method/get"></kb-on>
-</k-fetch>
+  <kb-on value="dog/changed:method/get"></kb-on>
+</kb-fetch>
 ```
 
 Every connection is an **arc** — `source/event:type/sink`:
 
-- `<kb-input name="dog">` publishes a `change` event; `<k-fetch>` subscribes with `dog/change:method/get` and fetches `…/search?q={the typed value}`.
-- `<k-fetch name="api">` publishes `ok` (or `error`); `<kb-render>` subscribes with `api/ok:method/render` to paint its `<template>` once per result, and with `api/error:method/clear` to empty it.
+- `<kb-input name="dog">` publishes a `changed` event; `<kb-fetch>` subscribes with `dog/changed:method/get` and fetches `…/search?q={the typed value}`.
+- `<kb-fetch name="api">` publishes `ok` (or `error`); `<kb-render>` subscribes with `api/ok:method/render` to paint its `<template>` once per result, and with `api/error:method/clear` to empty it.
 - The `{name}`, `{image.url}`, `{temperament}`… placeholders in the template are filled from each result object.
 
 No component references another in code — they only agree on event names. **[See it live →](https://t2e1.github.io/kuba/?path=/docs/behavior-render--docs)**

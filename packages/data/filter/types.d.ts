@@ -1,15 +1,15 @@
 /**
- * `<k-filter>` custom element. Filters the `value` collection exposed by its parent
- * element (e.g. `<k-dataset>`) by comparing each record's `key` field against `value`,
+ * `<kb-filter>` custom element. Filters the `value` collection exposed by its parent
+ * element (e.g. `<kb-dataset>`) by comparing each record's `key` field against `value`,
  * then dispatches a `filter` event on the parent with the matching records.
  *
  * @example
  * ```html
- * <k-dataset upsert="id">
- *   <k-filter key="active" value="true"></k-filter>
- * </k-dataset>
+ * <kb-dataset upsert="id">
+ *   <kb-filter key="active" value="true"></kb-filter>
+ * </kb-dataset>
  * <script>
- *   const dataset = document.querySelector('k-dataset')
+ *   const dataset = document.querySelector('kb-dataset')
  *   dataset.addEventListener('filter', (event) => console.log(event.detail))
  * </script>
  * ```
@@ -27,6 +27,6 @@ export default class KUBAFilterElement extends HTMLElement {
 
 declare global {
   interface HTMLElementTagNameMap {
-    'k-filter': KUBAFilterElement
+    'kb-filter': KUBAFilterElement
   }
 }

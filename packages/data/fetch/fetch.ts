@@ -10,7 +10,7 @@ import { abort, dispatch, setHeader } from './interface'
 
 // `url` may contain `{path.to.value}` placeholders resolved against `payload` by
 // @interpolate (dot-path lookup, missing/nullish segments become an empty string).
-@define('k-fetch')
+@define('kb-fetch')
 class Fetch extends Echo(Headless(HTMLElement)) {
   #controller = new Controller()
   #headers = {}
