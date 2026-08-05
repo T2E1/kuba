@@ -6,6 +6,14 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) and 
 
 ---
 
+## [0.1.0-alpha.23] — 2026-08-05
+
+### Fixed
+
+- Elements backed by the `Template` mixin (`<kb-form>`, `<kb-render>`) now read their `<template>` correctly when the markup is created by React. React appends template children to the element itself instead of to its `content` fragment, which left `innerHTML` empty and made the template resolve to nothing; the mixin now serializes whichever child list actually holds the content
+- Templates authored in React no longer lose text nodes and whitespace between elements — the previous fallback only serialized element children, so loose text (`Hello {name}`) and spacing between tags were dropped
+- Reading `template` on an element without a `<template>` child now returns an empty string instead of throwing a `TypeError`
+
 ## [0.1.0-alpha.22] — 2026-08-05
 
 ### Added
