@@ -6,6 +6,22 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) and 
 
 ---
 
+## [0.1.0-alpha.22] — 2026-08-05
+
+### Added
+
+- `<kb-footer>` now exposes its dimensions and spacing as overridable CSS custom properties (`--footer-size-height`, `--footer-size-max-width`, `--footer-space-inset`) — re-size a footer by setting these on the element or any ancestor, without reaching into its shadow DOM
+- A `footer.mdx` Storybook usage page documents `<kb-footer>` — when to use it, the `leading`/`trailing` slots and their composition rules, the full set of `--footer-*` properties, and its `contentinfo` landmark
+
+### Changed
+
+- Hardcoded values in `<kb-footer>` are now token defaults instead of magic constants — no visual change
+- `<kb-footer>`'s Storybook page now renders from `footer.mdx` instead of auto-generated docs; the catalog-only `Default` story was replaced by the interaction-tested `ProjectsSlottedContent` and `FallsBackToCopyright` stories, and both slots are now wired to controls
+
+### Fixed
+
+- `<kb-footer>` now fills the width of its container instead of the width of the viewport (`100%` instead of `100svw`). Nested in anything narrower than the window, it used to overflow its parent, producing a horizontal scrollbar and pushing the `trailing` content out of view; at the page root the rendering is unchanged
+
 ## [0.1.0-alpha.21] — 2026-08-01
 
 ### Added
