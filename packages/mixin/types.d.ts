@@ -31,7 +31,7 @@ declare module '@t2e1/kuba/mixin' {
 
   /** Instance shape added by {@link Template}. */
   interface TemplateInstance {
-    /** Resolved markup: the serialized content of the referenced `<template>`, or an empty string when none is found. */
+    /** Resolved markup: the `innerHTML` of the referenced `<template>`, or the concatenated `outerHTML` of its children. */
     template: string
   }
 

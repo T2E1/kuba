@@ -6,6 +6,12 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) and 
 
 ---
 
+## [0.1.0-alpha.24] — 2026-08-05
+
+### Changed
+
+- Reverted the `Template` mixin changes released in `0.1.0-alpha.23`: template resolution is back to the `innerHTML` of the referenced `<template>`, falling back to the concatenated `outerHTML` of its children. The React interoperability those changes targeted will be addressed by a dedicated decorator that observes children/template mutations
+
 ## [0.1.0-alpha.23] — 2026-08-05
 
 ### Fixed
