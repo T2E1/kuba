@@ -2,7 +2,7 @@ export default {
   title: 'Form/Input',
   tags: ['autodocs'],
   parameters: {
-    actions: { handles: ['change'] },
+    actions: { handles: ['changed'] },
     a11y: { test: 'todo' },
   },
   render: ({
@@ -47,7 +47,7 @@ export default {
     value: {
       control: 'text',
       description:
-        'The current text value. Setting it updates the inner `<input>`, re-runs validation, and dispatches a `change` event.',
+        'The current text value. Setting it updates the inner `<input>`, re-runs validation, and dispatches a `changed` event.',
     },
     disabled: {
       control: 'boolean',

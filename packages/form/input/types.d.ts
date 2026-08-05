@@ -69,7 +69,7 @@ export default class KUBAInputElement extends HTMLElement {
   readonly validationMessage: string
   /** The current validity state, per the Constraint Validation API. */
   readonly validity: ValidityState
-  /** The current text value. Setting it updates the inner `<input>`, re-runs validation, and dispatches a `change` event. */
+  /** The current text value. Setting it updates the inner `<input>`, re-runs validation, and dispatches a `changed` event. */
   value: string
   /** Whether this element is a candidate for constraint validation. */
   readonly willValidate: boolean

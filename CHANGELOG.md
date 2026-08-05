@@ -6,6 +6,13 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) and 
 
 ---
 
+## [0.1.0-alpha.25] — 2026-08-05
+
+### Changed
+
+- **Breaking:** `<kb-input>` now dispatches `changed` instead of `change` when its value changes. Listeners and Echo arcs pointing at `change` on an input (`on="...change:method/..."`) must be updated to `changed`. The other form controls (`<kb-textarea>`, `<kb-fileupload>`) and `<kb-dataset>` still dispatch `change`
+- `<kb-validity>` now revalidates on both `change` and `changed`, so it keeps working nested in any form control regardless of which event that control dispatches
+
 ## [0.1.0-alpha.24] — 2026-08-05
 
 ### Changed
