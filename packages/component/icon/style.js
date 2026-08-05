@@ -4,13 +4,17 @@ function style(self) {
   return css`
     :host {
       box-sizing: border-box;
-      color: ${self.color};
+      color: var(--icon-color, ${self.color});
       direction: ltr;
       display: inline-flex;
       font-family: 'Material Symbols Rounded';
-      font-size: var(--font-size-${self.size});
+      font-size: var(--icon-size, var(--font-size-${self.size}));
       font-style: normal;
-      font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      font-variation-settings:
+        'FILL' var(--icon-fill, 1),
+        'wght' var(--icon-weight, 400),
+        'GRAD' var(--icon-grade, 0),
+        'opsz' var(--icon-optical-size, 24);
       font-weight: normal;
       letter-spacing: normal;
       line-height: 1;

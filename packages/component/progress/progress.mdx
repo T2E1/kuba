@@ -1,0 +1,117 @@
+import { Canvas, Controls, Meta, Story } from '@storybook/addon-docs/blocks'
+import * as ProgressStories from './progress.stories.js'
+
+<Meta of={ProgressStories} />
+
+# Progress
+
+A progress bar shows how far along a task is, as a filled fraction of a
+horizontal track. It's determinate only: `value` is a percentage you set,
+so the bar can't express "working, duration unknown" — it would just sit
+at whatever number it was given.
+
+<Canvas of={ProgressStories.Default} />
+<Controls />
+
+## When to use
+
+- **A task with a known fraction complete** — an upload, a multi-step
+  form, a batch job reporting items processed.
+- **A quantity against a ceiling** — storage used, quota consumed,
+  password strength — where the bar reads as a gauge rather than a timer.
+
+## When not to use
+
+- **Work of unknown duration** — a spinner or skeleton is the honest
+  signal; a bar frozen at one value reads as stalled.
+- **A value the user can change** — this is output, not input. A bar the
+  user drags is a slider (`<input type="range">`).
+- **A step counter people navigate** — a labelled stepper communicates
+  "step 2 of 5" better than a filled fraction, and stays operable.
+
+## Composition
+
+- **Can contain**: no meaningful children. The shadow root renders a
+  single `<div>` as the indicator and declares no slot (see
+  `component.js`), so light-DOM children never appear. A label belongs
+  next to the bar, not inside it.
+- **Can be a child of**: anything. The host is `display: block` at 100%
+  width, so it takes the width of its container — pair it with a
+  `<kb-text>` inside a `<kb-stack>` when the number should be visible too.
+
+<Canvas>
+  <Story of={ProgressStories.Default} args={{ value: '35' }} />
+</Canvas>
+
+## The value scale
+
+`value` is a bare number interpolated straight into a CSS `%` width — no
+clamping, no `min`/`max`. Three consequences worth knowing:
+
+- Pass `0`–`100`. Above `100` the indicator is simply wider than the
+  track; `overflow: hidden` on the host keeps it from painting outside,
+  so an overshoot looks identical to `100` and hides the bug.
+- A negative or non-numeric value produces an invalid width, and the
+  indicator collapses to nothing — the same picture as `0`.
+- Compute the percentage before setting it: `value="${(done / total) *
+  100}"`. The element does no arithmetic of its own.
+
+There is no transition on the width, so each update paints immediately —
+a bar driven by frequent updates animates as a series of steps. That's
+deliberate: the indicator lives in the shadow DOM with no `::part()`
+exposed, so an easing curve can't be attached from outside. Update on a
+cadence that reads well rather than on every byte.
+
+## Styling
+
+The track and the indicator are exposed as `--progress-*` custom
+properties, which inherit through the shadow boundary — set them on the
+element (or any ancestor) rather than reaching into its shadow DOM. There
+is no `::part()` on this element, so these properties are the whole
+extension surface.
+
+| Custom property | Default | Controls |
+|---|---|---|
+| `--progress-color-track` | `var(--color-pure-white)` | Background of the unfilled portion. |
+| `--progress-color-indicator` | `var(--color-primary)` | Fill color of the completed portion. |
+| `--progress-size-height` | `6px` | Thickness of the bar. |
+| `--progress-border-radius` | `var(--border-radius-pill)` | Corner rounding, applied to track and indicator together. |
+
+Use the indicator color semantically, not decoratively — the same
+vocabulary as the rest of the system: `--color-success` for a finished
+job, `--color-warning` for a quota nearing its limit, `--color-danger` for
+one that's over.
+
+```css
+/* A thicker, squared-off bar warning about quota */
+kb-progress.quota {
+  --progress-color-indicator: var(--color-warning);
+  --progress-size-height: 12px;
+  --progress-border-radius: var(--border-radius-sm);
+}
+```
+
+## States and accessibility
+
+- `kb-progress` has no `hidden` attribute and no custom states — it
+  doesn't use the `Hidden` mixin, so remove the element when there's
+  nothing to report.
+- The element exposes no ARIA role of its own. Assistive technology sees
+  two empty `<div>`s, so add the semantics on the host:
+  `<kb-progress role="progressbar" aria-valuenow="60" aria-valuemin="0"
+  aria-valuemax="100" aria-label="Uploading">`. Keep `aria-valuenow` in
+  sync with `value` — they're set independently.
+- The track defaults to `--color-pure-white`, which disappears on a white
+  surface. On a light page, set `--progress-color-track` to a neutral
+  (`--color-master-lighter`) so the unfilled portion stays visible.
+- Never rely on the fill alone to convey a state change — pair a `danger`
+  or `warning` bar with text, since color is the only difference.
+
+## Do's and don'ts
+
+| Do | Don't |
+|---|---|
+| Clamp the percentage before setting `value` | Pass a raw ratio (`0.6`) or an unbounded count — the bar reads as empty or maxed |
+| Add `role="progressbar"` and the `aria-value*` attributes | Ship the bare element and assume the visual fill is announced |
+| Give the track a visible color on light surfaces | Leave the white default on a white page, hiding the remaining portion |
+| Use a spinner for unknown-duration work | Park the bar at an arbitrary value to signal "loading" |

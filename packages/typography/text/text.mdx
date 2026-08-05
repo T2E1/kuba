@@ -1,0 +1,138 @@
+import { Canvas, Controls, Meta, Story } from '@storybook/addon-docs/blocks'
+import * as TextStories from './text.stories.js'
+
+<Meta of={TextStories} />
+
+# Text
+
+Text is the general-purpose type element: every visual decision — size,
+weight, color, family, line height, alignment — is an attribute mapped to
+a design token. It carries no document semantics: it's not a heading, a
+paragraph, or a list, even when styled like one.
+
+<Canvas of={TextStories.Default} />
+<Controls />
+
+## When to use
+
+- **Body copy and inline text** anywhere in a page or component, when it
+  should follow the type scale rather than the browser's defaults.
+- **A visual heading inside a component** — a card title, a section title
+  — where the size and weight matter and the document outline doesn't.
+- **Text that has to shift by token** — a caption in a muted grey, a total
+  in bold — without writing CSS per instance.
+
+## When not to use
+
+- **A document heading** — a screen reader's heading navigation needs a
+  real `<h1>`–`<h6>`. Use one and style it, or nest a `kb-text` inside it,
+  rather than replacing it.
+- **A field label or hint** — `<kb-label>` and `<kb-helper>` exist so the
+  form vocabulary stays uniform and self-slotting. Reaching for `kb-text`
+  there reintroduces per-instance decisions.
+- **Long-form prose with multiple paragraphs** — the element renders one
+  inline box with no paragraph spacing; use real `<p>` elements inside a
+  `<kb-stack>`.
+
+## Composition
+
+- **Can contain**: text and inline markup — the shadow root is a single
+  unnamed `<slot>` (see `component.js`). Nested `<a>`, `<strong>`, or a
+  `<kb-icon>` inherit the color and size set here.
+- **Can be a child of**: anything. The host has no `display` of its own,
+  so it behaves as inline content by default and participates in whatever
+  flex or grid context surrounds it.
+
+<Canvas>
+  <Story
+    of={TextStories.Default}
+    args={{ size: 'lg', weight: 'bold', color: 'primary', content: 'Monthly summary' }}
+  />
+</Canvas>
+
+## Which size
+
+`size` steps the shared type scale (`packages/pixel/tokens/fontSize.css`).
+Pick by role, not by how large it looks in one layout:
+
+| `size` | Renders at | Use for |
+|---|---|---|
+| `xxxs` / `xxs` | 12 / 14px | Captions, metadata, dense table cells. `xxs` is the default. |
+| `xs` / `sm` | 16 / 20px | Body copy and lead paragraphs. |
+| `md` / `lg` | 24 / 32px | Component and section titles. |
+| `xl`–`xxxl` | 40–64px | Page titles. |
+| `display` / `giant` | 80 / 96px | Marketing headlines only — these break layouts on small screens. |
+
+`weight` has three steps (`regular`, `medium`, `bold`) and `lineHeight`
+runs `default` (100%) through `xxl` (200%). Tighter line heights suit
+large display type; body copy wants `lg` or `xl`.
+
+## Which color
+
+`color` takes any suffix of `--color-*`
+(`packages/pixel/tokens/color.css`). Use the semantic families for
+meaning, the neutral `master-*` ramp for hierarchy:
+
+| `color` | Meaning |
+|---|---|
+| `master-dark` | Default body text. |
+| `master` / `master-light` | Secondary and tertiary text — metadata, timestamps. |
+| `primary` | Brand emphasis; a title that should lead the eye. |
+| `success` / `complete` | A positive or finished outcome. |
+| `warning` | A caution that isn't blocking. |
+| `danger` | An error or destructive consequence. |
+| `pure-white` | Text on a dark or image surface. |
+
+An unknown keyword resolves to an undefined custom property, and the text
+falls back to inherited color rather than failing visibly — check the
+token name if a color "doesn't apply".
+
+## Styling
+
+The attributes cover the per-instance cases. The `--text-*` custom
+properties exist for the surface-level override — a whole panel shifting
+its type — and for values the scale doesn't express, like a specific
+letter spacing.
+
+| Custom property | Default | Controls |
+|---|---|---|
+| `--text-color` | `var(--color-{color})` | Text color, overriding the `color` attribute. |
+| `--text-font-family` | `var(--font-family-{family})` | Type family. |
+| `--text-font-size` | `var(--font-size-{size})` | Type size. |
+| `--text-font-weight` | `var(--font-weight-{weight})` | Type weight. |
+| `--text-line-height` | `var(--line-height-{lineHeight})` | Line height. |
+| `--text-letter-spacing` | `0.38px` | Tracking — the one value with no attribute. |
+
+Prefer the attribute when styling one element; reach for the property when
+a rule should apply to many:
+
+```css
+/* Every text inside an inverted panel, without touching the markup */
+.panel-dark kb-text {
+  --text-color: var(--color-pure-white);
+}
+```
+
+## States and accessibility
+
+- `kb-text` has no `hidden` attribute and no custom states — it doesn't
+  use the `Hidden` mixin.
+- The element exposes no role. Styling it at `display` size does not make
+  it a heading: pair it with a real heading element (or `role="heading"`
+  plus `aria-level`) when it introduces a section.
+- Keep color contrast in mind when moving down the `master-*` ramp —
+  `master-light` on white is decorative-grade contrast, not body-text
+  grade.
+- Don't let color be the only carrier of meaning: a `danger`-colored total
+  needs words that say what's wrong.
+- `align="justify"` produces uneven word spacing in narrow columns; keep
+  it for wide measures.
+
+## Do's and don'ts
+
+| Do | Don't |
+|---|---|
+| Pick `size` by the role of the text | Pick it by how big it looks in one particular layout |
+| Wrap or nest a real heading element for document structure | Use `size="xxxl"` and call it a heading |
+| Use `<kb-label>` / `<kb-helper>` inside form fields | Recreate them with `kb-text` and per-instance attributes |
+| Set `--text-*` on an ancestor to shift a whole surface | Repeat the same attribute override on every element in it |

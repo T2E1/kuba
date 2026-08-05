@@ -7,24 +7,31 @@ function style(textarea) {
       box-sizing: border-box;
       display: flex;
       flex-direction: column;
-      gap: var(--spacing-nano);
+      gap: var(--textarea-space-gap, var(--spacing-nano));
       width: ${textarea.width};
 
       textarea {
         appearance: none;
-        background-color: var(--color-master-lightest);
-        border: var(--border-width-hairline) solid var(--color-master-light);
-        border-radius: var(--border-radius-sm);
+        background-color: var(
+          --textarea-color-background,
+          var(--color-master-lightest)
+        );
+        border: var(--border-width-hairline) solid
+          var(--textarea-color-border, var(--color-master-light));
+        border-radius: var(--textarea-border-radius, var(--border-radius-sm));
         box-sizing: border-box;
-        color: var(--color-master-darkest);
-        font-family: var(--font-family-base);
-        font-size: var(--font-size-xxs);
+        color: var(--textarea-color-text, var(--color-master-darkest));
+        font-family: var(--textarea-font-family, var(--font-family-base));
+        font-size: var(--textarea-font-size, var(--font-size-xxs));
         font-weight: var(--font-weight-regular);
         height: auto;
-        line-height: var(--line-height-lg);
-        min-height: 128px;
+        line-height: var(--textarea-line-height, var(--line-height-lg));
+        min-height: var(--textarea-size-min-height, 128px);
         overflow: hidden;
-        padding: var(--spacing_inset-nano) var(--spacing_inset-xs);
+        padding: var(
+          --textarea-space-inset,
+          var(--spacing_inset-nano) var(--spacing_inset-xs)
+        );
         resize: none;
         width: 100%;
 
@@ -34,20 +41,23 @@ function style(textarea) {
         }
 
         &:focus {
-          border-color: var(--color-primary);
+          border-color: var(--textarea-color-focus, var(--color-primary));
           outline: 0;
         }
 
         &:disabled,
         &:read-only {
-          background-color: var(--color-master-lighter);
-          border-color: var(--color-master-light);
+          background-color: var(
+            --textarea-color-background_disabled,
+            var(--color-master-lighter)
+          );
+          border-color: var(--textarea-color-border, var(--color-master-light));
           box-shadow: none;
-          color: var(--color-master);
+          color: var(--textarea-color-text_disabled, var(--color-master));
         }
 
         &::placeholder {
-          color: var(--color-master);
+          color: var(--textarea-color-placeholder, var(--color-master));
         }
 
         &:-webkit-autofill,
@@ -65,7 +75,7 @@ function style(textarea) {
 
     :host(:state(invalid)) {
       textarea {
-        border-color: var(--color-danger);
+        border-color: var(--textarea-color-invalid, var(--color-danger));
       }
 
       slot[name='helper'] {

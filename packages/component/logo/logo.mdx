@@ -1,0 +1,93 @@
+import { Canvas, Controls, Meta, Story } from '@storybook/addon-docs/blocks'
+import * as LogoStories from './logo.stories.js'
+
+<Meta of={LogoStories} />
+
+# Logo
+
+The logo renders the brand mark as inline SVG, sized to a square and
+colored from `currentColor`. It's the mark alone — it has no attributes,
+no wordmark, and no link behavior, so wrap it when it needs to navigate.
+
+<Canvas of={LogoStories.Default} />
+<Controls />
+
+## When to use
+
+- **Identifying the product at the top of a page** — slotted into
+  `<kb-header>`'s `leading` region, which is what that region is shaped
+  for.
+- **Anchoring an entry screen** — sign-in, splash, empty state, where the
+  mark stands alone above the content.
+- **Marking ownership in a closing bar** — next to the copyright line in
+  `<kb-footer>`.
+
+## When not to use
+
+- **As a home link on its own** — the element renders no anchor; wrap it
+  in an `<a href="/">` (or a `<kb-button variant="naked">`) so the mark
+  becomes navigable and focusable.
+- **As a generic icon** — use `<kb-icon>`, which resolves any Material
+  Symbols glyph by name. `kb-logo` renders one fixed SVG.
+- **For a lockup with the product name** — this is the symbol only. Put a
+  `<kb-text>` beside it in a `<kb-stack direction="row">` when you need
+  mark plus wordmark.
+
+## Composition
+
+- **Can contain**: no meaningful children. The shadow root renders a fixed
+  `<svg>` and declares no slot (see `component.js`), so light-DOM children
+  never appear.
+- **Can be a child of**: anything. It's a fixed-size square that neither
+  grows nor shrinks with its container, so it composes predictably inside
+  a flex row — `<kb-header slot="leading">`, `<kb-stack>`, an `<a>`.
+
+<Canvas>
+  <Story of={LogoStories.Default} />
+</Canvas>
+
+## Styling
+
+The mark's two visual decisions are exposed as `--logo-*` custom
+properties. They inherit through the shadow boundary, so you set them on
+the element (or any ancestor) rather than reaching into its shadow DOM.
+
+| Custom property | Default | Controls |
+|---|---|---|
+| `--logo-color` | `var(--color-primary)` | Stroke color of the mark. The SVG strokes with `currentColor`, so this is the host's `color`. |
+| `--logo-size` | `40px` | Side of the square; height and width move together, keeping the mark's 1:1 ratio. |
+
+Because the mark inherits `currentColor`, a single `color` declaration on
+an ancestor is enough to invert it on a dark surface — `--logo-color` is
+for the case where the mark should *not* follow the surrounding text.
+
+```css
+/* A larger mark that follows the header's text color */
+kb-header kb-logo {
+  --logo-size: 56px;
+  --logo-color: currentColor;
+}
+```
+
+## States and accessibility
+
+- `kb-logo` has no `hidden` attribute and no custom states — it doesn't
+  use the `Hidden` mixin.
+- The inline SVG carries no `<title>` and no ARIA role, so assistive
+  technology sees an unlabelled graphic. When the mark is the only content
+  of a link, put the name on the link: `<a href="/" aria-label="Home">`.
+- When a visible wordmark already names the product beside it, the mark is
+  decorative — `aria-hidden="true"` on the `kb-logo` avoids announcing it
+  twice.
+- The mark strokes at a fixed 20 units on a 363-unit canvas, so it keeps
+  its weight at any `--logo-size`; it doesn't need a separate small
+  variant.
+
+## Do's and don'ts
+
+| Do | Don't |
+|---|---|
+| Wrap the mark in an `<a>` when it should lead home | Attach a click listener to `kb-logo` — it has no focus or link semantics |
+| Let it inherit `currentColor` on inverted surfaces | Hard-code a hex color that breaks when the surface changes |
+| Resize with `--logo-size` so the square stays square | Set `height` or `width` directly and stretch the mark |
+| Label the wrapping link, or hide the mark from screen readers | Leave an unlabelled graphic as the only content of a link |

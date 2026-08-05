@@ -1,0 +1,128 @@
+import { Canvas, Controls, Meta, Story } from '@storybook/addon-docs/blocks'
+import * as InsetStories from './inset.stories.js'
+
+<Meta of={InsetStories} />
+
+# Inset
+
+An inset cancels a padded ancestor's padding on the sides you name, using
+a negative margin, so its content bleeds to that ancestor's edges — the
+full-width image at the top of a padded card. It's the escape hatch for
+one child, not a layout for many: it flexes its content, clips the
+overflow, and rounds the corners that stay inside.
+
+<Canvas of={InsetStories.Column} />
+<Controls />
+
+## When to use
+
+- **A media band inside a padded surface** — a cover image or map that
+  should touch the card's edges while the text around it stays inset.
+- **A divider or tinted strip that spans the full surface** — a section
+  break inside a `<kb-card>` that would otherwise stop short of both
+  edges.
+- **A bottom action bar inside a padded container** — `side="bottom"`
+  keeps the top corners square against the content above and rounds the
+  two that meet the container's edge.
+
+## When not to use
+
+- **Spacing siblings** — that's `<kb-stack>`. An inset removes space; it
+  doesn't distribute it.
+- **Centering page content** — `<kb-main>` already caps the width and
+  centers the column.
+- **When the parent has no padding** — the negative margin then pulls
+  content *outside* the parent instead of to its edge, which is almost
+  never what you want. The bleed distance is fixed, not measured from the
+  parent.
+- **Rounding an image on its own** — a `border-radius` on the image is
+  simpler. Reach for `kb-inset` only when the bleed is the point.
+
+## Composition
+
+- **Can contain**: anything — the shadow root is a single unnamed `<slot>`
+  (see `component.js`). Media is the common case, and `overflow: hidden`
+  on the host means an image larger than the box is clipped by the rounded
+  corners rather than escaping them.
+- **Can be a child of**: a padded container whose padding matches the
+  bleed. `<kb-card>` is the intended parent; the default bleed
+  (`--spacing_inset-xs`, 16px) is exactly the card's own inset, which is
+  why the two line up without configuration.
+
+The host is itself a flex container, so `direction` arranges multiple
+children the way `<kb-stack>` would — but keep it to what belongs in the
+bleed; anything that should respect the parent's padding goes outside the
+inset.
+
+<Canvas>
+  <Story of={InsetStories.BottomOnly} />
+</Canvas>
+
+## Which side
+
+`side` picks which edges bleed. The value also drives the corner rounding,
+so the corners that meet the parent's edge stay round and the ones meeting
+the content go square:
+
+| `side` | Bleeds | Rounds |
+|---|---|---|
+| `all` (default) | every edge | all four corners |
+| `top` | top, left, right | the two top corners |
+| `bottom` | bottom, left, right | the two bottom corners |
+| `left` / `right` | that edge plus top and bottom | the two corners on that edge |
+| `x` | left and right only | nothing — the band is open on both sides |
+| `y` | top and bottom only | nothing |
+
+An unrecognized value falls back to `all` (see `style.js`), so a typo
+bleeds on every side rather than failing visibly.
+
+## Styling
+
+The bleed distance and the corner rounding are exposed as `--inset-*`
+custom properties. They inherit through the shadow boundary, so set them
+on the element (or any ancestor) rather than reaching into its shadow DOM.
+
+| Custom property | Default | Controls |
+|---|---|---|
+| `--inset-space-bleed` | `var(--spacing_inset-xs)` (16px) | How far the content pulls out on each named side. Applied as a negative margin. |
+| `--inset-border-radius` | `var(--border-radius-sm)` (8px) | Rounding of the corners that stay at the parent's edge. |
+
+Match the bleed to the parent's padding — that's the whole contract. A
+container padded with `--spacing_inset-md` needs the same value here, or
+the content stops short of the edge (too small) or spills past it (too
+large):
+
+```css
+/* Inside a surface padded with spacing_inset-md */
+.roomy-card kb-inset {
+  --inset-space-bleed: var(--spacing_inset-md);
+  --inset-border-radius: var(--border-radius-md);
+}
+```
+
+The margin is declared `!important` so it survives the layout rules of a
+parent that sets margins on its children; you can't override the bleed
+with a plain `margin` from outside — change the custom property instead.
+
+## States and accessibility
+
+- `kb-inset` uses the `Hidden` mixin: setting `hidden` adds a `hidden`
+  custom state and `display: none` via `:host(:state(hidden))`, removing
+  the element and its content from the layout and the accessibility tree.
+- It also carries `height` and `width` from the `Height`/`Width` mixins,
+  applied straight to the host.
+- The element renders no role and no landmark — it's a visual container.
+  Content inside keeps its own semantics, and the negative margin doesn't
+  change reading or focus order.
+- `overflow: hidden` clips, it doesn't scroll. Content taller than a fixed
+  `height` is silently cut, so leave the height automatic unless you
+  intend the crop.
+
+## Do's and don'ts
+
+| Do | Don't |
+|---|---|
+| Match `--inset-space-bleed` to the parent's padding | Leave the default bleed inside a container padded differently |
+| Use `side` to bleed only the edges that touch the parent | Use `all` and then fight the rounding on the inner edges |
+| Put one media block or band inside it | Treat it as a general layout container — that's `<kb-stack>` |
+| Let the height follow the content | Set a fixed height and rely on `overflow: hidden` to crop silently |

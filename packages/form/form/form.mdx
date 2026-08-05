@@ -1,0 +1,155 @@
+import { Canvas, Controls, Meta, Story } from '@storybook/addon-docs/blocks'
+import * as FormStories from './form.stories.js'
+
+<Meta of={FormStories} />
+
+# Form
+
+A form wraps a native `<form>` and turns its two moments into custom
+events: `submitted`, carrying the parsed `FormData` as a plain object, and
+`resetted`. Its content comes from a `<template>` child, optionally
+interpolated with data — so the same form markup can be rendered empty for
+a create flow and filled for an edit one.
+
+<Canvas of={FormStories.Default} />
+<Controls />
+
+## When to use
+
+- **Collecting a set of fields and acting on the result in JS** — the
+  `submitted` event hands you the data already parsed, with no
+  `FormData` walk of your own.
+- **Editing an existing record** — `render(data)` fills the template's
+  `{placeholders}` with the current values before the user sees the form.
+- **Wiring a form to other elements declaratively** — `submitted` is an
+  Echo event, so a `<kb-fetch>` can post it without a listener.
+
+## When not to use
+
+- **A classic server-side post** — the inner `<form>` has no `action` or
+  `method` and its native submit is prevented; a page that should navigate
+  on submit wants a plain `<form>`.
+- **A single field with a button** — a `<kb-input>` and a `<kb-button>` in
+  a `<kb-stack>` is less machinery when there's nothing to parse.
+- **Layout only** — the element exists for the submit/reset lifecycle. To
+  arrange fields without that, use `<kb-stack>`.
+
+## Composition
+
+- **Can contain**: exactly one `<template>` child, holding the fields and
+  the submit control. The template's markup is what gets rendered into the
+  shadow `<form>` — light-DOM children outside the template are not
+  projected (there is no `<slot>`; see `component.js`).
+- **Can be a child of**: anything. The host is full-width and lays its
+  fields out as a column.
+
+Inside the template, use the form controls of the library —
+`<kb-input>`, `<kb-textarea>`, `<kb-fileupload>` — plus a
+`<kb-button type="submit">`. Being form-associated, they register with the
+inner `<form>` and appear in the submitted data by their `name`.
+
+```html
+<kb-form autorender>
+  <template>
+    <kb-input name="email" type="email" required>
+      <kb-label>Email</kb-label>
+    </kb-input>
+    <kb-button type="submit">Send</kb-button>
+  </template>
+</kb-form>
+```
+
+<Canvas>
+  <Story of={FormStories.Default} />
+</Canvas>
+
+## Rendering the template
+
+Content is not rendered until `render()` runs. There are two ways to
+trigger it, and the choice is the main decision this element asks of you:
+
+- **`autorender`** — renders once on connect, with no data. Right for a
+  blank form: the fields appear as authored, `{placeholders}` resolve to
+  nothing.
+- **`render(data)`** — call it when the data arrives. Every `{path}` in
+  the template is replaced by the matching value (`{}` is the whole
+  object, `{user.email}` a nested lookup), which is how an edit form gets
+  pre-filled.
+
+```js
+document.querySelector('kb-form').render({ email: 'ada@example.com' })
+```
+
+Each call re-renders the shadow DOM, so calling `render()` again replaces
+the current fields — and any values the user has typed. Render on data
+arrival, not on every keystroke.
+
+Note that the template is read at render time. Markup added to the
+`<template>` afterwards — by a framework that fills its children
+asynchronously — is not picked up unless `render()` runs again.
+
+## Events
+
+| Event | Fires when | `detail` |
+|---|---|---|
+| `submitted` | the inner form is submitted, natively or via `submit()` | the form's data as a plain object |
+| `resetted` | the inner form is reset, natively or via `reset()` | `{}` |
+
+Both are re-dispatched from the host after the native event is stopped, so
+the page never navigates. `submit()` and `reset()` are the programmatic
+equivalents of pressing the buttons, and go through the same path — which
+means the validation of every field runs first.
+
+```html
+<kb-form name="signup" autorender>...</kb-form>
+<kb-fetch url="/api/signup" method="post">
+  <kb-on value="signup/submitted:method/post"></kb-on>
+</kb-fetch>
+```
+
+## Styling
+
+The inner form's layout is exposed as `--form-*` custom properties, which
+inherit through the shadow boundary — set them on the element (or any
+ancestor) rather than reaching into its shadow DOM.
+
+| Custom property | Default | Controls |
+|---|---|---|
+| `--form-direction` | `column` | `flex-direction` of the field list; `row` for a compact inline form. |
+| `--form-align` | `start` | `align-items` of the fields; `stretch` makes them fill the width. |
+| `--form-space-gap` | `var(--spacing_inset-xs)` | Gap between fields. |
+
+Fields sit at their natural width by default, since `align-items` is
+`start`. A form whose inputs should span the full width sets both the
+alignment and the field width:
+
+```css
+kb-form.wide {
+  --form-align: stretch;
+}
+```
+
+## States and accessibility
+
+- The element uses the `Hidden` mixin: `hidden` adds the `hidden` custom
+  state and `display: none`, removing the form from layout and from the
+  accessibility tree.
+- The inner `<form>` is a real form element, so native validation runs on
+  submit: an invalid field blocks `submitted` and reports itself. You
+  don't need to check validity before dispatching.
+- Fields live in the shadow DOM of the host, not in the page's light DOM.
+  An external `<label for>` can't reach them — label each field with its
+  own `<kb-label>` instead.
+- Give the form an accessible name when a page holds more than one:
+  `<kb-form aria-label="Sign up">`. There is no `name`-derived labelling.
+- Keep the submit control inside the template. A button outside the
+  element belongs to a different form (or none) and won't submit this one.
+
+## Do's and don'ts
+
+| Do | Don't |
+|---|---|
+| Put every field and the submit button inside the `<template>` | Place fields as light-DOM children — they are never projected |
+| Use `autorender` for a blank form, `render(data)` for a filled one | Call `render()` on each change and wipe what the user typed |
+| Read the submitted values from `event.detail` | Query the shadow DOM for the fields to collect values |
+| Let native validation gate the submit | Re-check the fields in script before calling `submit()` |

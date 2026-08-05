@@ -1,8 +1,13 @@
 export default {
   title: 'Components/Icon',
-  tags: ['autodocs'],
+  // Docs page is authored by hand in icon.mdx (usage guidance), which
+  // attaches via `<Meta of={IconStories} />` — tagging this file 'autodocs'
+  // too would generate a second, conflicting page.
   parameters: {
     a11y: { test: 'todo' },
+    // Show the exact markup `render` returns (with args resolved) in the
+    // "Show code" block, instead of Storybook's beautifier re-indenting it.
+    docs: { source: { format: false } },
   },
   render: ({ use, size, color }) =>
     `<kb-icon use="${use}" size="${size}" color="${color}"></kb-icon>`,

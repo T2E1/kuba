@@ -6,17 +6,18 @@ function style(fileupaload) {
       box-sizing: border-box;
       display: flex;
       flex-direction: column;
-      gap: var(--spacing-nano);
+      gap: var(--fileupload-space-gap, var(--spacing-nano));
       position: relative;
       user-select: none;
       width: ${fileupaload.width};
 
       label {
         align-items: center;
-        aspect-ratio: 1.95/1;
-        background-color: transparent;
-        border: var(--border-width-hairline) solid var(--color-master-light);
-        border-radius: var(--border-radius-sm);
+        aspect-ratio: var(--fileupload-aspect-ratio, 1.95/1);
+        background-color: var(--fileupload-color-background, transparent);
+        border: var(--border-width-hairline) solid
+          var(--fileupload-color-border, var(--color-master-light));
+        border-radius: var(--fileupload-border-radius, var(--border-radius-sm));
         box-sizing: border-box;
         cursor: pointer;
         display: flex;
@@ -24,11 +25,11 @@ function style(fileupaload) {
         gap: var(--spacing_inset-xs);
         justify-content: center;
         overflow: hidden;
-        padding: var(--spacing-xl) var(--spacing-md);
+        padding: var(--fileupload-space-inset, var(--spacing-xl) var(--spacing-md));
         width: 100%;
 
         &:hover {
-          border-color: var(--color-primary);
+          border-color: var(--fileupload-color-border_hover, var(--color-primary));
         }
 
         input {
@@ -37,7 +38,10 @@ function style(fileupaload) {
 
         icon {
           align-items: center;
-          background-color: var(--color-primary-lighter);
+          background-color: var(
+            --fileupload-color-icon-background,
+            var(--color-primary-lighter)
+          );
           border-radius: var(--border-radius-circular);
           display: flex;
           height: 48px;
@@ -47,7 +51,7 @@ function style(fileupaload) {
       }
 
       preview {
-        aspect-ratio: 1.95/1;
+        aspect-ratio: var(--fileupload-aspect-ratio, 1.95/1);
         box-sizing: border-box;
         display: ${fileupaload.file ? 'block' : 'none'};
         left: 0;
@@ -56,10 +60,13 @@ function style(fileupaload) {
         width: 100%;
 
         img {
-          border-radius: var(--border-radius-sm);
+          border-radius: var(
+            --fileupload-border-radius,
+            var(--border-radius-sm)
+          );
           display: block;
           height: 100%;
-          object-fit: cover;
+          object-fit: var(--fileupload-preview-fit, cover);
           width: 100%;
         }
 

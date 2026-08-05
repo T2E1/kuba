@@ -1,9 +1,14 @@
 export default {
   title: 'Form/Fileupload',
-  tags: ['autodocs'],
+  // Docs page is authored by hand in fileupload.mdx (usage guidance), which
+  // attaches via `<Meta of={FileuploadStories} />` — tagging this file
+  // 'autodocs' too would generate a second, conflicting page.
   parameters: {
     actions: { handles: ['change'] },
     a11y: { test: 'todo' },
+    // Show the exact markup `render` returns (with args resolved) in the
+    // "Show code" block, instead of Storybook's beautifier re-indenting it.
+    docs: { source: { format: false } },
   },
   render: ({ name, required, file, label, helper }) => `
     <kb-fileupload

@@ -6,6 +6,19 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) and 
 
 ---
 
+## [0.1.0-alpha.27] — 2026-08-05
+
+### Added
+
+- The remaining 15 visual elements now expose their visual decisions as overridable CSS custom properties, the same way `<kb-cover>` and `<kb-footer>` already did — `--header-*`, `--icon-*`, `--logo-*`, `--progress-*`, `--stack-*`, `--inset-*`, `--main-*`, `--helper-*`, `--label-*`, `--text-*`, `--input-*`, `--textarea-*`, `--fileupload-*`, `--validity-*` and `--form-*`. Each defaults to the value it replaced, so nothing changes visually; re-style an element by setting these on it or any ancestor, without reaching into its shadow DOM
+- `<kb-icon>` exposes the four Material Symbols variation axes (`--icon-fill`, `--icon-weight`, `--icon-grade`, `--icon-optical-size`), so outlined or lighter glyphs no longer require a different font
+- Storybook usage pages (`.mdx`) for those same 15 elements — when to use and when not to, composition rules, the per-attribute usage guidance, the custom property table, accessibility notes and do/don't pairs
+
+### Changed
+
+- `<kb-inset>`'s margin and border-radius maps are now derived from two constants instead of repeating `-16px`/`8px` across fourteen literal strings
+- The 15 elements' Storybook pages now render from their `.mdx` instead of auto-generated docs; `tags: ['autodocs']` was removed from each story file, as the hand-written page replaces it
+
 ## [0.1.0-alpha.26] — 2026-08-05
 
 ### Changed

@@ -1,8 +1,13 @@
 export default {
   title: 'Layout/Inset',
-  tags: ['autodocs'],
+  // Docs page is authored by hand in inset.mdx (usage guidance), which
+  // attaches via `<Meta of={InsetStories} />` — tagging this file 'autodocs'
+  // too would generate a second, conflicting page.
   parameters: {
     a11y: { test: 'todo' },
+    // Show the exact markup `render` returns (with args resolved) in the
+    // "Show code" block, instead of Storybook's beautifier re-indenting it.
+    docs: { source: { format: false } },
   },
   render: ({ direction, side, content }) =>
     `<kb-inset direction="${direction}" side="${side}">${content}</kb-inset>`,

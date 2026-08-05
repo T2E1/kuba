@@ -6,7 +6,7 @@ function style(self) {
       align-items: ${self.align};
       display: flex;
       flex-direction: ${self.direction};
-      gap: var(--spacing_inset-${self.spacing});
+      gap: var(--stack-space-gap, var(--spacing_inset-${self.spacing}));
       height: ${self.height};
       justify-content: ${self.justify};
       width: ${self.width};

@@ -1,8 +1,13 @@
 export default {
   title: 'Form/Validity',
-  tags: ['autodocs'],
+  // Docs page is authored by hand in validity.mdx (usage guidance), which
+  // attaches via `<Meta of={ValidityStories} />` — tagging this file
+  // 'autodocs' too would generate a second, conflicting page.
   parameters: {
     a11y: { test: 'todo' },
+    // Show the exact markup `render` returns (with args resolved) in the
+    // "Show code" block, instead of Storybook's beautifier re-indenting it.
+    docs: { source: { format: false } },
   },
   render: ({ state, message }) => `
     <kb-input name="email" type="email" required>

@@ -1,9 +1,14 @@
 export default {
   title: 'Form/Textarea',
-  tags: ['autodocs'],
+  // Docs page is authored by hand in textarea.mdx (usage guidance), which
+  // attaches via `<Meta of={TextareaStories} />` — tagging this file
+  // 'autodocs' too would generate a second, conflicting page.
   parameters: {
     actions: { handles: ['change'] },
     a11y: { test: 'todo' },
+    // Show the exact markup `render` returns (with args resolved) in the
+    // "Show code" block, instead of Storybook's beautifier re-indenting it.
+    docs: { source: { format: false } },
   },
   render: ({
     name,

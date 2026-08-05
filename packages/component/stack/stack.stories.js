@@ -1,6 +1,8 @@
 export default {
   title: 'Components/Stack',
-  tags: ['autodocs'],
+  // Docs page is authored by hand in stack.mdx (usage guidance), which
+  // attaches via `<Meta of={StackStories} />` — tagging this file 'autodocs'
+  // too would generate a second, conflicting page.
   render: ({ direction, align, justify, spacing, content }) =>
     `<kb-stack direction="${direction}" align="${align}" justify="${justify}" spacing="${spacing}">${content}</kb-stack>`,
   argTypes: {
@@ -33,6 +35,9 @@ export default {
   },
   parameters: {
     a11y: { test: 'todo' },
+    // Show the exact markup `render` returns (with args resolved) in the
+    // "Show code" block, instead of Storybook's beautifier re-indenting it.
+    docs: { source: { format: false } },
   },
 }
 

@@ -7,10 +7,10 @@ function style() {
       width: 100%;
 
       form {
-        align-items: start;
+        align-items: var(--form-align, start);
         display: flex;
-        flex-direction: column;
-        gap: var(--spacing_inset-xs);
+        flex-direction: var(--form-direction, column);
+        gap: var(--form-space-gap, var(--spacing_inset-xs));
         width: 100%;
       }
     }

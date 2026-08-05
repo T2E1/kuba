@@ -1,9 +1,14 @@
 export default {
   title: 'Form/Input',
-  tags: ['autodocs'],
+  // Docs page is authored by hand in input.mdx (usage guidance), which
+  // attaches via `<Meta of={InputStories} />` — tagging this file 'autodocs'
+  // too would generate a second, conflicting page.
   parameters: {
     actions: { handles: ['changed'] },
     a11y: { test: 'todo' },
+    // Show the exact markup `render` returns (with args resolved) in the
+    // "Show code" block, instead of Storybook's beautifier re-indenting it.
+    docs: { source: { format: false } },
   },
   render: ({
     name,

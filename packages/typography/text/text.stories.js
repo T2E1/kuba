@@ -1,8 +1,13 @@
 export default {
   title: 'Typography/Text',
-  tags: ['autodocs'],
+  // Docs page is authored by hand in text.mdx (usage guidance), which
+  // attaches via `<Meta of={TextStories} />` — tagging this file 'autodocs'
+  // too would generate a second, conflicting page.
   parameters: {
     a11y: { test: 'todo' },
+    // Show the exact markup `render` returns (with args resolved) in the
+    // "Show code" block, instead of Storybook's beautifier re-indenting it.
+    docs: { source: { format: false } },
   },
   render: ({ align, color, family, lineHeight, size, weight, content }) =>
     `<kb-text align="${align}" color="${color}" family="${family}" line-height="${lineHeight}" size="${size}" weight="${weight}">${content}</kb-text>`,

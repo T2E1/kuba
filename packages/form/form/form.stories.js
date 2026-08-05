@@ -1,9 +1,14 @@
 export default {
   title: 'Form/Form',
-  tags: ['autodocs'],
+  // Docs page is authored by hand in form.mdx (usage guidance), which
+  // attaches via `<Meta of={FormStories} />` — tagging this file 'autodocs'
+  // too would generate a second, conflicting page.
   parameters: {
     actions: { handles: ['submitted', 'resetted'] },
     a11y: { test: 'todo' },
+    // Show the exact markup `render` returns (with args resolved) in the
+    // "Show code" block, instead of Storybook's beautifier re-indenting it.
+    docs: { source: { format: false } },
   },
   render: ({ autorender }) => `
     <kb-form ${autorender ? 'autorender' : ''}>

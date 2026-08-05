@@ -1,0 +1,122 @@
+import { Canvas, Controls, Meta, Story } from '@storybook/addon-docs/blocks'
+import * as HeaderStories from './header.stories.js'
+
+<Meta of={HeaderStories} />
+
+# Header
+
+A header is the opening bar of a page: a strip that pins one group of
+content to the start of a centered row (`leading`) and another to its end
+(`trailing`), laying each region out as a flex row with a gap between its
+children. It's a page-level landmark, not a generic toolbar — it has no
+attributes, dispatches no events, and carries no default (unnamed) slot,
+so anything not assigned to `leading` or `trailing` is dropped.
+
+<Canvas of={HeaderStories.Default} />
+<Controls />
+
+## When to use
+
+- **Opening a page** with the identity and navigation that belong at the
+  very top — brand mark, primary nav, account menu, a search entry point.
+- **Pairing with `<kb-footer>`** so a page opens and closes with the same
+  centered 1024px column and the same 72px bar height.
+
+## When not to use
+
+- **The bottom bar of the page** — use `<kb-footer>`, the matching
+  landmark for that end of the page. It shares the centered-row geometry
+  but leaves its slot regions unstyled instead of laying them out as flex
+  rows.
+- **A header inside a card, dialog, or section** — `kb-header` renders a
+  native `<header>` at page level; a title row inside a contained surface
+  is a `<kb-stack direction="row" justify="space-between">` with a
+  `<kb-text>`.
+- **A toolbar of actions** — the two regions anchor content to opposite
+  ends of a fixed-height bar. A dense row of buttons that should wrap or
+  scroll wants a `<kb-stack>`, which grows with its content.
+
+## Composition
+
+- **Can contain**: anything carrying `slot="leading"` or
+  `slot="trailing"` — `kb-header` renders only those two named slots and
+  no default slot (see `component.js`), so unslotted children never
+  appear. `leading` typically holds a `<kb-logo>` (optionally followed by
+  a product name in `<kb-text>`); `trailing` holds a `<nav>`, a
+  `<kb-stack direction="row">` of `<kb-button variant="link">`, or an
+  avatar.
+- **Can be a child of**: anything, semantically the page root. Note that
+  the inner `<header>` is `100svw` wide — it spans the viewport rather
+  than its container — so nesting one inside a narrower element makes it
+  overflow that element.
+
+Unlike `<kb-footer>`, each region is itself a flex row with
+`gap: var(--header-space-gap)`, so several elements slotted into the same
+side are spaced and vertically centered without any extra wrapper.
+
+<Canvas>
+  <Story
+    of={HeaderStories.Default}
+    args={{ trailing: '<kb-button variant="link">Docs</kb-button><kb-button variant="link">Guides</kb-button>' }}
+  />
+</Canvas>
+
+## Content
+
+Both regions are empty until filled — there is no fallback content on
+either slot. Keep each side to one line: the bar is a fixed 72px tall and
+doesn't grow, so content that wraps overflows it rather than pushing it
+taller.
+
+## Styling
+
+Every dimension is exposed as a `--header-*` CSS custom property with a
+default that aliases a global token from `packages/pixel/tokens/` (or, for
+the two dimensions, a plain value). Because custom properties inherit
+through the shadow boundary, you re-style a header by setting these on the
+element (or any ancestor) — never by reaching into its shadow DOM.
+Override a token, not the internals.
+
+| Custom property | Default | Controls |
+|---|---|---|
+| `--header-size-height` | `72px` | Height of the bar, on both the host and the inner centered row. |
+| `--header-size-max-width` | `1024px` | Cap on the centered content row; below it, the row follows the bar's width. |
+| `--header-space-inset` | `var(--spacing_inset-xs)` | Inner padding of the centered row. |
+| `--header-space-gap` | `var(--spacing_inset-xs)` | Gap between elements slotted into the same region. |
+
+`kb-header` paints no background of its own, so the page background shows
+through — set `background-color` directly on the element when the bar
+needs to read as a separate surface:
+
+```css
+/* A taller, wider, tinted header */
+kb-header {
+  --header-size-height: 96px;
+  --header-size-max-width: 1280px;
+  background-color: var(--color-master-lightest);
+}
+```
+
+## States and accessibility
+
+- `kb-header` has no `hidden` attribute and no custom states — it doesn't
+  use the `Hidden` mixin, so remove the element itself when the bar
+  shouldn't be in the layout.
+- The inner `<header>` exposes a `banner` landmark for the page. Use a
+  single `kb-header` per page; a second one splits that landmark and makes
+  "jump to page header" ambiguous for screen reader users.
+- Wrap primary navigation in a `<nav>` inside the `trailing` slot so it
+  gets its own `navigation` landmark — the header's landmark doesn't
+  describe the links it contains.
+- The element adds no focus management of its own (its shadow root is not
+  `delegatesFocus`), so slotted links and buttons keep their native focus
+  order — `leading` first, matching the reading order.
+
+## Do's and don'ts
+
+| Do | Don't |
+|---|---|
+| Slot the brand mark into `leading` and navigation into `trailing` | Leave children unslotted — without `slot=`, they never render |
+| Keep a single `kb-header`, at the page root | Reuse it as the title bar of a card or dialog — its landmark belongs to the page |
+| Slot several elements into one region and let the built-in gap space them | Wrap them in an extra flex container to recreate spacing the region already provides |
+| Keep each side to a single short line | Fill the bar with content that wraps — the 72px height is fixed |
