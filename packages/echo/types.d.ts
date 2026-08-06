@@ -33,9 +33,9 @@ declare module '@t2e1/kuba/echo' {
    *
    * @example
    * ```html
-   * <!-- Whenever any element with id="panel" dispatches a "change" event,
+   * <!-- Whenever any element with id="panel" dispatches a "changed" event,
    *      call `refresh(payload)` on this host. -->
-   * <my-widget on="#panel/change:method/refresh"></my-widget>
+   * <my-widget on="#panel/changed:method/refresh"></my-widget>
    * ```
    *
    * @param Base - The custom element class (or mixin chain) to extend.

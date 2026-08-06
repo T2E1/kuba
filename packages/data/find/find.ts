@@ -36,7 +36,7 @@ class Find extends Echo(Headless(HTMLElement)) {
     const detail = this.parentElement.value.find(
       ({ [this.key]: value }) => value === this.value,
     )
-    this.parentElement.dispatchEvent(customEvent('find', detail))
+    this.parentElement.dispatchEvent(customEvent('found', detail))
     return this
   }
 }

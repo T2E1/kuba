@@ -9,8 +9,8 @@ import * as RenderStories from './render.stories.js'
 against arbitrary data, supplied via `render()`, and emptied again via
 `clear()`. It's also an Echo host: its `on` attribute (or a `<kb-on>`
 child) can wire either method to another element's event — e.g.
-re-rendering whenever a data source dispatches `change`, or clearing on
-an `error` — so updates happen declaratively, without a manual event
+re-rendering whenever a data source dispatches `succeeded`, or clearing on
+a `failed` — so updates happen declaratively, without a manual event
 listener or a framework's reactivity system.
 
 <Canvas of={RenderStories.WiredToAFetch} />
@@ -79,8 +79,8 @@ styling:
 - `clear()` empties the rendered `textContent` without touching the
   template, so a later `render()` call still has a template to
   interpolate against. It's the natural counterpart to wire to an
-  error/empty event — e.g. `<kb-on value="api/error:method/clear">` next
-  to `<kb-on value="api/ok:method/render">`, as shown in the playground
+  error/empty event — e.g. `<kb-on value="api/failed:method/clear">` next
+  to `<kb-on value="api/succeeded:method/render">`, as shown in the playground
   above, so a failed request clears stale results instead of leaving them
   on screen.
 

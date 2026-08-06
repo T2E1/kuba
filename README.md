@@ -66,8 +66,8 @@ A complete feature — search dog breeds as you type and render the results — 
         </kb-stack>
       </kb-card>
     </template>
-    <kb-on value="api/ok:method/render"></kb-on>
-    <kb-on value="api/error:method/clear"></kb-on>
+    <kb-on value="api/succeeded:method/render"></kb-on>
+    <kb-on value="api/failed:method/clear"></kb-on>
   </kb-render>
 </kb-stack>
 
@@ -80,7 +80,7 @@ A complete feature — search dog breeds as you type and render the results — 
 Every connection is an **arc** — `source/event:type/sink`:
 
 - `<kb-input name="dog">` publishes a `changed` event; `<kb-fetch>` subscribes with `dog/changed:method/get` and fetches `…/search?q={the typed value}`.
-- `<kb-fetch name="api">` publishes `ok` (or `error`); `<kb-render>` subscribes with `api/ok:method/render` to paint its `<template>` once per result, and with `api/error:method/clear` to empty it.
+- `<kb-fetch name="api">` publishes `succeeded` (or `failed`); `<kb-render>` subscribes with `api/succeeded:method/render` to paint its `<template>` once per result, and with `api/failed:method/clear` to empty it.
 - The `{name}`, `{image.url}`, `{temperament}`… placeholders in the template are filled from each result object.
 
 No component references another in code — they only agree on event names. **[See it live →](https://t2e1.github.io/kuba/?path=/docs/behavior-render--docs)**

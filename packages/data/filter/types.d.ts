@@ -1,7 +1,7 @@
 /**
  * `<kb-filter>` custom element. Filters the `value` collection exposed by its parent
  * element (e.g. `<kb-dataset>`) by comparing each record's `key` field against `value`,
- * then dispatches a `filter` event on the parent with the matching records.
+ * then dispatches a `filtered` event on the parent with the matching records.
  *
  * @example
  * ```html
@@ -10,7 +10,7 @@
  * </kb-dataset>
  * <script>
  *   const dataset = document.querySelector('kb-dataset')
- *   dataset.addEventListener('filter', (event) => console.log(event.detail))
+ *   dataset.addEventListener('filtered', (event) => console.log(event.detail))
  * </script>
  * ```
  */

@@ -1,7 +1,7 @@
 /**
  * `<kb-find>` custom element. Finds the first record in the `value` collection exposed
  * by its parent element (e.g. `<kb-dataset>`) whose `key` field matches `value`, then
- * dispatches a `find` event on the parent with the matching record.
+ * dispatches a `found` event on the parent with the matching record.
  *
  * @example
  * ```html
@@ -10,7 +10,7 @@
  * </kb-dataset>
  * <script>
  *   const dataset = document.querySelector('kb-dataset')
- *   dataset.addEventListener('find', (event) => console.log(event.detail))
+ *   dataset.addEventListener('found', (event) => console.log(event.detail))
  * </script>
  * ```
  */

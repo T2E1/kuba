@@ -94,14 +94,14 @@ which is how `<kb-form>`'s reset reaches the field.
 
 ## Events
 
-The element dispatches `change` with the new value as `event.detail` on
-every value change — note that `<kb-input>` dispatches `changed` instead,
-so an Echo arc wired to one won't fire for the other:
+The element dispatches `changed` with the new value as `event.detail` on
+every value change — the same event `<kb-input>` and `<kb-fileupload>`
+publish, so an arc written for one field works for any of them:
 
 ```html
 <kb-textarea name="note"></kb-textarea>
 <kb-render>
-  <kb-on value="note/change:method/render"></kb-on>
+  <kb-on value="note/changed:method/render"></kb-on>
   <template>{}</template>
 </kb-render>
 ```
@@ -163,4 +163,4 @@ kb-textarea.brief {
 | Size `--textarea-size-min-height` to the expected answer | Ship the default 128px for a field that always holds one line |
 | Set `name` (or `id`) so the label associates and the value submits | Rely on a visible `<kb-label>` alone to name the field |
 | Use `<kb-input>` when the answer is a single line | Reach for a textarea because it "looks roomier" |
-| Remember this element dispatches `change`, not `changed` | Copy an Echo arc from `<kb-input>` and expect it to fire |
+| Debounce `changed` before driving a request | Fire a request per keystroke straight from the event |

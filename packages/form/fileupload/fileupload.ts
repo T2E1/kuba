@@ -108,7 +108,7 @@ class FileUpload extends Echo(Hidden(Width(HTMLElement))) {
   }
 
   [dispatch]() {
-    this.dispatchEvent(customEvent('change', this.file))
+    this.dispatchEvent(customEvent('changed', this.file))
     return this
   }
 

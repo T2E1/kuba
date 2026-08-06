@@ -1,6 +1,6 @@
 /**
  * `<kb-dataset>` custom element. Holds an in-memory collection of records, keyed by the
- * field named in the `upsert` attribute, and dispatches a `change` event whenever the
+ * field named in the `upsert` attribute, and dispatches a `changed` event whenever the
  * collection is mutated via `push`, `delete`, or `reset`.
  *
  * @example
@@ -8,7 +8,7 @@
  * <kb-dataset upsert="id"></kb-dataset>
  * <script>
  *   const dataset = document.querySelector('kb-dataset')
- *   dataset.addEventListener('change', (event) => console.log(event.detail))
+ *   dataset.addEventListener('changed', (event) => console.log(event.detail))
  *   dataset.push({ id: 1, name: 'Ada' })
  * </script>
  * ```
@@ -24,7 +24,7 @@ export default class KUBADatasetElement extends HTMLElement {
   readonly value: unknown[]
 
   /**
-   * Removes the record whose upsert-key value matches `key`. Dispatches `change`.
+   * Removes the record whose upsert-key value matches `key`. Dispatches `changed`.
    *
    * @param key - Value of the upsert key identifying the record to remove.
    * @returns This element, for chaining.
@@ -34,7 +34,7 @@ export default class KUBADatasetElement extends HTMLElement {
   /**
    * Inserts or merges one or more records into the collection. Records sharing an
    * existing upsert-key value are merged into the stored record rather than duplicated.
-   * Dispatches `change`.
+   * Dispatches `changed`.
    *
    * @param data - A single record, or an array of records, to add/merge.
    * @returns This element, for chaining.
@@ -42,7 +42,7 @@ export default class KUBADatasetElement extends HTMLElement {
   push(data: unknown): this
 
   /**
-   * Clears all stored records. Dispatches `change`.
+   * Clears all stored records. Dispatches `changed`.
    *
    * @returns This element, for chaining.
    */

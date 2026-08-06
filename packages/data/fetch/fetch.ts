@@ -45,8 +45,8 @@ class Fetch extends Echo(Headless(HTMLElement)) {
     requestIdleCallback(async () => {
       const { data, error } = await response
       error
-        ? this.dispatchEvent(customEvent('error', data))
-        : this.dispatchEvent(customEvent('ok', data))
+        ? this.dispatchEvent(customEvent('failed', data))
+        : this.dispatchEvent(customEvent('succeeded', data))
     })
     return this
   }

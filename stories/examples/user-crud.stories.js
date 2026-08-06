@@ -44,7 +44,7 @@ export const AddAndDeleteRecords = {
           </kb-button>
         </kb-stack>
       </template>
-      <kb-on value="users/change:method/render"></kb-on>
+      <kb-on value="users/changed:method/render"></kb-on>
     </kb-render>
 
     <kb-dataset name="users" upsert="id">

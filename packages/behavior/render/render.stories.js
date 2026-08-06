@@ -56,8 +56,8 @@ const wiredToAFetchMarkup = `<kb-stack direction="column">
         </kb-stack>
       </kb-card>
     </template>
-    <kb-on value="api/ok:method/render"></kb-on>
-    <kb-on value="api/error:method/clear"></kb-on>
+    <kb-on value="api/succeeded:method/render"></kb-on>
+    <kb-on value="api/failed:method/clear"></kb-on>
   </kb-render>
 </kb-stack>
 

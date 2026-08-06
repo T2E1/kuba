@@ -54,8 +54,7 @@ class Validity extends Echo(HTMLElement) {
   async [reflectable]() {
     await customElements.whenDefined(this.parentElement?.localName)
 
-    // `changed` covers `input`; `change` the controls that still dispatch it.
-    for (const event of ['change', 'changed', 'invalid']) {
+    for (const event of ['changed', 'invalid']) {
       this.parentElement.addEventListener(event, this[validatable].bind(this), {
         signal: this.controller.signal,
       })

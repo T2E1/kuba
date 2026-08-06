@@ -159,7 +159,7 @@ class Textarea extends Echo(Hidden(Width(HTMLElement))) {
   }
 
   [dispatch]() {
-    this.dispatchEvent(customEvent('change', this.value))
+    this.dispatchEvent(customEvent('changed', this.value))
     return this
   }
 

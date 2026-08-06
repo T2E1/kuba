@@ -50,7 +50,7 @@ const Echo = (Klass) => {
     }
 
     // Parses one arc string of the form `source/event:type/sink|filters` —
-    // e.g. `#panel/change:method/refresh|debounce=200` — and subscribes to
+    // e.g. `#panel/changed:method/refresh|debounce=200` — and subscribes to
     // the shared bus for it. `source` may be `*` (any), `#id`, `name`, or
     // tag name; `type` selects how `sink` is invoked (method/attribute/setter);
     // `filters` is a `|`-separated list of `name=value` pairs, each resolved

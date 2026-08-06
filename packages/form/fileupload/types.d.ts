@@ -21,7 +21,7 @@ export default class KUBAFileUploadElement extends HTMLElement {
   readonly controller: AbortController
   /**
    * The selected file encoded as a base64 data URL. Setting this value
-   * updates the preview, re-runs validation, and dispatches a `change`
+   * updates the preview, re-runs validation, and dispatches a `changed`
    * event.
    * @default ''
    */

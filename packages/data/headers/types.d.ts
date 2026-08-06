@@ -62,7 +62,7 @@ export default class KUBAHeadersElement extends HTMLElement {
    *
    * @example
    * ```ts
-   * element.on = '#source/change:setter/value' // ok
+   * element.on = '#source/changed:setter/value' // ok
    * ```
    */
   on: KUBAHeadersOnAttribute | (string & {})

@@ -85,7 +85,7 @@ export default class KUBACardElement extends HTMLElement {
    * @default undefined
    * @example
    * ```ts
-   * element.on = '#panel/change:method/refresh' // ok
+   * element.on = '#panel/changed:method/refresh' // ok
    * ```
    */
   on: KUBACardOnAttribute | (string & {})

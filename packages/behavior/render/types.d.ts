@@ -78,7 +78,7 @@ export default class KUBARenderElement extends HTMLElement {
    *
    * @example
    * ```ts
-   * element.on = '#source/change:method/render' // ok
+   * element.on = '#source/changed:method/render' // ok
    * ```
    */
   on: KUBARenderOnAttribute | (string & {})
@@ -97,7 +97,7 @@ export default class KUBARenderElement extends HTMLElement {
   /**
    * Empties the element's rendered `textContent`, without touching its
    * template. Commonly wired to an error/empty event (e.g. a fetch's
-   * `error`) via `on`/`<kb-on>`, as the counterpart to `render()`.
+   * `failed`) via `on`/`<kb-on>`, as the counterpart to `render()`.
    *
    * @returns This element, for chaining.
    */

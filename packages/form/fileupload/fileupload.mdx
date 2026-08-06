@@ -86,7 +86,7 @@ the corner of the preview does the same thing for the user.
 
 ## Events
 
-The element dispatches `change` with the data URL as `event.detail`
+The element dispatches `changed` with the data URL as `event.detail`
 whenever a file is chosen or cleared. That payload is the whole image, so
 prefer a listener that stores it over an Echo arc that forwards it through
 several elements.

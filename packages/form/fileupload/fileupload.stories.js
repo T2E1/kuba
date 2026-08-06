@@ -4,7 +4,7 @@ export default {
   // attaches via `<Meta of={FileuploadStories} />` — tagging this file
   // 'autodocs' too would generate a second, conflicting page.
   parameters: {
-    actions: { handles: ['change'] },
+    actions: { handles: ['changed'] },
     a11y: { test: 'todo' },
     // Show the exact markup `render` returns (with args resolved) in the
     // "Show code" block, instead of Storybook's beautifier re-indenting it.

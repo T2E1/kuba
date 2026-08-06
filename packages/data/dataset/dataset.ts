@@ -25,7 +25,7 @@ class Dataset extends Echo(Headless(HTMLElement)) {
     return this.#storage.values
   }
 
-  // @around(dispatch) fires a 'change' event after the mutation completes.
+  // @around(dispatch) fires a 'changed' event after the mutation completes.
   @around(dispatch)
   delete(key) {
     this.#storage.delete(key)
@@ -33,7 +33,7 @@ class Dataset extends Echo(Headless(HTMLElement)) {
   }
 
   [dispatch]() {
-    this.dispatchEvent(customEvent('change', this.value))
+    this.dispatchEvent(customEvent('changed', this.value))
     return this
   }
 

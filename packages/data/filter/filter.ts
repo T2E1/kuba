@@ -36,7 +36,7 @@ class Filter extends Echo(Headless(HTMLElement)) {
     const detail = this.parentElement.value.filter(
       ({ [this.key]: value }) => value === this.value,
     )
-    this.parentElement.dispatchEvent(customEvent('filter', detail))
+    this.parentElement.dispatchEvent(customEvent('filtered', detail))
     return this
   }
 }

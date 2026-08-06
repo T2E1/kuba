@@ -8,7 +8,7 @@ interface FetchResult<T = unknown> {
 
 /**
  * `<kb-fetch>` custom element. Wraps HTTP requests to the URL in its `url` attribute,
- * interpolating the payload into the URL template, and dispatches `ok`/`error` events
+ * interpolating the payload into the URL template, and dispatches `succeeded`/`failed` events
  * with the resulting data instead of throwing. Starting a new request aborts any
  * request already in flight.
  *
@@ -17,7 +17,7 @@ interface FetchResult<T = unknown> {
  * <kb-fetch url="/api/users/{id}"></kb-fetch>
  * <script>
  *   const fetcher = document.querySelector('kb-fetch')
- *   fetcher.addEventListener('ok', (event) => console.log(event.detail))
+ *   fetcher.addEventListener('succeeded', (event) => console.log(event.detail))
  *   fetcher.get({ id: 1 })
  * </script>
  * ```

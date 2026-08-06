@@ -6,6 +6,25 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) and 
 
 ---
 
+## [0.1.0-alpha.28] — 2026-08-06
+
+### Changed
+
+- **Breaking:** every custom event a kuba element dispatches is now named in the past tense, describing what happened rather than what to do. Listeners and Echo arcs targeting the old names stop firing and must be updated:
+
+  | Element | Old event | New event |
+  |---|---|---|
+  | `<kb-textarea>` | `change` | `changed` |
+  | `<kb-fileupload>` | `change` | `changed` |
+  | `<kb-dataset>` | `change` | `changed` |
+  | `<kb-filter>` | `filter` | `filtered` |
+  | `<kb-find>` | `find` | `found` |
+  | `<kb-fetch>` | `ok` / `error` | `succeeded` / `failed` |
+
+  `<kb-button>` and `<kb-card>` (`clicked`), `<kb-input>` (`changed`) and `<kb-form>` (`submitted`/`resetted`) already followed the convention and are unchanged. `<kb-fetch>`'s pair describes the outcome of the operation, so it reads correctly for `get`, `post`, `put` and `delete` alike
+- All three form controls now publish the same `changed` event, so an Echo arc written for one field works for any of them — `<kb-input>` is no longer the odd one out
+- `<kb-validity>` listens for `changed` instead of both `change` and `changed`; the second name became dead code once every control converged
+
 ## [0.1.0-alpha.27] — 2026-08-05
 
 ### Added
