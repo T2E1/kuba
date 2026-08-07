@@ -27,6 +27,16 @@ jobs:
       - run: npx playwright install --with-deps chromium
       - run: bun run test
       - run: bun run release
-      - run: npm publish --access public
+      # Not every push to main carries a new version — a docs, test, chore or
+      # ci commit doesn't bump one. Publishing unconditionally turns those into
+      # a red build for a 403 that means "there was nothing to release".
+      - name: Publish when the version is new
+        run: |
+          version=$(node -p "require('./package.json').version")
+          if npm view "@t2e1/kuba@$version" version >/dev/null 2>&1; then
+            echo "@t2e1/kuba@$version is already published — nothing to release."
+            exit 0
+          fi
+          npm publish --access public
         env:
           NPM_TOKEN: ${{secrets.NPM_TOKEN}}
