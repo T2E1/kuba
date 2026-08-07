@@ -1,0 +1,68 @@
+name: 📖 Deploy docs to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+  # Also triggerable by hand: a push event that fails to fire leaves the site
+  # stale with no way to republish without an empty commit.
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # The docs are a real consumer of the published package: index.html loads
+      # kuba from the CDN at a pinned version. A pin pointing at a version that
+      # was never published deploys a site where every live example is dead, and
+      # nothing else would catch it — so fail here instead of shipping it.
+      - name: Verify the pinned kuba version is published
+        run: |
+          version=$(grep -o '@t2e1/kuba@[0-9][^/]*' docs/index.html | head -1 | cut -d@ -f3)
+          echo "docs/index.html pins @t2e1/kuba@$version"
+          curl -fsSL -o /dev/null "https://cdn.jsdelivr.net/npm/@t2e1/kuba@$version/dist/kuba.js"
+          curl -fsSL -o /dev/null "https://cdn.jsdelivr.net/npm/@t2e1/kuba@$version/dist/kuba.css"
+
+          # A pin that exists but lags the current version means the docs
+          # describe behavior the loaded package doesn't have. Warn rather than
+          # fail: during a release the two are briefly out of step by design.
+          current=$(node -p "require('./package.json').version")
+          if [ "$version" != "$current" ]; then
+            echo "::warning::docs pin ($version) is behind package.json ($current) — bump it in docs/index.html"
+          fi
+
+      # docsify renders markdown in the browser, so there is nothing to build —
+      # the site is the docs/ directory as it stands in the repository.
+      - name: Assemble the site
+        run: |
+          mkdir -p site
+          cp -r docs/. site/
+          # Jekyll would drop docsify's _sidebar.md and _navbar.md, since it
+          # ignores paths starting with an underscore.
+          touch site/.nojekyll
+
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/deploy-pages@v4
+        id: deployment

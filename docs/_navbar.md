@@ -1,0 +1,7 @@
+- [Foundations](/foundations/introduction)
+- [Learn](/learn/installation)
+- [Components](/components/)
+- [Tokens](/foundations/tokens/)
+- [Reference](/reference/)
+- [Cookbook](/cookbook/)
+- [Contributing](/contributing)

@@ -14,7 +14,7 @@ Instead of managing state in JavaScript, kuba embraces the browser's native even
 
 ## Documentation
 
-The full documentation lives in Storybook — it's the single source of truth for how kuba behaves and why: **[t2e1.github.io/kuba](https://t2e1.github.io/kuba/)**.
+The full documentation is the single source of truth for how kuba behaves and why: **[t2e1.github.io/kuba](https://t2e1.github.io/kuba/)**.
 
 Start with the **Guidelines** section (Introduction → Design Principles → Design Tokens → Naming), then browse one live, controllable story per custom element under **Components**, **Form**, **Layout**, **Typography**, and **Behavior**. The **Guides** show multiple elements wired together into small apps.
 

@@ -57,28 +57,27 @@
     "node": ">=20.0.0"
   },
   "scripts": {
-    "dev": "storybook dev -p 6006",
-    "build": "storybook build",
+    "dev": "bunx serve docs -l 3000",
+    "test": "vitest run",
+    "test:watch": "vitest",
     "release": "vite build",
     "format": "biome format --write .",
     "lint": "biome lint --write .",
     "check": "biome check --write .",
-    "prepare": "husky",
-    "test": "exit 0"
+    "prepare": "husky"
   },
   "devDependencies": {
     "@biomejs/biome": "^2.4.15",
     "@commitlint/cli": "^19.6.1",
     "@commitlint/config-conventional": "^19.6.0",
     "@rollup/plugin-terser": "^0.4.4",
-    "@storybook/addon-a11y": "^10.5.3",
-    "@storybook/addon-docs": "^10.5.3",
-    "@storybook/web-components-vite": "^10.5.3",
+    "@vitest/browser": "^4.1.10",
+    "@vitest/browser-playwright": "^4.1.10",
     "husky": "^9.1.7",
     "lint-staged": "^15.2.11",
-    "remark-gfm": "^4.0.1",
-    "storybook": "^10.5.3",
+    "playwright": "^1.62.1",
     "typescript": "^5.8.3",
-    "vite": "^6.3.5"
+    "vite": "^6.3.5",
+    "vitest": "^4.1.10"
   }
 }

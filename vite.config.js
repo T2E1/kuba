@@ -6,8 +6,8 @@ import minifyTemplateLiterals from './plugins/minify-template-literals.js'
 const r = (p) => resolve(import.meta.dirname, p)
 
 /**
- * Path aliases shared between the library build below and the Storybook build
- * (`.storybook/main.js`), so both resolve `@behavior`, `@component`, etc. the
+ * Path aliases shared between the library build below and the test runner
+ * (`vitest.config.js`), so both resolve `@behavior`, `@component`, etc. the
  * same way without duplicating the map.
  */
 export const aliases = {

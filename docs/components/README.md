@@ -1,0 +1,62 @@
+# Components
+
+Every element ships registered — there is nothing to install per component. Add
+the two tags from [Installation](/learn/installation) and every tag below works.
+
+Each page follows the same shape: a live example first, then when to use it and
+when not to, what it can contain, the attributes that carry a rule, the CSS
+custom properties you can override, and accessibility notes.
+
+## Interface
+
+<div class="gallery">
+  <a href="#/components/button"><strong>Button</strong><span>Triggers an action. Never navigates.</span></a>
+  <a href="#/components/card"><strong>Card</strong><span>A grouped, optionally clickable surface.</span></a>
+  <a href="#/components/cover"><strong>Cover</strong><span>A framed, ratio-locked image.</span></a>
+  <a href="#/components/icon"><strong>Icon</strong><span>One Material Symbols glyph.</span></a>
+  <a href="#/components/logo"><strong>Logo</strong><span>The brand mark as inline SVG.</span></a>
+  <a href="#/components/progress"><strong>Progress</strong><span>A determinate progress bar.</span></a>
+</div>
+
+## Layout
+
+<div class="gallery">
+  <a href="#/components/header"><strong>Header</strong><span>The opening bar of a page.</span></a>
+  <a href="#/components/footer"><strong>Footer</strong><span>The closing bar of a page.</span></a>
+  <a href="#/components/main"><strong>Main</strong><span>The centered content column.</span></a>
+  <a href="#/components/stack"><strong>Stack</strong><span>A flex row or column with a token gap.</span></a>
+  <a href="#/components/inset"><strong>Inset</strong><span>Bleeds content past a padded parent.</span></a>
+</div>
+
+## Typography
+
+<div class="gallery">
+  <a href="#/components/text"><strong>Text</strong><span>General type, driven by tokens.</span></a>
+  <a href="#/components/label"><strong>Label</strong><span>The name of a form field.</span></a>
+  <a href="#/components/helper"><strong>Helper</strong><span>The hint under a field.</span></a>
+</div>
+
+## Forms
+
+<div class="gallery">
+  <a href="#/components/form"><strong>Form</strong><span>Submit and reset as events.</span></a>
+  <a href="#/components/input"><strong>Input</strong><span>A single-line, form-associated field.</span></a>
+  <a href="#/components/textarea"><strong>Textarea</strong><span>Multi-line, auto-growing.</span></a>
+  <a href="#/components/fileupload"><strong>Fileupload</strong><span>One image, previewed and encoded.</span></a>
+  <a href="#/components/validity"><strong>Validity</strong><span>One message per validation rule.</span></a>
+</div>
+
+## Data and behavior
+
+These render nothing. They hold or fetch data and publish events for other
+elements to react to — see [Events and Echo](/learn/events-and-echo).
+
+<div class="gallery">
+  <a href="#/components/fetch"><strong>Fetch</strong><span>HTTP requests as events.</span></a>
+  <a href="#/components/dataset"><strong>Dataset</strong><span>An in-memory record collection.</span></a>
+  <a href="#/components/filter"><strong>Filter</strong><span>Narrows a parent's records.</span></a>
+  <a href="#/components/find"><strong>Find</strong><span>Selects one record from a parent.</span></a>
+  <a href="#/components/render"><strong>Render</strong><span>Interpolates a template with data.</span></a>
+  <a href="#/components/on"><strong>On</strong><span>An Echo arc as an element.</span></a>
+  <a href="#/components/redirect"><strong>Redirect</strong><span>Declarative navigation.</span></a>
+</div>

@@ -21,6 +21,10 @@ jobs:
         with:
           bun-version: latest
       - run: bun install
+      # The suite runs in a real browser (see vitest.config.js), so the runner
+      # needs one. `--with-deps` pulls the system libraries headless Chromium
+      # links against, which the image doesn't ship.
+      - run: npx playwright install --with-deps chromium
       - run: bun run test
       - run: bun run release
       - run: npm publish --access public

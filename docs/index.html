@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>kuba — Web Components primitives</title>
+    <link
+      rel="icon"
+      href="https://avatars.githubusercontent.com/u/305539252"
+      type="image/png"
+    />
+    <meta
+      name="description"
+      content="Lightweight Web Components primitives and custom elements. No framework, no build step — the DOM is the runtime."
+    />
+
+    <!-- Fonts named by packages/pixel/tokens/fontFamily.css and by
+         packages/component/icon/style.js. kuba names these families but doesn't
+         bundle them — without these links every <kb-icon> renders its ligature
+         as literal text and the type falls back to sans-serif. -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;500;700&family=Roboto:wght@400;500;700&display=swap"
+    />
+
+    <!-- kuba itself, from the CDN, pinned to a released version. The docs are a
+         real consumer of the published package: if an example on this site
+         breaks, the package is broken. Bump this with every release. -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@t2e1/kuba@0.1.0-alpha.28/dist/kuba.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/docsify@4/lib/themes/vue.css"
+    />
+    <link rel="stylesheet" href="assets/docs.css" />
+  </head>
+  <body>
+    <div id="app">Loading…</div>
+
+    <script>
+      // Renders ```html preview blocks as a live example plus a collapsed
+      // source view — the shadcn pattern. Written inline instead of pulled from
+      // a plugin: the third-party viewer needs a Custom Elements Manifest for
+      // its controls, and kuba deliberately has none (the public contract lives
+      // in hand-written types.d.ts files).
+      function previewRenderer(code, lang) {
+        if (!/^html\s+preview/.test(lang || '')) {
+          return this.origin.code.apply(this, arguments)
+        }
+
+        const source = this.origin.code.call(this, code, 'html')
+        return `
+          <div class="preview">
+            <div class="preview__stage">${code}</div>
+            <details class="preview__source">
+              <summary>Code</summary>
+              ${source}
+            </details>
+          </div>
+        `
+      }
+
+      window.$docsify = {
+        name: 'kuba',
+        // Replaces the sidebar's text title with the mark; `name` stays as its
+        // alt text.
+        logo: 'https://avatars.githubusercontent.com/u/305539252',
+        repo: 'https://github.com/T2E1/kuba',
+        loadSidebar: true,
+        loadNavbar: true,
+        subMaxLevel: 3,
+        auto2top: true,
+        // Every link in _sidebar.md is absolute, so relative resolution buys
+        // nothing and makes docsify probe for a per-directory _sidebar.md,
+        // producing a 404 on every nested page.
+        relativePath: false,
+        // Hash routing needs no server-side rewrite, which is what makes the
+        // site work unchanged on GitHub Pages.
+        routerMode: 'hash',
+        markdown: { renderer: { code: previewRenderer } },
+        search: {
+          depth: 3,
+          placeholder: 'Search the docs',
+          noData: 'No results.',
+        },
+        pagination: { crossChapter: true, crossChapterText: true },
+      }
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/docsify@4/lib/docsify.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/docsify@4/lib/plugins/search.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/docsify-copy-code@3"></script>
+    <script src="https://cdn.jsdelivr.net/npm/docsify-pagination@2/dist/docsify-pagination.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-bash.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-json.min.js"></script>
+
+    <script
+      type="module"
+      src="https://cdn.jsdelivr.net/npm/@t2e1/kuba@0.1.0-alpha.28/dist/kuba.js"
+    ></script>
+  </body>
+</html>

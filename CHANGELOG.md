@@ -6,6 +6,22 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) and 
 
 ---
 
+## [Unreleased]
+
+### Added
+
+- A documentation site built with docsify, published to GitHub Pages: 62 pages covering foundations, design tokens, guides, every component, the package reference and a cookbook. It loads kuba from the CDN at a pinned version, so every live example runs against the published package — a broken release now breaks the docs visibly
+- An interaction test suite running in a real Chromium through Vitest browser mode (`bun run test`): 28 tests across 12 files, colocated with each package. They cover event dispatch, form association and validation, Echo arc wiring, shadow DOM projection and the full add-and-delete dataset flow
+
+### Changed
+
+- `bun run dev` now serves the documentation; `bun run test` runs the suite instead of exiting 0, so a failing test blocks publishing to npm
+- Documentation for `<kb-icon>` now states that the Material Symbols font is not bundled and must be loaded by the consumer, and that an unknown `use` renders as literal text
+
+### Removed
+
+- Storybook, its three addons and `remark-gfm`, along with 22 `.stories.js`, 22 `.mdx` and the `stories/` directory. Everything they documented lives in the docs site; the interaction tests moved to Vitest. Neither stories nor MDX were ever part of the published package, so consumers are unaffected
+
 ## [0.1.0-alpha.28] — 2026-08-06
 
 ### Changed
