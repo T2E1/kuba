@@ -1,0 +1,12 @@
+- [Fundamentos](/es/foundations/introduction)
+- [Aprender](/es/learn/installation)
+- [Componentes](/es/components/)
+- [Tokens](/es/foundations/tokens/)
+- [Referencia](/es/reference/)
+- [Recetario](/es/cookbook/)
+- [Contribuir](/es/contributing)
+
+- Idioma
+  - [English](/)
+  - [Português (BR)](/pt-br/)
+  - [Español](/es/)

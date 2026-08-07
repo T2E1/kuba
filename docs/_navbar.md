@@ -5,3 +5,8 @@
 - [Reference](/reference/)
 - [Cookbook](/cookbook/)
 - [Contributing](/contributing)
+
+- Language
+  - [English](/)
+  - [Português (BR)](/pt-br/)
+  - [Español](/es/)

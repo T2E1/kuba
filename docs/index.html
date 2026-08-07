@@ -68,8 +68,56 @@
         `
       }
 
+      // '' is English, which lives at the root.
+      const LANGUAGES = ['', 'pt-br', 'es']
+
+      const languageOf = (path) =>
+        LANGUAGES.find((code) => code && path.startsWith(`/${code}/`)) ?? ''
+
+      /** The path with any language prefix removed, e.g. '/learn/installation'. */
+      const canonical = (path) =>
+        path.replace(/^\/(pt-br|es)(?=\/|$)/, '') || '/'
+
+      const href = (code, path) => (code ? `#/${code}${path}` : `#${path}`)
+
+      // The language switcher is authored in _navbar.md as plain links to each
+      // language root, so it can't carry an identifier of its own. Tag the three
+      // on the first pass, then reuse the tags — after the first rewrite their
+      // hrefs no longer match what the selector looked for.
+      function switcherLinks(nav) {
+        if (!nav.querySelector('[data-language]')) {
+          for (const code of LANGUAGES) {
+            const link = nav.querySelector(`a[href="${href(code, '/')}"]`)
+            if (link) link.dataset.language = code
+          }
+        }
+        return nav.querySelectorAll('[data-language]')
+      }
+
+      // Two links would otherwise drop the reader somewhere they didn't ask
+      // for: docsify points the sidebar logo at the site root, which is
+      // English, and the switcher points at each language's home rather than
+      // the page being read. Both are rewritten after every render.
+      function keepPlaceAcrossLanguages(hook, vm) {
+        hook.doneEach(() => {
+          const current = languageOf(vm.route.path)
+          const path = canonical(vm.route.path)
+
+          const logo = document.querySelector('.sidebar > h1 a')
+          if (logo) logo.setAttribute('href', href(current, '/'))
+
+          const nav = document.querySelector('.app-nav')
+          if (!nav) return
+
+          for (const link of switcherLinks(nav)) {
+            link.setAttribute('href', href(link.dataset.language, path))
+          }
+        })
+      }
+
       window.$docsify = {
         name: 'kuba',
+        plugins: [keepPlaceAcrossLanguages],
         // Replaces the sidebar's text title with the mark; `name` stays as its
         // alt text.
         logo: 'https://avatars.githubusercontent.com/u/305539252',
@@ -86,10 +134,23 @@
         // site work unchanged on GitHub Pages.
         routerMode: 'hash',
         markdown: { renderer: { code: previewRenderer } },
+        // English is the default and lives at the root. A page missing from
+        // /pt-br/ or /es/ falls back to its English original, so a partially
+        // translated site never 404s — every language can carry the full
+        // navigation from day one.
+        fallbackLanguages: ['pt-br', 'es'],
         search: {
           depth: 3,
-          placeholder: 'Search the docs',
-          noData: 'No results.',
+          placeholder: {
+            '/pt-br/': 'Buscar na documentação',
+            '/es/': 'Buscar en la documentación',
+            '/': 'Search the docs',
+          },
+          noData: {
+            '/pt-br/': 'Nenhum resultado.',
+            '/es/': 'Sin resultados.',
+            '/': 'No results.',
+          },
         },
         pagination: { crossChapter: true, crossChapterText: true },
       }

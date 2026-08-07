@@ -12,6 +12,8 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) and 
 
 - A documentation site built with docsify, published to GitHub Pages: 62 pages covering foundations, design tokens, guides, every component, the package reference and a cookbook. It loads kuba from the CDN at a pinned version, so every live example runs against the published package — a broken release now breaks the docs visibly
 - An interaction test suite running in a real Chromium through Vitest browser mode (`bun run test`): 28 tests across 12 files, colocated with each package. They cover event dispatch, form association and validation, Echo arc wiring, shadow DOM projection and the full add-and-delete dataset flow
+- The documentation site is available in three languages — English (the default, at the root), Portuguese (Brazil) at `/pt-br/` and Spanish at `/es/`. Home, Foundations, Design tokens, Learn and the Cookbook are translated; Components, Reference and Contributing stay in English and are served by docsify's language fallback, so no navigation entry is ever a dead link
+- A language switcher in the navbar preserves the page being read: switching from `/pt-br/learn/lifecycle` to English lands on `/learn/lifecycle`, not the home page. The sidebar logo likewise returns to the current language's home instead of always the English one
 
 ### Changed
 
