@@ -44,7 +44,7 @@ That's what design tokens and custom properties make possible: the same
 `<kb-button>`, with a different look, by swapping which tokens are active. Every
 visual decision in every element is exposed as a `--{component}-*` property
 defaulting to a token, so re-skinning never means reaching into a shadow root —
-see [Styling](/learn/styling).
+see [Styling](/build-ui/theming).
 
 *Keywords: adaptable, versatile, dynamic.*
 

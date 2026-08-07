@@ -1,9 +1,8 @@
-- [Foundations](/foundations/introduction)
-- [Learn](/learn/installation)
-- [Components](/components/)
+- [Learn](/learn/introduction)
+- [Foundations](/foundations/principles)
+- [Build UI](/components/)
+- [Build Elements](/build-elements/)
 - [Tokens](/foundations/tokens/)
-- [Reference](/reference/)
-- [Cookbook](/cookbook/)
 - [Contributing](/contributing)
 
 - Language

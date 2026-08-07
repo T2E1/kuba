@@ -11,7 +11,7 @@ oscuro en un solo token:
 ```
 
 Cuál se aplica lo decide el `color-scheme` de la página — ve
-[Modo oscuro](/es/learn/styling) para saber cómo activarlo. Las muestras de abajo
+[Modo oscuro](/es/build-ui/theming) para saber cómo activarlo. Las muestras de abajo
 renderizan el valor activo en tu navegador ahora mismo.
 
 Cada familia tiene cinco tonos (`lighter`, `light`, base, `dark`, `darker`),

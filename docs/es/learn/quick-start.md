@@ -116,11 +116,11 @@ componentes.
 
 ## Qué leer después
 
-- **[Ciclo de vida](/es/learn/lifecycle)** — qué hacen `@define`, `@paint` y
+- **[Ciclo de vida](/es/build-elements/lifecycle)** — qué hacen `@define`, `@paint` y
   `@repaint` entre "elemento en el HTML" y "píxeles en pantalla".
-- **[Eventos y Echo](/es/learn/events-and-echo)** — la gramática completa del
+- **[Eventos y Echo](/es/foundations/events-and-echo)** — la gramática completa del
   arco, incluidos los filtros, y cuándo preferir un listener.
 - **[Componentes](/es/components/)** — cada elemento con sus atributos, estados
   y ganchos de estilo.
-- **[Recetario](/es/cookbook/)** — pantallas completas: búsqueda al escribir,
+- **[Recetario](/es/build-ui/patterns/)** — pantallas completas: búsqueda al escribir,
   CRUD, navegación declarativa.

@@ -31,13 +31,13 @@ an event layer, and a declarative wiring system called Echo.
 
 ## Start here
 
-- **[Introduction](/foundations/introduction)** — why it exists, and the gap it
+- **[Introduction](/learn/introduction)** — why it exists, and the gap it
   occupies between a framework and plain HTML.
 - **[Installation](/learn/installation)** — a script tag, or a package install.
 - **[Quick start](/learn/quick-start)** — build a working form in ten minutes.
-- **[Lifecycle](/learn/lifecycle)** — what happens between `define` and paint.
+- **[Lifecycle](/build-elements/lifecycle)** — what happens between `define` and paint.
 - **[Components](/components/)** — every element, with live examples.
-- **[Cookbook](/cookbook/)** — complete recipes for real screens.
+- **[Patterns](/build-ui/patterns/)** — complete recipes for real screens.
 
 ## What it is not
 

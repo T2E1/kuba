@@ -56,7 +56,7 @@ import { Hidden, Width } from '@t2e1/kuba/mixin'
 
 Los subcaminos exportados son `cookie`, `directive`, `dom`, `echo`, `event`,
 `interpolate`, `middleware`, `mixin`, `polyfill`, `renderer`, `result`, `router`
-y `spark`. Ve **[Reference › Packages](/es/reference/)** para saber qué contiene
+y `spark`. Ve **[Reference › Packages](/es/build-elements/)** para saber qué contiene
 cada uno.
 
 ## Verificar la instalación

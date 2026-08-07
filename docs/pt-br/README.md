@@ -32,14 +32,14 @@ uma camada de eventos e um sistema declarativo de fiação chamado Echo.
 
 ## Comece por aqui
 
-- **[Introdução](/pt-br/foundations/introduction)** — por que existe, e a lacuna
+- **[Introdução](/pt-br/learn/introduction)** — por que existe, e a lacuna
   que ocupa entre um framework e HTML puro.
 - **[Instalação](/pt-br/learn/installation)** — uma tag de script, ou instalação
   via pacote.
 - **[Início rápido](/pt-br/learn/quick-start)** — um formulário funcionando em
   dez minutos.
 - **[Componentes](/pt-br/components/)** — cada elemento, com exemplos ao vivo.
-- **[Receitas](/pt-br/cookbook/)** — telas completas: busca enquanto digita,
+- **[Receitas](/pt-br/build-ui/patterns/)** — telas completas: busca enquanto digita,
   CRUD, navegação declarativa.
 
 ## O que não é

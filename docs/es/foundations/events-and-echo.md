@@ -1,0 +1,171 @@
+# Eventos y Echo
+
+Los elementos de kuba nunca se importan entre sí. Disparan eventos, y Echo los
+conecta desde el markup. Esta página explica las dos mitades: los eventos que
+publica un componente, y la gramática de arco que se suscribe a ellos.
+
+## Los eventos son la API pública
+
+Todo componente de kuba que hace algo dispara un `CustomEvent` describiendo lo
+que ocurrió, con el valor relevante en `detail`. Los eventos burbujean y son
+compuestos, así que cruzan fronteras de shadow como los nativos.
+
+Los nombres están siempre en **pasado** — informan un hecho, no piden una acción:
+
+| Elemento | Evento | `detail` |
+|---|---|---|
+| `<kb-button>`, `<kb-card>` | `clicked` | el `value` del elemento |
+| `<kb-input>`, `<kb-textarea>`, `<kb-fileupload>` | `changed` | el nuevo valor |
+| `<kb-form>` | `submitted` | los datos del formulario parseados |
+| `<kb-form>` | `resetted` | `{}` |
+| `<kb-dataset>` | `changed` | la colección completa de registros |
+| `<kb-filter>` | `filtered` | los registros coincidentes |
+| `<kb-find>` | `found` | el registro coincidente |
+| `<kb-fetch>` | `succeeded` | el cuerpo de la respuesta parseado |
+| `<kb-fetch>` | `failed` | `null` — ve [Fetch](/es/components/fetch) |
+
+?> `<kb-filter>` y `<kb-find>` disparan en el **padre**, no en sí mismos — la
+única excepción a la regla anterior. El `source` de un arco debe nombrar la
+colección padre.
+
+Puedes consumir cualquiera de ellos de la forma habitual:
+
+```js
+document.querySelector('kb-form').addEventListener('submitted', (event) => {
+  save(event.detail)
+})
+```
+
+## El arco
+
+La alternativa de Echo es declarativa. Todo elemento es un host Echo: observa un
+atributo `on` cuyo valor es un **arco**.
+
+```
+origen/evento:tipo/destino|filtro=valor
+```
+
+Léelo de izquierda a derecha: *cuando `origen` dispare `evento`, aplica `destino`
+en mí, usando `tipo`, tras pasar el payload por los filtros.*
+
+```html
+<kb-render on="results/succeeded:method/render"></kb-render>
+```
+
+Un hijo `<kb-on>` hace lo mismo y se lee mejor cuando un elemento tiene varios
+arcos — uno por línea, en vez de un atributo largo:
+
+```html
+<kb-render>
+  <kb-on value="api/succeeded:method/render"></kb-on>
+  <kb-on value="api/failed:method/clear"></kb-on>
+  <template>{name}</template>
+</kb-render>
+```
+
+### `origen` — a qué elemento escuchar
+
+| Forma | Coincide con |
+|---|---|
+| `*` | cualquier elemento |
+| `#id` | el elemento cuyo `id` es `id` |
+| `nombre` | el elemento cuyo atributo `name` es `nombre` |
+| `tag-name` | cualquier elemento de esa etiqueta |
+
+La coincidencia ignora mayúsculas y ocurre en un bus compartido: cada host Echo
+reemite ahí sus propios disparos, marcados con su `id`, `name` y etiqueta.
+
+### `tipo` — cómo se aplica el payload
+
+| `tipo` | Efecto |
+|---|---|
+| `method` | llama a `this[destino](payload)` |
+| `setter` | asigna `this[destino] = payload` |
+| `attribute` | llama a `this.setAttribute(destino, payload)` |
+
+### Filtros — transformar el payload
+
+Los filtros son pares `nombre=valor` separados por `|`, aplicados en orden, cada
+uno una función de `(payload, valor)`:
+
+```html
+<kb-text on="user/changed:setter/textContent|prop=email"></kb-text>
+```
+
+Los nombres disponibles vienen del registro de `spark`: `prop`, `equals`,
+`different`, `not`, `truthy`, `len`, `add`, `subtract`, `inc`, `dec`, `gt`,
+`gte`, `lt`, `lte` y `always`. Registra los tuyos en runtime:
+
+```js
+import spark from '@t2e1/kuba/spark'
+
+spark.set('uppercase', (value) => String(value).toUpperCase())
+```
+
+!> **Un nombre de filtro desconocido se ignora en silencio.** `spark.get` cae en
+la función identidad en lugar de lanzar error, así que una errata — o un filtro
+que no existe — deja el payload intacto sin avisar. Revisa el nombre primero
+cuando un arco "funciona pero no hace nada".
+
+?> **No existe un filtro `debounce`, y no puede existir.** Los filtros son
+transformaciones síncronas del payload; no pueden retrasar ni descartar la
+llamada al destino. Para contener un `changed` que dispara en cada tecla, hazlo
+dentro del método destino o usa un listener normal.
+
+## Cuándo usar cada uno
+
+Los arcos valen la pena cuando la conexión es **estructural** — este elemento
+siempre reacciona a aquel, y quien lee el HTML debería verlo. Es la mayor parte
+de la conexión en una página kuba, y por eso el markup es el diagrama de
+arquitectura.
+
+Prefiere un listener cuando:
+
+- el payload necesita lógica real antes de usarse (más que una cadena de
+  filtros),
+- necesitas esperar algo, limitar la frecuencia o manejar un camino de error,
+- la reacción no es una sola llamada a un método en un solo elemento.
+
+Mezclar ambos es normal. Un formulario suele tener arcos para la conexión de
+presentación y un listener para el envío real.
+
+## Tiempo de vida
+
+Cada arco recibe su propio `AbortController`. Cambiar el atributo `on` desmonta
+la suscripción anterior y crea la nueva; desconectar el elemento las desmonta
+todas. Nunca cancelas la suscripción a mano, y un elemento eliminado no deja
+listeners atrás.
+
+## Un ejemplo completo
+
+Dos elementos, sin script: escribir en el input publica `changed`, el fetch se
+suscribe y solicita, luego publica `succeeded`, al que se suscribe el
+renderizador.
+
+```html preview
+<kb-input name="breed" placeholder="Prueba 'akita'">
+  <kb-label>Buscar razas de perro</kb-label>
+</kb-input>
+
+<kb-render>
+  <kb-on value="api/succeeded:method/render"></kb-on>
+  <kb-on value="api/failed:method/clear"></kb-on>
+  <template>
+    <kb-text size="xxs">{name}</kb-text>
+  </template>
+</kb-render>
+
+<kb-fetch name="api" url="https://api.thedogapi.com/v1/breeds/search?q={}">
+  <kb-on value="breed/changed:method/get"></kb-on>
+</kb-fetch>
+```
+
+Tres elementos, tres arcos, ningún import entre ellos. Cambia el fetch por otra
+fuente de datos y nada más cambia — el contrato es el nombre del evento.
+
+## Después
+
+- **[Decorators](/es/build-elements/decorators)** — `@on` para escuchar dentro de tu
+  propio componente, y los decorators de middleware.
+- **[Recetario › Búsqueda al escribir](/es/build-ui/patterns/search-as-you-type)** — el
+  ejemplo de arriba, construido paso a paso con estados de error y vacío.

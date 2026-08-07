@@ -11,7 +11,7 @@ escuro num único token:
 ```
 
 Qual deles se aplica é decidido pelo `color-scheme` da página — veja
-[Modo escuro](/pt-br/learn/styling) para saber como ativar. As amostras abaixo
+[Modo escuro](/pt-br/build-ui/theming) para saber como ativar. As amostras abaixo
 renderizam o valor ativo no seu navegador agora.
 
 Cada família tem cinco tons (`lighter`, `light`, base, `dark`, `darker`), exceto

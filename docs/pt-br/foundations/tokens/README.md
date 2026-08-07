@@ -49,7 +49,7 @@ cada tela desenhada.
 
 Tokens são globais. Cada componente também expõe suas próprias propriedades
 `--{componente}-*`, que têm como padrão um token — veja
-[Estilização](/pt-br/learn/styling) para saber quando usar cada um.
+[Estilização](/pt-br/build-ui/theming) para saber quando usar cada um.
 
 ```css
 :root { --color-primary: #0b7285 }       /* todo elemento acompanha */

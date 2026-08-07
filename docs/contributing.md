@@ -91,7 +91,7 @@ no build step, a single HTML file with the two CDN tags is usually enough.
 Starting your own product and want kuba as its foundation? Install it, or clone
 the repository and use the package structure as a starting point. Adapt the
 design tokens to your brand — see
-[Theming a brand](/learn/styling) — and adjust the components as needed.
+[Theming a brand](/build-ui/theming) — and adjust the components as needed.
 
 kuba is not a framework that dictates one way of working. It's a reference to be
 studied, understood and adapted to the reality of each product; the guarantees
@@ -99,3 +99,13 @@ come from the [principles](/foundations/principles), not from an API that must
 be obeyed to the letter.
 
 Just remember to keep the license credits, as the MIT license requires.
+
+## How this documentation is built
+
+This site is markdown rendered by docsify in the browser, and it loads kuba
+**from the CDN at a pinned version** — the same two tags any consumer would
+write.
+
+That's not a detail: every live example on this site runs against the published
+package. If a release breaks, the documentation breaks visibly, instead of
+passing green against source code that only exists on a developer's machine.

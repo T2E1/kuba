@@ -47,7 +47,7 @@ entry every time a screen is designed.
 ## Tokens vs component properties
 
 Tokens are global. Each component also exposes its own `--{component}-*`
-properties, which default to tokens — see [Styling](/learn/styling) for when to
+properties, which default to tokens — see [Styling](/build-ui/theming) for when to
 reach for which.
 
 ```css

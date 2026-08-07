@@ -113,11 +113,11 @@ That's the whole coupling model, and it's why kuba has no component tree.
 
 ## What to read next
 
-- **[Lifecycle](/learn/lifecycle)** — what `@define`, `@paint` and `@repaint` do
+- **[Lifecycle](/build-elements/lifecycle)** — what `@define`, `@paint` and `@repaint` do
   between "element in HTML" and "pixels on screen".
-- **[Events and Echo](/learn/events-and-echo)** — the full arc grammar,
+- **[Events and Echo](/foundations/events-and-echo)** — the full arc grammar,
   including filters, and when to prefer a listener.
 - **[Components](/components/)** — every element with its attributes, states
   and styling hooks.
-- **[Cookbook](/cookbook/)** — complete screens: search as you type, CRUD,
+- **[Cookbook](/build-ui/patterns/)** — complete screens: search as you type, CRUD,
   declarative navigation.

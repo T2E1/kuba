@@ -54,7 +54,7 @@ import { Hidden, Width } from '@t2e1/kuba/mixin'
 
 The subpath exports are `cookie`, `directive`, `dom`, `echo`, `event`,
 `interpolate`, `middleware`, `mixin`, `polyfill`, `renderer`, `result`,
-`router` and `spark`. See **[Reference › Packages](/reference/)** for what each
+`router` and `spark`. See **[Reference › Packages](/build-elements/)** for what each
 one contains.
 
 ## Verifying the install

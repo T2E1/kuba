@@ -1,0 +1,185 @@
+# Formulários
+
+Os controles de formulário do kuba são **custom elements associados a
+formulário**: do ponto de vista do `<form>` dono, eles se comportam como inputs
+nativos. Enviam, validam, resetam. Esta página é como as peças se encaixam; a
+página de cada elemento tem o contrato completo.
+
+## As peças
+
+| Elemento | Papel |
+|---|---|
+| `<kb-form>` | Renderiza campos de um `<template>`, publica `submitted` com os dados parseados |
+| `<kb-input>` | Valor de uma linha |
+| `<kb-textarea>` | Valor de várias linhas, cresce com o conteúdo |
+| `<kb-fileupload>` | Uma imagem, como data URL em base64 |
+| `<kb-label>` | O nome visível do campo |
+| `<kb-helper>` | A dica sob o campo |
+| `<kb-validity>` | Uma mensagem de erro, ligada a uma regra de validação |
+
+Os três últimos se atribuem ao slot certo ao conectar, então compor um campo é
+aninhar e nada mais:
+
+```html preview
+<kb-input name="email" type="email" required>
+  <kb-label>E-mail</kb-label>
+  <kb-helper>Nunca vamos compartilhar.</kb-helper>
+  <kb-validity state="valueMissing">E-mail é obrigatório.</kb-validity>
+  <kb-validity state="typeMismatch">Isso não é um e-mail.</kb-validity>
+</kb-input>
+```
+
+## A validação é do navegador
+
+Você não escreve lógica de validação. Declare restrições como atributos, e o
+navegador as avalia pela Constraint Validation API:
+
+| Atributo | Falha com |
+|---|---|
+| `required` | `valueMissing` |
+| `type="email"` / `type="url"` | `typeMismatch` |
+| `pattern` | `patternMismatch` |
+| `minlength` / `maxlength` | `tooShort` / `tooLong` |
+| `min` / `max` | `rangeUnderflow` / `rangeOverflow` |
+| `step` | `stepMismatch` |
+
+O resultado é espelhado no host como um estado customizado `invalid`, que governa
+tanto o estilo do campo quanto a visibilidade de cada `<kb-validity>`.
+
+**Uma mensagem por regra.** Um `<kb-validity state="tooShort">` aparece só
+enquanto aquela flag específica é verdadeira, então a pessoa lê o motivo em vez
+de "inválido":
+
+```html preview
+<kb-input name="password" type="password" required minlength="8">
+  <kb-label>Senha</kb-label>
+  <kb-helper>Ao menos 8 caracteres.</kb-helper>
+  <kb-validity state="valueMissing">Escolha uma senha.</kb-validity>
+  <kb-validity state="tooShort">Ao menos 8 caracteres.</kb-validity>
+</kb-input>
+```
+
+?> `<kb-textarea>` e `<kb-fileupload>` só repassam `required` — as restrições de
+comprimento, faixa e padrão são exclusivas do `<kb-input>`.
+
+### O texto de apoio desaparece
+
+Enquanto um campo está inválido, `<kb-input>` e `<kb-textarea>` escondem o slot
+`helper` para o erro tomar o lugar dele em vez de se empilhar abaixo. Duas
+consequências:
+
+- Não faça a dica e o erro dizerem a mesma coisa — a pessoa vê um de cada vez.
+- Se a dica carrega um requisito que ainda é necessário durante a correção,
+  repita-o na mensagem de validade.
+
+`<kb-fileupload>` não faz isso; o texto de apoio dele continua visível.
+
+## Lendo os valores
+
+`<kb-form>` publica `submitted` com os dados já parseados num objeto indexado
+pelo `name` de cada campo:
+
+```html preview
+<kb-form autorender id="signup-demo">
+  <template>
+    <kb-input name="email" type="email" required>
+      <kb-label>E-mail</kb-label>
+    </kb-input>
+    <kb-input name="company">
+      <kb-label>Empresa</kb-label>
+    </kb-input>
+    <kb-button type="submit">Criar conta</kb-button>
+  </template>
+</kb-form>
+
+<kb-text id="signup-out" size="xxs" color="master">nada enviado ainda</kb-text>
+
+<script type="module">
+  document.querySelector('#signup-demo').addEventListener('submitted', (event) => {
+    document.querySelector('#signup-out').textContent = JSON.stringify(event.detail)
+  })
+</script>
+```
+
+A validação nativa roda primeiro, então `submitted` nunca dispara com um campo
+inválido. Não há "o formulário está válido?" para escrever.
+
+Você também pode dispensar o elemento de formulário e ler os campos direto — todo
+controle expõe `value`, `validity`, `checkValidity()` e `reportValidity()`, a
+mesma API de um input nativo.
+
+## Os campos vivem num shadow root
+
+`<kb-form>` renderiza seu `<template>` no próprio shadow DOM. Isso tem
+consequências que valem ser internalizadas:
+
+- **Filhos de light DOM fora do template não são projetados.** Os campos precisam
+  estar dentro do `<template>`.
+- **Um `<label for>` externo não alcança um campo.** Rotule cada um com seu
+  próprio `<kb-label>`.
+- **`document.querySelector('input')` não os encontra.** Leia os valores de
+  `submitted`, não por consulta.
+- **O controle de submit também precisa estar dentro do template** — um botão
+  fora pertence a outro formulário, ou a nenhum.
+
+## Preenchendo para uma edição
+
+`autorender` renderiza um formulário em branco ao conectar. Para editar, dispense
+esse atributo e chame `render(data)` quando o registro chegar — todo `{path}` do
+template é substituído:
+
+```html
+<kb-form id="edit-user">
+  <template>
+    <kb-input name="name" value="{name}"><kb-label>Nome</kb-label></kb-input>
+    <kb-button type="submit">Salvar</kb-button>
+  </template>
+</kb-form>
+```
+
+```js
+document.querySelector('#edit-user').render({ name: 'Ada Lovelace' })
+```
+
+!> Cada chamada de `render()` substitui os campos — **e o que a pessoa digitou**.
+Renderize quando os dados chegam, nunca a cada mudança.
+
+## Acessibilidade
+
+As partes que exigem sua atenção, porque os elementos não fazem por você:
+
+- **Dê nome a todo campo.** O `<label for>` interno aponta para o controle
+  interno pelo `id`, caindo no `name`. Um campo sem nenhum dos dois fica sem
+  rótulo — o `<kb-label>` visível sozinho não o nomeia para tecnologia
+  assistiva.
+- **`<kb-validity>` não é ligado ao campo.** A associação é estrutural, não
+  programática. Adicione `aria-describedby` no controle quando um leitor de tela
+  precisar ligar os dois, e `aria-live` quando o erro precisar ser anunciado ao
+  aparecer.
+- **Nomeie o formulário** quando a página tem mais de um:
+  `<kb-form aria-label="Cadastro">`.
+- **`disabled` versus `readonly`**: `disabled` remove o campo do envio por
+  completo; `readonly` mantém o valor nos dados. Escolha pelo que deve ou não ser
+  enviado.
+
+## Resetando
+
+`reset()` num campo limpa seu valor e seu estado inválido. O `reset()` do
+`<kb-form>` propaga para todos os campos e publica `resetted`. Um
+`<kb-button type="reset">` dentro do template faz o mesmo pelo markup.
+
+Um padrão comum é um formulário que se limpa após uma inclusão bem-sucedida:
+
+```html
+<kb-form name="add-item" autorender>
+  <template>…</template>
+  <kb-on value="add-item/submitted:method/reset"></kb-on>
+</kb-form>
+```
+
+## Depois
+
+- **[Form](/pt-br/components/form)**, **[Input](/pt-br/components/input)**,
+  **[Validity](/pt-br/components/validity)** — os contratos completos.
+- **[Receitas › CRUD de usuários](/pt-br/build-ui/patterns/user-crud)** — um formulário
+  conectado a um dataset e a uma lista, sem listener nenhum.

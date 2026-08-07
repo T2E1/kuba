@@ -33,14 +33,14 @@ llamado Echo.
 
 ## Empieza aquí
 
-- **[Introducción](/es/foundations/introduction)** — por qué existe, y el hueco
+- **[Introducción](/es/learn/introduction)** — por qué existe, y el hueco
   que ocupa entre un framework y HTML puro.
 - **[Instalación](/es/learn/installation)** — una etiqueta de script, o
   instalación por paquete.
 - **[Inicio rápido](/es/learn/quick-start)** — un formulario funcionando en diez
   minutos.
 - **[Componentes](/es/components/)** — cada elemento, con ejemplos en vivo.
-- **[Recetario](/es/cookbook/)** — pantallas completas: búsqueda al escribir,
+- **[Recetario](/es/build-ui/patterns/)** — pantallas completas: búsqueda al escribir,
   CRUD, navegación declarativa.
 
 ## Qué no es

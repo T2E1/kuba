@@ -71,7 +71,7 @@ The question to ask, in order:
 1. **Is it a composition of existing Elements?** Then it's a Block. Write the
    markup, not a new package.
 2. **Is it the same Element with a different look?** Then it's a token override
-   or a `variant` attribute — see [Styling](/learn/styling).
+   or a `variant` attribute — see [Styling](/build-ui/theming).
 3. **Is it genuinely a new indivisible part?** Only then does it earn a package,
    a `types.d.ts` and a page here.
 

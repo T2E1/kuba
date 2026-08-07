@@ -45,7 +45,7 @@ bifurcar o componente para cada variação.
 `<kb-button>`, com aparência diferente, trocando quais tokens estão ativos. Toda
 decisão visual de todo elemento é exposta como uma propriedade `--{componente}-*`
 com padrão vindo de um token, então re-estilizar nunca significa alcançar um
-shadow root — veja [Estilização](/pt-br/learn/styling).
+shadow root — veja [Estilização](/pt-br/build-ui/theming).
 
 *Palavras-chave: adaptável, versátil, dinâmico.*
 

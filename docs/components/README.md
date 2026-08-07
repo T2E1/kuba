@@ -49,7 +49,7 @@ custom properties you can override, and accessibility notes.
 ## Data and behavior
 
 These render nothing. They hold or fetch data and publish events for other
-elements to react to — see [Events and Echo](/learn/events-and-echo).
+elements to react to — see [Events and Echo](/foundations/events-and-echo).
 
 <div class="gallery">
   <a href="#/components/fetch"><strong>Fetch</strong><span>HTTP requests as events.</span></a>

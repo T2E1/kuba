@@ -57,7 +57,7 @@ so declaring it before the parent has upgraded is safe.
 ## The arc string
 
 `value` takes the same grammar as the `on` attribute — see
-[Events and Echo](/learn/events-and-echo) for the full reference:
+[Events and Echo](/foundations/events-and-echo) for the full reference:
 
 ```
 source/event:type/sink|filter=value

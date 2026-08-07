@@ -1,9 +1,14 @@
+- **Learn**
+
+  - [Introduction](/learn/introduction)
+  - [Installation](/learn/installation)
+  - [Quick start](/learn/quick-start)
+
 - **Foundations**
 
-  - [Introduction](/foundations/introduction)
   - [Principles](/foundations/principles)
-  - [Technology](/foundations/technology)
   - [Naming](/foundations/naming)
+  - [Events and Echo](/foundations/events-and-echo)
 
 - **Design tokens**
 
@@ -15,63 +20,69 @@
   - [Shadows](/foundations/tokens/shadows)
   - [Opacity](/foundations/tokens/opacity)
 
-- **Learn**
-
-  - [Installation](/learn/installation)
-  - [Quick start](/learn/quick-start)
-  - [Lifecycle](/learn/lifecycle)
-  - [Events and Echo](/learn/events-and-echo)
-  - [Decorators](/learn/decorators)
-  - [Styling](/learn/styling)
-  - [Forms](/learn/forms)
-
-- **Components**
+- **Build UI**
 
   - [Overview](/components/)
+
+  - _Components_
   - [Button](/components/button)
   - [Card](/components/card)
   - [Cover](/components/cover)
   - [Icon](/components/icon)
   - [Logo](/components/logo)
   - [Progress](/components/progress)
+
+  - _Layout_
   - [Header](/components/header)
   - [Footer](/components/footer)
   - [Main](/components/main)
   - [Stack](/components/stack)
   - [Inset](/components/inset)
+
+  - _Typography_
   - [Text](/components/text)
   - [Label](/components/label)
   - [Helper](/components/helper)
-  - [Render](/components/render)
-  - [On](/components/on)
-  - [Redirect](/components/redirect)
-  - [Fetch](/components/fetch)
-  - [Dataset](/components/dataset)
-  - [Filter](/components/filter)
-  - [Find](/components/find)
+
+  - _Forms_
+  - [Building a form](/build-ui/forms)
   - [Form](/components/form)
   - [Input](/components/input)
   - [Textarea](/components/textarea)
   - [Fileupload](/components/fileupload)
   - [Validity](/components/validity)
 
-- **Reference**
+  - _Data_
+  - [Fetch](/components/fetch)
+  - [Dataset](/components/dataset)
+  - [Filter](/components/filter)
+  - [Find](/components/find)
 
-  - [Packages](/reference/)
-  - [directive](/reference/directive)
-  - [dom](/reference/dom)
-  - [echo](/reference/echo)
-  - [event](/reference/event)
-  - [mixin](/reference/mixin)
-  - [spark](/reference/spark)
-  - [http](/reference/http)
-  - [router](/reference/router)
+  - _Behavior_
+  - [Render](/components/render)
+  - [On](/components/on)
+  - [Redirect](/components/redirect)
 
-- **Cookbook**
+  - _Making it yours_
+  - [Theming](/build-ui/theming)
+  - [Patterns](/build-ui/patterns/)
+  - [Search as you type](/build-ui/patterns/search-as-you-type)
+  - [User CRUD](/build-ui/patterns/user-crud)
+  - [Declarative navigation](/build-ui/patterns/declarative-navigation)
 
-  - [Overview](/cookbook/)
-  - [Search as you type](/cookbook/search-as-you-type)
-  - [User CRUD](/cookbook/user-crud)
-  - [Declarative navigation](/cookbook/declarative-navigation)
+- **Build Elements**
+
+  - [Packages](/build-elements/)
+  - [Lifecycle](/build-elements/lifecycle)
+  - [Decorators](/build-elements/decorators)
+  - [Defining](/build-elements/directive)
+  - [Rendering](/build-elements/dom)
+  - [Attribute mixins](/build-elements/mixin)
+  - [Echo](/build-elements/echo)
+  - [Listeners and filters](/build-elements/event)
+  - [Operators](/build-elements/spark)
+  - [HTTP](/build-elements/http)
+  - [Router](/build-elements/router)
+  - [Tools and workflows](/build-elements/tools)
 
 - **[Contributing](/contributing)**

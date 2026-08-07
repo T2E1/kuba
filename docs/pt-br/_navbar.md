@@ -1,9 +1,8 @@
-- [Fundamentos](/pt-br/foundations/introduction)
-- [Aprender](/pt-br/learn/installation)
-- [Componentes](/pt-br/components/)
+- [Aprender](/pt-br/learn/introduction)
+- [Fundamentos](/pt-br/foundations/principles)
+- [Construir telas](/pt-br/components/)
+- [Construir elementos](/pt-br/build-elements/)
 - [Tokens](/pt-br/foundations/tokens/)
-- [Referência](/pt-br/reference/)
-- [Receitas](/pt-br/cookbook/)
 - [Contribuir](/pt-br/contributing)
 
 - Idioma

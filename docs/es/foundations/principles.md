@@ -48,7 +48,7 @@ Eso es lo que hacen posible los design tokens y las custom properties: el mismo
 decisión visual de cada elemento se expone como una propiedad
 `--{componente}-*` con valor por defecto tomado de un token, así que
 re-estilizar nunca implica alcanzar un shadow root — ve
-[Estilos](/es/learn/styling).
+[Estilos](/es/build-ui/theming).
 
 *Palabras clave: adaptable, versátil, dinámico.*
 

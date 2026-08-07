@@ -11,7 +11,7 @@ value in one token:
 ```
 
 Which one applies is decided by the page's `color-scheme` — see
-[Dark mode](/learn/styling) for how to turn it on. The swatches below render
+[Dark mode](/build-ui/theming) for how to turn it on. The swatches below render
 whichever value is active in your browser right now.
 
 Each family has five tones (`lighter`, `light`, base, `dark`, `darker`), except

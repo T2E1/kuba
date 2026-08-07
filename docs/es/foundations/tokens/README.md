@@ -50,7 +50,7 @@ entrada nueva cada vez que se diseña una pantalla.
 
 Los tokens son globales. Cada componente además expone sus propias propiedades
 `--{componente}-*`, cuyo valor por defecto es un token — ve
-[Estilos](/es/learn/styling) para saber cuándo usar cada uno.
+[Estilos](/es/build-ui/theming) para saber cuándo usar cada uno.
 
 ```css
 :root { --color-primary: #0b7285 }       /* cada elemento lo sigue */

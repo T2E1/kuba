@@ -115,11 +115,11 @@ evento. Esse é todo o modelo de acoplamento, e é por isso que o kuba não tem
 
 ## O que ler depois
 
-- **[Ciclo de vida](/pt-br/learn/lifecycle)** — o que `@define`, `@paint` e
+- **[Ciclo de vida](/pt-br/build-elements/lifecycle)** — o que `@define`, `@paint` e
   `@repaint` fazem entre "elemento no HTML" e "pixels na tela".
-- **[Eventos e Echo](/pt-br/learn/events-and-echo)** — a gramática completa do
+- **[Eventos e Echo](/pt-br/foundations/events-and-echo)** — a gramática completa do
   arco, incluindo filtros, e quando preferir um listener.
 - **[Componentes](/pt-br/components/)** — cada elemento com seus atributos,
   estados e ganchos de estilo.
-- **[Receitas](/pt-br/cookbook/)** — telas completas: busca enquanto digita,
+- **[Receitas](/pt-br/build-ui/patterns/)** — telas completas: busca enquanto digita,
   CRUD, navegação declarativa.
