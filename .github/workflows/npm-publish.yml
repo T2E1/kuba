@@ -5,6 +5,9 @@ on:
   push:
     branches:
       - main
+  # A push that fails to trigger leaves a version committed but never published,
+  # with no way to release it short of an empty commit.
+  workflow_dispatch:
 
 jobs:
   release:
