@@ -29,14 +29,50 @@ existing page, or an entire screen orchestrated through the Echo bus.
 an implementation detail to be hidden behind a Virtual DOM — and that the HTML
 the server sends remains, in fact, the application.
 
-## The gap it occupies
+## Two schools of thought, and the gap between them
 
-Component frameworks — React, Vue, Angular — solve client-side dataflow at the
-cost of an entire runtime. htmx solves simplicity by handing HTML back to the
-server, but has no local dataflow.
+Modern frontend development has converged on two competing philosophies, and
+each one solves only half of the problem.
 
-kuba exists to occupy that exact middle ground: instant reactivity between
-elements, without giving up HTML as the source of the application.
+**React, Vue, and Angular** treat the DOM as an implementation detail to be
+abstracted away. State lives in JavaScript. The UI is a pure function of that
+state, re-rendered through a virtual DOM and reconciled back into real elements.
+This gives teams a genuinely powerful dataflow model — components can react to
+each other, compose, and update predictably. But the cost is a parallel
+universe: a runtime that must be shipped to the browser, a build step that must
+compile JSX or templates into JavaScript, and a state model that has nothing to
+do with the DOM it eventually produces. The HTML the browser receives is no
+longer the application; it is a rendering target.
+
+**htmx** goes the opposite direction. It restores HTML as the application: the
+server renders markup, the client swaps fragments of it in place, and no
+client-side state model is needed at all. This is a return to the web's original
+request/response model, and a legitimate rejection of frontend complexity. But
+it comes with a real limitation: htmx has no dataflow *inside the client*. Two
+elements on the same page cannot react to one another without a trip back to the
+server for a new fragment. Interactivity that should be instantaneous and local
+— a filter reacting to an input, a counter reacting to a toggle — is modeled as
+a network request, because there is no other channel available.
+
+The gap between these two schools is exactly the gap kuba closes: **client-side
+dataflow without leaving HTML, and without a JavaScript state runtime to
+maintain it.**
+
+### How kuba resolves it
+
+The browser has had a dataflow mechanism since 1995: the DOM event system. Every
+element can dispatch an event; every element can listen for one. Frameworks
+reinvented this capability in userland — props, stores, observables — because
+raw DOM events, on their own, are too unstructured to compose an application
+from. There is no shared vocabulary for *which* element should react to *which*
+event, or *how*.
+
+kuba's answer is to standardize that vocabulary, not to replace the mechanism.
+Every kuba custom element understands a declarative wiring attribute (`on`) that
+describes, in plain markup, which source element's event should drive which
+sink property, method, or attribute on itself. The browser's native
+`CustomEvent` system does the actual delivery; kuba only supplies the grammar
+for expressing intent.
 
 ```html
 <kb-input name="query"></kb-input>
@@ -46,8 +82,21 @@ elements, without giving up HTML as the source of the application.
 </kb-fetch>
 ```
 
-Two elements react to each other, and neither imports the other. That's the
-whole model — see [Events and Echo](/foundations/events-and-echo).
+Two elements react to each other, and neither imports the other. The consequence
+is a dataflow model that is:
+
+- **Client-side**, like React/Vue/Angular — elements react to each other
+  instantly, with no server round-trip for local interactivity.
+- **HTML-first**, like htmx — the wiring lives in markup, not in a JavaScript
+  state tree; there is nothing to compile, hydrate, or reconcile.
+- **Native**, unlike either — there is no framework-specific event bus
+  underneath; it is the DOM's own event system, exposed rather than hidden.
+
+This is why kuba is best understood as an evolution rather than a third
+alternative sitting beside the other two: it takes the dataflow ambition of the
+component frameworks and the platform fidelity of htmx, and satisfies both with
+the one mechanism the browser already shipped for exactly this purpose. The full
+grammar is in [Events and Echo](/foundations/events-and-echo).
 
 ## Four things we believe
 

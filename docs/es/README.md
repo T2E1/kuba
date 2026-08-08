@@ -3,13 +3,50 @@
 Primitivos de Web Components y custom elements. Sin framework, sin paso de
 build — el navegador es el runtime, el HTML es la API.
 
+Una funcionalidad completa — buscar razas de perro mientras se escribe y
+renderizar los resultados — conectada enteramente en HTML, sin nada de
+JavaScript escrito por ti. Escribe en ella:
+
 ```html preview
-<kb-stack direction="row" spacing="xs">
-  <kb-button>Primario</kb-button>
-  <kb-button variant="outlined">Contorneado</kb-button>
-  <kb-button variant="link">Enlace</kb-button>
+<kb-stack direction="column" spacing="xs">
+  <kb-input name="dog" width="fill">
+    <kb-label>Búsqueda de razas de perro</kb-label>
+    <kb-helper>Prueba 'akita' o 'corgi'.</kb-helper>
+  </kb-input>
+
+  <kb-render layout="grid">
+    <template>
+      <kb-card>
+        <kb-text family="highlight" weight="medium" size="xs" color="primary">{name}</kb-text>
+        <kb-stack direction="column" spacing="quarck">
+          <kb-text size="xxxs"><strong>Criado para:</strong> {bred_for}</kb-text>
+          <kb-text size="xxxs"><strong>Temperamento:</strong> {temperament}</kb-text>
+        </kb-stack>
+      </kb-card>
+    </template>
+    <kb-on value="api/succeeded:method/render"></kb-on>
+    <kb-on value="api/failed:method/clear"></kb-on>
+  </kb-render>
 </kb-stack>
+
+<kb-fetch name="api" url="https://api.thedogapi.com/v1/breeds/search?q={}">
+  <kb-on value="dog/changed:method/get"></kb-on>
+</kb-fetch>
 ```
+
+Cada conexión es un **arco** — `origen/evento:tipo/destino`:
+
+- `<kb-input name="dog">` publica un evento `changed`; `<kb-fetch>` se suscribe
+  con `dog/changed:method/get` y pide `…/search?q={el valor escrito}`.
+- `<kb-fetch name="api">` publica `succeeded` (o `failed`); `<kb-render>` se
+  suscribe con `api/succeeded:method/render` para pintar su `<template>` una vez
+  por resultado, y con `api/failed:method/clear` para vaciarlo.
+- Los placeholders `{name}`, `{bred_for}`, `{temperament}`… de la plantilla se
+  rellenan a partir de cada objeto de resultado.
+
+Ningún componente referencia a otro en código — solo acuerdan nombres de
+evento. La misma funcionalidad se desarma paso a paso en
+**[Búsqueda al escribir](/es/build-ui/patterns/search-as-you-type)**.
 
 Todo en este sitio se ejecuta contra el paquete publicado, cargado desde un CDN
 — las mismas dos líneas que pondrías en tu propia página. Si un ejemplo aquí se

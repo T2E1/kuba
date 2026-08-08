@@ -75,7 +75,7 @@ Modern frontend development has converged on two competing philosophies, and eac
 
 kuba closes exactly that gap: **client-side dataflow without leaving HTML, and without a JavaScript state runtime to maintain it.** The browser has had the mechanism since 1995 — the DOM event system. Frameworks reinvented it in userland because raw events are too unstructured to compose an application from: there is no shared vocabulary for *which* element reacts to *which* event, or *how*. kuba standardizes that vocabulary and leaves the mechanism alone. The delivery is the browser's own `CustomEvent`; kuba only supplies the grammar for expressing intent.
 
-Read the reasoning in full under [Principles](https://t2e1.github.io/kuba/#/foundations/principles) and [Events and Echo](https://t2e1.github.io/kuba/#/foundations/events-and-echo).
+The argument in full — including how the DOM event system closes the gap — is in the [Introduction](https://t2e1.github.io/kuba/#/learn/introduction); the grammar itself is in [Events and Echo](https://t2e1.github.io/kuba/#/foundations/events-and-echo).
 
 ## Packages
 

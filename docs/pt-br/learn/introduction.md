@@ -31,14 +31,52 @@ barramento do Echo.
 de dados, não como detalhe de implementação a ser escondido atrás de um Virtual
 DOM — e que o HTML enviado pelo servidor continue sendo, de fato, a aplicação.
 
-## A lacuna que ocupa
+## Duas escolas de pensamento, e a lacuna entre elas
 
-Frameworks de componentes — React, Vue, Angular — resolvem fluxo de dados no
-cliente ao custo de um runtime inteiro. O htmx resolve simplicidade devolvendo o
-HTML ao servidor, mas não tem fluxo de dados local.
+O desenvolvimento frontend moderno convergiu para duas filosofias concorrentes,
+e cada uma resolve apenas metade do problema.
 
-kuba existe para ocupar exatamente esse meio: reatividade imediata entre
-elementos, sem abrir mão do HTML como fonte da aplicação.
+**React, Vue e Angular** tratam o DOM como um detalhe de implementação a ser
+abstraído. O estado vive no JavaScript. A interface é uma função pura desse
+estado, rerrenderizada por um virtual DOM e reconciliada de volta em elementos
+reais. Isso entrega aos times um modelo de fluxo de dados genuinamente poderoso
+— componentes conseguem reagir uns aos outros, compor e atualizar de forma
+previsível. Mas o custo é um universo paralelo: um runtime que precisa ser
+enviado ao navegador, uma etapa de build que precisa compilar JSX ou templates
+em JavaScript, e um modelo de estado que não tem relação nenhuma com o DOM que
+ele acaba produzindo. O HTML que o navegador recebe deixa de ser a aplicação;
+ele vira um alvo de renderização.
+
+**O htmx** vai na direção oposta. Ele restaura o HTML como a aplicação: o
+servidor renderiza markup, o cliente troca fragmentos dele no lugar, e nenhum
+modelo de estado no cliente é necessário. É um retorno ao modelo original de
+requisição/resposta da web, e uma rejeição legítima da complexidade do frontend.
+Mas vem com uma limitação real: o htmx não tem fluxo de dados *dentro do
+cliente*. Dois elementos na mesma página não conseguem reagir um ao outro sem
+uma ida ao servidor buscar um fragmento novo. Interatividade que deveria ser
+instantânea e local — um filtro reagindo a um input, um contador reagindo a um
+toggle — é modelada como requisição de rede, porque não há outro canal
+disponível.
+
+A lacuna entre essas duas escolas é exatamente a lacuna que o kuba fecha:
+**fluxo de dados no cliente sem sair do HTML, e sem um runtime de estado em
+JavaScript para manter.**
+
+### Como o kuba resolve
+
+O navegador tem um mecanismo de fluxo de dados desde 1995: o sistema de eventos
+do DOM. Todo elemento consegue disparar um evento; todo elemento consegue
+escutar um. Os frameworks reinventaram essa capacidade em userland — props,
+stores, observables — porque eventos crus do DOM, sozinhos, são desestruturados
+demais para compor uma aplicação. Não existe um vocabulário compartilhado sobre
+*qual* elemento deve reagir a *qual* evento, nem *como*.
+
+A resposta do kuba é padronizar esse vocabulário, não substituir o mecanismo.
+Todo custom element do kuba entende um atributo declarativo de ligação (`on`)
+que descreve, em markup puro, qual evento de qual elemento de origem deve guiar
+qual propriedade, método ou atributo de destino nele mesmo. O sistema nativo de
+`CustomEvent` do navegador faz a entrega de verdade; o kuba só fornece a
+gramática para expressar a intenção.
 
 ```html
 <kb-input name="query"></kb-input>
@@ -48,8 +86,23 @@ elementos, sem abrir mão do HTML como fonte da aplicação.
 </kb-fetch>
 ```
 
-Dois elementos reagem um ao outro, e nenhum importa o outro. Esse é o modelo
-inteiro — veja [Eventos e Echo](/pt-br/foundations/events-and-echo).
+Dois elementos reagem um ao outro, e nenhum importa o outro. A consequência é um
+modelo de fluxo de dados que é:
+
+- **No cliente**, como React/Vue/Angular — elementos reagem uns aos outros
+  instantaneamente, sem ida e volta ao servidor para interatividade local.
+- **HTML primeiro**, como o htmx — a ligação vive no markup, não numa árvore de
+  estado em JavaScript; não há nada para compilar, hidratar ou reconciliar.
+- **Nativo**, diferente dos dois — não existe um barramento de eventos
+  específico de framework por baixo; é o próprio sistema de eventos do DOM,
+  exposto em vez de escondido.
+
+É por isso que o kuba se entende melhor como uma evolução do que como uma
+terceira alternativa ao lado das outras duas: ele pega a ambição de fluxo de
+dados dos frameworks de componentes e a fidelidade à plataforma do htmx, e
+satisfaz as duas com o único mecanismo que o navegador já entregou exatamente
+para isso. A gramática completa está em
+[Eventos e Echo](/pt-br/foundations/events-and-echo).
 
 ## Quatro coisas em que acreditamos
 

@@ -3,13 +3,49 @@
 Web Components primitives and custom elements. No framework, no build step —
 the browser is the runtime, HTML is the API.
 
+A complete feature — search dog breeds as you type and render the results —
+wired entirely in HTML, with no JavaScript written by you. Type in it:
+
 ```html preview
-<kb-stack direction="row" spacing="xs">
-  <kb-button>Primary</kb-button>
-  <kb-button variant="outlined">Outlined</kb-button>
-  <kb-button variant="link">Link</kb-button>
+<kb-stack direction="column" spacing="xs">
+  <kb-input name="dog" width="fill">
+    <kb-label>Dog Breed Search</kb-label>
+    <kb-helper>Try 'akita' or 'corgi'.</kb-helper>
+  </kb-input>
+
+  <kb-render layout="grid">
+    <template>
+      <kb-card>
+        <kb-text family="highlight" weight="medium" size="xs" color="primary">{name}</kb-text>
+        <kb-stack direction="column" spacing="quarck">
+          <kb-text size="xxxs"><strong>Bred for:</strong> {bred_for}</kb-text>
+          <kb-text size="xxxs"><strong>Temperament:</strong> {temperament}</kb-text>
+        </kb-stack>
+      </kb-card>
+    </template>
+    <kb-on value="api/succeeded:method/render"></kb-on>
+    <kb-on value="api/failed:method/clear"></kb-on>
+  </kb-render>
 </kb-stack>
+
+<kb-fetch name="api" url="https://api.thedogapi.com/v1/breeds/search?q={}">
+  <kb-on value="dog/changed:method/get"></kb-on>
+</kb-fetch>
 ```
+
+Every connection is an **arc** — `source/event:type/sink`:
+
+- `<kb-input name="dog">` publishes a `changed` event; `<kb-fetch>` subscribes
+  with `dog/changed:method/get` and fetches `…/search?q={the typed value}`.
+- `<kb-fetch name="api">` publishes `succeeded` (or `failed`); `<kb-render>`
+  subscribes with `api/succeeded:method/render` to paint its `<template>` once
+  per result, and with `api/failed:method/clear` to empty it.
+- The `{name}`, `{bred_for}`, `{temperament}`… placeholders in the template are
+  filled from each result object.
+
+No component references another in code — they only agree on event names. The
+same feature is taken apart step by step in
+**[Search as you type](/build-ui/patterns/search-as-you-type)**.
 
 Everything on this site runs against the published package, loaded from a CDN —
 the same two lines you would put in your own page. If an example here renders,

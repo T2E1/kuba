@@ -3,13 +3,50 @@
 Primitivos de Web Components e custom elements. Sem framework, sem etapa de
 build — o navegador é o runtime, o HTML é a API.
 
+Uma funcionalidade completa — buscar raças de cachorro enquanto se digita e
+renderizar os resultados — ligada inteiramente em HTML, sem nenhum JavaScript
+escrito por você. Digite nela:
+
 ```html preview
-<kb-stack direction="row" spacing="xs">
-  <kb-button>Primário</kb-button>
-  <kb-button variant="outlined">Contornado</kb-button>
-  <kb-button variant="link">Link</kb-button>
+<kb-stack direction="column" spacing="xs">
+  <kb-input name="dog" width="fill">
+    <kb-label>Busca de raças de cachorro</kb-label>
+    <kb-helper>Tente 'akita' ou 'corgi'.</kb-helper>
+  </kb-input>
+
+  <kb-render layout="grid">
+    <template>
+      <kb-card>
+        <kb-text family="highlight" weight="medium" size="xs" color="primary">{name}</kb-text>
+        <kb-stack direction="column" spacing="quarck">
+          <kb-text size="xxxs"><strong>Criado para:</strong> {bred_for}</kb-text>
+          <kb-text size="xxxs"><strong>Temperamento:</strong> {temperament}</kb-text>
+        </kb-stack>
+      </kb-card>
+    </template>
+    <kb-on value="api/succeeded:method/render"></kb-on>
+    <kb-on value="api/failed:method/clear"></kb-on>
+  </kb-render>
 </kb-stack>
+
+<kb-fetch name="api" url="https://api.thedogapi.com/v1/breeds/search?q={}">
+  <kb-on value="dog/changed:method/get"></kb-on>
+</kb-fetch>
 ```
+
+Cada conexão é um **arco** — `origem/evento:tipo/destino`:
+
+- `<kb-input name="dog">` publica um evento `changed`; o `<kb-fetch>` assina com
+  `dog/changed:method/get` e busca `…/search?q={o valor digitado}`.
+- `<kb-fetch name="api">` publica `succeeded` (ou `failed`); o `<kb-render>`
+  assina com `api/succeeded:method/render` para pintar seu `<template>` uma vez
+  por resultado, e com `api/failed:method/clear` para esvaziá-lo.
+- Os placeholders `{name}`, `{bred_for}`, `{temperament}`… no template são
+  preenchidos a partir de cada objeto de resultado.
+
+Nenhum componente referencia o outro em código — eles só concordam com nomes de
+evento. A mesma funcionalidade é destrinchada passo a passo em
+**[Busca enquanto digita](/pt-br/build-ui/patterns/search-as-you-type)**.
 
 Tudo neste site roda contra o pacote publicado, carregado de um CDN — as mesmas
 duas linhas que você colocaria na sua própria página. Se um exemplo aqui
