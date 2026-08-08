@@ -19,6 +19,7 @@ What lives in `devDependencies` isn't for consuming kuba; it's for building it.
 | Tool | Role |
 |---|---|
 | `vite` | Bundles `dist/` on `bun run release`. |
+| `vitest` + `playwright` | Run the test suite in a real Chromium (`bun run test`). |
 | `typescript` | Compiles nothing — type-checks against the hand-written `types.d.ts` files that document each element's public surface. |
 | `@biomejs/biome` | Lint and formatting (`bun run check`). |
 | `husky` + `lint-staged` | Run Biome on staged files before a commit lands. |
