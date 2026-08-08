@@ -1,0 +1,183 @@
+# Icon
+
+Renderiza um glifo do Material Symbols pelo nome. É um glifo, não um controle:
+sem comportamento de clique, sem foco, sem rótulo próprio — coloque dentro de um
+`<kb-button variant="icon">` quando a marca deve ser pressionada.
+
+```html preview
+<kb-icon use="home"></kb-icon>
+<kb-icon use="search" size="lg"></kb-icon>
+<kb-icon use="favorite" color="danger"></kb-icon>
+<kb-icon use="settings" size="xl" color="primary"></kb-icon>
+```
+
+## Uso
+
+```html
+<kb-icon use="home" size="md" color="primary"></kb-icon>
+```
+
+## Quando usar
+
+- **Reforçando uma ação rotulada** — um ícone ao lado do texto num botão ou item
+  de menu, onde o glifo acelera o reconhecimento mas o texto carrega o
+  significado.
+- **Substituindo texto onde o espaço é escasso** — uma barra de ferramentas de
+  botões só com ícone, uma affordance de fechar, um marcador de status numa
+  linha densa.
+- **Marcando status ao lado do conteúdo** — um check, um aviso, uma marca de
+  erro pareada com um `<kb-text>`, tirando a cor do mesmo token semântico da
+  mensagem.
+
+## Quando não usar
+
+- **Como o próprio elemento clicável.** Não há evento de clique, `tabindex` nem
+  nome acessível. Envolva num `<kb-button variant="icon">`, que traz a área de
+  toque, o anel de foco e o rótulo.
+- **Para a marca do produto** — use o `<kb-logo>`, que renderiza o logo de
+  verdade como SVG inline em vez de um glifo de fonte.
+- **Para ilustração decorativa ou um bitmap** — este só resolve nomes de
+  ligadura em uma única família de fonte.
+
+## Composição
+
+- **Pode conter**: nenhum filho relevante. O shadow root renderiza o `use` ao pé
+  da letra como conteúdo de texto, então filhos do light DOM são ignorados.
+  Defina o glifo pelo atributo, nunca digitando a ligadura entre as tags.
+- **Pode ser filho de**: qualquer coisa que aceite conteúdo inline. Ele é
+  `inline-flex` com `line-height: 1`, então se apoia na linha de base do texto
+  de um `<kb-text>`, dentro do rótulo de um `<kb-button>`, ou num
+  `<kb-stack direction="row">` sem alinhamento extra.
+
+```html preview
+<kb-button>
+  <kb-icon use="download"></kb-icon>
+  Baixar
+</kb-button>
+<kb-button variant="icon" aria-label="Buscar">
+  <kb-icon use="search"></kb-icon>
+</kb-button>
+```
+
+## Tamanho
+
+`size` seleciona um degrau da escala tipográfica compartilhada, então um ícone
+dimensionado como o texto ao lado se alinha com ele — esse é o ponto de
+reutilizar a escala em vez de valores em pixel.
+
+```html preview
+<kb-icon use="star" size="xxxs"></kb-icon>
+<kb-icon use="star" size="xs"></kb-icon>
+<kb-icon use="star" size="md"></kb-icon>
+<kb-icon use="star" size="xl"></kb-icon>
+<kb-icon use="star" size="xxxl"></kb-icon>
+```
+
+| `size` | Renderiza em | Use para |
+|---|---|---|
+| `xxxs`–`xs` | 12–16px | Marcas inline dentro de texto corrido, linhas densas de tabela. |
+| `sm`–`md` | 20–24px | A faixa padrão: botões, affordances de formulário, itens de lista. |
+| `lg`–`xl` | 32–40px | Ações isoladas numa barra de ferramentas, marcas de estado vazio. |
+| `xxl` para cima | 48px+ | Ilustrações de destaque, onde o glifo é o ponto focal. |
+
+## Cor
+
+Deixe `color` sem definir no caso comum: o ícone resolve para `currentColor` e
+herda do texto ao redor, então continua correto em qualquer fundo sem ser
+respecificado. Defina apenas quando o glifo carrega um significado que o texto
+não carrega.
+
+```html preview
+<kb-icon use="check_circle" color="success"></kb-icon>
+<kb-icon use="warning" color="warning"></kb-icon>
+<kb-icon use="error" color="danger"></kb-icon>
+<kb-icon use="info" color="info"></kb-icon>
+```
+
+| `color` | Significado |
+|---|---|
+| `primary` | Ênfase da marca — o ícone da ação principal de um grupo. |
+| `success` / `complete` | Um estado concluído ou válido. |
+| `warning` | Um estado que precisa de atenção mas não é bloqueante. |
+| `danger` | Um erro, ou a marca de uma ação destrutiva. |
+| `master-*` | Cinzas neutros, para ícones que devem recuar em relação ao texto. |
+
+Qualquer sufixo de `--color-*` funciona — o valor é interpolado em
+`var(--color-{valor})`, então um nome desconhecido resolve silenciosamente para
+nada, em vez de falhar de forma barulhenta.
+
+## Atributos
+
+| Atributo | Tipo | Padrão | Descrição |
+|---|---|---|---|
+| `use` | `string` | `''` | Nome da ligadura do Material Symbols, ex. `home`, `search`. |
+| `size` | degrau de token | `md` | Tamanho do glifo, resolvido contra `--font-size-{valor}`. |
+| `color` | sufixo de token | `currentColor` | Cor do glifo, resolvida contra `--color-{valor}`. |
+| `on` | string de arco | — | Ligação do Echo, `origem/evento:tipo/destino`. |
+
+Este elemento não dispara eventos.
+
+## Estilo
+
+Além dos atributos, a renderização do glifo é exposta como propriedades
+`--icon-*`. Os quatro eixos de variação são os eixos do Material Symbols.
+
+| Custom property | Padrão | Controla |
+|---|---|---|
+| `--icon-color` | o atributo `color`, ou `currentColor` | Cor do glifo, sobrescrevendo o atributo. |
+| `--icon-size` | `var(--font-size-{size})` | Tamanho do glifo, sobrescrevendo o atributo. |
+| `--icon-fill` | `1` | Eixo `FILL`: `1` sólido, `0` contornado. |
+| `--icon-weight` | `400` | Eixo `wght`, `100`–`700` — case com o texto próximo. |
+| `--icon-grade` | `0` | Eixo `GRAD`; um valor negativo pequeno afina os glifos em fundos escuros. |
+| `--icon-optical-size` | `24` | Eixo `opsz`; mantenha perto do tamanho renderizado em pixels. |
+
+```html preview
+<div style="--icon-fill: 0; --icon-weight: 300;">
+  <kb-icon use="home" size="xl"></kb-icon>
+  <kb-icon use="settings" size="xl"></kb-icon>
+  <kb-icon use="favorite" size="xl"></kb-icon>
+</div>
+```
+
+## Por que Material Symbols
+
+O conjunto foi escolhido em vez de desenhar um do zero: é gratuito, mantido pelo
+Google, cobre a maior parte das necessidades de um produto digital e — o fator
+decisivo — é entregue como **fonte**. Um glifo é um nome de ligadura, então
+adicionar um ícone significa escrever `use="bookmark"`, e não importar um
+recurso, registrar um sprite ou aumentar o bundle.
+
+Essa escolha também é o que faz `size` e `color` funcionarem do jeito que
+funcionam. Como o glifo é texto, ele resolve contra a escala tipográfica e herda
+`currentColor` — que é por que um ícone se alinha com o texto ao lado, e por que
+trocar a folha de tokens de uma marca re-estiliza todo ícone do produto sem
+nenhum atributo novo e sem variante de componente.
+
+Se um glifo de que você precisa não está no conjunto, avalie uma biblioteca de
+ícones complementar antes de desenhar um customizado.
+
+!> A fonte não vem no pacote do kuba. Carregue o **Material Symbols Rounded**
+você mesmo — sem ele, o `use` renderiza como texto literal em vez de glifo.
+
+## Estados e acessibilidade
+
+- `kb-icon` não tem atributo `hidden` nem custom states.
+- **O glifo é texto numa fonte de símbolos**, então um leitor de tela anuncia o
+  nome cru da ligadura ("home") a menos que você impeça. Adicione
+  `aria-hidden="true"` sempre que um rótulo de texto visível já carregar o
+  significado.
+- Quando o ícone é o único conteúdo de um controle, o nome acessível precisa vir
+  do controle — `<kb-button variant="icon" aria-label="Buscar">` — e não do
+  ícone.
+- Um valor de `use` desconhecido renderiza como texto literal em vez de glifo;
+  essa é a forma mais rápida de identificar um erro de digitação num nome de
+  ligadura.
+
+## Certo e errado
+
+| Faça | Não faça |
+|---|---|
+| Deixar `color` sem definir para o glifo herdar do texto | Definir cor em todo ícone "para ser explícito" — quebra em superfícies invertidas |
+| Envolver o glifo num `<kb-button variant="icon">` para torná-lo pressionável | Anexar um listener de clique no `kb-icon` — ele não tem foco nem área de toque |
+| Adicionar `aria-hidden="true"` quando há rótulo de texto | Deixar o nome da ligadura sendo anunciado ao lado do rótulo que ele duplica |
+| Casar o `size` com o texto ao lado | Escolher tamanhos no olho com `--icon-size` quando um degrau da escala serve |

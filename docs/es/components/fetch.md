@@ -1,0 +1,168 @@
+# Fetch
+
+Envuelve peticiones HTTP a la URL de su atributo `url`, interpolando el payload
+en esa URL, y publica el desenlace como `succeeded` o `failed`. No renderiza
+nada. Iniciar una petición aborta la que siga en curso, así que las respuestas
+fuera de orden no pueden sobrescribir resultados más nuevos.
+
+```html preview
+<kb-input name="breed" placeholder="Prueba 'akita'">
+  <kb-label>Buscar razas de perro</kb-label>
+</kb-input>
+
+<kb-render>
+  <kb-on value="dogs/succeeded:method/render"></kb-on>
+  <kb-on value="dogs/failed:method/clear"></kb-on>
+  <template>
+    <kb-text size="xxs">{name}</kb-text>
+  </template>
+</kb-render>
+
+<kb-fetch name="dogs" url="https://api.thedogapi.com/v1/breeds/search?q={}">
+  <kb-on value="breed/changed:method/get"></kb-on>
+</kb-fetch>
+```
+
+## Uso
+
+```html
+<kb-fetch name="users" url="/api/users/{id}"></kb-fetch>
+```
+
+```js
+const fetcher = document.querySelector('kb-fetch')
+fetcher.addEventListener('succeeded', (event) => render(event.detail))
+fetcher.get({ id: 1 }) // → GET /api/users/1
+```
+
+## Cuándo usarlo
+
+- **Cualquier petición JSON cuyo resultado guía la página** — una búsqueda, una
+  vista de detalle, un guardado — donde de otro modo escribirías `fetch`,
+  parseo, catch y actualización.
+- **Peticiones disparadas por el evento de otro elemento**, conectadas de forma
+  declarativa para que el markup muestre el flujo de datos.
+
+## Cuándo no usarlo
+
+- **Respuestas que no son JSON.** Cada verbo llama a `.json()` internamente; una
+  respuesta en texto, blob o streaming no está soportada.
+- **Peticiones que necesitan retry, progreso o streaming personalizados** — usa
+  el paquete `http` directamente, o `fetch` a secas.
+- **Una petición cuyo resultado nada en la página consume.** Todo el propósito
+  de este elemento es publicar el desenlace como evento.
+
+## La plantilla de la URL
+
+`url` puede contener placeholders `{path.to.value}`, resueltos contra el payload
+mediante búsqueda por ruta con puntos. Los segmentos ausentes o nulos se
+convierten en cadena vacía.
+
+| `url` | `get(payload)` | Pide |
+|---|---|---|
+| `/api/users/{id}` | `{ id: 42 }` | `/api/users/42` |
+| `/search?q={}` | `'akita'` | `/search?q=akita` |
+| `/api/{group.name}/list` | `{ group: { name: 'admins' } }` | `/api/admins/list` |
+
+`{}` — el placeholder vacío — es el payload entero, y eso es lo que hace que un
+arco desde un campo de texto funcione sin ninguna transformación.
+
+## Composición
+
+- **Puede contener**: un `<kb-headers>` por nombre de cabecera, y uno o más
+  `<kb-on>` para arcos. Nada se renderiza.
+- **Puede ser hijo de**: cualquier cosa. Suele ser hermano de los elementos que
+  alimenta, cerca del final del markup.
+
+```html
+<kb-fetch name="api" url="/api/users/{id}">
+  <kb-headers key="x-api-key" value="PUBLIC-DEMO-KEY"></kb-headers>
+  <kb-headers key="accept-language" value="es-ES"></kb-headers>
+  <kb-on value="row/clicked:method/get"></kb-on>
+</kb-fetch>
+```
+
+`<kb-headers>` establece un par clave/valor en su padre una vez que el padre se
+ha inicializado. Muta al padre, no a sí mismo — colocado bajo cualquier cosa que
+no sea un `<kb-fetch>`, no hace nada.
+
+!> Una clave escrita en el markup es visible para cualquiera que abra la página.
+Usa esto solo para claves públicas y con límite de tasa; cualquier cosa real
+pertenece detrás de tu propio endpoint.
+
+## Métodos
+
+Cada verbo aborta cualquier petición pendiente, interpola la URL, y devuelve una
+promesa que resuelve a `{ data, error }` — nunca lanza.
+
+| Método | Envía | Cuerpo |
+|---|---|---|
+| `get(payload)` | GET | — |
+| `post(payload)` | POST | el payload |
+| `put(payload)` | PUT | el payload |
+| `delete(payload)` | DELETE | — |
+
+Para `post` y `put`, el payload se usa **dos veces**: interpolado en la URL *y*
+enviado como cuerpo. Eso resulta cómodo cuando el id vive en ambos, y
+sorprendente cuando no — `post({ id: 1, name: 'Ada' })` contra
+`url="/api/users/{id}"` envía `{ id: 1, name: 'Ada' }` a `/api/users/1`.
+
+También puedes hacer `await` sobre el resultado en vez de escuchar:
+
+```js
+const { data, error } = await fetcher.get({ id: 1 })
+```
+
+## Atributos
+
+| Atributo | Tipo | Por defecto | Descripción |
+|---|---|---|---|
+| `url` | `string` | `''` | Plantilla de URL, con placeholders `{path}` opcionales. |
+| `name` | `string` | — | Identifica a este elemento como el `origen` de un arco. |
+| `on` | cadena de arco | — | Conexión de Echo, `origen/evento:tipo/destino`. |
+
+## Eventos
+
+| Evento | Se dispara cuando | `detail` |
+|---|---|---|
+| `succeeded` | la petición resolvió sin error | el cuerpo JSON ya parseado |
+| `failed` | la petición o su parseo falló | `null` |
+
+!> **`failed` lleva `null`, no el error.** Ambas ramas despachan el `data` del
+resultado, que es `null` siempre que `error` está establecido — así que el
+motivo del fallo nunca llega al listener. Conecta `failed` a algo que no
+necesite detalle (`clear`, alternar un mensaje), y haz `await` sobre la llamada
+al método cuando necesites inspeccionar el error. Esto parece un bug más que una
+decisión de diseño.
+
+El despacho se difiere con `requestIdleCallback`, así que los listeners se
+ejecutan después de que la respuesta se haya manejado, no a mitad de ella.
+
+## Cancelación
+
+Cada llamada aborta la anterior antes de empezar. Para un campo de búsqueda
+mientras se escribe esto es exactamente lo correcto: solo la consulta más nueva
+puede resolver, así que una respuesta anterior lenta no puede caer encima de una
+posterior más rápida.
+
+La otra cara: dos consumidores distintos no pueden compartir un `<kb-fetch>`. Si
+una vista de detalle y una lista piden por el mismo elemento, el que se dispare
+segundo cancela al primero. Usa un elemento por petición concurrente.
+
+## Estados y accesibilidad
+
+- El elemento es headless y no renderiza nada — no tiene superficie de
+  accesibilidad.
+- **Nada anuncia la carga ni el fallo.** Conecta `succeeded`/`failed` a algo
+  visible: un `<kb-progress>`, un mensaje, o un `<kb-render>` que se limpia. Un
+  fallo silencioso es invisible para todo el mundo, y doblemente para quien usa
+  lector de pantalla.
+
+## Recomendado y no recomendado
+
+| Haz | No hagas |
+|---|---|
+| Usar un elemento por petición concurrente | Compartir un `<kb-fetch>` entre dos consumidores — cada llamada aborta la otra |
+| Conectar `failed` a una reacción visible como `clear` | Confiar en el `detail` de `failed` para explicar qué salió mal — es `null` |
+| Hacer `await` sobre el método cuando necesitas el error | Suponer una promesa rechazada; resuelve con `{ data, error }` |
+| Mantener las claves de API detrás de tu propio endpoint | Poner una credencial real en un valor de `<kb-headers>` |
