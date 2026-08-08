@@ -1,0 +1,151 @@
+# Render
+
+Renderiza conteúdo interpolando um template contra dados arbitrários, fornecidos
+via `render()` e esvaziados via `clear()`. Ele é um host do Echo, então qualquer
+um dos métodos pode ser ligado ao evento de outro elemento — rerrenderizando
+quando uma fonte de dados publica `succeeded`, limpando num `failed` — sem
+listener manual e sem sistema de reatividade.
+
+```html preview
+<kb-render id="greeting-demo">
+  <template>
+    <kb-text size="xs">Olá, {name}! Você tem {count} mensagens.</kb-text>
+  </template>
+</kb-render>
+
+<script type="module">
+  const target = document.querySelector('#greeting-demo')
+  requestAnimationFrame(() => target.render({ name: 'Ada', count: 3 }))
+</script>
+```
+
+## Uso
+
+```html
+<kb-render>
+  <kb-on value="api/succeeded:method/render"></kb-on>
+  <template>{name}</template>
+</kb-render>
+```
+
+```js
+document.querySelector('kb-render').render([{ name: 'Ada' }, { name: 'Grace' }])
+```
+
+## Quando usar
+
+- **Exibindo uma lista ou grade de registros** cuja forma continua a mesma mas
+  cujos dados mudam — um template, rerrenderizado contra um novo array a cada
+  vez.
+- **Ligando a renderização a um evento** em vez de escrever um listener mais
+  atualizações de DOM à mão.
+
+## Quando não usar
+
+- **Conteúdo estático que nunca muda depois da primeira renderização** — HTML
+  comum não precisa de nada dessa maquinaria.
+- **Conteúdo que exige ramificação condicional ou estrutura aninhada** além da
+  substituição simples de `{path.to.value}`. O motor de template só substitui
+  placeholders; ele não tem `if` nem sintaxe de loop além de "uma interpolação
+  por entrada do array".
+
+## Composição
+
+- **Pode conter**: um único filho `<template>`, e um ou mais filhos `<kb-on>`
+  para arcos além do único atributo `on`.
+- **Pode ser filho de**: qualquer coisa.
+
+## Resolução do template
+
+- **Aninhe o `<template>` diretamente como filho** — o caso comum.
+- **Ou defina `template="algum-id"`** para referenciar um `<template>` declarado
+  em outro lugar do documento, resolvido uma vez e cacheado. Útil quando várias
+  instâncias de `<kb-render>` compartilham um template.
+
+## Dados e rerrenderização
+
+`render(data)` aceita um único item ou um array; um valor único é convertido
+numa lista de um item, então a mesma interpolação lida com uma ou muitas
+entradas, concatenadas em ordem.
+
+```html preview
+<kb-render id="list-demo" layout="grid">
+  <template>
+    <kb-card>
+      <kb-text size="xxs" weight="bold">{name}</kb-text>
+      <kb-text size="xxxs" color="master">{role}</kb-text>
+    </kb-card>
+  </template>
+</kb-render>
+
+<script type="module">
+  const target = document.querySelector('#list-demo')
+  requestAnimationFrame(() =>
+    target.render([
+      { name: 'Ada Lovelace', role: 'Matemática' },
+      { name: 'Grace Hopper', role: 'Contra-almirante' },
+    ]),
+  )
+</script>
+```
+
+!> **Chamar `render()` antes do primeiro paint não faz nada, em silêncio.**
+Chame depois que o elemento estiver conectado — em resposta a um evento, não de
+forma síncrona no carregamento do módulo. É por isso que os exemplos acima
+esperam um frame.
+
+`clear()` esvazia o conteúdo renderizado sem tocar no template, então um
+`render()` posterior ainda tem contra o que interpolar. É a contraparte natural
+para ligar a um evento de falha, para que uma requisição malsucedida limpe
+resultados velhos em vez de deixá-los na tela parecendo atuais.
+
+## Layout
+
+`layout` controla como o conteúdo renderizado é organizado, não como ele parece.
+
+| Layout | Arranjo | Use para |
+|---|---|---|
+| `list` (padrão) | Coluna flex única | Uma lista vertical de registros, um por linha. |
+| `grid` | Grade de duas colunas | Registros que se leem melhor lado a lado, como pares de nome/valor. |
+
+## Atributos
+
+| Atributo | Tipo | Padrão | Descrição |
+|---|---|---|---|
+| `layout` | `list` \| `grid` | `list` | Arranjo dos itens renderizados. |
+| `template` | `string` | — | Id de um `<template>` em outro lugar do documento, usado no lugar de um filho. |
+| `hidden` | `boolean` | `false` | Remove o elemento do layout e da árvore de acessibilidade. |
+| `on` | string de arco | — | Ligação do Echo, `origem/evento:tipo/destino`. |
+
+## Métodos
+
+| Método | Devolve | Descrição |
+|---|---|---|
+| `render(data)` | `this` | Interpola o template contra `data` — um item ou um array — e substitui o conteúdo renderizado. |
+| `clear()` | `this` | Esvazia o conteúdo renderizado, deixando o template intacto. |
+
+Este elemento não dispara eventos.
+
+## Estilo
+
+| Custom property | Padrão | Controla |
+|---|---|---|
+| `--render-space-gap` | `var(--spacing_inset-xs)` | Espaçamento entre itens renderizados, nos dois layouts. |
+| `--render-grid-columns` | `2` | Número de colunas no layout `grid`. Sem efeito no `list`. |
+
+```css
+/* Uma galeria mais densa, de três colunas, escopada a uma área */
+.gallery kb-render {
+  --render-grid-columns: 3;
+  --render-space-gap: var(--spacing_inset-nano);
+}
+```
+
+## Certo e errado
+
+| Faça | Não faça |
+|---|---|
+| Aninhar um único filho `<template>` para o caso comum | Referenciar um nó externo com `template` quando um filho resolveria |
+| Ligar o `render()` ao evento de um publicador via `on` ou `<kb-on>` | Escrever um listener à mão quando um arco já cobre |
+| Usar `layout="grid"` para entradas pareadas e fáceis de varrer | Usar `grid` para texto livre longo, que não ganha nada com colunas |
+| Chamar `render()` só depois de o elemento estar conectado | Chamá-lo de forma síncrona logo após criar o elemento — não faz nada antes do primeiro paint |
