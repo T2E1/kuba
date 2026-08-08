@@ -124,12 +124,8 @@ class Textarea extends Echo(Hidden(Width(HTMLElement))) {
     this.element.value = value
   }
 
-  // NOTE: `willValidateaaadf` does not exist on `ElementInternals`; this
-  // getter currently returns `undefined` instead of the actual
-  // will-validate flag (compare with the `input`/`fileupload` siblings,
-  // which read `this.internals.willValidate`).
   get willValidate() {
-    return this.internals.willValidateaaadf
+    return this.internals.willValidate
   }
 
   static get formAssociated() {

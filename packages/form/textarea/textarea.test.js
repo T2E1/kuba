@@ -16,6 +16,27 @@ test('dispatches changed with the typed value', async () => {
   expect(onChanged.mock.calls.at(-1)[0].detail).toBe('hi')
 })
 
+test('willValidate reports that the field takes part in validation', async () => {
+  const body = mount('<kb-textarea name="bio"></kb-textarea>')
+  const textarea = body.querySelector('kb-textarea')
+
+  await inner(textarea, 'textarea')
+
+  expect(textarea.willValidate).toBe(true)
+})
+
+test('willValidate is false while the field is disabled', async () => {
+  // The flag comes from `internals`, not from the inner <textarea>: what the
+  // form validates is the host, so a disabled host is barred from validation
+  // even though its shadow control is untouched.
+  const body = mount('<kb-textarea name="bio" disabled></kb-textarea>')
+  const textarea = body.querySelector('kb-textarea')
+
+  await inner(textarea, 'textarea')
+
+  expect(textarea.willValidate).toBe(false)
+})
+
 test('grows to fit its content', async () => {
   // `@on.input('textarea')` re-measures scrollHeight on every input, so the
   // box fits its content instead of scrolling — the one behavior with no

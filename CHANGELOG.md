@@ -24,6 +24,12 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) and 
 
 - Storybook, its three addons and `remark-gfm`, along with 22 `.stories.js`, 22 `.mdx` and the `stories/` directory. Everything they documented lives in the docs site; the interaction tests moved to Vitest. Neither stories nor MDX were ever part of the published package, so consumers are unaffected
 
+## [0.1.0-alpha.29] — 2026-08-08
+
+### Fixed
+
+- `<kb-textarea>` now reports `willValidate` correctly. The getter read a property that does not exist on `ElementInternals`, so it always returned `undefined` — code branching on it treated the field as if it never took part in constraint validation. It now returns the boolean its type declaration always promised, matching `<kb-input>` and `<kb-fileupload>`
+
 ## [0.1.0-alpha.28] — 2026-08-06
 
 ### Changed
