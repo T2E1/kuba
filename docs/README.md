@@ -8,7 +8,7 @@ wired entirely in HTML, with no JavaScript written by you. Type in it:
 
 ```html preview
 <kb-stack direction="column" spacing="xs">
-  <kb-input name="dog" width="fill">
+  <kb-input name="dog" value="american" width="fill">
     <kb-label>Dog Breed Search</kb-label>
     <kb-helper>Try 'akita' or 'corgi'.</kb-helper>
   </kb-input>
@@ -16,9 +16,13 @@ wired entirely in HTML, with no JavaScript written by you. Type in it:
   <kb-render layout="grid">
     <template>
       <kb-card>
-        <kb-text family="highlight" weight="medium" size="xs" color="primary">{name}</kb-text>
+        <kb-inset side="top">
+          <kb-cover src="{image.url}"></kb-cover>
+        </kb-inset>
+        <kb-text family="highlight" weight="medium" size="xs" color="primary-dark">{name}</kb-text>
         <kb-stack direction="column" spacing="quarck">
           <kb-text size="xxxs"><strong>Bred for:</strong> {bred_for}</kb-text>
+          <kb-text size="xxxs"><strong>Life span:</strong> {life_span}</kb-text>
           <kb-text size="xxxs"><strong>Temperament:</strong> {temperament}</kb-text>
         </kb-stack>
       </kb-card>
@@ -29,6 +33,7 @@ wired entirely in HTML, with no JavaScript written by you. Type in it:
 </kb-stack>
 
 <kb-fetch name="api" url="https://api.thedogapi.com/v1/breeds/search?q={}">
+  <kb-headers key="x-api-key" value="DEMO-API-KEY"></kb-headers>
   <kb-on value="dog/changed:method/get"></kb-on>
 </kb-fetch>
 ```

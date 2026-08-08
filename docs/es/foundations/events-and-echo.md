@@ -156,6 +156,7 @@ renderizador.
 </kb-render>
 
 <kb-fetch name="api" url="https://api.thedogapi.com/v1/breeds/search?q={}">
+  <kb-headers key="x-api-key" value="DEMO-API-KEY"></kb-headers>
   <kb-on value="breed/changed:method/get"></kb-on>
 </kb-fetch>
 ```

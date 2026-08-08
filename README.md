@@ -57,6 +57,7 @@ A complete feature — search dog breeds as you type and render the results — 
 </kb-render>
 
 <kb-fetch name="api" url="https://api.thedogapi.com/v1/breeds/search?q={}">
+  <kb-headers key="x-api-key" value="DEMO-API-KEY"></kb-headers>
   <kb-on value="dog/changed:method/get"></kb-on>
 </kb-fetch>
 ```
