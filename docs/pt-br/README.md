@@ -8,8 +8,8 @@ renderizar os resultados — ligada inteiramente em HTML, sem nenhum JavaScript
 escrito por você. Digite nela:
 
 ```html preview
-<kb-stack direction="column" spacing="xs">
-  <kb-input name="dog" value="american" width="fill">
+<kb-stack direction="column" spacing="xs" width="fill">
+  <kb-input name="dog" width="fill">
     <kb-label>Busca de raças de cachorro</kb-label>
     <kb-helper>Tente 'akita' ou 'corgi'.</kb-helper>
   </kb-input>

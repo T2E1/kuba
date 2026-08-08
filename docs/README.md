@@ -7,8 +7,8 @@ A complete feature — search dog breeds as you type and render the results —
 wired entirely in HTML, with no JavaScript written by you. Type in it:
 
 ```html preview
-<kb-stack direction="column" spacing="xs">
-  <kb-input name="dog" value="american" width="fill">
+<kb-stack direction="column" spacing="xs" width="fill">
+  <kb-input name="dog" width="fill">
     <kb-label>Dog Breed Search</kb-label>
     <kb-helper>Try 'akita' or 'corgi'.</kb-helper>
   </kb-input>
