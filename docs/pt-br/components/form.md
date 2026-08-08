@@ -1,0 +1,178 @@
+# Form
+
+Um form embrulha um `<form>` nativo e transforma os dois momentos dele em
+eventos customizados: `submitted`, carregando os dados já convertidos como
+objeto simples, e `resetted`. O conteúdo vem de um filho `<template>`,
+opcionalmente interpolado com dados — então o mesmo markup renderiza vazio para
+um fluxo de criação e preenchido para um de edição.
+
+```html preview
+<kb-form autorender>
+  <template>
+    <kb-input name="email" type="email" required>
+      <kb-label>Email</kb-label>
+      <kb-validity state="valueMissing">O email é obrigatório.</kb-validity>
+      <kb-validity state="typeMismatch">Isso não é um endereço de email.</kb-validity>
+    </kb-input>
+    <kb-button type="submit">Enviar</kb-button>
+  </template>
+</kb-form>
+```
+
+## Uso
+
+```html
+<kb-form autorender>
+  <template>
+    <kb-input name="email" required></kb-input>
+    <kb-button type="submit">Enviar</kb-button>
+  </template>
+</kb-form>
+```
+
+```js
+document.querySelector('kb-form').addEventListener('submitted', (event) => {
+  save(event.detail) // { email: '…' }
+})
+```
+
+## Quando usar
+
+- **Coletando um conjunto de campos e agindo sobre o resultado em JS** — o
+  `submitted` te entrega os dados já convertidos, sem uma varredura de
+  `FormData` sua.
+- **Editando um registro existente** — o `render(data)` preenche os
+  `{placeholders}` do template com os valores atuais antes de a pessoa ver o
+  formulário.
+- **Ligando um formulário a outros elementos de forma declarativa** — o
+  `submitted` é um evento do Echo, então um `<kb-fetch>` consegue publicá-lo sem
+  listener.
+
+## Quando não usar
+
+- **Um post clássico para o servidor.** O `<form>` interno não tem `action` nem
+  `method` e o submit nativo dele é impedido; uma página que deve navegar na
+  submissão quer um `<form>` comum.
+- **Um único campo com um botão** — um `<kb-input>` e um `<kb-button>` num
+  `<kb-stack>` é menos maquinaria quando não há nada para converter.
+- **Apenas layout.** O elemento existe para o ciclo de submissão/reset; para
+  organizar campos sem isso, use o `<kb-stack>`.
+
+## Composição
+
+- **Pode conter**: exatamente um filho `<template>`, guardando os campos e o
+  controle de submissão. O markup dele é o que é renderizado dentro do `<form>`
+  do shadow. **Filhos do light DOM fora do template não são projetados** — não
+  existe `<slot>`.
+- **Pode ser filho de**: qualquer coisa. O host ocupa a largura toda e dispõe os
+  campos como uma coluna.
+
+Dentro do template, use os controles de formulário da biblioteca —
+`<kb-input>`, `<kb-textarea>`, `<kb-fileupload>` — mais um
+`<kb-button type="submit">`. Por serem associados a formulário, eles se
+registram no `<form>` interno e aparecem nos dados submetidos pelo `name`.
+
+## Renderizando o template
+
+O conteúdo não é renderizado até o `render()` rodar. Há duas formas de disparar
+isso, e escolher entre elas é a principal decisão que este elemento te pede.
+
+**`autorender`** renderiza uma vez na conexão, sem dados. Certo para um
+formulário em branco: os campos aparecem como foram escritos e os
+`{placeholders}` resolvem para nada.
+
+**`render(data)`** você chama quando os dados chegam. Todo `{path}` no template é
+substituído pelo valor correspondente — `{}` é o objeto inteiro, `{user.email}`
+uma busca aninhada — e é assim que um formulário de edição vem preenchido:
+
+```js
+document.querySelector('kb-form').render({ email: 'ada@exemplo.com' })
+```
+
+Cada chamada rerrenderiza o shadow DOM, substituindo os campos atuais **e
+qualquer valor que a pessoa tenha digitado**. Renderize na chegada dos dados,
+não a cada tecla.
+
+!> O template é lido no momento da renderização. Markup adicionado ao
+`<template>` depois — por um framework que preenche os filhos dele de forma
+assíncrona — não é capturado a menos que o `render()` rode de novo.
+
+## Atributos
+
+| Atributo | Tipo | Padrão | Descrição |
+|---|---|---|---|
+| `autorender` | `boolean` | `false` | Renderiza o template na conexão, sem esperar pelo `render()`. |
+| `template` | `string` | — | Id de um `<template>` em outro lugar do documento, usado no lugar de um filho. |
+| `hidden` | `boolean` | `false` | Remove o formulário do layout e da árvore de acessibilidade. |
+| `on` | string de arco | — | Ligação do Echo, `origem/evento:tipo/destino`. |
+
+## Métodos
+
+| Método | Devolve | Descrição |
+|---|---|---|
+| `render(data?)` | `this` | Renderiza o template, interpolando os placeholders `{path}` a partir de `data`. |
+| `submit()` | `this` | Submete o formulário interno, disparando a validação e depois o `submitted`. |
+| `reset()` | `this` | Reseta o formulário interno, disparando o `resetted`. |
+
+## Eventos
+
+| Evento | Dispara quando | `detail` |
+|---|---|---|
+| `submitted` | o formulário interno é submetido, nativamente ou via `submit()` | os dados do formulário como objeto simples |
+| `resetted` | o formulário interno é resetado, nativamente ou via `reset()` | `{}` |
+
+Os dois são redisparados a partir do host depois que o evento nativo é
+interrompido, então a página nunca navega. `submit()` e `reset()` passam pelo
+mesmo caminho, o que significa que a validação de cada campo roda antes.
+
+```html
+<kb-form name="signup" autorender>…</kb-form>
+<kb-fetch url="/api/signup" method="post">
+  <kb-on value="signup/submitted:method/post"></kb-on>
+</kb-fetch>
+```
+
+## Estilo
+
+| Custom property | Padrão | Controla |
+|---|---|---|
+| `--form-direction` | `column` | `flex-direction` da lista de campos; `row` para um formulário inline compacto. |
+| `--form-align` | `start` | `align-items` dos campos; `stretch` faz com que preencham a largura. |
+| `--form-space-gap` | `var(--spacing_inset-xs)` | Espaçamento entre campos. |
+
+Os campos ficam na largura natural por padrão, já que o `align-items` é `start`.
+Um formulário cujos inputs devem atravessar a largura toda define o alinhamento:
+
+```html preview
+<div style="--form-align: stretch;">
+  <kb-form autorender>
+    <template>
+      <kb-input name="city"><kb-label>Cidade</kb-label></kb-input>
+      <kb-button type="submit" width="fill">Salvar</kb-button>
+    </template>
+  </kb-form>
+</div>
+```
+
+## Estados e acessibilidade
+
+- `hidden` remove o formulário do layout e da árvore de acessibilidade.
+- O `<form>` interno é um elemento de formulário de verdade, então a validação
+  nativa roda na submissão: um campo inválido bloqueia o `submitted` e se
+  reporta. Você não precisa checar a validade antes de disparar.
+- **Os campos vivem no shadow DOM do host**, não no light DOM da página. Um
+  `<label for>` externo não consegue alcançá-los — rotule cada campo com o
+  próprio `<kb-label>`.
+- Dê ao formulário um nome acessível quando a página tiver mais de um:
+  `<kb-form aria-label="Cadastro">`. Não existe rotulação derivada do `name`.
+- Mantenha o controle de submissão dentro do template. Um botão fora do elemento
+  pertence a outro formulário, ou a nenhum, e não vai submeter este.
+
+## Certo e errado
+
+| Faça | Não faça |
+|---|---|
+| Colocar todo campo e o botão de submissão dentro do `<template>` | Colocar campos como filhos do light DOM — eles nunca são projetados |
+| Usar `autorender` para um formulário em branco, `render(data)` para um preenchido | Chamar `render()` a cada mudança e apagar o que a pessoa digitou |
+| Ler os valores submetidos de `event.detail` | Consultar o shadow DOM em busca dos campos para coletar valores |
+| Deixar a validação nativa controlar a submissão | Rechecar os campos em script antes de chamar o `submit()` |
