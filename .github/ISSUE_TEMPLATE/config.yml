@@ -1,5 +1,8 @@
 blank_issues_enabled: false
 contact_links:
-  - name: 💬 Questions & ideas
-    url: https://github.com/T2E1/kuba/discussions
-    about: Reserve issues for confirmed bugs and feature requests with a clear use case — open a Discussion for anything else.
+  - name: 📖 Documentation
+    url: https://t2e1.github.io/kuba/
+    about: How every element behaves, with live examples — check here before opening an issue.
+  - name: 🔒 Report a security issue
+    url: https://github.com/T2E1/kuba/security/advisories/new
+    about: Vulnerabilities are reported privately, never through a public issue.

@@ -1,0 +1,6 @@
+# Example endpoints in code samples. The dog API key in the docs is a
+# placeholder, so every request 401s — the URL is illustrative, not a link.
+^https://api\.thedogapi\.com
+
+# Placeholder hosts used in examples.
+^https?://(localhost|example\.com|api\.example\.com)

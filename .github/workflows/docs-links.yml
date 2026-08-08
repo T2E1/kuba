@@ -1,0 +1,48 @@
+name: 🔗 Check documentation links
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+  # Links rot without anyone touching the repository: a page moves, a service
+  # shuts down. Weekly is enough to catch it before a reader does.
+  schedule:
+    - cron: '0 6 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  lychee:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # Two passes because the two sets of files mean different things by a
+      # link. The repository markdown is read on GitHub, where './LICENSE' has
+      # to resolve as a file. The docs are read through docsify, where
+      # '/foundations/naming' is a client-side route, not a path on disk — so
+      # there only the external URLs are checkable.
+      - name: Repository markdown — files and URLs
+        uses: lycheeverse/lychee-action@v2
+        with:
+          args: >-
+            --no-progress
+            --cache
+            --max-cache-age 1d
+            README.md CONTRIBUTING.md SECURITY.md CODE_OF_CONDUCT.md CHANGELOG.md
+          fail: true
+
+      - name: Documentation site — external URLs only
+        uses: lycheeverse/lychee-action@v2
+        with:
+          args: >-
+            --no-progress
+            --cache
+            --max-cache-age 1d
+            --scheme https
+            --scheme http
+            'docs/**/*.md' docs/llms.txt
+          fail: true

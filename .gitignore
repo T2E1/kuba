@@ -5,3 +5,6 @@ test-results
 playwright-report
 .vitest-attachments
 __screenshots__
+
+# Reference material kept locally, not part of the project.
+*.pdf
