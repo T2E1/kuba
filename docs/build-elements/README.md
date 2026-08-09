@@ -9,7 +9,7 @@ anything.
 | `@t2e1/kuba` | Every custom element, registered on import. |
 | [`@t2e1/kuba/directive`](/build-elements/directive) | Lifecycle decorators: `define`, `connected`, `disconnected`, `adopted`, `attributeChanged`, `formAssociated`, `formDisabled`, `formReset`, `formStateRestore`, `execute`. |
 | [`@t2e1/kuba/dom`](/build-elements/dom) | Rendering: `paint`, `repaint`, `retouch`, `html`, `css`, and the paint lifecycle symbols. |
-| [`@t2e1/kuba/mixin`](/build-elements/mixin) | Attribute mixins: `Headless`, `Height`, `Hidden`, `Template`, `Value`, `Width`. |
+| [`@t2e1/kuba/mixin`](/build-elements/mixin) | Attribute mixins: `Headless`, `Height`, `Hidden`, `Identity`, `Template`, `Value`, `Width`. |
 | [`@t2e1/kuba/echo`](/build-elements/echo) | The `Echo` host mixin and the `dispatchEvent` decorator. |
 | [`@t2e1/kuba/event`](/build-elements/event) | The `on` listener proxy and its filters: `value`, `files`, `formData`, `dataset`, `detail`, `prevent`, `stop`, `customEvent`. |
 | `@t2e1/kuba/middleware` | `before`, `after`, `around` — see [Decorators](/build-elements/decorators). |

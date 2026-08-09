@@ -1,7 +1,7 @@
 # mixin
 
 ```js
-import { Headless, Height, Hidden, Template, Value, Width } from '@t2e1/kuba/mixin'
+import { Headless, Height, Hidden, Identity, Template, Value, Width } from '@t2e1/kuba/mixin'
 ```
 
 Reusable attribute behavior. Each mixin takes a class and returns a subclass
@@ -34,8 +34,57 @@ with the property.
 |---|---|---|
 | `hidden` | `boolean` | `false` |
 
-Requires the host to expose `internals` (an `ElementInternals`), which every
-kuba element does through a lazy getter.
+Requires the host to expose `internals` (an `ElementInternals`) through a lazy
+getter.
+
+## `Identity(Base)`
+
+Gives the element an identity in the accessibility tree: the **role** it plays,
+and — for elements with no readable text of their own — the **name** it answers
+to. Without it a custom element is an anonymous box: `<kb-progress value="40">`
+announces as nothing at all.
+
+Unlike the other mixins, the role is not an attribute. The element declares it
+by implementing `[role]`, which the mixin reads on connect:
+
+```js
+import { Identity, role } from '@t2e1/kuba/mixin'
+
+class Progress extends Identity(Echo(HTMLElement)) {
+  get [role]() {
+    return 'progressbar'
+  }
+}
+```
+
+`role` is a `Symbol.for`, so the element declaring it and the mixin reading it
+agree on the same key even when bundled separately.
+
+The name comes from the `alt` attribute, for elements whose content is a glyph
+rather than text:
+
+```html
+<kb-button variant="icon" alt="Delete">
+  <kb-icon use="delete"></kb-icon>
+</kb-button>
+```
+
+Use `alt` only where there is no visible text. When the element has a label the
+reader can see, use `<kb-label>` — setting both makes the announced name differ
+from the written one, which breaks voice control.
+
+| Member | Type | Default |
+|---|---|---|
+| `alt` | `string` | `''` |
+| `[role]` | `string` | — (the element declares it) |
+
+Both are published as **default semantics** on `ElementInternals`, so a `role`
+or `aria-label` written in the markup still wins — the element ships correct
+defaults without taking the decision away from the consumer.
+
+Requires the host to expose `internals`, as `Hidden` does. The mixin never
+calls `attachInternals()` itself: it may be called only once per element, so
+the element owns that call.
 
 ## `Headless(Base)`
 

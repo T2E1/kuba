@@ -1,7 +1,7 @@
 # mixin
 
 ```js
-import { Headless, Height, Hidden, Template, Value, Width } from '@t2e1/kuba/mixin'
+import { Headless, Height, Hidden, Identity, Template, Value, Width } from '@t2e1/kuba/mixin'
 ```
 
 Comportamiento de atributo reutilizable. Cada mixin recibe una clase y devuelve
@@ -35,8 +35,57 @@ consistente con la propiedad.
 |---|---|---|
 | `hidden` | `boolean` | `false` |
 
-Requiere que el host exponga `internals` (un `ElementInternals`), lo que cada
-elemento kuba hace mediante un getter perezoso.
+Requiere que el host exponga `internals` (un `ElementInternals`) mediante un
+getter perezoso.
+
+## `Identity(Base)`
+
+Da al elemento una identidad en el árbol de accesibilidad: el **rol** que
+cumple y — para elementos sin texto legible propio — el **nombre** por el que
+responde. Sin esto, un custom element es una caja anónima: `<kb-progress
+value="40">` no anuncia nada en absoluto.
+
+A diferencia de los demás mixins, el rol no es un atributo. El elemento lo
+declara implementando `[role]`, que el mixin lee al conectar:
+
+```js
+import { Identity, role } from '@t2e1/kuba/mixin'
+
+class Progress extends Identity(Echo(HTMLElement)) {
+  get [role]() {
+    return 'progressbar'
+  }
+}
+```
+
+`role` es un `Symbol.for`, así que el elemento que lo declara y el mixin que lo
+lee coinciden en la misma clave incluso empaquetados por separado.
+
+El nombre viene del atributo `alt`, para elementos cuyo contenido es un glifo en
+lugar de texto:
+
+```html
+<kb-button variant="icon" alt="Eliminar">
+  <kb-icon use="delete"></kb-icon>
+</kb-button>
+```
+
+Usa `alt` solo donde no hay texto visible. Cuando el elemento tiene una etiqueta
+que se ve, usa `<kb-label>` — poner ambos hace que el nombre anunciado difiera
+del escrito, lo que rompe el control por voz.
+
+| Miembro | Tipo | Por defecto |
+|---|---|---|
+| `alt` | `string` | `''` |
+| `[role]` | `string` | — (lo declara el elemento) |
+
+Ambos se publican como **semántica por defecto** en `ElementInternals`, así que
+un `role` o `aria-label` escrito en el markup gana — el elemento entrega
+valores correctos sin quitarle la decisión a quien lo consume.
+
+Requiere que el host exponga `internals`, como `Hidden`. El mixin nunca llama a
+`attachInternals()` por su cuenta: solo se permite llamarlo una vez por
+elemento, así que esa llamada pertenece al elemento.
 
 ## `Headless(Base)`
 

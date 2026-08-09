@@ -11,6 +11,20 @@ declare module '@t2e1/kuba/mixin' {
     hidden: boolean
   }
 
+  /**
+   * Key an element implements to declare the role it plays in the
+   * accessibility tree, read by {@link Identity}.
+   */
+  const role: unique symbol
+
+  /** Instance shape added by {@link Identity}. */
+  interface IdentityInstance {
+    /** Accessible name for an element with no readable text of its own. Reflects the `alt` attribute. */
+    alt: string
+    /** The role this element plays in the accessibility tree. */
+    readonly [role]: string
+  }
+
   /** Instance shape added by {@link Height}. */
   interface HeightInstance {
     /** CSS height applied to the element. Reflects the `height` attribute; defaults to `"auto"`. */
@@ -62,6 +76,28 @@ declare module '@t2e1/kuba/mixin' {
   function Hidden<T extends Constructor>(
     Base: T,
   ): T & Constructor<HiddenInstance>
+
+  /**
+   * Gives the element an identity in the accessibility tree: the role it
+   * plays, declared by the element through `[role]`, and an accessible name
+   * backed by the `alt` attribute. Both are published as default semantics on
+   * `ElementInternals`, so author-supplied `role`/`aria-label` still wins.
+   *
+   * Reads `internals` from the host class — the element owns the
+   * `attachInternals()` call.
+   *
+   * @param Base - The class to extend.
+   * @returns `Base` extended with accessible role and name.
+   * @example
+   * class MyElement extends Identity(HTMLElement) {
+   *   get [role]() {
+   *     return 'progressbar'
+   *   }
+   * }
+   */
+  function Identity<T extends Constructor>(
+    Base: T,
+  ): T & Constructor<IdentityInstance>
 
   /**
    * Adds a `height` property reflected from/to the `height` attribute.
@@ -119,5 +155,5 @@ declare module '@t2e1/kuba/mixin' {
     Base: T,
   ): T & Constructor<TemplateInstance>
 
-  export { Headless, Height, Hidden, Template, Value, Width }
+  export { Headless, Height, Hidden, Identity, role, Template, Value, Width }
 }

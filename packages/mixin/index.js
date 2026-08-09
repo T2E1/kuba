@@ -1,6 +1,7 @@
 export { default as Headless } from './headless'
 export { default as Height } from './height'
 export { default as Hidden } from './hidden'
+export { default as Identity, role } from './identity'
 export { default as Template } from './template'
 export { default as Value } from './value'
 export { default as Width } from './width'

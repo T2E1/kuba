@@ -1,7 +1,7 @@
 # mixin
 
 ```js
-import { Headless, Height, Hidden, Template, Value, Width } from '@t2e1/kuba/mixin'
+import { Headless, Height, Hidden, Identity, Template, Value, Width } from '@t2e1/kuba/mixin'
 ```
 
 Comportamento de atributo reutilizável. Cada mixin recebe uma classe e devolve
@@ -35,8 +35,57 @@ consistente com a propriedade.
 |---|---|---|
 | `hidden` | `boolean` | `false` |
 
-Exige que o host exponha `internals` (um `ElementInternals`), o que todo
-elemento kuba faz através de um getter preguiçoso.
+Exige que o host exponha `internals` (um `ElementInternals`) através de um
+getter preguiçoso.
+
+## `Identity(Base)`
+
+Dá ao elemento uma identidade na árvore de acessibilidade: o **papel** que ele
+cumpre e — para elementos sem texto legível próprio — o **nome** pelo qual
+atende. Sem isso, um custom element é uma caixa anônima: `<kb-progress
+value="40">` não anuncia absolutamente nada.
+
+Diferente dos outros mixins, o papel não é um atributo. O elemento o declara
+implementando `[role]`, que o mixin lê na conexão:
+
+```js
+import { Identity, role } from '@t2e1/kuba/mixin'
+
+class Progress extends Identity(Echo(HTMLElement)) {
+  get [role]() {
+    return 'progressbar'
+  }
+}
+```
+
+`role` é um `Symbol.for`, então o elemento que o declara e o mixin que o lê
+concordam com a mesma chave mesmo empacotados separadamente.
+
+O nome vem do atributo `alt`, para elementos cujo conteúdo é um glifo em vez de
+texto:
+
+```html
+<kb-button variant="icon" alt="Excluir">
+  <kb-icon use="delete"></kb-icon>
+</kb-button>
+```
+
+Use `alt` apenas onde não há texto visível. Quando o elemento tem um rótulo que
+se enxerga, use `<kb-label>` — definir os dois faz o nome anunciado divergir do
+escrito, o que quebra o controle por voz.
+
+| Membro | Tipo | Padrão |
+|---|---|---|
+| `alt` | `string` | `''` |
+| `[role]` | `string` | — (o elemento declara) |
+
+Ambos são publicados como **semântica padrão** no `ElementInternals`, então um
+`role` ou `aria-label` escrito no markup vence — o elemento entrega padrões
+corretos sem tirar a decisão de quem o consome.
+
+Exige que o host exponha `internals`, como o `Hidden`. O mixin nunca chama
+`attachInternals()` por conta própria: só é permitido chamá-lo uma vez por
+elemento, então a posse dessa chamada é do elemento.
 
 ## `Headless(Base)`
 
