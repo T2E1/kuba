@@ -47,8 +47,11 @@ It's the mark alone — no attributes, no wordmark, no link behavior.
 
 ## Attributes
 
-This element has no attributes and dispatches no events. Everything about it is
-controlled through CSS.
+| Attribute | Type | Default | Description |
+|---|---|---|---|
+| `alt` | `string` | `''` | Accessible name for the mark. Unset, the logo is hidden from assistive technology. |
+
+It dispatches no events; everything else about it is controlled through CSS.
 
 ## Styling
 
@@ -70,11 +73,13 @@ mark should *not* follow the surrounding text.
 ## States and accessibility
 
 - `kb-logo` has no `hidden` attribute and no custom states.
-- **The inline SVG carries no `<title>` and no ARIA role**, so assistive
-  technology sees an unlabelled graphic. When the mark is the only content of a
-  link, put the name on the link: `<a href="/" aria-label="Home">`.
-- When a visible wordmark already names the product beside it, the mark is
-  decorative — `aria-hidden="true"` avoids announcing it twice.
+- **An unnamed logo hides itself.** The inline SVG carries no `<title>`, so it
+  would otherwise be an unlabelled graphic. With no `alt`, the element sets
+  `aria-hidden="true"` on itself — right whenever a visible wordmark names the
+  product beside it.
+- **Set `alt` when the mark stands alone**, such as the only content of a home
+  link: `<kb-logo alt="kuba, home">`. Naming the link instead works too; do one
+  or the other, not both.
 - The mark strokes at a fixed weight relative to its canvas, so it keeps its
   proportions at any `--logo-size`; it doesn't need a separate small variant.
 

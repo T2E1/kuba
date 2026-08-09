@@ -8,6 +8,14 @@
  */
 export default class KUBAIconElement extends HTMLElement {
   /**
+   * Accessible name for the glyph (reflects the `alt` attribute). Left unset,
+   * the icon is hidden from assistive technology, which is right whenever the
+   * surrounding control already carries the meaning.
+   * @default ''
+   */
+  alt: string
+
+  /**
    * Icon color (reflects the `color` attribute), resolved against the
    * `--color-{value}` CSS custom property.
    * @default 'currentColor' (when the attribute is unset)

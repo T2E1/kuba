@@ -52,7 +52,7 @@ variant="icon">` when the mark is meant to be pressed.
   <kb-icon use="download"></kb-icon>
   Download
 </kb-button>
-<kb-button variant="icon" aria-label="Search">
+<kb-button variant="icon" alt="Search">
   <kb-icon use="search"></kb-icon>
 </kb-button>
 ```
@@ -108,6 +108,7 @@ than failing loudly.
 | Attribute | Type | Default | Description |
 |---|---|---|---|
 | `use` | `string` | `''` | Material Symbols ligature name, e.g. `home`, `search`. |
+| `alt` | `string` | `''` | Accessible name. Unset, the icon is hidden from assistive technology. |
 | `size` | token step | `md` | Glyph size, resolved against `--font-size-{value}`. |
 | `color` | token suffix | `currentColor` | Glyph color, resolved against `--color-{value}`. |
 | `on` | arc string | — | Echo wiring, `source/event:type/sink`. |
@@ -159,12 +160,15 @@ without it, `use` renders as literal text instead of a glyph.
 ## States and accessibility
 
 - `kb-icon` has no `hidden` attribute and no custom states.
-- **The glyph is text in a symbol font**, so a screen reader announces the raw
-  ligature name ("home") unless you prevent it. Add `aria-hidden="true"`
-  whenever a visible text label already carries the meaning.
-- When the icon is the only content of a control, the accessible name has to
-  come from the control — `<kb-button variant="icon" aria-label="Search">` — not
-  from the icon.
+- **An unnamed icon hides itself.** The glyph is text in a symbol font, so a
+  screen reader would otherwise announce the raw ligature name ("home"). With no
+  `alt`, the element sets `aria-hidden="true"` on itself — the right default
+  whenever a visible label already carries the meaning.
+- **Set `alt` when the icon is the meaning**, and it becomes a named `img`
+  instead: `<kb-icon use="check" alt="Verified">`.
+- When the icon is the only content of a control, name the control rather than
+  the icon — `<kb-button variant="icon" alt="Search">`. Naming both makes the
+  same thing announced twice.
 - An unknown `use` value renders as literal text rather than a glyph; that's the
   fastest way to spot a typo in a ligature name.
 
@@ -174,5 +178,5 @@ without it, `use` renders as literal text instead of a glyph.
 |---|---|
 | Leave `color` unset so the glyph inherits from its text | Set a color on every icon "to be explicit" — it breaks on inverted surfaces |
 | Wrap the glyph in `<kb-button variant="icon">` to make it pressable | Attach a click listener to `kb-icon` — it has no focus or hit area |
-| Add `aria-hidden="true"` when a text label is present | Leave the ligature name announced next to the label it duplicates |
+| Leave `alt` unset when a text label is present — the icon hides itself | Set `alt` to the same words as the label beside it, announcing them twice |
 | Match `size` to the text beside it | Pick sizes by eye with `--icon-size` when a scale step fits |

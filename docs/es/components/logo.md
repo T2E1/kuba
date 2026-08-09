@@ -51,8 +51,11 @@ comportamiento de enlace.
 
 ## Atributos
 
-Este elemento no tiene atributos y no despacha eventos. Todo en él se controla
-mediante CSS.
+| Atributo | Tipo | Por defecto | Descripción |
+|---|---|---|---|
+| `alt` | `string` | `''` | Nombre accesible de la marca. Sin poner, el logo queda oculto a la tecnología de asistencia. |
+
+No despacha eventos; todo lo demás se controla mediante CSS.
 
 ## Estilos
 
@@ -74,11 +77,13 @@ caso en que la marca *no* deba seguir al texto que la rodea.
 ## Estados y accesibilidad
 
 - `kb-logo` no tiene atributo `hidden` ni custom states.
-- **El SVG inline no lleva `<title>` ni rol ARIA**, así que la tecnología de
-  asistencia ve un gráfico sin etiqueta. Cuando la marca es el único contenido
-  de un enlace, pon el nombre en el enlace: `<a href="/" aria-label="Inicio">`.
-- Cuando un nombre escrito visible ya identifica el producto al lado, la marca
-  es decorativa — `aria-hidden="true"` evita anunciarla dos veces.
+- **Un logo sin nombre se oculta solo.** El SVG inline no lleva `<title>`, así
+  que sería un gráfico sin etiqueta. Sin `alt`, el elemento se pone
+  `aria-hidden="true"` — lo correcto siempre que un nombre escrito visible
+  identifique el producto al lado.
+- **Pon `alt` cuando la marca está sola**, como único contenido de un enlace a
+  la home: `<kb-logo alt="kuba, inicio">`. Nombrar el enlace también sirve; haz
+  una cosa o la otra, no ambas.
 - La marca traza con un grosor fijo respecto a su lienzo, así que mantiene sus
   proporciones en cualquier `--logo-size`; no necesita una variante pequeña
   aparte.

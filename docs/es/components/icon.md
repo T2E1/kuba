@@ -55,7 +55,7 @@ dentro de un `<kb-button variant="icon">` cuando la marca deba pulsarse.
   <kb-icon use="download"></kb-icon>
   Descargar
 </kb-button>
-<kb-button variant="icon" aria-label="Buscar">
+<kb-button variant="icon" alt="Buscar">
   <kb-icon use="search"></kb-icon>
 </kb-button>
 ```
@@ -112,6 +112,7 @@ nada, en vez de fallar de forma ruidosa.
 | Atributo | Tipo | Por defecto | Descripción |
 |---|---|---|---|
 | `use` | `string` | `''` | Nombre de la ligadura de Material Symbols, p. ej. `home`, `search`. |
+| `alt` | `string` | `''` | Nombre accesible. Sin poner, el icono queda oculto a la tecnología de asistencia. |
 | `size` | escalón de token | `md` | Tamaño del glifo, resuelto contra `--font-size-{valor}`. |
 | `color` | sufijo de token | `currentColor` | Color del glifo, resuelto contra `--color-{valor}`. |
 | `on` | cadena de arco | — | Conexión de Echo, `origen/evento:tipo/destino`. |
@@ -163,13 +164,15 @@ mismo — sin ella, `use` se renderiza como texto literal en vez de glifo.
 ## Estados y accesibilidad
 
 - `kb-icon` no tiene atributo `hidden` ni custom states.
-- **El glifo es texto en una fuente de símbolos**, así que un lector de pantalla
-  anuncia el nombre crudo de la ligadura ("home") a menos que lo impidas. Añade
-  `aria-hidden="true"` siempre que una etiqueta de texto visible ya lleve el
-  significado.
-- Cuando el icono es el único contenido de un control, el nombre accesible tiene
-  que venir del control — `<kb-button variant="icon" aria-label="Buscar">` — y
-  no del icono.
+- **Un icono sin nombre se oculta solo.** El glifo es texto en una fuente de
+  símbolos, así que un lector de pantalla anunciaría el nombre crudo de la
+  ligadura ("home"). Sin `alt`, el elemento se pone `aria-hidden="true"` — el
+  valor correcto siempre que una etiqueta visible ya lleve el significado.
+- **Pon `alt` cuando el icono es el significado**, y pasa a ser un `img` con
+  nombre: `<kb-icon use="check" alt="Verificado">`.
+- Cuando el icono es el único contenido de un control, nombra el control y no el
+  icono — `<kb-button variant="icon" alt="Buscar">`. Nombrar ambos hace que lo
+  mismo se anuncie dos veces.
 - Un valor de `use` desconocido se renderiza como texto literal en vez de glifo;
   esa es la forma más rápida de detectar un error de tipeo en un nombre de
   ligadura.
@@ -180,5 +183,5 @@ mismo — sin ella, `use` se renderiza como texto literal en vez de glifo.
 |---|---|
 | Dejar `color` sin definir para que el glifo herede de su texto | Poner color en cada icono "para ser explícito" — se rompe en superficies invertidas |
 | Envolver el glifo en un `<kb-button variant="icon">` para hacerlo pulsable | Añadir un listener de clic a `kb-icon` — no tiene foco ni área de pulsación |
-| Añadir `aria-hidden="true"` cuando hay etiqueta de texto | Dejar que se anuncie el nombre de la ligadura junto a la etiqueta que duplica |
+| Dejar `alt` sin poner cuando hay etiqueta de texto — el icono se oculta solo | Repetir en `alt` las mismas palabras de la etiqueta al lado, anunciándolas dos veces |
 | Hacer coincidir `size` con el texto de al lado | Elegir tamaños a ojo con `--icon-size` cuando un escalón de la escala encaja |
