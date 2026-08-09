@@ -127,9 +127,9 @@ same properties in CSS.
 
 - `hidden` adds the `hidden` custom state and `display: none`, removing the
   stack and its children from layout and the accessibility tree.
-- The element renders no landmark, no role and no label. Group semantics have to
-  come from what you put inside it — a `<nav>`, a `<ul>`, a fieldset — or from
-  ARIA on the host.
+- **The host is declared presentational**, so the stack itself adds no node to
+  the accessibility tree. Group semantics have to come from what you put inside
+  it — a `<nav>`, a `<ul>`, a fieldset.
 - Visual order follows source order, so keyboard order matches the screen. Don't
   reverse it with `flex-direction: row-reverse` from outside.
 

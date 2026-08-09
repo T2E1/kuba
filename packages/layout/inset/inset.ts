@@ -1,7 +1,7 @@
 import { attributeChanged, define } from '@directive'
 import { paint, retouch } from '@dom'
 import Echo from '@echo'
-import { Height, Hidden, Width } from '@mixin'
+import { Height, Hidden, Identity, role, Width } from '@mixin'
 import component from './component'
 import style from './style'
 
@@ -9,7 +9,7 @@ import style from './style'
 @paint(component, style)
 // Mixin order matters: Width/Hidden/Height layer their attribute reflection
 // and rendering hooks bottom-up, and Echo adds event dispatch on top.
-class Inset extends Echo(Height(Hidden(Width(HTMLElement)))) {
+class Inset extends Identity(Echo(Height(Hidden(Width(HTMLElement))))) {
   #direction
   #internals
   #side
@@ -22,6 +22,12 @@ class Inset extends Echo(Height(Hidden(Width(HTMLElement)))) {
   @retouch
   set direction(value) {
     this.#direction = value
+  }
+
+  // Negative spacing and nothing else — the content it lets bleed to the edge
+  // keeps its own semantics.
+  get [role]() {
+    return 'none'
   }
 
   get internals() {

@@ -2,18 +2,24 @@ import { define } from '@directive'
 import { paint, repaint } from '@dom'
 import Echo from '@echo'
 import interpolate from '@interpolate'
-import { Hidden, Template } from '@mixin'
+import { Hidden, Identity, role, Template } from '@mixin'
 import component from './component'
 import style from './style'
 
 @define('kb-render')
 @paint(component, style)
-class Render extends Echo(Hidden(Template(HTMLElement))) {
+class Render extends Identity(Echo(Hidden(Template(HTMLElement)))) {
   #textContent
   #internals
 
   get textContent() {
     return (this.#textContent ??= '')
+  }
+
+  // A container for whatever the template produces; the rendered items carry
+  // the semantics, not the box holding them.
+  get [role]() {
+    return 'none'
   }
 
   get internals() {

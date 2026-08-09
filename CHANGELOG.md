@@ -24,6 +24,17 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) and 
 
 - Storybook, its three addons and `remark-gfm`, along with 22 `.stories.js`, 22 `.mdx` and the `stories/` directory. Everything they documented lives in the docs site; the interaction tests moved to Vitest. Neither stories nor MDX were ever part of the published package, so consumers are unaffected
 
+## [0.1.0-alpha.31] — 2026-08-09
+
+### Added
+
+- `<kb-icon>` and `<kb-logo>` accept `alt`. Without it they now hide themselves from assistive technology, which is what you want whenever a visible label already carries the meaning — previously an icon was announced by its Material Symbols ligature name, so `use="cloud_upload"` was read aloud as "cloud_upload", and the logo was an unlabelled graphic. Given an `alt`, both become a named image
+- `<kb-stack>`, `<kb-inset>` and `<kb-render>` declare themselves presentational, so they no longer add a node of their own to the accessibility tree. Their content keeps its semantics untouched
+
+### Changed
+
+- `<kb-icon>`'s documented workarounds are gone: adding `aria-hidden="true"` by hand, and naming an icon button through `aria-label`. The element hides itself, and `<kb-button>` takes `alt`
+
 ## [0.1.0-alpha.30] — 2026-08-09
 
 ### Added

@@ -52,3 +52,18 @@ test('clear() empties the output without losing the template', async () => {
   render.render({ name: 'Grace' })
   await vi.waitFor(() => expect(render.textContent).toBe('Grace'))
 })
+
+test('stays out of the accessibility tree', async () => {
+  // The rendered items carry the semantics; the container holding them adds
+  // nothing an assistive technology needs to hear about.
+  const body = mount(`
+    <kb-render>
+      <template>{name}</template>
+    </kb-render>
+  `)
+  const render = body.querySelector('kb-render')
+
+  render.render({ name: 'Ada' })
+
+  expect(render.internals.role).toBe('none')
+})

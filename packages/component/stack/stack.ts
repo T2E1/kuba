@@ -1,13 +1,13 @@
 import { attributeChanged, define } from '@directive'
 import { paint, retouch } from '@dom'
 import Echo from '@echo'
-import { Height, Hidden, Width } from '@mixin'
+import { Height, Hidden, Identity, role, Width } from '@mixin'
 import component from './component.js'
 import style from './style.js'
 
 @define('kb-stack')
 @paint(component, style)
-class Stack extends Hidden(Width(Height(Echo(HTMLElement)))) {
+class Stack extends Identity(Hidden(Width(Height(Echo(HTMLElement))))) {
   #align
   #direction
   #internals
@@ -32,6 +32,12 @@ class Stack extends Hidden(Width(Height(Echo(HTMLElement)))) {
   @retouch
   set direction(value) {
     this.#direction = value
+  }
+
+  // A layout box with no meaning of its own: declaring it presentational
+  // keeps it from adding a generic node around whatever it arranges.
+  get [role]() {
+    return 'none'
   }
 
   get internals() {

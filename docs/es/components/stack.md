@@ -130,9 +130,9 @@ las mismas propiedades en CSS.
 
 - `hidden` añade el custom state `hidden` y `display: none`, eliminando el stack
   y sus hijos del layout y del árbol de accesibilidad.
-- El elemento no renderiza landmark, rol ni etiqueta. La semántica de grupo
-  tiene que venir de lo que pongas dentro — un `<nav>`, una `<ul>`, un fieldset
-  — o de ARIA en el host.
+- **El host se declara presentacional**, así que la pila en sí no añade ningún
+  nodo al árbol de accesibilidad. La semántica de grupo tiene que venir de lo
+  que pongas dentro — un `<nav>`, una `<ul>`, un fieldset.
 - El orden visual sigue al orden del código, así que el orden de teclado
   coincide con el de la pantalla. No lo inviertas con
   `flex-direction: row-reverse` desde fuera.

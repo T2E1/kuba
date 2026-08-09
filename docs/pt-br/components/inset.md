@@ -139,9 +139,9 @@ comum de fora — mude a custom property no lugar.
 
 - `hidden` adiciona o custom state `hidden` e `display: none`, removendo o
   elemento e seu conteúdo do layout e da árvore de acessibilidade.
-- O elemento não renderiza papel nem landmark — é um contêiner visual. O
-  conteúdo dentro mantém a própria semântica, e a margem negativa não muda a
-  ordem de leitura nem a de foco.
+- **O host é declarado presentacional** — é um contêiner visual. O conteúdo
+  dentro mantém a própria semântica, e a margem negativa não muda a ordem de
+  leitura nem a de foco.
 - `overflow: hidden` corta, não rola. Conteúdo mais alto que uma `height` fixa é
   cortado em silêncio, então deixe a altura automática a menos que você queira o
   corte.

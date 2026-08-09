@@ -140,9 +140,9 @@ establece márgenes en sus hijos. No puedes sobrescribir la sangría con un
 
 - `hidden` añade el custom state `hidden` y `display: none`, eliminando el
   elemento y su contenido del layout y del árbol de accesibilidad.
-- El elemento no renderiza rol ni landmark — es un contenedor visual. El
-  contenido de dentro conserva su propia semántica, y el margen negativo no
-  cambia el orden de lectura ni el de foco.
+- **El host se declara presentacional** — es un contenedor visual. El contenido
+  de dentro conserva su propia semántica, y el margen negativo no cambia el
+  orden de lectura ni el de foco.
 - `overflow: hidden` recorta, no desplaza. El contenido más alto que una
   `height` fija se corta en silencio, así que deja la altura automática salvo
   que busques el recorte.

@@ -135,7 +135,7 @@ on its children. You can't override the bleed with a plain `margin` from outside
 
 - `hidden` adds the `hidden` custom state and `display: none`, removing the
   element and its content from layout and the accessibility tree.
-- The element renders no role and no landmark — it's a visual container. Content
+- **The host is declared presentational** — it's a visual container. Content
   inside keeps its own semantics, and the negative margin doesn't change reading
   or focus order.
 - `overflow: hidden` clips, it doesn't scroll. Content taller than a fixed
