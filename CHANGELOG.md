@@ -24,6 +24,19 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) and 
 
 - Storybook, its three addons and `remark-gfm`, along with 22 `.stories.js`, 22 `.mdx` and the `stories/` directory. Everything they documented lives in the docs site; the interaction tests moved to Vitest. Neither stories nor MDX were ever part of the published package, so consumers are unaffected
 
+## [0.1.0-alpha.30] — 2026-08-09
+
+### Added
+
+- `Identity`, a mixin that gives an element its identity in the accessibility tree: the role it plays, declared through the `[role]` contract, and an accessible name backed by a new `alt` attribute. Both are published as default semantics on `ElementInternals`, so a `role` or `aria-label` written in the markup still wins. Exported from `@t2e1/kuba/mixin` alongside the `role` symbol
+- `<kb-main>` now carries the `main` landmark, `<kb-header>` the `banner` landmark and `<kb-footer>` the `contentinfo` landmark. Previously `<kb-main>` exposed no landmark at all, and the docs told you to add `role="main"` by hand — that is no longer needed
+- `<kb-progress>` now exposes `role="progressbar"`, with `value` mirrored onto `aria-valuenow` on every change and the scale fixed at `aria-valuemin="0"` / `aria-valuemax="100"`. It also accepts `alt`, to say what is progressing
+- `<kb-button>` accepts `alt`, written as `aria-label` onto the `<button>` in its shadow root. Required for `variant="icon"`, which previously announced the Material Symbols ligature name — an icon button using `cloud_upload` was read as "cloud_upload"
+
+### Changed
+
+- The shadow roots of `<kb-header>` and `<kb-footer>` no longer render native `<header>`/`<footer>` elements. Those map to `banner`/`contentinfo` on their own, which would have nested two landmarks once the host carried the role. The wrapper is internal, so no consumer markup changes
+
 ## [0.1.0-alpha.29] — 2026-08-08
 
 ### Fixed

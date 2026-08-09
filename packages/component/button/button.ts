@@ -1,5 +1,5 @@
 import { attributeChanged, define } from '@directive'
-import { paint, retouch } from '@dom'
+import { paint, repaint, retouch } from '@dom'
 import Echo, { dispatchEvent } from '@echo'
 import on, { stop } from '@event'
 import { before } from '@middleware'
@@ -17,10 +17,25 @@ import style from './style.js'
 @define('kb-button')
 @paint(component, style)
 class Button extends Echo(Hidden(Value(Width(HTMLElement)))) {
+  #alt
   #color
   #internals
   #type
   #variant
+
+  get alt() {
+    return (this.#alt ??= '')
+  }
+
+  // Deliberately not the `Identity` mixin: that publishes a role and a name on
+  // the host, and here the host is only a wrapper — the <button> in the shadow
+  // root is what the accessibility tree treats as the button. `@repaint`
+  // re-renders the markup so the template can write `aria-label` onto it.
+  @attributeChanged('alt')
+  @repaint
+  set alt(value) {
+    this.#alt = value
+  }
 
   get color() {
     return (this.#color ??= 'primary')

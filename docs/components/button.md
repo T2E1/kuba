@@ -115,6 +115,7 @@ button doesn't clip text.
 
 | Attribute | Type | Default | Description |
 |---|---|---|---|
+| `alt` | `string` | `''` | Accessible name, written as `aria-label` onto the inner `<button>`. Required for `variant="icon"`. |
 | `color` | `string` | `primary` | Semantic color, resolved against `--color-{value}`. |
 | `variant` | `solid` \| `naked` \| `ghost` \| `link` \| `icon` | `solid` | Emphasis level. |
 | `width` | `auto` \| `fill` \| `hug` \| length | `auto` | How the button fills its container. |
@@ -164,9 +165,14 @@ element or any ancestor — never reach into the shadow DOM.
 - `hidden` removes the button from layout and interaction. Prefer it over not
   rendering the element when the presence or absence should stay findable in the
   DOM.
-- An `icon` button with no text needs an accessible name from context — put
-  `aria-label` on the `kb-button` itself. The glyph conveys nothing to assistive
-  technology.
+- **An `icon` button needs `alt`.** The glyph conveys nothing, and without a
+  name the button is announced from the ligature text — `<kb-button
+  variant="icon" use="cloud_upload">` reads as "cloud_upload". `alt` is written
+  as `aria-label` onto the `<button>` in the shadow root, which is what the
+  accessibility tree treats as the button — the host only wraps it.
+- Leave `alt` unset on a button with visible text — the text already names it,
+  and a differing `alt` would make the announced name diverge from the written
+  one, breaking voice control.
 - `type="submit"` only does something inside a `<form>`. Standalone, it's a
   silent no-op on click.
 

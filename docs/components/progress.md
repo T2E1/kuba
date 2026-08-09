@@ -81,6 +81,7 @@ on every byte.
 | Attribute | Type | Default | Description |
 |---|---|---|---|
 | `value` | `string` | `'0'` | Fill percentage, `0`–`100`. Applied directly as a CSS `%` width. |
+| `alt` | `string` | `''` | Accessible name saying what is progressing. |
 | `on` | arc string | — | Echo wiring, `source/event:type/sink`. |
 
 This element dispatches no events.
@@ -113,10 +114,12 @@ over.
 
 - `kb-progress` has no `hidden` attribute and no custom states — remove the
   element when there's nothing to report.
-- **The element exposes no ARIA role.** Assistive technology sees two empty
-  `<div>`s, so add the semantics on the host: `role="progressbar"`,
-  `aria-valuenow`, `aria-valuemin`, `aria-valuemax` and a label. Keep
-  `aria-valuenow` in sync with `value` — they're set independently.
+- **The host carries `role="progressbar"`**, published through
+  `ElementInternals`, with `value` mirrored onto `aria-valuenow` on every
+  change. The scale is fixed at `aria-valuemin="0"` / `aria-valuemax="100"`,
+  because `value` is applied straight into CSS as a `%`.
+- **Give it an `alt`.** The role and the number are announced, but nothing says
+  *what* is progressing — `<kb-progress value="40" alt="Upload">` does.
 - The track defaults to `--color-pure-white`, which disappears on a white
   surface. On a light page, set `--progress-color-track` to a neutral so the
   unfilled portion stays visible.

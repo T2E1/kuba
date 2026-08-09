@@ -82,6 +82,7 @@ bem, e não a cada byte.
 | Atributo | Tipo | Padrão | Descrição |
 |---|---|---|---|
 | `value` | `string` | `'0'` | Porcentagem de preenchimento, `0`–`100`. Aplicada diretamente como largura CSS em `%`. |
+| `alt` | `string` | `''` | Nome acessível dizendo o que está progredindo. |
 | `on` | string de arco | — | Ligação do Echo, `origem/evento:tipo/destino`. |
 
 Este elemento não dispara eventos.
@@ -114,11 +115,12 @@ passou.
 
 - `kb-progress` não tem atributo `hidden` nem custom states — remova o elemento
   quando não houver nada a reportar.
-- **O elemento não expõe papel ARIA nenhum.** A tecnologia assistiva vê dois
-  `<div>` vazios, então adicione a semântica no host: `role="progressbar"`,
-  `aria-valuenow`, `aria-valuemin`, `aria-valuemax` e um rótulo. Mantenha
-  `aria-valuenow` em sincronia com `value` — eles são definidos de forma
-  independente.
+- **O host carrega `role="progressbar"`**, publicado via `ElementInternals`,
+  com `value` espelhado em `aria-valuenow` a cada mudança. A escala é fixa em
+  `aria-valuemin="0"` / `aria-valuemax="100"`, porque `value` é aplicado direto
+  no CSS como `%`.
+- **Dê um `alt` a ele.** O papel e o número são anunciados, mas nada diz *o quê*
+  está progredindo — `<kb-progress value="40" alt="Envio">` diz.
 - A trilha usa `--color-pure-white` por padrão, que desaparece numa superfície
   branca. Numa página clara, defina `--progress-color-track` como um neutro para
   que a parte não preenchida continue visível.

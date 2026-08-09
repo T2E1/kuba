@@ -120,6 +120,7 @@ saltan de línea en vez de truncarse; el botón no recorta el texto.
 
 | Atributo | Tipo | Por defecto | Descripción |
 |---|---|---|---|
+| `alt` | `string` | `''` | Nombre accesible, escrito como `aria-label` en el `<button>` interno. Obligatorio para `variant="icon"`. |
 | `color` | `string` | `primary` | Color semántico, resuelto contra `--color-{valor}`. |
 | `variant` | `solid` \| `naked` \| `ghost` \| `link` \| `icon` | `solid` | Nivel de énfasis. |
 | `width` | `auto` \| `fill` \| `hug` \| longitud | `auto` | Cómo llena el botón su contenedor. |
@@ -170,9 +171,14 @@ metas mano en el shadow DOM.
 - `hidden` elimina el botón del layout y de la interacción. Prefiérelo a no
   renderizar el elemento cuando la presencia o ausencia deba seguir siendo
   localizable en el DOM.
-- Un botón `icon` sin texto necesita un nombre accesible que venga del contexto
-  — pon `aria-label` en el propio `kb-button`. El glifo no transmite nada a la
-  tecnología de asistencia.
+- **Un botón `icon` necesita `alt`.** El glifo no transmite nada, y sin nombre
+  el botón se anuncia a partir del texto de la ligature — `<kb-button
+  variant="icon" use="cloud_upload">` se lee como "cloud_upload". El `alt` se
+  escribe como `aria-label` en el `<button>` del shadow root, que es lo que el
+  árbol de accesibilidad trata como el botón — el host solo lo envuelve.
+- Deja `alt` sin poner en un botón con texto visible — el texto ya lo nombra, y
+  un `alt` distinto haría que el nombre anunciado difiera del escrito, rompiendo
+  el control por voz.
 - `type="submit"` solo hace algo dentro de un `<form>`. Por sí solo, no hace
   nada al hacer clic, en silencio.
 

@@ -1,6 +1,6 @@
 import { expect, test, vi } from 'vitest'
 import { userEvent } from 'vitest/browser'
-import { clickInner, mount } from '../../../vitest.helpers.js'
+import { clickInner, inner, mount } from '../../../vitest.helpers.js'
 
 test('dispatches clicked carrying its value', async () => {
   const body = mount('<kb-button value="42">Save</kb-button>')
@@ -55,4 +55,41 @@ test('wires a payload to another element through an arc', async () => {
   await clickInner(body.querySelector('#source'))
 
   await vi.waitFor(() => expect(target.value).toBe('42'))
+})
+
+test('names the inner control, not the host', async () => {
+  // The <button> in the shadow root is what the accessibility tree treats as
+  // the button, so the name has to land there — naming the host would name a
+  // wrapper no one ever focuses.
+  const body = mount('<kb-button variant="icon" alt="Delete"></kb-button>')
+  const button = body.querySelector('kb-button')
+
+  const control = await inner(button, 'button')
+
+  expect(control.getAttribute('aria-label')).toBe('Delete')
+})
+
+test('leaves the control unnamed when alt is absent', async () => {
+  // A button with visible text takes its name from that text; an empty
+  // aria-label would erase it.
+  const body = mount('<kb-button>Save</kb-button>')
+  const button = body.querySelector('kb-button')
+
+  const control = await inner(button, 'button')
+
+  expect(control.hasAttribute('aria-label')).toBe(false)
+})
+
+test('follows alt when it changes after mount', async () => {
+  const body = mount('<kb-button variant="icon" alt="Delete"></kb-button>')
+  const button = body.querySelector('kb-button')
+  await inner(button, 'button')
+
+  button.setAttribute('alt', 'Remove')
+
+  await vi.waitFor(async () =>
+    expect((await inner(button, 'button')).getAttribute('aria-label')).toBe(
+      'Remove',
+    ),
+  )
 })

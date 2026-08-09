@@ -68,6 +68,15 @@ type KUBAButtonWidthAttribute =
  */
 export default class KUBAButtonElement extends HTMLElement {
   /**
+   * Accessible name, written as `aria-label` onto the `<button>` in the shadow
+   * root (reflects the `alt` attribute). Required for `variant="icon"`, which
+   * has no visible text to take a name from; leave it unset on a button that
+   * does, so the text keeps naming it.
+   * @default ''
+   */
+  alt: string
+
+  /**
    * Semantic color applied to the button (reflects the `color` attribute).
    * Resolved against the `--color-{value}` CSS custom property.
    * @default 'primary'

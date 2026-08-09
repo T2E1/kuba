@@ -83,6 +83,7 @@ Actualiza a una cadencia que se lea bien, no en cada byte.
 | Atributo | Tipo | Por defecto | Descripción |
 |---|---|---|---|
 | `value` | `string` | `'0'` | Porcentaje de relleno, `0`–`100`. Se aplica directamente como ancho CSS en `%`. |
+| `alt` | `string` | `''` | Nombre accesible que dice qué está progresando. |
 | `on` | cadena de arco | — | Conexión de Echo, `origen/evento:tipo/destino`. |
 
 Este elemento no despacha eventos.
@@ -115,11 +116,12 @@ una que se pasó.
 
 - `kb-progress` no tiene atributo `hidden` ni custom states — elimina el
   elemento cuando no haya nada que reportar.
-- **El elemento no expone ningún rol ARIA.** La tecnología de asistencia ve dos
-  `<div>` vacíos, así que añade la semántica en el host: `role="progressbar"`,
-  `aria-valuenow`, `aria-valuemin`, `aria-valuemax` y una etiqueta. Mantén
-  `aria-valuenow` en sincronía con `value` — se establecen de forma
-  independiente.
+- **El host lleva `role="progressbar"`**, publicado mediante `ElementInternals`,
+  con `value` reflejado en `aria-valuenow` en cada cambio. La escala es fija en
+  `aria-valuemin="0"` / `aria-valuemax="100"`, porque `value` se aplica directo
+  en CSS como `%`.
+- **Dale un `alt`.** El rol y el número se anuncian, pero nada dice *qué* está
+  progresando — `<kb-progress value="40" alt="Subida">` sí.
 - La pista usa `--color-pure-white` por defecto, que desaparece sobre una
   superficie blanca. En una página clara, establece `--progress-color-track` a
   un neutro para que la parte sin rellenar siga siendo visible.
