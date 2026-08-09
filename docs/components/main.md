@@ -18,7 +18,7 @@ top, `kb-main` between, `<kb-footer>` below.
 ## Usage
 
 ```html
-<kb-main role="main">
+<kb-main>
   <h1>Page title</h1>
   <p>Page content.</p>
 </kb-main>
@@ -77,7 +77,11 @@ default.
 
 ## Attributes
 
-This element has no attributes and dispatches no events.
+| Attribute | Type | Default | Description |
+|---|---|---|---|
+| `alt` | `string` | `''` | Accessible name for the landmark, for pages that carry more than one. |
+
+It dispatches no events.
 
 ## Styling
 
@@ -104,10 +108,9 @@ header's own 1024px row:
 ## States and accessibility
 
 - `kb-main` has no `hidden` attribute and no custom states.
-- **The element does not render a native `<main>`** — its shadow root is just a
-  slot, so it exposes no `main` landmark on its own. Add the role on the host
-  (`<kb-main role="main">`) or wrap the page content in a real `<main>`, so
-  "skip to content" works.
+- **The host carries the `main` landmark**, published through
+  `ElementInternals`, so "skip to content" works with no markup of your own. The
+  shadow root is just a slot, which is why the role belongs on the host.
 - Keep one per page. Two content regions make the landmark ambiguous, the same
   way two `<kb-header>`s would.
 - The width cap is what keeps line length readable; overriding it far beyond
@@ -120,4 +123,4 @@ header's own 1024px row:
 | Use exactly one `kb-main` per page | Nest one inside another, or reuse it per section |
 | Keep `--main-size-offset` in sync with the bar heights | Change the bars and leave the offset at 144px |
 | Let direct children inherit the built-in gap | Add margins to children to recreate spacing the column provides |
-| Add `role="main"` (or wrap in `<main>`) for the landmark | Assume the element name alone conveys the landmark |
+| Name the landmark with `alt` when a page carries more than one | Add `role="main"` by hand — the element already publishes it |

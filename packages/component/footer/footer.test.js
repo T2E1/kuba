@@ -1,6 +1,26 @@
 import { expect, test } from 'vitest'
 import { inner, mount } from '../../../vitest.helpers.js'
 
+test('is the contentinfo landmark', async () => {
+  const body = mount('<kb-footer></kb-footer>')
+  const footer = body.querySelector('kb-footer')
+
+  await inner(footer, 'wrapper')
+
+  expect(footer.internals.role).toBe('contentinfo')
+})
+
+test('holds the only contentinfo in its shadow root', async () => {
+  // A <footer> inside the shadow root would map to `contentinfo` as well,
+  // leaving two nested landmarks — the wrapper is deliberately non-semantic.
+  const body = mount('<kb-footer></kb-footer>')
+  const footer = body.querySelector('kb-footer')
+
+  await inner(footer, 'wrapper')
+
+  expect(footer.shadowRoot.querySelector('footer')).toBe(null)
+})
+
 test('projects content into its leading and trailing regions', async () => {
   // kb-footer's only job is pushing content to opposite ends of a centered
   // row — there is no attribute or event to exercise, so the projection

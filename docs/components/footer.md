@@ -85,8 +85,11 @@ content that wraps will overflow it rather than push it taller.
 
 ## Attributes
 
-This element has no attributes and dispatches no events. Its whole surface is
-the pair of named slots.
+| Attribute | Type | Default | Description |
+|---|---|---|---|
+| `alt` | `string` | `''` | Accessible name for the landmark, for pages that carry more than one. |
+
+It dispatches no events; the rest of its surface is the pair of named slots.
 
 ## Styling
 
@@ -113,9 +116,11 @@ separate surface:
 
 - `kb-footer` has no `hidden` attribute and no custom states — remove the
   element itself when the bar shouldn't be in the layout.
-- The inner `<footer>` exposes a `contentinfo` landmark for the page. Use a
-  single `kb-footer` per page; a second splits that landmark and makes "jump to
-  page footer" ambiguous.
+- The host carries the `contentinfo` landmark, published through
+  `ElementInternals`. The shadow wrapper is deliberately non-semantic: a
+  `<footer>` there would map to `contentinfo` too, leaving two nested landmarks.
+- Use a single `kb-footer` per page; a second splits that landmark and makes
+  "jump to page footer" ambiguous.
 - The element adds no focus management, so slotted links and buttons keep their
   native focus order — keep them in the reading order you want, `leading` first.
 

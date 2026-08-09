@@ -88,8 +88,11 @@ então conteúdo que quebra linha vai transbordar em vez de aumentá-la.
 
 ## Atributos
 
-Este elemento não tem atributos e não dispara eventos. Toda a superfície dele é
-o par de slots nomeados.
+| Atributo | Tipo | Padrão | Descrição |
+|---|---|---|---|
+| `alt` | `string` | `''` | Nome acessível do landmark, para páginas que carregam mais de um. |
+
+Ele não dispara eventos; o resto da superfície é o par de slots nomeados.
 
 ## Estilo
 
@@ -116,9 +119,11 @@ superfície separada:
 
 - `kb-footer` não tem atributo `hidden` nem custom states — remova o próprio
   elemento quando a barra não deve estar no layout.
-- O `<footer>` interno expõe um landmark `contentinfo` para a página. Use um
-  único `kb-footer` por página; um segundo divide esse landmark e torna o "pular
-  para o rodapé da página" ambíguo.
+- O host carrega o landmark `contentinfo`, publicado via `ElementInternals`. O
+  wrapper do shadow é deliberadamente sem semântica: um `<footer>` ali também
+  mapearia para `contentinfo`, deixando dois landmarks aninhados.
+- Use um único `kb-footer` por página; um segundo divide esse landmark e torna o
+  "pular para o rodapé da página" ambíguo.
 - O elemento não adiciona gerenciamento de foco, então links e botões encaixados
   mantêm a ordem de foco nativa — mantenha-os na ordem de leitura que você quer,
   `leading` primeiro.

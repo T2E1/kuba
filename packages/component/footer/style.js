@@ -7,7 +7,7 @@ function style() {
       height: var(--footer-size-height, 72px);
       width: 100%;
 
-      footer {
+      wrapper {
         width: 100%;
 
         container {

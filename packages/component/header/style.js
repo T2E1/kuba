@@ -7,7 +7,7 @@ function style() {
       height: var(--header-size-height, 72px);
       width: 100%;
 
-      header {
+      wrapper {
         box-sizing: border-box;
         width: 100svw;
 

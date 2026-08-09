@@ -18,7 +18,7 @@ da página — `<kb-header>` em cima, `kb-main` no meio, `<kb-footer>` embaixo.
 ## Uso
 
 ```html
-<kb-main role="main">
+<kb-main>
   <h1>Título da página</h1>
   <p>Conteúdo da página.</p>
 </kb-main>
@@ -79,7 +79,11 @@ manter o padrão.
 
 ## Atributos
 
-Este elemento não tem atributos e não dispara eventos.
+| Atributo | Tipo | Padrão | Descrição |
+|---|---|---|---|
+| `alt` | `string` | `''` | Nome acessível do landmark, para páginas que carregam mais de um. |
+
+Ele não dispara eventos.
 
 ## Estilo
 
@@ -106,10 +110,9 @@ coluna acompanhe a própria faixa de 1024px do cabeçalho:
 ## Estados e acessibilidade
 
 - `kb-main` não tem atributo `hidden` nem custom states.
-- **O elemento não renderiza um `<main>` nativo** — o shadow root dele é só um
-  slot, então ele não expõe um landmark `main` por conta própria. Adicione o
-  papel no host (`<kb-main role="main">`) ou envolva o conteúdo da página num
-  `<main>` de verdade, para que o "pular para o conteúdo" funcione.
+- **O host carrega o landmark `main`**, publicado via `ElementInternals`, então
+  o "pular para o conteúdo" funciona sem markup seu. O shadow root é só um slot,
+  e é por isso que o papel pertence ao host.
 - Mantenha um por página. Duas regiões de conteúdo tornam o landmark ambíguo, do
   mesmo jeito que dois `<kb-header>` tornariam.
 - O limite de largura é o que mantém o comprimento da linha legível;
@@ -123,4 +126,4 @@ coluna acompanhe a própria faixa de 1024px do cabeçalho:
 | Usar exatamente um `kb-main` por página | Aninhar um dentro do outro, ou reutilizá-lo por seção |
 | Manter o `--main-size-offset` em sincronia com as alturas das barras | Mudar as barras e deixar o deslocamento em 144px |
 | Deixar os filhos diretos herdarem o espaçamento embutido | Adicionar margens nos filhos para recriar o espaçamento que a coluna já dá |
-| Adicionar `role="main"` (ou envolver num `<main>`) para o landmark | Supor que o nome do elemento sozinho comunica o landmark |
+| Nomear o landmark com `alt` quando a página carrega mais de um | Adicionar `role="main"` na mão — o elemento já o publica |

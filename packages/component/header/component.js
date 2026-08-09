@@ -2,7 +2,7 @@ import { html } from '@dom'
 
 function component() {
   return html`
-    <header>
+    <wrapper>
       <container>
         <leading>
           <slot name="leading">
@@ -12,7 +12,7 @@ function component() {
           <slot name="trailing"></slot>
         </trailing>
       </container>
-    </header>
+    </wrapper>
   `
 }
 

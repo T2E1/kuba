@@ -74,7 +74,7 @@ y centrados verticalmente sin ningún wrapper extra.
 </kb-header>
 ```
 
-!> **El `<header>` interno mide `100svw` de ancho** — abarca el viewport en vez
+!> **El wrapper del shadow mide `100svw` de ancho** — abarca el viewport en vez
 de su contenedor. Anidar uno dentro de un elemento más estrecho hace que lo
 desborde. `<kb-footer>` tenía el mismo comportamiento y se cambió para llenar su
 contenedor; este no.
@@ -88,8 +88,11 @@ de agrandarla.
 
 ## Atributos
 
-Este elemento no tiene atributos y no despacha eventos. Toda su superficie es el
-par de slots con nombre.
+| Atributo | Tipo | Por defecto | Descripción |
+|---|---|---|---|
+| `alt` | `string` | `''` | Nombre accesible del landmark, para páginas que llevan más de uno. |
+
+No despacha eventos; el resto de su superficie es el par de slots con nombre.
 
 ## Estilos
 
@@ -117,9 +120,12 @@ como una superficie separada:
 
 - `kb-header` no tiene atributo `hidden` ni custom states — elimina el propio
   elemento cuando la barra no deba estar en el layout.
-- El `<header>` interno expone un landmark `banner`. Usa un único `kb-header`
-  por página; un segundo divide ese landmark y hace ambiguo el "saltar a la
-  cabecera de la página".
+- El host lleva el landmark `banner`, publicado mediante `ElementInternals`. El
+  wrapper del shadow es deliberadamente no semántico: un `<header>` ahí también
+  mapearía a `banner`, dejando dos landmarks anidados.
+- Usa un único `kb-header` por página; un segundo divide ese landmark y hace
+  ambiguo el "saltar a la cabecera de la página". Cuando una página necesite dos
+  de verdad, dale un `alt` a cada uno para poder distinguirlos.
 - Envuelve la navegación principal en un `<nav>` dentro del slot `trailing` para
   que tenga su propio landmark `navigation` — el landmark de la cabecera no
   describe los enlaces que contiene.

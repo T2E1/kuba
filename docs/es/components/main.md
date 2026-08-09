@@ -19,7 +19,7 @@ abajo.
 ## Uso
 
 ```html
-<kb-main role="main">
+<kb-main>
   <h1>Título de la página</h1>
   <p>Contenido de la página.</p>
 </kb-main>
@@ -80,7 +80,11 @@ mantener el valor por defecto.
 
 ## Atributos
 
-Este elemento no tiene atributos y no despacha eventos.
+| Atributo | Tipo | Por defecto | Descripción |
+|---|---|---|---|
+| `alt` | `string` | `''` | Nombre accesible del landmark, para páginas que llevan más de uno. |
+
+No despacha eventos.
 
 ## Estilos
 
@@ -108,10 +112,9 @@ cabecera:
 ## Estados y accesibilidad
 
 - `kb-main` no tiene atributo `hidden` ni custom states.
-- **El elemento no renderiza un `<main>` nativo** — su shadow root es solo un
-  slot, así que no expone un landmark `main` por sí mismo. Añade el rol en el
-  host (`<kb-main role="main">`) o envuelve el contenido de la página en un
-  `<main>` real, para que "saltar al contenido" funcione.
+- **El host lleva el landmark `main`**, publicado mediante `ElementInternals`,
+  así que "saltar al contenido" funciona sin markup propio. El shadow root es
+  solo un slot, y por eso el rol pertenece al host.
 - Mantén uno por página. Dos regiones de contenido hacen el landmark ambiguo,
   igual que lo harían dos `<kb-header>`.
 - El límite de ancho es lo que mantiene legible la longitud de línea;
@@ -125,4 +128,4 @@ cabecera:
 | Usar exactamente un `kb-main` por página | Anidar uno dentro de otro, o reutilizarlo por sección |
 | Mantener `--main-size-offset` en sincronía con las alturas de las barras | Cambiar las barras y dejar el desplazamiento en 144px |
 | Dejar que los hijos directos hereden el espaciado incorporado | Añadir márgenes a los hijos para recrear el espaciado que la columna ya da |
-| Añadir `role="main"` (o envolver en un `<main>`) para el landmark | Suponer que el nombre del elemento por sí solo transmite el landmark |
+| Nombrar el landmark con `alt` cuando la página lleva más de uno | Añadir `role="main"` a mano — el elemento ya lo publica |
