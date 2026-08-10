@@ -26,7 +26,7 @@ As três camadas se empilham, e confundi-las é o erro que este arquivo existe p
 | Camada | Responde | Exemplo |
 |---|---|---|
 | **rule** | *O que é proibido* | "Métodos com no máximo **3** parâmetros" |
-| **skill** | *Como se faz* | Como nomear um Symbol; como escrever uma story |
+| **skill** | *Como se faz* | Como nomear um Symbol; como demonstrar um componente |
 | **agent** | *Quem faz, com que método* | O QA que decide o que testar e quando reprovar |
 
 A rule **exige**, a skill **executa**, o agent **decide**. Um agent que ensina sintaxe

@@ -83,7 +83,7 @@ decorator resolvem isso; `addEventListener` manual vai em `connectedCallback`, c
 - [ ] Todo listener manual removido em `disconnectedCallback`
 - [ ] Nenhum componente guardando referência direta a outro
 - [ ] Todo evento disparado documentado no `types.d.ts` com `@fires`
-- [ ] Todo evento documentado tem story com `play` que o exercita
+- [ ] Todo evento documentado tem teste de interação que o exercita
 
 ## Troubleshooting
 
@@ -102,7 +102,7 @@ elemento foi movido no DOM — o que dispara `disconnected` e `connected` de nov
 
 **Causa:** a declaração em `actions.handles` mostra o evento; não prova que a lógica
 funciona.
-**Solução:** story com `play` (skill `story`, Regra 6) fazendo `expect` do `detail`.
+**Solução:** teste de interação (skill `preview`) fazendo `expect` do `detail`.
 
 ## Rules relacionadas
 

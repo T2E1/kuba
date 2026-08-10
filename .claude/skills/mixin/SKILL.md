@@ -92,7 +92,7 @@ Todo componente que dispara ou escuta evento precisa dele na cadeia.
 **Causa:** foi o bug real do `Hidden` com `<kb-button>` — o componente não expunha
 `internals` publicamente, então o mixin não conseguia aplicar o estado.
 **Solução:** verificar o que o mixin precisa da classe base e garantir que está exposto.
-Escrever a story com `play` da skill `story` para que o defeito falhe em CI, não em
+Escrever o teste de interação da skill `preview` para que o defeito falhe em CI, não em
 revisão manual.
 
 ### Trocar a ordem dos mixins quebrou o componente

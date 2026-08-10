@@ -1,7 +1,7 @@
 ---
 name: bdd
 model: opus
-description: Especificação de comportamento em Gherkin pt-BR — arquivos .feature em docs/bdd/ com Funcionalidade, Cenário, Dado/Quando/Então, escritos em linguagem de negócio e livres de detalhe de implementação. Use ao definir critérios de aceitação com stakeholders, ao especificar uma regra de negócio complexa de forma executável, ou ao dar ao teste uma referência de comportamento esperado. Não use para testar implementação de componente — use a skill story, cujo play exercita a interação real.
+description: Especificação de comportamento em Gherkin pt-BR — arquivos .feature em docs/bdd/ com Funcionalidade, Cenário, Dado/Quando/Então, escritos em linguagem de negócio e livres de detalhe de implementação. Use ao definir critérios de aceitação com stakeholders, ao especificar uma regra de negócio complexa de forma executável, ou ao dar ao teste uma referência de comportamento esperado. Não use para testar implementação de componente — use a skill preview, cujo teste de interação exercita o componente de verdade.
 ---
 
 # BDD
@@ -22,7 +22,7 @@ não consegue ler e validar o cenário, ele foi escrito para a máquina errada.
 | Definindo critérios de aceitação | Escrever `.feature` antes de implementar |
 | Regra de negócio com muitos casos | `Esquema do Cenário` com tabela de exemplos |
 | Teste precisa de referência de comportamento | Consultar o `.feature` correspondente |
-| Testar clique e evento de um componente | Não é aqui — é a skill `story`, com `play` |
+| Testar clique e evento de um componente | Não é aqui — é a skill `preview` |
 
 Não escreva Gherkin para comportamento técnico interno. Cenário que menciona status HTTP,
 SQL ou ID interno perdeu o público que justificava o formato.

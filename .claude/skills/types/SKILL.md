@@ -130,8 +130,8 @@ tipada.
 ### O `types.d.ts` divergiu da implementação
 
 **Causa:** atributo adicionado sem atualizar o contrato.
-**Solução:** os dois mudam juntos, no mesmo commit — e a story também, porque `argTypes`
-transcreve daqui (skill `story`).
+**Solução:** os dois mudam juntos, no mesmo commit — e a página de documentação também,
+porque a tabela de atributos transcreve daqui (skill `preview`).
 
 ## Referências
 

@@ -123,7 +123,7 @@ Filtros e directives usam a forma que descreve o que fazem no ponto de uso: `sto
 | `interfaces.js` | Symbols de contrato — **plural, sempre**, mesmo com um só |
 | `index.js` | Superfície pública |
 | `types.d.ts` | Contrato tipado |
-| `<nome>.stories.js` | Story do Storybook |
+| `<nome>.test.js` | Testes de comportamento do elemento |
 | `<nome>.test.js` | Teste |
 
 As funções em `component.js` e `style.js` chamam-se sempre `component` e `style`. O

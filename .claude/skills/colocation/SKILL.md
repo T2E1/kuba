@@ -1,7 +1,7 @@
 ---
 name: colocation
 model: sonnet
-description: Colocação de arquivos em `packages/` — o que muda junto fica junto, um pacote por custom element com implementação, template, estilo, contratos, tipos, story e teste lado a lado, agrupados por categoria. Use ao criar um pacote novo, ao decidir onde um arquivo deve morar, ao adicionar teste ou story a um componente, ou ao revisar estrutura organizada por tipo técnico em vez de por feature. Não use para decidir o que o pacote exporta — use a skill revelation.
+description: Colocação de arquivos em `packages/` — o que muda junto fica junto, um pacote por custom element com implementação, template, estilo, contratos, tipos e teste lado a lado, agrupados por categoria. Use ao criar um pacote novo, ao decidir onde um arquivo deve morar, ao adicionar teste a um componente, ou ao revisar estrutura organizada por tipo técnico em vez de por feature. Não use para decidir o que o pacote exporta — use a skill revelation.
 ---
 
 # Colocation
@@ -10,7 +10,7 @@ description: Colocação de arquivos em `packages/` — o que muda junto fica ju
 
 Organização por **razão-para-mudar**, não por tipo técnico. Tudo que muda junto quando um
 componente muda vive na mesma pasta: implementação, template, estilo, contratos, tipos,
-story e teste.
+e teste.
 
 É CCP (rule 016) levado à estrutura de diretórios. O oposto — `styles/`, `tests/`,
 `types/` no topo — obriga cada mudança a percorrer o repositório inteiro.
@@ -21,7 +21,7 @@ story e teste.
 |---|---|
 | Criando componente novo | Um pacote em `packages/<categoria>/<nome>/` |
 | Decidindo onde um arquivo mora | Junto do que muda com ele |
-| Adicionando teste ou story | Ao lado da implementação |
+| Adicionando teste | Ao lado da implementação |
 | Encontrando pasta por tipo técnico | Redistribuir por feature |
 
 Não use para decidir **o que sai** do pacote — isso é `revelation`. Colocação define
@@ -39,7 +39,6 @@ packages/<categoria>/<nome>/
 ├── interfaces.js      Symbols de contrato
 ├── index.js           superfície pública
 ├── types.d.ts         contrato tipado do consumidor
-├── <nome>.stories.js  story do Storybook
 └── <nome>.test.js     teste
 ```
 
@@ -63,7 +62,7 @@ associado.
    ele é do pacote.
 2. **Nunca centralize por tipo.** Não existe `styles/`, `tests/` ou `types/` no topo.
    A única exceção é a demo composta que atravessa pacotes, que vai para
-   `stories/examples/` na raiz — ela não pertence a nenhum componente.
+   `docs/build-ui/` — ela não pertence a nenhum componente.
 
 ## Exemplos
 
@@ -74,7 +73,7 @@ associado.
 ## Checklist
 
 - [ ] Um pacote por custom element
-- [ ] `types.d.ts`, story e teste ao lado da implementação
+- [ ] `types.d.ts` e teste ao lado da implementação
 - [ ] Nenhuma pasta agrupando por tipo técnico
 - [ ] `index.js` presente em todo pacote
 - [ ] Nenhum import alcançando arquivo interno de outro pacote
