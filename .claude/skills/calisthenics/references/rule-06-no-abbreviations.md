@@ -65,5 +65,5 @@ class OrderTotalCalculator {
 ## Regras Relacionadas
 
 - [003 - Wrap Primitives](rule-03-wrap-primitives.md): reforça
-- [024 - Proibição de Constantes Mágicas](../../rules/024_proibicao-constantes-magicas.md): complementa
-- [034 - Nomes Consistentes](../../rules/034_nomes-classes-metodos-consistentes.md): reforça
+- [024 - Proibição de Constantes Mágicas](../../../rules/024_proibicao-constantes-magicas.md): complementa
+- [034 - Nomes Consistentes](../../../rules/034_nomes-classes-metodos-consistentes.md): reforça

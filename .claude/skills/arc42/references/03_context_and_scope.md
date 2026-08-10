@@ -69,7 +69,7 @@ Esta seção define a fronteira do sistema: o que está dentro (responsabilidade
 
 ## Related to
 
-- [c4model Level 1](../../c4model/references/01_system-context.md): equivalente — mesmo diagrama em formato C4
+- [c4model Level 1](../../c4-model/references/01_system-context.md): equivalente — mesmo diagrama em formato C4
 - [05_building_block_view.md](05_building_block_view.md): complementa — §5 decompõe o interior da caixa preta de §3
 - [01_introduction_and_goals.md](01_introduction_and_goals.md): complementa — atores de §3 são os stakeholders de §1
 - [12_glossary.md](12_glossary.md): complementa — termos de domínio introduzidos aqui devem ser definidos em §12

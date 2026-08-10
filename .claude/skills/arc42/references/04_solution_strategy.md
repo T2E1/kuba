@@ -69,7 +69,7 @@ Esta seção documenta as decisões fundamentais que moldam a arquitetura: escol
 - [01_introduction_and_goals.md](01_introduction_and_goals.md): depende — estratégia deve atender aos objetivos e RNFs de §1
 - [02_architecture_constraints.md](02_architecture_constraints.md): reforça — estratégia é moldada pelas restrições de §2
 - [09_architecture_decisions.md](09_architecture_decisions.md): complementa — ADRs detalham cada decisão aqui resumida
-- [c4model Level 2](../../c4model/references/02_container.md): complementa — containers implementam a estratégia tecnológica
+- [c4model Level 2](../../c4-model/references/02_container.md): complementa — containers implementam a estratégia tecnológica
 
 ---
 

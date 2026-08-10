@@ -68,5 +68,5 @@ function createOrder(data: OrderData): Order {
 
 ## Relacionado a
 
-- Rules: [022](../../../.claude/rules/022_priorizacao-simplicidade-clareza.md), [039](../../../.claude/rules/039_regra-escoteiro-refatoracao-continua.md)
+- Rules: [022](../../../rules/022_priorizacao-simplicidade-clareza.md), [039](../../../rules/039_regra-escoteiro-refatoracao-continua.md)
 - Tags similares: HACK funciona mas mal, FIXME não funciona (bug)

@@ -39,7 +39,7 @@ Esta seção documenta as restrições que limitam as opções de design arquite
 | Regras 001–070 | Todas as 70 regras arquiteturais do .claude/rules/ são obrigatórias | [rules/](../../../rules/) |
 | Path Aliases | Imports relativos com `../` são proibidos | [rule 031](../../../rules/031_restricao-imports-relativos.md) |
 | Cobertura ≥ 85% | Domínio deve ter cobertura mínima de linha | [rule 032](../../../rules/032_cobertura-teste-minima-qualidade.md) |
-| Vertical Slice | Estrutura obrigatória: context/container/component | [CLAUDE.md](../../../CLAUDE.md) |
+| Estrutura de pacote | `packages/<categoria>/<nome>/` — um elemento por pasta | [colocation](../../colocation/SKILL.md) |
 
 ## Restrições Legais / Regulatórias
 

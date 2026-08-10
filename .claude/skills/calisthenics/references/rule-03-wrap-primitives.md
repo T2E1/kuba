@@ -77,4 +77,4 @@ class UserService {
 
 - [008 - Proibição de Getters/Setters](rule-08-no-getters-setters.md): reforça
 - [009 - Tell, Don't Ask](rule-09-tell-dont-ask.md): reforça
-- [024 - Proibição de Constantes Mágicas](../../rules/024_proibicao-constantes-magicas.md): reforça
+- [024 - Proibição de Constantes Mágicas](../../../rules/024_proibicao-constantes-magicas.md): reforça

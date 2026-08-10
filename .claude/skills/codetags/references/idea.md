@@ -90,5 +90,5 @@ function Button({ variant, children }) {
 
 ## Relacionado a
 
-- Rules: [023 - YAGNI](../../../.claude/rules/023_proibicao-funcionalidade-especulativa.md) (IDEA ≠ implementar agora)
+- Rules: [023 - YAGNI](../../../rules/023_proibicao-funcionalidade-especulativa.md) (IDEA ≠ implementar agora)
 - Tags similares: IDEA (não confirmado) vs TODO (confirmado e priorizado)

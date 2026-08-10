@@ -92,4 +92,4 @@ class Order {
 
 - [008 - Proibição de Getters/Setters](rule-08-no-getters-setters.md): reforça
 - [005 - One Dot per Line](rule-05-one-dot-per-line.md): reforça
-- [012 - Princípio de Substituição de Liskov](../../rules/012_principio-substituicao-liskov.md): reforça
+- [012 - Princípio de Substituição de Liskov](../../../rules/012_principio-substituicao-liskov.md): reforça

@@ -78,5 +78,5 @@ function formatDateLegacy(date: Date): string {
 
 ## Relacionado a
 
-- Rules: [026 - Qualidade de Comentários](../../../.claude/rules/026_qualidade-comentarios-porque.md) (NOTE explica o "por quê")
+- Rules: [026 - Qualidade de Comentários](../../../rules/026_qualidade-comentarios-porque.md) (NOTE explica o "por quê")
 - Tags similares: NOTE (decisão crítica) vs INFO (detalhe técnico)

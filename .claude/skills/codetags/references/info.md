@@ -88,5 +88,5 @@ const ONE_DAY_MS = 86400000;
 
 ## Relacionado a
 
-- Rules: [026 - Qualidade de Comentários](../../../.claude/rules/026_qualidade-comentarios-porque.md) (INFO complementa, não substitui código bom)
+- Rules: [026 - Qualidade de Comentários](../../../rules/026_qualidade-comentarios-porque.md) (INFO complementa, não substitui código bom)
 - Tags similares: INFO (contexto extra) vs NOTE (decisão crítica)

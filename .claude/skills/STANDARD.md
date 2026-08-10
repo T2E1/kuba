@@ -217,12 +217,56 @@ O padrão é verificável por script. Antes de commitar uma skill nova ou altera
 - `model` presente e entre `haiku`, `sonnet`, `opus`
 - nenhum campo de frontmatter fora dos três permitidos
 - todas as seções obrigatórias presentes
-- links de `../../rules/`, `../<skill>/SKILL.md`, `examples/` e `references/` resolvendo
+- links resolvendo — **em todos os arquivos, não só no `SKILL.md`**
 - nenhum bloco de código executável no `SKILL.md`
 - `SKILL.md` abaixo de 5.000 palavras
+
+### Links
+
+A profundidade do `../` depende de onde o arquivo está, e é onde os erros acontecem:
+
+| De | Para `rules/` | Para outra skill |
+|---|---|---|
+| `<skill>/SKILL.md` | `../../rules/NNN_*.md` | `../<outra>/SKILL.md` |
+| `<skill>/references/*.md` | `../../../rules/NNN_*.md` | `../../<outra>/SKILL.md` |
+| `<skill>/examples/*` | `../../../rules/NNN_*.md` | `../../<outra>/SKILL.md` |
+
+O erro típico é copiar o link de um `SKILL.md` para dentro de `references/` sem acrescentar
+o nível — 69 links quebraram exatamente assim antes desta verificação existir.
+
+Placeholder de template não é link: `ADR-001_[titulo].md` nunca vai existir com esse nome.
+Escreva como código inline.
+
+### O script
+
+Ele ignora blocos cercados e **código inline** — sem isso, a bracket notation deste
+repositório dá falso positivo, porque `` `this[sink](payload)` `` casa com a sintaxe de
+link do markdown.
+
+```bash
+python3 - <<'PY'
+import re, os, glob, sys
+FENCE  = re.compile(r'^\s*```')
+INLINE = re.compile(r'`[^`]*`')
+LINK   = re.compile(r'\]\((?!https?:|#)([^)\s]+)\)')
+bad = 0
+for f in sorted(glob.glob("skills/**/*.md", recursive=True) + glob.glob("agents/*.md")):
+    base, inside = os.path.dirname(f), False
+    for n, line in enumerate(open(f), 1):
+        if FENCE.match(line): inside = not inside; continue
+        if inside: continue
+        for link in LINK.findall(INLINE.sub('', line)):
+            if not os.path.exists(os.path.normpath(os.path.join(base, link))):
+                print(f"{f}:{n} -> {link}"); bad += 1
+print(f"{bad} links quebrados")
+sys.exit(1 if bad else 0)
+PY
+```
+
+Rodar de `.claude/`. Cobre skills e agents de uma vez, porque os dois erram do mesmo jeito.
 
 ---
 
 **Criado em**: 2026-08-09
 **Atualizado em**: 2026-08-10
-**Versão**: 1.2
+**Versão**: 1.3

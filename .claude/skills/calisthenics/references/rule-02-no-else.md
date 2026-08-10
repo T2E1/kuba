@@ -65,4 +65,4 @@ class PayPalPayment implements PaymentStrategy {
 
 - [001 - Single Indentation Level](rule-01-single-indentation.md): reforça
 - [008 - Proibição de Getters/Setters](rule-08-no-getters-setters.md): reforça
-- [011 - Princípio Aberto/Fechado](../../rules/011_principio-aberto-fechado.md): reforça
+- [011 - Princípio Aberto/Fechado](../../../rules/011_principio-aberto-fechado.md): reforça

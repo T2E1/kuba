@@ -74,4 +74,4 @@ class UserExporter {
 
 - [001 - Single Indentation Level](rule-01-single-indentation.md): reforça
 - [004 - First Class Collections](rule-04-first-class-collections.md): reforça
-- [010 - Princípio da Responsabilidade Única](../../rules/010_principio-responsabilidade-unica.md): reforça
+- [010 - Princípio da Responsabilidade Única](../../../rules/010_principio-responsabilidade-unica.md): reforça

@@ -100,5 +100,5 @@ function applyDiscount(price: number, discountPercent: number): number {
 
 ## Relacionado a
 
-- Rules: [026 - Qualidade de Comentários](../../../.claude/rules/026_qualidade-comentarios-porque.md) (QUESTION é comunicação temporária)
+- Rules: [026 - Qualidade de Comentários](../../../rules/026_qualidade-comentarios-porque.md) (QUESTION é comunicação temporária)
 - Tags similares: QUESTION (dúvida do autor) vs REVIEW (precisa de validação externa)

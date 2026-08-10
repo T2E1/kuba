@@ -154,5 +154,5 @@ class Human implements Employee, LivingBeing {
 - [010 - Princípio da Responsabilidade Única](srp.md): reforça
 - [011 - Princípio Aberto/Fechado](ocp.md): complementa
 - [012 - Princípio de Substituição de Liskov](lsp.md): reforça
-- [017 - Princípio do Reuso Comum](../../rules/017_principio-reuso-comum.md): complementa
-- [037 - Proibição de Argumentos Sinalizadores](../../rules/037_proibicao-argumentos-sinalizadores.md): reforça
+- [017 - Princípio do Reuso Comum](../../../rules/017_principio-reuso-comum.md): complementa
+- [037 - Proibição de Argumentos Sinalizadores](../../../rules/037_proibicao-argumentos-sinalizadores.md): reforça

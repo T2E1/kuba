@@ -108,8 +108,8 @@ class ActivityLogger {
 
 ## Rules Relacionadas
 
-- [007 - Limite Máximo de Linhas por Classe](../../rules/007_limite-maximo-linhas-classe.md): reforça
-- [004 - Coleções de Primeira Classe](../../rules/004_colecoes-primeira-classe.md): reforça
+- [007 - Limite Máximo de Linhas por Classe](../../../rules/007_limite-maximo-linhas-classe.md): reforça
+- [004 - Coleções de Primeira Classe](../../../rules/004_colecoes-primeira-classe.md): reforça
 - [011 - Princípio Aberto/Fechado](ocp.md): complementa
-- [025 - Proibição do Anti-Pattern The Blob](../../rules/025_proibicao-anti-pattern-the-blob.md): complementa
-- [054 - Proibição de Mudança Divergente](../../rules/054_proibicao-mudanca-divergente.md): reforça
+- [025 - Proibição do Anti-Pattern The Blob](../../../rules/025_proibicao-anti-pattern-the-blob.md): complementa
+- [054 - Proibição de Mudança Divergente](../../../rules/054_proibicao-mudanca-divergente.md): reforça

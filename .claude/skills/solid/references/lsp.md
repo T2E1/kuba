@@ -124,7 +124,7 @@ penguin.performFly();  // Cannot fly
 ## Rules Relacionadas
 
 - [011 - Princípio Aberto/Fechado](ocp.md): reforça
-- [009 - Tell, Don't Ask](../../rules/009_diga-nao-pergunte.md): reforça
-- [003 - Encapsulamento de Primitivos](../../rules/003_encapsulamento-primitivos.md): complementa
+- [009 - Tell, Don't Ask](../../../rules/009_diga-nao-pergunte.md): reforça
+- [003 - Encapsulamento de Primitivos](../../../rules/003_encapsulamento-primitivos.md): complementa
 - [013 - Princípio de Segregação de Interface](isp.md): reforça
-- [036 - Restrição de Funções com Efeitos Colaterais](../../rules/036_restricao-funcoes-efeitos-colaterais.md): reforça
+- [036 - Restrição de Funções com Efeitos Colaterais](../../../rules/036_restricao-funcoes-efeitos-colaterais.md): reforça

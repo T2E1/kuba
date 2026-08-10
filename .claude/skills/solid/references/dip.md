@@ -146,9 +146,9 @@ const userService = container.resolve<UserService>('UserService');
 ## Rules Relacionadas
 
 - [011 - Princípio Aberto/Fechado](ocp.md): reforça
-- [015 - Princípio de Lançamento e Reuso](../../rules/015_principio-equivalencia-lancamento-reuso.md): reforça
-- [003 - Encapsulamento de Primitivos](../../rules/003_encapsulamento-primitivos.md): complementa
-- [018 - Princípio de Dependências Acíclicas](../../rules/018_principio-dependencias-aciclicas.md): reforça
-- [019 - Princípio de Dependências Estáveis](../../rules/019_principio-dependencias-estaveis.md): reforça
-- [020 - Princípio de Abstrações Estáveis](../../rules/020_principio-abstracoes-estaveis.md): reforça
-- [032 - Cobertura Mínima de Teste](../../rules/032_cobertura-teste-minima-qualidade.md): complementa
+- [015 - Princípio de Lançamento e Reuso](../../../rules/015_principio-equivalencia-lancamento-reuso.md): reforça
+- [003 - Encapsulamento de Primitivos](../../../rules/003_encapsulamento-primitivos.md): complementa
+- [018 - Princípio de Dependências Acíclicas](../../../rules/018_principio-dependencias-aciclicas.md): reforça
+- [019 - Princípio de Dependências Estáveis](../../../rules/019_principio-dependencias-estaveis.md): reforça
+- [020 - Princípio de Abstrações Estáveis](../../../rules/020_principio-abstracoes-estaveis.md): reforça
+- [032 - Cobertura Mínima de Teste](../../../rules/032_cobertura-teste-minima-qualidade.md): complementa

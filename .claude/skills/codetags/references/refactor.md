@@ -84,5 +84,5 @@ class NotificationService {
 
 ## Relacionado a
 
-- Rules: [010](../../../.claude/rules/010_principio-responsabilidade-unica.md), [011](../../../.claude/rules/011_principio-aberto-fechado.md), [021](../../../.claude/rules/021_proibicao-duplicacao-logica.md), [025](../../../.claude/rules/025_proibicao-anti-pattern-the-blob.md)
+- Rules: [010](../../../rules/010_principio-responsabilidade-unica.md), [011](../../../rules/011_principio-aberto-fechado.md), [021](../../../rules/021_proibicao-duplicacao-logica.md), [025](../../../rules/025_proibicao-anti-pattern-the-blob.md)
 - Tags similares: REFACTOR muda estrutura, CLEANUP remove ruído, HACK é temporário

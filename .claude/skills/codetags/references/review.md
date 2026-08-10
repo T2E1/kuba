@@ -81,5 +81,5 @@ function checkAccess(user: User, resource: Resource) {
 
 ## Relacionado a
 
-- Rules: [032 - Cobertura de Testes](../../../.claude/rules/032_cobertura-teste-minima-qualidade.md) (código revisado deve ter testes)
+- Rules: [032 - Cobertura de Testes](../../../rules/032_cobertura-teste-minima-qualidade.md) (código revisado deve ter testes)
 - Tags similares: REVIEW (precisa de validação) vs QUESTION (dúvida do autor)

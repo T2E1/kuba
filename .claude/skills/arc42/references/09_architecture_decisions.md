@@ -19,10 +19,10 @@ Esta seção é o índice central de todos os ADRs (Architecture Decision Record
 
 | ID | Título | Status | Data | Seção Arc42 Relacionada |
 |----|--------|--------|------|-------------------------|
-| [ADR-001](../../../docs/adr/ADR-001_[titulo].md) | [Título da decisão] | Aceito | YYYY-MM-DD | §4 Estratégia |
-| [ADR-002](../../../docs/adr/ADR-002_[titulo].md) | [Título da decisão] | Aceito | YYYY-MM-DD | §2 Restrições |
-| [ADR-003](../../../docs/adr/ADR-003_[titulo].md) | [Título da decisão] | Substituído por ADR-007 | YYYY-MM-DD | §7 Deployment |
-| [ADR-004](../../../docs/adr/ADR-004_[titulo].md) | [Título da decisão] | Em revisão | YYYY-MM-DD | §8 Concepts |
+| `ADR-001` | [Título da decisão] | Aceito | YYYY-MM-DD | §4 Estratégia |
+| `ADR-002` | [Título da decisão] | Aceito | YYYY-MM-DD | §2 Restrições |
+| `ADR-003` | [Título da decisão] | Substituído por ADR-007 | YYYY-MM-DD | §7 Deployment |
+| `ADR-004` | [Título da decisão] | Em revisão | YYYY-MM-DD | §8 Concepts |
 
 ## ADRs por Categoria
 
@@ -30,28 +30,28 @@ Esta seção é o índice central de todos os ADRs (Architecture Decision Record
 
 | ADR | Decisão | Status |
 |-----|---------|--------|
-| [ADR-001](../../../docs/adr/ADR-001.md) | [ex: Adoção de Cloudflare Workers como runtime] | Aceito |
-| [ADR-002](../../../docs/adr/ADR-002.md) | [ex: Uso de D1 como banco de dados principal] | Aceito |
+| `ADR-001` | [ex: Adoção de Cloudflare Workers como runtime] | Aceito |
+| `ADR-002` | [ex: Uso de D1 como banco de dados principal] | Aceito |
 
 ### Arquitetura e Estrutura
 
 | ADR | Decisão | Status |
 |-----|---------|--------|
-| [ADR-003](../../../docs/adr/ADR-003.md) | [ex: Vertical Slice Architecture como padrão estrutural] | Aceito |
-| [ADR-004](../../../docs/adr/ADR-004.md) | [ex: Repository pattern para acesso a dados] | Aceito |
+| `ADR-003` | [ex: Vertical Slice Architecture como padrão estrutural] | Aceito |
+| `ADR-004` | [ex: Repository pattern para acesso a dados] | Aceito |
 
 ### Qualidade e Processo
 
 | ADR | Decisão | Status |
 |-----|---------|--------|
-| [ADR-005](../../../docs/adr/ADR-005.md) | [ex: Adoção de Biome para lint e format] | Aceito |
-| [ADR-006](../../../docs/adr/ADR-006.md) | [ex: Cobertura mínima de 85% para domínio] | Aceito |
+| `ADR-005` | [ex: Adoção de Biome para lint e format] | Aceito |
+| `ADR-006` | [ex: Cobertura mínima de 85% para domínio] | Aceito |
 
 ### Decisões Revogadas / Substituídas
 
 | ADR | Decisão Original | Substituído Por | Motivo |
 |-----|-----------------|-----------------|--------|
-| [ADR-003](../../../docs/adr/ADR-003.md) | [Decisão original] | [ADR-NNN] | [Por que foi revogada] |
+| `ADR-003` | [Decisão original] | [ADR-NNN] | [Por que foi revogada] |
 
 ## Como Criar um Novo ADR
 
@@ -83,7 +83,7 @@ Esta seção é o índice central de todos os ADRs (Architecture Decision Record
 
 ## Related to
 
-- [docs/adr/](../../../docs/adr/): referencia — todos os ADRs individuais vivem neste diretório
+- `docs/adr/`: referencia — todos os ADRs individuais vivem neste diretório
 - [04_solution_strategy.md](04_solution_strategy.md): complementa — cada decisão de §4 deve ter ADR correspondente
 - [02_architecture_constraints.md](02_architecture_constraints.md): complementa — restrições de §2 motivam ADRs
 - [11_technical_risks.md](11_technical_risks.md): complementa — riscos identificados podem gerar ADRs de mitigação

@@ -94,7 +94,7 @@ Benefícios concretos do sistema:
 
 ## Relacionado a
 
-- [arc42 §3 — Contexto e Escopo](../arc42/03_context_and_scope.md): equivalente
+- [arc42 §3 — Contexto e Escopo](../../arc42/references/03_context_and_scope.md): equivalente
 
 ---
 

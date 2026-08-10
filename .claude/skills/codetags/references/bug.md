@@ -56,5 +56,5 @@ async function processOrder(order: Order): Promise<void> {
 
 ## Relacionado a
 
-- Rules: [027](../../../.claude/rules/027_qualidade-tratamento-erros-dominio.md), [032](../../../.claude/rules/032_cobertura-teste-minima-qualidade.md)
+- Rules: [027](../../../rules/027_qualidade-tratamento-erros-dominio.md), [032](../../../rules/032_cobertura-teste-minima-qualidade.md)
 - Tags similares: BUG é planejado, FIXME é imediato

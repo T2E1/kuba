@@ -58,4 +58,4 @@ class OrderProcessor {
 
 - [002 - Proibição da Cláusula ELSE](rule-02-no-else.md): reforça
 - [007 - Classes Pequenas](rule-07-small-classes.md): complementa
-- [022 - Simplicidade e Clareza](../../rules/022_priorizacao-simplicidade-clareza.md): reforça
+- [022 - Simplicidade e Clareza](../../../rules/022_priorizacao-simplicidade-clareza.md): reforça

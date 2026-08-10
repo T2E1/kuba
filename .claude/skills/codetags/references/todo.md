@@ -57,5 +57,5 @@ async function fetchWithRetry(url: string) {
 
 ## Relacionado a
 
-- Rules: [023 - YAGNI](../../../.claude/rules/023_proibicao-funcionalidade-especulativa.md) (não criar TODOs especulativos)
+- Rules: [023 - YAGNI](../../../rules/023_proibicao-funcionalidade-especulativa.md) (não criar TODOs especulativos)
 - Tags similares: TODO (confirmado) vs IDEA (não confirmado)

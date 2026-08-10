@@ -69,5 +69,5 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
 ## Relacionado a
 
-- Rules: [030](../../../.claude/rules/030_proibicao-funcoes-inseguras.md), [042](../../../.claude/rules/042_configuracoes-via-ambiente.md)
+- Rules: [030](../../../rules/030_proibicao-funcoes-inseguras.md), [042](../../../rules/042_configuracoes-via-ambiente.md)
 - Tags similares: SECURITY é crítico de segurança, FIXME é crítico funcional

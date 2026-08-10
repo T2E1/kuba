@@ -66,4 +66,4 @@ class Order {
 
 - [009 - Tell, Don't Ask](rule-09-tell-dont-ask.md): reforça
 - [008 - Proibição de Getters/Setters](rule-08-no-getters-setters.md): reforça
-- [022 - Simplicidade e Clareza](../../rules/022_priorizacao-simplicidade-clareza.md): complementa
+- [022 - Simplicidade e Clareza](../../../rules/022_priorizacao-simplicidade-clareza.md): complementa

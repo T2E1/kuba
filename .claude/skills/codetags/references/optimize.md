@@ -71,5 +71,5 @@ function ExpensiveComponent({ data }: { data: Item[] }) {
 
 ## Relacionado a
 
-- Rules: [022 - KISS](../../../.claude/rules/022_priorizacao-simplicidade-clareza.md) (não complicar para micro-otimização)
+- Rules: [022 - KISS](../../../rules/022_priorizacao-simplicidade-clareza.md) (não complicar para micro-otimização)
 - Tags similares: OPTIMIZE (oportunidade) vs PERF (problema real medido)

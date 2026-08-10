@@ -64,7 +64,7 @@ Esta seção descreve o problema que o sistema resolve, os requisitos funcionais
 
 - [02_architecture_constraints.md](02_architecture_constraints.md): complementa — restrições derivam dos objetivos
 - [10_quality_requirements.md](10_quality_requirements.md): complementa — qualidade deriva dos RNF definidos aqui
-- [c4model Nível 1](../../c4model/references/01_system-context.md): complementa — visão de contexto ilustra atores e sistemas listados aqui
+- [c4model Nível 1](../../c4-model/references/01_system-context.md): complementa — visão de contexto ilustra atores e sistemas listados aqui
 - [regra 032 Cobertura de Testes](../../../rules/032_cobertura-teste-minima-qualidade.md): complementa — RNF de qualidade de código
 
 ---

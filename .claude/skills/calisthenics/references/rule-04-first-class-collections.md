@@ -70,4 +70,4 @@ class OrderService {
 
 - [007 - Classes Pequenas](rule-07-small-classes.md): reforça
 - [008 - Proibição de Getters/Setters](rule-08-no-getters-setters.md): reforça
-- [010 - Princípio da Responsabilidade Única](../../rules/010_principio-responsabilidade-unica.md): reforça
+- [010 - Princípio da Responsabilidade Única](../../../rules/010_principio-responsabilidade-unica.md): reforça

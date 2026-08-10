@@ -104,7 +104,7 @@ class PaymentStrategyFactory {
 
 ## Rules Relacionadas
 
-- [002 - Proibição da Cláusula ELSE](../../rules/002_proibicao-clausula-else.md): reforça
+- [002 - Proibição da Cláusula ELSE](../../../rules/002_proibicao-clausula-else.md): reforça
 - [012 - Princípio de Substituição de Liskov](lsp.md): depende
 - [013 - Princípio de Segregação de Interface](isp.md): complementa
 - [010 - Princípio da Responsabilidade Única](srp.md): complementa

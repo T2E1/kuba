@@ -181,9 +181,8 @@ Antes de commitar um agent novo ou alterado:
 - Todo passo do `## Método` verificável por terceiro
 
 ```bash
-# links quebrados
-grep -ohE '\]\(\.\./(skills|rules)/[^)]+\)' *.md | tr -d '()' | sed 's/^]//' | sort -u |
-  while read f; do [ -f "$f" ] || echo "quebrado: $f"; done
+# links quebrados — o script está em skills/STANDARD.md e cobre agents junto,
+# porque os dois erram a profundidade do ../ do mesmo jeito
 
 # resíduo de fluxo
 grep -nE 'changes/00|attempts-|Encaminhar ao @|Sequência de Agentes' *.md
