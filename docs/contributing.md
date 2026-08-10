@@ -15,15 +15,11 @@ cd kuba
 bun install
 ```
 
-| Command | Does |
-|---|---|
-| `bun run dev` | Serves this documentation at `localhost:3000`. |
-| `bun run test` | Runs the test suite in a real Chromium, via Vitest. |
-| `bun run check` | Lint and formatting, via Biome. |
-| `bun run release` | Builds `dist/` with Vite. |
-
 The repository has no runtime dependencies, so `bun install` only fetches the
-tooling.
+tooling. The scripts — running the docs, the test suite, the linter, the build —
+are listed in
+[`CONTRIBUTING.md`](https://github.com/T2E1/kuba/blob/main/CONTRIBUTING.md),
+which is where the development setup is kept up to date.
 
 ## The shape of a change
 
