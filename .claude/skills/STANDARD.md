@@ -211,19 +211,29 @@ Mesmo vocabulário de relação usado nas rules:
 
 ## Verificação
 
-O padrão é verificável por script. Antes de commitar uma skill nova ou alterada:
+O padrão inteiro é verificável por script — não há item aqui que dependa de julgamento.
+Rode antes de commitar uma skill nova ou alterada.
 
-- `name` do frontmatter igual ao nome da pasta
-- `model` presente e entre `haiku`, `sonnet`, `opus`
-- nenhum campo de frontmatter fora dos três permitidos
-- todas as seções obrigatórias presentes
-- links resolvendo — **em todos os arquivos, não só no `SKILL.md`**
-- nenhum bloco de código executável no `SKILL.md`
-- `SKILL.md` abaixo de 5.000 palavras
+### O que é verificado
 
-### Links
+| Item | Critério |
+|---|---|
+| `name` | Igual ao nome da pasta |
+| `model` | Presente, e entre `haiku`, `sonnet`, `opus` |
+| Frontmatter | Exatamente os três campos; nenhum a mais, nenhum a menos |
+| `description` | Abaixo de 1024 caracteres, sem `<` nem `>` |
+| Seções | As sete obrigatórias, mais o rodapé e o título |
+| Código | Nenhum bloco executável no `SKILL.md` |
+| Tamanho | `SKILL.md` abaixo de 5.000 palavras |
+| Nome da pasta | kebab-case; sem `claude` nem `anthropic` |
+| `README.md` | Ausente de dentro da pasta |
+| `examples/` | Existe, e todo tema tem o par `valid` **e** `invalid` |
+| Links | Resolvem — **em todos os arquivos, não só no `SKILL.md`** |
+| Tabela de modelos | O que este arquivo declara bate com o que as skills declaram |
 
-A profundidade do `../` depende de onde o arquivo está, e é onde os erros acontecem:
+### Duas armadilhas que o script trata
+
+**A profundidade do `../` muda com o diretório**, e é onde os erros acontecem:
 
 | De | Para `rules/` | Para outra skill |
 |---|---|---|
@@ -231,42 +241,102 @@ A profundidade do `../` depende de onde o arquivo está, e é onde os erros acon
 | `<skill>/references/*.md` | `../../../rules/NNN_*.md` | `../../<outra>/SKILL.md` |
 | `<skill>/examples/*` | `../../../rules/NNN_*.md` | `../../<outra>/SKILL.md` |
 
-O erro típico é copiar o link de um `SKILL.md` para dentro de `references/` sem acrescentar
-o nível — 69 links quebraram exatamente assim antes desta verificação existir.
+Copiar um link do `SKILL.md` para dentro de `references/` sem acrescentar o nível quebrou
+69 links antes desta verificação existir.
 
-Placeholder de template não é link: `ADR-001_[titulo].md` nunca vai existir com esse nome.
-Escreva como código inline.
+**Bracket notation parece link.** `` `this[sink](payload)` `` casa com a sintaxe de link do
+markdown, então o script ignora blocos cercados e código inline — sem isso, `dataflow` e
+`naming` acusam falso positivo.
+
+Placeholder de template também não é link: `ADR-001_[titulo].md` nunca vai existir com esse
+nome. Escreva como código inline.
 
 ### O script
 
-Ele ignora blocos cercados e **código inline** — sem isso, a bracket notation deste
-repositório dá falso positivo, porque `` `this[sink](payload)` `` casa com a sintaxe de
-link do markdown.
+Rodar de `.claude/`. Cobre skills e agents de uma vez, porque os dois erram igual.
 
 ```bash
 python3 - <<'PY'
-import re, os, glob, sys
-FENCE  = re.compile(r'^\s*```')
-INLINE = re.compile(r'`[^`]*`')
-LINK   = re.compile(r'\]\((?!https?:|#)([^)\s]+)\)')
-bad = 0
+import os, re, glob, sys
+from collections import Counter, defaultdict
+
+FM, MODELS = {"name", "model", "description"}, {"haiku", "sonnet", "opus"}
+SECOES = ["## O que é", "## Quando usar", "## Como aplicar", "## Exemplos",
+          "## Checklist", "## Rules relacionadas", "## Skills relacionadas"]
+EXEC = {"js", "javascript", "ts", "typescript", "jsx", "tsx", "css", "html", "json"}
+FENCE, INLINE = re.compile(r"^\s*```"), re.compile(r"`[^`]*`")
+LINK = re.compile(r"\]\((?!https?:|#)([^)\s]+)\)")
+erros = defaultdict(list)
+
+# 1. conformidade de cada skill
+skills = sorted(d for d in os.listdir("skills") if os.path.isdir(f"skills/{d}"))
+modelos = Counter()
+for s in skills:
+    p = f"skills/{s}/SKILL.md"
+    if not os.path.isfile(p):
+        erros[s].append("sem SKILL.md"); continue
+    raw = open(p).read()
+    m = re.match(r"^---\n(.*?)\n---\n", raw, re.S)
+    if not m:
+        erros[s].append("sem frontmatter"); continue
+    fm, corpo = m.group(1), raw[m.end():]
+    chaves = set(re.findall(r"^([a-z_-]+):", fm, re.M))
+    if extra := chaves - FM: erros[s].append(f"campo extra: {sorted(extra)}")
+    if falta := FM - chaves: erros[s].append(f"campo faltando: {sorted(falta)}")
+    if (n := re.search(r"^name:\s*(\S+)", fm, re.M)) and n.group(1) != s:
+        erros[s].append(f"name '{n.group(1)}' != pasta")
+    if mo := re.search(r"^model:\s*(\S+)", fm, re.M):
+        modelos[mo.group(1)] += 1
+        if mo.group(1) not in MODELS: erros[s].append(f"model inválido: {mo.group(1)}")
+    if d := re.search(r"^description:\s*(.+)$", fm, re.M):
+        if len(d.group(1)) > 1024: erros[s].append(f"description {len(d.group(1))} > 1024")
+        if re.search(r"[<>]", d.group(1)): erros[s].append("description com < ou >")
+    for sec in SECOES:  # linha inteira: '## Checklist' não pode casar '## Checklist_x'
+        if not re.search(rf"^{re.escape(sec)}\s*$", corpo, re.M): erros[s].append(f"falta: {sec}")
+    if not corpo.lstrip().startswith("# "): erros[s].append("sem título H1")
+    if not re.search(r"\*\*Criado em\*\*.*\n\*\*Atualizado em\*\*.*\n\*\*Versão\*\*", corpo):
+        erros[s].append("rodapé incompleto")
+    for lang in re.findall(r"^\s*```([a-zA-Z]+)", corpo, re.M):
+        if lang.lower() in EXEC: erros[s].append(f"código executável no SKILL.md: {lang}")
+    if (w := len(corpo.split())) > 5000: erros[s].append(f"{w} palavras > 5000")
+    if not re.fullmatch(r"[a-z0-9]+(-[a-z0-9]+)*", s): erros[s].append("nome fora do kebab-case")
+    if "claude" in s or "anthropic" in s: erros[s].append("nome reservado")
+    if os.path.isfile(f"skills/{s}/README.md"): erros[s].append("README.md dentro da pasta")
+    if not os.path.isdir(f"skills/{s}/examples"):
+        erros[s].append("sem examples/")
+    else:
+        temas = defaultdict(set)
+        for f in os.listdir(f"skills/{s}/examples"):
+            if e := re.match(r"(.+)\.(valid|invalid)\.[a-z]+$", f): temas[e.group(1)].add(e.group(2))
+            else: erros[s].append(f"examples fora da convenção: {f}")
+        for tema, tipos in temas.items():
+            if tipos != {"valid", "invalid"}: erros[s].append(f"'{tema}' só tem {sorted(tipos)}")
+
+# 2. links, em todos os arquivos de skills e agents
 for f in sorted(glob.glob("skills/**/*.md", recursive=True) + glob.glob("agents/*.md")):
-    base, inside = os.path.dirname(f), False
-    for n, line in enumerate(open(f), 1):
-        if FENCE.match(line): inside = not inside; continue
-        if inside: continue
-        for link in LINK.findall(INLINE.sub('', line)):
+    base, dentro = os.path.dirname(f), False
+    for n, linha in enumerate(open(f), 1):
+        if FENCE.match(linha): dentro = not dentro; continue
+        if dentro: continue
+        for link in LINK.findall(INLINE.sub("", linha)):
             if not os.path.exists(os.path.normpath(os.path.join(base, link))):
-                print(f"{f}:{n} -> {link}"); bad += 1
-print(f"{bad} links quebrados")
-sys.exit(1 if bad else 0)
+                erros[f].append(f"linha {n}: link quebrado -> {link}")
+
+# 3. a tabela de modelos deste arquivo bate com a realidade
+std = open("skills/STANDARD.md").read()
+for modelo, quantos in modelos.items():
+    if f"| `{modelo}` | {quantos} |" not in std:
+        erros["STANDARD.md"].append(f"tabela de modelos: {modelo} são {quantos}")
+
+for alvo in sorted(erros):
+    print(f"X {alvo}")
+    for e in erros[alvo]: print(f"    {e}")
+print(f"\n{len(skills)} skills · {sum(len(v) for v in erros.values())} problemas")
+sys.exit(1 if erros else 0)
 PY
 ```
-
-Rodar de `.claude/`. Cobre skills e agents de uma vez, porque os dois erram do mesmo jeito.
-
 ---
 
 **Criado em**: 2026-08-09
 **Atualizado em**: 2026-08-10
-**Versão**: 1.3
+**Versão**: 1.4
