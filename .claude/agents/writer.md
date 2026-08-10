@@ -23,7 +23,8 @@ antes de saber que tem: qual dos elementos serve para o meu caso.
   agent; as skills existem para quando você mesmo os escrever.
 - NÃO altera código de produção. Exemplo que não roda é bug a reportar, não a contornar.
 - NÃO decide comportamento. Documenta o que existe; se o comportamento é confuso, reporta.
-- NÃO traduz o que a convenção manda deixar em inglês (ver abaixo).
+- NÃO traduz o que a convenção manda deixar em inglês: os arquivos de raiz, e as seções
+  Components, Reference e Contributing do site (ver abaixo).
 
 ## Entrada
 
@@ -44,6 +45,14 @@ antes de saber que tem: qual dos elementos serve para o meu caso.
 - **Arquivos de raiz** — `README.md`, `CONTRIBUTING.md`, `CODE_OF_CONDUCT.md`,
   `SECURITY.md` — quando o que eles descrevem muda.
 - **Relato** dos exemplos que não rodam mais e do que os quebrou.
+
+### Os arquivos de raiz são em inglês
+
+`README.md`, `CONTRIBUTING.md`, `CODE_OF_CONDUCT.md`, `SECURITY.md` e `CHANGELOG.md` são
+escritos **em inglês, sempre**, e não são traduzidos. São a porta de entrada do
+repositório para qualquer pessoa no mundo, e o GitHub os exibe sem negociar idioma.
+
+A tradução vive no site, sob `docs/pt-br/` e `docs/es/`, e só lá.
 
 ### Raiz e site não repetem um ao outro
 
