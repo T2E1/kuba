@@ -1,0 +1,37 @@
+<!-- ❌ Referência direta entre componentes distantes.
+     Correto em: binding.valid.html -->
+
+<kb-search name="search"></kb-search>
+<kb-results name="results"></kb-results>
+<kb-counter name="counter"></kb-counter>
+
+<script>
+  // O código imperativo conhece os três componentes e a API de cada um.
+  const search = document.querySelector('[name="search"]')
+  const results = document.querySelector('[name="results"]')
+  const counter = document.querySelector('[name="counter"]')
+
+  search.addEventListener('searched', (event) => {
+    // Acoplamento a três APIs concretas ao mesmo tempo (rule 014).
+    results.setAttribute('query', event.detail.term.trim().toLowerCase())
+    counter.total = event.detail.results.length
+  })
+
+  // Pior: o receptor realimenta o emissor. `results` emite `filtered`, que
+  // atualiza `search`, que emite `searched` de novo — dataflow circular,
+  // loop infinito (rule 018).
+  results.addEventListener('filtered', (event) => {
+    search.setAttribute('term', event.detail.term)
+  })
+</script>
+
+<!--
+  Problemas acumulados:
+
+  - Nenhum dos três componentes é testável isolado: o fluxo mora no script
+    da página, não neles.
+  - A transformação (`trim().toLowerCase()`) está solta no listener, sem
+    nome e sem reuso.
+  - Os listeners nunca são removidos: se os elementos saírem do DOM, vazam.
+  - Mudar a estrutura da página quebra os seletores.
+-->

@@ -1,0 +1,53 @@
+<!-- ✅ Conexão declarada no template; nenhum componente conhece o outro. -->
+
+<kb-search name="search"></kb-search>
+
+<!--
+  Anatomia do binding:
+
+    search      /searched   :attribute  /query      |trim|lowercase
+    └ source    └ event     └ type      └ sink      └ filtros
+
+  source  quem emite (por atributo name)
+  event   o CustomEvent despachado
+  type    como o receptor recebe (attribute | setter | method)
+  sink    o alvo no receptor
+  filtros pipeline puro de transformação, aplicado na ordem
+-->
+<kb-results
+  name="results"
+  morph-on="search/searched:attribute/query|trim|lowercase"
+></kb-results>
+
+<!-- `*` escuta qualquer emissor daquele evento; `setter` atribui a propriedade. -->
+<kb-counter
+  name="counter"
+  morph-on="*/searched:setter/total|count"
+></kb-counter>
+
+<!-- Method: chama o método público do receptor com o payload. -->
+<kb-toast
+  name="toast"
+  morph-on="search/failed:method/show|message"
+></kb-toast>
+
+<!--
+  O que muda em relação ao script imperativo:
+
+  - Zero JavaScript de ligação: nenhum querySelector, nenhum addEventListener.
+  - Os três componentes são testáveis isolados — o fluxo não mora neles.
+  - Os listeners conectam quando o receptor entra no documento e são
+    removidos quando ele sai. Nada vaza.
+  - A transformação virou filtro nomeado e reutilizável, puro (rule 036).
+  - Mudar a estrutura da página não quebra nada: a ligação é por `name`,
+    não por posição no DOM.
+
+  O que continua valendo:
+
+  - O grafo tem de ser acíclico (rule 018): se `results` emitisse um evento
+    que realimenta `search`, o loop volta — o bus não protege disso.
+  - Cada `sink` faz parte do contrato público do receptor e precisa estar
+    no types.d.ts dele.
+  - Onde pai e filho já se conhecem, chamar o método direto é mais legível
+    que declarar binding (rule 022).
+-->

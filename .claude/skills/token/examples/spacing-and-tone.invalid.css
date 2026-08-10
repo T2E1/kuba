@@ -1,0 +1,22 @@
+/* ❌ Tokens certos, escalas erradas.
+   Correto em: spacing-and-tone.valid.css
+
+   Este é o erro mais comum depois que os tokens já foram adotados: o valor
+   deixou de ser literal, mas a escala escolhida contradiz o uso. */
+
+.card {
+  /* --spacing-* é espaçamento EXTERNO (margin, gap). Usado como padding,
+     quebra a coerência da escala quando componentes são compostos. */
+  padding: var(--spacing-nano);
+
+  /* Tom `dark` em background. As cores usam light-dark() internamente, então
+     no dark mode isso vira fundo escuro sobre fundo escuro — o contraste
+     desaparece exatamente onde deveria aumentar. */
+  background: var(--color-primary-dark);
+
+  /* Tom `light` em texto: o espelho do erro acima. */
+  color: var(--color-master-light);
+
+  /* --spacing_inset-* é INTERNO; em gap não tem sentido. */
+  gap: var(--spacing_inset-xs);
+}

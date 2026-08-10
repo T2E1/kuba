@@ -1,0 +1,12 @@
+/* ✅ Tokens do design system — rule 024.
+   O dark mode vem de graça: as cores usam light-dark() internamente. */
+
+.button {
+  background: var(--color-primary);
+
+  /* padding é espaçamento interno → _inset */
+  padding: var(--spacing_inset-xs) var(--spacing_inset-sm);
+
+  font-size: var(--font-size-xs);
+  color: var(--color-master-lightest);
+}

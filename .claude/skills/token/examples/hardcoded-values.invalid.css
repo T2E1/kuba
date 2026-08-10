@@ -1,0 +1,18 @@
+/* ❌ Valores hardcoded — viola a rule 024 (constantes mágicas).
+   Correto em: hardcoded-values.valid.css */
+
+.button {
+  /* Nenhum desses valores é rastreável: mudar a cor da marca exige um
+     grep por hexadecimal em todo o repositório, e um deles vai escapar. */
+  background: #3b82f6;
+
+  /* 8px e 16px não pertencem a escala nenhuma. O próximo componente vai
+     usar 10px porque "ficou melhor", e a escala deixa de existir. */
+  padding: 8px 16px;
+
+  font-size: 14px;
+
+  /* `white` não responde a tema. No dark mode, texto branco sobre fundo
+     claro — os tokens de cor resolvem isso via light-dark(). */
+  color: white;
+}

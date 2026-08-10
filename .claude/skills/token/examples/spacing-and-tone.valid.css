@@ -1,0 +1,12 @@
+/* ✅ Escala coerente com o uso.
+
+   Duas regras que resolvem a maioria dos casos:
+   1. padding → --spacing_inset-*  |  margin e gap → --spacing-*
+   2. tom dark nunca em background |  tom light nunca em color de texto */
+
+.card {
+  padding: var(--spacing_inset-nano);
+  background: var(--color-primary-lighter);
+  color: var(--color-master-darker);
+  gap: var(--spacing-nano);
+}
