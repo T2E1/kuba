@@ -61,6 +61,7 @@ sobre percentual. Afirmar um número seria inventá-lo. Configurar a medição �
 | Que fatores de qualidade o caso extremo defende | [quality](../skills/quality/SKILL.md) |
 | Complexidade do teste — teste com `if` esconde caso não testado | [complexity](../skills/complexity/SKILL.md) |
 | Nome do teste e do que ele descreve | [naming](../skills/naming/SKILL.md) |
+| Redação do relato de falha | [prose](../skills/prose/SKILL.md) |
 
 ## Rules
 

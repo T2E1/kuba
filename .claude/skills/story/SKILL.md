@@ -206,6 +206,7 @@ componente, não na story.
 
 ## Skills relacionadas
 
+- [prose](../prose/SKILL.md): reinforces — a `description` do controle é lida por quem consome.
 - [types](../types/SKILL.md): depends on — o `types.d.ts` é a fonte que `argTypes` transcreve.
 - [jsdoc](../jsdoc/SKILL.md): depends on — o texto do JSDoc vira a `description` do controle.
 - [token](../token/SKILL.md): complements — as stories mostram visualmente as variantes que os tokens produzem.

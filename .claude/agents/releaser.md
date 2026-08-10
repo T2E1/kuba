@@ -52,7 +52,7 @@ Sem intervalo explícito, o padrão é desde a última tag de versão em `CHANGE
 | Nome de evento e de atributo — renomear é breaking | [naming](../skills/naming/SKILL.md) |
 | Evento despachado como parte do contrato | [event](../skills/event/SKILL.md) |
 | Fatores afetados por uma quebra de compatibilidade | [quality](../skills/quality/SKILL.md) |
-| Redação da entrada do CHANGELOG | [clean-code](../skills/clean-code/SKILL.md) |
+| Redação do CHANGELOG e da nota de migração | [prose](../skills/prose/SKILL.md) |
 
 ## Rules
 

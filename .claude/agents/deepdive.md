@@ -65,6 +65,7 @@ Um relatório, nunca uma mudança:
 | Entender fluxo assíncrono entre elementos | [dataflow](../skills/dataflow/SKILL.md) |
 | Entender o mecanismo de eventos | [event](../skills/event/SKILL.md) |
 | Entender a composição de um elemento | [mixin](../skills/mixin/SKILL.md), [constructor](../skills/constructor/SKILL.md) |
+| Redação do relatório de descobertas | [prose](../skills/prose/SKILL.md) |
 
 ## Rules
 

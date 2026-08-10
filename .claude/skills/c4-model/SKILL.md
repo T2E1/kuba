@@ -108,6 +108,7 @@ Fonte: Simon Brown, https://c4model.com
 
 ## Skills relacionadas
 
+- [prose](../prose/SKILL.md): reinforces — a legenda e a nota do diagrama são prosa, e falham do mesmo jeito.
 - [arc42](../arc42/SKILL.md): complements — a §5 usa estes diagramas como visão de blocos.
 - [adr](../adr/SKILL.md): complements — o diagrama mostra a estrutura; o ADR explica a escolha.
 - [package](../package/SKILL.md): reinforces — o nível 3 torna visível o grafo que os princípios de pacote governam.

@@ -106,6 +106,7 @@ ainda não foi nomeado.
 
 ## Skills relacionadas
 
+- [prose](../prose/SKILL.md): reinforces — cenário Gherkin vago não testa nada; o critério de concretude é o mesmo.
 - [story](../story/SKILL.md): complements — o `play` testa a interação do componente; o Gherkin descreve o comportamento de negócio.
 - [arc42](../arc42/SKILL.md): complements — os cenários detalham o comportamento que a §6 descreve como fluxo.
 - [quality](../quality/SKILL.md): reinforces — os critérios de aceitação daqui alimentam os cenários de qualidade da §10.

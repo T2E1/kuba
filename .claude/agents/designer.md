@@ -60,6 +60,7 @@ Uma especificação que o `developer` implementa sem adivinhar:
 | Nome de custom property e de estado | [naming](../skills/naming/SKILL.md) |
 | Valor nomeado em vez de literal | [enum](../skills/enum/SKILL.md) |
 | Que fatores de qualidade a decisão afeta | [quality](../skills/quality/SKILL.md) |
+| Redação da especificação | [prose](../skills/prose/SKILL.md) |
 
 ## Rules
 

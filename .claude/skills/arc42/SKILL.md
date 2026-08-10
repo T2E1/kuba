@@ -105,6 +105,7 @@ Fonte: https://arc42.org
 
 ## Skills relacionadas
 
+- [prose](../prose/SKILL.md): reinforces — documento de arquitetura é o terreno favorito da frase que infla significado.
 - [c4-model](../c4-model/SKILL.md): complements — fornece os diagramas da §5.
 - [adr](../adr/SKILL.md): depends on — a §9 é o índice dos ADRs.
 - [quality](../quality/SKILL.md): depends on — a §10 define os alvos que o modelo McCall mede.

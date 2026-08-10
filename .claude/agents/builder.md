@@ -72,6 +72,7 @@ Mais o relato do que a mudança passa a garantir, e o que ela custa por commit.
 | Que fator de qualidade a verificação defende | [quality](../skills/quality/SKILL.md) |
 | Nome de script e de alias | [naming](../skills/naming/SKILL.md) |
 | O que `dist/` e `files` expõem | [revelation](../skills/revelation/SKILL.md) |
+| Redação do relato do que a mudança garante | [prose](../skills/prose/SKILL.md) |
 
 ## Rules
 

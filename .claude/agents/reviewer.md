@@ -64,6 +64,7 @@ não é lida, e uma revisão que lista tudo esconde o que importa.
 | Custo algorítmico introduzido | [big-o](../skills/big-o/SKILL.md) |
 | Calibrar a severidade do achado | [quality](../skills/quality/SKILL.md) |
 | Marcar o que não será corrigido agora | [codetags](../skills/codetags/SKILL.md) |
+| Redação do achado — vago não é acionável | [prose](../skills/prose/SKILL.md) |
 
 ## Rules
 

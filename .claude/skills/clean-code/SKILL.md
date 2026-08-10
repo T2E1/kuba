@@ -131,6 +131,7 @@ codetag e tratar separado.
 
 ## Skills relacionadas
 
+- [prose](../prose/SKILL.md): complements — a mesma disciplina de honestidade e concretude, aplicada à prosa.
 - [calisthenics](../calisthenics/SKILL.md): reinforces — as 9 regras são o treino prático destas práticas.
 - [solid](../solid/SKILL.md): reinforces — a fundação de design sobre a qual Clean Code se apoia.
 - [anti-pattern](../anti-pattern/SKILL.md): complements — o catálogo do que acontece quando estas práticas faltam.

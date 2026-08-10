@@ -65,6 +65,7 @@ Código em `packages/<categoria>/<nome>/`, satisfazendo simultaneamente:
 | Token de estilo em `style.js` | [token](../skills/token/SKILL.md) |
 | Contrato público em `types.d.ts` | [types](../skills/types/SKILL.md) |
 | Comentário e documentação inline | [jsdoc](../skills/jsdoc/SKILL.md) |
+| Redação do comentário e da mensagem de commit | [prose](../skills/prose/SKILL.md) |
 | O que exportar em `index.js` | [revelation](../skills/revelation/SKILL.md) |
 | Onde o arquivo mora | [colocation](../skills/colocation/SKILL.md) |
 | Ordenação de membros e chaves | [alphabetical](../skills/alphabetical/SKILL.md) |

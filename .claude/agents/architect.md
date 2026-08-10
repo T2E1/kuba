@@ -62,6 +62,7 @@ Uma decisão em prosa, nunca código nem arquivo de documentação:
 | Requisito não-funcional e sua calibração | [quality](../skills/quality/SKILL.md) |
 | Custo algorítmico de uma alternativa | [big-o](../skills/big-o/SKILL.md) |
 | O que o projeto não deve virar | [anti-pattern](../skills/anti-pattern/SKILL.md) |
+| Redação da decisão e do descarte | [prose](../skills/prose/SKILL.md) |
 
 ## Rules
 

@@ -127,6 +127,7 @@ Integrity — o resto tem tag própria.
 
 ## Skills relacionadas
 
+- [prose](../prose/SKILL.md): reinforces — a nota do codetag precisa dizer o que fazer, não que algo é importante.
 - [quality](../quality/SKILL.md): depends on — o fator McCall impactado decide a tag.
 - [anti-pattern](../anti-pattern/SKILL.md): depends on — a tag registra o anti-pattern nomeado que não será refatorado agora.
 - [cdd](../cdd/SKILL.md): complements — ICP alto aceito por ora vira `REFACTOR` com o número junto.

@@ -121,6 +121,7 @@ Rules 026 e 062.
 
 ## Skills relacionadas
 
+- [prose](../prose/SKILL.md): reinforces — o comentário é prosa publicada e responde às mesmas regras.
 - [types](../types/SKILL.md): depends on — decide a forma do `types.d.ts`; esta skill documenta o resultado.
 - [story](../story/SKILL.md): complements — a `description` de cada `argTypes` reaproveita o texto escrito aqui.
 - [clean-code](../clean-code/SKILL.md): reinforces — comentar o porquê é parte da mesma disciplina.

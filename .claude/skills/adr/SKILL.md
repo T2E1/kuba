@@ -113,6 +113,7 @@ Fonte: Michael Nygard, *Documenting Architecture Decisions* (2011).
 
 ## Skills relacionadas
 
+- [prose](../prose/SKILL.md): reinforces — decisão escrita com hedge empilhado e atribuição vaga não registra decisão nenhuma.
 - [arc42](../arc42/SKILL.md): complements — a seção 9 do arc42 é o índice das decisões registradas aqui.
 - [c4-model](../c4-model/SKILL.md): complements — o C4 mostra a estrutura resultante da decisão.
 - [poeaa](../poeaa/SKILL.md): complements — escolhas de camada e persistência são candidatas típicas a ADR.
