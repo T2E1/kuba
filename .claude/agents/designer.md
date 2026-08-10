@@ -56,7 +56,7 @@ Uma especificação que o `developer` implementa sem adivinhar:
 | Evento que o componente despacha | [event](../skills/event/SKILL.md) |
 | Como o componente renderiza | [render](../skills/render/SKILL.md) |
 | O que documentar como superfície pública | [types](../skills/types/SKILL.md) |
-| Como demonstrar cada estado | [story](../skills/story/SKILL.md) |
+| Como demonstrar cada estado | [preview](../skills/preview/SKILL.md) |
 | Nome de custom property e de estado | [naming](../skills/naming/SKILL.md) |
 | Valor nomeado em vez de literal | [enum](../skills/enum/SKILL.md) |
 | Que fatores de qualidade a decisão afeta | [quality](../skills/quality/SKILL.md) |

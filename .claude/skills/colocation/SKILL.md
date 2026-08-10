@@ -118,7 +118,7 @@ mixin. Antes de dois, duplicar é mais barato que abstrair cedo (rule 023).
 
 - [package](../package/SKILL.md): depends on — os princípios que esta estrutura aplica.
 - [revelation](../revelation/SKILL.md): complements — define o que sai pelo `index.js`.
-- [story](../story/SKILL.md): reinforces — a story fica colocada, nunca centralizada.
+- [preview](../preview/SKILL.md): reinforces — a story fica colocada, nunca centralizada.
 - [types](../types/SKILL.md): reinforces — um `types.d.ts` por pacote.
 - [c4-model](../c4-model/SKILL.md): complements — os níveis Container e Component espelham categoria e pacote.
 

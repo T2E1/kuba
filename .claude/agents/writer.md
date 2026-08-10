@@ -75,7 +75,7 @@ que aconteceu com a lista de scripts, que ficou com entradas diferentes nos dois
 | Toda frase que vai ser publicada | [prose](../skills/prose/SKILL.md) |
 | O que é a superfície pública a documentar | [types](../skills/types/SKILL.md) |
 | Comentário no código, para não duplicar aqui | [jsdoc](../skills/jsdoc/SKILL.md) |
-| Que estados demonstrar e como | [story](../skills/story/SKILL.md) |
+| Que estados demonstrar e como | [preview](../skills/preview/SKILL.md) |
 | Token e custom property que o consumidor sobrescreve | [token](../skills/token/SKILL.md) |
 | Evento que o componente despacha | [event](../skills/event/SKILL.md) |
 | Fluxo entre elementos, para o exemplo composto | [dataflow](../skills/dataflow/SKILL.md) |

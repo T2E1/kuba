@@ -152,7 +152,7 @@ Fonte: [Wikipedia:Signs of AI writing](https://en.wikipedia.org/wiki/Wikipedia:S
 - [jsdoc](../jsdoc/SKILL.md): reinforces — o comentário é prosa e responde às mesmas regras.
 - [naming](../naming/SKILL.md): complements — nomear identificador é lá; escrever frase é aqui.
 - [clean-code](../clean-code/SKILL.md): reinforces — nome honesto e frase honesta são a mesma disciplina.
-- [story](../story/SKILL.md): complements — a descrição da story é prosa publicada.
+- [preview](../preview/SKILL.md): complements — a descrição da story é prosa publicada.
 - [adr](../adr/SKILL.md): reinforces — decisão registrada com hedge empilhado não decide nada.
 - [codetags](../codetags/SKILL.md): complements — a nota do codetag também é lida por alguém.
 

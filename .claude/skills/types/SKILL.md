@@ -151,7 +151,7 @@ transcreve daqui (skill `story`).
 ## Skills relacionadas
 
 - [jsdoc](../jsdoc/SKILL.md): complements — decide o que os comentários deste arquivo dizem.
-- [story](../story/SKILL.md): complements — `argTypes` transcreve este contrato.
+- [preview](../preview/SKILL.md): complements — `argTypes` transcreve este contrato.
 - [mixin](../mixin/SKILL.md): depends on — a cadeia de `extends` define o que achatar.
 - [revelation](../revelation/SKILL.md): complements — o `index.js` expõe o que este arquivo tipa.
 - [colocation](../colocation/SKILL.md): reinforces — um `types.d.ts` por pacote, colocado.

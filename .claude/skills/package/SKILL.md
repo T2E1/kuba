@@ -91,7 +91,6 @@ Distância        D = |A + I − 1|                        D ∈ [0,1]
 |---|---|---|
 | Agrupamento por razão-para-mudar vs. por tipo técnico (CCP) | [package-layout.valid.md](examples/package-layout.valid.md) | [package-layout.invalid.md](examples/package-layout.invalid.md) |
 | Ciclo entre pacotes e sua quebra por inversão (ADP) | [dependency-cycle.valid.js](examples/dependency-cycle.valid.js) | [dependency-cycle.invalid.js](examples/dependency-cycle.invalid.js) |
-| Cálculo de I, A e D com leitura do resultado (SDP, SAP) | [metrics.valid.md](examples/metrics.valid.md) | — |
 
 ## Checklist
 
@@ -125,6 +124,8 @@ pode ser instável por requisito.
 introduzindo abstrações na fronteira.
 
 ## Referências
+
+- `references/metrics.md` — cálculo de I, A e D com leitura do resultado (SDP, SAP).
 
 - `references/rep.md`, `ccp.md`, `crp.md`, `adp.md`, `sdp.md`, `sap.md` — cada princípio
   com critério, detecção e refatoração.

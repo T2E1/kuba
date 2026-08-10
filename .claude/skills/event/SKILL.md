@@ -119,7 +119,7 @@ funciona.
 - [constructor](../constructor/SKILL.md): depends on — por que listener não vive no constructor.
 - [dataflow](../dataflow/SKILL.md): complements — event bus para fluxo entre componentes distantes.
 - [enum](../enum/SKILL.md): reinforces — nomes de evento como constantes.
-- [story](../story/SKILL.md): complements — `actions.handles` e a story com `play`.
+- [preview](../preview/SKILL.md): complements — `actions.handles` e a story com `play`.
 - [types](../types/SKILL.md): depends on — o evento disparado é parte do contrato público.
 - [method](../method/SKILL.md): complements — a forma do método decorado.
 

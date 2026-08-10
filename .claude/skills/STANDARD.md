@@ -100,7 +100,7 @@ sempre carregada no system prompt, e é por ela que a skill é escolhida.
 - Deve conter **o que a skill faz** *e* **quando usá-la** (frases-gatilho que o
   usuário realmente diria).
 - Sem `<` ou `>` (colchetes angulares são proibidos no frontmatter).
-- Mencionar tipos de arquivo quando relevante (`types.d.ts`, `*.stories.js`, `.css`).
+- Mencionar tipos de arquivo quando relevante (`types.d.ts`, `*.test.js`, `.css`).
 - Incluir gatilho negativo quando a skill colide com outra (`Não use para X — use a skill Y`).
 
 ## `model` — equilíbrio entre custo e qualidade
@@ -120,7 +120,7 @@ Toda skill declara o modelo. Nenhuma fica omissa: a declaração é a decisão r
 | Modelo | Quantas | Quando | Skills |
 |---|---|---|---|
 | `haiku` | 4 | O trabalho é mecânico e verificável — reordenar, marcar. Nenhuma decisão de design pendente. | `alphabetical`, `anatomy`, `revelation`, `codetags` |
-| `sonnet` | 17 | Aplicação de convenção conhecida, com julgamento limitado a um arquivo ou componente. | `bracket`, `colocation`, `constructor`, `dataflow`, `enum`, `event`, `getter`, `jsdoc`, `method`, `mixin`, `naming`, `render`, `setter`, `state`, `story`, `token`, `types` |
+| `sonnet` | 18 | Aplicação de convenção conhecida, com julgamento limitado a um arquivo ou componente. | `bracket`, `colocation`, `constructor`, `dataflow`, `enum`, `event`, `getter`, `jsdoc`, `method`, `mixin`, `naming`, `preview`, `prose`, `render`, `setter`, `state`, `token`, `types` |
 | `opus` | 17 | Julgamento arquitetural, trade-off entre princípios, diagnóstico. Rebaixar aqui custa qualidade na decisão **e** no código que vem depois dela. | `adr`, `anti-pattern`, `arc42`, `bdd`, `big-o`, `c4-model`, `calisthenics`, `cdd`, `clean-code`, `complexity`, `gof`, `package`, `poeaa`, `quality`, `react`, `solid`, `twelve-factor` |
 
 Na dúvida, **`opus`**. O custo de um turno mais caro é menor que o de uma decisão de

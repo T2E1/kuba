@@ -52,7 +52,7 @@ sobre percentual. Afirmar um número seria inventá-lo. Configurar a medição �
 
 | Contexto | Skill |
 |---|---|
-| Estrutura do teste e do que se testa num componente | [story](../skills/story/SKILL.md) |
+| Estrutura do teste e do que se testa num componente | [preview](../skills/preview/SKILL.md) |
 | Estado do elemento e `internals.states` | [state](../skills/state/SKILL.md) |
 | Evento despachado e sua propagação | [event](../skills/event/SKILL.md) |
 | Fluxo assíncrono entre elementos | [dataflow](../skills/dataflow/SKILL.md) |

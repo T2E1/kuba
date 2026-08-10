@@ -151,7 +151,7 @@ Fonte da taxonomia: Nathan Curtis, "Naming Tokens in Design Systems" (EightShape
 ## Skills relacionadas
 
 - [render](../render/SKILL.md): depends on — os estilos que consomem tokens são aplicados na função `style`.
-- [story](../story/SKILL.md): complements — as stories documentam visualmente as variantes que os tokens produzem.
+- [preview](../preview/SKILL.md): complements — as stories documentam visualmente as variantes que os tokens produzem.
 - [enum](../enum/SKILL.md): reinforces — mesma disciplina de eliminar literais, aplicada a JavaScript.
 - [alphabetical](../alphabetical/SKILL.md): complements — ordenação das propriedades dentro do bloco de estilo.
 
