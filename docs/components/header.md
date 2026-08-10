@@ -63,7 +63,7 @@ any extra wrapper.
     <kb-logo></kb-logo>
     <kb-text size="xxs" weight="bold">kuba</kb-text>
   </kb-stack>
-  <kb-button slot="trailing" variant="icon" aria-label="Account">
+  <kb-button slot="trailing" variant="icon" alt="Account">
     <kb-icon use="account_circle"></kb-icon>
   </kb-button>
 </kb-header>

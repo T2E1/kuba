@@ -67,7 +67,7 @@ centralizados na vertical sem nenhum wrapper extra.
     <kb-logo></kb-logo>
     <kb-text size="xxs" weight="bold">kuba</kb-text>
   </kb-stack>
-  <kb-button slot="trailing" variant="icon" aria-label="Conta">
+  <kb-button slot="trailing" variant="icon" alt="Conta">
     <kb-icon use="account_circle"></kb-icon>
   </kb-button>
 </kb-header>

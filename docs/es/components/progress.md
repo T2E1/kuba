@@ -14,14 +14,7 @@ desconocida" — simplemente se quedaría en el número que recibió.
 ## Uso
 
 ```html
-<kb-progress
-  value="60"
-  role="progressbar"
-  aria-valuenow="60"
-  aria-valuemin="0"
-  aria-valuemax="100"
-  aria-label="Subiendo"
-></kb-progress>
+<kb-progress value="60" alt="Subiendo"></kb-progress>
 ```
 
 ## Cuándo usarlo
@@ -134,6 +127,6 @@ una que se pasó.
 | Haz | No hagas |
 |---|---|
 | Acotar el porcentaje antes de establecer `value` | Pasar una razón cruda (`0.6`) o un conteo sin límite |
-| Añadir `role="progressbar"` y los atributos `aria-value*` | Publicar el elemento pelado y suponer que el relleno se anuncia |
+| Darle un `alt` que diga qué está progresando | Publicar el elemento pelado y suponer que el relleno se anuncia |
 | Darle a la pista un color visible en superficies claras | Dejar el blanco por defecto en una página blanca |
 | Usar un spinner para trabajo de duración desconocida | Aparcar la barra en un valor arbitrario para señalar "cargando" |

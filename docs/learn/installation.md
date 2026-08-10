@@ -11,11 +11,11 @@ page, no tooling at all.
 ```html
 <link
   rel="stylesheet"
-  href="https://cdn.jsdelivr.net/npm/@t2e1/kuba@0.1.0-alpha.28/dist/kuba.css"
+  href="https://cdn.jsdelivr.net/npm/@t2e1/kuba@0.1.0-alpha.32/dist/kuba.css"
 />
 <script
   type="module"
-  src="https://cdn.jsdelivr.net/npm/@t2e1/kuba@0.1.0-alpha.28/dist/kuba.js"
+  src="https://cdn.jsdelivr.net/npm/@t2e1/kuba@0.1.0-alpha.32/dist/kuba.js"
 ></script>
 ```
 

@@ -14,14 +14,7 @@ simplesmente ficaria parada no número que recebeu.
 ## Uso
 
 ```html
-<kb-progress
-  value="60"
-  role="progressbar"
-  aria-valuenow="60"
-  aria-valuemin="0"
-  aria-valuemax="100"
-  aria-label="Enviando"
-></kb-progress>
+<kb-progress value="60" alt="Enviando"></kb-progress>
 ```
 
 ## Quando usar
@@ -133,6 +126,6 @@ passou.
 | Faça | Não faça |
 |---|---|
 | Limitar a porcentagem antes de definir o `value` | Passar uma razão crua (`0.6`) ou uma contagem sem limite |
-| Adicionar `role="progressbar"` e os atributos `aria-value*` | Publicar o elemento pelado supondo que o preenchimento é anunciado |
+| Dar um `alt` dizendo o que está progredindo | Publicar o elemento pelado supondo que o preenchimento é anunciado |
 | Dar à trilha uma cor visível em superfícies claras | Deixar o padrão branco numa página branca |
 | Usar um spinner para trabalho de duração desconhecida | Estacionar a barra num valor arbitrário para sinalizar "carregando" |

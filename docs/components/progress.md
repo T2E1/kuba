@@ -13,14 +13,7 @@ determinate only: `value` is a percentage you set, so the bar can't express
 ## Usage
 
 ```html
-<kb-progress
-  value="60"
-  role="progressbar"
-  aria-valuenow="60"
-  aria-valuemin="0"
-  aria-valuemax="100"
-  aria-label="Uploading"
-></kb-progress>
+<kb-progress value="60" alt="Uploading"></kb-progress>
 ```
 
 ## When to use
@@ -131,6 +124,6 @@ over.
 | Do | Don't |
 |---|---|
 | Clamp the percentage before setting `value` | Pass a raw ratio (`0.6`) or an unbounded count |
-| Add `role="progressbar"` and the `aria-value*` attributes | Ship the bare element and assume the fill is announced |
+| Give it an `alt` saying what is progressing | Ship the bare element and assume the fill is announced |
 | Give the track a visible color on light surfaces | Leave the white default on a white page |
 | Use a spinner for unknown-duration work | Park the bar at an arbitrary value to signal "loading" |
