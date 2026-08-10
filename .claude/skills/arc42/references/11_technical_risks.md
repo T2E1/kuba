@@ -63,7 +63,7 @@ Esta seção documenta os riscos técnicos identificados: o que pode dar errado,
 | ID | Risco | Score | Mitigação Principal |
 |----|-------|-------|---------------------|
 | R-01 | [ex: Indisponibilidade do provedor cloud] | 6 | [ex: Multi-region failover] |
-| R-02 | [ex: Limite de rate do banco de dados edge] | 4 | [ex: Cache em KV Store] |
+| R-02 | [ex: API da plataforma sem suporte num navegador alvo] | 4 | [ex: Polyfill isolado, com teste no navegador real] |
 
 ### Riscos de Dependências Externas
 

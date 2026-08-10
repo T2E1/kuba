@@ -23,9 +23,9 @@ Esta seção documenta as decisões fundamentais que moldam a arquitetura: escol
 
 | Decisão | Escolha | Alternativas Consideradas | Motivação |
 |---------|---------|--------------------------|-----------|
-| Runtime | [ex: Cloudflare Workers] | [ex: Node.js, Deno, Bun] | [ex: Edge computing, custo zero no free tier] |
+| Runtime | [ex: o navegador, sem build] | [ex: React, Lit, Stencil] | [ex: HTML é a API; nada a instalar para usar] |
 | Linguagem | [ex: TypeScript strict] | [ex: JavaScript, Go] | [ex: Tipagem estática, tooling maduro] |
-| Banco de dados | [ex: D1 SQLite] | [ex: PostgreSQL, MongoDB] | [ex: Integrado ao Workers, sem latência de rede] |
+| Encapsulamento | [ex: Shadow DOM] | [ex: CSS com escopo por convenção] | [ex: Isolamento real de estilo, dado pela plataforma] |
 | Testes | [ex: Bun test] | [ex: Jest, Vitest] | [ex: Zero config, compatível com o runtime] |
 | Linter/Formatter | [ex: Biome] | [ex: ESLint + Prettier] | [ex: Uma ferramenta, mais rápido] |
 
@@ -33,7 +33,7 @@ Esta seção documenta as decisões fundamentais que moldam a arquitetura: escol
 
 | Aspecto | Decisão | Justificativa |
 |---------|---------|---------------|
-| Estrutura de código | [ex: Vertical Slice Architecture] | [ex: Alta coesão por feature, facilita manutenção isolada] |
+| Estrutura de código | [ex: um pacote por elemento em `packages/<categoria>/<nome>/`] | [ex: Alta coesão; o elemento e tudo que ele precisa no mesmo lugar] |
 | Padrão de camadas | [ex: Controller → Service → Repository] | [ex: Separação de responsabilidades clara] |
 | Comunicação | [ex: Síncrona via HTTP REST] | [ex: Simplicidade, sem overhead de message broker] |
 | Estado | [ex: Stateless — nenhum estado em memória] | [ex: Compatível com edge workers, horizontal scaling] |
@@ -44,7 +44,7 @@ Esta seção documenta as decisões fundamentais que moldam a arquitetura: escol
 |----------------------|------------------------|
 | Testabilidade | [ex: Injeção de dependências, interfaces para repositórios] |
 | Manutenibilidade | [ex: 70 regras enforced, máx. 50 linhas por classe] |
-| Performance | [ex: Edge deployment, cache em KV store] |
+| Performance | [ex: bundle sem dependência; render adiado a um requestAnimationFrame] |
 | Segurança | [ex: Secrets via env vars, sem hardcode] |
 | Observabilidade | [ex: Logs estruturados em JSON para stdout] |
 
@@ -52,7 +52,7 @@ Esta seção documenta as decisões fundamentais que moldam a arquitetura: escol
 
 | Padrão | Onde é Aplicado | Por Quê |
 |--------|-----------------|---------|
-| [ex: Repository] | Acesso a dados | [ex: Abstrai D1, facilita mock em testes] |
+| [ex: Mixin] | Comportamento compartilhado | [ex: Compõe capacidades sem hierarquia de herança profunda] |
 | [ex: Factory] | Criação de entidades | [ex: Centraliza validação e construção] |
 | [ex: Strategy] | [Contexto de variação] | [ex: Comportamento intercambiável sem if/switch] |
 ```

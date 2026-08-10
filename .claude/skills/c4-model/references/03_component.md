@@ -4,7 +4,7 @@
 
 ## Container em Foco: [Nome do Container]
 
-[Identificar qual container está sendo decomposto. Ex: "API Server — Cloudflare Worker implementado em TypeScript com Hono, responsável pela lógica de negócio e orquestração."]
+[Identificar qual container está sendo decomposto. Ex: "Bundle — o módulo ESM publicado, que define os custom elements no registro do navegador."]
 
 ## Diagrama de Componentes
 
@@ -14,81 +14,86 @@
 │                          [Tecnologia do Container]                            │
 │                                                                              │
 │  ┌───────────────────────────────────────────────────────────────────────┐   │
-│  │  [Context / Domínio A]                                                │   │
+│  │  [Elementos visíveis]                                                 │   │
 │  │                                                                       │   │
-│  │  ┌──────────────┐     ┌──────────────┐     ┌──────────────────────┐  │   │
-│  │  │              │     │              │     │                      │  │   │
-│  │  │  Controller  │────►│   Service    │────►│    Repository        │  │   │
-│  │  │              │     │              │     │                      │  │   │
-│  │  │  HTTP routes │     │  Use cases   │     │  Data access (D1/KV) │  │   │
-│  │  │  Validation  │     │  Biz rules   │     │                      │  │   │
-│  │  └──────┬───────┘     └──────┬───────┘     └──────────────────────┘  │   │
-│  │         │                   │                                         │   │
-│  │         └─────────┬─────────┘                                         │   │
-│  │                   ▼                                                   │   │
-│  │         ┌──────────────────┐                                          │   │
-│  │         │      Model       │                                          │   │
-│  │         │  Types, schemas  │                                          │   │
-│  │         │  Value Objects   │                                          │   │
-│  │         └──────────────────┘                                          │   │
-│  └───────────────────────────────────────────────────────────────────────┘   │
+│  │  ┌──────────────┐  ┌──────────────┐  ┌──────────┐  ┌───────────────┐ │   │
+│  │  │  component/  │  │    form/     │  │ layout/  │  │  typography/  │ │   │
+│  │  │              │  │              │  │          │  │               │ │   │
+│  │  │ kb-button    │  │ kb-input     │  │ kb-stack │  │ kb-text       │ │   │
+│  │  │ kb-icon      │  │ kb-textarea  │  │ kb-inset │  │ kb-label      │ │   │
+│  │  └──────┬───────┘  └──────┬───────┘  └────┬─────┘  └───────┬───────┘ │   │
+│  └─────────┼─────────────────┼───────────────┼────────────────┼─────────┘   │
+│            │                 │               │                │             │
+│            └─────────────────┴───────┬───────┴────────────────┘             │
+│                                      ▼                                       │
+│  ┌───────────────────────────────────────────────────────────────────────┐   │
+│  │  [Comportamento compartilhado]                                        │   │
+│  │  mixin/ — Width, Height, Hidden, Headless, Identity, Template, Value  │   │
+│  └───────────────────────────────────┬───────────────────────────────────┘   │
+│                                      ▼                                       │
+│  ┌──────────────────────────┐   ┌──────────────────────────────────────────┐ │
+│  │  [Infraestrutura]        │   │  [Comunicação]                           │ │
+│  │  dom/ — paint, css, html │   │  echo/ — o barramento de arcos           │ │
+│  │  directive/ — define     │   │  event/ — on, stop                       │ │
+│  │  renderer/               │   │  middleware/ — before, after, around     │ │
+│  └──────────────────────────┘   └──────────────────────────────────────────┘ │
 │                                                                              │
 │  ┌───────────────────────────────────────────────────────────────────────┐   │
-│  │  [Context / Domínio B]   (mesmo padrão)                               │   │
-│  │  Controller → Service → Repository → Model                            │   │
+│  │  [Elementos sem representação visual]                                 │   │
+│  │  data/ — kb-fetch, kb-dataset    ·    behavior/, router/, http/       │   │
 │  └───────────────────────────────────────────────────────────────────────┘   │
-│                                                                              │
-│  ┌──────────────────────────┐   ┌──────────────────────────────────────────┐ │
-│  │  [Shared / Infraestrutura│   │  [Middleware / Cross-cutting]            │ │
-│  │  Logger, ErrorHandler    │   │  Auth guard, Rate limiter, CORS          │ │
-│  │  DB Client, KV Client]   │   │                                          │ │
-│  └──────────────────────────┘   └──────────────────────────────────────────┘ │
 └──────────────────────────────────────────────────────────────────────────────┘
                                         │
           ┌─────────────────────────────┼─────────────────────────────┐
           ▼                             ▼                             ▼
   ┌───────────────┐           ┌──────────────────┐          ┌─────────────────┐
-  │ [Database]    │           │ [Cache / KV]     │          │ [Sistema Ext.]  │
-  │ [Container]   │           │ [Container]      │          │ [Externo]       │
+  │ [Folha de     │           │ [Plataforma:     │          │ [Aplicação do   │
+  │  tokens]      │           │  Shadow DOM,     │          │  consumidor]    │
+  │ [Container]   │           │  ElementInternals│          │ [Externo]       │
   └───────────────┘           └──────────────────┘          └─────────────────┘
 ```
 
 ## Componentes do Container
 
-| Componente | Arquivo | Responsabilidade | Interface Pública |
-|------------|---------|-----------------|-------------------|
-| **Controller** | `controller.ts` | HTTP handlers: recebe request, valida schema, delega ao service, retorna response | Handlers Hono/Express registrados no router |
-| **Service** | `service.ts` | Lógica de negócio pura: orquestra casos de uso, aplica regras de domínio | Métodos de caso de uso tipados |
-| **Repository** | `repository.ts` | Acesso a dados: queries SQL (D1), leitura/escrita KV, chamadas a APIs externas | Interface `IRepository` com métodos CRUD |
-| **Model** | `model.ts` | Types, interfaces, schemas Zod, Value Objects, DTOs | Types/interfaces exportados |
-| **Logger** | `shared/logger.ts` | Logging estruturado em JSON para stdout | `logger.info()`, `logger.error()` |
-| **ErrorHandler** | `shared/errors.ts` | Classes de erro de domínio: `ValidationError`, `NotFoundError`, `DomainError` | Classes de erro exportadas |
-| **AuthGuard** | `middleware/auth.ts` | Verificação de token JWT em cada request protegido | Middleware Hono |
+| Componente | Diretório | Responsabilidade | Interface Pública |
+|------------|-----------|-----------------|-------------------|
+| **Elementos visíveis** | `packages/component/`, `form/`, `layout/`, `typography/` | Custom elements com Shadow DOM que o consumidor escreve no HTML | Prefixo `kb-`, configurados por atributo |
+| **Elementos headless** | `packages/data/`, `behavior/` | Comportamento sem representação visual — busca, coleção, redirecionamento | Prefixo `k-`, ou `kb-` quando renderizam conteúdo |
+| **Mixins** | `packages/mixin/` | Comportamento compartilhado aplicado por composição de classes | `(Super) => class extends Super`, aplicados da direita para a esquerda |
+| **Render** | `packages/dom/` | `@paint`, `@repaint`, `@retouch`, `css`, `html` — escreve no shadow root | Decorators e template tags |
+| **Definição** | `packages/directive/` | `@define` registra o elemento no `customElements` | Decorator |
+| **Comunicação** | `packages/echo/`, `event/` | Arcos declarativos `on="fonte/evento:tipo/destino"` e escuta no shadow root | `Echo` na cadeia, `@on.*`, `@dispatchEvent` |
+| **Middleware** | `packages/middleware/` | `@before`, `@after`, `@around` — valida e transforma antes de atribuir | Decorators |
+| **Tokens** | `packages/pixel/` | Custom properties de cor, espaço, tipografia e borda | `index.css`, importado pelo consumidor |
 
 ## Dependências entre Componentes
 
 | Componente | Depende de | Tipo de Dependência | Direção |
 |------------|-----------|---------------------|---------|
-| Controller | Service | Injeção de dependência via interface | Controller → Service |
-| Controller | Model (types) | Import de tipos | Controller → Model |
-| Service | Repository | Injeção de dependência via interface | Service → Repository |
-| Service | Model (types) | Import de tipos | Service → Model |
-| Repository | DB Client (shared) | Import direto | Repository → Shared |
-| Controller | ErrorHandler | Import de classes de erro | Controller → Shared |
-| Service | ErrorHandler | Import de classes de erro | Service → Shared |
+| Elemento visível | Mixin | Composição na cadeia de `extends` | Elemento → Mixin |
+| Elemento visível | `dom/` | Decorator `@paint` e template tags | Elemento → Infra |
+| Elemento que despacha evento | `echo/` | `Echo` obrigatório na cadeia | Elemento → Echo |
+| Elemento | `directive/` | `@define` para registrar | Elemento → Directive |
+| Elemento | `pixel/` | `var(--token)` no `style.js` | Elemento → Tokens |
+| Mixin | Plataforma | `ElementInternals`, `internals.states` | Mixin → Navegador |
+
+O grafo aponta sempre dos elementos para a infraestrutura, e nunca de volta — é o que
+mantém `packages/dom/` e `packages/echo/` reutilizáveis por qualquer elemento novo
+(rule 018, dependências acíclicas).
 
 ## Estrutura de Diretórios Correspondente
 
 ```
-src/
-└── [context]/
-    └── [container]/
-        └── [component]/
-            ├── controller.ts      ← HTTP handlers
-            ├── service.ts         ← Business logic
-            ├── repository.ts      ← Data access
-            ├── model.ts           ← Types, interfaces, schemas
-            └── [component].test.ts ← Testes unitários
+packages/
+└── [categoria]/          ← component, form, layout, typography, data, mixin...
+    └── [nome]/
+        ├── [nome].ts     ← a classe do elemento, com decorators e mixins
+        ├── component.js  ← o markup do shadow root
+        ├── style.js      ← o CSS, com tokens e custom properties
+        ├── interfaces.js ← os Symbols que formam o contrato
+        ├── index.js      ← o que é exportado
+        ├── types.d.ts    ← o contrato público: atributo, propriedade, evento
+        └── [nome].test.js ← testes de comportamento em navegador real
 ```
 
 ---
@@ -99,7 +104,8 @@ src/
 - [c4model Level 2 — Container](02_container.md): depende — Level 3 decompõe um container específico de Level 2
 - [c4model Level 4 — Code](04_code.md): complementa — Level 4 mostra a implementação interna de cada componente aqui
 - [rule 010 SRP](../../../rules/010_principio-responsabilidade-unica.md): reforça — cada componente deve ter responsabilidade única
-- [rule 014 DIP](../../../rules/014_principio-inversao-dependencia.md): reforça — componentes dependem de interfaces, não de concretos
+- [rule 018 ADP](../../../rules/018_principio-dependencias-aciclicas.md): reforça — o grafo entre pacotes é acíclico
+- [skill colocation](../../colocation/SKILL.md): complementa — define onde cada arquivo do pacote mora
 
 ---
 

@@ -28,12 +28,12 @@ Esta seção centraliza as definições precisas de todos os termos relevantes d
 
 | Termo | Definição | Contexto de Uso |
 |-------|-----------|-----------------|
-| **Vertical Slice** | Fatia vertical que contém todos os artefatos de uma feature: controller, service, repository, model e testes. Estrutura: `src/[context]/[container]/[component]/` | Estrutura do projeto |
-| **Context** | Primeiro nível da Vertical Slice Architecture. Representa o domínio de negócio. Ex: `user_auth`, `billing`. | Estrutura do projeto |
-| **Container** | Segundo nível. Subdomínio ou serviço dentro do context. Ex: `login`, `checkout`. | Estrutura do projeto |
-| **Component** | Terceiro nível. Feature específica dentro do container. Ex: `authentication`. | Estrutura do projeto |
-| **Value Object** | Objeto de domínio imutável identificado por seu valor (não por ID). Ex: `Email`, `CPF`, `Money`. | Código TypeScript |
-| **Repository** | Abstração de acesso a dados. Interface define o contrato; implementação acessa D1/KV/API. | Código TypeScript |
+| **Pacote** | Diretório que reúne tudo que um elemento precisa: a classe, o markup, o estilo, os contratos, os tipos e os testes. Estrutura: `packages/[categoria]/[nome]/` | Estrutura do projeto |
+| **Categoria** | Primeiro nível de `packages/`. Agrupa elementos pelo que eles são. Ex: `component`, `form`, `layout`, `data`. | Estrutura do projeto |
+| **Elemento** | Custom element registrado no navegador. Visível usa prefixo `kb-`; headless usa `k-`. Ex: `kb-button`, `k-fetch`. | Estrutura do projeto |
+| **Mixin** | Função `(Super) => class extends Super` que adiciona comportamento a um elemento. Aplicados da direita para a esquerda. Ex: `Hidden`, `Value`. | Estrutura do projeto |
+| **Value Object** | Objeto de domínio imutável identificado por seu valor (não por ID). Ex: `Email`, `CPF`, `Money`. | Código |
+| **Contrato** | Symbol exportado em `interfaces.js` e invocado por bracket notation. `Symbol()` é interno ao pacote; `Symbol.for()` atravessa pacotes. | Código |
 | **ADR** | Architecture Decision Record. Documento que captura uma decisão arquitetural, seu contexto e consequências. | docs/adr/ |
 | **Guard Clause** | Retorno antecipado que verifica pré-condições no início de uma função, evitando aninhamento. | Padrão de código |
 

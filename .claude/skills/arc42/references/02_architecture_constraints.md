@@ -19,17 +19,17 @@ Esta seção documenta as restrições que limitam as opções de design arquite
 
 | ID | Restrição | Origem | Impacto Arquitetural |
 |----|-----------|--------|----------------------|
-| RT-01 | [ex: Deploy exclusivamente em Cloudflare Workers] | [Decisão de infraestrutura] | [Sem suporte a filesystem, sem processos persistentes] |
-| RT-02 | [ex: Banco de dados: apenas D1 (SQLite edge)] | [Custo / plataforma] | [Sem transações distribuídas, sem stored procedures complexas] |
-| RT-03 | [ex: Linguagem: TypeScript estrito] | [Padrão da equipe] | [Todas as interfaces tipadas, sem `any`] |
-| RT-04 | [ex: Runtime: Bun para testes locais] | [Toolchain definido] | [Compatibilidade com Web APIs] |
+| RT-01 | [ex: O runtime é o navegador do consumidor] | [Decisão de produto] | [Sem passo de build obrigatório, sem API de Node] |
+| RT-02 | [ex: Zero dependência de runtime no pacote publicado] | [Custo transferido ao consumidor] | [Só APIs da plataforma; nada de framework] |
+| RT-03 | [ex: JavaScript puro; tipos só em `types.d.ts`] | [Padrão da equipe] | [Contrato público tipado sem obrigar build no consumidor] |
+| RT-04 | [ex: Testes num navegador real, não em DOM emulado] | [As APIs usadas exigem] | [Suíte mais lenta; prova o que diz provar] |
 
 ## Restrições Organizacionais
 
 | ID | Restrição | Origem | Impacto |
 |----|-----------|--------|---------|
 | RO-01 | [ex: Time de 2 devs em part-time] | [Headcount] | [Soluções simples preferidas, sem overhead operacional] |
-| RO-02 | [ex: Sem budget para serviços pagos além do plano free] | [Orçamento] | [Cloudflare free tier, sem SaaS de monitoramento pago] |
+| RO-02 | [ex: Sem budget para infraestrutura paga] | [Orçamento] | [npm público e GitHub Pages; CDN gratuito para os exemplos] |
 | RO-03 | [ex: Deploys via CI/CD obrigatório — sem deploy manual] | [Segurança / processo] | [Exige pipeline configurado antes de qualquer entrega] |
 
 ## Conventions Obrigatórias

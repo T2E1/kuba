@@ -25,17 +25,17 @@ Esta seção documenta onde e como o sistema é executado: infraestrutura físic
 │  │                    Ambiente: Production                      │ │
 │  │                                                             │ │
 │  │  ┌───────────────────────┐    ┌──────────────────────────┐  │ │
-│  │  │   [Edge Worker]       │    │  [Banco de Dados]        │  │ │
-│  │  │   [Runtime]           │───►│  [Tipo / Região]         │  │ │
+│  │  │   [Registro npm]      │    │  [CDN sobre o registro]  │  │ │
+│  │  │   [Pacote versionado] │───►│  [Entrega ao navegador]  │  │ │
 │  │  │                       │    │                          │  │ │
-│  │  │  - [Componente A]     │    │  [Schema principal]      │  │ │
-│  │  │  - [Componente B]     │    └──────────────────────────┘  │ │
+│  │  │  - [Bundle ESM]       │    │  [Versão pinada]         │  │ │
+│  │  │  - [Folha de tokens]  │    └──────────────────────────┘  │ │
 │  │  └───────────────────────┘                                   │ │
 │  │                 │                                            │ │
 │  │                 ▼                                            │ │
 │  │  ┌───────────────────────┐    ┌──────────────────────────┐  │ │
-│  │  │   [KV Store / Cache]  │    │  [Queue / Pub-Sub]       │  │ │
-│  │  │   [Tipo]              │    │  [Tipo]                  │  │ │
+│  │  │  [Site de docs]       │    │  [Navegador do           │  │ │
+│  │  │  [Hospedagem estática]│    │   consumidor]            │  │ │
 │  │  └───────────────────────┘    └──────────────────────────┘  │ │
 │  └─────────────────────────────────────────────────────────────┘ │
 └──────────────────────────────────────────────────────────────────┘
@@ -45,11 +45,11 @@ Esta seção documenta onde e como o sistema é executado: infraestrutura físic
 
 | Componente | Nó de Execução | Tecnologia | Região |
 |------------|----------------|------------|--------|
-| API Handler | [ex: Cloudflare Worker] | [ex: V8 Isolate] | [ex: Global Edge] |
-| Banco de dados | [ex: Cloudflare D1] | [ex: SQLite] | [ex: São Paulo] |
-| Cache | [ex: Cloudflare KV] | [ex: Key-Value] | [ex: Global] |
-| Fila | [ex: Cloudflare Queue] | [ex: FIFO Queue] | [ex: Global] |
-| Arquivos estáticos | [ex: Cloudflare R2] | [ex: S3-compatible] | [ex: Global] |
+| Pacote publicado | [ex: npm `@escopo/nome`] | [ex: módulo ESM] | [ex: registro público] |
+| Entrega ao navegador | [ex: jsDelivr] | [ex: CDN sobre o npm] | [ex: global] |
+| Site de documentação | [ex: GitHub Pages] | [ex: estático] | [ex: global] |
+| Publicação | [ex: GitHub Actions] | [ex: workflow em push] | [ex: efêmero] |
+| Execução | [ex: navegador do consumidor] | [ex: fora do nosso controle] | [ex: onde o usuário estiver] |
 
 ## Ambientes
 

@@ -30,14 +30,14 @@ Esta seção é o índice central de todos os ADRs (Architecture Decision Record
 
 | ADR | Decisão | Status |
 |-----|---------|--------|
-| `ADR-001` | [ex: Adoção de Cloudflare Workers como runtime] | Aceito |
-| `ADR-002` | [ex: Uso de D1 como banco de dados principal] | Aceito |
+| `ADR-001` | [ex: Nenhuma dependência de runtime no pacote publicado] | Aceito |
+| `ADR-002` | [ex: Shadow DOM em todo elemento visível] | Aceito |
 
 ### Arquitetura e Estrutura
 
 | ADR | Decisão | Status |
 |-----|---------|--------|
-| `ADR-003` | [ex: Vertical Slice Architecture como padrão estrutural] | Aceito |
+| `ADR-003` | [ex: Um pacote por elemento, agrupado por categoria] | Aceito |
 | `ADR-004` | [ex: Repository pattern para acesso a dados] | Aceito |
 
 ### Qualidade e Processo

@@ -22,7 +22,7 @@ Esta seção documenta os conceitos e padrões que se aplicam transversalmente a
 | Aspecto | Decisão | Exemplo |
 |---------|---------|---------|
 | Formato | [ex: JSON estruturado] | `{"level":"info","msg":"...","ts":"...","traceId":"..."}` |
-| Destino | [ex: stdout → plataforma coleta] | Cloudflare Logpush |
+| Destino | [ex: console do navegador do consumidor] | DevTools |
 | Níveis | [ex: error, warn, info, debug] | `LOG_LEVEL=info` em produção |
 | Campos obrigatórios | [ex: traceId, userId, duration] | Todos os logs de request |
 | Campos proibidos | [ex: passwords, tokens, PII] | Nunca logar dados sensíveis |

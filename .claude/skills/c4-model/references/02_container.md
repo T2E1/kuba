@@ -8,66 +8,67 @@
 ┌──────────────────────────────────────────────────────────────────────────────┐
 │                            [Nome do Sistema]                                  │
 │                                                                              │
-│  ┌─────────────────┐     ┌─────────────────┐     ┌──────────────────────┐   │
-│  │                 │     │                 │     │                      │   │
-│  │   [Web App]     │     │   [API Server]  │     │   [Worker / Queue]   │   │
-│  │   [Tecnologia]  │────►│   [Tecnologia]  │────►│   [Tecnologia]       │   │
-│  │                 │     │                 │     │                      │   │
-│  │  [Responsabi-   │     │  [Responsabi-   │     │  [Responsabi-        │   │
-│  │   lidade]       │     │   lidade]       │     │   lidade]            │   │
-│  └─────────────────┘     └────────┬────────┘     └──────────────────────┘   │
-│                                   │                                          │
-│                    ┌──────────────┴──────────────┐                          │
-│                    │                             │                          │
-│           ┌────────▼────────┐          ┌─────────▼────────┐                │
-│           │                 │          │                   │                │
-│           │  [Database]     │          │  [Cache / KV]     │                │
-│           │  [Tecnologia]   │          │  [Tecnologia]     │                │
-│           │                 │          │                   │                │
-│           │  [O que arma-   │          │  [O que arma-     │                │
-│           │   zena]         │          │   zena]           │                │
-│           └─────────────────┘          └───────────────────┘                │
-└──────────────────────────────────────────────────────────────────────────────┘
-         │                                         │
-         ▼                                         ▼
-┌─────────────────┐                      ┌─────────────────┐
-│                 │                      │                 │
-│  [Sistema Ext.  │                      │  [Sistema Ext.  │
-│   Principal]    │                      │   Secundário]   │
-│ [Sistema Externo]                      │ [Sistema Externo]
-│                 │                      │                 │
-└─────────────────┘                      └─────────────────┘
+│  ┌──────────────────────┐              ┌──────────────────────┐             │
+│  │   [Bundle]           │              │   [Folha de tokens]  │             │
+│  │   [Tecnologia]       │─── var() ───►│   [Tecnologia]       │             │
+│  │                      │              │                      │             │
+│  │  [Responsabilidade]  │              │  [Responsabilidade]  │             │
+│  └──────────┬───────────┘              └──────────────────────┘             │
+│             │                                                                │
+│             │ acompanha                                                      │
+│             ▼                                                                │
+│  ┌──────────────────────┐              ┌──────────────────────┐             │
+│  │   [Declarações .d.ts]│              │  [Site de docs]      │             │
+│  │   [Tecnologia]       │              │  [Tecnologia]        │             │
+│  │                      │              │                      │             │
+│  │  [Responsabilidade]  │              │  [Responsabilidade]  │             │
+│  └──────────────────────┘              └──────────┬───────────┘             │
+└───────────────────────────────────────────────────┼──────────────────────────┘
+         │                                          │
+         │ instalado / carregado                    │ carrega versão pinada
+         ▼                                          ▼
+┌───────────────────────┐                 ┌───────────────────────┐
+│                       │                 │                       │
+│  [Aplicação do        │                 │  [Registro / CDN]     │
+│   consumidor]         │                 │                       │
+│  [Sistema Externo]    │                 │  [Sistema Externo]    │
+│                       │                 │                       │
+└───────────────────────┘                 └───────────────────────┘
 ```
 
 ## Containers do Sistema
 
 | Container | Tipo | Tecnologia | Responsabilidade |
 |-----------|------|------------|-----------------|
-| **[Web App]** | Single Page App / SSR | [ex: React, Next.js, HTML] | [Interface do usuário — formulários, visualizações, navegação] |
-| **[API Server]** | API REST / GraphQL | [ex: Cloudflare Workers, Hono, Express] | [Lógica de negócio, autenticação, validação, orquestração] |
-| **[Worker]** | Background Worker | [ex: Cloudflare Queue, BullMQ] | [Processamento assíncrono — envio de emails, relatórios, sync] |
-| **[Database]** | Banco Relacional | [ex: Cloudflare D1, PostgreSQL, SQLite] | [Persistência de dados transacionais do domínio] |
-| **[Cache]** | Key-Value Store | [ex: Cloudflare KV, Redis] | [Cache de sessões, dados frequentes, rate limiting] |
-| **[Storage]** | Object Storage | [ex: Cloudflare R2, S3] | [Arquivos binários — imagens, documentos, exports] |
+| **[Bundle]** | Módulo ESM publicado | [ex: `dist/kuba.js`, JavaScript puro] | [Define os custom elements no registro do navegador] |
+| **[Folha de tokens]** | CSS publicado | [ex: `dist/kuba.css`, custom properties] | [Fornece os tokens que os elementos consomem] |
+| **[Declarações de tipo]** | `.d.ts` publicados | [ex: `packages/**/types.d.ts`] | [Descreve o contrato público para o editor do consumidor] |
+| **[Site de documentação]** | Site estático | [ex: docsify, markdown no navegador] | [Ensina o uso; roda os exemplos contra o pacote publicado] |
+
+Uma biblioteca tem poucos containers, e nenhum deles é um processo em execução — o
+runtime é o navegador de quem consome. Se o seu Level 2 tem servidor, banco e fila, você
+está documentando uma aplicação, não uma biblioteca.
 
 ## Interações entre Containers
 
 | De | Para | Protocolo | Formato | Descrição |
 |----|------|-----------|---------|-----------|
-| Web App | API Server | HTTPS | JSON | Chamadas REST autenticadas via Bearer token |
-| API Server | Database | SQL | SQL/Resultset | Queries via prepared statements |
-| API Server | Cache | KV API | Bytes | Leitura/escrita de cache com TTL |
-| API Server | Worker | Queue | JSON | Enfileiramento de jobs assíncronos |
-| Worker | Database | SQL | SQL/Resultset | Leitura e atualização de jobs processados |
-| API Server | [Sistema Externo] | HTTPS | JSON | Chamadas para API externa com retry |
+| [Aplicação do consumidor] | Bundle | `import` / `<script type="module">` | ESM | Carrega e registra os custom elements |
+| [Aplicação do consumidor] | Folha de tokens | `<link rel="stylesheet">` | CSS | Declara as custom properties no `:root` |
+| Bundle | Folha de tokens | `var(--token)` | CSS | O elemento lê o token com fallback próprio |
+| Elemento | Elemento | `CustomEvent` com `composed: true` | `detail` | Comunicação declarativa por arcos do `Echo` |
+| Site de documentação | CDN | HTTPS | ESM + CSS | Carrega a versão pinada; exemplo ao vivo prova o pacote real |
 
 ## Tecnologias por Container
 
-| Container | Runtime | Linguagem | Framework | Deploy |
-|-----------|---------|-----------|-----------|--------|
-| **[API Server]** | [ex: V8 Isolate] | TypeScript | [ex: Hono] | [ex: Cloudflare Workers] |
-| **[Web App]** | [ex: Browser / Node] | TypeScript | [ex: React] | [ex: Cloudflare Pages] |
-| **[Worker]** | [ex: V8 Isolate] | TypeScript | — | [ex: Cloudflare Queue Consumer] |
+| Container | Runtime | Linguagem | Dependências | Publicação |
+|-----------|---------|-----------|--------------|------------|
+| **[Bundle]** | [ex: navegador do consumidor] | JavaScript | [ex: nenhuma em runtime] | [ex: npm, servido pelo jsDelivr] |
+| **[Folha de tokens]** | [ex: navegador do consumidor] | CSS | — | [ex: npm, no mesmo pacote] |
+| **[Site de documentação]** | [ex: navegador do leitor] | Markdown | [ex: docsify via CDN] | [ex: GitHub Pages] |
+
+Repare na coluna de dependências: uma biblioteca de componentes que adiciona dependência
+de runtime a transfere para todo consumidor. Aqui ela é vazia por decisão.
 
 ---
 

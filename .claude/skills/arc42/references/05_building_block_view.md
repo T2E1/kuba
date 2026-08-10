@@ -66,10 +66,11 @@ Esta seção decompõe o sistema em blocos de construção (building blocks) em 
 
 | Componente | Arquivo | Responsabilidade |
 |------------|---------|-----------------|
-| **Controller** | `controller.ts` | HTTP handlers, validação de entrada, roteamento |
-| **Service** | `service.ts` | Business logic pura, orquestração de casos de uso |
-| **Repository** | `repository.ts` | Acesso a dados (D1, KV, API externa) |
-| **Model** | `model.ts` | Types, interfaces, schemas, Value Objects |
+| **Elemento** | `[nome].ts` | A classe: estado privado, propriedades, comportamento |
+| **Markup** | `component.js` | A estrutura do shadow root |
+| **Estilo** | `style.js` | O CSS, com token e custom property de re-estilização |
+| **Contratos** | `interfaces.js` | Os Symbols que o pacote publica |
+| **Contrato público** | `types.d.ts` | Atributo, propriedade e evento que o consumidor usa |
 
 ## Nível 3 — Interfaces Internas de [Componente]
 
