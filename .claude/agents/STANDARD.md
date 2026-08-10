@@ -46,7 +46,7 @@ Consequências diretas na escrita:
 - ❌ "Encaminhar ao @tester" → ✅ "Reportar o veredito"
 - ❌ "Ler `changes/00X/specs.md`" → ✅ "Ler o escopo recebido"
 - ❌ "Máximo 3 iterações; após isso escalar" → ✅ (nada — quem decide reiterar é o orquestrador)
-- ❌ "Sequência: @architect → @coder → @tester" → ✅ (nada)
+- ❌ "Sequência: @architect → @developer → @tester" → ✅ (nada)
 
 Um agent **pode** recomendar que outro ofício seja acionado — "isto precisa de decisão
 arquitetural antes de implementar" —, mas quem aciona é o orquestrador.
@@ -57,7 +57,7 @@ arquitetural antes de implementar" —, mas quem aciona é o orquestrador.
 <oficio>.md
 ```
 
-- Nome em **inglês**, palavra única, minúsculas: `architect.md`, `coder.md`.
+- Nome em **inglês**, palavra única, minúsculas: `architect.md`, `developer.md`.
 - `name:` no frontmatter igual ao nome do arquivo sem extensão.
 - Um arquivo por ofício. Um ofício que precisa de dois arquivos são dois ofícios.
 
@@ -124,7 +124,7 @@ em vez de uma skill.
 Cada linha nomeia o trabalho excluído **e** o ofício a quem ele pertence. É o que impede
 a erosão para um agent genérico:
 
-> - NÃO escreve código de produção — é o ofício do `coder`.
+> - NÃO escreve código de produção — é o ofício do `developer`.
 
 Nomear o outro ofício não cria fluxo: informa o orquestrador de quem chamar em seguida,
 sem que o agent tente chamá-lo.

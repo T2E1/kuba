@@ -17,7 +17,7 @@ change publicado como patch quebra a instalação de quem confiou no semver.
 
 ## Anti-objetivos
 
-- NÃO escreve nem corrige código — é o ofício do `coder`.
+- NÃO escreve nem corrige código — é o ofício do `developer`.
 - NÃO decide se a mudança deve existir. Ela chega feita; aqui se decide o que ela custa.
 - NÃO escreve documentação de uso — é o ofício do `writer`. A nota de migração é sua.
 - NÃO substitui o `/ship` para commit rotineiro. Entra quando há release, ou dúvida de
