@@ -1,6 +1,6 @@
 import { css } from '@dom'
 
-function style(fileupaload) {
+function style(fileupload) {
   return css`
     :host {
       box-sizing: border-box;
@@ -9,7 +9,7 @@ function style(fileupaload) {
       gap: var(--fileupload-space-gap, var(--spacing-nano));
       position: relative;
       user-select: none;
-      width: ${fileupaload.width};
+      width: ${fileupload.width};
 
       label {
         align-items: center;
@@ -53,7 +53,7 @@ function style(fileupaload) {
       preview {
         aspect-ratio: var(--fileupload-aspect-ratio, 1.95/1);
         box-sizing: border-box;
-        display: ${fileupaload.file ? 'block' : 'none'};
+        display: ${fileupload.file ? 'block' : 'none'};
         left: 0;
         position: absolute;
         top: 0;

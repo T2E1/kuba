@@ -1,14 +1,14 @@
 import { css } from '@dom'
 
-function style(self) {
+function style(icon) {
   return css`
     :host {
       box-sizing: border-box;
-      color: var(--icon-color, ${self.color});
+      color: var(--icon-color, ${icon.color});
       direction: ltr;
       display: inline-flex;
       font-family: 'Material Symbols Rounded';
-      font-size: var(--icon-size, var(--font-size-${self.size}));
+      font-size: var(--icon-size, var(--font-size-${icon.size}));
       font-style: normal;
       font-variation-settings:
         'FILL' var(--icon-fill, 1),

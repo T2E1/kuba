@@ -1,7 +1,7 @@
 import { connected, define } from '@directive'
 import { paint } from '@dom'
 import component from './component'
-import { slottable } from './interface'
+import { slottable } from './interfaces'
 import style from './style'
 
 @define('kb-label')

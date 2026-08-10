@@ -24,6 +24,13 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) and 
 
 - Storybook, its three addons and `remark-gfm`, along with 22 `.stories.js`, 22 `.mdx` and the `stories/` directory. Everything they documented lives in the docs site; the interaction tests moved to Vitest. Neither stories nor MDX were ever part of the published package, so consumers are unaffected
 
+## [0.1.0-alpha.32] — 2026-08-10
+
+### Changed
+
+- The file declaring a package's Symbol contracts is now named `interfaces.js` in every package. Six packages spelled it `interface.js` — `<kb-fetch>`, `<kb-dataset>`, `<kb-helper>`, `<kb-label>` and the `Hidden` and `Identity` mixins. The file is internal and never exported, so nothing consumers import changes
+- The private style function of `<kb-button>`, `<kb-icon>`, `<kb-stack>` and `<kb-text>` is named after the element it styles instead of the generic `self`
+
 ## [0.1.0-alpha.31] — 2026-08-09
 
 ### Added

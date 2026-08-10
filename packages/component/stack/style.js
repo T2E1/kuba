@@ -1,15 +1,15 @@
 import { css } from '@dom'
 
-function style(self) {
+function style(stack) {
   return css`
     :host {
-      align-items: ${self.align};
+      align-items: ${stack.align};
       display: flex;
-      flex-direction: ${self.direction};
-      gap: var(--stack-space-gap, var(--spacing_inset-${self.spacing}));
-      height: ${self.height};
-      justify-content: ${self.justify};
-      width: ${self.width};
+      flex-direction: ${stack.direction};
+      gap: var(--stack-space-gap, var(--spacing_inset-${stack.spacing}));
+      height: ${stack.height};
+      justify-content: ${stack.justify};
+      width: ${stack.width};
     }
 
     :host(:state(hidden)) {

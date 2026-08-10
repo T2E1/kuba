@@ -1,14 +1,14 @@
 import { css } from '@dom'
 
-function style(self) {
+function style(button) {
   return css`
     :host {
       display: inline-flex;
-      width: ${self.width};
+      width: ${button.width};
 
       button {
         align-items: center;
-        background-color: var(--button-color-accent, var(--color-${self.color}));
+        background-color: var(--button-color-accent, var(--color-${button.color}));
         border: var(--button-border-width, var(--border-width-thin)) solid transparent;
         border-radius: var(--button-border-radius, var(--border-radius-sm));
         box-sizing: border-box;
@@ -33,8 +33,8 @@ function style(self) {
     :host(:state(naked)) {
       button {
         background-color: transparent;
-        border: var(--button-border-width, var(--border-width-thin)) solid var(--button-color-accent, var(--color-${self.color}));
-        color: var(--button-color-accent, var(--color-${self.color}));
+        border: var(--button-border-width, var(--border-width-thin)) solid var(--button-color-accent, var(--color-${button.color}));
+        color: var(--button-color-accent, var(--color-${button.color}));
       }
     }
 
@@ -42,7 +42,7 @@ function style(self) {
       button {
         background-color: var(--button-color-background-ghost, var(--color-master-lighter));
         border: var(--button-border-width, var(--border-width-thin)) solid transparent;
-        color: var(--button-color-accent, var(--color-${self.color}));
+        color: var(--button-color-accent, var(--color-${button.color}));
       }
     }
 
@@ -50,7 +50,7 @@ function style(self) {
       button {
         background-color: transparent;
         border: var(--button-border-width, var(--border-width-thin)) solid transparent;
-        color: var(--button-color-accent, var(--color-${self.color}));
+        color: var(--button-color-accent, var(--color-${button.color}));
       }
     }
 
@@ -58,7 +58,7 @@ function style(self) {
       button {
         background-color: transparent;
         border: var(--button-border-width, var(--border-width-thin)) solid transparent;
-        color: var(--button-color-accent, var(--color-${self.color}));
+        color: var(--button-color-accent, var(--color-${button.color}));
         padding: 0;
         width: var(--button-size-height, 40px);
       }

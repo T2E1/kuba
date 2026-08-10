@@ -1,18 +1,18 @@
 import { css } from '@dom'
 
-function style(self) {
+function style(text) {
   return css`
     :host {
-      color: var(--text-color, var(--color-${self.color}));
-      font-family: var(--text-font-family, var(--font-family-${self.family}));
-      font-size: var(--text-font-size, var(--font-size-${self.size}));
-      font-weight: var(--text-font-weight, var(--font-weight-${self.weight}));
+      color: var(--text-color, var(--color-${text.color}));
+      font-family: var(--text-font-family, var(--font-family-${text.family}));
+      font-size: var(--text-font-size, var(--font-size-${text.size}));
+      font-weight: var(--text-font-weight, var(--font-weight-${text.weight}));
       letter-spacing: var(--text-letter-spacing, 0.38px);
       line-height: var(
         --text-line-height,
-        var(--line-height-${self.lineHeight})
+        var(--line-height-${text.lineHeight})
       );
-      text-align: ${self.align};
+      text-align: ${text.align};
     }
   `
 }

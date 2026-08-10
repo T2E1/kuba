@@ -1,6 +1,6 @@
 import { connected } from '@directive'
 import attributeChanged from '@directive/attributeChanged'
-import { identifiable, role } from './interface'
+import { identifiable, role } from './interfaces'
 
 /**
  * Gives the element an identity in the accessibility tree: the role it plays,

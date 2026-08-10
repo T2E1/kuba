@@ -6,7 +6,7 @@ import interpolate from '@interpolate'
 import { after, before } from '@middleware'
 import { Headless } from '@mixin'
 import Controller from './controller'
-import { abort, dispatch, setHeader } from './interface'
+import { abort, dispatch, setHeader } from './interfaces'
 
 // `url` may contain `{path.to.value}` placeholders resolved against `payload` by
 // @interpolate (dot-path lookup, missing/nullish segments become an empty string).

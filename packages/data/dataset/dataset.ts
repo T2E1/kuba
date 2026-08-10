@@ -3,7 +3,7 @@ import Echo from '@echo'
 import { customEvent } from '@event'
 import { around } from '@middleware'
 import { Headless } from '@mixin'
-import { dispatch } from './interface'
+import { dispatch } from './interfaces'
 import { Storage } from './storage'
 
 // `upsert` names the key field used by Storage#push to merge records instead of duplicating them.

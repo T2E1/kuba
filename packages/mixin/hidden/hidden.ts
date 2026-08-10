@@ -1,6 +1,6 @@
 import attributeChanged, { booleanAttribute } from '@directive/attributeChanged'
 import { around, before } from '@middleware'
-import { cleanup, hideable } from './interface'
+import { cleanup, hideable } from './interfaces'
 
 /**
  * Adds a `hidden` property backed by the `hidden` attribute. Setting it runs,
