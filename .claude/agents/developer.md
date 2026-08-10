@@ -22,6 +22,7 @@ comportamento deve existir, nem que forma ele deveria ter: isso chega decidido.
 - NÃO decide token, estado visual ou regra de acessibilidade — é o ofício do `designer`.
 - NÃO expande o escopo recebido. Problema encontrado fora dele vira codetag ou relato.
 - NÃO edita `docs/`. A documentação segue o código, em trabalho próprio.
+- NÃO altera configuração, hook nem workflow — é o ofício do `builder`.
 
 ## Entrada
 

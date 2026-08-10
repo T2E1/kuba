@@ -51,7 +51,6 @@ Sem intervalo explícito, o padrão é desde a última tag de versão em `CHANGE
 | Granularidade de release e reuso do pacote | [package](../skills/package/SKILL.md) |
 | Nome de evento e de atributo — renomear é breaking | [naming](../skills/naming/SKILL.md) |
 | Evento despachado como parte do contrato | [event](../skills/event/SKILL.md) |
-| Registrar decisão de release que muda rumo | [adr](../skills/adr/SKILL.md) |
 | Fatores afetados por uma quebra de compatibilidade | [quality](../skills/quality/SKILL.md) |
 | Redação da entrada do CHANGELOG | [clean-code](../skills/clean-code/SKILL.md) |
 
