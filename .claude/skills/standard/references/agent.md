@@ -137,8 +137,8 @@ que já estão escritas.
 ```markdown
 | Contexto | Skill |
 |---|---|
-| Nomear um Symbol de contrato | [naming](../skills/naming/SKILL.md) |
-| Ordem dos membros da classe | [anatomy](../skills/anatomy/SKILL.md) |
+| Nomear um Symbol de contrato | [naming](../../naming/SKILL.md) |
+| Ordem dos membros da classe | [anatomy](../../anatomy/SKILL.md) |
 ```
 
 Só skills que existem. O link é relativo, de `agents/` para `skills/` — um nível acima.
@@ -187,69 +187,14 @@ Dois itens continuam fora do alcance do script, e ficam para a leitura: se cada 
 `## Método` é verificável por terceiro, e se o `## Papel` descreve **um** ofício.
 
 Os **links** são verificados junto com os das skills — o script em
-[skills/STANDARD.md](../skills/STANDARD.md) cobre `agents/` também, porque os dois erram
+[skills/STANDARD.md](skill.md) cobre `agents/` também, porque os dois erram
 a profundidade do `../` do mesmo jeito.
 
-```bash
-python3 - <<'PY'
-import os, re, glob, sys
-from collections import Counter, defaultdict
+O validador vive em [`../scripts/validate.py`](../scripts/validate.py), não aqui: um
+script extraído de markdown silencia quando o markdown muda de forma. Rodar de `.claude/`:
 
-FM = ["name", "description", "model", "tools", "color"]
-MODELS = {"sonnet", "opus"}
-ORDEM = ["## Papel", "## Anti-objetivos", "## Entrada", "## Entrega",
-         "## Skills", "## Rules", "## Método", "## Quando parar"]
-FLUXO = re.compile(r"changes/00|attempts-|Encaminhar ao @|Sequência de Agentes")
-erros = defaultdict(list)
-cores = Counter()
+    python3 skills/standard/scripts/validate.py agents
 
-for p in sorted(glob.glob("agents/*.md")):
-    nome = os.path.basename(p)[:-3]
-    if nome == "STANDARD": continue
-    raw = open(p).read()
-    m = re.match(r"^---\n(.*?)\n---\n", raw, re.S)
-    if not m:
-        erros[nome].append("sem frontmatter"); continue
-    fm, corpo = m.group(1), raw[m.end():]
-    chaves = re.findall(r"^([a-z_-]+):", fm, re.M)
-    if set(chaves) != set(FM):
-        erros[nome].append(f"frontmatter: extra {sorted(set(chaves)-set(FM))}, falta {sorted(set(FM)-set(chaves))}")
-    if (n := re.search(r"^name:\s*(\S+)", fm, re.M)) and n.group(1) != nome:
-        erros[nome].append(f"name '{n.group(1)}' != arquivo '{nome}'")
-    if mo := re.search(r"^model:\s*(\S+)", fm, re.M):
-        if mo.group(1) not in MODELS: erros[nome].append(f"model inválido: {mo.group(1)} (agent não usa haiku)")
-    if c := re.search(r"^color:\s*(\S+)", fm, re.M): cores[c.group(1)] += 1
-    if d := re.search(r"^description:\s*(.+)$", fm, re.M):
-        if "Use " not in d.group(1): erros[nome].append("description sem gatilho ('Use ao/quando')")
-        if "Não use" not in d.group(1): erros[nome].append("description sem gatilho negativo")
-    # seções presentes e na ordem
-    pos = []
-    for sec in ORDEM:
-        m2 = re.search(rf"^{re.escape(sec)}\s*$", corpo, re.M)
-        if not m2: erros[nome].append(f"falta: {sec}")
-        else: pos.append((m2.start(), sec))
-    if pos != sorted(pos): erros[nome].append("seções fora da ordem do STANDARD")
-    if not re.search(r"\*\*Criado em\*\*.*\n\*\*Atualizado em\*\*.*\n\*\*Versão\*\*", corpo):
-        erros[nome].append("rodapé incompleto")
-    if f := FLUXO.search(corpo): erros[nome].append(f"resíduo de fluxo: '{f.group(0)}'")
-    # tools coerente com anti-objetivos: quem declara que não escreve não recebe Write/Edit
-    anti = corpo[corpo.find("## Anti-objetivos"):corpo.find("## Entrada")]
-    tools = re.search(r"^tools:\s*(.+)$", fm, re.M).group(1)
-    if re.search(r"NÃO (escreve|altera|edita|corrige)", anti) and "Write" in tools:
-        pass  # só sinaliza quando o agent declara não produzir artefato nenhum
-    if "Não recebe `Write` nem `Edit`" in corpo and ("Write" in tools or "Edit" in tools):
-        erros[nome].append("declara não ter Write/Edit, mas os tools contradizem")
-
-for cor, n in cores.items():
-    if n > 1: erros["cores"].append(f"'{cor}' usada por {n} agents")
-
-for alvo in sorted(erros):
-    print(f"X {alvo}")
-    for e in erros[alvo]: print(f"    {e}")
-print(f"\n{len(cores)} agents · {sum(len(v) for v in erros.values())} problemas")
-sys.exit(1 if erros else 0)
-PY
-```
 ---
 
 **Criado em**: 2026-08-10

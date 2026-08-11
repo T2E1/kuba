@@ -22,10 +22,10 @@ command  →  aciona agent  →  que carrega skill
 
 | Camada | Responde | Quem aciona | Padrão |
 |---|---|---|---|
-| **rule** | O que é proibido | ninguém — está sempre em contexto | [rules/STANDARD.md](rules/STANDARD.md) |
-| **skill** | Como se faz | o agent, quando o contexto pede | [skills/STANDARD.md](skills/STANDARD.md) |
-| **agent** | Quem faz, com que julgamento | o command, ou eu | [agents/STANDARD.md](agents/STANDARD.md) |
-| **command** | Em que ordem, e o que roda entre as etapas | você, digitando `/` | [commands/STANDARD.md](commands/STANDARD.md) |
+| **rule** | O que é proibido | ninguém — está sempre em contexto | [rules/STANDARD.md](skills/standard/references/rule.md) |
+| **skill** | Como se faz | o agent, quando o contexto pede | [skills/STANDARD.md](skills/standard/references/skill.md) |
+| **agent** | Quem faz, com que julgamento | o command, ou eu | [agents/STANDARD.md](skills/standard/references/agent.md) |
+| **command** | Em que ordem, e o que roda entre as etapas | você, digitando `/` | [commands/STANDARD.md](skills/standard/references/command.md) |
 
 **A rule exige, a skill executa, o agent decide, o command sequencia.**
 
@@ -108,12 +108,15 @@ volta explícito. Silêncio sobre o que faltou é o pior modo de falhar.
 
 ## Verificação
 
-Cada `STANDARD.md` traz o validador da sua camada, na seção `## Verificação`. Rodar de
-`.claude/`. Eles não rodam sozinhos: dispare quando alterar a camada.
+A forma das quatro camadas é a skill [standard](skills/standard/SKILL.md): os padrões em
+`references/`, o validador em `scripts/validate.py`. Rodar de `.claude/`, ao alterar
+qualquer artefato:
 
-O que nenhum deles alcança — e que por isso exige leitura — está escrito em cada um: se o
-critério é verificável por terceiro, se o passo tem resultado observável, se o exemplo
-ainda reflete o código real.
+    python3 skills/standard/scripts/validate.py
+
+Ele não roda sozinho, e verifica forma — não conteúdo. O que exige leitura está escrito em
+cada reference: se o critério é verificável por terceiro, se o passo tem resultado
+observável, se o exemplo ainda reflete o código real.
 
 ---
 

@@ -121,7 +121,7 @@ Toda skill declara o modelo. Nenhuma fica omissa: a declaração é a decisão r
 |---|---|---|---|
 | `haiku` | 4 | O trabalho é mecânico e verificável — reordenar, marcar. Nenhuma decisão de design pendente. | `alphabetical`, `anatomy`, `revelation`, `codetags` |
 | `sonnet` | 18 | Aplicação de convenção conhecida, com julgamento limitado a um arquivo ou componente. | `bracket`, `colocation`, `constructor`, `dataflow`, `enum`, `event`, `getter`, `jsdoc`, `method`, `mixin`, `naming`, `preview`, `prose`, `render`, `setter`, `state`, `token`, `types` |
-| `opus` | 17 | Julgamento arquitetural, trade-off entre princípios, diagnóstico. Rebaixar aqui custa qualidade na decisão **e** no código que vem depois dela. | `adr`, `anti-pattern`, `arc42`, `bdd`, `big-o`, `c4-model`, `calisthenics`, `cdd`, `clean-code`, `complexity`, `gof`, `package`, `poeaa`, `quality`, `react`, `solid`, `twelve-factor` |
+| `opus` | 18 | Julgamento arquitetural, trade-off entre princípios, diagnóstico. Rebaixar aqui custa qualidade na decisão **e** no código que vem depois dela. | `adr`, `anti-pattern`, `arc42`, `bdd`, `big-o`, `c4-model`, `calisthenics`, `cdd`, `clean-code`, `complexity`, `gof`, `package`, `poeaa`, `quality`, `react`, `solid`, `standard`, `twelve-factor` |
 
 Na dúvida, **`opus`**. O custo de um turno mais caro é menor que o de uma decisão de
 arquitetura tomada com menos capacidade.
@@ -165,9 +165,9 @@ o que a rule **exige**. Cada item declara a rule e explica como ela sustenta a s
 ```markdown
 ## Rules relacionadas
 
-- [010 — Princípio da Responsabilidade Única](../../rules/010_principio-responsabilidade-unica.md):
+- [010 — Princípio da Responsabilidade Única](../../../rules/010_principio-responsabilidade-unica.md):
   a skill operacionaliza o limite de 7 métodos públicos ao dividir a classe.
-- [024 — Proibição de Constantes Mágicas](../../rules/024_proibicao-constantes-magicas.md):
+- [024 — Proibição de Constantes Mágicas](../../../rules/024_proibicao-constantes-magicas.md):
   todo literal de estilo vira token nomeado.
 ```
 
@@ -185,8 +185,8 @@ Mesmo vocabulário de relação usado nas rules:
 ```markdown
 ## Skills relacionadas
 
-- [calisthenics](../calisthenics/SKILL.md): reinforces — as 9 regras dão a forma concreta.
-- [complexity](../complexity/SKILL.md): depends on — medir CC antes de refatorar.
+- [calisthenics](../../calisthenics/SKILL.md): reinforces — as 9 regras dão a forma concreta.
+- [complexity](../../complexity/SKILL.md): depends on — medir CC antes de refatorar.
 ```
 
 ## Escrita das instruções
@@ -255,86 +255,11 @@ nome. Escreva como código inline.
 
 Rodar de `.claude/`. Cobre skills e agents de uma vez, porque os dois erram igual.
 
-```bash
-python3 - <<'PY'
-import os, re, glob, sys
-from collections import Counter, defaultdict
+O validador vive em [`../scripts/validate.py`](../scripts/validate.py), não aqui: um
+script extraído de markdown silencia quando o markdown muda de forma. Rodar de `.claude/`:
 
-FM, MODELS = {"name", "model", "description"}, {"haiku", "sonnet", "opus"}
-SECOES = ["## O que é", "## Quando usar", "## Como aplicar", "## Exemplos",
-          "## Checklist", "## Rules relacionadas", "## Skills relacionadas"]
-EXEC = {"js", "javascript", "ts", "typescript", "jsx", "tsx", "css", "html", "json"}
-FENCE, INLINE = re.compile(r"^\s*```"), re.compile(r"`[^`]*`")
-LINK = re.compile(r"\]\((?!https?:|#)([^)\s]+)\)")
-erros = defaultdict(list)
+    python3 skills/standard/scripts/validate.py skills
 
-# 1. conformidade de cada skill
-skills = sorted(d for d in os.listdir("skills") if os.path.isdir(f"skills/{d}"))
-modelos = Counter()
-for s in skills:
-    p = f"skills/{s}/SKILL.md"
-    if not os.path.isfile(p):
-        erros[s].append("sem SKILL.md"); continue
-    raw = open(p).read()
-    m = re.match(r"^---\n(.*?)\n---\n", raw, re.S)
-    if not m:
-        erros[s].append("sem frontmatter"); continue
-    fm, corpo = m.group(1), raw[m.end():]
-    chaves = set(re.findall(r"^([a-z_-]+):", fm, re.M))
-    if extra := chaves - FM: erros[s].append(f"campo extra: {sorted(extra)}")
-    if falta := FM - chaves: erros[s].append(f"campo faltando: {sorted(falta)}")
-    if (n := re.search(r"^name:\s*(\S+)", fm, re.M)) and n.group(1) != s:
-        erros[s].append(f"name '{n.group(1)}' != pasta")
-    if mo := re.search(r"^model:\s*(\S+)", fm, re.M):
-        modelos[mo.group(1)] += 1
-        if mo.group(1) not in MODELS: erros[s].append(f"model inválido: {mo.group(1)}")
-    if d := re.search(r"^description:\s*(.+)$", fm, re.M):
-        if len(d.group(1)) > 1024: erros[s].append(f"description {len(d.group(1))} > 1024")
-        if re.search(r"[<>]", d.group(1)): erros[s].append("description com < ou >")
-    for sec in SECOES:  # linha inteira: '## Checklist' não pode casar '## Checklist_x'
-        if not re.search(rf"^{re.escape(sec)}\s*$", corpo, re.M): erros[s].append(f"falta: {sec}")
-    if not corpo.lstrip().startswith("# "): erros[s].append("sem título H1")
-    if not re.search(r"\*\*Criado em\*\*.*\n\*\*Atualizado em\*\*.*\n\*\*Versão\*\*", corpo):
-        erros[s].append("rodapé incompleto")
-    for lang in re.findall(r"^\s*```([a-zA-Z]+)", corpo, re.M):
-        if lang.lower() in EXEC: erros[s].append(f"código executável no SKILL.md: {lang}")
-    if (w := len(corpo.split())) > 5000: erros[s].append(f"{w} palavras > 5000")
-    if not re.fullmatch(r"[a-z0-9]+(-[a-z0-9]+)*", s): erros[s].append("nome fora do kebab-case")
-    if "claude" in s or "anthropic" in s: erros[s].append("nome reservado")
-    if os.path.isfile(f"skills/{s}/README.md"): erros[s].append("README.md dentro da pasta")
-    if not os.path.isdir(f"skills/{s}/examples"):
-        erros[s].append("sem examples/")
-    else:
-        temas = defaultdict(set)
-        for f in os.listdir(f"skills/{s}/examples"):
-            if e := re.match(r"(.+)\.(valid|invalid)\.[a-z]+$", f): temas[e.group(1)].add(e.group(2))
-            else: erros[s].append(f"examples fora da convenção: {f}")
-        for tema, tipos in temas.items():
-            if tipos != {"valid", "invalid"}: erros[s].append(f"'{tema}' só tem {sorted(tipos)}")
-
-# 2. links, em todos os arquivos de skills e agents
-for f in sorted(glob.glob("skills/**/*.md", recursive=True) + glob.glob("agents/*.md")):
-    base, dentro = os.path.dirname(f), False
-    for n, linha in enumerate(open(f), 1):
-        if FENCE.match(linha): dentro = not dentro; continue
-        if dentro: continue
-        for link in LINK.findall(INLINE.sub("", linha)):
-            if not os.path.exists(os.path.normpath(os.path.join(base, link))):
-                erros[f].append(f"linha {n}: link quebrado -> {link}")
-
-# 3. a tabela de modelos deste arquivo bate com a realidade
-std = open("skills/STANDARD.md").read()
-for modelo, quantos in modelos.items():
-    if f"| `{modelo}` | {quantos} |" not in std:
-        erros["STANDARD.md"].append(f"tabela de modelos: {modelo} são {quantos}")
-
-for alvo in sorted(erros):
-    print(f"X {alvo}")
-    for e in erros[alvo]: print(f"    {e}")
-print(f"\n{len(skills)} skills · {sum(len(v) for v in erros.values())} problemas")
-sys.exit(1 if erros else 0)
-PY
-```
 ---
 
 **Criado em**: 2026-08-09

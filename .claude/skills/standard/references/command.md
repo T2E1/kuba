@@ -160,24 +160,11 @@ Antes de commitar um command novo ou alterado:
 
 Rodar de `.claude/`:
 
-```bash
-for f in commands/*.md; do
-  [ "$(basename "$f")" = "STANDARD.md" ] && continue   # o padrão não é um command
-  grep -q '^description: "' "$f" || echo "$f: description sem aspas"
-  for s in "## Propósito" "## Fluxo" "## Instruções"; do
-    grep -q "^$s" "$f" || echo "$f falta: $s"
-  done
-  # comando ! com caminho relativo quebra fora da raiz; git e rev-parse são seguros
-  grep -oE '^!`[^`]+`' "$f" | grep -vE '^!`git |rev-parse' &&
-    echo "$f: comando ! com caminho não ancorado"
-  grep -q '^\*\*Criado em\*\*' "$f" || echo "$f: sem rodapé"
-  # agent citado precisa existir
-  grep -oE '`(architect|builder|deepdive|designer|developer|releaser|reviewer|tester|writer)`' "$f" |
-    tr -d '`' | sort -u | while read a; do
-      [ -f "agents/$a.md" ] || echo "$f: agent inexistente '$a'"; done
-done
-echo "commands verificados"
-```
+O validador vive em [`../scripts/validate.py`](../scripts/validate.py), não aqui: um
+script extraído de markdown silencia quando o markdown muda de forma. Rodar de `.claude/`:
+
+    python3 skills/standard/scripts/validate.py commands
+
 
 ---
 
