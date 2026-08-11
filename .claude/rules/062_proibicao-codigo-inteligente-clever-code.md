@@ -1,6 +1,6 @@
 # Proibição de Código Inteligente (Clever Code)
 
-**ID**: AP-04-062
+**ID**: BEHAVIORAL-062
 **Severity**: 🟡 Medium
 **Category**: Behavioral
 
@@ -57,4 +57,4 @@ Clever Code ocorre quando um desenvolvedor escreve código excessivamente concis
 
 **Created on**: 2026-03-28
 **Updated on**: 2026-08-10
-**Version**: 1.2
+**Version**: 1.3

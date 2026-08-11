@@ -1,6 +1,6 @@
 # Proibição de Código Spaghetti
 
-**ID**: AP-03-060
+**ID**: STRUCTURAL-060
 **Severity**: 🔴 Critical
 **Category**: Structural
 
@@ -60,4 +60,4 @@ Spaghetti Code ocorre quando o fluxo de controle do código é complexo e entrel
 
 **Created on**: 2026-03-28
 **Updated on**: 2026-08-10
-**Version**: 1.2
+**Version**: 1.3

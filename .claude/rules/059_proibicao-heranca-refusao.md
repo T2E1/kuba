@@ -1,6 +1,6 @@
 # Proibição de Herança Recusada
 
-**ID**: AP-17-059
+**ID**: STRUCTURAL-059
 **Severity**: 🟡 Medium
 **Category**: Structural
 
@@ -57,4 +57,4 @@ Refused Bequest ocorre quando uma classe herda de outra mas não usa a maioria d
 
 **Created on**: 2026-03-28
 **Updated on**: 2026-08-10
-**Version**: 1.2
+**Version**: 1.3

@@ -1,6 +1,6 @@
 # Proibição de Shotgun Surgery
 
-**ID**: AP-15-058
+**ID**: STRUCTURAL-058
 **Severity**: 🟠 High
 **Category**: Structural
 
@@ -59,4 +59,4 @@ Shotgun Surgery ocorre quando uma única mudança requer alterar múltiplas clas
 
 **Created on**: 2026-03-28
 **Updated on**: 2026-08-10
-**Version**: 1.2
+**Version**: 1.3

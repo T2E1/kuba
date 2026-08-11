@@ -1,6 +1,6 @@
 # Proibição de Mutação Acidental
 
-**ID**: AP-07-052
+**ID**: BEHAVIORAL-052
 **Severity**: 🟠 High
 **Category**: Behavioral
 
@@ -61,4 +61,4 @@ Mutação acidental ocorre quando objetos ou estruturas de dados são modificado
 
 **Created on**: 2026-03-28
 **Updated on**: 2026-08-10
-**Version**: 1.2
+**Version**: 1.3

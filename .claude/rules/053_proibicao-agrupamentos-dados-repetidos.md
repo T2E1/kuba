@@ -1,6 +1,6 @@
 # Proibição de Agrupamentos de Dados Repetidos (Data Clumps)
 
-**ID**: AP-20-053
+**ID**: STRUCTURAL-053
 **Severity**: 🟡 Medium
 **Category**: Structural
 
@@ -55,4 +55,4 @@ Data Clumps ocorrem quando grupos de dados sempre aparecem juntos como parâmetr
 
 **Created on**: 2026-03-28
 **Updated on**: 2026-08-10
-**Version**: 1.2
+**Version**: 1.3

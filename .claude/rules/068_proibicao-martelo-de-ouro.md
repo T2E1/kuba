@@ -1,6 +1,6 @@
 # Proibição do Martelo de Ouro
 
-**ID**: AP-06-068
+**ID**: STRUCTURAL-068
 **Severity**: 🟡 Medium
 **Category**: Structural
 
@@ -55,4 +55,4 @@ Golden Hammer ocorre quando um desenvolvedor ou time aplica a mesma ferramenta, 
 
 **Created on**: 2026-03-28
 **Updated on**: 2026-08-10
-**Version**: 1.2
+**Version**: 1.3

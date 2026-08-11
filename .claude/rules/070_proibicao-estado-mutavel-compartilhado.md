@@ -1,6 +1,6 @@
 # Proibição de Estado Mutável Compartilhado
 
-**ID**: AP-08-070
+**ID**: BEHAVIORAL-070
 **Severity**: 🟠 High
 **Category**: Behavioral
 
@@ -52,5 +52,5 @@ Estado Mutável Compartilhado (Shared Mutable State) ocorre quando múltiplos m�
 ---
 
 **Created on**: 2026-03-29
-**Updated on**: 2026-07-15
-**Version**: 1.1
+**Updated on**: 2026-08-10
+**Version**: 1.2

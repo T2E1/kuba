@@ -1,6 +1,6 @@
 # Proibição de Dependência Barco-Âncora
 
-**ID**: AP-01-067
+**ID**: STRUCTURAL-067
 **Severity**: 🟡 Medium
 **Category**: Structural
 
@@ -55,4 +55,4 @@ Boat Anchor ocorre quando uma dependência, biblioteca ou componente é importad
 
 **Created on**: 2026-03-28
 **Updated on**: 2026-08-10
-**Version**: 1.2
+**Version**: 1.3

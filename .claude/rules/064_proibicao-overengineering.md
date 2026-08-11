@@ -1,6 +1,6 @@
 # Proibição de Overengineering
 
-**ID**: AP-09-064
+**ID**: STRUCTURAL-064
 **Severity**: 🟡 Medium
 **Category**: Structural
 
@@ -59,4 +59,4 @@ Overengineering ocorre quando um desenvolvedor cria arquitetura ou código exces
 
 **Created on**: 2026-03-28
 **Updated on**: 2026-08-10
-**Version**: 1.2
+**Version**: 1.3

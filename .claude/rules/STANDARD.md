@@ -180,14 +180,11 @@ O link é relativo e sem `../` — as rules vivem todas no mesmo diretório.
 `<CATEGORIA>-NNN`, com a categoria em maiúsculas: `BEHAVIORAL-037`, `STRUCTURAL-007`,
 `CREATIONAL-024`, `INFRASTRUCTURE-042`.
 
-**Exceção histórica:** 17 rules de anti-pattern usam `AP-<n>-NNN`, onde `<n>` é a posição
-no catálogo de anti-patterns de origem: `AP-03-060`. Esse contador é herdado, não tem dono
-e não é verificável — nada garante que o próximo `<n>` esteja livre. Foi assim que `055` e
-`061` acabaram ambas em `AP-19`, até serem convertidas para `STRUCTURAL-055` e
-`STRUCTURAL-061`.
-
-Rule nova de anti-pattern usa o formato de categoria. Não estenda o contador `AP-`; ele
-está em extinção, e converter as 17 restantes é trabalho pendente, não decisão em aberto.
+Sem exceção: os 70 IDs seguem esta forma. As rules de anti-pattern usaram
+`AP-<n>-NNN` até 2026-08-10, herdado do catálogo de onde vieram — um contador sem dono,
+sem regra de geração e impossível de verificar, que acabou atribuindo `AP-19` a duas
+rules ao mesmo tempo. O número da rule já é único; o contador só duplicava a identidade
+com pior garantia.
 
 ### `Severity`
 
@@ -243,7 +240,7 @@ Rodar de `.claude/`, antes de commitar uma rule nova ou alterada.
 | `Allowed Exceptions` | Ao menos uma exceção nomeada em negrito |
 | `Automatic` | Cita ferramenta nomeada, ou declara que não existe regra nativa |
 | `Related to` | Todo link resolve, e traz relação do vocabulário |
-| IDs | Sem duplicata, e sem reúso do contador `AP-` |
+| IDs | Sem duplicata |
 
 Fora do alcance do script, e por isso o que mais merece atenção na leitura: se **todo item
 de `Objective Criteria` é verificável por terceiro**. É o critério que decide se a rule
@@ -281,7 +278,7 @@ for p in arquivos:
         ids[m.group(1)].append(nome)
         cat_id = m.group(1).split("-")[0]
         if m2 := re.search(r"^\*\*Category\*\*:\s*(\S+)", t, re.M):
-            if cat_id != "AP" and cat_id != m2.group(1).upper():
+            if cat_id != m2.group(1).upper():
                 erros[nome].append(f"ID '{m.group(1)}' não bate com Category '{m2.group(1)}'")
         if not m.group(1).endswith(nome[:3]):
             erros[nome].append(f"ID '{m.group(1)}' não termina no número do arquivo ({nome[:3]})")
@@ -312,11 +309,6 @@ for p in arquivos:
 
 for rid, quais in ids.items():
     if len(quais) > 1: erros["IDs"].append(f"'{rid}' em {quais}")
-contador = defaultdict(list)
-for rid, quais in ids.items():
-    if rid.startswith("AP-"): contador["-".join(rid.split("-")[:2])] += quais
-for c, quais in contador.items():
-    if len(quais) > 1: erros["IDs"].append(f"contador '{c}' reusado em {sorted(quais)}")
 
 for alvo in sorted(erros):
     print(f"X {alvo}")
@@ -328,13 +320,10 @@ PY
 
 ### Divergências
 
-Nenhuma. O script sai com código 0 nas 70 rules.
-
-As 17 rules que ainda usam `AP-<n>-NNN` passam porque o validador não exige coerência
-entre esse contador e a `Category` — não há como exigir de um identificador herdado sem
-regra. Convertê-las ao formato de categoria fecharia essa brecha.
+Nenhuma. O script sai com código 0 nas 70 rules, e todo `ID` é verificado contra a
+`Category` — o que só passou a valer depois que o formato `AP-` foi eliminado.
 ---
 
 **Criado em**: 2026-08-10
 **Atualizado em**: 2026-08-10
-**Versão**: 1.2
+**Versão**: 2.0

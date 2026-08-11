@@ -1,6 +1,6 @@
 # Proibição de Mudança Divergente
 
-**ID**: AP-16-054
+**ID**: STRUCTURAL-054
 **Severity**: 🟠 High
 **Category**: Structural
 
@@ -60,4 +60,4 @@ Mudança Divergente (Divergent Change) ocorre quando uma única classe é modifi
 
 **Created on**: 2026-03-28
 **Updated on**: 2026-08-10
-**Version**: 1.2
+**Version**: 1.3

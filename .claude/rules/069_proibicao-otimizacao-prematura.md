@@ -1,6 +1,6 @@
 # Proibição de Otimização Prematura
 
-**ID**: AP-10-069
+**ID**: BEHAVIORAL-069
 **Severity**: 🟡 Medium
 **Category**: Behavioral
 
@@ -51,5 +51,5 @@ Otimização Prematura ocorre quando o desenvolvedor otimiza código baseado em 
 ---
 
 **Created on**: 2026-03-29
-**Updated on**: 2026-07-15
-**Version**: 1.1
+**Updated on**: 2026-08-10
+**Version**: 1.2

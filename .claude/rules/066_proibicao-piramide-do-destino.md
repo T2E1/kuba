@@ -1,6 +1,6 @@
 # Proibição da Pirâmide do Destino
 
-**ID**: AP-23-066
+**ID**: STRUCTURAL-066
 **Severity**: 🟠 High
 **Category**: Structural
 
@@ -56,4 +56,4 @@ Pirâmide do Destino (ou Arrow Anti-Pattern) ocorre quando há aninhamento exces
 
 **Created on**: 2026-03-28
 **Updated on**: 2026-08-10
-**Version**: 1.2
+**Version**: 1.3

@@ -1,6 +1,6 @@
 # Proibição de Código Zombie (Lava Flow)
 
-**ID**: AP-02-056
+**ID**: STRUCTURAL-056
 **Severity**: 🟠 High
 **Category**: Structural
 
@@ -60,4 +60,4 @@ Lava Flow (Dead Code / Zombie Code) ocorre quando código não é mais utilizado
 
 **Created on**: 2026-03-28
 **Updated on**: 2026-08-10
-**Version**: 1.2
+**Version**: 1.3

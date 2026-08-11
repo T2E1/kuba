@@ -1,6 +1,6 @@
 # Proibição de Feature Envy
 
-**ID**: AP-13-057
+**ID**: BEHAVIORAL-057
 **Severity**: 🟡 Medium
 **Category**: Behavioral
 
@@ -57,4 +57,4 @@ Feature Envy ocorre quando um método usa dados e comportamentos de outra classe
 
 **Created on**: 2026-03-28
 **Updated on**: 2026-08-10
-**Version**: 1.2
+**Version**: 1.3
