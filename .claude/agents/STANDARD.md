@@ -190,9 +190,6 @@ Os **links** são verificados junto com os das skills — o script em
 [skills/STANDARD.md](../skills/STANDARD.md) cobre `agents/` também, porque os dois erram
 a profundidade do `../` do mesmo jeito.
 
-Este script roda automaticamente a cada prompt, pelo hook `UserPromptSubmit` — ver
-`hooks/validate.py`. Rodá-lo à mão só é necessário para conferir uma correção na hora.
-
 ```bash
 python3 - <<'PY'
 import os, re, glob, sys

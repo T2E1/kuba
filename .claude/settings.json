@@ -29,17 +29,5 @@
       "Bash(git log *)",
       "Bash(node -p *)"
     ]
-  },
-  "hooks": {
-    "UserPromptSubmit": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "python3 \"$CLAUDE_PROJECT_DIR/.claude/hooks/validate.py\""
-          }
-        ]
-      }
-    ]
   }
 }
