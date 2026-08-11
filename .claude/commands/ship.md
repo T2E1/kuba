@@ -1,75 +1,81 @@
 ---
-description: "Prepara mudanças, cria commit Conventional Commits, ajusta a versão em package.json e o CHANGELOG.md conforme o tipo do commit, e envia para remoto. Usar após completar Feature, Task ou Quick fix."
-allowed-tools: Bash(git add *), Bash(git status), Bash(git diff *), Bash(git commit *), Bash(git push *), Bash(git log *), Read, Edit
+description: "Revisa o que está por commitar, julga o impacto de versão, escreve o CHANGELOG e envia para o remoto. Usar ao concluir uma mudança, antes de ela sair do seu computador."
+allowed-tools: Bash(git add *), Bash(git status), Bash(git diff *), Bash(git commit *), Bash(git push *), Bash(git log *), Bash(bun run test), Bash(bun run lint), Read, Edit
 ---
 
 ## Propósito
 
-Commita e envia mudanças atuais para repositório remoto, mantendo a versão em `package.json` sincronizada com o tipo semântico do commit.
+Leva o que está no working tree até o remoto, passando por duas decisões que não são
+mecânicas: **o código está pronto para entrar** e **o que essa mudança custa para quem
+consome o pacote**. Cada uma é de um ofício.
 
 Estado atual:
 !`git status --short`
 
-Commits recentes (referência de estilo):
+Escopo das mudanças:
+!`git diff --stat HEAD`
+
+Commits recentes, como referência de estilo:
 !`git log --oneline -5`
 
-Versão atual:
-!`node -p "require('./package.json').version"`
+## Fluxo
+
+| # | Agent | Recebe | Entrega |
+|---|---|---|---|
+| 1 | `reviewer` | O diff completo | Achados com `arquivo:linha` e veredito de merge |
+| 2 | `releaser` | O intervalo desde a última versão | Impacto (major/minor/patch/nenhum), versão, CHANGELOG |
+
+O `reviewer` só é acionado quando o diff toca `packages/`. Mudança restrita a `docs/` ou
+`.claude/` não tem o que revisar contra as 31 rules que ele cobre.
+
+O `releaser` é acionado sempre, inclusive para responder "nenhum impacto" — é ele quem sabe
+que mudança em `docs/` e `.claude/` não versiona, porque não é publicada.
 
 ## Instruções
 
-1. Executar `git status` — confirmar arquivos a commitar
+1. **Confirmar o escopo.** Ler o `git status` acima. Se houver arquivo que você não
+   reconhece, pare e pergunte antes de seguir.
 
-2. Executar `git diff --stat` — entender escopo das mudanças
+2. **Rodar as verificações locais.** `bun run lint` e `bun run test`. Vermelho aqui
+   encerra o fluxo — não se envia o que não passa.
 
-3. Elaborar mensagem de commit seguindo Conventional Commits:
+3. **Acionar o `reviewer`**, quando o diff toca `packages/`, passando o intervalo.
+   - ❌ requer alteração → reportar os achados e parar. Corrigir é trabalho próprio.
+   - ⚠️ com ressalva → seguir, e incluir os achados no relato final.
+   - ✅ aprovado → seguir.
 
-   | Prefixo | Quando usar |
-   |---------|-------------|
-   | `feat:` | Nova funcionalidade |
-   | `fix:` | Correção de bug |
-   | `refactor:` | Refatoração sem mudança de comportamento |
-   | `docs:` | Mudanças de documentação |
-   | `chore:` | Manutenção, configs, scripts |
-   | `test:` | Adicionar ou corrigir testes |
+4. **Acionar o `releaser`**, passando o intervalo desde a última versão em `CHANGELOG.md`.
+   Ele devolve o impacto, a versão nova e a entrada do CHANGELOG.
+   - **Breaking identificado:** parar e reportar o que quebra. Publicar major é decisão
+     sua, não do fluxo.
 
-4. Determinar o impacto de versão a partir do tipo/escopo do commit definido no passo 3:
+5. **Aplicar o que o `releaser` decidiu**, quando houver bump: `package.json` e
+   `CHANGELOG.md`, via `Edit`.
 
-   | Tipo/marcador | Bump | Exemplo |
-   |---------------|------|---------|
-   | `feat!:` ou rodapé `BREAKING CHANGE:` | **major** | `1.4.2` → `2.0.0` |
-   | `feat:` | **minor** | `1.4.2` → `1.5.0` |
-   | `fix:`, `perf:`, `refactor:` | **patch** | `1.4.2` → `1.4.3` |
-   | `docs:`, `chore:`, `test:`, `style:`, `ci:`, `build:` | **nenhum** | versão inalterada |
+6. **Preparar os arquivos** com `git add` explícito, um a um ou por diretório. Nunca
+   `git add -A`.
 
-   - Se a versão atual tiver um sufixo de *prerelease* (ex.: `0.1.0-alpha.4`) e o bump for **minor** ou **patch**, incrementar apenas o número do prerelease (`-alpha.4` → `-alpha.5`) em vez do núcleo semver — a base só muda em um bump **major** ou em uma decisão explícita de sair do prerelease.
-   - Múltiplos commits de tipos diferentes preparados juntos: usar o de maior impacto (major > minor > patch > nenhum).
+7. **Commitar** em Conventional Commits, no imperativo, com o rodapé:
 
-5. Se houver bump, atualizar o campo `version` em `package.json` (via Edit) e incluir o arquivo no mesmo commit.
-
-6. Se houver bump, atualizar `CHANGELOG.md` (via Edit) no mesmo commit:
-   - Adicionar uma nova seção `## [<versão>] — <data de hoje, AAAA-MM-DD>` no topo, logo abaixo da linha `---`.
-   - Agrupar as mudanças em `### Added`, `### Changed`, `### Fixed` ou `### Removed` conforme o conteúdo do commit (usar só as seções necessárias).
-   - Descrever o que mudou em linguagem de usuário/API (não apenas colar a mensagem do commit).
-   - Não reescrever entradas de versões já publicadas.
-
-7. Preparar arquivos com `git add` específico (evitar `git add -A` com arquivos sensíveis) — incluindo `package.json` e `CHANGELOG.md` se a versão mudou
-
-8. Criar commit com HEREDOC:
-   ```bash
-   git commit -m "$(cat <<'EOF'
-   tipo: descrição concisa no imperativo
-
+   ```
    Co-Authored-By: Cleber de M. Goncalves <cleber.engineer@gmail.com>
-   EOF
-   )"
    ```
 
-9. Enviar: `git push`
+   O prefixo descreve **o que a mudança é** — `feat`, `fix`, `refactor`, `docs`, `chore`,
+   `test`. O impacto de versão não vem daqui: vem do `releaser`, que julga pelo contrato
+   público e não pelo prefixo escolhido.
 
-10. Confirmar: `git status`
+8. **Enviar** com `git push`, e confirmar com `git status`.
+
+9. **Relatar**: o que foi commitado, a versão resultante, e qualquer ressalva do `reviewer`
+   que ficou sem correção.
 
 ## Observações
 
-- Não commitar: `.env` com valores reais, secrets, credenciais hardcoded.
-- Não versionar (bump) quando o commit for apenas `docs:`, `chore:`, `test:`, `style:`, `ci:` ou `build:`.
+- Um commit por mudança independente. Três assuntos no working tree são três commits, e o
+  `releaser` julga o impacto de cada um.
+- Nunca commitar `.env` com valores reais, segredo ou credencial.
+- O hook de `pre-commit` roda `biome check --write` no que está em stage: arquivos podem
+  ser reformatados durante o commit. É esperado.
+- Breaking change nunca sai em silêncio, mesmo com o `reviewer` aprovando: o veredito do
+  `releaser` volta para você antes do push.
