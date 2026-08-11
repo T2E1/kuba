@@ -2,15 +2,14 @@
 
 Como todo command em `.claude/commands/` deve ser escrito.
 
-Este arquivo não é um command: não tem `## Fluxo`, não aciona agent e não muda nada. É a
-especificação de forma dos que são, e mora aqui pela mesma razão que os outros três moram
-nas pastas que governam — o padrão fica ao lado do que ele governa.
+Uma peculiaridade da camada, que decide onde este arquivo mora: `rules/`, `skills/` e
+`agents/` ignoram arquivo fora da forma que esperam, mas **todo `.md` em `commands/` é
+registrado como comando invocável**. Um `commands/STANDARD.md` apareceria como `/STANDARD`
+na lista de quem usa o repositório — foi o que aconteceu enquanto ele esteve lá.
 
-Uma peculiaridade da camada, que vale conhecer: `rules/`, `skills/` e `agents/` ignoram
-arquivo fora da forma que esperam, mas **todo `.md` em `commands/` é registrado**. Este
-aparece como `/STANDARD` na lista, e disparar mostra o padrão — inofensivo, e às vezes
-conveniente. Nenhum outro arquivo de apoio entra aqui: se precisar de um, ele vai para
-`references/` de uma skill, não para esta pasta.
+Por isso `commands/` contém apenas commands. Este padrão vive na skill `standard`, junto
+dos outros três, e qualquer arquivo de apoio de um command vai para `references/` de uma
+skill — nunca para aquela pasta.
 
 ---
 

@@ -187,7 +187,7 @@ Dois itens continuam fora do alcance do script, e ficam para a leitura: se cada 
 `## Método` é verificável por terceiro, e se o `## Papel` descreve **um** ofício.
 
 Os **links** são verificados junto com os das skills — o script em
-[skills/STANDARD.md](skill.md) cobre `agents/` também, porque os dois erram
+[skill.md](skill.md) cobre `agents/` também, porque os dois erram
 a profundidade do `../` do mesmo jeito.
 
 O validador vive em [`../scripts/validate.py`](../scripts/validate.py), não aqui: um

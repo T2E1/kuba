@@ -20,12 +20,16 @@ command  →  aciona agent  →  que carrega skill
          rules valem em tudo
 ```
 
-| Camada | Responde | Quem aciona | Padrão |
+| Camada | Responde | Quem aciona | Forma |
 |---|---|---|---|
-| **rule** | O que é proibido | ninguém — está sempre em contexto | [rules/STANDARD.md](skills/standard/references/rule.md) |
-| **skill** | Como se faz | o agent, quando o contexto pede | [skills/STANDARD.md](skills/standard/references/skill.md) |
-| **agent** | Quem faz, com que julgamento | o command, ou eu | [agents/STANDARD.md](skills/standard/references/agent.md) |
-| **command** | Em que ordem, e o que roda entre as etapas | você, digitando `/` | [commands/STANDARD.md](skills/standard/references/command.md) |
+| **rule** | O que é proibido | ninguém — está sempre em contexto | [rule.md](skills/standard/references/rule.md) |
+| **skill** | Como se faz | o agent, quando o contexto pede | [skill.md](skills/standard/references/skill.md) |
+| **agent** | Quem faz, com que julgamento | o command, ou eu | [agent.md](skills/standard/references/agent.md) |
+| **command** | Em que ordem, e o que roda entre as etapas | você, digitando `/` | [command.md](skills/standard/references/command.md) |
+
+Os quatro vivem na skill [standard](skills/standard/SKILL.md) — não nas pastas que
+governam. O padrão de uma rule não é lido junto com as rules: é lido por quem escreve
+uma, e o vizinho natural dele é o autor.
 
 **A rule exige, a skill executa, o agent decide, o command sequencia.**
 
@@ -109,9 +113,8 @@ volta explícito. Silêncio sobre o que faltou é o pior modo de falhar.
 
 ## Verificação
 
-A forma das quatro camadas é a skill [standard](skills/standard/SKILL.md): os padrões em
-`references/`, o validador em `scripts/validate.py`. Rodar de `.claude/`, ao alterar
-qualquer artefato:
+O validador da skill `standard` cobre as quatro camadas e todos os links. Rodar de
+`.claude/`, ao alterar qualquer artefato:
 
     python3 skills/standard/scripts/validate.py
 
