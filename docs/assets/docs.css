@@ -143,3 +143,70 @@
   color: var(--color-master, #7d8595);
   font-size: 0.85rem;
 }
+
+/* Docsify keeps `.app-nav` absolutely positioned at the top right at every
+   width, only nudging its margin below 768px. Seven entries need 749px, so the
+   corner only fits them past 1149px. Below that they overlap whatever is there:
+   the search box and the first heading while the sidebar shows, the opening
+   paragraphs once it hides.
+
+   In flow the nav costs the corner and buys a header that pushes the content
+   down instead of covering it. */
+@media screen and (max-width: 1149px) {
+  .app-nav {
+    background: var(--docs-surface);
+    border-bottom: 1px solid var(--docs-border);
+    position: static;
+    text-align: left;
+  }
+
+  /* The entries are inline-block with a 1rem side margin, which reads as a wide
+     gap once they wrap. Flex gives an even gap in both directions. */
+  .app-nav > ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem 1.25rem;
+  }
+
+  .app-nav li {
+    margin: 0;
+  }
+
+  /* The language dropdown opens absolutely under its parent. Anchored right it
+     runs off the edge once the nav starts at the left. */
+  .app-nav li ul {
+    left: 0;
+    right: auto;
+  }
+}
+
+/* Sidebar still showing: the nav starts where it ends. */
+@media screen and (min-width: 769px) and (max-width: 1149px) {
+  .app-nav {
+    margin: 0 0 0 300px;
+    padding: 0.5rem 5.5rem 0.75rem 1.5rem;
+  }
+}
+
+/* Sidebar hidden behind the hamburger, which docsify fixes at the bottom left —
+   so the nav needs no clearance there. The right padding clears
+   `.github-corner`, 80px square and fixed at the top right: without it the last
+   entries sit on the ribbon, dark text on the theme colour. */
+@media screen and (max-width: 768px) {
+  .app-nav {
+    margin: 0;
+    padding: 0.5rem 5.5rem 0.75rem 1rem;
+  }
+
+  /* Wide content must scroll inside itself rather than making the page scroll
+     sideways. */
+  .markdown-section table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+
+  .preview__stage {
+    padding: var(--spacing_inset-xs, 16px);
+  }
+}
