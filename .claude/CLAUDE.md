@@ -72,6 +72,7 @@ entre si e não veem esta conversa — recebem o escopo que eu passo, e devolvem
 | Comportamento mudou | `developer` → `tester` → `writer`, nesta ordem: documentar antes do teste documenta intenção |
 | Render lento, bundle grande | `deepdive` → `architect`, se a correção mudar a forma |
 | CI ou build quebrado | `builder`, sozinho |
+| Acrescentar rule, skill, agent ou command | `/extend` — sem agent; a skill `standard` decide a camada |
 
 ### Quando não delegar
 
