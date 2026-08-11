@@ -51,14 +51,18 @@ function processOrder(order: Order): Result {
 }
 
 // CLEANUP: imports não utilizados - remover
-import { useState, useEffect, useCallback, useMemo } from 'react';
-import { format, parse, addDays } from 'date-fns';
-import _ from 'lodash';
+import { attributeChanged, define } from '@directive';
+import { paint, repaint, retouch } from '@dom';
+import Echo from '@echo';
+import { Hidden, Value, Width } from '@mixin';
 
-// Apenas useState é usado
-function SimpleComponent(): JSX.Element {
-  const [value, setValue] = useState(0);
-  return <div>{value}</div>;
+// Apenas define, paint, Echo e Value são usados
+@define('kb-sample')
+class Sample extends Value(Echo(HTMLElement)) {
+  @paint
+  render() {
+    return this.value;
+  }
 }
 
 // CLEANUP: comentários desatualizados - atualizar ou remover
