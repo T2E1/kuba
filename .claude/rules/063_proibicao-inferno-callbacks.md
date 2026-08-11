@@ -28,9 +28,9 @@ Callback Hell ocorre quando código assíncrono é escrito usando aninhamento pr
 
 ## Allowed Exceptions
 
-- Código legado onde linguagem/runtimes não suportam promises ou async/await
-- APIs externas que exigem estritamente padrão de callback sem alternativa
-- Aninhamento de callback de nível único com lógica simples (apenas uma operação assíncrona)
+- **Runtime sem Promises**: Linguagem ou runtime sem suporte a promise e `async`/`await`.
+- **APIs de Callback Obrigatório**: De terceiro, sem alternativa em promise.
+- **Aninhamento de Nível Único**: Um único nível, com uma só operação assíncrona.
 
 ## How to Detect
 
@@ -55,5 +55,5 @@ Callback Hell ocorre quando código assíncrono é escrito usando aninhamento pr
 ---
 
 **Created on**: 2026-03-28
-**Updated on**: 2026-07-15
-**Version**: 1.1
+**Updated on**: 2026-08-10
+**Version**: 1.2

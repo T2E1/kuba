@@ -28,10 +28,10 @@ Shotgun Surgery ocorre quando uma única mudança requer alterar múltiplas clas
 
 ## Allowed Exceptions
 
-- Arquiteturas explícitas onde camadas são intencionalmente separadas (controller, service, repository)
-- Sistemas de plugins/modulares onde opiniões são extensíveis por design
-- Código legado onde refatoração imediata traria risco inaceitável
-- Fronteiras de microserviços por design onde múltiplos serviços tratam mesma preocupação de domínio
+- **Camadas Intencionais**: Separação em camadas adotada por decisão explícita de arquitetura.
+- **Sistemas de Plugin**: Onde a extensão em vários pontos é o desenho, não o acidente.
+- **Código Legado**: Quando a refatoração imediata traria risco inaceitável.
+- **Fronteiras de Serviço**: Serviços independentes que tratam a mesma preocupação por desenho.
 
 ## How to Detect
 
@@ -58,5 +58,5 @@ Shotgun Surgery ocorre quando uma única mudança requer alterar múltiplas clas
 ---
 
 **Created on**: 2026-03-28
-**Updated on**: 2026-07-15
-**Version**: 1.1
+**Updated on**: 2026-08-10
+**Version**: 1.2

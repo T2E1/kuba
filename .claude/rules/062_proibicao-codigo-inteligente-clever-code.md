@@ -28,10 +28,10 @@ Clever Code ocorre quando um desenvolvedor escreve código excessivamente concis
 
 ## Allowed Exceptions
 
-- Cópia otimizada de algoritmos conhecidos (CRC32, MD5) onde propósito é claro via nome da função
-- Code golfing em funções intencionalmente minúsculas onde contexto torna significado óbvio
-- Caminhos críticos de performance que foram perfilados como hotspots onde comentários justificam otimização
-- Domínio específico (cripto, gráficos, programação de sistemas) onde operações padrão são conhecidas
+- **Algoritmos Canônicos**: Implementação conhecida — CRC32, MD5 — cujo propósito o nome da função entrega.
+- **Funções Minúsculas**: Função intencionalmente minúscula onde o contexto torna o significado óbvio.
+- **Hotspots Perfilados**: Caminho identificado por profiling, com comentário justificando a otimização.
+- **Domínio Especializado**: Cripto, gráficos ou programação de sistemas, onde a operação é padrão da área.
 
 ## How to Detect
 
@@ -56,5 +56,5 @@ Clever Code ocorre quando um desenvolvedor escreve código excessivamente concis
 ---
 
 **Created on**: 2026-03-28
-**Updated on**: 2026-07-15
-**Version**: 1.1
+**Updated on**: 2026-08-10
+**Version**: 1.2

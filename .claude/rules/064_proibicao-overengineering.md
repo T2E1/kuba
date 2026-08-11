@@ -30,10 +30,10 @@ Overengineering ocorre quando um desenvolvedor cria arquitetura ou código exces
 
 ## Allowed Exceptions
 
-- Código de framework por natureza geral que precisa suportar múltiplos casos de uso
-- Bibliotecas onde flexibilidade é preocupação primária (frameworks UI, ORMs)
-- Decisões arquiteturais explícitas documentando por que complexidade é justificada
-- Código em crescimento extremo (startups com MVP rapidamente escalado) onde investimento em arquitetura se paga
+- **Código de Framework**: Generalidade exigida por natureza, para suportar múltiplos consumidores.
+- **Bibliotecas de Flexibilidade**: Onde a flexibilidade é a preocupação primária — framework de UI, ORM.
+- **Decisão Arquitetural Documentada**: Complexidade justificada por decisão de arquitetura registrada.
+- **Crescimento Acelerado**: Onde o investimento antecipado em arquitetura já se paga pelo ritmo de crescimento.
 
 ## How to Detect
 
@@ -58,5 +58,5 @@ Overengineering ocorre quando um desenvolvedor cria arquitetura ou código exces
 ---
 
 **Created on**: 2026-03-28
-**Updated on**: 2026-07-15
-**Version**: 1.1
+**Updated on**: 2026-08-10
+**Version**: 1.2

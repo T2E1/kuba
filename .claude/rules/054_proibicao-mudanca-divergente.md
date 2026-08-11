@@ -28,10 +28,10 @@ Mudança Divergente (Divergent Change) ocorre quando uma única classe é modifi
 
 ## Allowed Exceptions
 
-- Classes pequenas (< 100 linhas) com responsabilidades estreitamente relacionadas
-- DTOs (Data Transfer Objects) ou Value Objects que por definição agrupam dados
-- Adapters que precisam implementar múltiplas interfaces do mesmo paradigma
-- Código legado onde refatoração imediata traria risco inaceitável
+- **Classes Pequenas**: Abaixo de 100 linhas, com responsabilidades estreitamente relacionadas.
+- **DTOs e Value Objects**: Agrupam dados por definição — é o propósito deles.
+- **Adapters Multi-Interface**: Quando as interfaces implementadas pertencem ao mesmo paradigma.
+- **Código Legado**: Quando a refatoração imediata traria risco inaceitável.
 
 ## How to Detect
 
@@ -59,5 +59,5 @@ Mudança Divergente (Divergent Change) ocorre quando uma única classe é modifi
 ---
 
 **Created on**: 2026-03-28
-**Updated on**: 2026-07-15
-**Version**: 1.1
+**Updated on**: 2026-08-10
+**Version**: 1.2

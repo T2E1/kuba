@@ -28,9 +28,9 @@ Pirâmide do Destino (ou Arrow Anti-Pattern) ocorre quando há aninhamento exces
 
 ## Allowed Exceptions
 
-- Código legado onde refatoração imediata traria alto risco sem ganho claro
-- Código de parser ou máquinas de estado necessariamente complexos por especificação externa
-- Event handlers onde múltiplas validações são obrigatórias e não podem ser extraídas
+- **Código Legado**: Quando a refatoração imediata traria alto risco sem ganho claro.
+- **Parsers e Máquinas de Estado**: Complexidade imposta por especificação externa de parsing ou de estados.
+- **Validações Obrigatórias**: Que não podem ser extraídas do handler sem quebrar a ordem.
 
 ## How to Detect
 
@@ -55,5 +55,5 @@ Pirâmide do Destino (ou Arrow Anti-Pattern) ocorre quando há aninhamento exces
 ---
 
 **Created on**: 2026-03-28
-**Updated on**: 2026-07-15
-**Version**: 1.1
+**Updated on**: 2026-08-10
+**Version**: 1.2

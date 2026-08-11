@@ -28,10 +28,10 @@ Refused Bequest ocorre quando uma classe herda de outra mas não usa a maioria d
 
 ## Allowed Exceptions
 
-- Interfaces marcadoras onde subclasse intencionalmente herda "capacidade" mesmo se não usada
-- Padrões de template method abstrato onde subclasse sobrescreve maior parte do comportamento mas herda contrato
-- Classes de framework onde métodos não usados fazem parte de interface obrigatória
-- Código legado onde refatoração imediata traria alto risco sem ganho claro
+- **Interfaces Marcadoras**: Herança de capacidade declarativa, sem comportamento a usar.
+- **Template Method**: A subclasse sobrescreve o comportamento e herda apenas o contrato.
+- **Contratos de Framework**: Quando o método não usado faz parte de interface obrigatória.
+- **Código Legado**: Quando a refatoração imediata traria alto risco sem ganho claro.
 
 ## How to Detect
 
@@ -56,5 +56,5 @@ Refused Bequest ocorre quando uma classe herda de outra mas não usa a maioria d
 ---
 
 **Created on**: 2026-03-28
-**Updated on**: 2026-07-15
-**Version**: 1.1
+**Updated on**: 2026-08-10
+**Version**: 1.2

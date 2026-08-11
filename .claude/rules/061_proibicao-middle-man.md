@@ -28,10 +28,10 @@ Middle Man ocorre quando uma classe delega a maioria de seus métodos para outra
 
 ## Allowed Exceptions
 
-- Padrões de Facade que simplificam interface complexa (adicionando valor via simplificação)
-- Proxies com preocupações transversais (logging, caching, autenticação)
-- Adapters que transformam interfaces de formatos diferentes
-- DTOs/ViewModels que transformam objetos de entidade para camada de apresentação
+- **Facade**: Quando a simplificação de uma interface complexa é o valor entregue.
+- **Proxy Transversal**: Preocupação transversal — log, cache, autenticação — aplicada na passagem.
+- **Adapter**: Conversão entre formatos de interface incompatíveis.
+- **DTOs e ViewModels**: Transformação de entidade para a camada de apresentação.
 
 ## How to Detect
 
@@ -56,5 +56,5 @@ Middle Man ocorre quando uma classe delega a maioria de seus métodos para outra
 ---
 
 **Created on**: 2026-03-28
-**Updated on**: 2026-07-15
-**Version**: 1.1
+**Updated on**: 2026-08-10
+**Version**: 1.2

@@ -323,19 +323,11 @@ sys.exit(1 if erros else 0)
 PY
 ```
 
-### Divergências conhecidas
+### Divergência conhecida
 
-O script acusa 18 problemas hoje, e nenhum é acidente de escrita:
-
-- **`Allowed Exceptions` sem nome em negrito, em 052–068** (17 rules). O formato
-  `- **Nome**: condição` é seguido pelas outras 53, incluindo 069 e 070 — as duas últimas
-  da mesma faixa temática. As 17 usam bullet corrido, sem rótulo. É divergência de forma,
-  não de conteúdo: as exceções existem e são legítimas; falta o nome que permitiria citá-las
-  numa revisão ("isso cai na exceção de Código Legado").
-- **O contador `AP-19` reusado** por `055` e `061`, já documentado na seção de `ID`.
-
-Ambas são dívidas registradas, não pendências silenciosas. Enquanto existirem, o script
-sai com código 1 — o que é a intenção: uma divergência conhecida continua visível.
+O script sai com código 1 hoje, por um único motivo: **o contador `AP-19` é usado por
+`055` e `061`**, como registrado na seção de `ID`. É dívida documentada, não pendência
+silenciosa — enquanto existir, continua visível.
 ---
 
 **Criado em**: 2026-08-10

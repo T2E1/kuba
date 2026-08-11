@@ -28,10 +28,10 @@ Poltergeists (ou Entidades de Vida Curta) ocorrem quando classes ou objetos são
 
 ## Allowed Exceptions
 
-- Padrões de Builder onde builder adiciona legibilidade via API fluente mesmo se descartado
-- Adapters/wrappers que transformam formatos entre fronteiras (API → domínio interno)
-- Commands/Queries encapsulados em padrões CQRS que existem por design
-- DTOs que são criados, populados, passados para fronteira e então descartados (padrão padrão em camadas de fronteira)
+- **Builders Fluentes**: API fluente que ganha legibilidade mesmo sendo descartada ao fim.
+- **Adapters de Fronteira**: Conversão de formato na passagem entre API externa e domínio interno.
+- **Commands e Queries**: Encapsulamento de operação em CQRS, que existe por desenho.
+- **DTOs de Fronteira**: Criados, populados e entregues à fronteira — o padrão da camada.
 
 ## How to Detect
 
@@ -55,5 +55,5 @@ Poltergeists (ou Entidades de Vida Curta) ocorrem quando classes ou objetos são
 ---
 
 **Created on**: 2026-03-28
-**Updated on**: 2026-07-15
-**Version**: 1.1
+**Updated on**: 2026-08-10
+**Version**: 1.2

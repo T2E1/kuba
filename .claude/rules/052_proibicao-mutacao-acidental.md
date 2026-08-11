@@ -28,10 +28,10 @@ Mutação acidental ocorre quando objetos ou estruturas de dados são modificado
 
 ## Allowed Exceptions
 
-- Métodos explicitamente identificados como mutadores (ex.: `save()`, `update()`)
-- Objetos temporários construídos e usados exclusivamente dentro do mesmo escopo
-- Implementações de mutadores obrigatórias em interfaces/frameworks que não suportam imutabilidade
-- Código legado com mutação documentada e testes que garantem o comportamento esperado
+- **Métodos Mutadores Explícitos**: `save()`, `update()` e afins, cuja intenção de mutação está declarada no nome.
+- **Objetos de Escopo Local**: Construídos e descartados dentro do mesmo escopo, sem escapar dele.
+- **Contratos de Framework**: Quando a interface exigida não suporta imutabilidade.
+- **Código Legado Testado**: Quando a mutação está documentada e coberta por testes que garantem o comportamento.
 
 ## How to Detect
 
@@ -60,5 +60,5 @@ Mutação acidental ocorre quando objetos ou estruturas de dados são modificado
 ---
 
 **Created on**: 2026-03-28
-**Updated on**: 2026-07-15
-**Version**: 1.1
+**Updated on**: 2026-08-10
+**Version**: 1.2

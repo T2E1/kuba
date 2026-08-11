@@ -27,9 +27,9 @@ Boat Anchor ocorre quando uma dependência, biblioteca ou componente é importad
 
 ## Allowed Exceptions
 
-- DevDependencies usadas apenas em build-tooling (linters, formatters não referenciados em código prod)
-- Dependências opcionais onde uso é desconhecido em runtime até execução (plugins)
-- Dependência futura com roadmap bem definido (ex: feature requerendo X no próximo trimestre) se documentado em comments/tickets
+- **DevDependencies de Tooling**: Ferramenta de build — linter, formatter — nunca referenciada em produção.
+- **Dependências Opcionais**: Plugin cujo uso só se resolve em tempo de execução.
+- **Adoção Planejada**: Com prazo definido, registrada em comentário ou ticket.
 
 ## How to Detect
 
@@ -54,5 +54,5 @@ Boat Anchor ocorre quando uma dependência, biblioteca ou componente é importad
 ---
 
 **Created on**: 2026-03-28
-**Updated on**: 2026-07-15
-**Version**: 1.1
+**Updated on**: 2026-08-10
+**Version**: 1.2

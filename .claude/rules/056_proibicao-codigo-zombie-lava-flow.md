@@ -29,10 +29,10 @@ Lava Flow (Dead Code / Zombie Code) ocorre quando código não é mais utilizado
 
 ## Allowed Exceptions
 
-- Código temporariamente desabilitado/comentado com @TODO bem documentado e prazo
-- Feature flags ou testes A/B com uso conhecido
-- Código mantido para rollback imediato (< 1 dia) quando há funcionalidade crítica
-- Documentação histórica mantida em comentários quando possui valor educacional
+- **Desativação Temporária**: Desabilitado com `@TODO` documentado e prazo definido.
+- **Feature Flags**: Caminhos de feature flag ou teste A/B com uso conhecido.
+- **Rollback Imediato**: Mantido por menos de um dia para reverter funcionalidade crítica.
+- **Documentação Histórica**: Comentário histórico preservado por valor educacional.
 
 ## How to Detect
 
@@ -59,5 +59,5 @@ Lava Flow (Dead Code / Zombie Code) ocorre quando código não é mais utilizado
 ---
 
 **Created on**: 2026-03-28
-**Updated on**: 2026-07-15
-**Version**: 1.1
+**Updated on**: 2026-08-10
+**Version**: 1.2

@@ -28,9 +28,9 @@ Golden Hammer ocorre quando um desenvolvedor ou time aplica a mesma ferramenta, 
 
 ## Allowed Exceptions
 
-- Padrões padrão impostos por compliance/regulação (ex: frameworks de segurança)
-- Stack tecnológico company-wide onde variância traria maior custo de manutenibilidade
-- Bibliotecas/frameworks conhecidos e battle-tested onde investir em risco de nova tecnologia é alto
+- **Imposição Regulatória**: Padrão imposto por compliance ou regulação.
+- **Stack Corporativo**: Adotado em toda a empresa, onde a variação custaria mais manutenção.
+- **Tecnologia Battle-Tested**: Solução consolidada onde o risco de trocar por novidade não se paga.
 
 ## How to Detect
 
@@ -54,5 +54,5 @@ Golden Hammer ocorre quando um desenvolvedor ou time aplica a mesma ferramenta, 
 ---
 
 **Created on**: 2026-03-28
-**Updated on**: 2026-07-15
-**Version**: 1.1
+**Updated on**: 2026-08-10
+**Version**: 1.2

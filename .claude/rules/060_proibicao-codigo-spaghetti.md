@@ -30,10 +30,10 @@ Spaghetti Code ocorre quando o fluxo de controle do código é complexo e entrel
 
 ## Allowed Exceptions
 
-- Máquinas de estado implementadas com switch/case bem documentado
-- Código orientado a eventos com dispatcher único e múltiplos handlers (padrão mais limpo que goto)
-- Parsers de protocolo ou código de rede necessariamente complexo por especificação externa
-- Código legado onde refatoração imediata traria risco inaceitável
+- **Máquinas de Estado**: `switch`/`case` documentado implementando transição de estados.
+- **Dispatcher de Eventos**: Fluxo orientado a eventos com dispatcher único e handlers separados.
+- **Parsers de Protocolo**: Complexidade imposta por especificação externa de protocolo ou rede.
+- **Código Legado**: Quando a refatoração imediata traria risco inaceitável.
 
 ## How to Detect
 
@@ -59,5 +59,5 @@ Spaghetti Code ocorre quando o fluxo de controle do código é complexo e entrel
 ---
 
 **Created on**: 2026-03-28
-**Updated on**: 2026-07-15
-**Version**: 1.1
+**Updated on**: 2026-08-10
+**Version**: 1.2

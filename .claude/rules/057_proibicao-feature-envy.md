@@ -28,10 +28,10 @@ Feature Envy ocorre quando um método usa dados e comportamentos de outra classe
 
 ## Allowed Exceptions
 
-- Métodos em controllers/orchestrators que orquestram fluxos entre múltiplos objetos de serviço
-- DTOs/Data mappers que extraem dados de múltiplos objetos para formatar/serializar
-- Event handlers que agregam dados de diferentes fontes para processamento único
-- Código legado onde refatoração traria alto risco sem ganho claro
+- **Orquestradores**: Controllers que coordenam fluxos entre múltiplos serviços.
+- **Mappers e DTOs**: Extraem dados de vários objetos para formatar ou serializar.
+- **Event Handlers Agregadores**: Agregam dados de fontes diferentes para um processamento único.
+- **Código Legado**: Quando a refatoração traria alto risco sem ganho claro.
 
 ## How to Detect
 
@@ -56,5 +56,5 @@ Feature Envy ocorre quando um método usa dados e comportamentos de outra classe
 ---
 
 **Created on**: 2026-03-28
-**Updated on**: 2026-07-15
-**Version**: 1.1
+**Updated on**: 2026-08-10
+**Version**: 1.2

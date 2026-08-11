@@ -28,9 +28,9 @@ Data Clumps ocorrem quando grupos de dados sempre aparecem juntos como parâmetr
 
 ## Allowed Exceptions
 
-- Grupos temporários em eventos únicos ou scripts de migração
-- Integrações com APIs externas que não permitem objetos customizados
-- Código legado onde refatoração traria alto risco sem ganho claro
+- **Grupos Efêmeros**: Agrupamentos de vida curta em evento único ou script de migração.
+- **Contratos de API Externa**: Quando a API de terceiro não aceita objeto customizado.
+- **Código Legado**: Quando a refatoração traria alto risco sem ganho claro.
 
 ## How to Detect
 
@@ -54,5 +54,5 @@ Data Clumps ocorrem quando grupos de dados sempre aparecem juntos como parâmetr
 ---
 
 **Created on**: 2026-03-28
-**Updated on**: 2026-07-15
-**Version**: 1.1
+**Updated on**: 2026-08-10
+**Version**: 1.2

@@ -28,10 +28,10 @@ Long Method ocorre quando um método possui muitas linhas de código, tipicament
 
 ## Allowed Exceptions
 
-- Construtores de objetos complexos quando não há alternativa mais legível
-- Métodos implementando algoritmos matemáticos ou científicos onde quebrar a lógica reduziria clareza
-- Compatibilidade com código legado onde refatoração traria alto risco
-- Event handlers ou callbacks externos com código de terceiros arbitrário
+- **Construtores Complexos**: Quando quebrar a construção em partes reduziria a legibilidade.
+- **Algoritmos Matemáticos**: Onde dividir a lógica reduziria a clareza em vez de aumentá-la.
+- **Código Legado**: Quando a refatoração traria alto risco de regressão.
+- **Handlers de Terceiros**: Exigidos por biblioteca externa, com corpo que não controlamos.
 
 ## How to Detect
 
@@ -57,5 +57,5 @@ Long Method ocorre quando um método possui muitas linhas de código, tipicament
 ---
 
 **Created on**: 2026-03-28
-**Updated on**: 2026-07-15
-**Version**: 1.1
+**Updated on**: 2026-08-10
+**Version**: 1.2
