@@ -225,33 +225,119 @@ a skill `quality`, que pesa pelo fator McCall impactado.
 
 ## Verificação
 
-Antes de commitar uma rule nova ou alterada:
+Rodar de `.claude/`, antes de commitar uma rule nova ou alterada.
 
-- As seis seções presentes, na ordem, com os cabeçalhos em inglês
-- `### Manual` e `### Automatic` dentro de `How to Detect`
-- Todo item de `Objective Criteria` verificável por terceiro
-- Ao menos uma exceção em `Allowed Exceptions`
-- `Automatic` cita ferramenta real, ou declara que não existe regra nativa
-- Links de `Related to` resolvendo, com relação declarada do vocabulário
-- `ID` coerente com `Category`, sem colidir com um existente
-- `Updated on` e `Version` refletindo a alteração
+| Item | Critério |
+|---|---|
+| Nome do arquivo | `NNN_kebab-case.md` |
+| Seções | As seis obrigatórias, **na ordem**, com os cabeçalhos em inglês |
+| `How to Detect` | Contém `### Manual` e `### Automatic` |
+| `ID` | Presente, coerente com `Category`, terminando no número do arquivo |
+| `Severity` | Uma das três, com o emoji |
+| `Category` | Uma das quatro |
+| Datas | `Created on` e `Updated on` em AAAA-MM-DD; `Version` em MAJOR.MINOR |
+| `Objective Criteria` | Ao menos um checkbox `- [ ]` |
+| `Allowed Exceptions` | Ao menos uma exceção nomeada em negrito |
+| `Automatic` | Cita ferramenta nomeada, ou declara que não existe regra nativa |
+| `Related to` | Todo link resolve, e traz relação do vocabulário |
+| IDs | Sem duplicata, e sem reúso do contador `AP-` |
+
+Fora do alcance do script, e por isso o que mais merece atenção na leitura: se **todo item
+de `Objective Criteria` é verificável por terceiro**. É o critério que decide se a rule
+serve, e nenhuma regex o mede.
 
 ```bash
-# links quebrados
-grep -ohE '\]\([0-9]{3}_[a-z-]+\.md\)' *.md | tr -d '()' | sed 's/^]//' | sort -u |
-  while read f; do [ -f "$f" ] || echo "quebrado: $f"; done
+python3 - <<'PY'
+import os, re, glob, sys
+from collections import defaultdict
 
-# seções obrigatórias
-for f in *.md; do
-  for s in "What it is" "Why it matters" "Objective Criteria" \
-           "Allowed Exceptions" "How to Detect" "Related to"; do
-    grep -q "^## $s" "$f" || echo "$f falta: $s"
-  done
-done
+SECOES = ["## What it is", "## Why it matters", "## Objective Criteria",
+          "## Allowed Exceptions", "## How to Detect", "## Related to"]
+SEVERITY = {"🔴 Critical", "🟠 High", "🟡 Medium"}
+CATEGORY = {"Structural", "Behavioral", "Creational", "Infrastructure"}
+RELACAO = {"reinforces", "complements", "depends on", "supersedes"}
+erros, ids = defaultdict(list), defaultdict(list)
+
+arquivos = sorted(glob.glob("rules/[0-9][0-9][0-9]_*.md"))
+for p in arquivos:
+    nome = os.path.basename(p)
+    t = open(p).read()
+    if not re.fullmatch(r"\d{3}_[a-z0-9-]+\.md", nome):
+        erros[nome].append("nome fora do padrão NNN_kebab-case.md")
+    # seções, na ordem
+    pos = []
+    for sec in SECOES:
+        m = re.search(rf"^{re.escape(sec)}\s*$", t, re.M)
+        if not m: erros[nome].append(f"falta: {sec}")
+        else: pos.append((m.start(), sec))
+    if pos != sorted(pos): erros[nome].append("seções fora da ordem")
+    for sub in ["### Manual", "### Automatic"]:
+        if not re.search(rf"^{re.escape(sub)}\s*$", t, re.M): erros[nome].append(f"falta: {sub}")
+    # metadados
+    if m := re.search(r"^\*\*ID\*\*:\s*(\S+)", t, re.M):
+        ids[m.group(1)].append(nome)
+        cat_id = m.group(1).split("-")[0]
+        if m2 := re.search(r"^\*\*Category\*\*:\s*(\S+)", t, re.M):
+            if cat_id != "AP" and cat_id != m2.group(1).upper():
+                erros[nome].append(f"ID '{m.group(1)}' não bate com Category '{m2.group(1)}'")
+        if not m.group(1).endswith(nome[:3]):
+            erros[nome].append(f"ID '{m.group(1)}' não termina no número do arquivo ({nome[:3]})")
+    else: erros[nome].append("sem **ID**")
+    if m := re.search(r"^\*\*Severity\*\*:\s*(.+)$", t, re.M):
+        if m.group(1).strip() not in SEVERITY: erros[nome].append(f"Severity inválida: {m.group(1)}")
+    else: erros[nome].append("sem **Severity**")
+    if m := re.search(r"^\*\*Category\*\*:\s*(\S+)", t, re.M):
+        if m.group(1) not in CATEGORY: erros[nome].append(f"Category inválida: {m.group(1)}")
+    else: erros[nome].append("sem **Category**")
+    for campo in ["Created on", "Updated on"]:
+        if not re.search(rf"^\*\*{campo}\*\*:\s*\d{{4}}-\d{{2}}-\d{{2}}", t, re.M):
+            erros[nome].append(f"sem **{campo}** em AAAA-MM-DD")
+    if not re.search(r"^\*\*Version\*\*:\s*\d+\.\d+", t, re.M): erros[nome].append("sem **Version** MAJOR.MINOR")
+    # conteúdo das seções
+    criterios = t[t.find("## Objective Criteria"):t.find("## Allowed Exceptions")]
+    if criterios.count("- [ ]") == 0: erros[nome].append("Objective Criteria sem checkbox")
+    excecoes = t[t.find("## Allowed Exceptions"):t.find("## How to Detect")]
+    if not re.search(r"^- \*\*", excecoes, re.M): erros[nome].append("Allowed Exceptions sem exceção nomeada")
+    auto = t[t.find("### Automatic"):t.find("## Related to")]
+    if not (re.search(r"^- [^:\n]+:", auto, re.M) or "Sem regra" in auto):
+        erros[nome].append("Automatic não cita ferramenta nomeada nem declara ausência")
+    # Related to: link resolve e relação declarada
+    rel = t[t.find("## Related to"):]
+    for linha in re.findall(r"^- \[.*?\]\((\d{3}_[a-z0-9-]+\.md)\)(.*)$", rel, re.M):
+        if not os.path.exists(f"rules/{linha[0]}"): erros[nome].append(f"link quebrado: {linha[0]}")
+        if not any(r in linha[1] for r in RELACAO): erros[nome].append(f"relação não declarada em {linha[0]}")
+
+for rid, quais in ids.items():
+    if len(quais) > 1: erros["IDs"].append(f"'{rid}' em {quais}")
+contador = defaultdict(list)
+for rid, quais in ids.items():
+    if rid.startswith("AP-"): contador["-".join(rid.split("-")[:2])] += quais
+for c, quais in contador.items():
+    if len(quais) > 1: erros["IDs"].append(f"contador '{c}' reusado em {sorted(quais)}")
+
+for alvo in sorted(erros):
+    print(f"X {alvo}")
+    for e in erros[alvo]: print(f"    {e}")
+print(f"\n{len(arquivos)} rules · {sum(len(v) for v in erros.values())} problemas")
+sys.exit(1 if erros else 0)
+PY
 ```
 
+### Divergências conhecidas
+
+O script acusa 18 problemas hoje, e nenhum é acidente de escrita:
+
+- **`Allowed Exceptions` sem nome em negrito, em 052–068** (17 rules). O formato
+  `- **Nome**: condição` é seguido pelas outras 53, incluindo 069 e 070 — as duas últimas
+  da mesma faixa temática. As 17 usam bullet corrido, sem rótulo. É divergência de forma,
+  não de conteúdo: as exceções existem e são legítimas; falta o nome que permitiria citá-las
+  numa revisão ("isso cai na exceção de Código Legado").
+- **O contador `AP-19` reusado** por `055` e `061`, já documentado na seção de `ID`.
+
+Ambas são dívidas registradas, não pendências silenciosas. Enquanto existirem, o script
+sai com código 1 — o que é a intenção: uma divergência conhecida continua visível.
 ---
 
 **Criado em**: 2026-08-10
 **Atualizado em**: 2026-08-10
-**Versão**: 1.0
+**Versão**: 1.1
