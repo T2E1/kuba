@@ -1,6 +1,6 @@
 # Proibição de Middle Man
 
-**ID**: AP-19-061
+**ID**: STRUCTURAL-061
 **Severity**: 🟡 Medium
 **Category**: Structural
 
@@ -57,4 +57,4 @@ Middle Man ocorre quando uma classe delega a maioria de seus métodos para outra
 
 **Created on**: 2026-03-28
 **Updated on**: 2026-08-10
-**Version**: 1.2
+**Version**: 1.3

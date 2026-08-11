@@ -180,11 +180,14 @@ O link é relativo e sem `../` — as rules vivem todas no mesmo diretório.
 `<CATEGORIA>-NNN`, com a categoria em maiúsculas: `BEHAVIORAL-037`, `STRUCTURAL-007`,
 `CREATIONAL-024`, `INFRASTRUCTURE-042`.
 
-**Exceção histórica:** as rules de anti-pattern usam `AP-<n>-NNN`, onde `<n>` é a posição
-no catálogo de anti-patterns de origem: `AP-03-060`. Esse contador é herdado e **tem uma
-colisão conhecida** — `AP-19` aparece em `055_limite-maximo-linhas-metodo.md` e em
-`061_proibicao-middle-man.md`. Rules novas de anti-pattern devem usar o formato de
-categoria (`STRUCTURAL-NNN`), não estender o contador `AP-`.
+**Exceção histórica:** 17 rules de anti-pattern usam `AP-<n>-NNN`, onde `<n>` é a posição
+no catálogo de anti-patterns de origem: `AP-03-060`. Esse contador é herdado, não tem dono
+e não é verificável — nada garante que o próximo `<n>` esteja livre. Foi assim que `055` e
+`061` acabaram ambas em `AP-19`, até serem convertidas para `STRUCTURAL-055` e
+`STRUCTURAL-061`.
+
+Rule nova de anti-pattern usa o formato de categoria. Não estenda o contador `AP-`; ele
+está em extinção, e converter as 17 restantes é trabalho pendente, não decisão em aberto.
 
 ### `Severity`
 
@@ -323,13 +326,15 @@ sys.exit(1 if erros else 0)
 PY
 ```
 
-### Divergência conhecida
+### Divergências
 
-O script sai com código 1 hoje, por um único motivo: **o contador `AP-19` é usado por
-`055` e `061`**, como registrado na seção de `ID`. É dívida documentada, não pendência
-silenciosa — enquanto existir, continua visível.
+Nenhuma. O script sai com código 0 nas 70 rules.
+
+As 17 rules que ainda usam `AP-<n>-NNN` passam porque o validador não exige coerência
+entre esse contador e a `Category` — não há como exigir de um identificador herdado sem
+regra. Convertê-las ao formato de categoria fecharia essa brecha.
 ---
 
 **Criado em**: 2026-08-10
 **Atualizado em**: 2026-08-10
-**Versão**: 1.1
+**Versão**: 1.2

@@ -1,6 +1,6 @@
 # Limite Máximo de Linhas por Método
 
-**ID**: AP-19-055
+**ID**: STRUCTURAL-055
 **Severity**: 🟠 High
 **Category**: Structural
 
@@ -58,4 +58,4 @@ Long Method ocorre quando um método possui muitas linhas de código, tipicament
 
 **Created on**: 2026-03-28
 **Updated on**: 2026-08-10
-**Version**: 1.2
+**Version**: 1.3
