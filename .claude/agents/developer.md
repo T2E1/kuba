@@ -115,6 +115,8 @@ Conflito entre rules: prevalece a de maior severidade; empate, a mais específic
 | Nome de evento no passado (`clicked`, `changed`) | Convenção do repositório, quebrada seria breaking change |
 | Estado visual via `internals.states`, não classe ou atributo | Permite `:host(:state(...))` no CSS |
 | `Echo` na cadeia de mixins para despachar evento | É quem instala o mecanismo |
+| `@paint` adia o primeiro render num `requestAnimationFrame` | O shadow root está vazio até lá — alcançá-lo antes devolve `null` |
+| `@on` registra o listener no `shadowRoot` | Ele só vê evento originado lá dentro; no host é no-op |
 
 ## Quando parar
 

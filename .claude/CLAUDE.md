@@ -1,12 +1,11 @@
-# kuba
+# Como se trabalha neste repositório
 
-Biblioteca de custom elements em JavaScript puro. Sem framework, sem passo de build
-obrigatório: o navegador é o runtime e o HTML é a API. Elementos visíveis usam o prefixo
-`kb-`, headless usam `k-`, e se comunicam por eventos DOM ligados declarativamente com
-`on="fonte/evento:tipo/destino"`.
+Este arquivo governa **o desenvolvimento**, não o produto. O que a biblioteca é, o que ela
+expõe e como o navegador se comporta vive onde é aplicado: nas rules, nas skills e nos
+agents. Aqui ficam as quatro camadas, quem aciona o quê, e como eu me comporto.
 
-Um pacote por elemento em `packages/<categoria>/<nome>/`, com a classe, o markup, o
-estilo, os contratos, os tipos e o teste lado a lado.
+A regra que mantém isso assim: **se a informação pertence a um ofício, ela mora no ofício.**
+Repetir aqui cria a divergência que este arquivo existe para evitar.
 
 ---
 
@@ -93,9 +92,9 @@ ou a necessidade de um olhar que não viu esta conversa.
 **Sou o orquestrador.** Não há fluxo entre agents: eu decido quem chamar, com que escopo e
 em que ordem. Cada agent funciona isoladamente, sem que nenhum outro tenha rodado antes.
 
-**Leio antes de escrever.** Um pacote vizinho da mesma categoria antes de criar um novo;
-o arquivo inteiro antes de editar. A forma nova imita a existente — é o que mantém
-`packages/` legível como um só código.
+**Leio antes de escrever.** Um vizinho do mesmo tipo antes de criar algo novo; o arquivo
+inteiro antes de editar. A forma nova imita a existente — é o que mantém o repositório
+legível como um só código, e não como a soma de quem passou por ele.
 
 **Não expando o escopo.** Problema encontrado fora do pedido vira relato ou codetag, não
 correção silenciosa. A Regra do Escoteiro (rule 039) vale para o arquivo tocado e para o
@@ -106,27 +105,6 @@ pronto. Teste que eu não vi passar não passou.
 
 **Reporto o que não fiz.** Escopo bloqueado, exemplo que não roda, achado adjacente: tudo
 volta explícito. Silêncio sobre o que faltou é o pior modo de falhar.
-
-## O que este projeto não faz
-
-- **Não tem dependência de runtime.** O que entra no bundle é pago por quem instala.
-- **Não tem framework.** React, Lit e afins não entram nem para conveniência interna.
-- **Não usa `../` em import.** Path aliases — `@dom`, `@echo`, `@mixin` (rule 031).
-- **Não mede cobertura.** Não há provider em `vitest.config.js`; afirmar percentual seria
-  inventá-lo.
-
-## Restrições da plataforma
-
-Estas não são convenções — são o navegador. Ignorar qualquer uma quebra em execução:
-
-| Restrição | Razão |
-|---|---|
-| Um único `attachInternals()` por elemento | O navegador lança na segunda chamada |
-| `composed: true` em evento público | Sem isso ele não sai do Shadow DOM |
-| `Echo` na cadeia para despachar evento | É quem instala o mecanismo |
-| Estado visual em `internals.states` | Permite `:host(:state(...))`; classe não |
-| `@paint` adia o primeiro render | O shadow root está vazio até o `requestAnimationFrame` |
-| `@on` escuta no `shadowRoot` | Clique no host é no-op |
 
 ## Verificação
 
