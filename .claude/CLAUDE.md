@@ -44,6 +44,50 @@ mesma tabela de decisão em dois lugares, divergindo até uma delas dar a respos
 | Uma sequência fixa que você dispara | `commands/` |
 | Algo que deve rodar sozinho | infraestrutura — hook, `pre-commit`, CI |
 
+## Os nove ofícios, e quando acionar cada um
+
+Nenhum agent conhece outro: eu escolho, com que escopo e em que ordem. Eles não conversam
+entre si e não veem esta conversa — recebem o escopo que eu passo, e devolvem a entrega.
+
+| Agent | Aciono quando | Não aciono para |
+|---|---|---|
+| `architect` | A forma ainda não existe: que categoria, que mixins, que Symbols, ou qual de duas abordagens | Revisar código pronto, ou implementar |
+| `designer` | Definir token, estado visual, papel e nome acessível de um elemento | Elemento headless ou mixin — não têm aparência |
+| `developer` | Escrever ou alterar código em `packages/` | Decidir a forma antes, ou configurar tooling |
+| `tester` | Cobrir comportamento, reproduzir bug como teste que falha, auditar se a suíte prova algo | Corrigir o bug que ele achou |
+| `reviewer` | Julgar mudança pronta contra as 31 rules que o Biome não vê | O que `bun run lint` já pega |
+| `deepdive` | "Por que isto acontece" sem resposta óbvia, ou mapear pacote desconhecido | Escolher entre alternativas — é do `architect` |
+| `writer` | Página de `docs/`, tradução, `README`, `CONTRIBUTING` | JSDoc no código — é do `developer` |
+| `releaser` | Julgar se uma mudança quebra consumidor, e preparar versão | Commit corriqueiro — é o `/ship` |
+| `builder` | `biome.json`, os configs, hooks de husky, workflows, o que entra em `dist/` | Código de `packages/` |
+
+### Fluxos que se repetem
+
+| Situação | Sequência |
+|---|---|
+| Elemento novo | `architect` → `designer` → `developer` → `tester` → `writer` — é o `/craft` |
+| Bug relatado | `deepdive` → `developer` → `tester` |
+| "Está feio / não é acessível" | `designer` → `developer` → `tester` |
+| Mudança pronta para entrar | `reviewer` → `releaser` — é o `/ship` |
+| Componente sem teste | `tester`, sozinho |
+| Comportamento mudou | `developer` → `tester` → `writer`, nesta ordem: documentar antes do teste documenta intenção |
+| Render lento, bundle grande | `deepdive` → `architect`, se a correção mudar a forma |
+| CI ou build quebrado | `builder`, sozinho |
+
+### Quando não delegar
+
+Delegar tem custo: o agent começa sem o que já foi dito aqui, e eu volto a montar o
+contexto na resposta. Não vale quando:
+
+- **A tarefa é pequena.** Renomear uma variável, corrigir um typo, ler um arquivo.
+- **O passo seguinte depende do anterior inteiro.** Se preciso repassar toda a saída,
+  fazer aqui é mais direto.
+- **Dois ofícios tocariam o mesmo arquivo.** Em paralelo, um sobrescreve o outro.
+- **Eu já tenho o contexto.** Se acabei de ler o pacote, delegar refaz o trabalho.
+
+O sinal a favor é o oposto: mais de dez arquivos a explorar, três frentes independentes,
+ou a necessidade de um olhar que não viu esta conversa.
+
 ## Como eu trabalho aqui
 
 **Sou o orquestrador.** Não há fluxo entre agents: eu decido quem chamar, com que escopo e
