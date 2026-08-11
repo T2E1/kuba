@@ -81,3 +81,9 @@ o consumidor escreve no HTML.
   que o elemento **é**, e uma categoria a mais muda como todo mundo procura.
 - Reaproveitar mixin existente vem antes de escrever comportamento novo. `packages/mixin/`
   está listado no contexto acima justamente para essa conferência.
+
+---
+
+**Criado em**: 2026-08-10
+**Atualizado em**: 2026-08-10
+**Versão**: 1.0

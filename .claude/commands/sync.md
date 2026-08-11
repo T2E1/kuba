@@ -63,3 +63,9 @@ entra apenas quando a suíte quebra **depois** do merge, porque aí a pergunta d
   pessoa tem quebra o repositório dela.
 - Suíte vermelha depois do sync não é motivo para desfazer o merge. O código de outra
   pessoa está certo até prova em contrário — a prova é o que o `deepdive` produz.
+
+---
+
+**Criado em**: 2026-04-19
+**Atualizado em**: 2026-08-10
+**Versão**: 2.0

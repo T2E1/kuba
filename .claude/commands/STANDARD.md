@@ -2,13 +2,15 @@
 
 Como todo command em `.claude/commands/` deve ser escrito.
 
-Este arquivo não é um command — e por isso **não vive em `commands/`**, como os outros três
-padrões vivem nas pastas que governam.
+Este arquivo não é um command: não tem `## Fluxo`, não aciona agent e não muda nada. É a
+especificação de forma dos que são, e mora aqui pela mesma razão que os outros três moram
+nas pastas que governam — o padrão fica ao lado do que ele governa.
 
-A razão é uma peculiaridade da camada: `rules/`, `skills/` e `agents/` ignoram arquivo que
-não tem a forma que esperam, mas **todo `.md` em `commands/` vira um comando invocável**.
-Um `commands/STANDARD.md` apareceria como `/STANDARD` para quem usa o repositório — foi o
-que aconteceu, e é por isso que ele mora um nível acima.
+Uma peculiaridade da camada, que vale conhecer: `rules/`, `skills/` e `agents/` ignoram
+arquivo fora da forma que esperam, mas **todo `.md` em `commands/` é registrado**. Este
+aparece como `/STANDARD` na lista, e disparar mostra o padrão — inofensivo, e às vezes
+conveniente. Nenhum outro arquivo de apoio entra aqui: se precisar de um, ele vai para
+`references/` de uma skill, não para esta pasta.
 
 ---
 
@@ -91,6 +93,7 @@ allowed-tools: <lista mínima>
 | `## Fluxo` | ✅ | A sequência de agents, com o que cada um entrega |
 | `## Instruções` | ✅ | Passos numerados. A mecânica entre as etapas |
 | `## Observações` | — | Restrições e o que nunca fazer |
+| Rodapé | ✅ | Criado em / Atualizado em / Versão, como nas outras três camadas |
 
 ### Contexto com `!`
 
@@ -153,21 +156,26 @@ Antes de commitar um command novo ou alterado:
 - `## Fluxo` presente, com agents que existem em `../agents/`
 - Nenhuma tabela de decisão que duplique a de um agent
 - Nenhum passo de `## Instruções` que exija julgamento
+- Rodapé presente, com a data da alteração
 
 Rodar de `.claude/`:
 
 ```bash
 for f in commands/*.md; do
+  [ "$(basename "$f")" = "STANDARD.md" ] && continue   # o padrão não é um command
   grep -q '^description: "' "$f" || echo "$f: description sem aspas"
   for s in "## Propósito" "## Fluxo" "## Instruções"; do
     grep -q "^$s" "$f" || echo "$f falta: $s"
   done
-  grep -n '!`' "$f" | grep -v 'rev-parse' | grep -vE '!`git ' &&
+  # comando ! com caminho relativo quebra fora da raiz; git e rev-parse são seguros
+  grep -oE '^!`[^`]+`' "$f" | grep -vE '^!`git |rev-parse' &&
     echo "$f: comando ! com caminho não ancorado"
+  grep -q '^\*\*Criado em\*\*' "$f" || echo "$f: sem rodapé"
+  # agent citado precisa existir
+  grep -oE '`(architect|builder|deepdive|designer|developer|releaser|reviewer|tester|writer)`' "$f" |
+    tr -d '`' | sort -u | while read a; do
+      [ -f "agents/$a.md" ] || echo "$f: agent inexistente '$a'"; done
 done
-grep -ohE '`(architect|builder|deepdive|designer|developer|releaser|reviewer|tester|writer)`' \
-  commands/*.md | tr -d '`' | sort -u | while read a; do
-    [ -f "agents/$a.md" ] || echo "agent inexistente: $a"; done
 echo "commands verificados"
 ```
 

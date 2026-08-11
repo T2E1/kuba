@@ -79,3 +79,9 @@ que mudança em `docs/` e `.claude/` não versiona, porque não é publicada.
   ser reformatados durante o commit. É esperado.
 - Breaking change nunca sai em silêncio, mesmo com o `reviewer` aprovando: o veredito do
   `releaser` volta para você antes do push.
+
+---
+
+**Criado em**: 2026-04-19
+**Atualizado em**: 2026-08-10
+**Versão**: 2.0
