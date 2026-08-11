@@ -255,6 +255,9 @@ nome. Escreva como código inline.
 
 Rodar de `.claude/`. Cobre skills e agents de uma vez, porque os dois erram igual.
 
+Este script roda automaticamente a cada prompt, pelo hook `UserPromptSubmit` — ver
+`hooks/validate.py`. Rodá-lo à mão só é necessário para conferir uma correção na hora.
+
 ```bash
 python3 - <<'PY'
 import os, re, glob, sys

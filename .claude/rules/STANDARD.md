@@ -246,6 +246,9 @@ Fora do alcance do script, e por isso o que mais merece atenção na leitura: se
 de `Objective Criteria` é verificável por terceiro**. É o critério que decide se a rule
 serve, e nenhuma regex o mede.
 
+Este script roda automaticamente a cada prompt, pelo hook `UserPromptSubmit` — ver
+`hooks/validate.py`. Rodá-lo à mão só é necessário para conferir uma correção na hora.
+
 ```bash
 python3 - <<'PY'
 import os, re, glob, sys

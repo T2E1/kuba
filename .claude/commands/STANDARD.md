@@ -160,6 +160,9 @@ Antes de commitar um command novo ou alterado:
 
 Rodar de `.claude/`:
 
+Este script roda automaticamente a cada prompt, pelo hook `UserPromptSubmit` — ver
+`hooks/validate.py`. Rodá-lo à mão só é necessário para conferir uma correção na hora.
+
 ```bash
 for f in commands/*.md; do
   [ "$(basename "$f")" = "STANDARD.md" ] && continue   # o padrão não é um command
