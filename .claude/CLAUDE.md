@@ -111,16 +111,25 @@ pronto. Teste que eu não vi passar não passou.
 **Reporto o que não fiz.** Escopo bloqueado, exemplo que não roda, achado adjacente: tudo
 volta explícito. Silêncio sobre o que faltou é o pior modo de falhar.
 
-## Verificação
+## Os dois hooks
 
-O validador da skill `standard` cobre as quatro camadas e todos os links. Rodar de
-`.claude/`, ao alterar qualquer artefato:
+Rodam sozinhos, nas duas pontas do trabalho:
+
+| Hook | Evento | Quando | O que faz |
+|---|---|---|---|
+| `hooks/ladder.sh` | `PreToolUse` | Um pacote vai nascer | Injeta a escada: precisa existir? já existe aqui? a plataforma cobre? Com o inventário real do repositório. Não bloqueia |
+| `hooks/gates.sh` | `Stop` | Fim do turno | Roda `bun run test`, `bun run lint` e o validador do `.claude/` no que mudou. **Devolve o turno** enquanto houver progresso |
+
+Um pergunta antes de escrever, o outro cobra depois. Nenhum dos dois julga: a escada
+oferece dados e para; os portões leem exit code de comandos que já existem.
+
+Para rodar o validador de forma à mão, de `.claude/`:
 
     python3 skills/standard/scripts/validate.py
 
-Ele não roda sozinho, e verifica forma — não conteúdo. O que exige leitura está escrito em
-cada reference: se o critério é verificável por terceiro, se o passo tem resultado
-observável, se o exemplo ainda reflete o código real.
+Ele verifica forma, não conteúdo. O que exige leitura está escrito em cada reference: se o
+critério é verificável por terceiro, se o passo tem resultado observável, se o exemplo
+ainda reflete o código real.
 
 ---
 

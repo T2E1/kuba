@@ -57,6 +57,8 @@ Mais o relato do que a mudança passa a garantir, e o que ela custa por commit.
 | `.lintstagedrc.json` | `biome check --write` no que está em stage |
 | `.husky/pre-commit` · `commit-msg` | lint-staged e commitlint |
 | `settings.json` | Permissões e hooks do Claude Code |
+| `hooks/gates.sh` | Os portões de fim de turno, no evento `Stop` |
+| `hooks/ladder.sh` | A escada antes de um pacote nascer, no evento `PreToolUse` |
 | `commitlint.config.js` | Conventional Commits |
 | `.github/workflows/npm-publish.yml` | `bun run test` e `bun run release` antes de publicar |
 | `.github/workflows/pages-deploy.yml` | Publicação de `docs/` no GitHub Pages |
@@ -106,6 +108,7 @@ Mais o relato do que a mudança passa a garantir, e o que ela custa por commit.
 | A checagem | Onde |
 |---|---|
 | É rápida e evita commit inválido | `pre-commit` via lint-staged |
+| Vale por turno, e só quando o alvo mudou | `Stop` em `settings.json` |
 | Valida a mensagem do commit | `commit-msg` |
 | É lenta, ou precisa de navegador | Workflow de CI |
 | Bloqueia a publicação | `npm-publish.yml`, antes do `bun run release` |
