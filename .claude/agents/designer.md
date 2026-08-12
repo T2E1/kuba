@@ -50,6 +50,7 @@ Uma especificação que o `developer` implementa sem adivinhar:
 
 | Contexto | Skill |
 |---|---|
+| Enumerar estado e edge cases de acessibilidade antes da especificação | [lld](../skills/lld/SKILL.md) |
 | Nomear token e arquitetar o namespace | [token](../skills/token/SKILL.md) |
 | Estado do elemento e `internals.states` | [state](../skills/state/SKILL.md) |
 | Papel e nome acessível via `ElementInternals` | [mixin](../skills/mixin/SKILL.md) |
