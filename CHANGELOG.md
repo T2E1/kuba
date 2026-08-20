@@ -6,7 +6,7 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) and 
 
 ---
 
-## [Unreleased]
+## [0.1.0-alpha.33] — 2026-08-20
 
 ### Added
 
@@ -14,15 +14,27 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) and 
 - An interaction test suite running in a real Chromium through Vitest browser mode (`bun run test`): 28 tests across 12 files, colocated with each package. They cover event dispatch, form association and validation, Echo arc wiring, shadow DOM projection and the full add-and-delete dataset flow
 - The documentation site is available in three languages — English (the default, at the root), Portuguese (Brazil) at `/pt-br/` and Spanish at `/es/`. Home, Foundations, Design tokens, Learn and the Cookbook are translated; Components, Reference and Contributing stay in English and are served by docsify's language fallback, so no navigation entry is ever a dead link
 - A language switcher in the navbar preserves the page being read: switching from `/pt-br/learn/lifecycle` to English lands on `/learn/lifecycle`, not the home page. The sidebar logo likewise returns to the current language's home instead of always the English one
+- `<kb-button>` accepts `disabled`, as attribute and property. It writes the native `disabled` onto the `<button>` in the shadow root — so the platform itself blocks focus, click and keyboard activation, rather than a JavaScript guard that a synthetic event could slip past — publishes `:state(disabled)` for styling, and is inherited from an enclosing `<fieldset disabled>` through `formDisabledCallback`. Backed by `Disabled`, a new mixin exported from `@t2e1/kuba/mixin`
+- `<kb-button>` accepts `type="button"`, for a button that carries a payload through an Echo arc without submitting or resetting its owning form. Previously only `'submit'` and `'reset'` existed, so an inert button meant sitting outside a form
+- `<kb-button>` exports `part="button"`, so its inner `<button>` can be reached with `kb-button::part(button)` for the rare rule the `--button-*` custom properties do not cover
+- `<kb-button>` gains hover, active and focus-visible styling on every variant, and a forced-colors treatment that keeps `naked`, `ghost`, `link` and `icon` from losing their boundary under a high-contrast theme
 
 ### Changed
 
+- **Breaking:** `<kb-button>`'s `click()` returns the element itself instead of its `value`, so it chains like every other command in the library. Code reading the return — `const payload = button.click()` — now receives the element. Read `button.value` before or after the call instead; the `clicked` event still carries the value as its `detail`
+- **Breaking:** `<kb-button>` dispatches `clicked` on the tick after `click()` returns, rather than synchronously during it. A test or handler that called `click()` and asserted on the next line must now await a tick — the listener itself is unaffected, only the timing relative to a programmatic call
+- **Breaking:** setting `hidden = false` on any element using the `Hidden` mixin removes the `hidden` attribute on the following tick instead of synchronously. Code that assigns `hidden` and immediately reads `getAttribute('hidden')` or measures layout will see the old value; the attribute settles before the next paint
+- **Breaking:** `<kb-button>`'s `color`, `variant` and `type` reject values outside their known sets. An unknown token is ignored and the property keeps its last valid value, instead of being interpolated into the shadow stylesheet or added to `internals.states` as an invented state. `color="brand"` no longer resolves to `--color-brand` — define your palette by overriding `--button-color-accent`, which is honoured ahead of the token in every variant
+- `<kb-button>`'s `alt` is escaped before it becomes `aria-label`, so an ampersand, quote or angle bracket in the text no longer terminates the attribute early and corrupts the rendered markup
+- `cursor: not-allowed` now actually shows on a disabled `<kb-button>`. The inner `<button>` declared `cursor: pointer` unconditionally, which won regardless of state
+- The `@dispatchEvent` decorator from `@t2e1/kuba/echo` is deprecated. Tying the dispatched detail to the decorated method's return value forces commands to give up returning the element, which is what broke `click()`'s chaining. It still works and is still exported; dispatch a `customEvent` by hand instead
 - `bun run dev` now serves the documentation; `bun run test` runs the suite instead of exiting 0, so a failing test blocks publishing to npm
 - Documentation for `<kb-icon>` now states that the Material Symbols font is not bundled and must be loaded by the consumer, and that an unknown `use` renders as literal text
 
 ### Removed
 
 - Storybook, its three addons and `remark-gfm`, along with 22 `.stories.js`, 22 `.mdx` and the `stories/` directory. Everything they documented lives in the docs site; the interaction tests moved to Vitest. Neither stories nor MDX were ever part of the published package, so consumers are unaffected
+- `internals` is gone from `<kb-button>`'s published type declaration. The property still exists — the mixins need it — but it exposes `ElementInternals` on the host, which was never meant to be consumer-facing and gives write access to form state and the accessibility tree. Nothing in the documented API required it
 
 ## [0.1.0-alpha.32] — 2026-08-10
 
