@@ -56,6 +56,27 @@ Enum elimina o literal, não a ramificação. Se o código tem `if` para cada va
 o problema seguinte é OCP (rule 011) — a solução é polimorfismo ou function map, não mais
 constantes. Ver a skill `gof`.
 
+### Enum como conjunto fechado de um `attribute`
+
+Quando o enum é o domínio válido de um `attribute` de custom element (`color`, `variant`,
+`type`...), ele não para no `Object.freeze` — precisa impedir que um valor fora do
+conjunto chegue à property. A ferramenta é o filtro `enumerating(ENUM)` de
+`@directive/attributeChanged`, aplicado no decorator do setter:
+`@attributeChanged('color', enumerating(COLORS))`.
+
+`enumerating` faz `Object.values(ENUM).includes(value)` e só chama `next(value)` quando o
+valor é conhecido — um atributo desconhecido nunca chega ao corpo do setter, e a property
+mantém o último valor válido (skill `setter`, decorator `attributeChanged`). O setter não
+reimplementa essa checagem; um `if (!VALID.includes(value)) return` dentro do corpo é o
+sinal de que o filtro devia ter feito esse trabalho.
+
+O getter correspondente usa o próprio enum como default, nunca a string solta:
+`this.#color ??= COLORS.PRIMARY`, não `this.#color ??= 'primary'`.
+
+Ver `packages/component/button/{color,variant,type}.js` e `button.ts` para o padrão
+completo — um enum por arquivo, cada um consumido por `enumerating` no `attributeChanged`
+e pelo próprio enum no default do getter.
+
 ## Exemplos
 
 | Caso | Correto | Incorreto |
@@ -108,9 +129,11 @@ polimorfismo (rule 011).
 - [clean-code](../clean-code/SKILL.md): reinforces — constante mágica é um dos smells do detector.
 - [gof](../gof/SKILL.md): complements — quando o enum vira ramificação, o passo seguinte é Strategy.
 - [calisthenics](../calisthenics/SKILL.md): complements — a regra 3 leva o conceito além do enum, para Value Object.
+- [setter](../setter/SKILL.md): complements — `enumerating(ENUM)` é o filtro que valida o enum contra o `attribute`.
+- [getter](../getter/SKILL.md): complements — o default do getter é o próprio enum, não a string solta.
 
 ---
 
 **Criado em**: 2026-04-01
-**Atualizado em**: 2026-08-10
-**Versão**: 2.0
+**Atualizado em**: 2026-08-20
+**Versão**: 2.1

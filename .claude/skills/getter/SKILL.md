@@ -44,11 +44,15 @@ o getter não estava fazendo nada.
 2. **O campo é só declarado.** `#nome` sem inicializador — o valor padrão mora no `??=`
    do getter, nunca em `#nome = valorPadrao`. Duas fontes para o mesmo default divergem
    cedo ou tarde.
-3. **Sem efeito colateral.** Getter que dispara evento ou muda outro estado viola CQS
+3. **Default de um `attribute` validado por enum vem do próprio enum**, nunca da string
+   solta — `this.#color ??= COLORS.PRIMARY`, não `this.#color ??= 'primary'`. Repetir o
+   literal em dois lugares (o enum e o `??=`) é a mesma duplicação que a skill `enum`
+   já proíbe, só que dentro da própria classe.
+4. **Sem efeito colateral.** Getter que dispara evento ou muda outro estado viola CQS
    (rule 038). A exceção é a inicialização preguiçosa, que é cache, não regra de negócio.
-4. **Sem operação cara.** Leitura tem de parecer leitura. Se custa, é método.
-5. **Até 15 linhas** (rule 007). Acima disso, extrair.
-6. **Nome corresponde ao campo**, exceto quando o valor é derivado — `displayName` para
+5. **Sem operação cara.** Leitura tem de parecer leitura. Se custa, é método.
+6. **Até 15 linhas** (rule 007). Acima disso, extrair.
+7. **Nome corresponde ao campo**, exceto quando o valor é derivado — `displayName` para
    `#name` é legítimo, porque o nome anuncia a transformação.
 
 ## Exemplos
@@ -102,9 +106,10 @@ com comportamento, o cliente deveria estar dizendo, não perguntando.
 - [calisthenics](../calisthenics/SKILL.md): reinforces — a regra 8 é a origem desta convenção.
 - [method](../method/SKILL.md): complements — o que não cabe em getter vira método de intenção.
 - [constructor](../constructor/SKILL.md): complements — `internals` por getter preguiçoso é o caso canônico aqui.
+- [enum](../enum/SKILL.md): complements — o default de um `attribute` validado por enum vem do enum, não de string solta.
 
 ---
 
 **Criado em**: 2026-04-01
-**Atualizado em**: 2026-08-12
-**Versão**: 2.1
+**Atualizado em**: 2026-08-20
+**Versão**: 2.2

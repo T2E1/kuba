@@ -36,7 +36,7 @@ O teste da intenção: `pedido.setStatus('cancelado')` descreve mecânica;
 
 | Decorator | Efeito |
 |---|---|
-| `attributeChanged` | Sincroniza o setter com a mudança do atributo HTML; filtros (`booleanAttribute`, etc.) tratam o valor cru antes de chegar ao corpo do setter |
+| `attributeChanged` | Sincroniza o setter com a mudança do atributo HTML; filtros (`booleanAttribute`, `resizing`, `enumerating(ENUM)`, etc., de `@directive/attributeChanged`) tratam o valor cru antes de chegar ao corpo do setter. Um filtro de aridade 2 `(value, next)` é validador — só propaga chamando `next`; sem `next`, o setter nunca roda e a property mantém o valor anterior (skill `enum`) |
 | `retouch` | Re-renderização parcial após a escrita |
 | `repaint` | Re-renderização completa após a escrita |
 | `around` | Delega um efeito colateral que não transforma o valor (`internals.states`, `removeAttribute`, etc.) para o método de contrato, executado numa tick depois — nunca dentro do próprio setter (skill `state`) |
@@ -51,7 +51,9 @@ O teste da intenção: `pedido.setStatus('cancelado')` descreve mecânica;
 4. **Validação simples.** Regra de negócio complexa é método, não setter.
 5. **Tratamento de valor vem do filtro, não do corpo.** `booleanAttribute` e afins,
    em `attributeChanged`, normalizam o valor cru do atributo. O corpo do setter não
-   reimplementa esse tratamento — só atribui o que o filtro já entregou pronto.
+   reimplementa esse tratamento — só atribui o que o filtro já entregou pronto. Um
+   `if (!VALID.includes(value)) return` dentro do setter é sinal de que o filtro devia
+   ter feito essa checagem — troque por `enumerating(ENUM)` (skill `enum`).
 6. **Sem efeito colateral alheio** — mexer em outro campo, ou manipular
    `internals.states` diretamente, quebra a previsibilidade (rule 036) e a
    responsabilidade única do próprio setter (rule 010). Quando a propriedade
@@ -134,9 +136,10 @@ ver a skill `state` e o exemplo de `hidden.ts` (`[hideable]`).
 - [state](../state/SKILL.md): depends on — quando a escrita sincroniza `internals.states`, é `state` que dita a separação entre o setter e o método de contrato.
 - [method](../method/SKILL.md): complements — a mudança com intenção de negócio vira método.
 - [event](../event/SKILL.md): complements — quando a escrita deve notificar o mundo externo.
+- [enum](../enum/SKILL.md): complements — `enumerating(ENUM)` é o filtro que valida contra um conjunto fechado.
 
 ---
 
 **Criado em**: 2026-04-01
-**Atualizado em**: 2026-08-13
-**Versão**: 2.2
+**Atualizado em**: 2026-08-20
+**Versão**: 2.3
