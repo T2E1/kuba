@@ -36,6 +36,22 @@ document.querySelector('kb-button').addEventListener('clicked', (event) => {
   full-page navigation, or `<kb-redirect>` wired to a button's `clicked` event
   for in-app navigation. `kb-button` has no concept of a destination.
 
+## Disabled
+
+`disabled` blocks focus, click, and form submission — it's written onto the
+inner `<button>`, so keyboard activation is blocked by the platform, not by
+`kb-button`'s own code. A button also picks up `disabled` from an enclosing
+`<fieldset disabled>`, without setting the attribute itself.
+
+```html preview
+<kb-button disabled>Save</kb-button>
+
+<fieldset disabled>
+  <legend>Account</legend>
+  <kb-button>Save</kb-button>
+</fieldset>
+```
+
 ## Variants
 
 `variant` expresses emphasis, not decoration — pick by how important the action
@@ -115,26 +131,41 @@ button doesn't clip text.
 
 | Attribute | Type | Default | Description |
 |---|---|---|---|
-| `alt` | `string` | `''` | Accessible name, written as `aria-label` onto the inner `<button>`. Required for `variant="icon"`. |
-| `color` | `string` | `primary` | Semantic color, resolved against `--color-{value}`. |
-| `variant` | `solid` \| `naked` \| `ghost` \| `link` \| `icon` | `solid` | Emphasis level. |
+| `alt` | `string` | `''` | Accessible name, written as `aria-label` onto the inner `<button>`. Required for `variant="icon"`. Escaped before it's interpolated, so it can't break out of the attribute. |
+| `color` | `master` \| `primary` \| `complete` \| `success` \| `warning` \| `danger` \| `info` \| `menu` | `primary` | Semantic color, resolved against `--color-{value}`. An unrecognized value is ignored — the property keeps the last valid color it had. |
+| `disabled` | `boolean` | `false` | Blocks focus, click, and form submission. Also set when the button sits inside a `<fieldset disabled>`. |
+| `variant` | `solid` \| `naked` \| `ghost` \| `link` \| `icon` | `solid` | Emphasis level. An unrecognized value is ignored — the property, and the `:state(...)` it drives, keep the last valid variant. |
 | `width` | `auto` \| `fill` \| `hug` \| length | `auto` | How the button fills its container. |
-| `type` | `submit` \| `reset` | `submit` | Behavior inside an owning `<form>`. |
-| `value` | `string` | — | Payload sent as the `clicked` event's `detail`. |
+| `type` | `submit` \| `reset` \| `button` | `submit` | Behavior inside an owning `<form>`: `submit` requests submission, `reset` resets it, `button` does neither. An unrecognized value is ignored — the property keeps the last valid type. |
+| `value` | `string` | — | Payload dispatched as the `clicked` event's `detail` and along `on` arcs. **Not** a form submission value — `kb-button` never calls `setFormValue()`, so `value` never reaches `FormData`. Give the button a `name` on the surrounding form field or distinguish actions by their `clicked` listener instead. |
 | `hidden` | `boolean` | `false` | Removes the button from layout and the accessibility tree. |
 | `on` | arc string | — | Echo wiring, `source/event:type/sink`. |
+
+## Methods
+
+| Method | Does | Returns |
+|---|---|---|
+| `click()` | Runs the same form interaction as a real click — submits or resets the owning form according to `type` — then dispatches `clicked`. | the element itself, for chaining |
 
 ## Events
 
 | Event | Fires when | `detail` |
 |---|---|---|
-| `clicked` | the button is activated | the `value` attribute |
+| `clicked` | the button is activated — by click, `Enter` while focused, or a call to `click()` | the `value` attribute |
+
+`type="submit"` runs the form's native constraint validation before submitting: a required
+field left empty blocks both the `submit` event and `clicked` the same way a native
+`<button type="submit">` would. Outside a `<form>`, `type="submit"`/`type="reset"` have
+nothing to act on — `clicked` still fires.
 
 ## Styling
 
 Every visual decision is a `--button-*` custom property defaulting to a global
 token. Custom properties inherit through the shadow boundary, so set them on the
 element or any ancestor — never reach into the shadow DOM.
+
+For anything the custom properties don't cover, the inner `<button>` exposes
+`part="button"`, reachable with `kb-button::part(button)`.
 
 | Custom property | Default | Controls |
 |---|---|---|
@@ -165,6 +196,10 @@ element or any ancestor — never reach into the shadow DOM.
 - `hidden` removes the button from layout and interaction. Prefer it over not
   rendering the element when the presence or absence should stay findable in the
   DOM.
+- `disabled` removes the button from the tab order and blocks click and form
+  submission. It's enforced by the native `disabled` attribute on the inner
+  `<button>`, so keyboard and pointer activation are both blocked by the
+  platform.
 - **An `icon` button needs `alt`.** The glyph conveys nothing, and without a
   name the button is announced from the ligature text — `<kb-button
   variant="icon" use="cloud_upload">` reads as "cloud_upload". `alt` is written
@@ -173,8 +208,11 @@ element or any ancestor — never reach into the shadow DOM.
 - Leave `alt` unset on a button with visible text — the text already names it,
   and a differing `alt` would make the announced name diverge from the written
   one, breaking voice control.
-- `type="submit"` only does something inside a `<form>`. Standalone, it's a
-  silent no-op on click.
+- `type="submit"`/`type="reset"` only interact with an owning `<form>`.
+  Standalone, there's no form to submit or reset — `clicked` still fires.
+- `Tab` delegates focus straight to the inner `<button>` (`delegatesFocus: true`) —
+  there's no separate host-level focus stop. `Enter` while focused activates it, the
+  same as clicking.
 
 ## Do's and don'ts
 
@@ -184,3 +222,4 @@ element or any ancestor — never reach into the shadow DOM.
 | Reserve `color="danger"` for destructive actions | Use `danger` just to make a button stand out |
 | Give an icon-only button an accessible name | Ship an icon-only button with no label for assistive tech |
 | Use `width="fill"` for the single action in a narrow form | Fix `width` in px for a label that can grow when translated |
+| Set `type="button"` on an in-form action that shouldn't submit | Leave `type` unset on that button — the default is `submit`, so it submits the form |

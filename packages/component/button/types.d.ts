@@ -81,12 +81,18 @@ export default class KUBAButtonElement extends HTMLElement {
    * Resolved against the `--color-{value}` CSS custom property.
    * @default 'primary'
    */
-  color: KUBAButtonColorAttribute | (string & {})
+  color: KUBAButtonColorAttribute
 
   /**
-   * The element's `ElementInternals`, attached on construction.
+   * Whether the button is disabled (reflects the `disabled` attribute).
+   * Prevents focus, click, and form submission — enforced by the native
+   * `disabled` attribute written onto the `<button>` in the shadow root —
+   * and toggles the `:host(:state(disabled))` custom element state. Also
+   * set when the button sits inside a `<fieldset disabled>`, inherited via
+   * `formDisabledCallback`.
+   * @default false
    */
-  readonly internals: ElementInternals
+  disabled: boolean
 
   /**
    * Whether the button is hidden (reflects the `hidden` attribute). The
@@ -116,20 +122,23 @@ export default class KUBAButtonElement extends HTMLElement {
    * requests submission of the owning form, `'reset'` resets it.
    * @default 'submit'
    */
-  type: 'submit' | 'reset'
+  type: 'submit' | 'reset' | 'button'
 
   /**
    * Arbitrary payload carried by the button (reflects the `value`
-   * attribute), returned by `click()`.
+   * attribute), dispatched as the `detail` of the `clicked` event and along
+   * the `Echo` mixin's `on` arcs. It is **not** sent as a form submission
+   * value — the component never calls `setFormValue()`, so `value` never
+   * reaches `FormData`.
    */
-  value: string
+  value: string | undefined
 
   /**
    * Visual style of the button (reflects the `variant` attribute), exposed
    * to CSS as a custom element state (e.g. `:host(:state(naked))`).
    * @default 'solid'
    */
-  variant: KUBAButtonVariantAttribute | (string & {})
+  variant: KUBAButtonVariantAttribute
 
   /**
    * Width of the button (reflects the `width` attribute), normalized by
@@ -142,9 +151,9 @@ export default class KUBAButtonElement extends HTMLElement {
   /**
    * Programmatically triggers the button's native form action (submit or
    * reset, depending on `type`) and dispatches a `"clicked"` event.
-   * @returns The button's current `value`.
+   * @returns The element itself, for chaining.
    */
-  click(): string
+  click(): this
 }
 
 declare global {

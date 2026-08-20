@@ -1,13 +1,13 @@
 import attributeChanged, { booleanAttribute } from '@directive/attributeChanged'
-import { around, before } from '@middleware'
+import { around } from '@middleware'
 import { cleanup, hideable } from './interfaces'
 
 /**
- * Adds a `hidden` property backed by the `hidden` attribute. Setting it runs,
- * in order: `cleanup` (via `@before`, synchronously, transforms the incoming
- * value and removes the `hidden` attribute when it becomes `false`), the
- * setter itself, then `hideable` (via `@around`, scheduled on a later tick)
- * to reflect the state onto `internals.states`.
+ * Adds a `hidden` property backed by the `hidden` attribute. The setter only
+ * assigns; both side effects run via `@around`, scheduled on a later tick,
+ * neither touching the assigned value: `cleanup` removes the `hidden`
+ * attribute when the value becomes `false`, and `hideable` reflects the
+ * state onto `internals.states`.
  */
 const Hidden = (Super) => {
   class C extends Super {
@@ -19,14 +19,14 @@ const Hidden = (Super) => {
 
     @attributeChanged('hidden', booleanAttribute)
     @around(hideable)
-    @before(cleanup)
+    @around(cleanup)
     set hidden(value) {
       this.#hidden = value
     }
 
-    [cleanup](value) {
-      value === false && this.removeAttribute('hidden')
-      return value
+    [cleanup]() {
+      !this.hidden && this.removeAttribute('hidden')
+      return this
     }
 
     [hideable]() {

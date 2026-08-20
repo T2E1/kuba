@@ -2,7 +2,11 @@ import { html } from '@dom'
 
 function component(button) {
   return html`
-    <button ${button.alt ? `aria-label="${button.alt}"` : ''}>
+    <button
+      part="button"
+      ${button.alt ? `aria-label="${button.alt}"` : ''}
+      ${button.disabled ? 'disabled' : ''}
+    >
       <slot></slot>
     </button>
   `

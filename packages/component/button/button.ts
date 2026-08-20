@@ -1,22 +1,23 @@
-import { attributeChanged, define } from '@directive'
+import { define } from '@directive'
+import attributeChanged, {
+  enumerating,
+  escaping,
+} from '@directive/attributeChanged'
 import { paint, repaint, retouch } from '@dom'
-import Echo, { dispatchEvent } from '@echo'
-import on, { stop } from '@event'
-import { before } from '@middleware'
-import { Hidden, Value, Width } from '@mixin'
+import Echo from '@echo'
+import on, { customEvent, stop } from '@event'
+import { around, before } from '@middleware'
+import { Disabled, Hidden, Value, Width } from '@mixin'
+import { COLORS } from './color.js'
 import component from './component.js'
-import { variantable } from './interfaces.js'
+import { dispatch, variantable } from './interfaces.js'
 import style from './style.js'
+import { TYPES } from './type.js'
+import { VARIANTS } from './variant.js'
 
-/**
- * `variant` is validated by the `variantable` middleware (see `before`)
- * before being assigned, and the resulting element state is toggled via
- * `#internals.states` (rather than a class/attribute) so CSS can target it
- * with `:host(:state(...))`.
- */
 @define('kb-button')
 @paint(component, style)
-class Button extends Echo(Hidden(Value(Width(HTMLElement)))) {
+class Button extends Echo(Disabled(Hidden(Value(Width(HTMLElement))))) {
   #alt
   #color
   #internals
@@ -31,42 +32,56 @@ class Button extends Echo(Hidden(Value(Width(HTMLElement)))) {
   // the host, and here the host is only a wrapper — the <button> in the shadow
   // root is what the accessibility tree treats as the button. `@repaint`
   // re-renders the markup so the template can write `aria-label` onto it.
-  @attributeChanged('alt')
+  // `escaping` runs first so `component.js` can interpolate `alt` straight
+  // into the attribute without escaping it itself.
+  @attributeChanged('alt', escaping)
   @repaint
   set alt(value) {
     this.#alt = value
   }
 
   get color() {
-    return (this.#color ??= 'primary')
+    return (this.#color ??= COLORS.PRIMARY)
   }
 
-  // Exposed so the `Hidden` mixin (`this.internals.states`) can toggle the
-  // `hidden` custom state — see mixin/hidden/hidden.ts.
-  get internals() {
-    return (this.#internals ??= this.attachInternals())
-  }
-
-  @attributeChanged('color')
+  // `enumerating(COLORS)` only propagates a value in the known tokens — an
+  // unknown one never reaches the setter, so an unvalidated attribute
+  // never reaches the CSS interpolation in style.js, and the property
+  // keeps whatever color was last valid.
+  @attributeChanged('color', enumerating(COLORS))
   @retouch
   set color(value) {
     this.#color = value
   }
 
-  get type() {
-    return (this.#type ??= 'submit')
+  // Exposed so the `Disabled`/`Hidden` mixins (`this.internals.states`) can
+  // toggle their custom states — see mixin/disabled/disabled.ts and
+  // mixin/hidden/hidden.ts. Internal only: not part of the published
+  // contract (see types.d.ts).
+  get internals() {
+    return (this.#internals ??= this.attachInternals())
   }
 
-  @attributeChanged('type')
+  get type() {
+    return (this.#type ??= TYPES.SUBMIT)
+  }
+
+  // `enumerating(TYPES)` only propagates a value in the known tokens — an
+  // unknown one never reaches the setter, so `type` keeps whatever was
+  // last valid.
+  @attributeChanged('type', enumerating(TYPES))
   set type(value) {
     this.#type = value
   }
 
   get variant() {
-    return (this.#variant ??= 'solid')
+    return (this.#variant ??= VARIANTS.SOLID)
   }
 
-  @attributeChanged('variant')
+  // `enumerating(VARIANTS)` only propagates a value in the known tokens —
+  // an unknown one never reaches the setter, so `internals.states` never
+  // carries an invented custom state.
+  @attributeChanged('variant', enumerating(VARIANTS))
   @before(variantable)
   set variant(value) {
     this.#variant = value
@@ -81,29 +96,36 @@ class Button extends Echo(Hidden(Value(Width(HTMLElement)))) {
     this.attachShadow({ mode: 'open', delegatesFocus: true })
   }
 
-  // Intercepts and stops any inner click, then re-dispatches it as a single
-  // "clicked" event (via @dispatchEvent) carrying `this.value` as detail.
+  // Intercepts and stops any inner click, then interacts with the form
+  // according to `type`.
   @on.click('*', stop)
-  @dispatchEvent('clicked')
+  @around(dispatch)
   click() {
     switch (this.type) {
-      case 'submit':
+      case TYPES.SUBMIT:
         this.internals.form?.requestSubmit()
         break
-      case 'reset':
+      case TYPES.RESET:
         this.internals.form?.reset()
         break
     }
-    return this.value
+    return this
   }
 
-  // Invoked by the `before(variantable)` middleware on `set variant` prior
-  // to assignment; swaps the previous variant's custom state for the new
+  // Invoked by `around(dispatch)` on `click()`; dispatches "clicked"
+  // carrying `this.value` as detail.
+  [dispatch]() {
+    this.dispatchEvent(customEvent('clicked', this.value))
+    return this
+  }
+
+  // Invoked by `before(variantable)` on `set variant`, prior to
+  // assignment; swaps the previous variant's custom state for the new
   // one so only one `:state(...)` variant is ever active at a time.
   [variantable](variant) {
     this.internals.states.delete(this.variant)
     this.internals.states.add(variant)
-    return this
+    return variant
   }
 }
 
