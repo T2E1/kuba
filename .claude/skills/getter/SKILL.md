@@ -41,11 +41,14 @@ o getter não estava fazendo nada.
 
 1. **Um getter, um campo privado.** Getter que combina vários campos é lógica de negócio
    disfarçada — vira método (rule 010).
-2. **Sem efeito colateral.** Getter que dispara evento ou muda outro estado viola CQS
+2. **O campo é só declarado.** `#nome` sem inicializador — o valor padrão mora no `??=`
+   do getter, nunca em `#nome = valorPadrao`. Duas fontes para o mesmo default divergem
+   cedo ou tarde.
+3. **Sem efeito colateral.** Getter que dispara evento ou muda outro estado viola CQS
    (rule 038). A exceção é a inicialização preguiçosa, que é cache, não regra de negócio.
-3. **Sem operação cara.** Leitura tem de parecer leitura. Se custa, é método.
-4. **Até 15 linhas** (rule 007). Acima disso, extrair.
-5. **Nome corresponde ao campo**, exceto quando o valor é derivado — `displayName` para
+4. **Sem operação cara.** Leitura tem de parecer leitura. Se custa, é método.
+5. **Até 15 linhas** (rule 007). Acima disso, extrair.
+6. **Nome corresponde ao campo**, exceto quando o valor é derivado — `displayName` para
    `#name` é legítimo, porque o nome anuncia a transformação.
 
 ## Exemplos
@@ -103,5 +106,5 @@ com comportamento, o cliente deveria estar dizendo, não perguntando.
 ---
 
 **Criado em**: 2026-04-01
-**Atualizado em**: 2026-08-10
-**Versão**: 2.0
+**Atualizado em**: 2026-08-12
+**Versão**: 2.1

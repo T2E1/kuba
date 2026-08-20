@@ -33,17 +33,36 @@ onde os arquivos ficam; revelation define quais são públicos.
 
 ```
 packages/<categoria>/<nome>/
-├── <nome>.ts          implementação (.ts só pela sintaxe de decorator)
-├── component.js       função pura de template
-├── style.js           função pura de estilo
-├── interfaces.js      Symbols de contrato
-├── index.js           superfície pública
-├── types.d.ts         contrato tipado do consumidor
-└── <nome>.test.js     teste
+├── <nome>.ts           implementação (.ts só pela sintaxe de decorator)
+├── component.js        função pura de template — só a função `component`, nada mais
+├── style.js            função pura de estilo — só a função `style`, nada mais
+├── <filtro>.js         um filtro de `attributeChanged` específico deste componente
+├── constants.js        listas/valores que os filtros e o template consultam
+├── interfaces.js       Symbols de contrato
+├── index.js            superfície pública
+├── types.d.ts          contrato tipado do consumidor
+└── <nome>.test.js      teste
 ```
 
 Componentes de formulário costumam ter `element.js` a mais, para o elemento interno
 associado.
+
+`component.js` e `style.js` contêm exatamente a função que o nome promete — nenhuma
+segunda função, helper ou validação junto. Transformar ou validar um valor antes de ele
+chegar ao template (escapar HTML, normalizar cor, cair num default) é responsabilidade de
+um filtro de `attributeChanged`, não do template. Um `component.js` com uma função a mais
+é sinal de que a validação foi escrita no lugar errado — foi exatamente o que aconteceu
+com um `escapeAttribute` que chegou a viver dentro de `component.js` do `kb-button` antes
+de virar filtro.
+
+**Onde o filtro mora** depende de quantos componentes o usam, mesmo critério da rule 017
+(CRP): um filtro que só este componente usa (`variant` do botão, vocabulário que nenhum
+outro elemento compartilha) fica local, um arquivo por filtro — `<verbo-ndo>.js`, mesmo
+padrão de `packages/directive/attributeChanged/resizing.js`. Um filtro que outros
+componentes já usam ou usariam (validar `color`, contra o mesmo conjunto de tokens que
+`kb-icon` e `kb-text` também resolvem) vai para `packages/directive/attributeChanged/`
+— foi o que aconteceu com `coloring` e `escaping`, que nasceram dentro de `kb-button` e
+subiram assim que ficou claro que o segundo consumidor já existia no repositório.
 
 ### Categorias
 
@@ -75,11 +94,21 @@ associado.
 - [ ] Um pacote por custom element
 - [ ] `types.d.ts` e teste ao lado da implementação
 - [ ] Nenhuma pasta agrupando por tipo técnico
+- [ ] `component.js` e `style.js` com uma única função exportada — validação e escaping vão para um filtro de `attributeChanged`
+- [ ] Filtro usado por mais de um componente vive em `packages/directive/attributeChanged/`, não duplicado em cada pacote
 - [ ] `index.js` presente em todo pacote
 - [ ] Nenhum import alcançando arquivo interno de outro pacote
 - [ ] Nenhum `../` em import — só path alias (rule 031)
 
 ## Troubleshooting
+
+### Um valor precisa ser validado ou escapado antes de entrar no template
+
+**Causa:** a tentação é resolver ali mesmo, com uma segunda função em `component.js` —
+foi o que produziu um `escapeAttribute` dentro do `component.js` de `kb-button`.
+**Solução:** o tratamento é um filtro de `attributeChanged` (`filters.js`), aplicado no
+setter da property. Quando o template lê o valor, ele já chega pronto — `component.js`
+volta a ser só a função `component`.
 
 ### Dois componentes precisam do mesmo helper
 
@@ -124,5 +153,5 @@ mixin. Antes de dois, duplicar é mais barato que abstrair cedo (rule 023).
 ---
 
 **Criado em**: 2026-04-01
-**Atualizado em**: 2026-08-10
-**Versão**: 2.0
+**Atualizado em**: 2026-08-20
+**Versão**: 2.1

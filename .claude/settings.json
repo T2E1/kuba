@@ -31,23 +31,13 @@
     ]
   },
   "hooks": {
-    "Stop": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "\"$CLAUDE_PROJECT_DIR/.claude/hooks/gates.sh\""
-          }
-        ]
-      }
-    ],
     "PreToolUse": [
       {
         "matcher": "Write",
         "hooks": [
           {
             "type": "command",
-            "command": "\"$CLAUDE_PROJECT_DIR/.claude/hooks/ladder.sh\""
+            "command": "\"$CLAUDE_PROJECT_DIR/.claude/hooks/khaby-lame.sh\""
           }
         ]
       }

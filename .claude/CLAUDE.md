@@ -72,11 +72,25 @@ entre si e não veem esta conversa — recebem o escopo que eu passo, e devolvem
 | Bug relatado | `deepdive` → `developer` → `tester` |
 | "Está feio / não é acessível" | `designer` → `developer` → `tester` |
 | Mudança pronta para entrar | `reviewer` → `releaser` — é o `/ship` |
+| Segunda opinião fora do fluxo de commit | `reviewer`, sozinho — é o `/audit` |
 | Componente sem teste | `tester`, sozinho |
 | Comportamento mudou | `developer` → `tester` → `writer`, nesta ordem: documentar antes do teste documenta intenção |
 | Render lento, bundle grande | `deepdive` → `architect`, se a correção mudar a forma |
 | CI ou build quebrado | `builder`, sozinho |
 | Acrescentar rule, skill, agent ou command | `/extend` — sem agent; a skill `standard` decide a camada |
+| Começar a trabalhar, ou abrir um pull request | `/sync` — sem agent; mecânica de git |
+
+### Os cinco commands
+
+O que você dispara digitando `/`, num relance:
+
+| Command | Faz |
+|---|---|
+| `/craft` | Leva um pacote de "não existe" a documentado e testado |
+| `/ship` | Revisa, versiona e publica o que está no working tree |
+| `/audit` | Segunda opinião do `reviewer` sobre código já escrito, sem corrigir nem commitar |
+| `/sync` | Traz o remoto para a branch atual, resolvendo divergência |
+| `/extend` | Acrescenta rule, skill, agent ou command a este `.claude/` |
 
 ### Quando não delegar
 
@@ -111,17 +125,17 @@ pronto. Teste que eu não vi passar não passou.
 **Reporto o que não fiz.** Escopo bloqueado, exemplo que não roda, achado adjacente: tudo
 volta explícito. Silêncio sobre o que faltou é o pior modo de falhar.
 
-## Os dois hooks
+## O hook
 
-Rodam sozinhos, nas duas pontas do trabalho:
+Roda sozinho, antes de um pacote nascer:
 
 | Hook | Evento | Quando | O que faz |
 |---|---|---|---|
-| `hooks/ladder.sh` | `PreToolUse` | Um pacote vai nascer | Injeta a escada: precisa existir? já existe aqui? a plataforma cobre? Com o inventário real do repositório. Não bloqueia |
-| `hooks/gates.sh` | `Stop` | Fim do turno | Roda `bun run test`, `bun run lint` e o validador do `.claude/` no que mudou. **Devolve o turno** enquanto houver progresso |
+| `hooks/khaby-lame.sh` | `PreToolUse` | Um pacote vai nascer | Injeta a escada: precisa existir? já existe aqui? a plataforma cobre? Com o inventário real do repositório. Não bloqueia |
 
-Um pergunta antes de escrever, o outro cobra depois. Nenhum dos dois julga: a escada
-oferece dados e para; os portões leem exit code de comandos que já existem.
+Não julga: oferece dados e para. `bun run lint`, `bun run test` e o validador do `.claude/`
+não rodam mais sozinhos ao fim do turno — ficam a cargo de quem trabalha, reforçados pelo
+`/audit` quando vale pedir uma segunda opinião fora do fluxo de commit.
 
 Para rodar o validador de forma à mão, de `.claude/`:
 
@@ -134,5 +148,5 @@ ainda reflete o código real.
 ---
 
 **Criado em**: 2026-08-11
-**Atualizado em**: 2026-08-11
-**Versão**: 1.0
+**Atualizado em**: 2026-08-20
+**Versão**: 1.2

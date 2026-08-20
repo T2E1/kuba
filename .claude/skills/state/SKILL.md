@@ -97,6 +97,16 @@ mixin usou uma segunda instância de internals.
 **Solução:** se o consumidor precisa saber, isso não é estado interno: ou vira atributo
 refletido, ou vira evento notificando a mudança.
 
+### O setter ficou fazendo a atribuição e o `states.add`/`delete` no mesmo corpo
+
+**Causa:** a manipulação de `internals.states` foi colada direto no setter "porque já
+estava ali" — duas responsabilidades no mesmo membro (rule 010), o mesmo defeito que a
+skill `setter` documenta no seu próprio troubleshooting.
+**Solução:** mover a manipulação para o método de contrato (`[algoAvel]()`), e ligar os
+dois só pelo `@around`. O setter some com uma linha: `this.#campo = value`. Foi o que
+aconteceu no primeiro rascunho do mixin `Disabled` (`packages/mixin/disabled/`), corrigido
+ao espelhar `hidden.ts`.
+
 ### O estado e o atributo divergiram
 
 **Causa:** duas fontes de verdade para a mesma condição.
@@ -123,5 +133,5 @@ pelo mesmo fluxo.
 ---
 
 **Criado em**: 2026-04-01
-**Atualizado em**: 2026-08-10
-**Versão**: 2.0
+**Atualizado em**: 2026-08-12
+**Versão**: 2.1

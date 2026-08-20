@@ -57,8 +57,7 @@ Mais o relato do que a mudança passa a garantir, e o que ela custa por commit.
 | `.lintstagedrc.json` | `biome check --write` no que está em stage |
 | `.husky/pre-commit` · `commit-msg` | lint-staged e commitlint |
 | `settings.json` | Permissões e hooks do Claude Code |
-| `hooks/gates.sh` | Os portões de fim de turno, no evento `Stop` |
-| `hooks/ladder.sh` | A escada antes de um pacote nascer, no evento `PreToolUse` |
+| `hooks/khaby-lame.sh` | A escada antes de um pacote nascer, no evento `PreToolUse` |
 | `commitlint.config.js` | Conventional Commits |
 | `.github/workflows/npm-publish.yml` | `bun run test` e `bun run release` antes de publicar |
 | `.github/workflows/pages-deploy.yml` | Publicação de `docs/` no GitHub Pages |

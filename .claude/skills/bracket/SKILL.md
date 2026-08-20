@@ -1,7 +1,7 @@
 ---
 name: bracket
 model: sonnet
-description: Uso de Symbol para métodos privados e contratos de interface entre mixins e componentes — `Symbol()` local para o que é privado ao módulo, `Symbol.for()` apenas quando o contrato precisa atravessar módulos, exportado por `interfaces.js`. Use ao definir método privado que um decorator precisa alcançar, ao criar contrato entre mixin e componente, ou ao substituir privacidade por convenção de underscore. Não use para estado privado simples — campo `#` resolve e é mais direto.
+description: Uso de Symbol para métodos privados e contratos de interface entre mixins e componentes — toda chave de método bracket exportada por `interfaces.js`, mesmo com um único consumidor no próprio módulo, e `Symbol.for()` reservado só para contrato que atravessa pacotes. Use ao definir método privado que um decorator precisa alcançar, ao criar contrato entre mixin e componente, ou ao substituir privacidade por convenção de underscore. Não use para estado privado simples — campo `#` resolve e é mais direto.
 ---
 
 # Bracket
@@ -21,7 +21,7 @@ alcança. Symbol é privacidade por obscuridade controlada: quem tem a referênc
 | Situação | Ferramenta |
 |---|---|
 | Estado interno que ninguém de fora acessa | Campo `#` — não use Symbol |
-| Método privado que um decorator precisa chamar | `Symbol()` local |
+| Método por bracket notation acionado por `before`/`around`/`after` | `Symbol()` exportado por `interfaces.js` — mesmo com um único consumidor no próprio módulo |
 | Contrato entre mixin e componente | `Symbol()` exportado por `interfaces.js` |
 | Contrato que atravessa pacotes | `Symbol.for()` — e só nesse caso |
 | Privacidade por `_underscore` | Substituir por `#` ou Symbol |
@@ -43,8 +43,12 @@ precisa ser compartilhado entre pacotes que não se importam.
 
 1. **O módulo dono do conceito define o Symbol.** Se o contrato é do mixin, o Symbol
    nasce no mixin.
-2. **`interfaces.js` exporta os contratos públicos.** Symbol privado não sai do módulo
-   (rule 013).
+2. **Todo Symbol que é chave de método (bracket notation) vai para `interfaces.js`** —
+   mesmo quando só o próprio arquivo o consome. O consumidor único não é motivo de
+   exceção: é o padrão observado em `mixin/hidden/interfaces.js` (`cleanup`, `hideable`,
+   ambos usados só dentro de `hidden.ts`) e `form/input/interfaces.js` (`dispatch`, entre
+   outros). Reserva-se a declaração local, fora de `interfaces.js`, para o caso raro de um
+   Symbol que nunca é chave de método — uma chave de cache interna, por exemplo.
 3. **Sempre com descrição.** `Symbol()` sem string vira `Symbol()` no stack trace, e
    depurar fica cego.
 4. **Nome revela intenção** (rule 006).
@@ -70,8 +74,7 @@ precisa ser compartilhado entre pacotes que não se importam.
 - [ ] Nenhum membro privado por `_underscore`
 - [ ] Todo Symbol tem descrição
 - [ ] `Symbol.for()` usado apenas onde há necessidade real cross-pacote
-- [ ] Symbols privados não exportados
-- [ ] Contratos públicos exportados por `interfaces.js`
+- [ ] Todo Symbol usado como chave de método bracket exportado por `interfaces.js`, mesmo com um único consumidor
 - [ ] Campo `#` usado onde Symbol não era necessário
 
 ## Troubleshooting

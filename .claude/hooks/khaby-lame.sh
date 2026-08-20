@@ -1,17 +1,21 @@
 #!/usr/bin/env bash
 #
-# A escada que se sobe antes de escrever código novo.
+# Khaby Lame: o vídeo é sempre o mesmo formato — alguém complica um gesto simples com dez
+# passos e um gadget, e ele responde sem falar nada, fazendo a mesma coisa com as mãos. A
+# piada nunca é a solução; é o quanto do problema já não existia.
 #
-# Registrado no evento `PreToolUse` para `Write` (ver `settings.json`), então roda no
-# instante anterior a um arquivo nascer. A regra é parar no primeiro degrau que sustentar:
-# o melhor código é o que não chega a ser escrito.
+# Este hook é essa reação, aplicada a pacote nascendo. Registrado no evento `PreToolUse`
+# para `Write` (ver `settings.json`), roda no instante anterior a um arquivo nascer, e faz
+# a pergunta que o vídeo faz em silêncio: isso precisava mesmo de um pacote novo? A regra é
+# parar no primeiro degrau que responder que não.
 #
-# Não bloqueia nada. "Isto é especulativo?" não tem resposta binária, e negar transformaria
-# heurística em regra. Ele injeta contexto: os degraus que têm resposta mecânica vêm
-# respondidos com o inventário real do repositório, e os demais vêm como pergunta.
+# Não bloqueia nada — ele não é o corte seco do vídeo, é a pausa antes dele. "Isto é
+# especulativo?" não tem resposta binária, e negar transformaria heurística em regra. Ele
+# injeta contexto: os degraus que têm resposta mecânica vêm respondidos com o inventário
+# real do repositório, e os demais vêm como pergunta.
 #
 # Dispara uma vez por pacote, no primeiro arquivo. Arquivo em pacote que já existe é
-# continuação, não decisão — e continuação em silêncio.
+# continuação, não decisão — e continuação não precisa de piada.
 
 set -uo pipefail
 
@@ -52,8 +56,9 @@ list() {
 }
 
 ladder=$(cat <<TEXT
-$package está nascendo. Antes da primeira linha, suba a escada e pare no primeiro degrau
-que sustentar:
+$package está nascendo, com dez passos e um gadget imaginados antes da primeira linha.
+Suba a escada e pare no primeiro degrau que já resolver — a resposta mais simples costuma
+estar aí, e o resto era só o vídeo.
 
 01 · Precisa existir agora?
      Necessidade especulativa é para depois (rule 023).

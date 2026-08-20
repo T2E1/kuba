@@ -52,7 +52,7 @@ comando e consulta no mesmo método viola CQS (rule 038).
 | `connected` | Elemento entrou no documento |
 | `disconnected` | Elemento saiu do documento |
 | `didPaint` | Depois da renderização |
-| `before` / `after` / `around` | Envolvem o método principal |
+| `before` / `after` / `around` | Envolvem o método principal — `around` é o que liga um setter a seu método de contrato de estado (skill `state`) |
 
 ### Limites
 
@@ -60,7 +60,9 @@ comando e consulta no mesmo método viola CQS (rule 038).
 - Até 15 linhas (rule 007).
 - CC até 5 (rule 022).
 - Guard clause em vez de `else` (rule 002).
-- Uma responsabilidade (rule 010).
+- Uma responsabilidade (rule 010). Num método de contrato de estado (`[algoAvel]()`,
+  skill `state`), a responsabilidade é o estado que o próprio Symbol nomeia — nunca
+  também a atribuição do campo, que já é do setter que o `around` chamou antes.
 
 ## Exemplos
 
@@ -77,6 +79,8 @@ comando e consulta no mesmo método viola CQS (rule 038).
 - [ ] Até 3 parâmetros, até 15 linhas, CC até 5
 - [ ] Nenhum `else` — guard clauses
 - [ ] Efeito colateral anunciado pelo nome
+- [ ] Nenhum método concentra mais de uma responsabilidade — cada uma extraída para seu próprio método/Symbol
+- [ ] Todo método sem valor de retorno próprio devolve `this`
 
 ## Troubleshooting
 
@@ -84,6 +88,25 @@ comando e consulta no mesmo método viola CQS (rule 038).
 
 **Causa:** `validateAndSave` é duas responsabilidades declaradas no próprio nome.
 **Solução:** dois métodos. O nome já diagnosticou (rule 010).
+
+### O método faz mais de uma coisa e a Complexidade Ciclomática sobe
+
+**Causa:** responsabilidades diferentes (ex.: interagir com o form e notificar um evento)
+acumuladas no mesmo método elevam a CC e misturam duas razões para mudar — mesmo sem um
+`else` ou um nome com "e" no meio (rule 010, rule 022).
+**Solução:** cada responsabilidade vira seu próprio método, endereçado por Symbol (skill
+`bracket`) quando é privado à classe, orquestrado por `before`/`around`/`after` (skill
+`middleware`) em vez de chamado inline. Cada método resultante mira CC 1: um único
+caminho de execução, uma única razão de existir. Precedente: `dispatch` em
+`packages/form/input/input.ts` e `packages/form/fileupload/fileupload.ts`.
+
+### Um método sem valor de retorno próprio quebra o encadeamento
+
+**Causa:** depois de extrair a responsabilidade que exigia devolver um valor (ex.:
+`detail` de um evento), o método que sobra não tem nada natural para retornar.
+**Solução:** `return this` — é comando, não consulta (CQS, rule 038). Vale tanto para o
+método público quanto para o método por Symbol extraído; nenhum dos dois deve devolver
+`undefined` por omissão.
 
 ### `return this` num método que devolve valor
 
@@ -119,5 +142,5 @@ permitida da regra, mas a legibilidade continua valendo.
 ---
 
 **Criado em**: 2026-04-01
-**Atualizado em**: 2026-08-10
-**Versão**: 2.0
+**Atualizado em**: 2026-08-12
+**Versão**: 2.1

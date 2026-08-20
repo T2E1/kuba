@@ -60,6 +60,9 @@ não é lida, e uma revisão que lista tudo esconde o que importa.
 | Dependência entre pacotes e ciclo | [package](../skills/package/SKILL.md) |
 | Convenção de nome de classe, Symbol, método e arquivo | [naming](../skills/naming/SKILL.md) |
 | Ordem dos membros da classe | [anatomy](../skills/anatomy/SKILL.md) |
+| Ordem alfabética de imports, exports e objetos — fora de classe | [alphabetical](../skills/alphabetical/SKILL.md) |
+| Forma do método — retorno (`this` vs. valor), CQS, extração de responsabilidade via Symbol | [method](../skills/method/SKILL.md) |
+| Um arquivo tem função a mais — `component.js`/`style.js` com helper que devia ser filtro | [colocation](../skills/colocation/SKILL.md) |
 | Contrato público que a mudança altera | [types](../skills/types/SKILL.md) |
 | Custo algorítmico introduzido | [big-o](../skills/big-o/SKILL.md) |
 | Calibrar a severidade do achado | [quality](../skills/quality/SKILL.md) |
@@ -131,5 +134,5 @@ excede este ofício: reportar como "requer decisão do `architect`" em vez de pr
 ---
 
 **Criado em**: 2026-08-10
-**Atualizado em**: 2026-08-10
-**Versão**: 1.0
+**Atualizado em**: 2026-08-20
+**Versão**: 1.2
