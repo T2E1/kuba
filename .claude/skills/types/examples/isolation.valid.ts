@@ -1,6 +1,6 @@
 // ✅ Cada pacote define o próprio vocabulário — Regra 1.
 
-// packages/behavior/redirect/types.d.ts
+// src/behavior/redirect/types.d.ts
 //
 // Nenhum import. O redirect nomeia o próprio atributo `on`, mesmo que a
 // forma coincida exatamente com o atributo `value` de <kb-on>.

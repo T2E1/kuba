@@ -1,7 +1,7 @@
 # ✅ Colocação por razão-para-mudar
 
 ```
-packages/
+src/
 ├── component/
 │   ├── button/
 │   │   ├── button.ts          implementação
@@ -15,11 +15,13 @@ packages/
 │   │   └── __screenshots__/
 │   └── icon/
 │       └── …
-├── form/
-│   └── textarea/
-│       ├── textarea.ts
-│       ├── element.js         elemento interno associado
-│       └── …
+└── form/
+    └── textarea/
+        ├── textarea.ts
+        ├── element.js         elemento interno associado
+        └── …
+
+packages/
 ├── mixin/                     composição reutilizável
 ├── echo/                      sistema de eventos
 └── pixel/                     design tokens

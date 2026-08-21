@@ -73,7 +73,7 @@ Uma especificação que o `developer` implementa sem adivinhar:
 
 ## Método
 
-1. **Ler um componente irmão.** `packages/component/button/style.js` é a referência viva
+1. **Ler um componente irmão.** `src/component/button/style.js` é a referência viva
    da convenção. A especificação nova segue a forma da existente.
 2. **Mapear cada propriedade visual para um token.** O padrão do repositório é duplo:
 
@@ -84,7 +84,11 @@ Uma especificação que o `developer` implementa sem adivinhar:
 
    A primeira é o que o consumidor sobrescreve; a segunda é a decisão do design system.
    Toda propriedade visual tem as duas. Valor fixo direto é violação da rule 024 — exceto
-   o que é estrutural e não temático (`display: flex`, `box-sizing`).
+   o que é estrutural e não temático (`display: flex`, `box-sizing`). **Invoque a skill
+   `token`** para nomear cada token pela taxonomia por níveis, mapear a propriedade CSS
+   certa (`references/uso-em-css.md`) e decidir promoção local → global pela regra dos 3
+   componentes — não decida essas três coisas de memória: a skill é a fonte de verdade, e
+   este método não a reescreve.
 3. **Enumerar os estados.** Para cada um: o que muda visualmente e como o estado é
    publicado — em `internals.states`, alcançável por `:host(:state(nome))`, nunca por
    classe ou atributo espelhado.
@@ -101,14 +105,10 @@ Uma especificação que o `developer` implementa sem adivinhar:
    remover uma depois quebra o consumidor. Expor pouco e bem.
 6. **Escrever os critérios de aceitação**, observáveis de fora.
 
-### Decidir se um valor vira token
-
-| Situação | Decisão |
-|---|---|
-| Aparece em 3+ componentes | Token global |
-| Aparece num componente, consumidor pode querer mudar | Custom property do componente, com fallback global |
-| Aparece uma vez e é estrutural (`display`, `box-sizing`) | Valor direto |
-| É um tamanho específico sem equivalente no sistema (`40px` de altura) | Custom property com o valor como fallback, e registrar a dívida |
+Um caso não coberto pela skill `token`: quando o valor é um tamanho específico sem
+equivalente no sistema (`40px` de altura, por exemplo) — a custom property leva esse valor
+como fallback, e a dívida (a falta de um token de escala para ele) fica registrada na
+especificação, não silenciada.
 
 ## Quando parar
 
@@ -124,5 +124,5 @@ a proposta padrão, mas a decisão volta ao orquestrador.
 ---
 
 **Criado em**: 2026-08-10
-**Atualizado em**: 2026-08-10
-**Versão**: 1.0
+**Atualizado em**: 2026-08-21
+**Versão**: 1.2

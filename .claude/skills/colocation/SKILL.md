@@ -1,7 +1,7 @@
 ---
 name: colocation
 model: sonnet
-description: Colocação de arquivos em `packages/` — o que muda junto fica junto, um pacote por custom element com implementação, template, estilo, contratos, tipos e teste lado a lado, agrupados por categoria. Use ao criar um pacote novo, ao decidir onde um arquivo deve morar, ao adicionar teste a um componente, ou ao revisar estrutura organizada por tipo técnico em vez de por feature. Não use para decidir o que o pacote exporta — use a skill revelation.
+description: Colocação de arquivos em `src/` e `packages/` — o que muda junto fica junto, um pacote por custom element com implementação, template, estilo, contratos, tipos e teste lado a lado, agrupados por categoria. Use ao criar um pacote novo, ao decidir onde um arquivo deve morar, ao adicionar teste a um componente, ou ao revisar estrutura organizada por tipo técnico em vez de por feature. Não use para decidir o que o pacote exporta — use a skill revelation.
 ---
 
 # Colocation
@@ -19,7 +19,7 @@ e teste.
 
 | Situação | Ação |
 |---|---|
-| Criando componente novo | Um pacote em `packages/<categoria>/<nome>/` |
+| Criando componente novo | Um pacote em `src/<categoria>/<nome>/` |
 | Decidindo onde um arquivo mora | Junto do que muda com ele |
 | Adicionando teste | Ao lado da implementação |
 | Encontrando pasta por tipo técnico | Redistribuir por feature |
@@ -32,7 +32,7 @@ onde os arquivos ficam; revelation define quais são públicos.
 ### Estrutura de um pacote de custom element
 
 ```
-packages/<categoria>/<nome>/
+src/<categoria>/<nome>/
 ├── <nome>.ts           implementação (.ts só pela sintaxe de decorator)
 ├── component.js        função pura de template — só a função `component`, nada mais
 ├── style.js            função pura de estilo — só a função `style`, nada mais
@@ -66,14 +66,17 @@ subiram assim que ficou claro que o segundo consumidor já existia no repositór
 
 ### Categorias
 
-`packages/` agrupa por categoria de responsabilidade, não por camada técnica:
+`src/` e `packages/` agrupam por categoria de responsabilidade, não por camada técnica:
+`src/` reúne os seis tipos de custom element que o consumidor final importa; `packages/`
+reúne a infraestrutura que os sustenta.
 
-| Categoria | Papel |
-|---|---|
-| `component`, `form`, `layout`, `typography` | Custom elements por família |
-| `mixin`, `echo`, `directive`, `middleware` | Composição e infraestrutura de componente |
-| `dom`, `event`, `http`, `router`, `data` | Capacidades transversais |
-| `pixel` | Design tokens |
+| Categoria | Papel | Raiz |
+|---|---|---|
+| `component`, `form`, `layout`, `typography` | Custom elements visíveis, por família | `src/` |
+| `behavior`, `data` | Custom elements headless | `src/` |
+| `mixin`, `echo`, `directive`, `middleware` | Composição e infraestrutura de componente | `packages/` |
+| `dom`, `event`, `http`, `router` | Capacidades transversais | `packages/` |
+| `pixel` | Design tokens | `packages/` |
 
 ### As duas regras que decidem tudo
 
@@ -153,5 +156,5 @@ mixin. Antes de dois, duplicar é mais barato que abstrair cedo (rule 023).
 ---
 
 **Criado em**: 2026-04-01
-**Atualizado em**: 2026-08-20
-**Versão**: 2.1
+**Atualizado em**: 2026-08-21
+**Versão**: 2.2

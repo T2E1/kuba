@@ -47,7 +47,7 @@ type KUBARedirectHrefAttribute =
   | `?${string}`
 ```
 
-Implementação de referência: `packages/behavior/redirect/types.d.ts`
+Implementação de referência: `src/behavior/redirect/types.d.ts`
 (`KUBARedirectHrefAttribute`).
 
 ## Um conjunto fechado de literais usado dentro dessa forma
@@ -65,10 +65,10 @@ unidade usaria `Unit`, um restringindo um verbo HTTP usaria `Method`, e
 assim por diante.
 
 ```ts
-// packages/behavior/redirect/types.d.ts — segmento "como é aplicado" do arco
+// src/behavior/redirect/types.d.ts — segmento "como é aplicado" do arco
 type KUBARedirectOnAttributeSink = 'method' | 'attribute' | 'setter'
 
-// packages/behavior/on/types.d.ts — mesmo conjunto de literais, nome
+// src/behavior/on/types.d.ts — mesmo conjunto de literais, nome
 // diferente, porque é o próprio contrato de `<kb-on>`, não o do redirect
 type KUBAOnValueAttributeSink = 'method' | 'attribute' | 'setter'
 ```

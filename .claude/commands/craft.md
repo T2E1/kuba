@@ -1,5 +1,5 @@
 ---
-description: "Cria um pacote novo em packages/ do zero: forma, aparência, implementação, testes e documentação, cada etapa com o ofício que lhe cabe. Usar ao adicionar um custom element ou um mixin ao design system."
+description: "Cria um pacote novo em src/ (elemento consumível) ou packages/ (mixin) do zero: forma, aparência, implementação, testes e documentação, cada etapa com o ofício que lhe cabe. Usar ao adicionar um custom element ou um mixin ao design system."
 argument-hint: "[o que o elemento faz, em uma frase]"
 allowed-tools: Bash(ls *), Bash(find *), Bash(mkdir *), Bash(bun run lint), Bash(bun run test), Bash(git status), Read, Write, Edit, Glob, Grep
 ---
@@ -13,7 +13,10 @@ par produz retrabalho.
 
 O que criar: **$ARGUMENTS**
 
-Categorias existentes:
+Categorias de elemento existentes (`src/`):
+!`ls "$(git rev-parse --show-toplevel)/src/"`
+
+Categorias de infraestrutura existentes (`packages/`):
 !`ls "$(git rev-parse --show-toplevel)/packages/"`
 
 Mixins disponíveis para a cadeia:
@@ -25,12 +28,12 @@ Mixins disponíveis para a cadeia:
 |---|---|---|---|
 | 1 | `architect` | O comportamento esperado | Categoria, cadeia de mixins, contratos de Symbol, superfície pública, ≥3 critérios de aceitação |
 | 2 | `designer` | A forma decidida | Mapa de tokens, estados, papel e nome acessível |
-| 3 | `developer` | Forma e aparência | Os arquivos do pacote em `packages/<categoria>/<nome>/` |
+| 3 | `developer` | Forma e aparência | Os arquivos do pacote em `src/<categoria>/<nome>/` ou `packages/mixin/<nome>` |
 | 4 | `tester` | O pacote implementado | `<nome>.test.js`, e o veredito |
 | 5 | `writer` | O contrato e o comportamento provado | A página em `docs/components/<nome>.md` |
 
 O `designer` é pulado quando o pacote não tem representação visual — mixin, elemento
-headless em `packages/data/`. Nesse caso o passo 2 não acontece, e o `developer` recebe
+headless em `src/data/`. Nesse caso o passo 2 não acontece, e o `developer` recebe
 só a forma.
 
 O `writer` também é pulado para mixin e infraestrutura: `docs/components/` documenta o que
@@ -45,7 +48,8 @@ o consumidor escreve no HTML.
 
 2. **Acionar o `architect`** com o comportamento e a lista de categorias acima.
    - Se ele bloquear por ambiguidade, traga a pergunta dele para você e pare.
-   - A entrega dele define o caminho: `packages/<categoria>/<nome>/`.
+   - A entrega dele define o caminho: `src/<categoria>/<nome>/` para elemento consumível
+     (custom element que vai para o HTML de página), `packages/mixin/<nome>` para mixin.
 
 3. **Acionar o `designer`**, quando o elemento for visível, passando a forma decidida.
    Ele devolve que token governa cada propriedade e que custom properties o consumidor
@@ -85,5 +89,5 @@ o consumidor escreve no HTML.
 ---
 
 **Criado em**: 2026-08-10
-**Atualizado em**: 2026-08-10
-**Versão**: 1.0
+**Atualizado em**: 2026-08-21
+**Versão**: 1.1

@@ -25,7 +25,7 @@ Commits recentes, como referência de estilo:
 | 1 | `reviewer` | O diff completo | Achados com `arquivo:linha` e veredito de merge |
 | 2 | `releaser` | O intervalo desde a última versão | Impacto (major/minor/patch/nenhum), versão, CHANGELOG |
 
-O `reviewer` só é acionado quando o diff toca `packages/`. Mudança restrita a `docs/` ou
+O `reviewer` só é acionado quando o diff toca `src/` ou `packages/`. Mudança restrita a `docs/` ou
 `.claude/` não tem o que revisar contra as 31 rules que ele cobre.
 
 O `releaser` é acionado sempre, inclusive para responder "nenhum impacto" — é ele quem sabe
@@ -39,7 +39,7 @@ que mudança em `docs/` e `.claude/` não versiona, porque não é publicada.
 2. **Rodar as verificações locais.** `bun run lint` e `bun run test`. Vermelho aqui
    encerra o fluxo — não se envia o que não passa.
 
-3. **Acionar o `reviewer`**, quando o diff toca `packages/`, passando o intervalo.
+3. **Acionar o `reviewer`**, quando o diff toca `src/` ou `packages/`, passando o intervalo.
    - ❌ requer alteração → reportar os achados e parar. Corrigir é trabalho próprio.
    - ⚠️ com ressalva → seguir, e incluir os achados no relato final.
    - ✅ aprovado → seguir.
@@ -83,5 +83,5 @@ que mudança em `docs/` e `.claude/` não versiona, porque não é publicada.
 ---
 
 **Criado em**: 2026-04-19
-**Atualizado em**: 2026-08-10
-**Versão**: 2.0
+**Atualizado em**: 2026-08-21
+**Versão**: 2.1

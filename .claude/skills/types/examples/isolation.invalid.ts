@@ -1,7 +1,7 @@
 // ❌ types.d.ts alcançando o vocabulário de outro pacote — viola a Regra 1.
 // Correto em: isolation.valid.ts
 
-// packages/behavior/redirect/types.d.ts
+// src/behavior/redirect/types.d.ts
 
 // Dois componentes usam o mesmo mixin e produzem uma forma idêntica, então
 // a tentação é compartilhar o tipo. O custo do compartilhamento:

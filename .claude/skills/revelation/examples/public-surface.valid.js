@@ -1,10 +1,10 @@
 // ✅ Superfície pública escolhida símbolo por símbolo.
 
-// ─── packages/component/button/index.js ───────────────────────────────────
+// ─── src/component/button/index.js ─────────────────────────────────────────
 // O index do componente re-exporta apenas o componente.
 export { default } from './button.js'
 
-// ─── packages/component/index.js ──────────────────────────────────────────
+// ─── src/component/index.js ────────────────────────────────────────────────
 // O index do pacote agrega os componentes, em ordem alfabética.
 export { default as Button } from './button/index.js'
 export { default as Card } from './card/index.js'

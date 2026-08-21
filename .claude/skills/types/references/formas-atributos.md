@@ -40,7 +40,7 @@ type KUBA<PascalName><PascalAttribute>Attribute =
   | `?${string}`
 ```
 
-Implementação de referência: `packages/behavior/redirect/types.d.ts`
+Implementação de referência: `src/behavior/redirect/types.d.ts`
 (`KUBARedirectHrefAttribute`).
 
 ## Padrão: Arc string (o `on` do Echo)
@@ -61,8 +61,8 @@ type KUBA<PascalName>OnAttribute =
   `${string}/${string}:${KUBA<PascalName>OnAttributeSink}/${string}${'' | `|${string}`}`
 ```
 
-Implementações de referência: `packages/behavior/redirect/types.d.ts`
-(`KUBARedirectOnAttribute`), `packages/behavior/on/types.d.ts`
+Implementações de referência: `src/behavior/redirect/types.d.ts`
+(`KUBARedirectOnAttribute`), `src/behavior/on/types.d.ts`
 (`KUBAOnValueAttribute`, aplicado ao próprio atributo `value` de `<kb-on>`
 em vez de `on`, já que esse elemento expressa o arco como seu valor
 inteiro). Não importe nenhum dos dois em um terceiro componente — copie o
@@ -86,7 +86,7 @@ export default class KUBARedirectElement extends HTMLElement {
 
 Documente essa contrapartida no JSDoc do alias de tipo (conforme a
 `jsdoc-standard`) — veja o parágrafo já existente acima de
-`KUBARedirectHrefAttribute` em `packages/behavior/redirect/types.d.ts`
+`KUBARedirectHrefAttribute` em `src/behavior/redirect/types.d.ts`
 para o texto a reaproveitar.
 
 ## Padrão: enum fechado codificado como string
@@ -103,4 +103,4 @@ declarada uma vez por componente — Regra 1).
 type: 'submit' | 'reset'
 ```
 
-Implementação de referência: `packages/component/button/types.d.ts`.
+Implementação de referência: `src/component/button/types.d.ts`.

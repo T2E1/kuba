@@ -63,9 +63,9 @@ Sem intervalo explícito, o padrão é desde a última tag de versão em `CHANGE
 
 ## Método
 
-1. **Levantar o intervalo.** `git log <ultima-tag>..HEAD --oneline` e o diff de
-   `packages/`. Só `packages/` e `package.json` importam: `.claude/` e `docs/` não são
-   publicados.
+1. **Levantar o intervalo.** `git log <ultima-tag>..HEAD --oneline` e o diff de `src/` e
+   `packages/`. Só `src/`, `packages/` e `package.json` importam: `.claude/` e `docs/` não
+   são publicados.
 2. **Julgar cada mudança** pela tabela de impacto abaixo. Vale a de maior impacto.
 3. **Aplicar o bump.** A versão atual tem sufixo de prerelease, e a regra do projeto é:
    minor ou patch incrementam só o prerelease (`alpha.31` → `alpha.32`); o núcleo semver
@@ -122,5 +122,5 @@ do que quebra, antes do bump.
 ---
 
 **Criado em**: 2026-08-10
-**Atualizado em**: 2026-08-10
-**Versão**: 1.0
+**Atualizado em**: 2026-08-21
+**Versão**: 1.1

@@ -1,4 +1,4 @@
-// ✅ O padrão de packages/component/button/button.ts.
+// ✅ O padrão de src/component/button/button.ts.
 
 import { attributeChanged, define } from '@directive'
 import { paint, repaint } from '@dom'

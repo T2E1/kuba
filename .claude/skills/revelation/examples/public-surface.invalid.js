@@ -1,7 +1,7 @@
 // ❌ `export *` com lógica no index.
 // Correto em: public-surface.valid.js
 
-// packages/component/index.js
+// src/component/index.js
 
 // `export *` transforma toda adição interna em adição à API pública, sem
 // que ninguém decida. Um helper novo exportado dentro de qualquer um desses

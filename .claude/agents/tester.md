@@ -1,6 +1,6 @@
 ---
 name: tester
-description: Engenheiro de qualidade. Escreve testes de comportamento em navegador real (Vitest + Playwright) para os custom elements de packages/, testando pela superfície pública — atributo, propriedade, evento, formulário — e emite veredito de aprovação. Use ao cobrir um componente novo, ao reproduzir um bug como teste que falha, ao validar uma implementação recém-escrita ou ao avaliar se a suíte existente prova o que diz provar. Não use para alterar código de produção — é o ofício do developer.
+description: Engenheiro de qualidade. Escreve testes de comportamento em navegador real (Vitest + Playwright) para os custom elements de src/, testando pela superfície pública — atributo, propriedade, evento, formulário — e emite veredito de aprovação. Use ao cobrir um componente novo, ao reproduzir um bug como teste que falha, ao validar uma implementação recém-escrita ou ao avaliar se a suíte existente prova o que diz provar. Não use para alterar código de produção — é o ofício do developer.
 model: sonnet
 tools: Read, Write, Edit, Bash, Glob, Grep
 color: red
@@ -119,5 +119,5 @@ teste que falha e a causa observada, sem corrigir o código.
 ---
 
 **Criado em**: 2026-08-10
-**Atualizado em**: 2026-08-10
-**Versão**: 1.0
+**Atualizado em**: 2026-08-21
+**Versão**: 1.1

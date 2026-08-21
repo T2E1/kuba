@@ -57,8 +57,8 @@
 
 | Componente | Diretório | Responsabilidade | Interface Pública |
 |------------|-----------|-----------------|-------------------|
-| **Elementos visíveis** | `packages/component/`, `form/`, `layout/`, `typography/` | Custom elements com Shadow DOM que o consumidor escreve no HTML | Prefixo `kb-`, configurados por atributo |
-| **Elementos headless** | `packages/data/`, `behavior/` | Comportamento sem representação visual — busca, coleção, redirecionamento | Prefixo `k-`, ou `kb-` quando renderizam conteúdo |
+| **Elementos visíveis** | `src/component/`, `form/`, `layout/`, `typography/` | Custom elements com Shadow DOM que o consumidor escreve no HTML | Prefixo `kb-`, configurados por atributo |
+| **Elementos headless** | `src/data/`, `behavior/` | Comportamento sem representação visual — busca, coleção, redirecionamento | Prefixo `k-`, ou `kb-` quando renderizam conteúdo |
 | **Mixins** | `packages/mixin/` | Comportamento compartilhado aplicado por composição de classes | `(Super) => class extends Super`, aplicados da direita para a esquerda |
 | **Render** | `packages/dom/` | `@paint`, `@repaint`, `@retouch`, `css`, `html` — escreve no shadow root | Decorators e template tags |
 | **Definição** | `packages/directive/` | `@define` registra o elemento no `customElements` | Decorator |
@@ -84,8 +84,8 @@ mantém `packages/dom/` e `packages/echo/` reutilizáveis por qualquer elemento 
 ## Estrutura de Diretórios Correspondente
 
 ```
-packages/
-└── [categoria]/          ← component, form, layout, typography, data, mixin...
+src/
+└── [categoria]/          ← component, form, layout, typography, data, behavior
     └── [nome]/
         ├── [nome].ts     ← a classe do elemento, com decorators e mixins
         ├── component.js  ← o markup do shadow root
@@ -94,6 +94,11 @@ packages/
         ├── index.js      ← o que é exportado
         ├── types.d.ts    ← o contrato público: atributo, propriedade, evento
         └── [nome].test.js ← testes de comportamento em navegador real
+
+packages/
+└── [categoria]/          ← mixin, echo, directive, middleware, dom, event, pixel...
+    └── [nome]/
+        └── …              ← mesma forma, infraestrutura em vez de elemento
 ```
 
 ---

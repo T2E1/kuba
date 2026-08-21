@@ -98,7 +98,7 @@ acumuladas no mesmo método elevam a CC e misturam duas razões para mudar — m
 `bracket`) quando é privado à classe, orquestrado por `before`/`around`/`after` (skill
 `middleware`) em vez de chamado inline. Cada método resultante mira CC 1: um único
 caminho de execução, uma única razão de existir. Precedente: `dispatch` em
-`packages/form/input/input.ts` e `packages/form/fileupload/fileupload.ts`.
+`src/form/input/input.ts` e `src/form/fileupload/fileupload.ts`.
 
 ### Um método sem valor de retorno próprio quebra o encadeamento
 
@@ -142,5 +142,5 @@ permitida da regra, mas a legibilidade continua valendo.
 ---
 
 **Criado em**: 2026-04-01
-**Atualizado em**: 2026-08-12
-**Versão**: 2.1
+**Atualizado em**: 2026-08-21
+**Versão**: 2.2

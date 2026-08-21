@@ -29,7 +29,7 @@ Esta seção centraliza as definições precisas de todos os termos relevantes d
 | Termo | Definição | Contexto de Uso |
 |-------|-----------|-----------------|
 | **Pacote** | Diretório que reúne tudo que um elemento precisa: a classe, o markup, o estilo, os contratos, os tipos e os testes. Estrutura: `packages/[categoria]/[nome]/` | Estrutura do projeto |
-| **Categoria** | Primeiro nível de `packages/`. Agrupa elementos pelo que eles são. Ex: `component`, `form`, `layout`, `data`. | Estrutura do projeto |
+| **Categoria** | Primeiro nível de `src/` ou `packages/`. Agrupa elementos pelo que eles são. Ex: `component`, `form`, `layout`, `data` (em `src/`); `mixin`, `dom` (em `packages/`). | Estrutura do projeto |
 | **Elemento** | Custom element registrado no navegador. Visível usa prefixo `kb-`; headless usa `k-`. Ex: `kb-button`, `k-fetch`. | Estrutura do projeto |
 | **Mixin** | Função `(Super) => class extends Super` que adiciona comportamento a um elemento. Aplicados da direita para a esquerda. Ex: `Hidden`, `Value`. | Estrutura do projeto |
 | **Value Object** | Objeto de domínio imutável identificado por seu valor (não por ID). Ex: `Email`, `CPF`, `Money`. | Código |

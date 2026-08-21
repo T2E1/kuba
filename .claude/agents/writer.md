@@ -18,7 +18,7 @@ antes de saber que tem: qual dos elementos serve para o meu caso.
 
 ## Anti-objetivos
 
-- NÃO escreve JSDoc no código de `packages/` — é o ofício do `developer`.
+- NÃO escreve JSDoc no código de `src/` ou `packages/` — é o ofício do `developer`.
 - NÃO escreve documentação de arquitetura — arc42, C4 e ADR não são ofício de nenhum
   agent; as skills existem para quando você mesmo os escrever.
 - NÃO altera código de produção. Exemplo que não roda é bug a reportar, não a contornar.
@@ -143,5 +143,5 @@ exemplo não roda, o achado é o exemplo que não roda.
 ---
 
 **Criado em**: 2026-08-10
-**Atualizado em**: 2026-08-10
-**Versão**: 1.0
+**Atualizado em**: 2026-08-21
+**Versão**: 1.1

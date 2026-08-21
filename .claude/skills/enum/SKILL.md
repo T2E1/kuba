@@ -73,7 +73,7 @@ sinal de que o filtro devia ter feito esse trabalho.
 O getter correspondente usa o próprio enum como default, nunca a string solta:
 `this.#color ??= COLORS.PRIMARY`, não `this.#color ??= 'primary'`.
 
-Ver `packages/component/button/{color,variant,type}.js` e `button.ts` para o padrão
+Ver `src/component/button/{color,variant,type}.js` e `button.ts` para o padrão
 completo — um enum por arquivo, cada um consumido por `enumerating` no `attributeChanged`
 e pelo próprio enum no default do getter.
 
@@ -135,5 +135,5 @@ polimorfismo (rule 011).
 ---
 
 **Criado em**: 2026-04-01
-**Atualizado em**: 2026-08-20
-**Versão**: 2.1
+**Atualizado em**: 2026-08-21
+**Versão**: 2.2

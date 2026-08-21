@@ -1,6 +1,6 @@
 // ✅ Mixins achatados, taxonomia aplicada, primitivo preservado.
 
-// Implementação em packages/behavior/highlight/highlight.ts:
+// Implementação em src/behavior/highlight/highlight.ts:
 //
 //   @define('kb-highlight')
 //   class Highlight extends Echo(Value(HTMLElement)) {

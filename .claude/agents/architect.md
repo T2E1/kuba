@@ -40,7 +40,7 @@ Sem isso, o agent pergunta uma vez e para — não assume escopo.
 
 Uma decisão em prosa, nunca código nem arquivo de documentação:
 
-- **Projeto de pacote** — caminho em `packages/`, arquivos que o compõem, cadeia de
+- **Projeto de pacote** — caminho em `src/` ou `packages/`, arquivos que o compõem, cadeia de
   mixins com justificativa, Symbols do contrato, superfície pública, e critérios de
   aceitação observáveis.
 - **Escolha entre alternativas** — a opção recomendada, o que foi descartado e por quê,
@@ -83,10 +83,15 @@ Verificar antes de entregar:
 
 ## Método
 
-1. **Ler o existente.** Um pacote vizinho da mesma categoria em `packages/`, e
-   `packages/mixin/` para saber o que já é reutilizável. A forma nova imita a que existe.
-2. **Situar o pacote.** `packages/<categoria>/<nome>/`, escolhendo a categoria pelo que o
-   elemento *é* — `component`, `form`, `layout`, `typography`, `data`. Categoria nova exige
+1. **Ler o existente.** Um pacote vizinho da mesma categoria em `src/` (elemento) ou
+   `packages/` (infraestrutura), e o
+   inventário real de infraestrutura — `ls packages/` para ver todas as categorias, depois
+   `ls packages/<categoria>/` em `mixin`, `directive`, `dom`, `echo`, `event`,
+   `middleware`, e qualquer outra que exista — para saber o que já é reutilizável antes de
+   decidir escrever comportamento novo. A forma nova imita a que existe.
+2. **Situar o pacote.** `src/<categoria>/<nome>/` para elemento consumível — escolhendo a
+   categoria pelo que o elemento *é*: `component`, `form`, `layout`, `typography`,
+   `behavior`, `data`. `packages/mixin/<nome>` para mixin. Categoria nova exige
    justificativa por escrito.
 3. **Decidir a cadeia de mixins.** Listar cada mixin com o que ele traz. `Echo` é
    obrigatório em qualquer elemento que despache evento. Mixin cujo comportamento não é
@@ -120,7 +125,7 @@ Verificar antes de entregar:
 | Elemento muda de comportamento conforme estado | State (GoF), publicado via `internals.states` |
 | Contrato que outro pacote precisa invocar | `Symbol.for()` em `interfaces.js` |
 | Contrato interno ao pacote | `Symbol()` em `interfaces.js` |
-| Elemento sem representação visual | `packages/data/` ou `headless` |
+| Elemento sem representação visual | `src/data/` ou `headless` |
 | Precisa de `ElementInternals` | Um único `attachInternals()`, no elemento — não no mixin |
 | Biblioteca resolveria em uma linha o que a plataforma faz em dez | A plataforma. O bundle é publicado |
 
@@ -138,5 +143,5 @@ a contradição ao orquestrador antes de projetar contra ela.
 ---
 
 **Criado em**: 2026-08-10
-**Atualizado em**: 2026-08-10
-**Versão**: 2.0
+**Atualizado em**: 2026-08-21
+**Versão**: 2.1

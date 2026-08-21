@@ -11,8 +11,8 @@ body:
     id: package
     attributes:
       label: Affected package
-      description: Which package under `packages/` is involved? (e.g. `behavior/redirect`, `component/button`)
-      placeholder: packages/behavior/redirect
+      description: Which package under `src/` or `packages/` is involved? (e.g. `behavior/redirect`, `component/button`)
+      placeholder: src/behavior/redirect
     validations:
       required: true
 

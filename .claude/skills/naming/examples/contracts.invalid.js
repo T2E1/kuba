@@ -1,7 +1,7 @@
 // ❌ Contratos Symbol com sufixo que não corresponde à natureza.
 // Correto em: contracts.valid.js
 
-// packages/component/badge/interface.js   ← singular; o padrão é plural
+// src/component/badge/interface.js   ← singular; o padrão é plural
 
 // Capacidade nomeada como ação. `setVariant` promete um comando que o
 // chamador executa; isto é um hook acionado pelo middleware `before`.

@@ -7,7 +7,7 @@ apenas para o elemento cuja composição é difícil de deduzir lendo o arquivo.
 
 ## Componente em Foco: [Nome do Componente]
 
-[Identificar qual componente está sendo detalhado. Ex: "`<kb-button>` — elemento de `packages/component/button/`, que despacha `clicked` e participa de formulários."]
+[Identificar qual componente está sendo detalhado. Ex: "`<kb-button>` — elemento de `src/component/button/`, que despacha `clicked` e participa de formulários."]
 
 ## Diagrama de Composição
 

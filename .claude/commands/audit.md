@@ -28,7 +28,7 @@ Nenhum outro ofício entra neste fluxo. Corrigir o que o `reviewer` encontrar é
 1. **Determinar o escopo**, a partir de `$ARGUMENTS`:
    - Vazio → `git diff HEAD`, o que está por commitar (mesmo padrão do `reviewer` sem
      escopo).
-   - Um caminho (`packages/<categoria>/<nome>/` ou um arquivo) → auditoria do pacote ou
+   - Um caminho (`src/<categoria>/<nome>/`, `packages/<categoria>/` ou um arquivo) → auditoria do pacote ou
      arquivo inteiro, não só do que mudou.
    - Um intervalo de commits (`A..B`) ou número de pull request → esse intervalo.
 
@@ -52,5 +52,5 @@ Nenhum outro ofício entra neste fluxo. Corrigir o que o `reviewer` encontrar é
 ---
 
 **Criado em**: 2026-08-20
-**Atualizado em**: 2026-08-20
-**Versão**: 1.0
+**Atualizado em**: 2026-08-21
+**Versão**: 1.1

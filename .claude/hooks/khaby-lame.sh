@@ -33,11 +33,12 @@ file=$(grep -o '"file_path"[[:space:]]*:[[:space:]]*"[^"]*"' | head -1 | sed 's/
 relative=${file#"$root"/}
 
 # ── 2. Vale interromper? ───────────────────────────────────────────────────────────────
-# Só quando um pacote nasce: `packages/<categoria>/<nome>/` que ainda não existe. Editar,
-# continuar um pacote, mexer em qualquer outro lugar — nada disso é uma decisão nova.
+# Só quando um pacote nasce: `src/<categoria>/<nome>/` (elemento consumível) ou
+# `packages/<categoria>/<nome>/` (infraestrutura) que ainda não existe. Editar, continuar
+# um pacote, mexer em qualquer outro lugar — nada disso é uma decisão nova.
 
 case $relative in
-  packages/*/*/*) package=$(cut -d/ -f1-3 <<<"$relative") ;;
+  src/*/*/*|packages/*/*/*) package=$(cut -d/ -f1-3 <<<"$relative") ;;
   *) exit 0 ;;
 esac
 
@@ -67,6 +68,9 @@ estar aí, e o resto era só o vídeo.
      mixin/      $(list packages/mixin)
      directive/  $(list packages/directive)
      dom/        $(list packages/dom)
+     echo/       $(list packages/echo)
+     event/      $(list packages/event)
+     middleware/ $(list packages/middleware)
      Reaproveitar mixin vem antes de escrever comportamento novo.
 
 03 · A plataforma cobre?

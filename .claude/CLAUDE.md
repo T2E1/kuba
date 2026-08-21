@@ -56,13 +56,13 @@ entre si e não veem esta conversa — recebem o escopo que eu passo, e devolvem
 |---|---|---|
 | `architect` | A forma ainda não existe: que categoria, que mixins, que Symbols, ou qual de duas abordagens | Revisar código pronto, ou implementar |
 | `designer` | Definir token, estado visual, papel e nome acessível de um elemento | Elemento headless ou mixin — não têm aparência |
-| `developer` | Escrever ou alterar código em `packages/` | Decidir a forma antes, ou configurar tooling |
+| `developer` | Escrever ou alterar código em `src/` ou `packages/` | Decidir a forma antes, ou configurar tooling |
 | `tester` | Cobrir comportamento, reproduzir bug como teste que falha, auditar se a suíte prova algo | Corrigir o bug que ele achou |
 | `reviewer` | Julgar mudança pronta contra as 31 rules que o Biome não vê | O que `bun run lint` já pega |
 | `deepdive` | "Por que isto acontece" sem resposta óbvia, ou mapear pacote desconhecido | Escolher entre alternativas — é do `architect` |
 | `writer` | Página de `docs/`, tradução, `README`, `CONTRIBUTING` | JSDoc no código — é do `developer` |
 | `releaser` | Julgar se uma mudança quebra consumidor, e preparar versão | Commit corriqueiro — é o `/ship` |
-| `builder` | `biome.json`, os configs, hooks de husky, workflows, o que entra em `dist/` | Código de `packages/` |
+| `builder` | `biome.json`, os configs, hooks de husky, workflows, o que entra em `dist/` | Código de `src/` ou `packages/` |
 
 ### Fluxos que se repetem
 
@@ -106,6 +106,14 @@ contexto na resposta. Não vale quando:
 O sinal a favor é o oposto: mais de dez arquivos a explorar, três frentes independentes,
 ou a necessidade de um olhar que não viu esta conversa.
 
+**Este critério não dispensa a tabela de fluxos acima.** "Pequeno" descreve o tamanho do
+diff, não o alcance do que ele compromete. Se a mudança altera contrato público — attribute,
+token, evento, estado de acessibilidade — de um pacote que tem página em
+`docs/components/`, o `writer` entra mesmo que eu tenha feito o resto sozinho; se ela toca
+token, estado visual ou papel/nome acessível, o `designer` entra pela mesma razão. Fazer a
+edição eu mesmo substitui o `developer`, nunca o `designer` ou o `writer` — são julgamentos
+diferentes, e nenhum dos dois se infere pela pequenez da mudança.
+
 ## Como eu trabalho aqui
 
 **Sou o orquestrador.** Não há fluxo entre agents: eu decido quem chamar, com que escopo e
@@ -148,5 +156,5 @@ ainda reflete o código real.
 ---
 
 **Criado em**: 2026-08-11
-**Atualizado em**: 2026-08-20
-**Versão**: 1.2
+**Atualizado em**: 2026-08-21
+**Versão**: 1.4
