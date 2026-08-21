@@ -13,7 +13,7 @@ acessibilidade.
 
 <div class="gallery">
   <a href="#/pt-br/components/button"><strong>Button</strong><span>Dispara uma ação. Nunca navega.</span></a>
-  <a href="#/pt-br/components/card"><strong>Card</strong><span>Uma superfície agrupada, opcionalmente clicável.</span></a>
+  <a href="#/pt-br/components/card"><strong>Card</strong><span>Um contêiner de layout para agrupar conteúdo.</span></a>
   <a href="#/pt-br/components/cover"><strong>Cover</strong><span>Uma imagem emoldurada, com proporção travada.</span></a>
   <a href="#/pt-br/components/icon"><strong>Icon</strong><span>Um glifo do Material Symbols.</span></a>
   <a href="#/pt-br/components/logo"><strong>Logo</strong><span>A marca como SVG inline.</span></a>

@@ -79,6 +79,10 @@ imagen funciona en cualquiera de las dos proporciones.
 | `landscape` (por defecto) | 16/9 | Banners anchos, heros, miniaturas en un layout horizontal. |
 | `portrait` | 4/5 | Imágenes altas — fotos verticales, tarjetas mobile-first, miniaturas verticales. |
 
+Un valor no reconocido se ignora — la property conserva el último
+`orientation` válido que tuvo (o el valor por defecto, si nunca se estableció
+ninguno).
+
 ## Contenido
 
 `alt` debe describir la imagen para quien no puede verla. Déjalo vacío
@@ -92,7 +96,8 @@ pie de foto visible.
 |---|---|---|---|
 | `src` | `string` | `''` | URL de la imagen, reenviada al `<img>` interno. |
 | `alt` | `string` | `''` | Texto alternativo, reenviado al `<img>` interno. |
-| `orientation` | `landscape` \| `portrait` | `landscape` | Proporción a la que se recorta la imagen. |
+| `orientation` | `landscape` \| `portrait` | `landscape` | Proporción a la que se recorta la imagen. Un valor no reconocido se ignora — la property conserva el último orientation válido. |
+| `hidden` | `boolean` | `false` | Elimina la portada del layout y del árbol de accesibilidad. |
 | `on` | cadena de arco | — | Conexión de Echo, `origen/evento:tipo/destino`. |
 
 Este elemento no despacha eventos.
@@ -117,9 +122,9 @@ Este elemento no despacha eventos.
 
 ## Estados y accesibilidad
 
-- `kb-cover` no tiene atributo `hidden` ni custom states — no usa el mixin
-  `Hidden`, así que elimina o envuelve el elemento cuando deba desaparecer del
-  layout.
+- `hidden` elimina la portada del layout y de la interacción. Prefiérelo a no
+  renderizar el elemento cuando su presencia o ausencia deba seguir siendo
+  localizable.
 - El `<img>` interno conserva su rol nativo. Un `alt` ausente o vacío en una
   imagen con significado la hace invisible para los lectores de pantalla.
 - El elemento no tiene comportamiento de clic. Envuélvelo en una `<kb-card>` o

@@ -77,6 +77,9 @@ at either ratio.
 | `landscape` (default) | 16/9 | Wide banners, heroes, thumbnails in a horizontal layout. |
 | `portrait` | 4/5 | Tall images — portrait photos, mobile-first cards, vertical thumbnails. |
 
+An unrecognized value is ignored — the property keeps the last valid
+`orientation` it had (or the default, if none was ever set).
+
 ## Content
 
 `alt` should describe the image for anyone who can't see it. Leave it empty
@@ -89,7 +92,8 @@ same information — never omit it, and never repeat a visible caption verbatim.
 |---|---|---|---|
 | `src` | `string` | `''` | Image URL, forwarded to the internal `<img>`. |
 | `alt` | `string` | `''` | Alternative text, forwarded to the internal `<img>`. |
-| `orientation` | `landscape` \| `portrait` | `landscape` | Aspect ratio the image is cropped to. |
+| `orientation` | `landscape` \| `portrait` | `landscape` | Aspect ratio the image is cropped to. An unrecognized value is ignored — the property keeps the last valid orientation it had. |
+| `hidden` | `boolean` | `false` | Removes the cover from layout and the accessibility tree. |
 | `on` | arc string | — | Echo wiring, `source/event:type/sink`. |
 
 This element dispatches no events.
@@ -114,9 +118,8 @@ This element dispatches no events.
 
 ## States and accessibility
 
-- `kb-cover` has no `hidden` attribute and no custom states — it doesn't use the
-  `Hidden` mixin, so remove or wrap the element when it should disappear from
-  layout.
+- `hidden` removes the cover from layout and interaction. Prefer it over not
+  rendering the element when the presence or absence should stay findable.
 - The internal `<img>` keeps its native role. A missing or empty `alt` on a
   meaningful image makes it invisible to screen readers.
 - The element has no click behavior. Wrap it in a `<kb-card>` or an `<a>` when

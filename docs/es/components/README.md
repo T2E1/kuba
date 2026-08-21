@@ -12,7 +12,7 @@ custom properties de CSS que puedes sobrescribir, y notas de accesibilidad.
 
 <div class="gallery">
   <a href="#/es/components/button"><strong>Button</strong><span>Dispara una acción. Nunca navega.</span></a>
-  <a href="#/es/components/card"><strong>Card</strong><span>Una superficie agrupada, opcionalmente clicable.</span></a>
+  <a href="#/es/components/card"><strong>Card</strong><span>Un contenedor de layout para agrupar contenido.</span></a>
   <a href="#/es/components/cover"><strong>Cover</strong><span>Una imagen enmarcada, con proporción fija.</span></a>
   <a href="#/es/components/icon"><strong>Icon</strong><span>Un glifo de Material Symbols.</span></a>
   <a href="#/es/components/logo"><strong>Logo</strong><span>La marca como SVG inline.</span></a>
