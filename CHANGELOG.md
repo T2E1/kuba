@@ -6,6 +6,39 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) and 
 
 ---
 
+## [0.2.0-alpha.1] — 2026-08-21
+
+### Added
+
+- `<kb-cover>`, a cropped, aspect-ratio-constrained cover image. It takes `src` and `alt` for the underlying `<img>`, `orientation` to pick the ratio — `landscape` renders 16/9, `portrait` renders 4/5 — and `hidden`, which mirrors into `:state(hidden)` like every other element using the `Hidden` mixin. Use it wherever you were hand-rolling a wrapper with `aspect-ratio` and `object-fit: cover`
+
+### Changed
+
+- **Breaking:** `<kb-card>` is a layout container and nothing else. It loses `value`, `click()`, the `clicked` event and `variant="outlined"`. A card that was acting as a button no longer reacts to anything, and no longer dispatches — an Echo arc listening for `card/clicked:...` stops firing, and `card.click()` is now the inherited `HTMLElement.click()`, which does not carry a payload. What remains is `direction`, `height`, `width` and `on`
+- **Breaking:** `<kb-cover>` is `display: block`. It was inline while it was undocumented, so a cover sitting between text nodes used to sit on the baseline and pick up line-height; it now takes the full width of its container and starts on its own line. If you relied on the old flow, set `display: inline-block` on the host
+- **Breaking:** the `./polyfill` and `./interpolate` subpaths are gone from `exports`. `import '@t2e1/kuba/polyfill'` and `import ... from '@t2e1/kuba/interpolate'` now fail to resolve. Neither was ever needed: the polyfill installs itself as a side effect of the root import, and `interpolate` is an internal utility of the renderer with no stable signature. Delete the import — the root `import '@t2e1/kuba'` already does the work
+
+### Fixed
+
+- `<kb-stack>`'s `direction` and `<kb-cover>`'s `orientation` reject values outside the sets their documentation already listed. An unknown token is ignored and the property keeps its last valid value, instead of being interpolated into the shadow stylesheet as an invalid CSS declaration. `<kb-card>`'s `direction` validates the same way, against `row` and `column`
+- `<kb-cover>`'s `alt` and `src` are escaped before they become attributes on the inner `<img>`. A quote or angle bracket in a caption or in a query-string URL no longer terminates the attribute early and corrupts the rendered markup
+
+### Migration
+
+Restoring a clickable card means putting the interactive element where it belongs, rather than on the container:
+
+```html
+<!-- before -->
+<kb-card value="42" variant="outlined" on="#list/selected:setter/value">…</kb-card>
+
+<!-- after: the card frames, the button acts -->
+<kb-card>
+  <kb-button value="42" on="#list/selected:setter/value">…</kb-button>
+</kb-card>
+```
+
+`<kb-button>` carries `value`, `click()` and `clicked` with the same semantics the card had, plus the focus, keyboard activation and disabled handling the card never had. If the clickable region is a link or a single control inside the card, put the listener on that element directly — it is the one users actually reach with the keyboard. `variant="outlined"` has no replacement attribute; draw the border with the `--card-*` custom properties.
+
 ## [0.1.0-alpha.33] — 2026-08-20
 
 ### Added

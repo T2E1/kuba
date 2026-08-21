@@ -1,6 +1,6 @@
 {
   "name": "@t2e1/kuba",
-  "version": "0.1.0-alpha.33",
+  "version": "0.2.0-alpha.1",
   "description": "Lightweight Web Components primitives and custom elements",
   "type": "module",
   "license": "MIT",
@@ -22,6 +22,7 @@
     "dist",
     "types.d.ts",
     "packages/**/types.d.ts",
+    "packages/pixel",
     "src/**/types.d.ts"
   ],
   "types": "./types.d.ts",
