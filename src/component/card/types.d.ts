@@ -20,12 +20,12 @@ type KUBACardOnAttribute =
   `${string}/${string}:${KUBACardOnAttributeSink}/${string}${'' | `|${string}`}`
 
 /**
- * Shape of the `height` attribute of {@link KUBACardElement}. Normalized
- * by the `resizing` filter: numeric `px`/`%` values pass through, `'hug'`
- * becomes `'auto'`, `'fill'` becomes `'100%'`, and anything else defaults
- * to `'auto'`.
+ * Shape of a `resizing` attribute of {@link KUBACardElement} (`height` and
+ * `width`). Normalized by the `resizing` filter: numeric `px`/`%` values
+ * pass through, `'hug'` becomes `'auto'`, `'fill'` becomes `'100%'`, and
+ * anything else defaults to `'auto'`.
  */
-type KUBACardHeightAttribute =
+type KUBACardResizingAttribute =
   | `${number}px`
   | `${number}%`
   | 'hug'
@@ -33,25 +33,12 @@ type KUBACardHeightAttribute =
   | 'auto'
 
 /**
- * Shape of the `width` attribute of {@link KUBACardElement}. Normalized
- * by the `resizing` filter: numeric `px`/`%` values pass through, `'hug'`
- * becomes `'auto'`, `'fill'` becomes `'100%'`, and anything else defaults
- * to `'auto'`.
- */
-type KUBACardWidthAttribute =
-  | `${number}px`
-  | `${number}%`
-  | 'hug'
-  | 'fill'
-  | 'auto'
-
-/**
- * Custom element `<kb-card>` — a flexible container that lays out its
- * slotted content and can act as a single clickable unit.
+ * Custom element `<kb-card>` — a flexible layout container that groups
+ * slotted content in a flex box styled by `--card-*` tokens.
  *
  * @example
  * ```html
- * <kb-card direction="row" value="42">
+ * <kb-card direction="row">
  *   <kb-text>Content</kb-text>
  * </kb-card>
  * ```
@@ -66,12 +53,12 @@ export default class KUBACardElement extends HTMLElement {
 
   /**
    * Height of the card (reflects the `height` attribute), normalized by
-   * the `resizing` filter (see {@link KUBACardHeightAttribute}). Setting
+   * the `resizing` filter (see {@link KUBACardResizingAttribute}). Setting
    * it schedules a style-only re-render instead of a full repaint.
    * Inherited from the `Height` mixin.
    * @default 'auto'
    */
-  height: KUBACardHeightAttribute | (string & {})
+  height: KUBACardResizingAttribute | (string & {})
 
   /**
    * The element's `ElementInternals`, lazily attached on first access.
@@ -91,27 +78,13 @@ export default class KUBACardElement extends HTMLElement {
   on: KUBACardOnAttribute | (string & {})
 
   /**
-   * Arbitrary payload carried by the card (reflects the `value`
-   * attribute), sent as the detail of the `"clicked"` event.
-   * @default ''
-   */
-  value: string
-
-  /**
    * Width of the card (reflects the `width` attribute), normalized by
-   * the `resizing` filter (see {@link KUBACardWidthAttribute}). Setting
+   * the `resizing` filter (see {@link KUBACardResizingAttribute}). Setting
    * it schedules a style-only re-render instead of a full repaint.
    * Inherited from the `Width` mixin.
    * @default 'auto'
    */
-  width: KUBACardWidthAttribute | (string & {})
-
-  /**
-   * Dispatches a `"clicked"` event carrying `this.value` as detail,
-   * absorbing any inner click/clicked events from descendants.
-   * @returns This element, for chaining.
-   */
-  click(): this
+  width: KUBACardResizingAttribute | (string & {})
 }
 
 declare global {

@@ -1,23 +1,27 @@
-import { attributeChanged, define } from '@directive'
+import { define } from '@directive'
+import attributeChanged, { enumerating } from '@directive/attributeChanged'
 import { paint, retouch } from '@dom'
 import Echo from '@echo'
-import on, { customEvent, stop } from '@event'
-import { Height, Hidden, Width } from '@mixin'
-import component from './component'
-import style from './style'
+import { Height, Hidden, Identity, role, Width } from '@mixin'
+import component from './component.js'
+import { DIRECTIONS } from './direction.js'
+import style from './style.js'
 
 @define('kb-card')
 @paint(component, style)
-class Card extends Echo(Height(Hidden(Width(HTMLElement)))) {
+class Card extends Identity(Echo(Height(Hidden(Width(HTMLElement))))) {
   #direction
   #internals
-  #value
 
   get direction() {
-    return (this.#direction ??= 'column')
+    return (this.#direction ??= DIRECTIONS.COLUMN)
   }
 
-  @attributeChanged('direction')
+  // `enumerating(DIRECTIONS)` only propagates a value in the known tokens —
+  // an unknown one never reaches the setter, so `direction` keeps whatever
+  // was last valid and the CSS interpolation in style.js never sees an
+  // invalid keyword.
+  @attributeChanged('direction', enumerating(DIRECTIONS))
   @retouch
   set direction(value) {
     this.#direction = value
@@ -27,28 +31,15 @@ class Card extends Echo(Height(Hidden(Width(HTMLElement)))) {
     return (this.#internals ??= this.attachInternals())
   }
 
-  get value() {
-    return (this.#value ??= '')
-  }
-
-  @attributeChanged('value')
-  set value(value) {
-    this.#value = value
+  // A layout box with no meaning of its own: declaring it presentational
+  // keeps it from adding a generic node around whatever it groups.
+  get [role]() {
+    return 'none'
   }
 
   constructor() {
     super()
-    this.attachShadow({ mode: 'open', delegatesFocus: true })
-  }
-
-  // Intercepts both native "click" and re-dispatched "clicked" events from
-  // descendants (stopping them), then re-emits a single "clicked" event
-  // carrying `this.value`, so a card acts as one clickable unit.
-  @on.click('*', stop)
-  @on.clicked('*', stop)
-  click() {
-    this.dispatchEvent(customEvent('clicked', this.value))
-    return this
+    this.attachShadow({ mode: 'open' })
   }
 }
 
