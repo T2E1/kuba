@@ -1,13 +1,20 @@
-import { attributeChanged, define } from '@directive'
+import { define } from '@directive'
+import attributeChanged, {
+  enumerating,
+  escaping,
+} from '@directive/attributeChanged'
 import { paint, repaint, retouch } from '@dom'
 import Echo from '@echo'
+import { Hidden } from '@mixin'
 import component from './component.js'
+import { ORIENTATIONS } from './orientation.js'
 import style from './style.js'
 
 @define('kb-cover')
 @paint(component, style)
-class Cover extends Echo(HTMLElement) {
+class Cover extends Echo(Hidden(HTMLElement)) {
   #alt
+  #internals
   #orientation
   #src
 
@@ -15,17 +22,23 @@ class Cover extends Echo(HTMLElement) {
     return (this.#alt ??= '')
   }
 
-  @attributeChanged('alt')
+  // `escaping` runs first so `component.js` can interpolate `alt` straight
+  // into the attribute without escaping it itself.
+  @attributeChanged('alt', escaping)
   @repaint
   set alt(value) {
     this.#alt = value
   }
 
-  get orientation() {
-    return (this.#orientation ??= 'landscape')
+  get internals() {
+    return (this.#internals ??= this.attachInternals())
   }
 
-  @attributeChanged('orientation')
+  get orientation() {
+    return (this.#orientation ??= ORIENTATIONS.LANDSCAPE)
+  }
+
+  @attributeChanged('orientation', enumerating(ORIENTATIONS))
   @retouch
   set orientation(value) {
     this.#orientation = value
@@ -35,7 +48,9 @@ class Cover extends Echo(HTMLElement) {
     return (this.#src ??= '')
   }
 
-  @attributeChanged('src')
+  // `escaping` runs first so `component.js` can interpolate `src` straight
+  // into the attribute without escaping it itself.
+  @attributeChanged('src', escaping)
   @repaint
   set src(value) {
     this.#src = value

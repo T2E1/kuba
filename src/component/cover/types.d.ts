@@ -37,6 +37,17 @@ export default class KUBACoverElement extends HTMLElement {
   alt: string
 
   /**
+   * Whether the cover is hidden (reflects the `hidden` attribute). The
+   * attribute value `"false"` or `"0"` (or the attribute being absent)
+   * reads as `false`; any other value — including `""`, as in
+   * `<kb-cover hidden>` — reads as `true`. Setting the property to `false`
+   * removes the attribute; a truthy value adds the `hidden` custom element
+   * state, mixin `Hidden`, mirrored in `:state(hidden)`.
+   * @default false
+   */
+  hidden: boolean
+
+  /**
    * Arc string wiring an event from another element to this cover, in the
    * form `source/event:type/sink` (see {@link KUBACoverOnAttribute}).
    * Inherited from the `Echo` mixin. Reflects the `on` attribute.
