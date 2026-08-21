@@ -16,7 +16,7 @@ export default defineConfig({
       headless: true,
       instances: [{ browser: 'chromium' }],
     },
-    include: ['packages/**/*.test.js'],
+    include: ['{src,packages}/**/*.test.js'],
     setupFiles: ['./vitest.setup.js'],
   },
 })

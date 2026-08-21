@@ -11,11 +11,11 @@ const r = (p) => resolve(import.meta.dirname, p)
  * same way without duplicating the map.
  */
 export const aliases = {
-  '@behavior': r('packages/behavior'),
-  '@component': r('packages/component'),
-  '@data': r('packages/data'),
-  '@form': r('packages/form'),
-  '@layout': r('packages/layout'),
+  '@behavior': r('src/behavior'),
+  '@component': r('src/component'),
+  '@data': r('src/data'),
+  '@form': r('src/form'),
+  '@layout': r('src/layout'),
   '@cookie': r('packages/cookie'),
   '@http': r('packages/http/index.js'),
   '@directive': r('packages/directive'),
@@ -31,7 +31,7 @@ export const aliases = {
   '@result': r('packages/result'),
   '@router': r('packages/router'),
   '@spark': r('packages/spark'),
-  '@typography': r('packages/typography'),
+  '@typography': r('src/typography'),
   '@test': r('vitest.helpers.js'),
 }
 

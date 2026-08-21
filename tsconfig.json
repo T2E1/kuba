@@ -4,11 +4,11 @@
     "experimentalDecorators": true,
     "target": "ES2019",
     "paths": {
-      "@behavior/*": ["packages/behavior/*"],
-      "@component/*": ["packages/component/*"],
-      "@data/*": ["packages/data/*"],
-      "@form/*": ["packages/form/*"],
-      "@layout/*": ["packages/layout/*"],
+      "@behavior/*": ["src/behavior/*"],
+      "@component/*": ["src/component/*"],
+      "@data/*": ["src/data/*"],
+      "@form/*": ["src/form/*"],
+      "@layout/*": ["src/layout/*"],
       "@cookie/*": ["packages/cookie/*"],
       "@http": ["packages/http/index.js"],
       "@directive/*": ["packages/directive/*"],
@@ -24,7 +24,7 @@
       "@result/*": ["packages/result/*"],
       "@router/*": ["packages/router/*"],
       "@spark/*": ["packages/spark/*"],
-      "@typography/*": ["packages/typography/*"],
+      "@typography/*": ["src/typography/*"],
       "@test": ["vitest.helpers.js"]
     }
   }

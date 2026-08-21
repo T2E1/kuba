@@ -21,7 +21,8 @@
   "files": [
     "dist",
     "types.d.ts",
-    "packages/**/types.d.ts"
+    "packages/**/types.d.ts",
+    "src/**/types.d.ts"
   ],
   "types": "./types.d.ts",
   "exports": {
