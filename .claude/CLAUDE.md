@@ -47,7 +47,7 @@ mesma tabela de decisão em dois lugares, divergindo até uma delas dar a respos
 | Uma sequência fixa que você dispara | `commands/` |
 | Algo que deve rodar sozinho | infraestrutura — hook, `pre-commit`, CI |
 
-## Os nove ofícios, e quando acionar cada um
+## Os dez ofícios, e quando acionar cada um
 
 Nenhum agent conhece outro: eu escolho, com que escopo e em que ordem. Eles não conversam
 entre si e não veem esta conversa — recebem o escopo que eu passo, e devolvem a entrega.
@@ -63,6 +63,7 @@ entre si e não veem esta conversa — recebem o escopo que eu passo, e devolvem
 | `writer` | Página de `docs/`, tradução, `README`, `CONTRIBUTING` | JSDoc no código — é do `developer` |
 | `releaser` | Julgar se uma mudança quebra consumidor, e preparar versão | Commit corriqueiro — é o `/ship` |
 | `builder` | `biome.json`, os configs, hooks de husky, workflows, o que entra em `dist/` | Código de `src/` ou `packages/` |
+| `curator` | O consumidor corrige a entrega de qualquer ofício, e a lacuna que deixou passar o erro precisa ser localizada e fechada em `.claude/` | Corrigir a entrega em si, ou decidir a forma de algo novo |
 
 ### Fluxos que se repetem
 
@@ -77,6 +78,7 @@ entre si e não veem esta conversa — recebem o escopo que eu passo, e devolvem
 | Comportamento mudou | `developer` → `tester` → `writer`, nesta ordem: documentar antes do teste documenta intenção |
 | Render lento, bundle grande | `deepdive` → `architect`, se a correção mudar a forma |
 | CI ou build quebrado | `builder`, sozinho |
+| Consumidor corrigiu a entrega de qualquer ofício | `curator`, sozinho — refina a rule, skill ou agent que deixou passar |
 | Acrescentar rule, skill, agent ou command | `/extend` — sem agent; a skill `standard` decide a camada |
 | Começar a trabalhar, ou abrir um pull request | `/sync` — sem agent; mecânica de git |
 
@@ -157,4 +159,4 @@ ainda reflete o código real.
 
 **Criado em**: 2026-08-11
 **Atualizado em**: 2026-08-21
-**Versão**: 1.4
+**Versão**: 1.6
