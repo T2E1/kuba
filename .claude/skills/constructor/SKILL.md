@@ -39,19 +39,31 @@ segurança real.
 
 ### `delegatesFocus`
 
-| `true` | Omitir |
+A decisão não é pela categoria do componente — é por **o que o shadow root contém**.
+`delegatesFocus` muda duas coisas: `:host(:focus-visible)` só casa quando algo dentro do
+shadow tree (incluindo conteúdo slotted, que é projetado ali) recebe foco; e `elemento.
+focus()` chamado de fora passa a focar o primeiro descendente focável em vez de não fazer
+nada. Sem ele, um container cujo filho slotted é focado não tem como se estilizar em
+resposta — o anel de foco fica só no filho, nunca no `:host`.
+
+| Situação | `delegatesFocus` |
 |---|---|
-| Botão, link, label interativo | Ícone, imagem |
-| Input e formulário | Container passivo |
-| Container interativo | Decoração, separador |
+| `component.js` renderiza `<slot>` que aceita conteúdo arbitrário do consumidor | `true` — o conteúdo slotted pode ser focável, mesmo que o componente não seja ele mesmo um controle |
+| Sub-elemento nativo interativo no próprio shadow root (`<button>`, `<input>`) | `true` — é o padrão de `kb-button`, `kb-input`, `kb-textarea` |
+| Nenhum `<slot>`, e nada focável no shadow root (`kb-icon`, `kb-cover`, `kb-logo`, `kb-progress`) | Omitir |
+| Slot cujo conteúdo nunca é focável por contrato do próprio componente (raro) | Omitir, com comentário no `constructor` explicando a exceção — a ausência aqui é decisão, não esquecimento |
+
+Isso vale **independente** de o componente ter foco, papel ou ação própria. Um container
+puramente passivo — sem `tabIndex`, sem `role`, sem interceptar clique — ainda delega foco
+se aceita `<slot>`: é o filho que pode ser focável, não o host.
 
 ### Categorias de componente
 
-| Categoria | Shadow DOM | `delegatesFocus` | Exemplo |
+| Categoria | Shadow DOM | Sub-elemento nativo ou `<slot>` de conteúdo arbitrário | Comportamental |
 |---|---|---|---|
-| Interativo | Sim | Sim | Button, Link |
-| Container | Sim | Sim | Card |
-| Visual | Sim | Não | Icon |
+| Interativo (com controle nativo) | Sim | Sim — `delegatesFocus: true` | Button, Input |
+| Container (agrupa conteúdo do consumidor) | Sim | Sim — `delegatesFocus: true` | Card, Stack, Header |
+| Visual (sem slot, sem foco possível) | Sim | Não | Icon, Cover |
 | Comportamental | Não | — | On, Redirect |
 
 Componente comportamental usa o mixin `Headless` e **não define constructor**.
@@ -76,7 +88,7 @@ pública que causou o bug do mixin `Hidden` com `<kb-button>`.
 
 - [ ] `super()` é a primeira linha
 - [ ] `mode: 'open'` no `attachShadow`
-- [ ] `delegatesFocus` coerente com a categoria do componente
+- [ ] `delegatesFocus` presente se `component.js` renderiza `<slot>` de conteúdo arbitrário ou um sub-elemento nativo focável; omitido só quando nada no shadow root pode ser focado
 - [ ] Nenhum `getAttribute` no constructor
 - [ ] Nenhum acesso a DOM externo
 - [ ] Nenhum `addEventListener` — isso é `connectedCallback`
@@ -123,5 +135,5 @@ instância.
 ---
 
 **Criado em**: 2026-04-01
-**Atualizado em**: 2026-08-10
-**Versão**: 2.0
+**Atualizado em**: 2026-08-20
+**Versão**: 2.1

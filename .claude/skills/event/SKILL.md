@@ -42,6 +42,15 @@ Ordem dos elementos: **tipo → seletor (opcional) → modificadores (opcionais)
 Modificadores são funções puras: transformam o evento antes do handler, sem efeito
 colateral próprio.
 
+**Limite: `on` escuta o `shadowRoot`, nunca o host.** O decorator registra o listener em
+`this.shadowRoot`, delegando por seletor. Isso alcança qualquer evento que nasça *dentro* da
+árvore de shadow — incluindo conteúdo slotted, que atravessa o `<slot>` a caminho de fora —
+mas nunca um evento cujo `target` seja o próprio host (por exemplo, um `keydown` disparado
+quando o host está focado por `tabIndex`, sem nenhum filho focável no slot). `shadowRoot` não
+é ancestral do host na árvore composta; só recebe o que se origina dentro dele. Um elemento
+que precisa reagir a evento disparado nele mesmo — teclado num host sem sub-elemento nativo
+focável, por exemplo — não tem essa opção resolvida por `on` hoje. Ver Troubleshooting.
+
 ### `CustomEvent`
 
 | Campo | Valor | Por quê |
@@ -104,6 +113,22 @@ elemento foi movido no DOM — o que dispara `disconnected` e `connected` de nov
 funciona.
 **Solução:** teste de interação (skill `preview`) fazendo `expect` do `detail`.
 
+### `on.{tipo}` nunca dispara para um evento no próprio host
+
+**Causa:** o listener vive em `shadowRoot`, que não é ancestral do host na árvore composta —
+só evento nascido dentro do shadow tree (incluindo slotted) chega até ele. Um `keydown` (ou
+qualquer evento) despachado com `target` igual ao próprio elemento — típico de um host
+focável via `tabIndex`, sem sub-elemento nativo que herde o foco — nunca é observado por
+`on`, mesmo com seletor `'*'`. Verificado empiricamente: um evento `bubbles: true, composed:
+true` disparado no host não é visto por um listener em `host.shadowRoot`.
+**Solução hoje:** `addEventListener` manual no próprio elemento (não no `shadowRoot`),
+registrado no constructor ou em `connectedCallback` conforme o ciclo de vida exigir —
+aceitando a exceção à convenção de "listener por decorator" desta skill, com comentário
+explicando o motivo. Não existe workaround por seletor ou modificador: é um limite estrutural
+de `listen.js` (`packages/event/listen.js`), não de configuração. Estender `on` para também
+escutar no host é mudança de infraestrutura compartilhada — decisão do `architect`, fora do
+escopo de um componente único.
+
 ## Rules relacionadas
 
 - [009 — Diga, Não Pergunte](../../rules/009_diga-nao-pergunte.md): o evento notifica o que aconteceu; quem escuta decide o que fazer.
@@ -126,5 +151,5 @@ funciona.
 ---
 
 **Criado em**: 2026-04-01
-**Atualizado em**: 2026-08-10
-**Versão**: 2.0
+**Atualizado em**: 2026-08-20
+**Versão**: 2.1
