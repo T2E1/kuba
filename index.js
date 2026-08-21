@@ -1,4 +1,4 @@
-import '@pixel/index.css'
+import '@pixel'
 import '@polyfill'
 import '@behavior'
 import '@component'
