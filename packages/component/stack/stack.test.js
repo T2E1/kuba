@@ -1,5 +1,5 @@
+import { inner, mount } from '@test'
 import { expect, test } from 'vitest'
-import { inner, mount } from '../../../vitest.helpers.js'
 
 test('stays out of the accessibility tree', async () => {
   // A layout box has no meaning of its own; without this it shows up as a

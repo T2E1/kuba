@@ -1,5 +1,5 @@
+import { mount } from '@test'
 import { expect, test, vi } from 'vitest'
-import { mount } from '../../../vitest.helpers.js'
 
 // The Storybook story this replaces drove a real request against a public dog
 // API and waited up to 10s for it. That made the check depend on a third

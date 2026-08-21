@@ -1,5 +1,5 @@
+import { inner, mount } from '@test'
 import { expect, test, vi } from 'vitest'
-import { inner, mount } from '../../../vitest.helpers.js'
 
 test('is a progressbar to assistive technology', async () => {
   // The shadow root is a bare <div>, so without the role the bar is an

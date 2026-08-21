@@ -24,7 +24,8 @@
       "@result/*": ["packages/result/*"],
       "@router/*": ["packages/router/*"],
       "@spark/*": ["packages/spark/*"],
-      "@typography/*": ["packages/typography/*"]
+      "@typography/*": ["packages/typography/*"],
+      "@test": ["vitest.helpers.js"]
     }
   }
 }

@@ -1,6 +1,6 @@
+import { inner, mount } from '@test'
 import { expect, test, vi } from 'vitest'
 import { userEvent } from 'vitest/browser'
-import { inner, mount } from '../../../vitest.helpers.js'
 
 const markup = `
   <kb-form autorender>

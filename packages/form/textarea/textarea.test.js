@@ -1,6 +1,6 @@
+import { inner, mount } from '@test'
 import { expect, test, vi } from 'vitest'
 import { userEvent } from 'vitest/browser'
-import { inner, mount } from '../../../vitest.helpers.js'
 
 test('dispatches changed with the typed value', async () => {
   // The same event name <kb-input> and <kb-fileupload> publish, so one arc

@@ -1,6 +1,6 @@
+import { clickInner, inner, mount } from '@test'
 import { expect, test, vi } from 'vitest'
 import { userEvent } from 'vitest/browser'
-import { clickInner, inner, mount } from '../../../vitest.helpers.js'
 
 test('dispatches clicked carrying its value', async () => {
   const body = mount('<kb-button value="42">Save</kb-button>')

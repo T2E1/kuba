@@ -1,5 +1,5 @@
+import { clickInner, mount } from '@test'
 import { expect, test, vi } from 'vitest'
-import { clickInner, mount } from '../../../vitest.helpers.js'
 
 test('attaches more than one arc to the same host', async () => {
   // A host carries a single `on` attribute, so any additional subscription

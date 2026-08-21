@@ -1,5 +1,5 @@
+import { clickInner, mount } from '@test'
 import { afterEach, expect, test, vi } from 'vitest'
-import { clickInner, mount } from '../../../vitest.helpers.js'
 
 // go() calls history.pushState, which outlives the test — restore the entry
 // so the next test doesn't start on a URL a previous one navigated to.

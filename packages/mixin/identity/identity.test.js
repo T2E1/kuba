@@ -1,5 +1,5 @@
+import { mount } from '@test'
 import { expect, test, vi } from 'vitest'
-import { mount } from '../../../vitest.helpers.js'
 import Hidden from '../hidden'
 import Identity, { role } from './index'
 

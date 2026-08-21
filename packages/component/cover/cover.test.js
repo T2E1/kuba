@@ -1,5 +1,5 @@
+import { clickInner, inner, mount } from '@test'
 import { expect, test, vi } from 'vitest'
-import { clickInner, inner, mount } from '../../../vitest.helpers.js'
 
 test('projects src and alt onto its internal image', async () => {
   const body = mount(

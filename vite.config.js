@@ -32,6 +32,7 @@ export const aliases = {
   '@router': r('packages/router'),
   '@spark': r('packages/spark'),
   '@typography': r('packages/typography'),
+  '@test': r('vitest.helpers.js'),
 }
 
 export default defineConfig({

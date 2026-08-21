@@ -1,6 +1,6 @@
+import { inner, mount } from '@test'
 import { expect, test, vi } from 'vitest'
 import { userEvent } from 'vitest/browser'
-import { inner, mount } from '../../../vitest.helpers.js'
 
 // A 1x1 transparent GIF — the smallest real image a FileReader can encode, so
 // the test exercises the actual read path instead of stubbing it.

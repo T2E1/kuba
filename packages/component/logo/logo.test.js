@@ -1,5 +1,5 @@
+import { mount } from '@test'
 import { expect, test, vi } from 'vitest'
-import { mount } from '../../../vitest.helpers.js'
 
 test('hides itself when it carries no name', async () => {
   // The <svg> has no <title>, so an unnamed logo would be an image with

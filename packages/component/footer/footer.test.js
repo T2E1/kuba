@@ -1,5 +1,5 @@
+import { inner, mount } from '@test'
 import { expect, test } from 'vitest'
-import { inner, mount } from '../../../vitest.helpers.js'
 
 test('is the contentinfo landmark', async () => {
   const body = mount('<kb-footer></kb-footer>')

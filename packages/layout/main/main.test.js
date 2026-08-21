@@ -1,5 +1,5 @@
+import { inner, mount } from '@test'
 import { expect, test } from 'vitest'
-import { inner, mount } from '../../../vitest.helpers.js'
 
 test('is the main landmark', async () => {
   // The shadow root is a bare <slot>, so without this the page has no `main`

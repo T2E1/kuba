@@ -1,5 +1,5 @@
+import { mount } from '@test'
 import { expect, test, vi } from 'vitest'
-import { mount } from '../../../vitest.helpers.js'
 
 test('hides itself when it carries no name', async () => {
   // Decorative is the right default: without a name the ligature text is what
