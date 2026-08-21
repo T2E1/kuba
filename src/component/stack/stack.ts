@@ -1,8 +1,10 @@
-import { attributeChanged, define } from '@directive'
+import { define } from '@directive'
+import attributeChanged, { enumerating } from '@directive/attributeChanged'
 import { paint, retouch } from '@dom'
 import Echo from '@echo'
 import { Height, Hidden, Identity, role, Width } from '@mixin'
 import component from './component.js'
+import { DIRECTIONS } from './direction.js'
 import style from './style.js'
 
 @define('kb-stack')
@@ -25,10 +27,13 @@ class Stack extends Identity(Hidden(Width(Height(Echo(HTMLElement))))) {
   }
 
   get direction() {
-    return (this.#direction ??= 'row')
+    return (this.#direction ??= DIRECTIONS.ROW)
   }
 
-  @attributeChanged('direction')
+  // `enumerating(DIRECTIONS)` only propagates a value in the known tokens —
+  // an unknown one never reaches the setter, so the CSS interpolation in
+  // style.js never sees an invalid keyword.
+  @attributeChanged('direction', enumerating(DIRECTIONS))
   @retouch
   set direction(value) {
     this.#direction = value
