@@ -17,10 +17,8 @@ registrar nada.
 | [`@t2e1/kuba/http`](/pt-br/build-elements/http) | Um wrapper de `fetch` que devolve um objeto de resultado em vez de lançar erro. |
 | `@t2e1/kuba/result` | O tipo de resultado usado pelo `http`. |
 | [`@t2e1/kuba/router`](/pt-br/build-elements/router) | Registro de rotas, `params`, `args`, `urlFor` e o evento `pushstate`. |
-| `@t2e1/kuba/interpolate` | Interpolação de placeholders `{path}` para templates. |
 | `@t2e1/kuba/cookie` | Helpers de leitura/escrita de cookie. |
 | `@t2e1/kuba/renderer` | A entrada de renderização usada pelo `paint`. |
-| `@t2e1/kuba/polyfill` | O shim de `setImmediate` que agrupa repaints. |
 
 !> **`@t2e1/kuba/pixel` está declarado mas não é publicado.** O mapa de exports
 aponta para `packages/pixel/index.css`, que a lista `files` do pacote exclui,

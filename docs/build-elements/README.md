@@ -17,10 +17,8 @@ anything.
 | [`@t2e1/kuba/http`](/build-elements/http) | A `fetch` wrapper returning a result object instead of throwing. |
 | `@t2e1/kuba/result` | The result type used by `http`. |
 | [`@t2e1/kuba/router`](/build-elements/router) | Route registration, `params`, `args`, `urlFor` and the `pushstate` event. |
-| `@t2e1/kuba/interpolate` | `{path}` placeholder interpolation for templates. |
 | `@t2e1/kuba/cookie` | Cookie read/write helpers. |
 | `@t2e1/kuba/renderer` | The rendering entry used by `paint`. |
-| `@t2e1/kuba/polyfill` | The `setImmediate` shim that batches repaints. |
 
 !> **`@t2e1/kuba/pixel` is declared but not published.** The export map points at
 `packages/pixel/index.css`, which the package's `files` list excludes, so the
