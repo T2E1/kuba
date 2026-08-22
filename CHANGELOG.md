@@ -6,6 +6,37 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) and 
 
 ---
 
+## [0.2.0-alpha.2] — 2026-08-22
+
+### Added
+
+- `<kb-footer>` spaces the elements projected into a single region. `leading` and `trailing` are flex rows, so two links slotted into `trailing` no longer render flush against each other. The gap reads `--footer-space-gap`, falling back to `--spacing_inset-xs`; set it to `0` to get the old flush rendering back
+
+### Changed
+
+- **Breaking:** `<kb-footer>` no longer ships a default copyright line. Its `leading` slot used to fall back to `© 2025 Memoize. Todos os direitos reservados.` — a hardcoded year, a company that is not yours, in a language the rest of the library does not speak. A footer with nothing slotted into `leading` now renders that region empty. Write your own notice into the slot
+- **Breaking:** `<kb-footer>`'s `leading` and `trailing` are `display: flex` instead of participating in the surrounding layout as plain boxes. Content projected into them is now laid out as a row, centred on the cross axis, with `leading` packed to the start and `trailing` to the end. A slotted element that relied on the previous flow — a block filling the region's width, or several inline nodes wrapping — will lay out differently
+- **Breaking:** `internals` is gone from `<kb-footer>`'s published type declaration, following `<kb-button>`, `<kb-card>` and `<kb-cover>`. The property still exists at runtime, because the `Identity` mixin writes the landmark's role and name through it, but exposing `ElementInternals` on the host hands out write access to form state and the accessibility tree. TypeScript code reading `footer.internals` stops compiling; nothing in the documented API needed it
+
+### Migration
+
+The copyright line is now yours to write:
+
+```html
+<!-- before: the region filled itself in -->
+<kb-footer>
+  <kb-text slot="trailing" size="xxxs">Privacy Policy</kb-text>
+</kb-footer>
+
+<!-- after: say it yourself, in your language and your year -->
+<kb-footer>
+  <kb-text slot="leading" size="xxxs">© 2026 Your Company</kb-text>
+  <kb-text slot="trailing" size="xxxs">Privacy Policy</kb-text>
+</kb-footer>
+```
+
+Nothing replaces the fallback: a legal notice with a year baked into a published package goes stale the moment the year turns.
+
 ## [0.2.0-alpha.1] — 2026-08-21
 
 ### Added
