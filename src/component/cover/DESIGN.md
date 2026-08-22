@@ -1,6 +1,6 @@
 # DESIGN — `kb-cover`
 
-**Pacote**: `packages/component/cover/`
+**Pacote**: `src/component/cover/`
 **Tag**: `<kb-cover>`
 **Status**: documentação retroativa — a implementação precede este documento
 **Data**: 2026-08-20
@@ -209,10 +209,10 @@ puro, sem filtro. A property aceitava e guardava qualquer string. A única barre
 valor inválido estava em `style.js`, comparando `cover.orientation === 'portrait'` duas vezes
 na mesma linha — uma para o nome da custom property, outra para o literal de fallback.
 
-**Correção aplicada** — o mesmo padrão que `packages/component/card/direction.js` e
-`packages/component/card/card.ts` já aplicam para `direction`:
+**Correção aplicada** — o mesmo padrão que `src/component/card/direction.js` e
+`src/component/card/card.ts` já aplicam para `direction`:
 
-1. `packages/component/cover/orientation.js` criado com o enum congelado
+1. `src/component/cover/orientation.js` criado com o enum congelado
    `ORIENTATIONS = Object.freeze({ LANDSCAPE: 'landscape', PORTRAIT: 'portrait' })` —
    espelho exato de `card/direction.js`.
 2. Em `cover.ts`, o decorator passou a ser

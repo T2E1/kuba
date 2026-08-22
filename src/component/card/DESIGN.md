@@ -1,6 +1,6 @@
 # DESIGN — `kb-card`
 
-**Pacote**: `packages/component/card/`
+**Pacote**: `src/component/card/`
 **Tag**: `<kb-card>`
 **Status**: documentação retroativa — a implementação precede este documento
 **Data**: 2026-08-20
