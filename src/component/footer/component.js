@@ -5,9 +5,7 @@ function component() {
     <wrapper>
       <container>
         <leading>
-          <slot name="leading">
-            <kb-text size="xxxs">© 2025 Memoize. Todos os direitos reservados.</kb-text>
-          </slot>
+          <slot name="leading"></slot>
         </leading>
         <trailing>
           <slot name="trailing"></slot>

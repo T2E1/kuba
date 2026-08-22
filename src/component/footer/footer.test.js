@@ -27,7 +27,7 @@ test('projects content into its leading and trailing regions', async () => {
   // itself is what's asserted.
   const body = mount(`
     <kb-footer>
-      <kb-text slot="leading" size="xxxs">© 2026 Memoize</kb-text>
+      <kb-text slot="leading" size="xxxs">© 2026 Your Company</kb-text>
       <kb-text slot="trailing" size="xxxs">Privacy Policy</kb-text>
     </kb-footer>
   `)
@@ -36,13 +36,41 @@ test('projects content into its leading and trailing regions', async () => {
   const leading = await inner(footer, 'slot[name="leading"]')
   const trailing = await inner(footer, 'slot[name="trailing"]')
 
-  expect(leading.assignedElements()[0].textContent).toBe('© 2026 Memoize')
+  expect(leading.assignedElements()[0].textContent).toBe('© 2026 Your Company')
   expect(trailing.assignedElements()[0].textContent).toBe('Privacy Policy')
 })
 
-test('falls back to its built-in copyright line', async () => {
-  // With nothing slotted into `leading`, the <slot>'s own default content
-  // shows through.
+test('alt names the landmark when a page has more than one', async () => {
+  const body = mount('<kb-footer alt="Site"></kb-footer>')
+  const footer = body.querySelector('kb-footer')
+
+  await inner(footer, 'wrapper')
+
+  expect(footer.internals.ariaLabel).toBe('Site')
+})
+
+test('spaces multiple elements projected into the same region', async () => {
+  // A single slot can receive more than one projected element — the gap
+  // token is what keeps them from rendering flush against each other.
+  // getComputedStyle only proves the declaration exists, not that it's
+  // applied to real layout, so geometry is measured via getBoundingClientRect.
+  const body = mount(`
+    <kb-footer>
+      <kb-text slot="trailing" size="xxxs">Privacy Policy</kb-text>
+      <kb-text slot="trailing" size="xxxs">Terms of Service</kb-text>
+    </kb-footer>
+  `)
+  const footer = body.querySelector('kb-footer')
+  const trailing = await inner(footer, 'slot[name="trailing"]')
+  const [first, second] = trailing.assignedElements()
+
+  const firstRect = first.getBoundingClientRect()
+  const secondRect = second.getBoundingClientRect()
+
+  expect(secondRect.left).toBeGreaterThan(firstRect.right)
+})
+
+test('leaves leading empty when nothing is slotted into it', async () => {
   const body = mount(`
     <kb-footer>
       <kb-text slot="trailing" size="xxxs">Privacy Policy</kb-text>
@@ -55,5 +83,5 @@ test('falls back to its built-in copyright line', async () => {
   )
 
   expect(leading.assignedElements()).toHaveLength(0)
-  expect(leading.textContent).toContain('Todos os direitos reservados')
+  expect(leading.textContent.trim()).toBe('')
 })

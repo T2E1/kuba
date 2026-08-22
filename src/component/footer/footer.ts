@@ -9,6 +9,9 @@ import style from './style.js'
 class Footer extends Identity(HTMLElement) {
   #internals
 
+  // Exposed so the `Identity` mixin (`this.internals.role`/`ariaLabel`) can
+  // publish the landmark's semantics — see mixin/identity/identity.ts.
+  // Internal only: not part of the published contract (see types.d.ts).
   get internals() {
     return (this.#internals ??= this.attachInternals())
   }

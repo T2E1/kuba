@@ -19,6 +19,20 @@ function style() {
           margin: 0 auto;
           max-width: var(--footer-size-max-width, 1024px);
           padding: var(--footer-space-inset, var(--spacing_inset-xs));
+
+          leading {
+            align-items: center;
+            display: flex;
+            gap: var(--footer-space-gap, var(--spacing_inset-xs));
+            justify-content: start;
+          }
+
+          trailing {
+            align-items: center;
+            display: flex;
+            gap: var(--footer-space-gap, var(--spacing_inset-xs));
+            justify-content: end;
+          }
         }
       }
     }
