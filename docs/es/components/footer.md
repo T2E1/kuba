@@ -8,7 +8,7 @@ cosa no asignada a `leading` o `trailing` se descarta.
 
 ```html preview
 <kb-footer>
-  <kb-text slot="leading" size="xxxs">© 2026 Memoize</kb-text>
+  <kb-text slot="leading" size="xxxs">© 2026 Your Company</kb-text>
   <kb-text slot="trailing" size="xxxs">Política de Privacidad</kb-text>
 </kb-footer>
 ```
@@ -35,10 +35,9 @@ cosa no asignada a `leading` o `trailing` se descarta.
 - **La barra superior de la página** — usa `<kb-header>`, la misma primitiva de
   fila centrada, que dispone sus regiones como filas flex y es el landmark
   correspondiente de ese extremo.
-- **Un pie dentro de una tarjeta, diálogo o sección.** Este renderiza un
-  `<footer>` nativo y expone un landmark `contentinfo`, que pertenece a la
-  página — usa un `<kb-stack>` para la fila de acciones al final de una
-  superficie contenida.
+- **Un pie dentro de una tarjeta, diálogo o sección.** El host publica el
+  landmark `contentinfo`, que pertenece a la página — usa un `<kb-stack>` para
+  la fila de acciones al final de una superficie contenida.
 - **Agrupar contenido arbitrario en dos columnas** — usa `<kb-stack>` o un
   `<kb-card direction="row">`. Este fija la altura y el ancho máximo.
 
@@ -54,36 +53,29 @@ cosa no asignada a `leading` o `trailing` se descarta.
   estrecho en lugar de desbordarlo. Semánticamente sigue perteneciendo a la raíz
   de la página.
 
-El wrapper de cada slot es un elemento simple y sin estilos — a diferencia de
-`<kb-header>`, no dispone a sus hijos como fila flex. Dos elementos colocados en
-la misma región fluyen inline sin espaciado, así que envuélvelos en un
-`<kb-stack direction="row">` cuando necesites espacio entre ellos.
+El wrapper de cada slot dispone a sus hijos como fila flex, igual que
+`<kb-header>`. Dos elementos colocados en la misma región ya quedan
+espaciados entre sí, así que elementos simples bastan — sin necesidad de
+`<kb-stack>`.
 
 ```html preview
 <kb-footer>
-  <kb-text slot="leading" size="xxxs">© 2026 Memoize</kb-text>
-  <kb-stack slot="trailing" direction="row" spacing="nano">
-    <kb-button variant="link">Privacidad</kb-button>
-    <kb-button variant="link">Términos</kb-button>
-  </kb-stack>
+  <kb-text slot="leading" size="xxxs">© 2026 Your Company</kb-text>
+  <kb-button slot="trailing" variant="link">Privacidad</kb-button>
+  <kb-button slot="trailing" variant="link">Términos</kb-button>
 </kb-footer>
 ```
 
 ## Contenido
 
-`leading` tiene contenido de reserva incorporado — una línea de copyright — que
-se muestra siempre que no se coloca nada en él.
+Ninguno de los dos slots tiene contenido por defecto. `leading` y `trailing`
+quedan vacíos hasta que se coloca algo en ellos.
 
 ```html preview
 <kb-footer>
   <kb-text slot="trailing" size="xxxs">Solo trailing está relleno</kb-text>
 </kb-footer>
 ```
-
-!> Trata la reserva como un placeholder, no como un valor por defecto para
-publicar: fija un año, un nombre de empresa y un texto en portugués. Cualquier
-página real debería colocar su propia línea. `trailing` no tiene reserva y queda
-vacío hasta que se rellena.
 
 Mantén ambos lados cortos — la barra mide 72px fijos de alto y no crece, así que
 el contenido que salta de línea la desbordará en vez de agrandarla.
@@ -103,6 +95,7 @@ No despacha eventos; el resto de su superficie es el par de slots con nombre.
 | `--footer-size-height` | `72px` | Altura de la barra, tanto en el host como en la fila centrada interna. |
 | `--footer-size-max-width` | `1024px` | Límite de la fila de contenido centrada; por debajo, la fila sigue el ancho de la barra. |
 | `--footer-space-inset` | `var(--spacing_inset-xs)` | Padding interno de la fila centrada. |
+| `--footer-space-gap` | `var(--spacing_inset-xs)` | Espacio entre elementos colocados en la misma región. |
 
 `kb-footer` no pinta ningún fondo propio, así que el fondo de la página se ve a
 través — establece `background-color` directamente cuando la barra deba leerse
@@ -119,8 +112,11 @@ como una superficie separada:
 
 ## Estados y accesibilidad
 
-- `kb-footer` no tiene atributo `hidden` ni custom states — elimina el propio
-  elemento cuando la barra no deba estar en el layout.
+- `kb-footer` no tiene *propiedad* `hidden` ni custom states — el atributo
+  global nativo `hidden` sigue funcionando (la propia hoja de estilos del
+  navegador oculta cualquier elemento que lo tenga), pero no hay
+  `:host(:state(hidden))` para estilizar. Elimina el propio elemento cuando la
+  barra no deba estar en el layout.
 - El host lleva el landmark `contentinfo`, publicado mediante
   `ElementInternals`. El wrapper del shadow es deliberadamente no semántico: un
   `<footer>` ahí también mapearía a `contentinfo`, dejando dos anidados.
@@ -134,7 +130,7 @@ como una superficie separada:
 
 | Haz | No hagas |
 |---|---|
-| Colocar tu propia línea de copyright en `leading` | Publicar la reserva incorporada, que fija un año, un nombre y un idioma |
+| Colocar tu propia línea de copyright en `leading` | Dejar `leading` vacío y esperar que aparezca una línea de copyright |
 | Mantener un único `kb-footer`, en la raíz de la página | Reutilizarlo como barra inferior de una tarjeta o diálogo |
-| Envolver varios enlaces en un `<kb-stack direction="row">` | Colocar varios elementos lado a lado esperando que la región los espacie |
+| Colocar varios elementos lado a lado y dejar que la región los espacie | Envolverlos en un `<kb-stack direction="row">` — la región ya los dispone como fila flex |
 | Mantener ambos lados en una sola línea corta | Llenar la barra con contenido que salta de línea — la altura de 72px es fija |

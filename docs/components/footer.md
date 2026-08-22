@@ -8,7 +8,7 @@ attributes, no events, and no default slot, so anything not assigned to
 
 ```html preview
 <kb-footer>
-  <kb-text slot="leading" size="xxxs">© 2026 Memoize</kb-text>
+  <kb-text slot="leading" size="xxxs">© 2026 Your Company</kb-text>
   <kb-text slot="trailing" size="xxxs">Privacy Policy</kb-text>
 </kb-footer>
 ```
@@ -34,9 +34,9 @@ attributes, no events, and no default slot, so anything not assigned to
 - **The top bar of the page** — use `<kb-header>`, the same centered-row
   primitive, which lays its regions out as flex rows and is the matching
   landmark for that end.
-- **A footer inside a card, dialog or section.** This renders a native
-  `<footer>` and exposes a `contentinfo` landmark, which belongs to the page —
-  use a `<kb-stack>` for the action row at the bottom of a contained surface.
+- **A footer inside a card, dialog or section.** The host publishes the
+  `contentinfo` landmark, which belongs to the page — use a `<kb-stack>` for
+  the action row at the bottom of a contained surface.
 - **Grouping arbitrary content into two columns** — use `<kb-stack>` or a
   `<kb-card direction="row">`. This fixes the height and the max width.
 
@@ -50,35 +50,28 @@ attributes, no events, and no default slot, so anything not assigned to
   given and only caps its inner row, so it adapts to a narrower container
   instead of overflowing it. Semantically it still belongs at the page root.
 
-Each slot's wrapper is a plain unstyled element — unlike `<kb-header>`, it
-doesn't lay its children out as a flex row. Two elements slotted into the same
-region flow inline with no gap, so wrap them in a `<kb-stack direction="row">`
-when you need spacing between them.
+Each slot's wrapper lays its children out as a flex row, same as
+`<kb-header>`. Two elements slotted into the same region already come spaced
+apart, so plain elements are enough — no `<kb-stack>` needed.
 
 ```html preview
 <kb-footer>
-  <kb-text slot="leading" size="xxxs">© 2026 Memoize</kb-text>
-  <kb-stack slot="trailing" direction="row" spacing="nano">
-    <kb-button variant="link">Privacy</kb-button>
-    <kb-button variant="link">Terms</kb-button>
-  </kb-stack>
+  <kb-text slot="leading" size="xxxs">© 2026 Your Company</kb-text>
+  <kb-button slot="trailing" variant="link">Privacy</kb-button>
+  <kb-button slot="trailing" variant="link">Terms</kb-button>
 </kb-footer>
 ```
 
 ## Content
 
-`leading` has built-in fallback content — a copyright line — that shows whenever
-nothing is slotted into it.
+Neither slot has default content. `leading` and `trailing` stay empty until you
+slot something into them.
 
 ```html preview
 <kb-footer>
   <kb-text slot="trailing" size="xxxs">Only trailing is filled</kb-text>
 </kb-footer>
 ```
-
-!> Treat the fallback as a placeholder, not a default to ship: it hardcodes a
-year, a company name, and Portuguese wording. Any real page should slot its own
-line. `trailing` has no fallback and stays empty until filled.
 
 Keep both sides short — the bar is a fixed 72px tall and doesn't grow, so
 content that wraps will overflow it rather than push it taller.
@@ -98,6 +91,7 @@ It dispatches no events; the rest of its surface is the pair of named slots.
 | `--footer-size-height` | `72px` | Height of the bar, on both the host and the inner centered row. |
 | `--footer-size-max-width` | `1024px` | Cap on the centered content row; below it, the row follows the bar's width. |
 | `--footer-space-inset` | `var(--spacing_inset-xs)` | Inner padding of the centered row. |
+| `--footer-space-gap` | `var(--spacing_inset-xs)` | Gap between elements slotted into the same region. |
 
 `kb-footer` paints no background of its own, so the page background shows
 through — set `background-color` directly when the bar needs to read as a
@@ -114,8 +108,10 @@ separate surface:
 
 ## States and accessibility
 
-- `kb-footer` has no `hidden` attribute and no custom states — remove the
-  element itself when the bar shouldn't be in the layout.
+- `kb-footer` has no `hidden` *property* and no custom states — the native
+  `hidden` global attribute still works (the browser's own stylesheet hides
+  any element with it), but there's no `:host(:state(hidden))` to style.
+  Remove the element itself when the bar shouldn't be in the layout.
 - The host carries the `contentinfo` landmark, published through
   `ElementInternals`. The shadow wrapper is deliberately non-semantic: a
   `<footer>` there would map to `contentinfo` too, leaving two nested landmarks.
@@ -128,7 +124,7 @@ separate surface:
 
 | Do | Don't |
 |---|---|
-| Slot your own copyright line into `leading` | Ship the built-in fallback, which hardcodes a year, a name and a language |
+| Slot your own copyright line into `leading` | Leave `leading` empty and expect a copyright line to appear |
 | Keep a single `kb-footer`, at the page root | Reuse it as the bottom bar of a card or dialog |
-| Wrap multiple links in a `<kb-stack direction="row">` | Slot several elements side by side and expect the region to space them |
+| Slot several elements side by side and let the region space them | Wrap them in a `<kb-stack direction="row">` — the region already lays them out as a flex row |
 | Keep both sides to a single short line | Fill the bar with content that wraps — the 72px height is fixed |
