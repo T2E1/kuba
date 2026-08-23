@@ -37,11 +37,11 @@ atributos, sem eventos, e sem slot padrão, então qualquer coisa não atribuíd
 
 - **A barra inferior da página** — use o `<kb-footer>`, o landmark
   correspondente daquela ponta. Ele compartilha a geometria de linha
-  centralizada, mas deixa as regiões de slot sem estilo em vez de dispô-las como
-  linhas flex.
-- **Um cabeçalho dentro de um card, diálogo ou seção.** Este renderiza um
-  `<header>` nativo em nível de página; uma linha de título dentro de uma
-  superfície contida é um
+  centralizada e também dispõe suas regiões como linhas flex.
+- **Um cabeçalho dentro de um card, diálogo ou seção.** O host publica o
+  landmark `banner`, que pertence à página — o shadow root não renderiza
+  nenhum `<header>`, então o landmark vive inteiramente no host via
+  `ElementInternals`; uma linha de título dentro de uma superfície contida é um
   `<kb-stack direction="row" justify="space-between">`.
 - **Uma barra de ações.** As duas regiões ancoram conteúdo em pontas opostas de
   uma barra de altura fixa. Uma linha densa de botões que deveria quebrar ou
@@ -55,9 +55,12 @@ atributos, sem eventos, e sem slot padrão, então qualquer coisa não atribuíd
   tipicamente carrega um `<kb-logo>`, opcionalmente seguido do nome do produto;
   o `trailing` carrega um `<nav>`, um `<kb-stack direction="row">` de botões de
   link, ou um avatar.
-- **Pode ser filho de**: qualquer coisa, semanticamente a raiz da página.
+- **Pode ser filho de**: qualquer coisa. A barra preenche 100% da largura que
+  recebe e só limita a linha interna, então ela se adapta a um contêiner mais
+  estreito em vez de transbordar. Semanticamente, ela ainda pertence à raiz da
+  página.
 
-Diferente do `<kb-footer>`, cada região é ela mesma uma linha flex com
+Igual ao `<kb-footer>`, cada região é ela mesma uma linha flex com
 espaçamento, então vários elementos encaixados no mesmo lado ficam espaçados e
 centralizados na vertical sem nenhum wrapper extra.
 
@@ -72,11 +75,6 @@ centralizados na vertical sem nenhum wrapper extra.
   </kb-button>
 </kb-header>
 ```
-
-!> **O wrapper do shadow tem `100svw` de largura** — ele atravessa a viewport
-em vez do contêiner. Aninhar um dentro de um elemento mais estreito faz com que
-ele transborde esse elemento. O `<kb-footer>` tinha o mesmo comportamento e foi
-mudado para preencher o contêiner; este não foi.
 
 ## Conteúdo
 

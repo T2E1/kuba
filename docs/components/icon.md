@@ -91,17 +91,20 @@ being re-specified. Set it only when the glyph carries meaning the text doesn't.
 <kb-icon use="info" color="info"></kb-icon>
 ```
 
+`color` accepts one of eight semantic families — a closed set, not any
+`--color-*` suffix. An unrecognized value is never accepted: if it's the
+first value set, the color stays at its `currentColor` default; if a valid
+color was already set, that color is kept.
+
 | `color` | Meaning |
 |---|---|
 | `primary` | Brand emphasis — the icon of the main action in a group. |
 | `success` / `complete` | A finished or valid state. |
 | `warning` | A state that needs attention but isn't blocking. |
 | `danger` | An error, or a destructive action's mark. |
-| `master-*` | Neutral greys, for icons that should recede from the text. |
-
-Any suffix of `--color-*` works — the value is interpolated into
-`var(--color-{value})`, so an unknown name silently resolves to nothing rather
-than failing loudly.
+| `info` | An informational or neutral highlight. |
+| `menu` | Icons inside navigation and menu surfaces. |
+| `master` | Neutral greys, for icons that should recede from the text. |
 
 ## Attributes
 
@@ -109,8 +112,8 @@ than failing loudly.
 |---|---|---|---|
 | `use` | `string` | `''` | Material Symbols ligature name, e.g. `home`, `search`. |
 | `alt` | `string` | `''` | Accessible name. Unset, the icon is hidden from assistive technology. |
-| `size` | token step | `md` | Glyph size, resolved against `--font-size-{value}`. |
-| `color` | token suffix | `currentColor` | Glyph color, resolved against `--color-{value}`. |
+| `size` | one of 11 steps | `md` | Glyph size, resolved against `--font-size-{value}`. |
+| `color` | one of 8 families | `currentColor` | Glyph color, resolved against `--color-{value}`. |
 | `on` | arc string | — | Echo wiring, `source/event:type/sink`. |
 
 This element dispatches no events.

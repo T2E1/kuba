@@ -35,10 +35,12 @@ so anything not assigned to `leading` or `trailing` is dropped.
 ## When not to use
 
 - **The bottom bar of the page** — use `<kb-footer>`, the matching landmark for
-  that end. It shares the centered-row geometry but leaves its slot regions
-  unstyled instead of laying them out as flex rows.
-- **A header inside a card, dialog or section.** This renders a native
-  `<header>` at page level; a title row inside a contained surface is a
+  that end. It shares the centered-row geometry and lays its regions out as
+  flex rows too.
+- **A header inside a card, dialog or section.** The host publishes the
+  `banner` landmark, which belongs to the page — the shadow root renders no
+  `<header>` element, so the landmark lives entirely on the host through
+  `ElementInternals`; a title row inside a contained surface is a
   `<kb-stack direction="row" justify="space-between">`.
 - **A toolbar of actions.** The two regions anchor content to opposite ends of a
   fixed-height bar. A dense row of buttons that should wrap or scroll wants a
@@ -51,9 +53,11 @@ so anything not assigned to `leading` or `trailing` is dropped.
   children never appear. `leading` typically holds a `<kb-logo>`, optionally
   followed by a product name; `trailing` holds a `<nav>`, a `<kb-stack
   direction="row">` of link buttons, or an avatar.
-- **Can be a child of**: anything, semantically the page root.
+- **Can be a child of**: anything. The bar fills 100% of whatever width it's
+  given and only caps its inner row, so it adapts to a narrower container
+  instead of overflowing it. Semantically it still belongs at the page root.
 
-Unlike `<kb-footer>`, each region is itself a flex row with a gap, so several
+Same as `<kb-footer>`, each region is itself a flex row with a gap, so several
 elements slotted into the same side are spaced and vertically centered without
 any extra wrapper.
 
@@ -68,11 +72,6 @@ any extra wrapper.
   </kb-button>
 </kb-header>
 ```
-
-!> **The shadow wrapper is `100svw` wide** — it spans the viewport rather than
-its container. Nesting one inside a narrower element makes it overflow that
-element. `<kb-footer>` had the same behavior and was changed to fill its
-container instead; this one has not been.
 
 ## Content
 

@@ -95,17 +95,18 @@ significado que el texto no lleva.
 <kb-icon use="info" color="info"></kb-icon>
 ```
 
+`color` acepta una de ocho familias semánticas — un conjunto cerrado, no
+cualquier sufijo de `--color-*`. Un valor no reconocido cae en `currentColor`.
+
 | `color` | Significado |
 |---|---|
 | `primary` | Énfasis de marca — el icono de la acción principal de un grupo. |
 | `success` / `complete` | Un estado terminado o válido. |
 | `warning` | Un estado que necesita atención pero no bloquea. |
 | `danger` | Un error, o la marca de una acción destructiva. |
-| `master-*` | Grises neutros, para iconos que deben retroceder respecto al texto. |
-
-Cualquier sufijo de `--color-*` funciona — el valor se interpola en
-`var(--color-{valor})`, así que un nombre desconocido resuelve silenciosamente a
-nada, en vez de fallar de forma ruidosa.
+| `info` | Un resalte informativo o neutro. |
+| `menu` | Iconos dentro de superficies de navegación y menú. |
+| `master` | Grises neutros, para iconos que deben retroceder respecto al texto. |
 
 ## Atributos
 
@@ -113,8 +114,8 @@ nada, en vez de fallar de forma ruidosa.
 |---|---|---|---|
 | `use` | `string` | `''` | Nombre de la ligadura de Material Symbols, p. ej. `home`, `search`. |
 | `alt` | `string` | `''` | Nombre accesible. Sin poner, el icono queda oculto a la tecnología de asistencia. |
-| `size` | escalón de token | `md` | Tamaño del glifo, resuelto contra `--font-size-{valor}`. |
-| `color` | sufijo de token | `currentColor` | Color del glifo, resuelto contra `--color-{valor}`. |
+| `size` | uno de 11 escalones | `md` | Tamaño del glifo, resuelto contra `--font-size-{valor}`. |
+| `color` | una de 8 familias | `currentColor` | Color del glifo, resuelto contra `--color-{valor}`. |
 | `on` | cadena de arco | — | Conexión de Echo, `origen/evento:tipo/destino`. |
 
 Este elemento no despacha eventos.

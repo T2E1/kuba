@@ -37,12 +37,13 @@ asignada a `leading` o `trailing` se descarta.
 ## Cuándo no usarlo
 
 - **La barra inferior de la página** — usa `<kb-footer>`, el landmark
-  correspondiente de ese extremo. Comparte la geometría de fila centrada, pero
-  deja sus regiones de slot sin estilos en lugar de disponerlas como filas flex.
-- **Una cabecera dentro de una tarjeta, diálogo o sección.** Este renderiza un
-  `<header>` nativo a nivel de página; una fila de título dentro de una
-  superficie contenida es un
-  `<kb-stack direction="row" justify="space-between">`.
+  correspondiente de ese extremo. Comparte la geometría de fila centrada y
+  también dispone sus regiones como filas flex.
+- **Una cabecera dentro de una tarjeta, diálogo o sección.** El host publica el
+  landmark `banner`, que pertenece a la página — el shadow root no renderiza
+  ningún `<header>`, así que el landmark vive por completo en el host mediante
+  `ElementInternals`; una fila de título dentro de una superficie contenida es
+  un `<kb-stack direction="row" justify="space-between">`.
 - **Una barra de acciones.** Las dos regiones anclan contenido en extremos
   opuestos de una barra de altura fija. Una fila densa de botones que debería
   saltar de línea o desplazarse quiere un `<kb-stack>`, que crece con su
@@ -56,9 +57,12 @@ asignada a `leading` o `trailing` se descarta.
   suele llevar un `<kb-logo>`, opcionalmente seguido del nombre del producto;
   `trailing` lleva un `<nav>`, un `<kb-stack direction="row">` de botones de
   enlace, o un avatar.
-- **Puede ser hijo de**: cualquier cosa, semánticamente la raíz de la página.
+- **Puede ser hijo de**: cualquier cosa. La barra llena el 100% del ancho que
+  recibe y solo limita su fila interna, así que se adapta a un contenedor más
+  estrecho en lugar de desbordarlo. Semánticamente sigue perteneciendo a la
+  raíz de la página.
 
-A diferencia de `<kb-footer>`, cada región es en sí misma una fila flex con
+Igual que `<kb-footer>`, cada región es en sí misma una fila flex con
 espaciado, así que varios elementos colocados en el mismo lado quedan espaciados
 y centrados verticalmente sin ningún wrapper extra.
 
@@ -73,11 +77,6 @@ y centrados verticalmente sin ningún wrapper extra.
   </kb-button>
 </kb-header>
 ```
-
-!> **El wrapper del shadow mide `100svw` de ancho** — abarca el viewport en vez
-de su contenedor. Anidar uno dentro de un elemento más estrecho hace que lo
-desborde. `<kb-footer>` tenía el mismo comportamiento y se cambió para llenar su
-contenedor; este no.
 
 ## Contenido
 
