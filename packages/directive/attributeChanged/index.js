@@ -1,5 +1,6 @@
 export { default } from './attributeChanged'
 export { default as booleanAttribute } from './booleanAttribute'
+export { default as enumerated } from './enumerated'
 export { default as enumerating } from './enumerating'
 export { default as escaping } from './escaping'
 export { default as resizing } from './resizing'

@@ -4,7 +4,7 @@ function style(icon) {
   return css`
     :host {
       box-sizing: border-box;
-      color: var(--icon-color, ${icon.color});
+      color: var(--icon-color, ${icon.color ? `var(--color-${icon.color})` : 'currentColor'});
       direction: ltr;
       display: inline-flex;
       font-family: 'Material Symbols Rounded';

@@ -1,10 +1,16 @@
-import { attributeChanged, connected, define } from '@directive'
+import { connected, define } from '@directive'
+import attributeChanged, {
+  enumerated,
+  escaping,
+} from '@directive/attributeChanged'
 import { paint, repaint, retouch } from '@dom'
 import Echo from '@echo'
 import { around } from '@middleware'
 import { Identity, role } from '@mixin'
+import { COLORS } from './color.js'
 import component from './component.js'
 import { decorative } from './interfaces.js'
+import { SIZES } from './size.js'
 import style from './style.js'
 
 @define('kb-icon')
@@ -14,6 +20,29 @@ class Icon extends Identity(Echo(HTMLElement)) {
   #internals
   #size
   #use
+
+  get alt() {
+    return super.alt
+  }
+
+  @attributeChanged('alt')
+  @around(decorative)
+  set alt(value) {
+    super.alt = value
+  }
+
+  get color() {
+    return this.#color
+  }
+
+  // `enumerated(COLORS)` only propagates a value in the known tokens — an
+  // unknown one never reaches the setter, so an unvalidated attribute
+  // never reaches the CSS interpolation in style.js.
+  @attributeChanged('color', enumerated(COLORS))
+  @retouch
+  set color(value) {
+    this.#color = value
+  }
 
   get internals() {
     return (this.#internals ??= this.attachInternals())
@@ -25,33 +54,14 @@ class Icon extends Identity(Echo(HTMLElement)) {
     return 'img'
   }
 
-  get alt() {
-    return super.alt
-  }
-
-  @around(decorative)
-  set alt(value) {
-    super.alt = value
-  }
-
-  // Unlike the other getters here, the fallback isn't a stored default
-  // (`??=`): an unset color must resolve to `currentColor` so the icon
-  // inherits from its surrounding text, not from a fixed palette entry.
-  get color() {
-    return this.#color ? `var(--color-${this.#color})` : 'currentColor'
-  }
-
-  @attributeChanged('color')
-  @retouch
-  set color(value) {
-    this.#color = value
-  }
-
   get size() {
-    return (this.#size ??= 'md')
+    return (this.#size ??= SIZES.MD)
   }
 
-  @attributeChanged('size')
+  // `enumerated(SIZES)` only propagates a value in the known tokens — an
+  // unknown one never reaches the setter, so an unvalidated attribute
+  // never reaches the CSS interpolation in style.js.
+  @attributeChanged('size', enumerated(SIZES))
   @retouch
   set size(value) {
     this.#size = value
@@ -61,7 +71,11 @@ class Icon extends Identity(Echo(HTMLElement)) {
     return (this.#use ??= '')
   }
 
-  @attributeChanged('use')
+  // `component.js` returns `icon.use` verbatim and it lands in the shadow
+  // root via `innerHTML` (see packages/dom/paint/render.js) — unlike `alt`,
+  // this value becomes real markup, so it needs the same escaping button.ts
+  // applies to `alt`.
+  @attributeChanged('use', escaping)
   @repaint
   set use(value) {
     this.#use = value
