@@ -9,7 +9,7 @@ function style() {
 
       wrapper {
         box-sizing: border-box;
-        width: 100svw;
+        width: 100%;
 
         container {
           align-items: center;
