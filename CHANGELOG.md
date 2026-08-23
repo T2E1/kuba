@@ -6,6 +6,47 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) and 
 
 ---
 
+## [0.2.0-alpha.3] — 2026-08-23
+
+### Added
+
+- `enumerated` joins `booleanAttribute`, `enumerating` and `escaping` on the `attributeChanged` directive, re-exported from `@t2e1/kuba/directive`. Given a frozen enum object, it only propagates a value present among that enum's values — an unknown token never reaches the setter, so the property keeps whatever was last valid. It is the closed-set guard `<kb-icon>`'s `color` and `size` now use, and the piece to reach for when an attribute of your own feeds a stylesheet or a template
+- `<kb-icon>`'s published type declaration names its accepted values instead of `string`. `color` is now the union of the eight semantic families, `size` the union of the eleven scale steps, and `on` the arc-string shape inherited from `Echo`. TypeScript code assigning `icon.size = 'huge'` stops compiling where it used to pass
+
+### Changed
+
+- **Breaking:** `<kb-icon>`'s `color` property reads back the token you set, not the CSS it resolves to. `icon.color` used to return `'var(--color-primary)'`, or `'currentColor'` when the attribute was unset; it now returns `'primary'`, and `undefined` when unset. Code that took the property and dropped it straight into a style declaration has to wrap it itself — `` `var(--color-${icon.color})` ``. Reading the property to find out which family is set now works, which is what an attribute reflection is supposed to do
+- **Breaking:** `<kb-icon>`'s `color` accepts eight semantic families and nothing else — `master`, `primary`, `complete`, `success`, `warning`, `danger`, `info`, `menu`. Any suffix of `--color-*` used to be interpolated through, so shade variants like `color="master-dark"` rendered; they are now rejected and the icon keeps its previous color, or falls back to `currentColor` if none was valid yet. Same for `size`, which now accepts only the eleven documented steps from `xxxs` to `giant`
+- **Breaking:** `<kb-header>`'s shadow wrapper is `100%` wide instead of `100svw`. It used to span the viewport regardless of what contained it, so a header nested in a narrower element overflowed that element; it now fills the width it is given. A layout that leaned on the overflow to break out of a constrained container loses that effect — put the header at page root, or set `width: 100vw` on it yourself. `<kb-footer>` was corrected the same way in `0.2.0-alpha.2`; this closes the pair
+- `<kb-icon>`'s `use` is escaped before it becomes markup. A ligature name is written into the shadow root through `innerHTML`, so a value carrying `<` or a quote used to be parsed as real markup; it is now inserted as text. A `use` value that was somehow relying on being markup renders literally instead
+
+### Fixed
+
+- `<kb-icon>` no longer lets `color` or `size` inject CSS into its shadow root. Both values were interpolated into the adopted stylesheet unvalidated, so a payload closing the declaration early — `size="md)); } :host { … } trap { font-size: var(--a"` — appended arbitrary rules to the element's styles. Any value reaching the stylesheet is now one of the known tokens
+- `<kb-icon>` no longer lets `use` inject markup. `use="<img src=x onerror=…>"` used to run the handler; the value is now escaped before it reaches the shadow root, matching what `<kb-button>` already did with `alt`
+
+### Migration
+
+`color` reflects the token now, not the resolved CSS:
+
+```js
+// before: the property already carried the var()
+element.style.color = icon.color
+
+// after: resolve it where you use it
+element.style.color = icon.color ? `var(--color-${icon.color})` : 'currentColor'
+```
+
+Shade variants are no longer valid values. `<kb-icon color="master-dark">` renders in `currentColor`; pick the base family and adjust with the `--icon-color` custom property if you need a specific shade:
+
+```html
+<!-- before -->
+<kb-icon use="info" color="master-dark"></kb-icon>
+
+<!-- after -->
+<kb-icon use="info" style="--icon-color: var(--color-master-dark)"></kb-icon>
+```
+
 ## [0.2.0-alpha.2] — 2026-08-22
 
 ### Added
