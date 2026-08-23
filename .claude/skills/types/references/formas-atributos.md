@@ -92,15 +92,40 @@ para o texto a reaproveitar.
 ## Padrão: enum fechado codificado como string
 
 Usado para um conjunto pequeno e fixo de valores sem estrutura interna
-adicional (sem necessidade de template literal) — ex.: um atributo `type`
-ou `variant`. Apenas uma união simples, sem alias nomeado dedicado a menos
-que a união seja reaproveitada por mais de um membro do *mesmo* componente
-(se for, nomeie como `KUBA<PascalName><PascalAttribute>Attribute` conforme
-a taxonomia; se for reaproveitada entre componentes, ainda assim ela é
-declarada uma vez por componente — Regra 1).
+adicional (sem necessidade de template literal) — ex.: um atributo `color`,
+`variant` ou `type`.
+
+**Se o setter usa `enumerating(ENUM)`** (skill `enum`), o alias nomeado é
+**obrigatório**, mesmo para um membro só: `KUBA<PascalName><PascalAttribute>Attribute`,
+conforme a taxonomia (Regra 3). Não é opcional por ter um único consumidor —
+`KUBAButtonColorAttribute` existe e é usado por `color` sozinho. O nome é o que
+liga o tipo ao enum em runtime (`COLORS` em `color.js`) para quem lê o contrato;
+uma união anônima esconde essa origem.
 
 ```ts
-type: 'submit' | 'reset'
+type KUBAButtonColorAttribute =
+  | 'master'
+  | 'primary'
+  | 'complete'
+  | 'success'
+  | 'warning'
+  | 'danger'
+  | 'info'
+  | 'menu'
 ```
 
-Implementação de referência: `src/component/button/types.d.ts`.
+*(Débito conhecido: `button.type` também usa `enumerating(TYPES)` mas ficou como união
+inline `'submit' | 'reset' | 'button'`, sem `KUBAButtonTypeAttribute` — divergência
+pré-existente, não corrigida por esta revisão. Um `types.d.ts` novo segue a regra acima,
+não esse caso.)*
+
+**União inline sem alias** só se aplica ao caso raro de um conjunto fechado
+que **não** vem de um `enumerating(ENUM)` — não há módulo de enum dedicado
+para nomear o tipo. Se isso acontecer, vale perguntar primeiro se o setter
+deveria estar validando com `enumerating` também (skill `enum`).
+
+Implementação de referência: `src/component/button/types.d.ts`
+(`KUBAButtonColorAttribute`, `KUBAButtonVariantAttribute`) e
+`src/component/icon/types.d.ts` (`KUBAIconColorAttribute`,
+`KUBAIconSizeAttribute`) — duplicado do `button` por decisão de pacote
+(Regra 1), não importado.

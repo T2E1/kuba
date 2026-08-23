@@ -77,6 +77,13 @@ Ver `src/component/button/{color,variant,type}.js` e `button.ts` para o padrão
 completo — um enum por arquivo, cada um consumido por `enumerating` no `attributeChanged`
 e pelo próprio enum no default do getter.
 
+**O contrato público muda junto.** Todo atributo validado por `enumerating(ENUM)` precisa
+de um tipo de união fechada correspondente em `types.d.ts` — nunca `string` solto. Não é
+opcional nem posterior: é a mesma mudança, a skill `types` (Regra 4) decide a forma exata.
+Ver `KUBAButtonColorAttribute` em `src/component/button/types.d.ts` como o par de
+`COLORS` em `color.js` — um enum sem essa contrapartida é `enumerating` fechando a
+property e o `types.d.ts` deixando passar qualquer string em tempo de compilação.
+
 ## Exemplos
 
 | Caso | Correto | Incorreto |
@@ -131,6 +138,7 @@ polimorfismo (rule 011).
 - [calisthenics](../calisthenics/SKILL.md): complements — a regra 3 leva o conceito além do enum, para Value Object.
 - [setter](../setter/SKILL.md): complements — `enumerating(ENUM)` é o filtro que valida o enum contra o `attribute`.
 - [getter](../getter/SKILL.md): complements — o default do getter é o próprio enum, não a string solta.
+- [types](../types/SKILL.md): depends on — todo `enumerating(ENUM)` exige a união fechada correspondente em `types.d.ts`, nunca `string` solto.
 
 ---
 

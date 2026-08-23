@@ -81,6 +81,14 @@ template literal ou união fechada. Booleano vindo de mixin e `string` sem restr
 permanecem exatamente isso. Não invente `KUBAXHiddenAttribute = boolean` por simetria
 (rule 064).
 
+**Exceção obrigatória, não opcional:** se o setter do atributo usa `enumerating(ENUM)`
+(skill `enum`), o membro **nunca** permanece `string` — a Regra 4 não se aplica a esse
+caso, porque a restrição já existe em runtime e o contrato público precisa da mesma
+restrição em tempo de compilação. `color` de `kb-button` é `KUBAButtonColorAttribute`,
+não `string`, mesmo a "forma" sendo só uma lista de literais sem estrutura interna.
+Confira `references/formas-atributos.md` antes de decidir que um atributo validado por
+enum fica sem tipo nomeado — a leitura isolada da Regra 4 permite esse erro.
+
 ### Fluxo
 
 1. Ler o `<nome>.ts` por inteiro. Listar cada par getter/setter (vira propriedade), cada
@@ -110,6 +118,7 @@ permanecem exatamente isso. Não invente `KUBAXHiddenAttribute = boolean` por si
 - [ ] Nomes escopados ao componente, seguindo a taxonomia
 - [ ] `<PascalName>` igual ao nome da classe da implementação
 - [ ] Tipo nomeado só onde há restrição real de forma
+- [ ] Todo atributo validado por `enumerating(ENUM)` no `<nome>.ts` tem união fechada correspondente aqui — nunca `string`
 - [ ] Bloco `declare global` com `HTMLElementTagNameMap` presente
 - [ ] Passo de tipos públicos da skill `jsdoc` executado
 
@@ -155,6 +164,7 @@ porque a tabela de atributos transcreve daqui (skill `preview`).
 - [mixin](../mixin/SKILL.md): depends on — a cadeia de `extends` define o que achatar.
 - [revelation](../revelation/SKILL.md): complements — o `index.js` expõe o que este arquivo tipa.
 - [colocation](../colocation/SKILL.md): reinforces — um `types.d.ts` por pacote, colocado.
+- [enum](../enum/SKILL.md): depends on — `enumerating(ENUM)` no `.ts` é o gatilho da Regra 4 forçar tipo nomeado.
 
 ---
 

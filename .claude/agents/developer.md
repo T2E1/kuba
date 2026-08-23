@@ -109,6 +109,10 @@ Conflito entre rules: prevalece a de maior severidade; empate, a mais específic
    escrever um valor fixo; não decida token de memória.
 4. **Publicar o contrato** em `interfaces.js`, quando o pacote expõe Symbol.
 5. **Declarar a superfície pública** em `types.d.ts`: atributo, propriedade e evento.
+   Todo atributo que ganhou `enumerating(ENUM)` no passo 2 muda o `types.d.ts` na mesma
+   entrega — nunca fica `string` solto (skill `enum`, skill `types` Regra 4). Isso vale
+   mesmo quando a tarefa pediu só a validação em runtime: o contrato público e a
+   implementação mudam juntos, ou a entrega fica incompleta.
 6. **Exportar** em `index.js` — só o que é público.
 7. **Verificar.** `bun run lint` e `bun run test`. Ambos verdes antes de reportar.
 8. **Aplicar a Regra do Escoteiro** (rule 039) apenas no arquivo tocado e apenas quando
