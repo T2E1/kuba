@@ -1,6 +1,6 @@
 # Logo
 
-The brand mark as inline SVG, sized to a square and colored from `currentColor`.
+The brand mark as inline SVG, a portrait shape colored from `currentColor`.
 It's the mark alone — no attributes, no wordmark, no link behavior.
 
 ```html preview
@@ -35,7 +35,7 @@ It's the mark alone — no attributes, no wordmark, no link behavior.
 
 - **Can contain**: no meaningful children. The shadow root renders a fixed
   `<svg>` and declares no slot, so light-DOM children never appear.
-- **Can be a child of**: anything. It's a fixed-size square that neither grows
+- **Can be a child of**: anything. It's a fixed-size mark that neither grows
   nor shrinks with its container, so it composes predictably inside a flex row.
 
 ```html preview
@@ -57,8 +57,8 @@ It dispatches no events; everything else about it is controlled through CSS.
 
 | Custom property | Default | Controls |
 |---|---|---|
-| `--logo-color` | `var(--color-primary)` | Stroke color. The SVG strokes with `currentColor`, so this is the host's `color`. |
-| `--logo-size` | `40px` | Side of the square; height and width move together, keeping the 1:1 ratio. |
+| `--logo-color` | `var(--color-primary)` | Fill color. The SVG fills with `currentColor`, so this is the host's `color`. |
+| `--logo-size` | `40px` | The mark's height. Width is derived from it — `calc(var(--logo-size, 40px) * 60 / 93)` — matching the portrait `viewBox` (60×93) of the underlying path, so the mark never stretches. |
 
 Because the mark inherits `currentColor`, a single `color` declaration on an
 ancestor inverts it on a dark surface — `--logo-color` is for the case where the
@@ -80,8 +80,9 @@ mark should *not* follow the surrounding text.
 - **Set `alt` when the mark stands alone**, such as the only content of a home
   link: `<kb-logo alt="kuba, home">`. Naming the link instead works too; do one
   or the other, not both.
-- The mark strokes at a fixed weight relative to its canvas, so it keeps its
-  proportions at any `--logo-size`; it doesn't need a separate small variant.
+- The mark is a single filled path with a fixed portrait ratio (60:93), so it
+  keeps its proportions at any `--logo-size`; it doesn't need a separate small
+  variant.
 
 ## Do's and don'ts
 
@@ -89,5 +90,5 @@ mark should *not* follow the surrounding text.
 |---|---|
 | Wrap the mark in an `<a>` when it should lead home | Attach a click listener — it has no focus or link semantics |
 | Let it inherit `currentColor` on inverted surfaces | Hard-code a color that breaks when the surface changes |
-| Resize with `--logo-size` so the square stays square | Set `height` or `width` directly and stretch the mark |
+| Resize with `--logo-size` so the mark keeps its ratio | Set `height` or `width` directly and stretch the mark |
 | Label the wrapping link, or hide the mark from screen readers | Leave an unlabelled graphic as a link's only content |

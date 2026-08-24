@@ -1,3 +1,7 @@
+<!-- TODO(058): sincronizar com docs/components/logo.md — a proporção da marca
+     mudou de quadrado 1:1 para retrato 60:93 (--logo-size agora é altura, não
+     lado); esta tradução ainda descreve "quadrado"/"1:1" em vários pontos. -->
+
 # Logo
 
 A marca como SVG inline, dimensionada num quadrado e colorida a partir de
@@ -60,7 +64,7 @@ Ele não dispara eventos; todo o resto nele é controlado via CSS.
 
 | Custom property | Padrão | Controla |
 |---|---|---|
-| `--logo-color` | `var(--color-primary)` | Cor do traço. O SVG traça com `currentColor`, então isso é o `color` do host. |
+| `--logo-color` | `var(--color-primary)` | Cor de preenchimento. O SVG se preenche com `currentColor`, então isso é o `color` do host. |
 | `--logo-size` | `40px` | Lado do quadrado; altura e largura andam juntas, mantendo a proporção 1:1. |
 
 Como a marca herda `currentColor`, uma única declaração de `color` num ancestral
@@ -83,9 +87,8 @@ a inverte numa superfície escura — o `--logo-color` é para o caso em que a m
 - **Defina `alt` quando a marca está sozinha**, como único conteúdo de um link
   para a home: `<kb-logo alt="kuba, início">`. Nomear o link também funciona;
   faça um ou outro, não os dois.
-- A marca traça com espessura fixa em relação à sua tela, então mantém as
-  proporções em qualquer `--logo-size`; ela não precisa de uma variante pequena
-  separada.
+- A marca é um único path preenchido, então mantém as proporções em qualquer
+  `--logo-size`; ela não precisa de uma variante pequena separada.
 
 ## Certo e errado
 

@@ -1,3 +1,7 @@
+<!-- TODO(058): sincronizar com docs/components/logo.md — a proporção da marca
+     mudou de quadrado 1:1 para retrato 60:93 (--logo-size agora é altura, não
+     lado); esta tradução ainda descreve "cuadrado"/"1:1" em vários pontos. -->
+
 # Logo
 
 La marca como SVG inline, dimensionada en un cuadrado y coloreada a partir de
@@ -61,7 +65,7 @@ No despacha eventos; todo lo demás se controla mediante CSS.
 
 | Custom property | Por defecto | Controla |
 |---|---|---|
-| `--logo-color` | `var(--color-primary)` | Color del trazo. El SVG traza con `currentColor`, así que esto es el `color` del host. |
+| `--logo-color` | `var(--color-primary)` | Color de relleno. El SVG se rellena con `currentColor`, así que esto es el `color` del host. |
 | `--logo-size` | `40px` | Lado del cuadrado; alto y ancho se mueven juntos, manteniendo la proporción 1:1. |
 
 Como la marca hereda `currentColor`, una sola declaración de `color` en un
@@ -84,7 +88,7 @@ caso en que la marca *no* deba seguir al texto que la rodea.
 - **Pon `alt` cuando la marca está sola**, como único contenido de un enlace a
   la home: `<kb-logo alt="kuba, inicio">`. Nombrar el enlace también sirve; haz
   una cosa o la otra, no ambas.
-- La marca traza con un grosor fijo respecto a su lienzo, así que mantiene sus
+- La marca es un único trazado (`path`) relleno, así que mantiene sus
   proporciones en cualquier `--logo-size`; no necesita una variante pequeña
   aparte.
 
