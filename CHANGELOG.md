@@ -6,6 +6,38 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) and 
 
 ---
 
+## [0.2.0-alpha.4] — 2026-08-24
+
+### Changed
+
+- **Breaking:** `<kb-logo>` draws the kuba mark — a single filled path in a portrait `60×93` canvas — where it used to draw a stroked diamond crossed by a vertical line in a square `363×363` one. It is a different drawing, not a redraw of the same one, so anything that framed the old mark by eye — a fixed-width slot in a header, a background circle sized to the square, a padding value chosen to balance it — has to be measured again. `--logo-color` now names a fill rather than a stroke; it still resolves through `currentColor`, so a `color` declaration on an ancestor keeps working unchanged
+- **Breaking:** `--logo-size` sets the mark's height alone. It used to set the side of a square, moving height and width together at a 1:1 ratio; width is now derived from it as `calc(var(--logo-size, 40px) * 60 / 93)`, matching the new canvas. `<kb-logo style="--logo-size: 64px">` used to occupy 64×64 and now occupies roughly 41×64 — the mark keeps the height you asked for and gives back about a third of its width. In a row, that is horizontal space collapsing: a logo next to a wordmark inside a `<kb-stack direction="row">` shifts everything after it to the left, and a container that was sized to hold the square is now too wide by the difference
+
+### Fixed
+
+- `<kb-icon>` applies a change to `alt` once instead of twice. Setting the attribute used to run the accessible-name write two times for a single DOM change, because the element registered a listener for `alt` that the `Identity` mixin had already registered. The name that assistive technology ends up reading is the same either way; what changes is that a `MutationObserver` on the shadow root, or a profiler, no longer sees the duplicate
+
+### Migration
+
+Restoring the old footprint means asking for the height the square used to have:
+
+```html
+<!-- before: 64 wide by 64 tall -->
+<kb-logo style="--logo-size: 64px"></kb-logo>
+
+<!-- after: same 64px of width, taller mark -->
+<kb-logo style="--logo-size: calc(64px * 93 / 60)"></kb-logo>
+```
+
+There is no way to get a square back. Declaring `width` on the host stretches the mark, because the inner `<svg>` inherits the host's box on both axes — that is what the "don't set `height` or `width` directly" line in the documentation has always meant. Where the old logo sat in a row and its width carried the layout, reserve the space around it instead:
+
+```html
+<!-- the wrapper holds the width the square used to hold -->
+<span style="display: inline-flex; justify-content: center; width: 64px">
+  <kb-logo></kb-logo>
+</span>
+```
+
 ## [0.2.0-alpha.3] — 2026-08-23
 
 ### Added
