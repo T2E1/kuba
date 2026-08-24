@@ -25,7 +25,10 @@ class Icon extends Identity(Echo(HTMLElement)) {
     return super.alt
   }
 
-  @attributeChanged('alt')
+  // No @attributeChanged('alt') here: Identity already registers it, and
+  // observedAttributes/attributeChangedCallback are inherited, so the DOM
+  // change already lands on this setter. Re-adding the decorator wraps a
+  // second Proxy around the inherited one and fires this body twice.
   @around(decorative)
   set alt(value) {
     super.alt = value

@@ -387,7 +387,7 @@ ou compartilhada com `kb-text` — que tem um `size` com o mesmo problema.
 
 ### 4. Override de `alt` sobre o mixin `Identity` — **REFUTADA: é override legítimo e seguro**
 
-`icon.ts:28-35` redeclara `get alt()`/`set alt()` só para pendurar `@around(decorative)`,
+`icon.ts:24-35` redeclara `get alt()`/`set alt()` só para pendurar `@around(decorative)`,
 delegando a `super.alt` nos dois lados. Reconferi o mecanismo em `identity.ts` e é seguro, por
 três razões independentes:
 
@@ -408,16 +408,16 @@ três razões independentes:
    sobreviveram ao override — o `attributeChangedCallback` do mixin disparando, e o
    `@around` do `Icon` recalculando. Passa.
 
-Um hook separado seria pior, não melhor: exigiria um segundo `@attributeChanged('alt')` em
-`Icon`, e aí sim haveria duas inscrições no mesmo attribute, cada uma com sua cadeia de
-filtros, disparando em ordem não declarada. O override é a forma mais simples que funciona.
+Um segundo `@attributeChanged('alt')` em `Icon` chegou a existir, e é pior, não melhor: o
+`tester` mediu o efeito — o corpo do setter de `Identity` (`identity.ts:33`) rodando duas
+vezes por mudança única do attribute, porque `execute.js:26-44` encadeia um `Proxy` novo
+sobre o herdado sem dedupe. O decorator redundante foi removido; só `@around(decorative)`
+permanece (`icon.ts:32`). O override sem `@attributeChanged` é a forma mais simples que
+funciona.
 
-O que **falta** é comentário. `button.ts:31-36` explica em seis linhas por que ele não usa o
-`Identity`; `icon.ts:28-35` não explica por que redeclara `alt` — o comentário mais próximo
-está no `[decorative]` lá embaixo (`icon.ts:75-78`) e fala do *default* de acessibilidade, não
-do mecanismo de override. Um leitor futuro tem chance real de "limpar" o accessor
-aparentemente redundante e derrubar o Edge case 5 sem entender o que quebrou.
-**`ofício: developer`**, comentário de três linhas.
+`icon.ts:28-31` documenta o mecanismo no próprio accessor — por que o decorator não é
+repetido, e o que acontece se alguém reintroduzi-lo — para que um leitor futuro não "limpe"
+o accessor aparentemente redundante e reabra a dupla execução.
 
 ### 5. `internals` publicado em `types.d.ts` — **REFUTADA: não está lá**
 
