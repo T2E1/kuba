@@ -58,7 +58,7 @@ Portanto, todo componente cuja cadeia inclui `Echo` documenta **as duas**:
 | Onde | O que precisa aparecer |
 |---|---|
 | `types.d.ts` | O membro `on`, com o tipo template-literal local ao componente |
-| `docs/components/<nome>.md` § Composition | `<kb-on>` como filho aceito, com um exemplo |
+| `website/docs/components/<nome>.mdx` § Composition | `<kb-on>` como filho aceito, com um exemplo |
 
 Um componente com `Echo` na cadeia e sem menção a `<kb-on>` na seção de
 Composição está com a documentação incompleta, mesmo que o `on` esteja

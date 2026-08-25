@@ -57,7 +57,7 @@
     "node": ">=20.0.0"
   },
   "scripts": {
-    "dev": "bunx serve docs -l 3000",
+    "dev": "npm --prefix website start",
     "test": "vitest run",
     "test:watch": "vitest",
     "release": "vite build",

@@ -8,8 +8,9 @@ demonstração, quando usar, quando **não** usar, hierarquia de variantes, cor 
 semântica, composição, estados e acessibilidade, e pares do/don't lado a lado.
 
 Nenhum desses sistemas gera essa prosa a partir de metadados. É escrita à mão, uma vez,
-por quem entende o componente. `docs/components/button.md` é a implementação de referência
-neste repositório; `progress.md` é a versão curta, para um componente mais simples.
+por quem entende o componente. `website/docs/components/button.mdx` é a implementação de
+referência neste repositório; `progress.mdx` é a versão curta, para um componente mais
+simples.
 
 ## As seções, em ordem
 
@@ -27,8 +28,9 @@ erra, e dizê-la economiza uma escolha errada:
 Um bloco ` ```html preview ` logo depois do propósito, antes de qualquer `##`. Mostra o
 caso mais comum e as variantes principais lado a lado — o leitor vê antes de ler.
 
-O docsify renderiza esses blocos contra o kuba carregado do CDN. Só use atributo que
-existe na versão pinada.
+O plugin remark `website/src/remark/preview-plugin.js` transforma esses blocos no
+componente `<Preview>`, que renderiza o HTML ao vivo contra o kuba carregado do CDN. Só
+use atributo que existe na versão pinada.
 
 ### 3. `## Usage`
 
@@ -93,7 +95,7 @@ que estava nos arquivos `.mdx`; o que mudou foi o veículo:
 | `<Canvas of={Stories.X} />` | ` ```html preview ` |
 | `<Controls />` | Tabela de atributos em markdown |
 | `play` em `.stories.js` | `<nome>.test.js`, Vitest em navegador real |
-| `.mdx` ao lado do pacote | `docs/components/<nome>.md` |
+| `.mdx` ao lado do pacote | `website/docs/components/<nome>.mdx` |
 | `argTypes` transcrevendo `types.d.ts` | A tabela de atributos transcrevendo o mesmo |
 
 O princípio sobreviveu inteiro: **a demonstração transcreve o contrato, nunca o inventa.**
@@ -101,4 +103,4 @@ O princípio sobreviveu inteiro: **a demonstração transcreve o contrato, nunca
 ---
 
 **Criado em**: 2026-08-10
-**Atualizado em**: 2026-08-10
+**Atualizado em**: 2026-08-25

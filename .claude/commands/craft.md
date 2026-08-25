@@ -30,13 +30,13 @@ Mixins disponíveis para a cadeia:
 | 2 | `designer` | A forma decidida | Mapa de tokens, estados, papel e nome acessível |
 | 3 | `developer` | Forma e aparência | Os arquivos do pacote em `src/<categoria>/<nome>/` ou `packages/mixin/<nome>` |
 | 4 | `tester` | O pacote implementado | `<nome>.test.js`, e o veredito |
-| 5 | `writer` | O contrato e o comportamento provado | A página em `docs/components/<nome>.md` |
+| 5 | `writer` | O contrato e o comportamento provado | A página em `website/docs/components/<nome>.mdx` |
 
 O `designer` é pulado quando o pacote não tem representação visual — mixin, elemento
 headless em `src/data/`. Nesse caso o passo 2 não acontece, e o `developer` recebe
 só a forma.
 
-O `writer` também é pulado para mixin e infraestrutura: `docs/components/` documenta o que
+O `writer` também é pulado para mixin e infraestrutura: `website/docs/components/` documenta o que
 o consumidor escreve no HTML.
 
 ## Instruções
@@ -89,5 +89,5 @@ o consumidor escreve no HTML.
 ---
 
 **Criado em**: 2026-08-10
-**Atualizado em**: 2026-08-21
-**Versão**: 1.1
+**Atualizado em**: 2026-08-25
+**Versão**: 1.2

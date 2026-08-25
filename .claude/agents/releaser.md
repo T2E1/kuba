@@ -64,8 +64,8 @@ Sem intervalo explícito, o padrão é desde a última tag de versão em `CHANGE
 ## Método
 
 1. **Levantar o intervalo.** `git log <ultima-tag>..HEAD --oneline` e o diff de `src/` e
-   `packages/`. Só `src/`, `packages/` e `package.json` importam: `.claude/` e `docs/` não
-   são publicados.
+   `packages/`. Só `src/`, `packages/` e `package.json` importam: `.claude/` e `website/`
+   não são publicados.
 2. **Julgar cada mudança** pela tabela de impacto abaixo. Vale a de maior impacto.
 3. **Aplicar o bump.** A versão atual tem sufixo de prerelease, e a regra do projeto é:
    minor ou patch incrementam só o prerelease (`alpha.31` → `alpha.32`); o núcleo semver
@@ -75,9 +75,12 @@ Sem intervalo explícito, o padrão é desde a última tag de versão em `CHANGE
    efeito observável, e explicam a razão quando ela não é óbvia.
 5. **Escrever a nota de migração**, se houver breaking: o que era, o que passa a ser, e
    como converter. Sem isso, um major é só um número.
-6. **Atualizar o pin do CDN.** O site carrega `@t2e1/kuba@<versão>` em `docs/index.html`
-   e nas três `learn/installation.md`. Ficar para trás faz os exemplos ao vivo rodarem
-   contra código antigo — é dívida silenciosa, porque a página continua carregando.
+6. **Atualizar o pin do CDN.** O site carrega `@t2e1/kuba@<versão>` pela constante
+   `KUBA_VERSION` no topo de `website/docusaurus.config.js:8` — fonte única do pin — e o
+   mesmo número aparece nas três `learn/installation.mdx`. O workflow
+   `.github/workflows/pages-deploy.yml` lê essa constante para checar se a versão pinada
+   já foi publicada. Ficar para trás faz os exemplos ao vivo rodarem contra código antigo
+   — é dívida silenciosa, porque a página continua carregando.
 7. **Verificar antes de entregar:** `bun run test` verde e `bun run release` construindo.
 
 ### Tabela de impacto
@@ -96,7 +99,7 @@ Neste projeto o contrato público é o que o HTML e o JavaScript do consumidor t
 | Custom property de re-estilização nova | **minor** |
 | Correção de comportamento que estava errado | **patch** |
 | Refatoração interna sem efeito observável | **patch** |
-| Mudança em `docs/`, `.claude/`, testes ou tooling | **nenhum** |
+| Mudança em `website/`, `.claude/`, testes ou tooling | **nenhum** |
 
 Na dúvida entre patch e major: **major**. O custo de uma versão a mais é zero; o de
 quebrar a instalação de alguém em silêncio, não.
@@ -122,5 +125,5 @@ do que quebra, antes do bump.
 ---
 
 **Criado em**: 2026-08-10
-**Atualizado em**: 2026-08-21
-**Versão**: 1.1
+**Atualizado em**: 2026-08-25
+**Versão**: 1.2

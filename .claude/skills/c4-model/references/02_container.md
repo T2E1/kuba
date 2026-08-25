@@ -43,7 +43,7 @@
 | **[Bundle]** | Módulo ESM publicado | [ex: `dist/kuba.js`, JavaScript puro] | [Define os custom elements no registro do navegador] |
 | **[Folha de tokens]** | CSS publicado | [ex: `dist/kuba.css`, custom properties] | [Fornece os tokens que os elementos consomem] |
 | **[Declarações de tipo]** | `.d.ts` publicados | [ex: `packages/**/types.d.ts`] | [Descreve o contrato público para o editor do consumidor] |
-| **[Site de documentação]** | Site estático | [ex: docsify, markdown no navegador] | [Ensina o uso; roda os exemplos contra o pacote publicado] |
+| **[Site de documentação]** | Site estático | [ex: Docusaurus, MDX compilado no build] | [Ensina o uso; roda os exemplos contra o pacote publicado] |
 
 Uma biblioteca tem poucos containers, e nenhum deles é um processo em execução — o
 runtime é o navegador de quem consome. Se o seu Level 2 tem servidor, banco e fila, você
@@ -65,7 +65,7 @@ está documentando uma aplicação, não uma biblioteca.
 |-----------|---------|-----------|--------------|------------|
 | **[Bundle]** | [ex: navegador do consumidor] | JavaScript | [ex: nenhuma em runtime] | [ex: npm, servido pelo jsDelivr] |
 | **[Folha de tokens]** | [ex: navegador do consumidor] | CSS | — | [ex: npm, no mesmo pacote] |
-| **[Site de documentação]** | [ex: navegador do leitor] | Markdown | [ex: docsify via CDN] | [ex: GitHub Pages] |
+| **[Site de documentação]** | [ex: navegador do leitor] | MDX + React | [ex: Docusaurus, build estático] | [ex: GitHub Pages] |
 
 Repare na coluna de dependências: uma biblioteca de componentes que adiciona dependência
 de runtime a transfere para todo consumidor. Aqui ela é vazia por decisão.

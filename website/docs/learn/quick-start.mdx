@@ -1,0 +1,123 @@
+# Quick start
+
+You'll build a working signup form — labelled fields, native validation,
+per-rule error messages, and a submit handler that receives parsed data — and
+then wire a second element to it without writing a listener.
+
+Everything here runs in a plain HTML file with the two tags from
+**[Installation](/learn/installation)**. No build, no bundler, no framework.
+
+## 1. A field
+
+Start with one input. `name` is what the value submits as; `type` and `required`
+are forwarded to a real `<input>` inside the shadow root, so the browser
+validates them for you.
+
+```html preview
+<kb-input name="email" type="email" required>
+  <kb-label>Email</kb-label>
+  <kb-helper>We'll never share it.</kb-helper>
+</kb-input>
+```
+
+Two things happened without configuration. `<kb-label>` and `<kb-helper>`
+assigned themselves to the `label` and `helper` slots on connect — you nest
+them, you don't wire them. And the field is form-associated, so it will submit
+like a native control.
+
+## 2. Error messages per rule
+
+A single "invalid" message forces the user to guess which rule they broke. Add
+one `<kb-validity>` per failure mode; each watches one key of the native
+`ValidityState` and appears only for that failure.
+
+```html preview
+<kb-input name="password" type="password" required minlength="8">
+  <kb-label>Password</kb-label>
+  <kb-helper>At least 8 characters.</kb-helper>
+  <kb-validity state="valueMissing">Choose a password.</kb-validity>
+  <kb-validity state="tooShort">At least 8 characters.</kb-validity>
+</kb-input>
+```
+
+Type one character, then delete it, to see the two messages swap. Note that the
+helper line disappears while the field is invalid — the error takes its place
+rather than stacking under it.
+
+## 3. The form
+
+`<kb-form>` renders its fields from a `<template>` child and turns submit into
+an event carrying already-parsed data. `autorender` tells it to render on
+connect, since there's no data to interpolate yet.
+
+```html preview
+<kb-form autorender id="signup">
+  <template>
+    <kb-input name="email" type="email" required>
+      <kb-label>Email</kb-label>
+      <kb-validity state="valueMissing">Email is required.</kb-validity>
+      <kb-validity state="typeMismatch">That's not an email address.</kb-validity>
+    </kb-input>
+    <kb-input name="password" type="password" required minlength="8">
+      <kb-label>Password</kb-label>
+      <kb-validity state="tooShort">At least 8 characters.</kb-validity>
+    </kb-input>
+    <kb-button type="submit">Create account</kb-button>
+  </template>
+</kb-form>
+
+<kb-text id="signup-output" size="xxs" color="master">nothing submitted yet</kb-text>
+
+<script type="module">
+  document.querySelector('#signup').addEventListener('submitted', (event) => {
+    document.querySelector('#signup-output').textContent = JSON.stringify(
+      event.detail,
+    )
+  })
+</script>
+```
+
+Submit with an empty field: nothing fires, because native validation runs first
+and blocks it. Fill both in correctly and `submitted` arrives with
+`\{ email: …, password: … \}` — keyed by each field's `name`, already parsed. You
+never touch `FormData`.
+
+?> The fields live inside a `<template>`, not as plain children. `<kb-form>`
+renders that template into its shadow root; children outside it are not
+projected. See **[Components › Form](/components/)** for why.
+
+## 4. Wiring without listeners
+
+So far you wrote one `addEventListener`. Now connect two elements with no script
+at all. Every kuba element is an Echo host: its `on` attribute — or a `<kb-on>`
+child — declares an **arc**, `source/event:type/sink`.
+
+```html preview
+<kb-input name="greeting" placeholder="Type your name">
+  <kb-label>Name</kb-label>
+</kb-input>
+
+<kb-render>
+  <kb-on value="greeting/changed:method/render"></kb-on>
+  <template>Hello, {}!</template>
+</kb-render>
+```
+
+Read the arc as a sentence: *when the element named `greeting` dispatches
+`changed`, call the `render` method on me, with the payload*. `<kb-render>`
+interpolates the payload into its `<template>` — `\{\}` is the whole value.
+
+Neither element references the other in code. The input doesn't know a renderer
+exists; the renderer doesn't import the input. They agree on an event name.
+That's the whole coupling model, and it's why kuba has no component tree.
+
+## What to read next
+
+- **[Lifecycle](/build-elements/lifecycle)** — what `@define`, `@paint` and `@repaint` do
+  between "element in HTML" and "pixels on screen".
+- **[Events and Echo](/foundations/events-and-echo)** — the full arc grammar,
+  including filters, and when to prefer a listener.
+- **[Components](/components/)** — every element with its attributes, states
+  and styling hooks.
+- **[Cookbook](/build-ui/patterns/)** — complete screens: search as you type, CRUD,
+  declarative navigation.

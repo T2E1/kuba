@@ -133,7 +133,7 @@ métodos com nome de Symbol e campos privados ficam de fora. Ver
    todos os `types.d.ts` deste repositório estão livres deles hoje, e devem continuar.
 8. **Fechar a lista do passo 2**: reler o arquivo escrito com a lista de mixins ao lado e
    confirmar, item a item, que cada contribuição aparece. Sobrou item? O contrato está
-   incompleto. Se a cadeia inclui `Echo`, a página em `docs/components/` também menciona
+   incompleto. Se a cadeia inclui `Echo`, a página em `website/docs/components/` também menciona
    `<kb-on>` na seção de Composição — as duas faces do mesmo recurso.
 
 ## Exemplos
@@ -149,7 +149,7 @@ métodos com nome de Symbol e campos privados ficam de fora. Ver
 - [ ] Cadeia de `extends` transcrita como lista, e cada mixin dela reaparece no arquivo
 - [ ] Todo membro de mixin achatado na classe
 - [ ] `alt` declarado sempre que `Identity` está na cadeia
-- [ ] `on` declarado sempre que `Echo` está na cadeia — e `<kb-on>` citado na seção de Composição da página em `docs/components/`
+- [ ] `on` declarado sempre que `Echo` está na cadeia — e `<kb-on>` citado na seção de Composição da página em `website/docs/components/`
 - [ ] `internals` **não** declarado; nenhum método com nome de Symbol, nenhum campo privado
 - [ ] Estrutura comparada contra `src/component/button/types.d.ts`, aberto nesta execução
 - [ ] Nada declarado para `Headless`
@@ -223,4 +223,4 @@ porque a tabela de atributos transcreve daqui (skill `preview`).
 
 **Criado em**: 2026-07-15
 **Atualizado em**: 2026-08-25
-**Versão**: 2.1
+**Versão**: 2.2

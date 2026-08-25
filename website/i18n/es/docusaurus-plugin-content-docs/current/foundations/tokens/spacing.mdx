@@ -1,0 +1,73 @@
+# Espaciado
+
+Dos escalas, definidas en `packages/pixel/tokens/spacing.css`. Mantenerlas
+separadas es el punto: un ajuste al espacio *entre* elementos nunca cambia la
+respiración interna de un componente.
+
+| Escala | Gobierna | La usan |
+|---|---|---|
+| `--spacing-*` | márgenes y gaps **entre** elementos | el gap de `<kb-stack>`, el ritmo del layout |
+| `--spacing_inset-*` | padding **dentro** de un elemento | el padding propio de cada componente |
+
+## Spacing
+
+Estandariza la composición y el ritmo vertical de una interfaz.
+
+| Token | Valor | Muestra |
+|---|---|---|
+| `--spacing-quarck` | 4px | <span className="bar" style={{width: 'var(--spacing-quarck)'}}></span> |
+| `--spacing-nano` | 8px | <span className="bar" style={{width: 'var(--spacing-nano)'}}></span> |
+| `--spacing-xxxs` | 16px | <span className="bar" style={{width: 'var(--spacing-xxxs)'}}></span> |
+| `--spacing-xxs` | 24px | <span className="bar" style={{width: 'var(--spacing-xxs)'}}></span> |
+| `--spacing-xs` | 32px | <span className="bar" style={{width: 'var(--spacing-xs)'}}></span> |
+| `--spacing-sm` | 40px | <span className="bar" style={{width: 'var(--spacing-sm)'}}></span> |
+| `--spacing-md` | 48px | <span className="bar" style={{width: 'var(--spacing-md)'}}></span> |
+| `--spacing-lg` | 56px | <span className="bar" style={{width: 'var(--spacing-lg)'}}></span> |
+| `--spacing-xl` | 64px | <span className="bar" style={{width: 'var(--spacing-xl)'}}></span> |
+| `--spacing-xxl` | 80px | <span className="bar" style={{width: 'var(--spacing-xxl)'}}></span> |
+| `--spacing-xxxl` | 120px | <span className="bar" style={{width: 'var(--spacing-xxxl)'}}></span> |
+| `--spacing-huge` | 160px | <span className="bar" style={{width: 'var(--spacing-huge)'}}></span> |
+| `--spacing-giant` | 200px | <span className="bar" style={{width: 'var(--spacing-giant)'}}></span> |
+
+## Inset
+
+Espaciado interno — el padding de un componente, con los cuatro lados iguales.
+
+| Token | Valor | Muestra |
+|---|---|---|
+| `--spacing_inset-quarck` | 4px | <span className="bar" style={{width: 'var(--spacing_inset-quarck)'}}></span> |
+| `--spacing_inset-nano` | 8px | <span className="bar" style={{width: 'var(--spacing_inset-nano)'}}></span> |
+| `--spacing_inset-xs` | 16px | <span className="bar" style={{width: 'var(--spacing_inset-xs)'}}></span> |
+| `--spacing_inset-sm` | 24px | <span className="bar" style={{width: 'var(--spacing_inset-sm)'}}></span> |
+| `--spacing_inset-md` | 32px | <span className="bar" style={{width: 'var(--spacing_inset-md)'}}></span> |
+| `--spacing_inset-lg` | 40px | <span className="bar" style={{width: 'var(--spacing_inset-lg)'}}></span> |
+| `--spacing_inset-huge` | 48px | <span className="bar" style={{width: 'var(--spacing_inset-huge)'}}></span> |
+| `--spacing_inset-giant` | 56px | <span className="bar" style={{width: 'var(--spacing_inset-giant)'}}></span> |
+
+?> Las dos escalas comparten nombres de paso hasta `nano` y divergen después:
+`--spacing-xs` son 32px mientras que `--spacing_inset-xs` son 16px. Leer el
+nombre del paso sin la escala no dice nada — lleva siempre el prefijo.
+
+## En la práctica
+
+El atributo `spacing` de `<kb-stack>` resuelve contra la escala **inset**, que
+es lo que mantiene el gap dentro de un grupo proporcional al padding que lo
+rodea:
+
+```html preview
+<kb-stack direction="column" spacing="nano" align="stretch">
+  <kb-card>
+    <kb-text size="xxs">Gap de spacing_inset-nano entre estas tarjetas</kb-text>
+  </kb-card>
+  <kb-card>
+    <kb-text size="xxs">…y el padding de la propia tarjeta es spacing_inset-xs</kb-text>
+  </kb-card>
+</kb-stack>
+```
+
+| Paso | Úsalo para |
+|---|---|
+| `quarck` / `nano` | Elementos que se leen como una unidad — un icono y su etiqueta, un campo y su texto de ayuda. |
+| `xs` | El valor por defecto: hermanos dentro de un grupo. |
+| `sm` / `md` | Separar grupos entre sí dentro de una sección. |
+| `lg` en adelante | Separación a nivel de sección. |

@@ -2,7 +2,7 @@
 
 Thank you for your interest in contributing. kuba is a small, opinionated project — contributions that align with its design principles are welcome; contributions that add complexity without clear benefit are not.
 
-Read the [documentation](https://t2e1.github.io/kuba/) first — especially [Principles](https://t2e1.github.io/kuba/#/foundations/principles) and [Naming](https://t2e1.github.io/kuba/#/foundations/naming). Understand the model and why it matters before proposing changes.
+Read the [documentation](https://t2e1.github.io/kuba/) first — especially [Principles](https://t2e1.github.io/kuba/foundations/principles) and [Naming](https://t2e1.github.io/kuba/foundations/naming). Understand the model and why it matters before proposing changes.
 
 ---
 
@@ -57,11 +57,11 @@ A visual custom element lives in one `packages/<group>/<name>/` folder and is on
 1. **The implementation** — `<name>.ts`, plus its `component.js` and `style.js`.
 2. **A hand-written `types.d.ts` beside it**, describing only the public surface and registering the tag in `HTMLElementTagNameMap`. An implementation with no `types.d.ts` isn't a public element.
 3. **A `<name>.test.js` beside it**, running against the real browser API the element depends on.
-4. **A page under `docs/components/`**, following the shape of the existing ones: live example, when to use and when not to, composition, attributes, events, styling, accessibility, do's and don'ts.
+4. **A page under `website/docs/components/`**, following the shape of the existing ones: live example, when to use and when not to, composition, attributes, events, styling, accessibility, do's and don'ts.
 
 Every visual decision is a `--<name>-*` custom property defaulting to a design token — no literals in `style.js`.
 
-Before writing any of it, check [Naming](https://t2e1.github.io/kuba/#/foundations/naming): the change may be a Block (a composition of existing Elements) rather than a new Element, in which case it needs markup, not a package.
+Before writing any of it, check [Naming](https://t2e1.github.io/kuba/foundations/naming): the change may be a Block (a composition of existing Elements) rather than a new Element, in which case it needs markup, not a package.
 
 ---
 

@@ -1,0 +1,40 @@
+.preview {
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: var(--border-radius-sm, 8px);
+  margin: 1.5rem 0;
+  overflow: hidden;
+}
+
+.stage {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing_inset-xs, 16px);
+  padding: var(--spacing_inset-md, 32px);
+}
+
+.source {
+  border-top: 1px solid var(--ifm-color-emphasis-300);
+}
+
+.source summary {
+  cursor: pointer;
+  font-size: 0.85rem;
+  padding: 0.6rem 1rem;
+  user-select: none;
+}
+
+.source summary:hover {
+  background: var(--ifm-color-emphasis-100);
+}
+
+.source pre {
+  border-radius: 0;
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .stage {
+    padding: var(--spacing_inset-xs, 16px);
+  }
+}

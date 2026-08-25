@@ -1,0 +1,39 @@
+# Opacidade
+
+Níveis de opacidade para estados e sobreposições, definidos em
+`packages/pixel/tokens/opacity.css`.
+
+| Token | Valor | Amostra |
+|---|---|---|
+| `--opacity-level-semiopaque` | 0.72 | <span className="box" style={{background: 'var(--color-primary)', opacity: 'var(--opacity-level-semiopaque)'}}></span> |
+| `--opacity-level-intense` | 0.64 | <span className="box" style={{background: 'var(--color-primary)', opacity: 'var(--opacity-level-intense)'}}></span> |
+| `--opacity-level-medium` | 0.32 | <span className="box" style={{background: 'var(--color-primary)', opacity: 'var(--opacity-level-medium)'}}></span> |
+| `--opacity-level-light` | 0.16 | <span className="box" style={{background: 'var(--color-primary)', opacity: 'var(--opacity-level-light)'}}></span> |
+| `--opacity-level-semitransparent` | 0.08 | <span className="box" style={{background: 'var(--color-primary)', opacity: 'var(--opacity-level-semitransparent)'}}></span> |
+
+## Para que servem
+
+Estados de sobreposição: o fundo atrás de um modal, um hover sutil sobre uma
+superfície, um controle desabilitado.
+
+```css
+.backdrop {
+  background: var(--color-pure-black);
+  opacity: var(--opacity-level-intense);
+}
+```
+
+## Para que não servem
+
+**Nunca use opacidade para esmaecer texto legível.** Reduzir a opacidade de um
+texto derruba seu contraste contra o fundo de um jeito invisível para um
+verificador de contraste, que lê a cor declarada — o resultado computado pode
+cair abaixo do mínimo de 4.5:1 enquanto o CSS ainda diz `--color-master-dark`.
+
+Quando o texto deve recuar, escolha um passo mais claro da rampa `master`. O
+token é honesto sobre a cor resultante, e continua correto no modo escuro, onde a
+rampa inverte e a opacidade não.
+
+?> **Nenhum componente do kuba usa estes tokens hoje.** Inputs desabilitados, por
+exemplo, mudam fundo e cor de texto em vez de esmaecer — justamente para manter o
+contraste legível. Eles existem para o produto que você constrói em cima.

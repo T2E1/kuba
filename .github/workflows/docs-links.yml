@@ -22,7 +22,7 @@ jobs:
 
       # Two passes because the two sets of files mean different things by a
       # link. The repository markdown is read on GitHub, where './LICENSE' has
-      # to resolve as a file. The docs are read through docsify, where
+      # to resolve as a file. The docs are read through Docusaurus, where
       # '/foundations/naming' is a client-side route, not a path on disk — so
       # there only the external URLs are checkable.
       - name: Repository markdown — files and URLs
@@ -44,5 +44,5 @@ jobs:
             --max-cache-age 1d
             --scheme https
             --scheme http
-            'docs/**/*.md' docs/llms.txt
+            'website/docs/**/*.mdx' 'website/i18n/**/*.mdx' website/static/llms.txt
           fail: true

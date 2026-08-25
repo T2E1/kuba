@@ -1,0 +1,88 @@
+# http
+
+```js
+import http from '@t2e1/kuba/http'
+```
+
+Un wrapper fluido de `fetch` que **nunca lanza**. Cada petición resuelve a
+`\{ data, error \}`, así que el código que llama ramifica sobre un valor en lugar
+de envolver todo en `try`/`catch`.
+
+```js
+const { data, error } = await http
+  .post('/api/users')
+  .body({ name: 'Ada' })
+  .headers({ 'x-api-key': key })
+  .json()
+
+if (error) return showError()
+render(data)
+```
+
+## Iniciar una petición
+
+`http.<verbo>(url)` inicia un builder. El verbo es cualquier propiedad a la que
+accedas, así que `get`, `post`, `put`, `delete`, `patch` y cualquier otro nombre
+de método funcionan.
+
+| Llamada | Envía |
+|---|---|
+| `http.get(url)` | GET |
+| `http.post(url)` | POST |
+| `http.put(url)` | PUT |
+| `http.delete(url)` | DELETE |
+
+## Configurarla
+
+Cada método devuelve el mismo builder, así que se encadenan en cualquier orden.
+**Nada se envía hasta que se llama a `json()`.**
+
+| Método | Parámetro | Descripción |
+|---|---|---|
+| `body(target)` | `unknown` | Serializa `target` como JSON en el cuerpo de la petición. |
+| `headers(target)` | `HeadersInit` | Cualquier cosa que acepte el constructor `Headers`. |
+| `signal(target)` | `AbortSignal` | Cancela la petición en curso cuando se aborta. |
+
+## Enviarla
+
+`json()` envía la petición y parsea el cuerpo de la respuesta como JSON.
+
+```ts
+json<T = unknown>(): Promise<HttpResult<T>>
+```
+
+```ts
+interface HttpResult<T> {
+  data: T | null
+  error: unknown
+}
+```
+
+Exactamente un lado se rellena: una respuesta 2xx da `data` con `error: null`;
+una respuesta no-2xx, un fallo de red, o un error de parseo de JSON da
+`data: null` con `error` establecido.
+
+!> **La promesa nunca rechaza.** El `await` por sí solo no revela un fallo —
+tienes que comprobar `error`. Un `try`/`catch` alrededor de esto nunca se
+disparará, lo cual es fácil de escribir y fácil de creer.
+
+## Relación con `<kb-fetch>`
+
+[`<kb-fetch>`](/components/fetch) es este paquete más interpolación de URL,
+composición de cabeceras a partir de hijos `<kb-headers>`, cancelación
+automática de la petición anterior, y despacho de eventos. Usa el elemento
+cuando el resultado guía la página de forma declarativa; usa `http` directamente
+cuando quieres la promesa, o cuando la petición no está atada a ningún elemento.
+
+Una asimetría que vale la pena conocer: el evento `failed` del elemento lleva
+`null` en lugar del error, así que cuando necesites inspeccionar un fallo, haz
+`await` sobre el método del elemento — o llama a `http` tú mismo.
+
+## Limitaciones
+
+- **Solo JSON.** `json()` es el único método de envío; las respuestas en texto,
+  blob y streaming no están soportadas.
+- **Sin retry, sin timeout, sin interceptores.** Compón eso tú mismo alrededor
+  de la promesa, o usa `fetch` directamente.
+- **Sin URL base.** Pasa la ruta completa cada vez, o constrúyela antes de
+  llamar.

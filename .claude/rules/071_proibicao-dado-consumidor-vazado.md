@@ -32,7 +32,7 @@ morto, é conteúdo vivo, testado e documentado como se fosse decisão de produt
 - [ ] Nenhum literal de conteúdo editorial — nome de organização, linha de copyright, ano
   calendário fixo, endereço, texto de marketing — em template (`component.js`) de elemento
   publicado.
-- [ ] Exemplos em `docs/`, testes e JSDoc usam apenas placeholder reservado ou canônico:
+- [ ] Exemplos em `website/docs/`, testes e JSDoc usam apenas placeholder reservado ou canônico:
   `example.com` (RFC 2606), `Your Company`, `acme`, `ada`.
 - [ ] Nenhuma string do template ou do exemplo está num idioma diferente do resto do
   arquivo, sem justificativa de i18n explícita.
@@ -68,5 +68,5 @@ morto, é conteúdo vivo, testado e documentado como se fosse decisão de produt
 ---
 
 **Created on**: 2026-08-21
-**Updated on**: 2026-08-21
-**Version**: 1.0
+**Updated on**: 2026-08-25
+**Version**: 1.1

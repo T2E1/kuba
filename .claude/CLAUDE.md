@@ -60,7 +60,7 @@ entre si e não veem esta conversa — recebem o escopo que eu passo, e devolvem
 | `tester` | Cobrir comportamento, reproduzir bug como teste que falha, auditar se a suíte prova algo | Corrigir o bug que ele achou |
 | `reviewer` | Julgar mudança pronta contra as 31 rules que o Biome não vê | O que `bun run lint` já pega |
 | `deepdive` | "Por que isto acontece" sem resposta óbvia, ou mapear pacote desconhecido | Escolher entre alternativas — é do `architect` |
-| `writer` | Página de `docs/`, tradução, `README`, `CONTRIBUTING` | JSDoc no código — é do `developer` |
+| `writer` | Página de `website/docs/`, tradução, `README`, `CONTRIBUTING` | JSDoc no código — é do `developer` |
 | `releaser` | Julgar se uma mudança quebra consumidor, e preparar versão | Commit corriqueiro — é o `/ship` |
 | `builder` | `biome.json`, os configs, hooks de husky, workflows, o que entra em `dist/` | Código de `src/` ou `packages/` |
 | `curator` | O consumidor corrige a entrega de qualquer ofício, e a lacuna que deixou passar o erro precisa ser localizada e fechada em `.claude/` | Corrigir a entrega em si, ou decidir a forma de algo novo |
@@ -111,7 +111,7 @@ ou a necessidade de um olhar que não viu esta conversa.
 **Este critério não dispensa a tabela de fluxos acima.** "Pequeno" descreve o tamanho do
 diff, não o alcance do que ele compromete. Se a mudança altera contrato público — attribute,
 token, evento, estado de acessibilidade — de um pacote que tem página em
-`docs/components/`, o `writer` entra mesmo que eu tenha feito o resto sozinho; se ela toca
+`website/docs/components/`, o `writer` entra mesmo que eu tenha feito o resto sozinho; se ela toca
 token, estado visual ou papel/nome acessível, o `designer` entra pela mesma razão. Fazer a
 edição eu mesmo substitui o `developer`, nunca o `designer` ou o `writer` — são julgamentos
 diferentes, e nenhum dos dois se infere pela pequenez da mudança.
@@ -158,5 +158,5 @@ ainda reflete o código real.
 ---
 
 **Criado em**: 2026-08-11
-**Atualizado em**: 2026-08-21
-**Versão**: 1.6
+**Atualizado em**: 2026-08-25
+**Versão**: 1.7

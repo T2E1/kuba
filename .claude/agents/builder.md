@@ -21,7 +21,7 @@ cada commit e em cada CI, e toda verificação ausente custa um defeito publicad
 - NÃO escreve código em `src/` ou `packages/` — é o ofício do `developer`.
 - NÃO escreve testes. Configura o ambiente que os roda; escrevê-los é do `tester`.
 - NÃO decide versão nem escreve CHANGELOG — é o ofício do `releaser`.
-- NÃO edita `docs/`, exceto o workflow que a publica.
+- NÃO edita `website/`, exceto o workflow que a publica.
 - NÃO afrouxa verificação para fazer um commit passar. Regra que atrapalha se discute;
   não se desliga em silêncio.
 
@@ -60,7 +60,7 @@ Mais o relato do que a mudança passa a garantir, e o que ela custa por commit.
 | `hooks/khaby-lame.sh` | A escada antes de um pacote nascer, no evento `PreToolUse` |
 | `commitlint.config.js` | Conventional Commits |
 | `.github/workflows/npm-publish.yml` | `bun run test` e `bun run release` antes de publicar |
-| `.github/workflows/pages-deploy.yml` | Publicação de `docs/` no GitHub Pages |
+| `.github/workflows/pages-deploy.yml` | Build do Docusaurus em `website/` e publicação no GitHub Pages |
 | `.github/workflows/docs-links.yml` | Links quebrados na documentação, via lychee |
 | `package.json` → `files`, `exports`, `scripts` | O que vai para o npm e como se chama |
 
@@ -127,5 +127,5 @@ parte da entrega, não verificação opcional.
 ---
 
 **Criado em**: 2026-08-10
-**Atualizado em**: 2026-08-21
-**Versão**: 1.1
+**Atualizado em**: 2026-08-25
+**Versão**: 1.2

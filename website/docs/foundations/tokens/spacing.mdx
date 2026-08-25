@@ -1,0 +1,72 @@
+# Spacing
+
+Two scales, defined in `packages/pixel/tokens/spacing.css`. Keeping them
+separate is the point: an adjustment to the space *between* elements never
+changes a component's inner breathing room.
+
+| Scale | Governs | Used by |
+|---|---|---|
+| `--spacing-*` | margins and gaps **between** elements | `<kb-stack>`'s gap, layout rhythm |
+| `--spacing_inset-*` | padding **inside** an element | every component's own padding |
+
+## Spacing
+
+Standardizes composition and the vertical rhythm of an interface.
+
+| Token | Value | Sample |
+|---|---|---|
+| `--spacing-quarck` | 4px | <span className="bar" style={{width: 'var(--spacing-quarck)'}}></span> |
+| `--spacing-nano` | 8px | <span className="bar" style={{width: 'var(--spacing-nano)'}}></span> |
+| `--spacing-xxxs` | 16px | <span className="bar" style={{width: 'var(--spacing-xxxs)'}}></span> |
+| `--spacing-xxs` | 24px | <span className="bar" style={{width: 'var(--spacing-xxs)'}}></span> |
+| `--spacing-xs` | 32px | <span className="bar" style={{width: 'var(--spacing-xs)'}}></span> |
+| `--spacing-sm` | 40px | <span className="bar" style={{width: 'var(--spacing-sm)'}}></span> |
+| `--spacing-md` | 48px | <span className="bar" style={{width: 'var(--spacing-md)'}}></span> |
+| `--spacing-lg` | 56px | <span className="bar" style={{width: 'var(--spacing-lg)'}}></span> |
+| `--spacing-xl` | 64px | <span className="bar" style={{width: 'var(--spacing-xl)'}}></span> |
+| `--spacing-xxl` | 80px | <span className="bar" style={{width: 'var(--spacing-xxl)'}}></span> |
+| `--spacing-xxxl` | 120px | <span className="bar" style={{width: 'var(--spacing-xxxl)'}}></span> |
+| `--spacing-huge` | 160px | <span className="bar" style={{width: 'var(--spacing-huge)'}}></span> |
+| `--spacing-giant` | 200px | <span className="bar" style={{width: 'var(--spacing-giant)'}}></span> |
+
+## Inset
+
+Inner spacing — the padding of a component, where all four sides are equal.
+
+| Token | Value | Sample |
+|---|---|---|
+| `--spacing_inset-quarck` | 4px | <span className="bar" style={{width: 'var(--spacing_inset-quarck)'}}></span> |
+| `--spacing_inset-nano` | 8px | <span className="bar" style={{width: 'var(--spacing_inset-nano)'}}></span> |
+| `--spacing_inset-xs` | 16px | <span className="bar" style={{width: 'var(--spacing_inset-xs)'}}></span> |
+| `--spacing_inset-sm` | 24px | <span className="bar" style={{width: 'var(--spacing_inset-sm)'}}></span> |
+| `--spacing_inset-md` | 32px | <span className="bar" style={{width: 'var(--spacing_inset-md)'}}></span> |
+| `--spacing_inset-lg` | 40px | <span className="bar" style={{width: 'var(--spacing_inset-lg)'}}></span> |
+| `--spacing_inset-huge` | 48px | <span className="bar" style={{width: 'var(--spacing_inset-huge)'}}></span> |
+| `--spacing_inset-giant` | 56px | <span className="bar" style={{width: 'var(--spacing_inset-giant)'}}></span> |
+
+?> The two scales share step names up to `nano` but diverge after: `--spacing-xs`
+is 32px while `--spacing_inset-xs` is 16px. Reading a step name without its
+scale tells you nothing — always carry the prefix.
+
+## In practice
+
+`<kb-stack>`'s `spacing` attribute resolves against the **inset** scale, which
+is what keeps a gap inside a group proportional to the padding around it:
+
+```html preview
+<kb-stack direction="column" spacing="nano" align="stretch">
+  <kb-card>
+    <kb-text size="xxs">Gap of spacing_inset-nano between these cards</kb-text>
+  </kb-card>
+  <kb-card>
+    <kb-text size="xxs">…and the card's own padding is spacing_inset-xs</kb-text>
+  </kb-card>
+</kb-stack>
+```
+
+| Step | Use for |
+|---|---|
+| `quarck` / `nano` | Elements that read as one unit — an icon and its label, a field and its helper. |
+| `xs` | The default: siblings inside a group. |
+| `sm` / `md` | Separating groups from each other inside a section. |
+| `lg` and up | Section-level separation. |

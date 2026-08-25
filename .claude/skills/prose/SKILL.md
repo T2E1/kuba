@@ -24,7 +24,7 @@ longe. A outra metade é ter opinião, variar o ritmo e admitir a dúvida.
 
 | Situação | Ação |
 |---|---|
-| Escrevendo página de `docs/` | Aplicar antes de commitar |
+| Escrevendo página de `website/docs/` | Aplicar antes de commitar |
 | Escrevendo `README`, `CONTRIBUTING`, `SECURITY` | Aplicar — é a porta de entrada do projeto |
 | Escrevendo entrada de `CHANGELOG` | Aplicar; a entrada descreve efeito, não celebra |
 | Escrevendo comentário ou JSDoc | Aplicar a régua do enchimento e da atribuição vaga |
@@ -83,7 +83,7 @@ Nenhuma é proibida. Duas na mesma página já é sinal; três é diagnóstico.
 
 ## Exemplos
 
-A prosa que este projeto publica é em inglês — `docs/`, `README`, `CHANGELOG` —, então os
+A prosa que este projeto publica é em inglês — `website/docs/`, `README`, `CHANGELOG` —, então os
 exemplos estão em inglês, na forma real em que o texto é escrito aqui.
 
 | Caso | Correto | Incorreto |
@@ -159,5 +159,5 @@ Fonte: [Wikipedia:Signs of AI writing](https://en.wikipedia.org/wiki/Wikipedia:S
 ---
 
 **Criado em**: 2026-08-10
-**Atualizado em**: 2026-08-10
-**Versão**: 1.0
+**Atualizado em**: 2026-08-25
+**Versão**: 1.1

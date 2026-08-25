@@ -23,14 +23,15 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      # The docs are a real consumer of the published package: index.html loads
-      # kuba from the CDN at a pinned version. A pin pointing at a version that
-      # was never published deploys a site where every live example is dead, and
-      # nothing else would catch it — so fail here instead of shipping it.
+      # The docs are a real consumer of the published package: the site loads
+      # kuba from the CDN at a pinned version (website/docusaurus.config.js).
+      # A pin pointing at a version that was never published deploys a site
+      # where every live example is dead, and nothing else would catch it —
+      # so fail here instead of shipping it.
       - name: Verify the pinned kuba version is published
         run: |
-          version=$(grep -o '@t2e1/kuba@[0-9][^/]*' docs/index.html | head -1 | cut -d@ -f3)
-          echo "docs/index.html pins @t2e1/kuba@$version"
+          version=$(grep -oP "KUBA_VERSION = '\K[^']+" website/docusaurus.config.js)
+          echo "website/docusaurus.config.js pins @t2e1/kuba@$version"
           curl -fsSL -o /dev/null "https://cdn.jsdelivr.net/npm/@t2e1/kuba@$version/dist/kuba.js"
           curl -fsSL -o /dev/null "https://cdn.jsdelivr.net/npm/@t2e1/kuba@$version/dist/kuba.css"
 
@@ -39,23 +40,25 @@ jobs:
           # fail: during a release the two are briefly out of step by design.
           current=$(node -p "require('./package.json').version")
           if [ "$version" != "$current" ]; then
-            echo "::warning::docs pin ($version) is behind package.json ($current) — bump it in docs/index.html"
+            echo "::warning::docs pin ($version) is behind package.json ($current) — bump it in website/docusaurus.config.js"
           fi
 
-      # docsify renders markdown in the browser, so there is nothing to build —
-      # the site is the docs/ directory as it stands in the repository.
-      - name: Assemble the site
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: website/package-lock.json
+
+      - name: Install and build the site
+        working-directory: website
         run: |
-          mkdir -p site
-          cp -r docs/. site/
-          # Jekyll would drop docsify's _sidebar.md and _navbar.md, since it
-          # ignores paths starting with an underscore.
-          touch site/.nojekyll
+          npm ci
+          npm run build
 
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: site
+          path: website/build
 
   deploy:
     needs: build

@@ -2,7 +2,7 @@
 
 Correto em: `component-page.valid.md`
 
-O texto abaixo é o que uma página de `docs/components/` **não** deve parecer. Cada
+O texto abaixo é o que uma página de `website/docs/components/` **não** deve parecer. Cada
 comentário aponta o padrão do `references/catalogo.md`.
 
 ---

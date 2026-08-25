@@ -1,0 +1,47 @@
+# Shadows
+
+Elevation levels, defined in `packages/pixel/tokens/shadow.css`.
+
+| Token | Y offset | Blur | Sample |
+|---|---|---|---|
+| `--shadow-level-0` | — | `none` | <span className="box" style={{background: 'var(--color-pure-white)', boxShadow: 'var(--shadow-level-0)'}}></span> |
+| `--shadow-level-1` | 1px | 3px | <span className="box" style={{background: 'var(--color-pure-white)', boxShadow: 'var(--shadow-level-1)'}}></span> |
+| `--shadow-level-2` | 3px | 8px | <span className="box" style={{background: 'var(--color-pure-white)', boxShadow: 'var(--shadow-level-2)'}}></span> |
+| `--shadow-level-3` | 6px | 18px | <span className="box" style={{background: 'var(--color-pure-white)', boxShadow: 'var(--shadow-level-3)'}}></span> |
+| `--shadow-level-4` | 8px | 14px | <span className="box" style={{background: 'var(--color-pure-white)', boxShadow: 'var(--shadow-level-4)'}}></span> |
+| `--shadow-level-5` | 12px | 22px | <span className="box" style={{background: 'var(--color-pure-white)', boxShadow: 'var(--shadow-level-5)'}}></span> |
+
+Each level is a **composite** `box-shadow` — three stacked layers at different
+offsets and opacities, not a single value. That's what makes the depth read as
+light falling on an object rather than a grey blur behind it.
+
+The higher the level, the more the element should read as sitting above the
+surface:
+
+| Level | For |
+|---|---|
+| 0 | The resting default. Most components never leave it. |
+| 1–2 | Something lifted off the page but still part of it — a hovered card, a raised bar. |
+| 3–4 | Floating over content — a dropdown, a popover. |
+| 5 | Detached from the page entirely — a modal, a drawer. |
+
+?> **No kuba component uses a shadow today.** Cards, buttons and inputs are all
+flat by design, distinguished by fill and border instead. These tokens exist for
+the product you build on top — reach for them when an element genuinely floats
+above others, not to add visual weight to something that doesn't.
+
+```html preview
+<kb-stack direction="row" spacing="xs">
+  <kb-card style="box-shadow: var(--shadow-level-2)">
+    <kb-text size="xxs">Level 2</kb-text>
+  </kb-card>
+  <kb-card style="box-shadow: var(--shadow-level-4)">
+    <kb-text size="xxs">Level 4</kb-text>
+  </kb-card>
+</kb-stack>
+```
+
+!> The shadows are tuned for light surfaces — they're black at low opacity. On a
+dark background they're nearly invisible, since a shadow can't darken what's
+already dark. Elevation in dark mode comes from a lighter surface color instead:
+step up the `master` ramp rather than adding a shadow.

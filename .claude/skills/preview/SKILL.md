@@ -1,7 +1,7 @@
 ---
 name: preview
 model: sonnet
-description: Decide o que de um componente merece ser demonstrado e produz a demonstração nos dois lugares onde ela vive — o bloco ```html preview da página em docs/components/, que roda ao vivo contra o pacote publicado, e o teste de interação que prova cada evento documentado. Cobre a estrutura da página de componente, a hierarquia de variantes, cor como semântica, composição pai/filho e os pares do's/don'ts. Use ao documentar um componente novo, ao decidir quais estados mostrar, ao escrever a seção "when not to use" ou ao provar que um evento é realmente disparado. Não use para definir o contrato do componente — é a skill types.
+description: Decide o que de um componente merece ser demonstrado e produz a demonstração nos dois lugares onde ela vive — o bloco ```html preview da página em website/docs/components/, que roda ao vivo contra o pacote publicado, e o teste de interação que prova cada evento documentado. Cobre a estrutura da página de componente, a hierarquia de variantes, cor como semântica, composição pai/filho e os pares do's/don'ts. Use ao documentar um componente novo, ao decidir quais estados mostrar, ao escrever a seção "when not to use" ou ao provar que um evento é realmente disparado. Não use para definir o contrato do componente — é a skill types.
 ---
 
 # Preview
@@ -17,7 +17,7 @@ Neste repositório a demonstração vive em dois lugares, e os dois transcrevem 
 
 | Onde | O que prova | Quem escreve |
 |---|---|---|
-| ` ```html preview ` em `docs/components/<nome>.md` | Que o componente aparenta e se comporta como descrito | agent `writer` |
+| ` ```html preview ` em `website/docs/components/<nome>.mdx` | Que o componente aparenta e se comporta como descrito | agent `writer` |
 | `packages/<categoria>/<nome>/<nome>.test.js` | Que cada evento documentado é mesmo disparado | agent `tester` |
 
 Um fato do repositório molda todo o resto: **os exemplos da página rodam contra o pacote
@@ -30,11 +30,11 @@ em vez de teste verde contra código que só existe na máquina de quem escreveu
 
 | Situação | Ação |
 |---|---|
-| Pacote com `types.d.ts` e sem página em `docs/components/` | Escrever a página completa |
+| Pacote com `types.d.ts` e sem página em `website/docs/components/` | Escrever a página completa |
 | Componente ganhou atributo ou variante | Atualizar a página na mesma mudança |
 | Componente documenta um evento disparado | Garantir o teste de interação que o prova |
 | Pedido de "quando usar / quando não usar" | Escrever as duas seções, com a mesma atenção |
-| Demonstração atravessa mais de um componente | `docs/build-ui/` ou o cookbook, não a página do componente |
+| Demonstração atravessa mais de um componente | `website/docs/build-ui/` ou o cookbook, não a página do componente |
 | Definir que atributo o componente aceita | ❌ Não é aqui — skill `types` |
 | Escrever a prosa da página | Complementar — skill `prose` decide como a frase soa |
 
@@ -105,7 +105,8 @@ não importa (rule 023).
 
 ### O exemplo aparece quebrado na página publicada
 
-**Causa:** usa recurso mais novo que a versão pinada em `docs/index.html`.
+**Causa:** usa recurso mais novo que a versão pinada em `KUBA_VERSION`, no topo de
+`website/docusaurus.config.js`.
 **Solução:** conferir o pin. Ele fica para trás quando um release não o atualiza — é
 passo do método do `releaser`.
 
@@ -142,10 +143,10 @@ conteúdo não interceptar o clique" —, não uma lista de tipos aceitos.
 - [state](../state/SKILL.md): depends on — os estados demonstráveis são os de `internals.states`.
 - [event](../event/SKILL.md): depends on — o evento só chega ao exemplo com `composed: true`.
 - [token](../token/SKILL.md): complements — as custom properties re-estilizáveis são parte do que se documenta.
-- [colocation](../colocation/SKILL.md): complements — o teste mora ao lado do componente; a página, em `docs/`.
+- [colocation](../colocation/SKILL.md): complements — o teste mora ao lado do componente; a página, em `website/docs/`.
 
 ---
 
 **Criado em**: 2026-08-10
-**Atualizado em**: 2026-08-10
-**Versão**: 1.0
+**Atualizado em**: 2026-08-25
+**Versão**: 1.1

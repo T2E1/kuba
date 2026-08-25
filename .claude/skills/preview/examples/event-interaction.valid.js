@@ -1,6 +1,6 @@
 // ✅ O teste que prova que o evento documentado é mesmo disparado.
 //
-// A página em docs/components/ afirma que <kb-button> despacha `clicked`
+// A página em website/docs/components/ afirma que <kb-button> despacha `clicked`
 // carregando o `value`. Esta é a prova. Sem ela, a página documenta uma
 // intenção — e uma regressão só apareceria quando um consumidor reclamasse.
 //

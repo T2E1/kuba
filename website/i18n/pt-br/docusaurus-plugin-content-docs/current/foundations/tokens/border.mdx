@@ -1,0 +1,49 @@
+# Borda
+
+Definidos em `packages/pixel/tokens/borderRadius.css` e `borderWidth.css`.
+
+## Raio de borda
+
+Os cantos de formas e elementos.
+
+| Token | Valor | Amostra |
+|---|---|---|
+| `--border-radius-none` | 0 | <span className="box" style={{borderRadius: 'var(--border-radius-none)'}}></span> |
+| `--border-radius-sm` | 8px | <span className="box" style={{borderRadius: 'var(--border-radius-sm)'}}></span> |
+| `--border-radius-md` | 16px | <span className="box" style={{borderRadius: 'var(--border-radius-md)'}}></span> |
+| `--border-radius-lg` | 24px | <span className="box" style={{borderRadius: 'var(--border-radius-lg)'}}></span> |
+| `--border-radius-pill` | 500px | <span className="box" style={{borderRadius: 'var(--border-radius-pill)'}}></span> |
+| `--border-radius-circular` | 50% | <span className="box" style={{borderRadius: 'var(--border-radius-circular)', width: '2.5rem'}}></span> |
+
+`pill` é para elementos totalmente arredondados nas pontas — badges, tags, uma
+chamada de ação com `width="fill"`. `circular` é para elementos perfeitamente
+redondos: avatares, e o disco atrás do ícone do `<kb-fileupload>`.
+
+?> `pill` é um comprimento fixo grande, não uma palavra-chave. Numa caixa com
+mais de 1000px de altura os cantos deixam de parecer uma pílula — por isso ele
+pertence a controles, não a superfícies.
+
+Onde cada um é usado por padrão: `sm` em botões, inputs, covers e insets; `md`
+em cards.
+
+```html preview
+<kb-stack direction="row" spacing="nano" align="center">
+  <kb-button>Padrão (sm)</kb-button>
+  <kb-button style="--button-border-radius: var(--border-radius-pill)">Pílula</kb-button>
+  <kb-button style="--button-border-radius: var(--border-radius-none)">Reto</kb-button>
+</kb-stack>
+```
+
+## Espessura de borda
+
+| Token | Valor | Amostra |
+|---|---|---|
+| `--border-width-none` | 0 | <span className="box box--bordered" style={{borderWidth: 'var(--border-width-none)'}}></span> |
+| `--border-width-hairline` | 1px | <span className="box box--bordered" style={{borderWidth: 'var(--border-width-hairline)'}}></span> |
+| `--border-width-thin` | 2px | <span className="box box--bordered" style={{borderWidth: 'var(--border-width-thin)'}}></span> |
+| `--border-width-thick` | 4px | <span className="box box--bordered" style={{borderWidth: 'var(--border-width-thick)'}}></span> |
+| `--border-width-heavy` | 8px | <span className="box box--bordered" style={{borderWidth: 'var(--border-width-heavy)'}}></span> |
+
+`hairline` é o padrão para o que faz borda com uma superfície — inputs, cards
+contornados, o alvo do fileupload. `thin` é a borda do botão, para que um botão
+contornado se leia como controle e não como contêiner.

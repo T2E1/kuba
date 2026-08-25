@@ -1,0 +1,101 @@
+# router
+
+```js
+import router, { args, params, urlFor } from '@t2e1/kuba/router'
+```
+
+Um roteador client-side construído sobre o `history.pushState`: registre
+caminhos contra callbacks, e o que casar roda quando a URL muda.
+
+```js
+import router, { params } from '@t2e1/kuba/router'
+
+router('/users/:id', function showUser() {
+  render(params.id)
+})('/about', function showAbout() {
+  render('about')
+})
+
+router.fallback(function showNotFound() {
+  render('404')
+})
+```
+
+## `router(path, page)`
+
+Registra uma rota e devolve a si mesmo, então os registros encadeiam.
+
+| Parâmetro | Tipo | Descrição |
+|---|---|---|
+| `path` | `string` | Um padrão, ex. `/users/:id`. Um segmento `:name` casa com um ou mais de `[a-z0-9-_]`, sem diferenciar maiúsculas. |
+| `page` | `() => void` | Roda quando o padrão casa com a URL atual. |
+
+!> **Dê nome às suas funções de página.** O `urlFor` encontra uma rota pelo
+`.name` da função de página, então uma arrow anônima (`() => \{\}`) nunca consegue
+ser resolvida de volta para uma URL.
+
+## `router.fallback(page)`
+
+Registra o callback que roda quando nenhuma rota casa. Sem ele, uma URL sem
+correspondência não roda absolutamente nada — sem erro, sem saída.
+
+## `router.handle()`
+
+Resolve a rota que casa com a URL atual e invoca sua página. Feito para ser
+ligado a `popstate` e `pushstate`, e não chamado diretamente.
+
+## `params(path?)`
+
+Extrai os valores de `:segment` do padrão que casou contra o pathname atual. O
+`router.handle` chama isso para você com o caminho da rota que casou.
+
+```js
+// URL: /users/42, registrada como router('/users/:id', showUser)
+params.id // '42'
+```
+
+Chamar sem argumento limpa os params extraídos anteriormente.
+
+?> `params` é uma função cujas próprias propriedades guardam os valores — leia
+`params.id`, não `params().id`. O `args` funciona da mesma forma. É um formato
+incomum: o módulo muta a si mesmo para que os consumidores leiam valores frescos
+sem reimportar.
+
+## `args()`
+
+Lê a query string da URL atual sobre si mesmo, da mesma forma.
+
+```js
+// URL: /search?query=cats
+args()
+args.query // 'cats'
+```
+
+Chame de novo depois de navegar para atualizar — diferente de `params`, ninguém
+chama por você.
+
+## `urlFor(name, params?)`
+
+Monta uma URL para a rota cuja função de página tem `.name` igual a `name`,
+substituindo os segmentos `:key`.
+
+```js
+urlFor('showUser', { id: 42 }) // '/users/42'
+```
+
+| Comportamento | Resultado |
+|---|---|
+| Uma `:key` sem entrada correspondente em `params` | fica como `:key`, não é erro — templates parciais são permitidos |
+| Nenhuma rota com aquele nome de página | **lança `TypeError`** |
+
+É por aqui que o atributo `route` do `<kb-redirect>` resolve.
+
+## Navegação
+
+Navegar com `history.pushState` emite um evento `pushstate` no `window`, que
+este pacote escuta junto com o `popstate` — é assim que uma mudança de rota
+dispara o `handle()` sem recarregar.
+
+O [`<kb-redirect>`](/components/redirect) é a fachada declarativa disso:
+ligue o evento de um elemento ao método `go()` dele em vez de chamar o
+`pushState` você mesmo.

@@ -42,7 +42,7 @@ onde `@paint` adia o primeiro render. Quem lê consegue verificar cada item.
 Voz não é gíria nem exclamação. **É a frase em que alguém assume um risco** — dizer que uma
 ferramenta popular faz o teste provar nada é uma posição, e alguém a assinou.
 
-Um segundo exemplo, este de `docs/components/button.md`:
+Um segundo exemplo, este de `website/docs/components/button.mdx`:
 
 > `variant` expresses emphasis, not decoration — pick by how important the action is
 > relative to its siblings, not by taste.

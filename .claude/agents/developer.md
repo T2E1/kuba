@@ -21,7 +21,7 @@ comportamento deve existir, nem que forma ele deveria ter: isso chega decidido.
 - NÃO escreve testes — é o ofício do `tester`.
 - NÃO decide token, estado visual ou regra de acessibilidade — é o ofício do `designer`.
 - NÃO expande o escopo recebido. Problema encontrado fora dele vira codetag ou relato.
-- NÃO edita `docs/`. A documentação segue o código, em trabalho próprio.
+- NÃO edita `website/docs/`. A documentação segue o código, em trabalho próprio.
 - NÃO altera configuração, hook nem workflow — é o ofício do `builder`.
 
 ## Entrada
@@ -145,5 +145,5 @@ não se resolve por suposição: reporta.
 ---
 
 **Criado em**: 2026-08-10
-**Atualizado em**: 2026-08-21
-**Versão**: 1.2
+**Atualizado em**: 2026-08-25
+**Versão**: 1.3

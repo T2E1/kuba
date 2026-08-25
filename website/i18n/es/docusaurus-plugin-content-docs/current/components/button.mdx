@@ -1,0 +1,192 @@
+# Button
+
+Un botón dispara una acción síncrona que pertenece a la página en la que está —
+envío de formulario, reinicio de formulario, o un evento `clicked` al que otros
+elementos se suscriben. Nunca cambia la URL. Si el desenlace es una nueva
+ubicación, conecta un `<kb-redirect>` al evento `clicked` del botón en vez de
+poner esa lógica en el botón.
+
+```html preview
+<kb-button>Guardar</kb-button>
+<kb-button variant="naked">Cancelar</kb-button>
+<kb-button variant="link">Saber más</kb-button>
+<kb-button color="danger">Eliminar</kb-button>
+```
+
+## Uso
+
+```html
+<kb-button type="submit" color="primary">Guardar</kb-button>
+```
+
+```js
+document.querySelector('kb-button').addEventListener('clicked', (event) => {
+  console.log(event.detail) // el `value` del botón
+})
+```
+
+## Cuándo usarlo
+
+- Enviar o reiniciar un `<form>` (`type="submit"` / `type="reset"`).
+- Disparar una acción local a la página — abrir un diálogo, añadir una fila,
+  eliminar un registro — donde la respuesta es un evento `clicked`, y no un
+  cambio de URL.
+
+## Cuándo no usarlo
+
+- **Navegar a otra ruta o URL.** Usa un `<a>` normal para navegación externa o
+  de página completa, o un `<kb-redirect>` conectado al evento `clicked` de un
+  botón para navegación interna. `kb-button` no tiene concepto de destino.
+
+## Variantes
+
+`variant` expresa énfasis, no decoración — elige según lo importante que sea la
+acción respecto a sus hermanas, no por gusto.
+
+```html preview
+<kb-button variant="solid">Solid</kb-button>
+<kb-button variant="naked">Naked</kb-button>
+<kb-button variant="ghost">Ghost</kb-button>
+<kb-button variant="link">Link</kb-button>
+<kb-button variant="icon"><kb-icon use="home"></kb-icon></kb-button>
+```
+
+| Variante | Énfasis | Úsala para |
+|---|---|---|
+| `solid` (por defecto) | Máximo | La única acción primaria de un área. Más de una por área y ninguna se lee como primaria. |
+| `naked` | Medio | Una acción secundaria junto a una `solid` — "Cancelar" al lado de "Guardar". |
+| `ghost` | Medio-bajo | Una acción dentro de una superficie rellena, donde un botón con borde competiría con ella. |
+| `link` | Mínimo | Una acción que se lee como un enlace de texto — inline en la prosa o en una celda de tabla. |
+| `icon` | Compacto | Solo icono, donde el espacio es limitado. Dale siempre un nombre accesible. |
+
+## Color
+
+`color` lleva significado; no es una perilla de estilo.
+
+```html preview
+<kb-button color="primary">Primary</kb-button>
+<kb-button color="danger">Eliminar</kb-button>
+<kb-button color="success">Confirmar</kb-button>
+<kb-button color="warning">Revisar</kb-button>
+```
+
+- `primary` — el valor por defecto, para acciones corrientes.
+- `danger` — reservado para acciones destructivas o difíciles de deshacer. No
+  para dar énfasis.
+- `master`, `complete`, `success`, `warning`, `info`, `menu` — solo cuando el
+  desenlace coincide genuinamente con esa semántica.
+
+## Ancho
+
+`width` controla cómo llena el botón su contenedor, no su peso visual.
+
+```html preview
+<div style="width: 100%">
+  <kb-button width="fill">Continuar</kb-button>
+</div>
+```
+
+- `auto` (por defecto) — se ciñe a la etiqueta; úsalo inline, junto a otro
+  contenido.
+- `fill` — abarca el contenedor; para una única acción a todo el ancho.
+- `hug` — sinónimo explícito de `auto`.
+- Un valor en `px`/`%` — solo cuando una especificación lo exige. Un ancho fijo
+  no se adapta a una etiqueta traducida.
+
+## Composición
+
+- **Puede contener**: texto plano (la etiqueta), `<kb-icon>` para botones solo
+  de icono o icono+etiqueta, y uno o más `<kb-on>` para arcos más allá del único
+  atributo `on`. Cualquier otra cosa sigue renderizándose, pero el contenido
+  colocado recibe `pointer-events: none`, así que no puede interceptar el clic
+  destinado al botón.
+- **Puede ser hijo de**: cualquier cosa. Habitualmente dentro de un `<kb-form>`
+  como control de envío, dentro de una `<kb-card>`, o por sí solo.
+
+```html preview
+<kb-button>
+  <kb-icon use="download"></kb-icon>
+  Descargar
+</kb-button>
+```
+
+## Contenido
+
+La etiqueta debe ser una frase verbal corta y específica — "Guardar", "Eliminar
+archivo", "Añadir fila" — no un "OK" o "Enviar" vago. Las etiquetas largas
+saltan de línea en vez de truncarse; el botón no recorta el texto.
+
+## Atributos
+
+| Atributo | Tipo | Por defecto | Descripción |
+|---|---|---|---|
+| `alt` | `string` | `''` | Nombre accesible, escrito como `aria-label` en el `<button>` interno. Obligatorio para `variant="icon"`. |
+| `color` | `string` | `primary` | Color semántico, resuelto contra `--color-\{valor\}`. |
+| `variant` | `solid` \| `naked` \| `ghost` \| `link` \| `icon` | `solid` | Nivel de énfasis. |
+| `width` | `auto` \| `fill` \| `hug` \| longitud | `auto` | Cómo llena el botón su contenedor. |
+| `type` | `submit` \| `reset` | `submit` | Comportamiento dentro del `<form>` propietario. |
+| `value` | `string` | — | Payload enviado como `detail` del evento `clicked`. |
+| `hidden` | `boolean` | `false` | Elimina el botón del layout y del árbol de accesibilidad. |
+| `on` | cadena de arco | — | Conexión de Echo, `origen/evento:tipo/destino`. |
+
+## Eventos
+
+| Evento | Se dispara cuando | `detail` |
+|---|---|---|
+| `clicked` | se activa el botón | el atributo `value` |
+
+## Estilos
+
+Cada decisión visual es una custom property `--button-*` con valor por defecto
+en un token global. Las custom properties heredan a través de la frontera del
+shadow, así que establécelas en el elemento o en cualquier ancestro — nunca
+metas mano en el shadow DOM.
+
+| Custom property | Por defecto | Controla |
+|---|---|---|
+| `--button-color-accent` | `var(--color-\{color\})` | Acento que rellena `solid` y colorea texto/borde del resto. |
+| `--button-color-text` | `var(--color-pure-white)` | Color de la etiqueta en `solid`. |
+| `--button-color-background-ghost` | `var(--color-master-lighter)` | Fondo de `ghost`. |
+| `--button-font-family` | `var(--font-family-base)` | Familia tipográfica de la etiqueta. |
+| `--button-font-size` | `var(--font-size-xxs)` | Tamaño de la etiqueta. |
+| `--button-font-weight` | `var(--font-weight-medium)` | Peso de la etiqueta. |
+| `--button-line-height` | `var(--line-height-default)` | Interlínea de la etiqueta. |
+| `--button-letter-spacing` | `0.38px` | Espaciado entre letras de la etiqueta. |
+| `--button-size-height` | `40px` | Altura, y el lado del cuadrado de `icon`. |
+| `--button-size-min-width` | `40px` | Ancho mínimo, para que las etiquetas cortas sigan siendo pulsables. |
+| `--button-space-inline` | `var(--spacing_inset-xs)` | Padding horizontal. |
+| `--button-space-gap` | `var(--spacing_inset-nano)` | Espaciado entre etiqueta e icono colocado. |
+| `--button-border-width` | `var(--border-width-thin)` | Grosor del borde. |
+| `--button-border-radius` | `var(--border-radius-sm)` | Radio de las esquinas. |
+| `--button-transition` | `all 0.2s ease-out` | Transición en la interacción. |
+
+```html preview
+<div class="checkout" style="--button-size-height: 56px; --button-border-radius: 500px; --button-font-size: 16px;">
+  <kb-button>Finalizar compra</kb-button>
+</div>
+```
+
+## Estados y accesibilidad
+
+- `hidden` elimina el botón del layout y de la interacción. Prefiérelo a no
+  renderizar el elemento cuando la presencia o ausencia deba seguir siendo
+  localizable en el DOM.
+- **Un botón `icon` necesita `alt`.** El glifo no transmite nada, y sin nombre
+  el botón se anuncia a partir del texto de la ligature — `<kb-button
+  variant="icon" use="cloud_upload">` se lee como "cloud_upload". El `alt` se
+  escribe como `aria-label` en el `<button>` del shadow root, que es lo que el
+  árbol de accesibilidad trata como el botón — el host solo lo envuelve.
+- Deja `alt` sin poner en un botón con texto visible — el texto ya lo nombra, y
+  un `alt` distinto haría que el nombre anunciado difiera del escrito, rompiendo
+  el control por voz.
+- `type="submit"` solo hace algo dentro de un `<form>`. Por sí solo, no hace
+  nada al hacer clic, en silencio.
+
+## Recomendado y no recomendado
+
+| Haz | No hagas |
+|---|---|
+| Usar exactamente un botón `solid` por área para la acción primaria | Poner dos botones `solid` lado a lado — ninguno se lee como primario |
+| Reservar `color="danger"` para acciones destructivas | Usar `danger` solo para que el botón destaque |
+| Darle un nombre accesible a un botón solo de icono | Publicar un botón solo de icono sin etiqueta para la tecnología de asistencia |
+| Usar `width="fill"` para la acción única de un formulario estrecho | Fijar `width` en px para una etiqueta que puede crecer al traducirse |

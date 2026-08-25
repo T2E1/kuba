@@ -1,0 +1,50 @@
+# kuba
+
+> Lightweight Web Components primitives and custom elements. No framework, no build step — the browser is the runtime and HTML is the API. Components are custom elements configured by attributes; they communicate through native DOM events, wired declaratively in markup with `on="source/event:type/sink"` arcs. Visual elements use the `kb-` prefix, headless ones use `k-`.
+
+Every page below is the markdown this documentation site renders. Translations live under `/pt-br/` and `/es/`; a page missing from a translation falls back to the English original.
+
+## Learn
+
+- [Introduction](https://t2e1.github.io/kuba/learn/introduction): what kuba is, and the problem it solves
+- [Installation](https://t2e1.github.io/kuba/learn/installation): npm and CDN, the stylesheet, the fonts
+- [Quick start](https://t2e1.github.io/kuba/learn/quick-start): a working feature, start to finish
+
+## Foundations
+
+- [Principles](https://t2e1.github.io/kuba/foundations/principles): the rules every element obeys
+- [Naming](https://t2e1.github.io/kuba/foundations/naming): Elements, Blocks and Design Tokens, and how they relate
+- [Events and Echo](https://t2e1.github.io/kuba/foundations/events-and-echo): the arc grammar and the dataflow model
+- [Design tokens](https://t2e1.github.io/kuba/foundations/tokens/README): overview, then [colors](https://t2e1.github.io/kuba/foundations/tokens/colors), [typography](https://t2e1.github.io/kuba/foundations/tokens/typography), [spacing](https://t2e1.github.io/kuba/foundations/tokens/spacing), [border](https://t2e1.github.io/kuba/foundations/tokens/border), [shadows](https://t2e1.github.io/kuba/foundations/tokens/shadows), [opacity](https://t2e1.github.io/kuba/foundations/tokens/opacity)
+
+## Build UI — custom elements
+
+- [Overview](https://t2e1.github.io/kuba/components/README): the full element map
+- Components: [button](https://t2e1.github.io/kuba/components/button), [card](https://t2e1.github.io/kuba/components/card), [cover](https://t2e1.github.io/kuba/components/cover), [icon](https://t2e1.github.io/kuba/components/icon), [logo](https://t2e1.github.io/kuba/components/logo), [progress](https://t2e1.github.io/kuba/components/progress)
+- Layout: [header](https://t2e1.github.io/kuba/components/header), [footer](https://t2e1.github.io/kuba/components/footer), [main](https://t2e1.github.io/kuba/components/main), [stack](https://t2e1.github.io/kuba/components/stack), [inset](https://t2e1.github.io/kuba/components/inset)
+- Typography: [text](https://t2e1.github.io/kuba/components/text), [label](https://t2e1.github.io/kuba/components/label), [helper](https://t2e1.github.io/kuba/components/helper)
+- Forms: [building a form](https://t2e1.github.io/kuba/build-ui/forms), [form](https://t2e1.github.io/kuba/components/form), [input](https://t2e1.github.io/kuba/components/input), [textarea](https://t2e1.github.io/kuba/components/textarea), [fileupload](https://t2e1.github.io/kuba/components/fileupload), [validity](https://t2e1.github.io/kuba/components/validity)
+- Data (headless): [fetch](https://t2e1.github.io/kuba/components/fetch), [dataset](https://t2e1.github.io/kuba/components/dataset), [filter](https://t2e1.github.io/kuba/components/filter), [find](https://t2e1.github.io/kuba/components/find)
+- Behavior: [render](https://t2e1.github.io/kuba/components/render), [on](https://t2e1.github.io/kuba/components/on), [redirect](https://t2e1.github.io/kuba/components/redirect)
+- [Theming a brand](https://t2e1.github.io/kuba/build-ui/theming): overriding tokens from the outside
+
+## Build Elements — the packages
+
+- [Packages](https://t2e1.github.io/kuba/build-elements/README): the map of what is importable and from where
+- [Lifecycle](https://t2e1.github.io/kuba/build-elements/lifecycle), [Decorators](https://t2e1.github.io/kuba/build-elements/decorators), [Defining](https://t2e1.github.io/kuba/build-elements/directive)
+- [Rendering](https://t2e1.github.io/kuba/build-elements/dom), [Attribute mixins](https://t2e1.github.io/kuba/build-elements/mixin)
+- [Echo](https://t2e1.github.io/kuba/build-elements/echo), [Listeners and filters](https://t2e1.github.io/kuba/build-elements/event), [Operators](https://t2e1.github.io/kuba/build-elements/spark)
+- [HTTP](https://t2e1.github.io/kuba/build-elements/http), [Router](https://t2e1.github.io/kuba/build-elements/router)
+- [Tools and workflows](https://t2e1.github.io/kuba/build-elements/tools)
+
+## Patterns
+
+- [Recipes](https://t2e1.github.io/kuba/build-ui/patterns/README)
+- [Search as you type](https://t2e1.github.io/kuba/build-ui/patterns/search-as-you-type)
+- [User CRUD](https://t2e1.github.io/kuba/build-ui/patterns/user-crud)
+- [Declarative navigation](https://t2e1.github.io/kuba/build-ui/patterns/declarative-navigation)
+
+## Optional
+
+- [Contributing](https://t2e1.github.io/kuba/contributing): local setup, commit conventions, what a change ships with
+- [Repository](https://github.com/T2E1/kuba): source, issues and discussions

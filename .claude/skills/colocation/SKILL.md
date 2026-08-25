@@ -84,7 +84,7 @@ reúne a infraestrutura que os sustenta.
    ele é do pacote.
 2. **Nunca centralize por tipo.** Não existe `styles/`, `tests/` ou `types/` no topo.
    A única exceção é a demo composta que atravessa pacotes, que vai para
-   `docs/build-ui/` — ela não pertence a nenhum componente.
+   `website/docs/build-ui/` — ela não pertence a nenhum componente.
 
 ## Exemplos
 
@@ -156,5 +156,5 @@ mixin. Antes de dois, duplicar é mais barato que abstrair cedo (rule 023).
 ---
 
 **Criado em**: 2026-04-01
-**Atualizado em**: 2026-08-21
-**Versão**: 2.2
+**Atualizado em**: 2026-08-25
+**Versão**: 2.3

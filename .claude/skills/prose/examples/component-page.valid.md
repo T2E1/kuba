@@ -2,7 +2,7 @@
 
 Incorreto em: `component-page.invalid.md`
 
-Adaptado de `docs/components/progress.md`, que é o padrão real deste repositório.
+Adaptado de `website/docs/components/progress.mdx`, que é o padrão real deste repositório.
 
 ---
 
