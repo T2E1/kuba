@@ -89,19 +89,52 @@ não `string`, mesmo a "forma" sendo só uma lista de literais sem estrutura int
 Confira `references/formas-atributos.md` antes de decidir que um atributo validado por
 enum fica sem tipo nomeado — a leitura isolada da Regra 4 permite esse erro.
 
+### Regra 5 — A cadeia de `extends` é uma lista de verificação, não um detalhe
+
+O contrato não está completo quando descreve o que o componente escreveu: está
+completo quando descreve o que o componente **aceita**, e boa parte disso vem dos mixins.
+Um `types.d.ts` que documenta só os membros escritos à mão está sempre incompleto, e o
+erro é invisível — nada falha, o consumidor apenas não enxerga um atributo que existe.
+
+Por isso a cadeia se transcreve antes de escrever, não depois de conferir:
+
+```
+class Progress extends Identity(Echo(HTMLElement)) {}
+                       ^^^^^^^^ alt
+                                ^^^^ on
+```
+
+Cada mixin da cadeia vira uma linha anotada, e cada linha precisa reaparecer no arquivo
+final. Mixin que não contribui nada (`Headless`) também é anotado — como "nada", de
+propósito, para que a ausência seja uma decisão e não um esquecimento.
+
+O recíproco também vale: **nem tudo que a implementação tem é contrato**. `internals`,
+métodos com nome de Symbol e campos privados ficam de fora. Ver
+`references/achatamento-mixins.md` § "O que nunca entra no contrato".
+
 ### Fluxo
 
 1. Ler o `<nome>.ts` por inteiro. Listar cada par getter/setter (vira propriedade), cada
    método público e cada mixin na cadeia de `extends`.
-2. Para cada mixin, consultar `references/achatamento-mixins.md` e anotar o que contribui
-   — pode ser nada.
-3. Para cada membro, decidir pela Regra 4 se precisa de tipo nomeado. Se sim, nomear pela
+2. **Transcrever a cadeia de `extends` como lista** (Regra 5). Para cada mixin, consultar
+   `references/achatamento-mixins.md` e anotar o que contribui — pode ser nada. Mixin que
+   não estiver no catálogo não se adivinha: abrir o `types.d.ts` do pacote dele e
+   acrescentar a linha ao catálogo na mesma mudança, para o próximo não repetir a busca.
+3. **Abrir `src/component/button/types.d.ts` e comparar a estrutura** — é o modelo do
+   repositório: ordem das seções, uso de `declare global`, o que aparece e o que não
+   aparece. Um contrato que diverge do modelo precisa de uma razão dita em voz alta; sem
+   ela, o modelo vence. Não confie na memória do padrão (rule 072): abra o arquivo.
+4. Para cada membro, decidir pela Regra 4 se precisa de tipo nomeado. Se sim, nomear pela
    Regra 3, conferindo `references/formas-atributos.md` antes de inventar um template
    literal do zero.
-4. Escrever a classe e o bloco `declare global` com `HTMLElementTagNameMap`.
-5. Rodar o passo de tipos públicos da skill `jsdoc`.
-6. Verificar o isolamento: `grep -n "^import" types.d.ts`. Nenhum import deve existir —
+5. Escrever a classe e o bloco `declare global` com `HTMLElementTagNameMap`.
+6. Rodar o passo de tipos públicos da skill `jsdoc`.
+7. Verificar o isolamento: `grep -n "^import" types.d.ts`. Nenhum import deve existir —
    todos os `types.d.ts` deste repositório estão livres deles hoje, e devem continuar.
+8. **Fechar a lista do passo 2**: reler o arquivo escrito com a lista de mixins ao lado e
+   confirmar, item a item, que cada contribuição aparece. Sobrou item? O contrato está
+   incompleto. Se a cadeia inclui `Echo`, a página em `docs/components/` também menciona
+   `<kb-on>` na seção de Composição — as duas faces do mesmo recurso.
 
 ## Exemplos
 
@@ -113,7 +146,12 @@ enum fica sem tipo nomeado — a leitura isolada da Regra 4 permite esse erro.
 ## Checklist
 
 - [ ] Nenhum `import` no arquivo
+- [ ] Cadeia de `extends` transcrita como lista, e cada mixin dela reaparece no arquivo
 - [ ] Todo membro de mixin achatado na classe
+- [ ] `alt` declarado sempre que `Identity` está na cadeia
+- [ ] `on` declarado sempre que `Echo` está na cadeia — e `<kb-on>` citado na seção de Composição da página em `docs/components/`
+- [ ] `internals` **não** declarado; nenhum método com nome de Symbol, nenhum campo privado
+- [ ] Estrutura comparada contra `src/component/button/types.d.ts`, aberto nesta execução
 - [ ] Nada declarado para `Headless`
 - [ ] Nomes escopados ao componente, seguindo a taxonomia
 - [ ] `<PascalName>` igual ao nome da classe da implementação
@@ -135,6 +173,21 @@ baixo nível.
 **Causa:** o atributo vem de mixin e não foi achatado.
 **Solução:** redeclarar na classe. Nada é herdado automaticamente, porque a origem não é
 tipada.
+
+### O componente aceita um atributo que ninguém decidiu expor
+
+**Causa:** um mixin foi aplicado por um motivo e contribuiu mais de um membro junto — o
+caso clássico é `Identity`, aplicado pelo `role` e trazendo `alt` de carona.
+**Solução:** declarar o membro, ou levar ao `architect` a decisão de não ter aquele
+atributo. O que não vale é deixar sem decidir: o elemento aceita o atributo de qualquer
+forma, documentado ou não.
+
+### O `types.d.ts` ficou "fora do padrão" sem ninguém saber apontar onde
+
+**Causa:** foi escrito a partir da implementação apenas, sem comparar com um modelo.
+Cada arquivo isolado parece plausível; o desvio só aparece lado a lado.
+**Solução:** abrir `src/component/button/types.d.ts` e comparar seção a seção (passo 3 do
+fluxo). Divergência sem razão dita é desvio, não estilo.
 
 ### O `types.d.ts` divergiu da implementação
 
@@ -169,5 +222,5 @@ porque a tabela de atributos transcreve daqui (skill `preview`).
 ---
 
 **Criado em**: 2026-07-15
-**Atualizado em**: 2026-08-10
-**Versão**: 2.0
+**Atualizado em**: 2026-08-25
+**Versão**: 2.1

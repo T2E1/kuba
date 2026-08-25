@@ -25,8 +25,31 @@ não justifica a indireção (rule 023).
 | Número com significado de negócio | Constante nomeada |
 | Valor único e óbvio no contexto | Deixar como está |
 
-`0` e `1` em operação matemática comum não são constantes mágicas — a rule 024 os
-excepciona explicitamente.
+`0` e `1` **em operação matemática comum** não são constantes mágicas — a rule 024 os
+excepciona explicitamente. A exceção é sobre aritmética (`total / 2`, `index + 1`), não
+sobre o valor numérico em si.
+
+### O limite da exceção do `0` e do `1`
+
+`0` deixa de ser trivial no instante em que representa uma **fronteira de domínio** em vez
+de um passo de conta. O piso de uma barra de progresso, o teto de uma escala, o valor
+inicial de uma medida: todos respondem "por que este número?" com uma regra de negócio, e
+essa é a definição de constante mágica.
+
+| Literal | Papel | Veredito |
+|---|---|---|
+| `total / 2`, `i + 1` | Aritmética | Não é mágico — exceção da rule 024 |
+| `'0'` como default de `value` | Piso da escala | Mágico — precisa de nome |
+| `'0'` / `'100'` em `valuemin` / `valuemax` | Fronteiras da medida exposta na árvore de acessibilidade | Mágicos — precisam de nome |
+
+Repare que **o gatilho das duas ocorrências não salva esses casos**: mesmo aparecendo uma
+vez só, uma fronteira de domínio é nomeada, porque o que justifica o nome é o significado,
+não a repetição. O gatilho de duas ocorrências existe para literais cujo sentido já está
+óbvio no contexto — não para os que carregam regra.
+
+O teste rápido: se trocar o número muda o comportamento que alguém documentaria, ele tem
+nome de negócio e precisa de uma constante. `'0'` como piso de `value` num
+`<kb-progress>` é exatamente esse caso.
 
 ## Como aplicar
 
@@ -93,6 +116,7 @@ property e o `types.d.ts` deixando passar qualquer string em tempo de compilaç�
 ## Checklist
 
 - [ ] Nenhum literal com significado repetido 2+ vezes
+- [ ] Nenhuma fronteira de domínio (piso, teto, valor inicial) como literal solto — mesmo de ocorrência única, mesmo sendo `0` ou `1`
 - [ ] Todo enum congelado com `Object.freeze`
 - [ ] Chaves em `UPPER_SNAKE_CASE`
 - [ ] Enum no módulo dono do conceito, não num depósito genérico
@@ -143,5 +167,5 @@ polimorfismo (rule 011).
 ---
 
 **Criado em**: 2026-04-01
-**Atualizado em**: 2026-08-21
-**Versão**: 2.2
+**Atualizado em**: 2026-08-25
+**Versão**: 2.3
