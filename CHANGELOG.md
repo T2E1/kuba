@@ -6,6 +6,74 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) and 
 
 ---
 
+## [0.2.0-alpha.5] — 2026-08-25
+
+### Added
+
+- `numeric` joins `booleanAttribute`, `enumerated`, `enumerating`, `escaping` and `resizing` on the `attributeChanged` directive, re-exported from `@t2e1/kuba/directive`. It parses an attribute as a number and passes the parsed number re-serialized — never the raw text — so anything appended after a leading number is dropped instead of travelling on. Reach for it when a numeric attribute of your own feeds a stylesheet or a template
+- The three guards behind those filters are exported as plain functions: `toNumericString`, `toSizeString` and `isEnumerated`. A filter on `attributeChanged` only covers the attribute-to-property path; a property that can also be assigned directly needs the same check inside its setter, and these are the pieces to call there. That is exactly what `<kb-progress>` and `<kb-stack>` now do
+- The `Presentational` mixin, exported from `@t2e1/kuba/mixin`. It publishes `role="none"` on connect and adds nothing else to the element's public surface — the role half of `Identity` without the accessible name. Use it for a layout box that should add no node of its own to the accessibility tree; use `Identity` when the element does have a name to announce
+- `<kb-stack>`, `<kb-card>` and `<kb-progress>` publish type declarations that name their accepted values instead of `string`. `align`, `justify` and `spacing` are unions of the keywords the documentation already listed, `width`/`height` carry the `resizing` shape, and `on` carries the arc-string shape inherited from `Echo`. TypeScript code assigning `stack.spacing = 'medium'` stops compiling where it used to pass. `hidden`, `height`, `width` and `on` are declared where the elements always had them and the declaration was silent
+
+### Changed
+
+- **Breaking:** `<kb-stack>`'s `align`, `justify` and `spacing` accept a closed set of values and nothing else. All three used to be interpolated into the shadow stylesheet verbatim, so any CSS keyword worked. `align` now accepts `normal`, `start`, `end`, `center`, `stretch`, `baseline`, `flex-start`, `flex-end`, `self-start`, `self-end`; `justify` accepts those minus `baseline`/`self-*`, plus `left`, `right`, `space-between`, `space-around`, `space-evenly`; `spacing` accepts the eight inset steps from `quarck` to `giant`. Anything else is ignored and the property keeps its last valid value, so a two-keyword overflow form like `align="safe center"` stops taking effect. `direction` validated this way since `0.2.0-alpha.1`; it now validates on direct property assignment too
+- **Breaking:** `<kb-stack>`'s `justify` reads back `start` instead of `flex-start` when unset. The rendering is unchanged — `justify-content: start` and `justify-content: flex-start` lay a flex row out identically — but code comparing `stack.justify === 'flex-start'` to decide something now takes the other branch. Setting `justify="flex-start"` explicitly still works and still reads back `flex-start`
+- **Breaking:** `<kb-stack>` and `<kb-card>` have no `alt`. Both hosts are presentational — they carry `role="none"` and no accessible name — and the `alt` they inherited was never documented, never announced anything useful, and only existed because they composed the mixin that also supplies the role. Setting `alt` on either element is now inert, and `stack.alt` is `undefined`. The role each one publishes is unchanged; what a screen reader reads is unchanged. Name the content, not the box
+- **Breaking:** assigning `width` or `height` as a *property* on `<kb-stack>`, `<kb-card>` or `<kb-button>` normalizes the value the same way the attribute always did. `stack.width = '50vw'` used to be applied verbatim and now resolves to `'auto'`, because `vw` is not one of the accepted shapes — only a `px`/`%` length, `hug`, `fill` or `auto` are. The attribute path is unchanged; it is the property path that stops being a way around the rule. Set an unusual size in CSS on the host instead of through the property
+- **Breaking:** `internals` is gone from the published type declarations of `<kb-stack>`, `<kb-card>`, `<kb-progress>`, `<kb-header>` and `<kb-logo>`, finishing what `0.2.0-alpha.2` started with `<kb-button>`, `<kb-cover>` and `<kb-footer>`. The property still exists at runtime — it is how each element writes its role and ARIA state — but exposing `ElementInternals` on the host hands out write access to form state and the accessibility tree. TypeScript code reading `progress.internals` stops compiling; nothing in the documented API needed it
+
+### Fixed
+
+- `<kb-progress>` publishes its ARIA value range even when mounted without a `value`. `aria-valuemin` and `aria-valuemax` were only written when `value` changed, so `<kb-progress></kb-progress>` reached a screen reader as a progress bar with no range and no current value — announced as indeterminate, which this element never is. The documented `0`–`100` range and the `0` default are now published on connect
+- `<kb-progress>` no longer lets `value` inject CSS into its shadow root. The number is applied directly as a `%` width in the adopted stylesheet, and the raw attribute text used to arrive there unchecked, so a payload closing the declaration early appended arbitrary rules to the element's styles. `value` is now parsed as a number and re-serialized before being stored: text with no leading number is ignored and the bar keeps its last valid percentage, and text following a leading number is dropped. Both entry points are covered — the attribute *and* `progress.value = …`, which is the more common way a bar gets driven from fetched data
+- `<kb-stack>` no longer lets `align`, `justify` or `spacing` inject CSS into its shadow root. All three reached the stylesheet unvalidated — `spacing` as part of a custom property name — so a payload could append rules to the most widely used layout element in the library, up to and including hiding it. Every value reaching the stylesheet is now one of the known tokens
+- `width` and `height` no longer let a direct property assignment reach the stylesheet unnormalized on `<kb-stack>`, `<kb-card>` and `<kb-button>`. The attribute was normalized; `element.width = …` skipped that and landed in the interpolated stylesheet as written. Both paths now converge on the same closed set of outputs
+
+### Migration
+
+`<kb-stack>`'s alignment attributes take keywords now, not arbitrary CSS. If you were passing something outside the sets above, say it in CSS on the host:
+
+```html
+<!-- before: any align-items value was interpolated through -->
+<kb-stack align="safe center">…</kb-stack>
+
+<!-- after: the closed set for the attribute, CSS for the rest -->
+<kb-stack style="align-items: safe center">…</kb-stack>
+```
+
+Reading `justify` back to branch on it needs to account for the default's new spelling:
+
+```js
+// before: the unset default read as 'flex-start'
+if (stack.justify === 'flex-start') …
+
+// after: compare against both spellings, or set the attribute explicitly
+if (stack.justify === 'start' || stack.justify === 'flex-start') …
+```
+
+`alt` on a stack or a card described nothing. Where you were naming the box, name the content or the region instead:
+
+```html
+<!-- before: inert, and never announced -->
+<kb-card alt="Product summary">…</kb-card>
+
+<!-- after: the semantics come from what's inside -->
+<kb-card>
+  <section aria-label="Product summary">…</section>
+</kb-card>
+```
+
+Sizes assigned as properties are normalized. A unit the attribute never accepted has to go through CSS:
+
+```js
+// before: applied verbatim
+stack.width = '50vw'
+
+// after: '50vw' resolves to 'auto' — set it as CSS on the host
+stack.style.width = '50vw'
+```
+
 ## [0.2.0-alpha.4] — 2026-08-24
 
 ### Changed
