@@ -1,15 +1,21 @@
 import { define } from '@directive'
-import attributeChanged, { enumerating } from '@directive/attributeChanged'
+import attributeChanged, {
+  enumerating,
+  isEnumerated,
+} from '@directive/attributeChanged'
 import { paint, retouch } from '@dom'
 import Echo from '@echo'
-import { Height, Hidden, Identity, role, Width } from '@mixin'
+import { Height, Hidden, Presentational, Width } from '@mixin'
+import { ALIGNMENTS } from './align.js'
 import component from './component.js'
 import { DIRECTIONS } from './direction.js'
+import { JUSTIFICATIONS } from './justify.js'
+import { SPACINGS } from './spacing.js'
 import style from './style.js'
 
 @define('kb-stack')
 @paint(component, style)
-class Stack extends Identity(Hidden(Width(Height(Echo(HTMLElement))))) {
+class Stack extends Presentational(Hidden(Width(Height(Echo(HTMLElement))))) {
   #align
   #direction
   #internals
@@ -17,32 +23,30 @@ class Stack extends Identity(Hidden(Width(Height(Echo(HTMLElement))))) {
   #spacing
 
   get align() {
-    return (this.#align ??= 'start')
+    return (this.#align ??= ALIGNMENTS.START)
   }
 
-  @attributeChanged('align')
+  // `@attributeChanged('align', enumerating(ALIGNMENTS))` only guards
+  // attribute writes — `stack.align = untrusted` skips it and reaches this
+  // setter directly, so the setter re-checks with `isEnumerated` itself. Both
+  // entry points converge on the same closed set, not just the attribute one.
+  @attributeChanged('align', enumerating(ALIGNMENTS))
   @retouch
   set align(value) {
-    this.#align = value
+    isEnumerated(ALIGNMENTS, value) && (this.#align = value)
   }
 
   get direction() {
     return (this.#direction ??= DIRECTIONS.ROW)
   }
 
-  // `enumerating(DIRECTIONS)` only propagates a value in the known tokens —
-  // an unknown one never reaches the setter, so the CSS interpolation in
-  // style.js never sees an invalid keyword.
+  // Same asymmetry as `align`: the setter re-checks `isEnumerated` itself so
+  // a direct `stack.direction = untrusted` gets the same guard as the
+  // attribute path.
   @attributeChanged('direction', enumerating(DIRECTIONS))
   @retouch
   set direction(value) {
-    this.#direction = value
-  }
-
-  // A layout box with no meaning of its own: declaring it presentational
-  // keeps it from adding a generic node around whatever it arranges.
-  get [role]() {
-    return 'none'
+    isEnumerated(DIRECTIONS, value) && (this.#direction = value)
   }
 
   get internals() {
@@ -50,23 +54,30 @@ class Stack extends Identity(Hidden(Width(Height(Echo(HTMLElement))))) {
   }
 
   get justify() {
-    return (this.#justify ??= 'flex-start')
+    return (this.#justify ??= JUSTIFICATIONS.START)
   }
 
-  @attributeChanged('justify')
+  // Same asymmetry as `align`: the setter re-checks `isEnumerated` itself so
+  // a direct `stack.justify = untrusted` gets the same guard as the
+  // attribute path.
+  @attributeChanged('justify', enumerating(JUSTIFICATIONS))
   @retouch
   set justify(value) {
-    this.#justify = value
+    isEnumerated(JUSTIFICATIONS, value) && (this.#justify = value)
   }
 
   get spacing() {
-    return (this.#spacing ??= 'xs')
+    return (this.#spacing ??= SPACINGS.XS)
   }
 
-  @attributeChanged('spacing')
+  // Same asymmetry as `align`: the setter re-checks `isEnumerated` itself so
+  // a direct `stack.spacing = untrusted` gets the same guard as the
+  // attribute path — it never becomes part of the `--spacing_inset-{value}`
+  // custom property name in style.js.
+  @attributeChanged('spacing', enumerating(SPACINGS))
   @retouch
   set spacing(value) {
-    this.#spacing = value
+    isEnumerated(SPACINGS, value) && (this.#spacing = value)
   }
 
   constructor() {
