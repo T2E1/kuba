@@ -7,6 +7,9 @@
 **Nota**: seção 2 (Requisito 2, tabela de Custom properties) revisada em 2026-08-24 quando o
 `viewBox` do `<path>` mudou de 363×363 (quadrado) para 60×93 (retrato) — `--logo-size` deixou
 de significar "lado de um quadrado" e passou a significar altura, com a largura derivada.
+`types.d.ts` corrigido em 2026-08-25: publicava `internals` como propriedade do contrato,
+divergindo do padrão de `button`/`icon`/`cover` (que têm o mesmo getter na classe, mas não o
+publicam em `types.d.ts` — é uso interno dos mixins, não contrato do consumidor).
 
 ---
 
@@ -65,7 +68,7 @@ por nome; este componente renderiza um único traçado fixo.
 | Nome | Tipo | Default | Reflete | Especificação |
 |---|---|---|---|---|
 | `alt` | `string` | `''` | sim | Escreve `internals.ariaLabel` no host; controla também se a marca fica visível à árvore de acessibilidade |
-| `internals` | `ElementInternals` (readonly) | — | não | Exposto só para o mixin `Identity`, que precisa de `internals.ariaLabel`/`internals.role`; não é contrato para o consumidor |
+| `internals` | `ElementInternals` (readonly) | — | não | Exposto só para o mixin `Identity`, que precisa de `internals.ariaLabel`/`internals.role`. **Não é publicado em `types.d.ts`** — é uso interno dos mixins, não contrato do consumidor (decisão do `architect`, 2026-08-25, aplicada aos oito pacotes) |
 
 Nenhum attribute de aparência (`color`, `size`) — a superfície de variação inteira vive em
 CSS (ver Custom properties), porque cor e tamanho são decisão de estilo, não de
@@ -186,5 +189,5 @@ depende de `alt` estar ou não vazio no momento do connect.
 ---
 
 **Criado em**: 2026-08-24
-**Atualizado em**: 2026-08-24
-**Versão**: 1.1
+**Atualizado em**: 2026-08-25
+**Versão**: 1.2

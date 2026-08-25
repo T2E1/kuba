@@ -16,7 +16,6 @@ export default class KUBALogoElement extends HTMLElement {
    * @default ''
    */
   alt: string
-  readonly internals: ElementInternals
 }
 
 declare global {

@@ -21,7 +21,6 @@ export default class KUBAHeaderElement extends HTMLElement {
    * @default ''
    */
   alt: string
-  readonly internals: ElementInternals
 }
 
 declare global {

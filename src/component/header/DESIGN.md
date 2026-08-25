@@ -99,8 +99,11 @@ comentário no código (`header.ts:16-18`), que `kb-footer` toma para `contentin
 |---|---|---|---|---|
 | `alt` | `string` | `''` | não | **Vem do mixin `Identity`, não é declarado em `header.ts`.** Escreve `internals.ariaLabel`, nomeando o landmark. O setter só roda numa mudança real de attribute (`identity.ts:28-34`), então um cabeçalho sem `alt` mantém o nome que o conteúdo lhe dá (`ariaLabel` permanece `null`) |
 
-Não há `hidden`, `on`, `height`, `width` nem `value`. **Há**, hoje, `internals` publicado em
-`types.d.ts:16` — e não deveria; ver Lacuna 3.
+Não há `hidden`, `on`, `height`, `width` nem `value`. **Nem `internals`**: a decisão do
+`architect` (2026-08-25) é que `internals` não é publicado em `types.d.ts` — é uso interno
+dos mixins (`Identity` lê `internals` do host), não contrato do consumidor. Aplicada aqui e
+em `card`, fechando a Lacuna 3; `button`, `cover`, `footer`, `logo`, `progress` e `stack` já
+estavam desse lado.
 
 **Sobre `types.d.ts` documentar `alt`**: está **correto**, não é lacuna. `alt` é superfície
 pública do elemento — o consumidor não sabe nem precisa saber que ela chega por mixin.
@@ -307,11 +310,11 @@ removido o membro. O código atual só confirma três dos quatro:
 | `button` | removido |
 | `cover` | removido |
 | `footer` | removido |
-| `card` | **ainda presente** (`card/types.d.ts:66`) |
-| `logo` | ainda presente (`logo/types.d.ts:19`) |
-| `progress` | ainda presente (`progress/types.d.ts:20`) |
-| `stack` | ainda presente (`stack/types.d.ts:31`) |
-| `header` | ainda presente (`header/types.d.ts:16`) |
+| `card` | removido (2026-08-25) |
+| `logo` | removido (2026-08-25) |
+| `progress` | removido (2026-08-25) |
+| `stack` | removido (2026-08-25) |
+| `header` | removido (2026-08-25) |
 
 A conclusão para o `header` não muda: `internals` é detalhe de implementação exigido pelo
 mixin (`identity.ts:17-18` — "Reads `internals` from the host class ... the element owns the
@@ -417,7 +420,7 @@ revisão — registra apenas o que é verificável do lado da arquitetura, e a r
 | Contrato público, cadeia de mixins, Symbols, decisão sobre `Hidden`/`Echo`/`delegatesFocus` | `architect` | Concluído |
 | `types.d.ts:2-3` — fallback `<kb-logo>` documentado e inexistente (Lacuna 1) | `developer` | **Pendente** |
 | `style.js:12` — `100svw` no `wrapper` (Lacuna 2); mudança de comportamento visível | `designer` + `releaser` | Concluído |
-| `types.d.ts:16` — remoção de `readonly internals` (Lacuna 3), junto com `card`, `logo`, `progress`, `stack` | `developer` | **Pendente** |
+| `types.d.ts:16` — remoção de `readonly internals` (Lacuna 3), junto com `card`, `logo`, `progress`, `stack` | `developer` | Concluído (2026-08-25) — os oito pacotes agora concordam |
 | `types.d.ts:14` — JSDoc de `alt` com `@default`, origem no mixin e semântica do setter (Lacuna 4) | `developer` | **Pendente** |
 | Testes de gap, de projeção e de slot vazio, portados de `footer.test.js` (Lacuna 5) | `tester` | **Pendente** |
 | `docs/*/components/header.md` — "renders a native `<header>`" e as duas frases sobre o footer desatualizadas | `writer` | Concluído |
