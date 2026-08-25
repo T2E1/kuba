@@ -5,7 +5,6 @@ function style(progress) {
     :host {
       background-color: var(--progress-color-track, var(--color-pure-white));
       border-radius: var(--progress-border-radius, var(--border-radius-pill));
-      bottom: var(--spacing_inset-quarck);
       box-sizing: border-box;
       display: block;
       height: var(--progress-size-height, 6px);
