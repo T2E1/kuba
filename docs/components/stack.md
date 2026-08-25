@@ -40,7 +40,10 @@ looks like anything on its own.
 ## Composition
 
 - **Can contain**: anything. The shadow root is a single unnamed `<slot>`, so
-  every child renders in source order as a flex item.
+  every child renders in source order as a flex item. One or more `<kb-on>`
+  also work as children, for extra arcs beyond the single `on` attribute —
+  they wire to the stack directly and render nothing, so they don't count as
+  flex items either.
 - **Can be a child of**: anything, including another `kb-stack`. Nesting a
   column of rows is the normal way to build a two-dimensional layout out of this
   primitive, since a single stack never wraps.
@@ -60,14 +63,19 @@ flex rules — a child with `flex: 1` fills the leftover space.
 
 ## Direction, alignment and spacing
 
-`direction` is the only attribute with a closed set of values. `align` and
-`justify` pass through to `align-items` and `justify-content` verbatim, so any
-valid CSS value works — and an invalid one silently does nothing.
+`direction`, `align`, `justify` and `spacing` all accept a closed set of
+values. An unknown value is ignored and the *property* keeps its last valid
+value — it never reaches the stylesheet unchecked. The attribute in the DOM
+still shows whatever was written; read the property, not `getAttribute()`, to
+see what's actually applied.
 
-| Attribute | Acts along | Common values |
+| Attribute | Acts along | Accepted values |
 |---|---|---|
-| `justify` | the direction of the stack (main axis) | `flex-start`, `center`, `space-between`, `flex-end` |
-| `align` | across it (cross axis) | `start`, `center`, `stretch`, `baseline` |
+| `justify` | the direction of the stack (main axis) | `normal`, `start`, `end`, `center`, `stretch`, `left`, `right`, `space-between`, `space-around`, `space-evenly`, `flex-start`, `flex-end` |
+| `align` | across it (cross axis) | `normal`, `start`, `end`, `center`, `stretch`, `baseline`, `flex-start`, `flex-end`, `self-start`, `self-end` |
+
+`start`/`end` are the preferred spelling for both attributes; `flex-start`/
+`flex-end` are accepted as legacy aliases.
 
 In a `row`, `align="center"` vertically centers items of different heights; in a
 `column`, `align="stretch"` makes children fill the width. Switching `direction`
@@ -88,19 +96,23 @@ groups predictable across a page:
 | `quarck` / `nano` | 4 / 8px | Elements that read as one unit — icon and label, field and helper. |
 | `xs` | 16px | The default: siblings inside a group. |
 | `sm` / `md` | 24 / 32px | Separating groups inside a section. |
-| `lg` and up | 40px+ | Section-level separation, where `<kb-inset>` may serve better. |
+| `lg` / `huge` / `giant` | 40px+ | Section-level separation, where `<kb-inset>` may serve better. |
+
+`spacing` accepts only these eight steps of the inset scale. An unknown value
+is ignored and the gap keeps its last valid step.
 
 ## Attributes
 
 | Attribute | Type | Default | Description |
 |---|---|---|---|
 | `direction` | `row` \| `column` | `row` | Flex direction applied to the host. |
-| `align` | CSS `align-items` | `start` | Cross-axis alignment. |
-| `justify` | CSS `justify-content` | `flex-start` | Main-axis alignment. |
-| `spacing` | token step | `xs` | Gap, resolved against `--spacing_inset-{value}`. |
+| `align` | closed set, see [above](#direction-alignment-and-spacing) | `start` | Cross-axis alignment. |
+| `justify` | closed set, see [above](#direction-alignment-and-spacing) | `start` | Main-axis alignment. |
+| `spacing` | closed set, see [above](#direction-alignment-and-spacing) | `xs` | Gap, resolved against `--spacing_inset-{value}`. |
 | `width` | `auto` \| `fill` \| length | `auto` | Host width. |
 | `height` | `auto` \| length | `auto` | Host height. |
 | `hidden` | `boolean` | `false` | Removes the stack and its children from layout and the accessibility tree. |
+| `on` | arc string | — | Echo wiring, `source/event:type/sink`. |
 
 This element dispatches no events.
 
@@ -127,9 +139,10 @@ same properties in CSS.
 
 - `hidden` adds the `hidden` custom state and `display: none`, removing the
   stack and its children from layout and the accessibility tree.
-- **The host is declared presentational**, so the stack itself adds no node to
-  the accessibility tree. Group semantics have to come from what you put inside
-  it — a `<nav>`, a `<ul>`, a fieldset.
+- **The host is declared presentational** (`role="none"`), so the stack itself
+  adds no node to the accessibility tree, and carries no accessible name —
+  there's no `alt` attribute. Group semantics have to come from what you put
+  inside it — a `<nav>`, a `<ul>`, a fieldset.
 - Visual order follows source order, so keyboard order matches the screen. Don't
   reverse it with `flex-direction: row-reverse` from outside.
 

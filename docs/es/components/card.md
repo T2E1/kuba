@@ -35,16 +35,19 @@ real, nunca a la tarjeta.
   despacha nada — pon un `<kb-button>` o `<a>` real en el slot y escucha
   ahí.
 - **Esperando que la tarjeta sea enfocable o anunciada por un lector de
-  pantalla.** La tarjeta no añade rol, `tabindex` ni nombre accesible — es
-  transparente para el árbol de accesibilidad. Solo el contenido colocado es
-  alcanzable por teclado o tecnología de asistencia.
+  pantalla.** La tarjeta se declara presentacional (`role="none"`), no añade
+  `tabindex` ni tiene nombre accesible — se elimina del árbol de
+  accesibilidad. Solo el contenido colocado es alcanzable por teclado o
+  tecnología de asistencia.
 
 ## Composición
 
 - **Puede contener**: cualquier cosa — el shadow root es un único `<slot>`,
   y el contenedor flex de la tarjeta lo dispone. Nada se intercepta: un hijo
   interactivo conserva su propio clic, foco y comportamiento de teclado
-  intactos.
+  intactos. Uno o más `<kb-on>` también funcionan como hijos, para arcos
+  extra más allá del atributo único `on` — se conectan directamente a la
+  tarjeta y no renderizan nada.
 - **Puede ser hijo de**: cualquier cosa. Habitualmente dentro de una lista de
   `<kb-render>` o de una región de layout.
 
@@ -112,9 +115,10 @@ en el elemento o en cualquier ancestro, nunca metas mano en el shadow DOM.
 - `hidden` elimina la tarjeta del layout y de la interacción. Prefiérelo a no
   renderizar el elemento cuando la presencia o ausencia deba seguir siendo
   localizable.
-- La tarjeta no añade `role`, `tabindex` ni nombre accesible — nunca recibe
-  foco, y un lector de pantalla ve exactamente el contenido colocado, como
-  si la tarjeta no existiera.
+- **El host se declara presentacional** (`role="none"`), así que la tarjeta
+  no añade ningún nodo propio al árbol de accesibilidad ni tiene nombre
+  accesible. Nunca recibe foco, y un lector de pantalla ve exactamente el
+  contenido colocado, como si la tarjeta no existiera.
 
 ## Recomendado y no recomendado
 

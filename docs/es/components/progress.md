@@ -38,7 +38,9 @@ desconocida" — simplemente se quedaría en el número que recibió.
 
 - **Puede contener**: ningún hijo relevante. El shadow root renderiza un único
   `<div>` indicador y no declara ningún slot. Una etiqueta pertenece junto a la
-  barra, no dentro de ella.
+  barra, no dentro de ella. La única excepción es uno o más `<kb-on>` como
+  hijos, para arcos extra más allá del atributo único `on` — se conectan
+  directamente a la barra, sin colocarse en un slot ni renderizarse.
 - **Puede ser hijo de**: cualquier cosa. El host es `display: block` al 100% de
   ancho, así que toma el ancho de su contenedor.
 
@@ -60,8 +62,12 @@ acotación, sin `min`/`max`. Tres consecuencias que vale la pena conocer:
 - **Pasa `0`–`100`.** Por encima de `100` el indicador es simplemente más ancho
   que la pista; el `overflow: hidden` evita que pinte fuera, así que un exceso
   se ve idéntico a `100` y oculta el bug.
-- **Un valor negativo o no numérico** produce un ancho inválido y el indicador
-  se colapsa a nada — la misma imagen que `0`.
+- **Un valor negativo** produce un ancho inválido y el indicador se colapsa a
+  nada — la misma imagen que `0`. **Un valor no numérico se rechaza**:
+  `value` conserva su último ajuste válido en vez de tomar la cadena cruda.
+  Un valor con un prefijo numérico seguido de otro texto (`"50; } :host
+  {…"`) conserva solo el número analizado — nunca el texto final, que es lo
+  que mantiene este atributo seguro frente a inyecciones.
 - **Calcula el porcentaje antes de establecerlo**: `value="${(hecho / total) *
   100}"`. El elemento no hace ninguna aritmética por su cuenta.
 

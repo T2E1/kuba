@@ -36,7 +36,9 @@ determinate only: `value` is a percentage you set, so the bar can't express
 
 - **Can contain**: no meaningful children. The shadow root renders a single
   indicator `<div>` and declares no slot. A label belongs next to the bar, not
-  inside it.
+  inside it. The one exception is one or more `<kb-on>` children, for extra
+  arcs beyond the single `on` attribute — they wire to the bar directly,
+  without being slotted or rendered.
 - **Can be a child of**: anything. The host is `display: block` at 100% width,
   so it takes the width of its container.
 
@@ -58,8 +60,12 @@ clamping, no `min`/`max`. Three consequences worth knowing:
 - **Pass `0`–`100`.** Above `100` the indicator is simply wider than the track;
   `overflow: hidden` keeps it from painting outside, so an overshoot looks
   identical to `100` and hides the bug.
-- **A negative or non-numeric value** produces an invalid width and the
-  indicator collapses to nothing — the same picture as `0`.
+- **A negative value** produces an invalid width and the indicator collapses
+  to nothing — the same picture as `0`. **A non-numeric value is rejected**:
+  `value` keeps its last valid setting instead of taking the raw string. A
+  value with a numeric prefix followed by other text (`"50; } :host {…"`)
+  keeps only the parsed number — never the trailing text, which is how this
+  attribute stays safe against injection.
 - **Compute the percentage before setting it**: `value="${(done / total) *
   100}"`. The element does no arithmetic of its own.
 

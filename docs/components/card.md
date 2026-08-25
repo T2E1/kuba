@@ -34,15 +34,17 @@ content, like a real `<kb-button>` or `<a>`, never to the card.
   nothing — put a real `<kb-button>` or `<a>` in the slot and listen to that
   instead.
 - **Expecting the card to be focusable or announced by a screen reader.** The
-  card adds no role, no tabindex, and no accessible name — it's transparent to
-  the accessibility tree. Only the slotted content is reachable by keyboard or
-  assistive technology.
+  card is declared presentational (`role="none"`), adds no `tabindex`, and
+  carries no accessible name — it's removed from the accessibility tree.
+  Only the slotted content is reachable by keyboard or assistive technology.
 
 ## Composition
 
 - **Can contain**: anything — the shadow root is a single `<slot>`, and the
   card's flex container lays it out. Nothing is intercepted: an interactive
-  child keeps its own click, focus, and keyboard behavior untouched.
+  child keeps its own click, focus, and keyboard behavior untouched. One or
+  more `<kb-on>` also work as children, for extra arcs beyond the single
+  `on` attribute — they wire to the card directly and render nothing.
 - **Can be a child of**: anything. Commonly inside a `<kb-render>` list or a
   layout region.
 
@@ -107,9 +109,10 @@ any ancestor, never reach into the shadow DOM.
 
 - `hidden` removes the card from layout and interaction. Prefer it over not
   rendering the element when the presence or absence should stay findable.
-- The card adds no `role`, no `tabindex`, and no accessible name — it never
-  receives focus, and a screen reader sees exactly the slotted content, as if
-  the card weren't there.
+- **The host is declared presentational** (`role="none"`), so the card adds
+  no node of its own to the accessibility tree and carries no accessible
+  name. It never receives focus, and a screen reader sees exactly the
+  slotted content, as if the card weren't there.
 
 ## Do's and don'ts
 

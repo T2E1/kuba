@@ -35,8 +35,10 @@ nothing composes inside it, and it carries no click behavior of its own.
 
 ## Composition
 
-- **Can contain**: nothing. The element renders one internal `<img>` from `src`
-  and `alt`; anything placed between its tags is ignored.
+- **Can contain**: nothing rendered. The element renders one internal `<img>`
+  from `src` and `alt`; anything placed between its tags is ignored, except
+  one or more `<kb-on>` children — they wire to the cover directly, for
+  extra arcs beyond the single `on` attribute, without being slotted.
 - **Can be a child of**: anything. Commonly nested inside `<kb-inset>` inside a
   `<kb-card>`.
 

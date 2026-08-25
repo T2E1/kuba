@@ -33,15 +33,18 @@ conteúdo encaixado, como um `<kb-button>` ou `<a>` de verdade, nunca ao card.
 - **Esperando um evento `clicked` do próprio card.** O card não despacha nada
   — coloque um `<kb-button>` ou `<a>` de verdade no slot e escute nele.
 - **Esperando que o card seja focável ou anunciado por leitor de tela.** O
-  card não adiciona papel, `tabindex` nem nome acessível — é transparente
-  para a árvore de acessibilidade. Só o conteúdo encaixado é alcançável por
-  teclado ou tecnologia assistiva.
+  card é declarado apresentacional (`role="none"`), não adiciona `tabindex`
+  nem tem nome acessível — é removido da árvore de acessibilidade. Só o
+  conteúdo encaixado é alcançável por teclado ou tecnologia assistiva.
 
 ## Composição
 
 - **Pode conter**: qualquer coisa — o shadow root é um único `<slot>`, e o
   contêiner flex do card o organiza. Nada é interceptado: um filho interativo
-  mantém seu próprio clique, foco e comportamento de teclado intactos.
+  mantém seu próprio clique, foco e comportamento de teclado intactos. Um ou
+  mais `<kb-on>` também funcionam como filhos, para arcos extras além do
+  atributo único `on` — eles se ligam diretamente ao card e não renderizam
+  nada.
 - **Pode ser filho de**: qualquer coisa. Comumente dentro de uma lista de
   `<kb-render>` ou de uma região de layout.
 
@@ -107,9 +110,10 @@ qualquer ancestral, nunca alcance dentro do shadow DOM.
 - `hidden` remove o card do layout e da interação. Prefira isso a não
   renderizar o elemento quando a presença ou ausência deve continuar
   rastreável.
-- O card não adiciona `role`, `tabindex` nem nome acessível — nunca recebe
-  foco, e um leitor de tela vê exatamente o conteúdo encaixado, como se o
-  card não existisse.
+- **O host é declarado apresentacional** (`role="none"`), então o card não
+  adiciona nenhum nó próprio à árvore de acessibilidade nem tem nome
+  acessível. Nunca recebe foco, e um leitor de tela vê exatamente o conteúdo
+  encaixado, como se o card não existisse.
 
 ## Certo e errado
 

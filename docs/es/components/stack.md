@@ -42,7 +42,9 @@ nunca parece nada por sí sola.
 
 - **Puede contener**: cualquier cosa. El shadow root es un único `<slot>` sin
   nombre, así que cada hijo se renderiza en el orden del código como un ítem
-  flex.
+  flex. Uno o más `<kb-on>` también funcionan como hijos, para arcos extra
+  más allá del atributo único `on` — se conectan directamente al stack y no
+  renderizan nada, así que tampoco cuentan como ítems flex.
 - **Puede ser hijo de**: cualquier cosa, incluido otro `kb-stack`. Anidar una
   columna de filas es la forma normal de construir un layout bidimensional a
   partir de esta primitiva, ya que un solo stack nunca salta de línea.
@@ -62,14 +64,19 @@ reglas habituales de flex — un hijo con `flex: 1` llena el espacio sobrante.
 
 ## Dirección, alineación y espaciado
 
-`direction` es el único atributo con un conjunto cerrado de valores. `align` y
-`justify` pasan tal cual a `align-items` y `justify-content`, así que cualquier
-valor CSS válido funciona — y uno inválido silenciosamente no hace nada.
+`direction`, `align`, `justify` y `spacing` aceptan todos un conjunto cerrado
+de valores. Un valor desconocido se ignora y la *propiedad* conserva su
+último valor válido — nunca llega a la hoja de estilos sin verificar. El
+atributo en el DOM sigue mostrando lo que se haya escrito; lee la propiedad,
+no `getAttribute()`, para ver lo que realmente se aplica.
 
-| Atributo | Actúa a lo largo de | Valores comunes |
+| Atributo | Actúa a lo largo de | Valores aceptados |
 |---|---|---|
-| `justify` | la dirección del stack (eje principal) | `flex-start`, `center`, `space-between`, `flex-end` |
-| `align` | transversal a ella (eje cruzado) | `start`, `center`, `stretch`, `baseline` |
+| `justify` | la dirección del stack (eje principal) | `normal`, `start`, `end`, `center`, `stretch`, `left`, `right`, `space-between`, `space-around`, `space-evenly`, `flex-start`, `flex-end` |
+| `align` | transversal a ella (eje cruzado) | `normal`, `start`, `end`, `center`, `stretch`, `baseline`, `flex-start`, `flex-end`, `self-start`, `self-end` |
+
+`start`/`end` son la grafía preferida para ambos atributos; `flex-start`/
+`flex-end` se aceptan como alias heredados.
 
 En una `row`, `align="center"` centra verticalmente ítems de distintas alturas;
 en una `column`, `align="stretch"` hace que los hijos llenen el ancho. Cambiar
@@ -91,19 +98,23 @@ entre grupos predecible a lo largo de una página:
 | `quarck` / `nano` | 4 / 8px | Elementos que se leen como una unidad — icono y etiqueta, campo y helper. |
 | `xs` | 16px | El valor por defecto: hermanos dentro de un grupo. |
 | `sm` / `md` | 24 / 32px | Separando grupos dentro de una sección. |
-| `lg` en adelante | 40px+ | Separación a nivel de sección, donde `<kb-inset>` puede servir mejor. |
+| `lg` / `huge` / `giant` | 40px+ | Separación a nivel de sección, donde `<kb-inset>` puede servir mejor. |
+
+`spacing` acepta solo estos ocho escalones de la escala de inset. Un valor
+desconocido se ignora y el espaciado conserva su último escalón válido.
 
 ## Atributos
 
 | Atributo | Tipo | Por defecto | Descripción |
 |---|---|---|---|
 | `direction` | `row` \| `column` | `row` | Dirección flex aplicada al host. |
-| `align` | `align-items` de CSS | `start` | Alineación en el eje cruzado. |
-| `justify` | `justify-content` de CSS | `flex-start` | Alineación en el eje principal. |
-| `spacing` | escalón de token | `xs` | Espaciado, resuelto contra `--spacing_inset-{valor}`. |
+| `align` | conjunto cerrado, ver [arriba](#dirección-alineación-y-espaciado) | `start` | Alineación en el eje cruzado. |
+| `justify` | conjunto cerrado, ver [arriba](#dirección-alineación-y-espaciado) | `start` | Alineación en el eje principal. |
+| `spacing` | conjunto cerrado, ver [arriba](#dirección-alineación-y-espaciado) | `xs` | Espaciado, resuelto contra `--spacing_inset-{valor}`. |
 | `width` | `auto` \| `fill` \| longitud | `auto` | Ancho del host. |
 | `height` | `auto` \| longitud | `auto` | Alto del host. |
 | `hidden` | `boolean` | `false` | Elimina el stack y sus hijos del layout y del árbol de accesibilidad. |
+| `on` | cadena de arco | — | Conexión de Echo, `origen/evento:tipo/destino`. |
 
 Este elemento no despacha eventos.
 
@@ -130,9 +141,10 @@ las mismas propiedades en CSS.
 
 - `hidden` añade el custom state `hidden` y `display: none`, eliminando el stack
   y sus hijos del layout y del árbol de accesibilidad.
-- **El host se declara presentacional**, así que la pila en sí no añade ningún
-  nodo al árbol de accesibilidad. La semántica de grupo tiene que venir de lo
-  que pongas dentro — un `<nav>`, una `<ul>`, un fieldset.
+- **El host se declara presentacional** (`role="none"`), así que la pila en sí
+  no añade ningún nodo al árbol de accesibilidad, y no tiene nombre
+  accesible — no hay atributo `alt`. La semántica de grupo tiene que venir de
+  lo que pongas dentro — un `<nav>`, una `<ul>`, un fieldset.
 - El orden visual sigue al orden del código, así que el orden de teclado
   coincide con el de la pantalla. No lo inviertas con
   `flex-direction: row-reverse` desde fuera.

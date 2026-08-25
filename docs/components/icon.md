@@ -41,7 +41,10 @@ variant="icon">` when the mark is meant to be pressed.
 
 - **Can contain**: no meaningful children. The shadow root renders `use`
   verbatim as its text content, so light-DOM children are ignored. Set the glyph
-  through the attribute, never by typing the ligature between the tags.
+  through the attribute, never by typing the ligature between the tags. The
+  one exception is one or more `<kb-on>` children, for extra arcs beyond the
+  single `on` attribute — they wire to the icon directly, without being
+  slotted or rendered.
 - **Can be a child of**: anything accepting inline content. It's `inline-flex`
   with `line-height: 1`, so it sits on the text baseline of a `<kb-text>`,
   inside a `<kb-button>` label, or in a `<kb-stack direction="row">` without
