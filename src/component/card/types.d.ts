@@ -61,9 +61,15 @@ export default class KUBACardElement extends HTMLElement {
   height: KUBACardResizingAttribute | (string & {})
 
   /**
-   * The element's `ElementInternals`, lazily attached on first access.
+   * Whether the card is hidden (reflects the `hidden` attribute). The
+   * attribute value `"false"` or `"0"` (or the attribute being absent)
+   * reads as `false`; any other value — including `""`, as in
+   * `<kb-card hidden>` — reads as `true`. Setting the property to `false`
+   * removes the attribute; a truthy value adds the `hidden` custom element
+   * state, mixin `Hidden`, mirrored in `:state(hidden)`.
+   * @default false
    */
-  readonly internals: ElementInternals
+  hidden: boolean
 
   /**
    * Arc string wiring an event from another element to this card, in the

@@ -41,7 +41,7 @@ O template é `<slot></slot>` e nada mais — não há sub-elemento interno.
 | Somente leitura ou interativo | Somente leitura. Qualquer interação (clique, navegação) é do conteúdo slotted, nunca do cartão |
 | Caso de uso mínimo (MVP) | Agrupar conteúdo slotted em um flex container tokenizado, com direção, largura e altura controláveis |
 | Participa de `<form>` | Não |
-| Papel e nome acessível | Nenhum papel próprio. O cartão é declarado `role="none"` via `Identity`, transparente para a árvore de acessibilidade — quem tem papel e nome é o conteúdo slotted |
+| Papel e nome acessível | Nenhum papel próprio. O cartão publica `role="none"` em `internals.role` no connect, transparente para a árvore de acessibilidade — quem tem papel e nome é o conteúdo slotted |
 | Superfície de variação | `direction`, `height`, `width` |
 | Sub-elemento interno | Nenhum. O template é só `<slot></slot>` |
 
@@ -82,9 +82,12 @@ O template é `<slot></slot>` e nada mais — não há sub-elemento interno.
 | `width` | `KUBACardWidthAttribute \| \`${number}px\`` | `'auto'` | sim | Mixin `Width`, mesma normalização |
 | `hidden` | `boolean` | `false` | sim | Mixin `Hidden`, espelhado em `:state(hidden)` |
 | `on` | arco `source/event:type/sink` | `undefined` | sim | Mixin `Echo` |
-| `internals` | `ElementInternals` (readonly) | — | não | Lazy via `attachInternals()` na primeira leitura. Existe para os mixins que precisam de `internals.states` (`Hidden`); não é contrato para o consumidor |
+| `internals` | `ElementInternals` (readonly) | — | não | Lazy via `attachInternals()` na primeira leitura. Existe para os mixins que precisam de `internals` (`Hidden`, `Presentational`). **Não é publicado em `types.d.ts`** — é uso interno dos mixins, não contrato do consumidor (decisão do `architect`, 2026-08-25, aplicada aos oito pacotes) |
 
-Não há `value`, `alt`, `click()` nem evento `clicked` — removidos na reversão desta versão.
+Não há `value`, `alt`, `click()` nem evento `clicked`. `value`, `click()` e `clicked` saíram
+na reversão desta versão; `alt` nunca foi contrato, mas chegou ao elemento por herança —
+`Identity` publica papel **e** nome, e o cartão só queria o papel. Corrigido saindo do mixin
+(seção 3).
 
 ### Events
 
@@ -112,21 +115,46 @@ Nenhum. Não há sub-elemento no shadow root a exportar.
 
 ## 3. Composição
 
-**Cadeia**: `Identity(Echo(Height(Hidden(Width(HTMLElement)))))`
+**Cadeia**: `Echo(Height(Hidden(Presentational(Width(HTMLElement)))))`
 
 | Mixin | Traz | Por que entra na cadeia |
 |---|---|---|
-| `Identity` | `get [role]()` | O cartão declara `role="none"` para não introduzir um nó `generic` ao redor do conteúdo slotted — sem isso, a árvore de acessibilidade vê o cartão como um nó próprio, quebrando a promessa de transparência da seção 1 |
 | `Echo` | Sistema de eventos: `on`, arco declarativo | O cartão pode ser ligado a outro elemento por arco, mesmo sem despachar nada próprio |
 | `Height` | `height` normalizado + re-render de estilo | Cartão é caixa de layout; altura faz parte da superfície de variação |
 | `Hidden` | `hidden` + `:state(hidden)` | Visibilidade é estado de plataforma, não CSS solto |
+| `Presentational` | `role="none"` publicado em `internals.role` no connect | O cartão é caixa de layout sem significado próprio; sem isso o host vira um nó `generic` em volta do conteúdo. Não acrescenta nada à superfície pública |
 | `Width` | `width` normalizado + re-render de estilo | Idem `Height` |
 
 **Sobre não usar `Disabled` ou `Value`**: nenhum dos dois tem uso — o cartão não tem controle
 a desabilitar, não carrega payload de ação. Herdar qualquer um seria herança recusada (rule
 059). Ver "Decisão descartada" na seção 5 para o raciocínio completo de por que esses mixins
-chegaram a ser cogitados e por que saíram (`Identity`, ali descartado junto com o resto,
-voltou depois só para fixar `role="none"` — não para o `role="button"` da ideia original).
+chegaram a ser cogitados e por que saíram.
+
+**Sobre não usar `Identity`**: `Identity` empacota duas coisas — o papel (`[role]` publicado
+em `internals.role` no connect) e o **nome acessível** (`alt` → `internals.ariaLabel`). O
+cartão quer só a primeira: é presentational, e um host presentational não tem nome a
+publicar. Herdar as duas metades para usar uma é herança recusada (rule 059), e o efeito
+observável era pior que o smell: `card.alt = 'x'` funcionava de verdade, escrevendo
+`aria-label` num contrato que `types.d.ts`, `docs/` e esta página diziam não existir. O papel
+passou a vir do mixin `Presentational` (`packages/mixin/presentational/`), que é a metade
+de papel de `Identity` isolada, sem `alt`.
+
+**Decisão do `architect` (2026-08-25) — `Presentational` extraído como mixin.** A versão
+anterior desta seção registrava o custo da saída como duplicação (`kb-card` e `kb-stack`
+repetindo o mesmo hook `@connected [presentational]()`, o mesmo `interfaces.js` byte a byte
+e as mesmas oito linhas de comentário explicando a recusa de `Identity`) e recomendava
+quebrar `Identity` em papel + um mixin `Alt`. Essa recomendação foi **descartada**: mexer em
+`Identity` é mexer num pacote estável (rule 019) consumido por `header`, `logo` e
+`progress`, obrigaria os três a compor dois mixins onde hoje compõem um, e separaria papel
+de nome — duas metades da mesma identidade acessível, que CRP (rule 017) diz para manter
+juntas. O caminho adotado é aditivo: um mixin novo `Presentational`, na forma exata de
+`Headless` (hook só de connect, `PresentationalInstance {}` vazio), que **não acrescenta
+nada à superfície pública** do elemento — por isso o custo de reverter é o de apagar uma
+pasta, não o de renegociar um contrato. Manter os dois hooks locais foi descartado por
+motivo oposto: o que estava duplicado não era o corpo trivial de uma linha, era a
+justificativa — o mesmo raciocínio sobre acessibilidade em dois arquivos, com duas chances
+de divergir (rule 016). Um terceiro `role="none"` agora compõe o mixin em vez de copiar
+comentário.
 
 **Sub-elemento**: nenhum. Template é `<slot></slot>`.
 
@@ -166,7 +194,7 @@ manter.
 | 3 | Cartão vazio (sem conteúdo slotted) | Renderiza a caixa com `padding` e `background`; nada mais acontece |
 | 4 | `kb-button` (ou qualquer elemento interativo) dentro do cartão | Funciona normalmente, sem interferência do cartão — clique, foco e teclado pertencem inteiramente ao filho |
 | 5 | Cartão dentro de cartão | Aninhamento puro de layout, sem absorção de evento nenhuma |
-| 6 | Leitor de tela | O cartão fixa `role="none"` via `Identity`, o que impede o navegador de expor um nó `generic` ao redor do conteúdo — a árvore de acessibilidade vê exatamente o conteúdo slotted, como se o cartão não existisse |
+| 6 | Leitor de tela | O cartão fixa `role="none"` no connect, o que impede o navegador de expor um nó `generic` ao redor do conteúdo — a árvore de acessibilidade vê exatamente o conteúdo slotted, como se o cartão não existisse |
 | 7 | Teclado | O cartão nunca recebe foco por si só (sem `tabIndex`); `Tab` alcança diretamente o elemento focável dentro do slot, se houver — `delegatesFocus: true` só habilita `:host(:focus-visible)` a casar quando isso acontece |
 
 ### Decisão descartada: cartão como unidade clicável
@@ -200,9 +228,10 @@ consumidor só porque já foi quase construída.
 
 **Consequência**: `click()`, o evento `clicked`, o attribute `value`, o `role="button"`, o
 `tabIndex`, o listener de teclado e os tokens de hover/`:focus-visible`/`forced-colors` foram
-todos removidos. O cartão volta a ser only-layout. `Identity` voltou depois, isolado do resto
-desta reversão, só para fixar `role="none"` (seção 3) — não é a retomada do `role="button"`
-descartado aqui. Se o padrão de
+todos removidos. O cartão volta a ser only-layout. O `role="none"` voltou depois, isolado do
+resto desta reversão (seção 3) — não é a retomada do `role="button"` descartado aqui.
+Voltou a princípio via `Identity`, o que trouxe junto um `alt` que ninguém pediu; hoje o
+papel vem do mixin `Presentational` (seção 3), que publica só `role="none"`, sem `alt`. Se o padrão de
 cartão-como-ação for necessário no futuro, é uma decisão nova do `architect` — não uma
 retomada automática desta, porque o limite de `@on` continua existindo e precisa ser
 resolvido antes (estender `listen.js` para também escutar no host é o caminho mais provável,

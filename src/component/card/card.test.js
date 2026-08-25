@@ -1,5 +1,30 @@
-import { mount } from '@test'
+import { inner, mount } from '@test'
 import { expect, test, vi } from 'vitest'
+
+test('stays out of the accessibility tree', async () => {
+  // A layout box has no meaning of its own; without this it shows up as a
+  // generic node wrapping everything it groups.
+  const body = mount('<kb-card><kb-text>One</kb-text></kb-card>')
+  const card = body.querySelector('kb-card')
+
+  await inner(card, 'slot')
+
+  expect(card.internals.role).toBe('none')
+})
+
+test('never reintroduces alt as a functional property', async () => {
+  // `Card` composes the `Presentational` mixin instead of `Identity`, so it
+  // never contracts an accessible name. Assigning `alt` must be a no-op —
+  // proof that no mixin quietly reattached the property, not just that the
+  // symbol is absent.
+  const body = mount('<kb-card></kb-card>')
+  const card = body.querySelector('kb-card')
+  await inner(card, 'slot')
+
+  card.alt = 'x'
+
+  expect(card.internals.ariaLabel).toBeNull()
+})
 
 test('applies the default direction when the attribute is absent', async () => {
   const body = mount('<kb-card></kb-card>')

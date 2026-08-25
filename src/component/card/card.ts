@@ -2,14 +2,14 @@ import { define } from '@directive'
 import attributeChanged, { enumerating } from '@directive/attributeChanged'
 import { paint, retouch } from '@dom'
 import Echo from '@echo'
-import { Height, Hidden, Identity, role, Width } from '@mixin'
+import { Height, Hidden, Presentational, Width } from '@mixin'
 import component from './component.js'
 import { DIRECTIONS } from './direction.js'
 import style from './style.js'
 
 @define('kb-card')
 @paint(component, style)
-class Card extends Identity(Echo(Height(Hidden(Width(HTMLElement))))) {
+class Card extends Echo(Height(Hidden(Presentational(Width(HTMLElement))))) {
   #direction
   #internals
 
@@ -29,12 +29,6 @@ class Card extends Identity(Echo(Height(Hidden(Width(HTMLElement))))) {
 
   get internals() {
     return (this.#internals ??= this.attachInternals())
-  }
-
-  // A layout box with no meaning of its own: declaring it presentational
-  // keeps it from adding a generic node around whatever it groups.
-  get [role]() {
-    return 'none'
   }
 
   constructor() {
