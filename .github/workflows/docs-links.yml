@@ -1,14 +1,9 @@
 name: 🔗 Check documentation links
 
 on:
-  # Runs after the site redeploys instead of on push directly: checking
-  # t2e1.github.io/kuba/... links against a push that hasn't finished
-  # deploying yet is a race that fails on every path the old site never had.
-  workflow_run:
-    workflows:
-      - 📖 Deploy docs to GitHub Pages
-    types:
-      - completed
+  push:
+    branches:
+      - main
   pull_request:
   # Links rot without anyone touching the repository: a page moves, a service
   # shuts down. Weekly is enough to catch it before a reader does.
@@ -21,18 +16,10 @@ permissions:
 
 jobs:
   lychee:
-    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-        with:
-          ref: ${{ github.event.workflow_run.head_sha || github.ref }}
 
-      # Two passes because the two sets of files mean different things by a
-      # link. The repository markdown is read on GitHub, where './LICENSE' has
-      # to resolve as a file. The docs are read through Docusaurus, where
-      # '/foundations/naming' is a client-side route, not a path on disk — so
-      # there only the external URLs are checkable.
       - name: Repository markdown — files and URLs
         uses: lycheeverse/lychee-action@v2
         with:
@@ -43,7 +30,23 @@ jobs:
             README.md CONTRIBUTING.md SECURITY.md CODE_OF_CONDUCT.md CHANGELOG.md
           fail: true
 
-      - name: Documentation site — external URLs only
+      # Built rather than read from source: '/foundations/naming' in an .mdx
+      # file is a route Docusaurus resolves at build time, not a path lychee
+      # can check on disk or a scheme it can filter out. Building first turns
+      # every internal link into a real file lychee resolves against
+      # --root-dir, and every external link into a real HTTP request — so a
+      # renamed route fails here instead of on the deployed site.
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: website/package-lock.json
+      - name: Build documentation site
+        working-directory: website
+        run: |
+          npm ci
+          npm run build
+      - name: Documentation site — internal routes and external URLs
         uses: lycheeverse/lychee-action@v2
         with:
           args: >-
@@ -52,5 +55,6 @@ jobs:
             --max-cache-age 1d
             --scheme https
             --scheme http
-            'website/docs/**/*.mdx' 'website/i18n/**/*.mdx' website/static/llms.txt
+            --root-dir ${{ github.workspace }}/website/build
+            'website/build/**/*.html' website/build/llms.txt
           fail: true

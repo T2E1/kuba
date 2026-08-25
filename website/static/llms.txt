@@ -15,11 +15,11 @@ Every page below is the markdown this documentation site renders. Translations l
 - [Principles](https://t2e1.github.io/kuba/foundations/principles): the rules every element obeys
 - [Naming](https://t2e1.github.io/kuba/foundations/naming): Elements, Blocks and Design Tokens, and how they relate
 - [Events and Echo](https://t2e1.github.io/kuba/foundations/events-and-echo): the arc grammar and the dataflow model
-- [Design tokens](https://t2e1.github.io/kuba/foundations/tokens/README): overview, then [colors](https://t2e1.github.io/kuba/foundations/tokens/colors), [typography](https://t2e1.github.io/kuba/foundations/tokens/typography), [spacing](https://t2e1.github.io/kuba/foundations/tokens/spacing), [border](https://t2e1.github.io/kuba/foundations/tokens/border), [shadows](https://t2e1.github.io/kuba/foundations/tokens/shadows), [opacity](https://t2e1.github.io/kuba/foundations/tokens/opacity)
+- [Design tokens](https://t2e1.github.io/kuba/foundations/tokens/): overview, then [colors](https://t2e1.github.io/kuba/foundations/tokens/colors), [typography](https://t2e1.github.io/kuba/foundations/tokens/typography), [spacing](https://t2e1.github.io/kuba/foundations/tokens/spacing), [border](https://t2e1.github.io/kuba/foundations/tokens/border), [shadows](https://t2e1.github.io/kuba/foundations/tokens/shadows), [opacity](https://t2e1.github.io/kuba/foundations/tokens/opacity)
 
 ## Build UI — custom elements
 
-- [Overview](https://t2e1.github.io/kuba/components/README): the full element map
+- [Overview](https://t2e1.github.io/kuba/components/): the full element map
 - Components: [button](https://t2e1.github.io/kuba/components/button), [card](https://t2e1.github.io/kuba/components/card), [cover](https://t2e1.github.io/kuba/components/cover), [icon](https://t2e1.github.io/kuba/components/icon), [logo](https://t2e1.github.io/kuba/components/logo), [progress](https://t2e1.github.io/kuba/components/progress)
 - Layout: [header](https://t2e1.github.io/kuba/components/header), [footer](https://t2e1.github.io/kuba/components/footer), [main](https://t2e1.github.io/kuba/components/main), [stack](https://t2e1.github.io/kuba/components/stack), [inset](https://t2e1.github.io/kuba/components/inset)
 - Typography: [text](https://t2e1.github.io/kuba/components/text), [label](https://t2e1.github.io/kuba/components/label), [helper](https://t2e1.github.io/kuba/components/helper)
@@ -30,7 +30,7 @@ Every page below is the markdown this documentation site renders. Translations l
 
 ## Build Elements — the packages
 
-- [Packages](https://t2e1.github.io/kuba/build-elements/README): the map of what is importable and from where
+- [Packages](https://t2e1.github.io/kuba/build-elements/): the map of what is importable and from where
 - [Lifecycle](https://t2e1.github.io/kuba/build-elements/lifecycle), [Decorators](https://t2e1.github.io/kuba/build-elements/decorators), [Defining](https://t2e1.github.io/kuba/build-elements/directive)
 - [Rendering](https://t2e1.github.io/kuba/build-elements/dom), [Attribute mixins](https://t2e1.github.io/kuba/build-elements/mixin)
 - [Echo](https://t2e1.github.io/kuba/build-elements/echo), [Listeners and filters](https://t2e1.github.io/kuba/build-elements/event), [Operators](https://t2e1.github.io/kuba/build-elements/spark)
@@ -39,7 +39,7 @@ Every page below is the markdown this documentation site renders. Translations l
 
 ## Patterns
 
-- [Recipes](https://t2e1.github.io/kuba/build-ui/patterns/README)
+- [Recipes](https://t2e1.github.io/kuba/build-ui/patterns/)
 - [Search as you type](https://t2e1.github.io/kuba/build-ui/patterns/search-as-you-type)
 - [User CRUD](https://t2e1.github.io/kuba/build-ui/patterns/user-crud)
 - [Declarative navigation](https://t2e1.github.io/kuba/build-ui/patterns/declarative-navigation)

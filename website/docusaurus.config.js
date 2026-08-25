@@ -48,7 +48,7 @@ const config = {
           routeBasePath: '/',
           sidebarPath: './sidebars.js',
           remarkPlugins: [previewPlugin],
-          editUrl: 'https://github.com/T2E1/kuba/tree/main/docs/',
+          editUrl: 'https://github.com/T2E1/kuba/tree/main/website/',
         },
         blog: false,
         theme: {
