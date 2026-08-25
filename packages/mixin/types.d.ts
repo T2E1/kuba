@@ -25,6 +25,9 @@ declare module '@t2e1/kuba/mixin' {
     readonly [role]: string
   }
 
+  /** Instance shape added by {@link Presentational}. */
+  interface PresentationalInstance {}
+
   /** Instance shape added by {@link Height}. */
   interface HeightInstance {
     /** CSS height applied to the element. Reflects the `height` attribute; defaults to `"auto"`. */
@@ -100,6 +103,27 @@ declare module '@t2e1/kuba/mixin' {
   ): T & Constructor<IdentityInstance>
 
   /**
+   * Takes the element out of the accessibility tree without hiding it, by
+   * publishing `role="none"` on `ElementInternals` once connected — a layout
+   * box adds no generic node around the content it groups. Published as a
+   * *default*, so an author-supplied `role` still wins.
+   *
+   * Adds nothing to the element's public surface: unlike {@link Identity},
+   * it is the role half alone, with no `alt`.
+   *
+   * Reads `internals` from the host class — the element owns the
+   * `attachInternals()` call.
+   *
+   * @param Base - The class to extend.
+   * @returns `Base` extended with presentational semantics.
+   * @example
+   * class MyElement extends Presentational(HTMLElement) {}
+   */
+  function Presentational<T extends Constructor>(
+    Base: T,
+  ): T & Constructor<PresentationalInstance>
+
+  /**
    * Adds a `height` property reflected from/to the `height` attribute.
    * Defaults to `"auto"` until explicitly set.
    *
@@ -155,5 +179,15 @@ declare module '@t2e1/kuba/mixin' {
     Base: T,
   ): T & Constructor<TemplateInstance>
 
-  export { Headless, Height, Hidden, Identity, role, Template, Value, Width }
+  export {
+    Headless,
+    Height,
+    Hidden,
+    Identity,
+    Presentational,
+    role,
+    Template,
+    Value,
+    Width,
+  }
 }
