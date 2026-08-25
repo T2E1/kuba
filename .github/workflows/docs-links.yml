@@ -1,9 +1,14 @@
 name: 🔗 Check documentation links
 
 on:
-  push:
-    branches:
-      - main
+  # Runs after the site redeploys instead of on push directly: checking
+  # t2e1.github.io/kuba/... links against a push that hasn't finished
+  # deploying yet is a race that fails on every path the old site never had.
+  workflow_run:
+    workflows:
+      - 📖 Deploy docs to GitHub Pages
+    types:
+      - completed
   pull_request:
   # Links rot without anyone touching the repository: a page moves, a service
   # shuts down. Weekly is enough to catch it before a reader does.
@@ -16,9 +21,12 @@ permissions:
 
 jobs:
   lychee:
+    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.workflow_run.head_sha || github.ref }}
 
       # Two passes because the two sets of files mean different things by a
       # link. The repository markdown is read on GitHub, where './LICENSE' has
