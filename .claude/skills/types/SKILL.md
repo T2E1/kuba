@@ -216,6 +216,7 @@ porque a tabela de atributos transcreve daqui (skill `preview`).
 - [preview](../preview/SKILL.md): complements — `argTypes` transcreve este contrato.
 - [mixin](../mixin/SKILL.md): depends on — a cadeia de `extends` define o que achatar.
 - [revelation](../revelation/SKILL.md): complements — o `index.js` expõe o que este arquivo tipa.
+- [api-guidelines](../api-guidelines/SKILL.md): complements — este arquivo declara o contrato; ela julga se a forma dele prende o consumidor.
 - [colocation](../colocation/SKILL.md): reinforces — um `types.d.ts` por pacote, colocado.
 - [enum](../enum/SKILL.md): depends on — `enumerating(ENUM)` no `.ts` é o gatilho da Regra 4 forçar tipo nomeado.
 

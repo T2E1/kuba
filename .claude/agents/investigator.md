@@ -1,5 +1,5 @@
 ---
-name: deepdive
+name: investigator
 description: Investigador de código existente. Produz respostas baseadas em evidência com citação arquivo:linha — causa raiz de um bug, mapa de um pacote desconhecido, onde está o gargalo, por onde entra dado não confiável. Use quando a pergunta é "por que isso acontece", "como isso funciona" ou "onde está o problema", e a resposta precisa ser provada, não suposta. Não use para escolher entre alternativas — é o ofício do architect; nem para implementar a correção — é o do developer.
 model: opus
 tools: Read, Bash, Glob, Grep

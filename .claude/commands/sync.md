@@ -21,9 +21,9 @@ Divergência com o remoto:
 
 | # | Agent | Recebe | Entrega |
 |---|---|---|---|
-| 1 | `deepdive` | O teste que passou a falhar | A causa raiz, com `arquivo:linha` |
+| 1 | `investigator` | O teste que passou a falhar | A causa raiz, com `arquivo:linha` |
 
-Nenhum agent é acionado no caminho normal: sincronizar é mecânica de git. O `deepdive`
+Nenhum agent é acionado no caminho normal: sincronizar é mecânica de git. O `investigator`
 entra apenas quando a suíte quebra **depois** do merge, porque aí a pergunta deixa de ser
 "como atualizo" e passa a ser "por que isto quebrou" — que é julgamento, não sequência.
 
@@ -52,7 +52,7 @@ entra apenas quando a suíte quebra **depois** do merge, porque aí a pergunta d
 
 7. **Rodar `bun run test`.** É o que prova que a sincronização não quebrou nada.
    - Verde → reportar o que entrou e encerrar.
-   - Vermelho → **acionar o `deepdive`** com o teste que falha, e reportar a causa. Não
+   - Vermelho → **acionar o `investigator`** com o teste que falha, e reportar a causa. Não
      corrigir dentro deste fluxo: a correção é trabalho próprio, com escopo próprio.
 
 ## Observações
@@ -62,7 +62,7 @@ entra apenas quando a suíte quebra **depois** do merge, porque aí a pergunta d
 - Não use `git pull --rebase` em branch já publicada: reescrever histórico que outra
   pessoa tem quebra o repositório dela.
 - Suíte vermelha depois do sync não é motivo para desfazer o merge. O código de outra
-  pessoa está certo até prova em contrário — a prova é o que o `deepdive` produz.
+  pessoa está certo até prova em contrário — a prova é o que o `investigator` produz.
 
 ---
 

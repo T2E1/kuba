@@ -1,7 +1,7 @@
 ---
 name: colocation
 model: sonnet
-description: Colocação de arquivos em `src/` e `packages/` — o que muda junto fica junto, um pacote por custom element com implementação, template, estilo, contratos, tipos e teste lado a lado, agrupados por categoria. Use ao criar um pacote novo, ao decidir onde um arquivo deve morar, ao adicionar teste a um componente, ou ao revisar estrutura organizada por tipo técnico em vez de por feature. Não use para decidir o que o pacote exporta — use a skill revelation.
+description: Colocação de arquivos em `src/` e `packages/` — o que muda junto fica junto, um pacote por custom element com implementação, template, estilo, contratos, tipos e teste lado a lado, mais a convenção de segments no interior de um pacote de infraestrutura. Use ao criar um pacote novo, ao decidir onde um arquivo deve morar, ao adicionar teste a um componente, ou ao organizar o interior de um pacote que passou de sete arquivos. Não use para escolher o eixo de decomposição do sistema — é a skill package-by-feature; nem para decidir o que o pacote exporta — é a skill revelation.
 ---
 
 # Colocation
@@ -23,9 +23,15 @@ e teste.
 | Decidindo onde um arquivo mora | Junto do que muda com ele |
 | Adicionando teste | Ao lado da implementação |
 | Encontrando pasta por tipo técnico | Redistribuir por feature |
+| Um pacote de `packages/` passou de sete arquivos soltos | Agrupar em segments |
+| Uma unidade do pacote virou mais de um arquivo | Promover a pasta homônima |
 
 Não use para decidir **o que sai** do pacote — isso é `revelation`. Colocação define
 onde os arquivos ficam; revelation define quais são públicos.
+
+Não use para escolher **o eixo** de decomposição — isso é `package-by-feature`, e vem antes:
+ela decide se o primeiro nível corta por feature ou por camada. Esta skill assume o eixo
+já resolvido e organiza o que fica dentro.
 
 ## Como aplicar
 
@@ -64,6 +70,50 @@ componentes já usam ou usariam (validar `color`, contra o mesmo conjunto de tok
 — foi o que aconteceu com `coloring` e `escaping`, que nasceram dentro de `kb-button` e
 subiram assim que ficou claro que o segundo consumidor já existia no repositório.
 
+### Estrutura de um pacote de `packages/`
+
+Um pacote de infraestrutura não tem template nem estilo, e cresce por outro eixo: pelo
+número de unidades que exporta. A convenção é a mesma em todos:
+
+```
+packages/<nome>/
+├── index.js            superfície pública — só re-exports
+├── types.d.ts          contrato tipado — obrigatório, sem exceção
+├── interfaces.js       Symbols de contrato, quando houver
+├── <nome>.js           a unidade central, homônima do pacote
+├── <unidade>.js        uma unidade exportada que cabe num arquivo
+└── <unidade>/          uma unidade que virou mais de um arquivo
+    ├── index.js
+    ├── <unidade>.js
+    ├── interfaces.js
+    └── <auxiliar>.js
+```
+
+**A regra que decide se algo vira pasta**, e é a única:
+
+> Uma pasta existe quando a unidade tem mais de um arquivo. Nunca antes.
+
+`packages/directive/attributeChanged/` é pasta porque tem sete filtros além do próprio
+`attributeChanged.js`. `packages/dom/repaint.js` é arquivo solto porque é um arquivo só.
+Promover `repaint` a pasta com um `index.js` dentro seria cerimônia (rule 064).
+
+**Quando o pacote passa de sete unidades soltas**, o nível seguinte é agrupar por papel
+técnico — e aqui o eixo de camada é o certo, porque o recorte por assunto já aconteceu no
+nível do pacote. O nome do segment descreve o papel, nunca o tipo de arquivo:
+
+| Segment bom | Segment ruim | Por quê |
+|---|---|---|
+| `lifecycle/`, `form/` | `callbacks/` | O papel, não a forma técnica |
+| `payload/`, `control/` | `helpers/` | `helpers` aceita qualquer coisa |
+| `matching/`, `history/` | `utils/`, `misc/` | O depósito nunca se esvazia |
+| `math/`, `compare/` | `functions/` | Todos são funções; não restringe |
+
+`packages/pixel/` já é o modelo: `index.css` mais os segments `reset/` e `tokens/`.
+
+**`types.d.ts` é obrigatório em todo pacote de `packages/`.** Hoje `packages/interpolate/`
+tem só `index.js` e `interpolate.js` — é a única lacuna de contrato do diretório, e o
+pacote seria o primeiro a quebrar um consumidor sem que o tipo avisasse.
+
 ### Categorias
 
 `src/` e `packages/` agrupam por categoria de responsabilidade, não por camada técnica:
@@ -91,6 +141,7 @@ reúne a infraestrutura que os sustenta.
 | Caso | Correto | Incorreto |
 |---|---|---|
 | Pacote colocado vs. organização por tipo técnico | [package-structure.valid.md](examples/package-structure.valid.md) | [package-structure.invalid.md](examples/package-structure.invalid.md) |
+| Segments no interior de um pacote de `packages/` | [segment-structure.valid.md](examples/segment-structure.valid.md) | [segment-structure.invalid.md](examples/segment-structure.invalid.md) |
 
 ## Checklist
 
@@ -100,6 +151,10 @@ reúne a infraestrutura que os sustenta.
 - [ ] `component.js` e `style.js` com uma única função exportada — validação e escaping vão para um filtro de `attributeChanged`
 - [ ] Filtro usado por mais de um componente vive em `packages/directive/attributeChanged/`, não duplicado em cada pacote
 - [ ] `index.js` presente em todo pacote
+- [ ] `types.d.ts` presente em todo pacote de `packages/`, sem exceção
+- [ ] Nenhuma pasta criada para uma unidade de um arquivo só (rule 064)
+- [ ] Nenhum segment chamado `utils`, `helpers`, `misc`, `functions` ou `callbacks`
+- [ ] Segments só onde o pacote passou de sete unidades soltas
 - [ ] Nenhum import alcançando arquivo interno de outro pacote
 - [ ] Nenhum `../` em import — só path alias (rule 031)
 
@@ -131,6 +186,14 @@ mixin. Antes de dois, duplicar é mais barato que abstrair cedo (rule 023).
 **Solução:** o alias aponta para a raiz do pacote, e o que é público sai pelo `index.js`
 (skill `revelation`). Importar interno é depender de detalhe de implementação.
 
+### O pacote virou uma pasta por arquivo
+
+**Causa:** a regra "pasta quando tem mais de um arquivo" foi lida ao contrário, e cada
+unidade ganhou pasta com `index.js` dentro.
+**Solução:** desfazer. Arquivo solto é o padrão; pasta é a exceção que a segunda peça
+justifica. `packages/spark/` tem dezesseis funções em dezesseis arquivos soltos, e está
+certo — nenhuma delas tem uma segunda peça.
+
 ## Referências
 
 - `references/vertical-slice.md` — o princípio geral de fatia vertical, com o guia de
@@ -148,7 +211,9 @@ mixin. Antes de dois, duplicar é mais barato que abstrair cedo (rule 023).
 ## Skills relacionadas
 
 - [package](../package/SKILL.md): depends on — os princípios que esta estrutura aplica.
+- [package-by-feature](../package-by-feature/SKILL.md): depends on — ela escolhe o eixo; esta organiza o que fica dentro do recorte já feito.
 - [revelation](../revelation/SKILL.md): complements — define o que sai pelo `index.js`.
+- [framework-design-guidelines](../framework-design-guidelines/SKILL.md): complements — esta decide onde a pasta fica; `framework-design-guidelines` decide como ela se chama.
 - [preview](../preview/SKILL.md): reinforces — a story fica colocada, nunca centralizada.
 - [types](../types/SKILL.md): reinforces — um `types.d.ts` por pacote.
 - [c4-model](../c4-model/SKILL.md): complements — os níveis Container e Component espelham categoria e pacote.
@@ -157,4 +222,4 @@ mixin. Antes de dois, duplicar é mais barato que abstrair cedo (rule 023).
 
 **Criado em**: 2026-04-01
 **Atualizado em**: 2026-08-25
-**Versão**: 2.3
+**Versão**: 2.4

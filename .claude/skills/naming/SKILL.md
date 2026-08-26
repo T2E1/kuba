@@ -238,6 +238,7 @@ em `mixin/hidden/hidden.ts`.
 - [mixin](../mixin/SKILL.md): complements — a forma da função que estes nomes descrevem.
 - [enum](../enum/SKILL.md): reinforces — `UPPER_SNAKE_CASE` para as constantes de valor.
 - [token](../token/SKILL.md): complements — a taxonomia paralela, para nomes de design token.
+- [framework-design-guidelines](../framework-design-guidelines/SKILL.md): complements — esta nomeia o que está dentro do pacote; ela nomeia o pacote e o grupo de pastas.
 - [revelation](../revelation/SKILL.md): complements — o `index.js` reexporta com estes nomes.
 - [method](../method/SKILL.md): reinforces — verbo imperativo revelando intenção.
 

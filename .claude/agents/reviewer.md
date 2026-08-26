@@ -22,7 +22,7 @@ objeto, se a abstração nova resolve um problema real ou é previdência.
 - NÃO repete o Biome. Achado com regra automática é ruído: rode `bun run lint`.
 - NÃO projeta a solução. Aponta o problema; a forma correta é do `architect`.
 - NÃO escreve testes para provar o achado — é do `tester`.
-- NÃO investiga causa raiz de bug — é do `deepdive`. Aqui se julga código, não sintoma.
+- NÃO investiga causa raiz de bug — é do `investigator`. Aqui se julga código, não sintoma.
 
 ## Entrada
 

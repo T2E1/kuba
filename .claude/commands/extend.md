@@ -34,7 +34,7 @@ Agents e cores em uso:
 |---|---|---|---|
 | — | nenhum | — | — |
 
-**Este é o único command sem agent, e a razão é que o ofício não existe.** Os nove ofícios
+**Este é o único command sem agent, e a razão é que o ofício não existe.** Os dez ofícios
 tratam do produto: código, aparência, teste, documentação, release, infraestrutura. Nenhum
 escreve o ferramental.
 

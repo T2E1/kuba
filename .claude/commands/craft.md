@@ -74,6 +74,10 @@ o consumidor escreve no HTML.
    automaticamente. Conferir com `bun run test`, cujo setup importa o `index.js` da raiz —
    elemento não registrado falha ali.
 
+   Este passo é meu, não de um agent: aplicar a skill
+   [revelation](../skills/revelation/SKILL.md) — o index só reexporta, em ordem
+   alfabética, sem lógica e sem curinga.
+
 9. **Relatar** o caminho criado, os arquivos, o veredito do `tester` e o que ficou de fora.
 
 ## Observações

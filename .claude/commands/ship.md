@@ -65,6 +65,10 @@ que mudança em `website/` e `.claude/` não versiona, porque não é publicada.
    `test`. O impacto de versão não vem daqui: vem do `releaser`, que julga pelo contrato
    público e não pelo prefixo escolhido.
 
+   A mensagem é escrita por mim, não por um agent: aplicar a skill
+   [prose](../skills/prose/SKILL.md) — o assunto diz o que mudou e por quê, sem inflação
+   nem vocabulário de máquina.
+
 8. **Enviar** com `git push`, e confirmar com `git status`.
 
 9. **Relatar**: o que foi commitado, a versão resultante, e qualquer ressalva do `reviewer`

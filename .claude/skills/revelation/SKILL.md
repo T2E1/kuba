@@ -101,6 +101,7 @@ ajuda do lado dos consumidores.
 ## Skills relacionadas
 
 - [package](../package/SKILL.md): depends on — o index é onde CRP e SAP se materializam.
+- [api-guidelines](../api-guidelines/SKILL.md): reinforces — o index é a superfície plana que esconde o interior aninhado.
 - [bracket](../bracket/SKILL.md): complements — `interfaces.js` expõe os Symbols de contrato.
 - [colocation](../colocation/SKILL.md): complements — a estrutura de pastas que o index encabeça.
 - [types](../types/SKILL.md): complements — o `types.d.ts` tipa exatamente o que o index expõe.

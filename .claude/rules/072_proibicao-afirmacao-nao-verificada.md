@@ -8,7 +8,7 @@
 
 ## What it is
 
-Proíbe que um relatório de entrega — de qualquer um dos dez ofícios — afirme o estado de
+Proíbe que um relatório de entrega — de qualquer um dos onze ofícios — afirme o estado de
 um arquivo (o que ele contém, que padrão segue, se já faz algo) sem citar `arquivo:linha`
 lido *nesta execução*. "Lembrar" o conteúdo de um vizinho não é ler o vizinho.
 

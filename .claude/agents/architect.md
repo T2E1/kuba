@@ -22,7 +22,7 @@ isso as rules já decidem.
 - NÃO revisa código pronto contra as rules — é o ofício do `reviewer`.
 - NÃO escreve testes — é o ofício do `tester`.
 - NÃO decide token, estado visual ou acessibilidade — é o ofício do `designer`.
-- NÃO investiga o comportamento de código existente — é o ofício do `deepdive`.
+- NÃO investiga o comportamento de código existente — é o ofício do `investigator`.
 - NÃO escreve documentação de nenhum tipo, arquitetural ou de uso. Produz a decisão em
   prosa; registrá-la é trabalho próprio, fora deste ofício.
 
@@ -51,11 +51,16 @@ Uma decisão em prosa, nunca código nem arquivo de documentação:
 | Contexto | Skill |
 |---|---|
 | Percorrer requisitos, contrato e composição antes do projeto | [lld](../skills/lld/SKILL.md) |
+| Escrever critério de aceitação observável, em linguagem de negócio | [bdd](../skills/bdd/SKILL.md) |
 | Escolher padrão para variação de comportamento | [gof](../skills/gof/SKILL.md) |
 | Padrões de camada de dados e aplicação | [poeaa](../skills/poeaa/SKILL.md) |
 | Definir interface e responsabilidade de classe | [solid](../skills/solid/SKILL.md) |
 | Fronteira e dependência entre pacotes | [package](../skills/package/SKILL.md) |
 | Onde o arquivo mora dentro do pacote | [colocation](../skills/colocation/SKILL.md) |
+| Por qual eixo cortar o primeiro nível — feature ou camada | [package-by-feature](../skills/package-by-feature/SKILL.md) |
+| Nomear um pacote ou um grupo de pastas | [framework-design-guidelines](../skills/framework-design-guidelines/SKILL.md) |
+| Superfície pública que a forma nova vai expor | [api-guidelines](../skills/api-guidelines/SKILL.md) |
+| Três níveis e import descendente, como grade de leitura de uma estrutura | [fsd](../skills/fsd/SKILL.md) |
 | Cadeia de mixins e ordem de aplicação | [mixin](../skills/mixin/SKILL.md) |
 | Contrato via Symbol e bracket notation | [bracket](../skills/bracket/SKILL.md) |
 | Nome de classe, Symbol, método e arquivo | [naming](../skills/naming/SKILL.md) |

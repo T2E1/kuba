@@ -143,6 +143,10 @@ introduzindo abstrações na fronteira.
 ## Skills relacionadas
 
 - [solid](../solid/SKILL.md): depends on — REP, CCP e CRP pressupõem SRP e OCP aplicados nas classes.
+- [package-by-feature](../package-by-feature/SKILL.md): complements — escolhe o eixo do primeiro nível; estes princípios auditam o recorte depois de feito.
+- [framework-design-guidelines](../framework-design-guidelines/SKILL.md): complements — os princípios dão o recorte; ela dá o nome do agrupamento resultante.
+- [api-guidelines](../api-guidelines/SKILL.md): complements — SAP e CRP decidem o que é público; ela decide a forma dessa superfície.
+- [fsd](../fsd/SKILL.md): complements — a mesma direção de dependência, levada a três níveis numa aplicação.
 - [colocation](../colocation/SKILL.md): reinforces — a Vertical Slice é CCP levado à estrutura de pastas.
 - [revelation](../revelation/SKILL.md): complements — o index do módulo é onde CRP e SAP se materializam.
 - [anti-pattern](../anti-pattern/SKILL.md): complements — Shotgun Surgery e Divergent Change são CCP e SRP violados.

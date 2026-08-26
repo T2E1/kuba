@@ -49,6 +49,7 @@ Sem intervalo explícito, o padrão é desde a última tag de versão em `CHANGE
 |---|---|
 | O que é contrato público, e portanto quebrável | [types](../skills/types/SKILL.md) |
 | Granularidade de release e reuso do pacote | [package](../skills/package/SKILL.md) |
+| Future Proofing — o que a superfície pública prende para sempre | [api-guidelines](../skills/api-guidelines/SKILL.md) |
 | Nome de evento e de atributo — renomear é breaking | [naming](../skills/naming/SKILL.md) |
 | Evento despachado como parte do contrato | [event](../skills/event/SKILL.md) |
 | Fatores afetados por uma quebra de compatibilidade | [quality](../skills/quality/SKILL.md) |

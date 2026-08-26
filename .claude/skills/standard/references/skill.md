@@ -89,7 +89,7 @@ description: <o que faz> Use quando <gatilhos>. Não use para <escopo excluído>
 **Apenas estes três campos.** O Claude Code aceita outros — `when_to_use`,
 `allowed-tools`, `paths`, `effort`, `context`, `hooks`, `metadata` — e a restrição aqui é
 deliberada, não desconhecimento: cada campo extra é mais uma coisa a manter sincronizada
-em 38 arquivos. Um campo novo entra quando houver um problema concreto que ele resolva.
+em 44 arquivos. Um campo novo entra quando houver um problema concreto que ele resolva.
 
 `description` é o primeiro nível do *progressive disclosure* — é a única coisa
 sempre carregada no system prompt, e é por ela que a skill é escolhida.
@@ -121,7 +121,7 @@ Toda skill declara o modelo. Nenhuma fica omissa: a declaração é a decisão r
 |---|---|---|---|
 | `haiku` | 4 | O trabalho é mecânico e verificável — reordenar, marcar. Nenhuma decisão de design pendente. | `alphabetical`, `anatomy`, `revelation`, `codetags` |
 | `sonnet` | 18 | Aplicação de convenção conhecida, com julgamento limitado a um arquivo ou componente. | `bracket`, `colocation`, `constructor`, `dataflow`, `enum`, `event`, `getter`, `jsdoc`, `method`, `mixin`, `naming`, `preview`, `prose`, `render`, `setter`, `state`, `token`, `types` |
-| `opus` | 18 | Julgamento arquitetural, trade-off entre princípios, diagnóstico. Rebaixar aqui custa qualidade na decisão **e** no código que vem depois dela. | `adr`, `anti-pattern`, `arc42`, `bdd`, `big-o`, `c4-model`, `calisthenics`, `cdd`, `clean-code`, `complexity`, `gof`, `lld`, `package`, `poeaa`, `quality`, `solid`, `standard`, `twelve-factor` |
+| `opus` | 22 | Julgamento arquitetural, trade-off entre princípios, diagnóstico. Rebaixar aqui custa qualidade na decisão **e** no código que vem depois dela. | `adr`, `anti-pattern`, `api-guidelines`, `arc42`, `bdd`, `big-o`, `c4-model`, `calisthenics`, `cdd`, `clean-code`, `complexity`, `framework-design-guidelines`, `fsd`, `gof`, `lld`, `package`, `package-by-feature`, `poeaa`, `quality`, `solid`, `standard`, `twelve-factor` |
 
 Na dúvida, **`opus`**. O custo de um turno mais caro é menor que o de uma decisão de
 arquitetura tomada com menos capacidade.

@@ -47,7 +47,7 @@ mesma tabela de decisão em dois lugares, divergindo até uma delas dar a respos
 | Uma sequência fixa que você dispara | `commands/` |
 | Algo que deve rodar sozinho | infraestrutura — hook, `pre-commit`, CI |
 
-## Os dez ofícios, e quando acionar cada um
+## Os onze ofícios, e quando acionar cada um
 
 Nenhum agent conhece outro: eu escolho, com que escopo e em que ordem. Eles não conversam
 entre si e não veem esta conversa — recebem o escopo que eu passo, e devolvem a entrega.
@@ -59,7 +59,8 @@ entre si e não veem esta conversa — recebem o escopo que eu passo, e devolvem
 | `developer` | Escrever ou alterar código em `src/` ou `packages/` | Decidir a forma antes, ou configurar tooling |
 | `tester` | Cobrir comportamento, reproduzir bug como teste que falha, auditar se a suíte prova algo | Corrigir o bug que ele achou |
 | `reviewer` | Julgar mudança pronta contra as 31 rules que o Biome não vê | O que `bun run lint` já pega |
-| `deepdive` | "Por que isto acontece" sem resposta óbvia, ou mapear pacote desconhecido | Escolher entre alternativas — é do `architect` |
+| `surveyor` | Medir a organização existente de um diretório — grafo real, fan-in, fronteira, nome de agrupamento — e emitir achados | Decidir a estrutura nova, ou julgar o código dentro dos arquivos |
+| `investigator` | "Por que isto acontece" sem resposta óbvia, ou mapear pacote desconhecido | Escolher entre alternativas — é do `architect` |
 | `writer` | Página de `website/docs/`, tradução, `README`, `CONTRIBUTING` | JSDoc no código — é do `developer` |
 | `releaser` | Julgar se uma mudança quebra consumidor, e preparar versão | Commit corriqueiro — é o `/ship` |
 | `builder` | `biome.json`, os configs, hooks de husky, workflows, o que entra em `dist/` | Código de `src/` ou `packages/` |
@@ -70,13 +71,15 @@ entre si e não veem esta conversa — recebem o escopo que eu passo, e devolvem
 | Situação | Sequência |
 |---|---|
 | Elemento novo | `architect` → `designer` → `developer` → `tester` → `writer` — é o `/craft` |
-| Bug relatado | `deepdive` → `developer` → `tester` |
+| Bug relatado | `investigator` → `developer` → `tester` |
 | "Está feio / não é acessível" | `designer` → `developer` → `tester` |
 | Mudança pronta para entrar | `reviewer` → `releaser` — é o `/ship` |
-| Segunda opinião fora do fluxo de commit | `reviewer`, sozinho — é o `/audit` |
+| Segunda opinião sobre código, fora do fluxo de commit | `reviewer`, sozinho — é o `/audit` |
 | Componente sem teste | `tester`, sozinho |
 | Comportamento mudou | `developer` → `tester` → `writer`, nesta ordem: documentar antes do teste documenta intenção |
-| Render lento, bundle grande | `deepdive` → `architect`, se a correção mudar a forma |
+| Render lento, bundle grande | `investigator` → `architect`, se a correção mudar a forma |
+| "Esta pasta virou um labirinto" | `surveyor`, sozinho — é o `/audit` com um diretório que agrupa pacotes |
+| Reestruturar um diretório | `surveyor` → `architect` → `builder`: medir, decidir a forma, ajustar alias e build |
 | CI ou build quebrado | `builder`, sozinho |
 | Consumidor corrigiu a entrega de qualquer ofício | `curator`, sozinho — refina a rule, skill ou agent que deixou passar |
 | Acrescentar rule, skill, agent ou command | `/extend` — sem agent; a skill `standard` decide a camada |
@@ -90,9 +93,42 @@ O que você dispara digitando `/`, num relance:
 |---|---|
 | `/craft` | Leva um pacote de "não existe" a documentado e testado |
 | `/ship` | Revisa, versiona e publica o que está no working tree |
-| `/audit` | Segunda opinião do `reviewer` sobre código já escrito, sem corrigir nem commitar |
+| `/audit` | Segunda opinião sobre o que já existe — `reviewer` para código, `surveyor` para organização de diretório |
 | `/sync` | Traz o remoto para a branch atual, resolvendo divergência |
 | `/extend` | Acrescenta rule, skill, agent ou command a este `.claude/` |
+
+### Quem escreve e quem só lê
+
+Quatro dos onze não recebem `Write` nem `Edit` — a restrição é o ofício, não uma
+precaução. Eles julgam e relatam; a edição volta para mim ou para outro ofício.
+
+| Só leem | O que julgam |
+|---|---|
+| `architect` | A forma que ainda não existe |
+| `investigator` | Por que o código existente se comporta assim |
+| `reviewer` | A qualidade do código **dentro** dos arquivos |
+| `surveyor` | A organização **entre** os arquivos |
+
+Os outros sete escrevem, e **cada um tem um artefato exclusivo** — `developer` o código,
+`designer` token e estado visual, `tester` os `*.test.js`, `writer` o `website/`, `builder`
+os configs, `releaser` versão e CHANGELOG, `curator` o `.claude/`. Nenhum toca o arquivo de
+outro, e é isso que permite rodar dois em paralelo sem risco.
+
+### As skills que nenhum ofício carrega
+
+Três skills existem e **nenhum agent as usa** — não por esquecimento, mas porque o
+artefato que produzem é meu, não de um ofício. Se eu não souber que existem, elas não são
+usadas nunca:
+
+| Skill | Quando eu carrego |
+|---|---|
+| [adr](skills/adr/SKILL.md) | Uma decisão arquitetural precisa sobreviver a "por que fizemos assim?" seis meses depois |
+| [arc42](skills/arc42/SKILL.md) | Documentar a arquitetura de um sistema ou feature já implementada |
+| [c4-model](skills/c4-model/SKILL.md) | Comunicar a arquitetura em níveis, para públicos diferentes |
+
+O `writer` declara isso explicitamente nos anti-objetivos dele: documentação de
+arquitetura não é ofício de agent nenhum. A decisão vem do `architect` em prosa; registrá-la
+é trabalho meu, com a skill.
 
 ### Quando não delegar
 
@@ -102,7 +138,8 @@ contexto na resposta. Não vale quando:
 - **A tarefa é pequena.** Renomear uma variável, corrigir um typo, ler um arquivo.
 - **O passo seguinte depende do anterior inteiro.** Se preciso repassar toda a saída,
   fazer aqui é mais direto.
-- **Dois ofícios tocariam o mesmo arquivo.** Em paralelo, um sobrescreve o outro.
+- **Dois ofícios escreveriam o mesmo arquivo.** Ver a tabela acima: em paralelo, um
+  sobrescreve o outro. Os quatro que só leem podem rodar juntos sem risco.
 - **Eu já tenho o contexto.** Se acabei de ler o pacote, delegar refaz o trabalho.
 
 O sinal a favor é o oposto: mais de dez arquivos a explorar, três frentes independentes,
@@ -159,4 +196,4 @@ ainda reflete o código real.
 
 **Criado em**: 2026-08-11
 **Atualizado em**: 2026-08-25
-**Versão**: 1.7
+**Versão**: 2.0

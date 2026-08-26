@@ -30,7 +30,7 @@ comportamento deve existir, nem que forma ele deveria ter: isso chega decidido.
 |---|---|
 | O comportamento a implementar e o pacote alvo | Implementar |
 | O projeto do `architect`, quando houver | Implementar seguindo a forma decidida |
-| O diagnóstico do `deepdive`, quando o trabalho é correção | Corrigir a causa, não o sintoma |
+| O diagnóstico do `investigator`, quando o trabalho é correção | Corrigir a causa, não o sintoma |
 | A violação de rule apontada | Refatorar |
 
 Sem pacote alvo identificável, o agent pergunta uma vez e para.
