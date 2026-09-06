@@ -131,6 +131,10 @@ métodos com nome de Symbol e campos privados ficam de fora. Ver
 6. Rodar o passo de tipos públicos da skill `jsdoc`.
 7. Verificar o isolamento: `grep -n "^import" types.d.ts`. Nenhum import deve existir —
    todos os `types.d.ts` deste repositório estão livres deles hoje, e devem continuar.
+   No mesmo passo, `grep -nE "internals|#|\[" types.d.ts` para o arquivo escrito: qualquer
+   linha de membro que apareça aqui é interno vazando para o contrato. Ao contrário do
+   import, este grep **não** está limpo no repositório — oito arquivos declaram
+   `internals` hoje. Isso é defeito herdado, não licença para repetir.
 8. **Fechar a lista do passo 2**: reler o arquivo escrito com a lista de mixins ao lado e
    confirmar, item a item, que cada contribuição aparece. Sobrou item? O contrato está
    incompleto. Se a cadeia inclui `Echo`, a página em `website/docs/components/` também menciona
@@ -150,8 +154,9 @@ métodos com nome de Symbol e campos privados ficam de fora. Ver
 - [ ] Todo membro de mixin achatado na classe
 - [ ] `alt` declarado sempre que `Identity` está na cadeia
 - [ ] `on` declarado sempre que `Echo` está na cadeia — e `<kb-on>` citado na seção de Composição da página em `website/docs/components/`
-- [ ] `internals` **não** declarado; nenhum método com nome de Symbol, nenhum campo privado
-- [ ] Estrutura comparada contra `src/component/button/types.d.ts`, aberto nesta execução
+- [ ] `internals` **não** declarado; nenhum método com nome de Symbol, nenhum campo privado — mesmo que um arquivo irmão ou um teste o declare/acesse
+- [ ] Todo membro declarado tem um mixin da cadeia ou um getter da implementação que o respalda — atributo lido só por CSS vai em `@remarks`, não vira propriedade
+- [ ] Estrutura comparada contra `src/component/button/types.d.ts`, aberto nesta execução — e nenhum outro `types.d.ts` usado como gabarito
 - [ ] Nada declarado para `Headless`
 - [ ] Nomes escopados ao componente, seguindo a taxonomia
 - [ ] `<PascalName>` igual ao nome da classe da implementação
@@ -173,6 +178,29 @@ baixo nível.
 **Causa:** o atributo vem de mixin e não foi achatado.
 **Solução:** redeclarar na classe. Nada é herdado automaticamente, porque a origem não é
 tipada.
+
+### Declarei `internals` (ou outro membro interno) porque um arquivo irmão ou um teste fazia
+
+**Causa:** raciocínio por analogia com o vizinho, em vez de pela cadeia de `extends`. Oito
+`types.d.ts` deste repositório declaram `internals` — são defeitos herdados, e um deles
+citado como precedente já produziu o mesmo erro de novo. Um teste que faz
+`element.internals` também não prova nada: teste alcança detalhe interno por construção.
+**Solução:** remover. A pergunta que decide um membro é "que mixin da cadeia, ou que
+getter da implementação, respalda isto?" — não "quem mais declarou". Esta skill é a
+autoridade; arquivo existente que diverge dela é defeito, não modelo. O único gabarito
+estrutural é `src/component/button/types.d.ts` (passo 3). Ver
+`references/achatamento-mixins.md` § "O que nunca entra no contrato" e § "Divergência é
+defeito".
+
+### Declarei um membro que só existe como atributo lido por CSS
+
+**Causa:** o atributo existe no HTML e no `style.js` (`:host([layout="grid"])`), mas nenhum
+mixin nem getter o reflete para uma propriedade JS. Declará-lo promete ao consumidor um
+membro que não existe em runtime.
+**Solução:** não declarar como membro da classe. Se o atributo importa para quem usa o
+elemento, documente-o em `@remarks` no JSDoc da classe, dizendo que é hook de estilo sem
+propriedade correspondente — foi o que `src/behavior/render/types.d.ts` passou a fazer com
+`layout`.
 
 ### O componente aceita um atributo que ninguém decidiu expor
 
@@ -223,5 +251,5 @@ porque a tabela de atributos transcreve daqui (skill `preview`).
 ---
 
 **Criado em**: 2026-07-15
-**Atualizado em**: 2026-08-25
-**Versão**: 2.2
+**Atualizado em**: 2026-08-27
+**Versão**: 2.3

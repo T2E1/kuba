@@ -41,6 +41,7 @@ O teste da intenção: `pedido.setStatus('cancelado')` descreve mecânica;
 | `repaint` | Re-renderização completa após a escrita |
 | `around` | Delega um efeito colateral que não transforma o valor (`internals.states`, `removeAttribute`, etc.) para o método de contrato, executado numa tick depois — nunca dentro do próprio setter (skill `state`) |
 | `before` | Transforma o valor antes da atribuição. Só se justifica se o método **muda** o valor — se ele só faz efeito colateral e devolve o mesmo valor recebido, é `around`, não `before` |
+| `debounce` | Como `around`, mas coalesce chamadas repetidas num intervalo (`wait`, default 250ms) numa só, redisparando o timer a cada nova chamada. Só se justifica quando reduzir o número de chamadas é requisito em si (não correção de bug — `around` puro já é correto mesmo com chamadas redundantes; ver Troubleshooting) |
 
 ### Regras
 
@@ -102,6 +103,39 @@ devolvia o mesmo valor recebido, sem transformação nenhuma.
 como `[hideable]` já era. `before` fica reservado para quem de fato transforma o argumento
 antes da atribuição.
 
+### Escolher entre `around` puro e `debounce` quando duas propriedades escrevem juntas
+
+**O caso:** o setter precisa notificar o pai depois de mudar, e duas propriedades
+(`key`/`value`) escrevem quase juntas — cada escrita agenda uma chamada ao método de
+contrato. É `src/data/headers/headers.ts` (`@debounce(publish)` em `[publish]`, chamado por
+`@after(publish)` nos dois setters) contra `src/data/filter/filter.ts` (`@around(dispatch)`
+direto nos setters, sem coalescência nenhuma) — os dois pacotes resolvem o mesmo formato de
+problema, com decorators diferentes, e **os dois estão certos**, porque respondem a
+perguntas diferentes.
+
+**A distinção não é "correção" — os dois já são corretos sem coalescer.** O método de
+contrato não recebe argumentos e lê o estado da instância (`this.key`, `this.value`) no
+momento em que roda — que é sempre depois que as escritas síncronas do turno já
+aconteceram. Duas chamadas causadas por duas escritas leem o **mesmo estado final** e
+produzem o **mesmo efeito colateral**: a segunda é redundante, não errada, com `around`
+puro (`packages/middleware/around.js`) ou sem decorator de coalescência nenhum. Foi esse o
+raciocínio, correto até aqui, que motivou remover `@debounce` de `kb-headers` numa primeira
+correção.
+
+**A pergunta que decide é outra: reduzir o número de chamadas é, em si, um objetivo?**
+`kb-filter` não se importa — cada chamada extra é uma leitura e um `dispatchEvent`, barato,
+e ninguém pediu para reduzir. `kb-headers` foi trazido de volta para `@debounce`
+(`packages/middleware/debounce.js`) por decisão explícita do consumidor: evitar chamadas
+duplicadas a `[setHeader]` quando `key` e `value` mudam juntas, mesmo sendo chamadas
+idempotentes — preferência de eficiência, não correção de bug. As duas soluções continuam
+válidas ao mesmo tempo, uma em cada pacote.
+**Solução:** antes de escrever um decorator novo em `packages/middleware/`, comparar contra
+os que já existem (`before`/`after`/`around`/`debounce`) e contra o pacote-irmão que resolve
+o mesmo formato de problema — se um decorator existente já cobre a *forma* do problema
+(efeito colateral que lê estado da instância, chamada repetida inofensiva), a pergunta que
+falta é se reduzir o número de chamadas é, por si, requisito — e essa resposta não se infere
+do código, pede decisão explícita registrada (como aqui).
+
 ### O setter faz a atribuição e também mexe em `internals.states`
 
 **Causa:** duas responsabilidades no mesmo membro — a rule 010 vale para setters tanto
@@ -141,5 +175,5 @@ ver a skill `state` e o exemplo de `hidden.ts` (`[hideable]`).
 ---
 
 **Criado em**: 2026-04-01
-**Atualizado em**: 2026-08-20
-**Versão**: 2.3
+**Atualizado em**: 2026-09-06
+**Versão**: 2.5

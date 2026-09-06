@@ -87,15 +87,27 @@ nenhum modelo do repositório pede:
 
 | Membro | Por quê fica de fora |
 |---|---|
-| `internals` | Alvo do `attachInternals()` do host. É o canal por onde `Hidden`, `Identity` e `Disabled` publicam semântica — não algo que o consumidor lê ou escreve. Nenhum modelo (`button`, `icon`, `cover`) o declara. |
+| `internals` | Alvo do `attachInternals()` do host. É o canal por onde `Hidden`, `Identity` e `Disabled` publicam semântica — não algo que o consumidor lê ou escreve. O modelo (`src/component/button/types.d.ts`) não o declara. **Vários arquivos do repositório declaram** — `grep -rl internals src --include=types.d.ts` retorna hoje oito deles. São defeitos herdados, não precedente: ver § "Divergência é defeito" abaixo. Um teste que acessa `element.internals` também não torna o membro público — teste alcança detalhe interno por construção. |
 | Métodos com nome de Symbol (`[measurable]`, `[identifiable]`, `[disableable]`) | Contrato entre mixin e host, não entre elemento e consumidor. |
 | Campos privados (`#alt`, `#disabled`) | Inacessíveis por definição. |
 
 ## Divergência é defeito, não pendência
 
-Se o `types.d.ts` que você está lendo ou editando não declara um membro que
-esta tabela atribui à cadeia de `extends` dele, isso é um **defeito do
-contrato** — o consumidor não enxerga um atributo que o elemento aceita.
+A divergência tem duas direções, e **as duas são defeito**:
+
+| Direção | Sintoma | Exemplo real |
+|---|---|---|
+| Falta um membro que a cadeia contribui | O consumidor não enxerga um atributo que o elemento aceita | `src/layout/inset/types.d.ts` — cadeia `Identity(Echo(Height(Hidden(Width(HTMLElement)))))`, e nem `alt`, nem `on`, nem `height`, nem `hidden`, nem `width` declarados |
+| Sobra um membro que a § acima exclui | O contrato publica detalhe interno e prende o consumidor a ele | o mesmo `inset/types.d.ts`, que declara `internals` |
+| Sobra um membro que nenhum getter respalda | O contrato promete uma propriedade JS que não existe em runtime | `layout` em `src/behavior/render/types.d.ts` antes da correção — hook de CSS puro em `style.js`, sem mixin nem getter |
+
+**Esta skill é a autoridade; um `types.d.ts` existente que diverge dela é
+defeito, não precedente.** Nunca copie um membro de um arquivo irmão só porque
+ele está lá — a pergunta é sempre "que mixin ou getter respalda este membro?",
+respondida na cadeia de `extends` e na implementação, nunca por analogia com o
+vizinho. O único arquivo que serve de modelo estrutural é
+`src/component/button/types.d.ts`, nomeado no passo 3 do fluxo; qualquer outro é
+material de leitura, não gabarito.
 
 Corrija no arquivo em que está trabalhando, dentro do escopo da tarefa. Para os
 demais, reporte a lista ao orquestrador em vez de silenciar: uma lacuna de

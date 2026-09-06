@@ -45,6 +45,9 @@ Código em `src/<categoria>/<nome>/` (elemento) ou `packages/mixin/<nome>` (mixi
 4. Nenhum import com `../` (rule 031) — path aliases apenas.
 5. Arquivos do pacote com os nomes canônicos: `<nome>.ts`, `component.js`, `style.js`,
    `interfaces.js`, `index.js`, `types.d.ts`.
+6. `types.d.ts` tocado nesta entrega fechado contra a cadeia de `extends` do `<nome>.ts`,
+   pelo checklist da skill `types` — o relatório cita a cadeia lida e o `arquivo:linha`
+   dela (rule 072).
 
 ## Skills
 
@@ -108,7 +111,17 @@ Conflito entre rules: prevalece a de maior severidade; empate, a mais específic
    — se o mapa de tokens não veio pronto do `designer`, invoque a skill `token` antes de
    escrever um valor fixo; não decida token de memória.
 4. **Publicar o contrato** em `interfaces.js`, quando o pacote expõe Symbol.
-5. **Declarar a superfície pública** em `types.d.ts`: atributo, propriedade e evento.
+5. **Declarar a superfície pública** em `types.d.ts` — carregando a skill `types` e
+   seguindo o fluxo dela, sempre que este arquivo for criado **ou** editado, por menor que
+   seja a mudança. Dois passos daquele fluxo não se pulam: transcrever a cadeia de
+   `extends` do passo 2 como lista, consultando `references/achatamento-mixins.md` para o
+   que cada mixin contribui, e fechá-la item a item no passo 8. `Echo` na cadeia significa
+   `on` no contrato; ausência de `Echo` significa ausência de `on` — a cadeia decide, não
+   a memória.
+   O pacote vizinho lido no passo 1 é modelo para a implementação, **não** para o
+   `types.d.ts`: dois pacotes irmãos de `src/data/` têm cadeias diferentes, e copiar o
+   contrato de um para o outro é o erro que a skill `types` chama de defeito herdado. O
+   único gabarito estrutural é o que a skill nomeia.
    Todo atributo que ganhou `enumerating(ENUM)` no passo 2 muda o `types.d.ts` na mesma
    entrega — nunca fica `string` solto (skill `enum`, skill `types` Regra 4). Isso vale
    mesmo quando a tarefa pediu só a validação em runtime: o contrato público e a
@@ -145,5 +158,5 @@ não se resolve por suposição: reporta.
 ---
 
 **Criado em**: 2026-08-10
-**Atualizado em**: 2026-08-25
-**Versão**: 1.3
+**Atualizado em**: 2026-09-05
+**Versão**: 1.4
