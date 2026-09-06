@@ -2,7 +2,7 @@
  * Conditional validation message custom element (`<kb-validity>`).
  *
  * Slotted as `slot="validity"` inside a form-associated element such as
- * `<kb-input>`, `<kb-textarea>`, or `<kb-fileupload>`, it becomes visible
+ * `<kb-input>` or `<kb-textarea>`, it becomes visible
  * only when the specific `ValidityState` flag named by `state` is `true` on
  * its parent (e.g. shows only for a `valueMissing` error, not for any other
  * validity failure).

@@ -12,7 +12,6 @@ piezas; la página de cada elemento tiene el contrato completo.
 | `<kb-form>` | Renderiza campos desde un `<template>`, publica `submitted` con los datos parseados |
 | `<kb-input>` | Valor de una línea |
 | `<kb-textarea>` | Valor de varias líneas, crece con el contenido |
-| `<kb-fileupload>` | Una imagen, como data URL en base64 |
 | `<kb-label>` | El nombre visible del campo |
 | `<kb-helper>` | La pista bajo el campo |
 | `<kb-validity>` | Un mensaje de error, ligado a una regla de validación |
@@ -59,8 +58,8 @@ de "inválido":
 </kb-input>
 ```
 
-?> `<kb-textarea>` y `<kb-fileupload>` solo reenvían `required` — las
-restricciones de longitud, rango y patrón son exclusivas de `<kb-input>`.
+?> `<kb-textarea>` solo reenvía `required` — las restricciones de longitud,
+rango y patrón son exclusivas de `<kb-input>`.
 
 ### El texto de ayuda desaparece
 
@@ -71,8 +70,6 @@ consecuencias:
 - No hagas que la pista y el error digan lo mismo — la persona ve uno a la vez.
 - Si la pista lleva un requisito que sigue haciendo falta durante la corrección,
   repítelo en el mensaje de validez.
-
-`<kb-fileupload>` no hace esto; su texto de ayuda permanece visible.
 
 ## Leer los valores
 

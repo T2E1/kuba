@@ -16,8 +16,8 @@ The corners of shapes and elements.
 | `--border-radius-circular` | 50% | <span className="box" style={{borderRadius: 'var(--border-radius-circular)', width: '2.5rem'}}></span> |
 
 `pill` is for elements fully rounded at the ends — badges, tags, a
-`width="fill"` call to action. `circular` is for perfectly round elements:
-avatars, and the disc behind `<kb-fileupload>`'s icon.
+`width="fill"` call to action. `circular` is for perfectly round elements like
+avatars.
 
 ?> `pill` is a large fixed length, not a keyword. On a box taller than 1000px
 the corners stop looking like a pill — which is why it belongs on controls, not
@@ -46,6 +46,6 @@ Border thickness.
 | `--border-width-thick` | 4px | <span className="box box--bordered" style={{borderWidth: 'var(--border-width-thick)'}}></span> |
 | `--border-width-heavy` | 8px | <span className="box box--bordered" style={{borderWidth: 'var(--border-width-heavy)'}}></span> |
 
-`hairline` is the default for anything that borders a surface — inputs, outlined
-cards, the fileupload target. `thin` is the button's border, so an outlined
+`hairline` is the default for anything that borders a surface — inputs and
+outlined cards. `thin` is the button's border, so an outlined
 button reads as a control rather than a container.

@@ -1,4 +1,3 @@
-import './fileupload'
 import './form'
 import './input'
 import './textarea'

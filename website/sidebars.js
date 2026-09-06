@@ -72,7 +72,6 @@ const sidebars = {
             'components/form',
             'components/input',
             'components/textarea',
-            'components/fileupload',
             'components/validity',
           ],
         },

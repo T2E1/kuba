@@ -47,15 +47,13 @@ de um campo é toda a ligação necessária.
   nome. Um link dentro da dica está ok; conteúdo de nível de bloco não, já que o
   host é `inline-flex`.
 - **Pode ser filho de**: qualquer componente que exponha um slot `helper` —
-  `<kb-input>`, `<kb-textarea>`, `<kb-fileupload>`. Colocado em qualquer outro
-  lugar ele ainda renderiza, mas o `slot="helper"` que define em si mesmo não
-  casa com nada.
+  `<kb-input>` ou `<kb-textarea>`. Colocado em qualquer outro lugar ele ainda
+  renderiza, mas o `slot="helper"` que define em si mesmo não casa com nada.
 
 !> **No `<kb-input>` e no `<kb-textarea>`, o helper fica escondido enquanto o
 campo está inválido** — a mensagem do `<kb-validity>` toma o lugar dele, em vez
 de empilhar embaixo. Se a dica carrega uma exigência que a pessoa ainda precisa
-enquanto corrige o erro, repita-a na mensagem de validade. O `<kb-fileupload>`
-não faz isso; o helper dele continua visível.
+enquanto corrige o erro, repita-a na mensagem de validade.
 
 ```html preview
 <kb-input name="username" required minlength="3">

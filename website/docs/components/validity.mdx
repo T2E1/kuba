@@ -45,8 +45,8 @@ Type a single letter, then clear the field, to see the three messages swap.
 
 - **Can contain**: the message text and inline markup. The host is `inline` when
   shown, so keep it to a phrase.
-- **Can be a child of**: `<kb-input>`, `<kb-textarea>` or `<kb-fileupload>` —
-  and only as a **direct** child, since the parent is where `validity` is read
+- **Can be a child of**: `<kb-input>` or `<kb-textarea>` — and only as a
+  **direct** child, since the parent is where `validity` is read
   from. It assigns itself `slot="validity"` on connect, so nesting is the whole
   setup.
 

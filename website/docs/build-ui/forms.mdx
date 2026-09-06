@@ -12,7 +12,6 @@ page has its full contract.
 | `<kb-form>` | Renders fields from a `<template>`, publishes `submitted` with parsed data |
 | `<kb-input>` | Single-line value |
 | `<kb-textarea>` | Multi-line value, grows with content |
-| `<kb-fileupload>` | One image, as a base64 data URL |
 | `<kb-label>` | The field's visible name |
 | `<kb-helper>` | The hint under the field |
 | `<kb-validity>` | One error message, bound to one validation rule |
@@ -58,8 +57,8 @@ that specific flag is true, so the user reads the reason instead of "invalid":
 </kb-input>
 ```
 
-?> `<kb-textarea>` and `<kb-fileupload>` only forward `required` — the length,
-range and pattern constraints are `<kb-input>` only.
+?> `<kb-textarea>` only forwards `required` — the length, range and pattern
+constraints are `<kb-input>` only.
 
 ### The helper disappears
 
@@ -71,8 +70,6 @@ consequences:
   time.
 - If the hint carries a requirement they still need while fixing the error,
   repeat it in the validity message.
-
-`<kb-fileupload>` doesn't do this; its helper stays visible.
 
 ## Reading the values
 

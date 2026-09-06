@@ -3,8 +3,8 @@ import { expect, test, vi } from 'vitest'
 import { userEvent } from 'vitest/browser'
 
 test('dispatches changed with the typed value', async () => {
-  // The same event name <kb-input> and <kb-fileupload> publish, so one arc
-  // works for any of the three fields.
+  // The same event name <kb-input> publishes, so one arc works for either
+  // field.
   const body = mount('<kb-textarea name="bio"></kb-textarea>')
   const textarea = body.querySelector('kb-textarea')
   const onChanged = vi.fn()

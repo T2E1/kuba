@@ -43,15 +43,14 @@ note. It carries one fixed type style and, on connect, assigns itself
 - **Can contain**: text and inline markup — the shadow root is a single unnamed
   `<slot>`. A link inside the hint is fine; block-level content isn't, since the
   host is `inline-flex`.
-- **Can be a child of**: any component exposing a `helper` slot — `<kb-input>`,
-  `<kb-textarea>`, `<kb-fileupload>`. Placed anywhere else it still renders, but
-  the `slot="helper"` it sets on itself matches nothing.
+- **Can be a child of**: any component exposing a `helper` slot — `<kb-input>`
+  or `<kb-textarea>`. Placed anywhere else it still renders, but the
+  `slot="helper"` it sets on itself matches nothing.
 
 !> **In `<kb-input>` and `<kb-textarea>`, the helper is hidden while the field
 is invalid** — the `<kb-validity>` message takes its place rather than stacking
 under it. If the hint carries a requirement the user still needs while fixing
-the error, repeat it in the validity message. `<kb-fileupload>` doesn't do this;
-its helper stays visible.
+the error, repeat it in the validity message.
 
 ```html preview
 <kb-input name="username" required minlength="3">

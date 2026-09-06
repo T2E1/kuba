@@ -9,7 +9,7 @@ import style from './style'
  * Displays validation feedback for a specific `ValidityState` key (e.g.
  * `valueMissing`, `patternMismatch`) of its parent form control. Expects to
  * be slotted into a `slot="validity"` of a form-associated custom element
- * (see `input`, `textarea`, `fileupload`) and reads `parentElement.validity`
+ * (see `input`, `textarea`) and reads `parentElement.validity`
  * directly, so it only works when nested as a direct child of such an
  * element.
  */

@@ -1,8 +1,8 @@
 // DEPRECATED(056): não use em código novo. Tying the dispatched detail to the
 // decorated method's return value forces commands to give up `return this`
 // (skill method), breaking fluent chaining. Dispatch the CustomEvent manually
-// with `this.dispatchEvent(customEvent(...))` instead — see `packages/form/input/input.ts`
-// and `packages/form/fileupload/fileupload.ts` for the pattern.
+// with `this.dispatchEvent(customEvent(...))` instead — see `src/form/input/input.ts`
+// for the pattern.
 //
 // Decorator factory: wraps a setter or method so that, after it runs, the
 // host re-dispatches its new value/return as a bubbling CustomEvent, letting

@@ -47,15 +47,14 @@ la conexión que hace falta.
   sin nombre. Un enlace dentro de la pista está bien; el contenido de nivel de
   bloque no, ya que el host es `inline-flex`.
 - **Puede ser hijo de**: cualquier componente que exponga un slot `helper` —
-  `<kb-input>`, `<kb-textarea>`, `<kb-fileupload>`. Colocado en cualquier otro
-  sitio sigue renderizando, pero el `slot="helper"` que se pone a sí mismo no
-  coincide con nada.
+  `<kb-input>` o `<kb-textarea>`. Colocado en cualquier otro sitio sigue
+  renderizando, pero el `slot="helper"` que se pone a sí mismo no coincide con
+  nada.
 
 !> **En `<kb-input>` y `<kb-textarea>`, el helper se oculta mientras el campo es
 inválido** — el mensaje de `<kb-validity>` ocupa su lugar, en vez de apilarse
 debajo. Si la pista lleva un requisito que la persona todavía necesita mientras
-corrige el error, repítelo en el mensaje de validez. `<kb-fileupload>` no hace
-esto; su helper permanece visible.
+corrige el error, repítelo en el mensaje de validez.
 
 ```html preview
 <kb-input name="username" required minlength="3">

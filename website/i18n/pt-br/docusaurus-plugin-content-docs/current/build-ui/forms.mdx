@@ -12,7 +12,6 @@ página de cada elemento tem o contrato completo.
 | `<kb-form>` | Renderiza campos de um `<template>`, publica `submitted` com os dados parseados |
 | `<kb-input>` | Valor de uma linha |
 | `<kb-textarea>` | Valor de várias linhas, cresce com o conteúdo |
-| `<kb-fileupload>` | Uma imagem, como data URL em base64 |
 | `<kb-label>` | O nome visível do campo |
 | `<kb-helper>` | A dica sob o campo |
 | `<kb-validity>` | Uma mensagem de erro, ligada a uma regra de validação |
@@ -59,8 +58,8 @@ de "inválido":
 </kb-input>
 ```
 
-?> `<kb-textarea>` e `<kb-fileupload>` só repassam `required` — as restrições de
-comprimento, faixa e padrão são exclusivas do `<kb-input>`.
+?> `<kb-textarea>` só repassa `required` — as restrições de comprimento, faixa e
+padrão são exclusivas do `<kb-input>`.
 
 ### O texto de apoio desaparece
 
@@ -71,8 +70,6 @@ consequências:
 - Não faça a dica e o erro dizerem a mesma coisa — a pessoa vê um de cada vez.
 - Se a dica carrega um requisito que ainda é necessário durante a correção,
   repita-o na mensagem de validade.
-
-`<kb-fileupload>` não faz isso; o texto de apoio dele continua visível.
 
 ## Lendo os valores
 
