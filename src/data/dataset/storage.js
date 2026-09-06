@@ -13,7 +13,7 @@ export class Storage {
   }
 
   delete(key) {
-    this.#map.delete(key)
+    this.#map.delete(String(key))
     return this
   }
 
@@ -23,11 +23,12 @@ export class Storage {
   push(payload) {
     ;[].concat(payload).forEach((data) => {
       const key = data[this.#dataset.upsert] ?? uuid()
-      const value = this.#map.get(key) ?? {}
-      this.#map.set(key, {
-        ...Object.assign(value, data),
-        [this.#dataset.upsert]: key,
-      })
+      const index = String(key)
+      const stored = this.#map.get(index) ?? {}
+      this.#map.set(
+        index,
+        Object.freeze({ ...stored, ...data, [this.#dataset.upsert]: key }),
+      )
     })
     return this
   }

@@ -1,4 +1,21 @@
 /**
+ * Shape of the `on` attribute of {@link KUBADatasetElement} — an arc string
+ * in the form `source/event:type/sink`, optionally followed by one or more
+ * `|filter=value` pairs. Inherited from the `Echo` mixin.
+ *
+ * This only constrains the shape (the four `/`/`:`-separated segments and
+ * the `type` segment); `source`, `event`, `sink`, and filter contents remain
+ * free-form strings, since TypeScript cannot validate the full grammar (e.g.
+ * arbitrary characters, filter repetition) through a template literal type.
+ * The check only applies to string literals — a value assigned from a plain
+ * `string` variable falls back to unchecked `string`.
+ */
+type KUBADatasetOnAttributeSink = 'method' | 'attribute' | 'setter'
+
+type KUBADatasetOnAttribute =
+  `${string}/${string}:${KUBADatasetOnAttributeSink}/${string}${'' | `|${string}`}`
+
+/**
  * `<kb-dataset>` custom element. Holds an in-memory collection of records, keyed by the
  * field named in the `upsert` attribute, and dispatches a `changed` event whenever the
  * collection is mutated via `push`, `delete`, or `reset`.
@@ -30,6 +47,18 @@ export default class KUBADatasetElement extends HTMLElement {
    * @returns This element, for chaining.
    */
   delete(key: unknown): this
+
+  /**
+   * Arc string wiring an event from another element to this element, in the
+   * form `source/event:type/sink` (see {@link KUBADatasetOnAttribute}).
+   * Inherited from the `Echo` mixin. Reflects the `on` attribute.
+   * @default undefined
+   * @example
+   * ```ts
+   * element.on = '#panel/changed:method/push' // ok
+   * ```
+   */
+  on: KUBADatasetOnAttribute | (string & {})
 
   /**
    * Inserts or merges one or more records into the collection. Records sharing an

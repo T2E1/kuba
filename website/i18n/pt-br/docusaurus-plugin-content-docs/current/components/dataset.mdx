@@ -90,9 +90,10 @@ dataset.push({ id: 1, role: 'Condessa' })
 // → [{ id: 1, name: 'Ada', role: 'Condessa' }]  — o name sobreviveu
 ```
 
-!> Com o `upsert` não definido, a chave de todo registro é `undefined`, então
-todos colidem numa única entrada mesclada. Defina sempre que os registros
-tiverem qualquer identidade.
+!> Com o `upsert` não definido, cada `push` gera seu próprio uuid, então nenhum
+registro compartilha chave com outro — nada nunca é mesclado, e cada push
+silenciosamente adiciona um registro novo em vez de atualizar um existente.
+Defina sempre que os registros tiverem qualquer identidade.
 
 ## Métodos
 
@@ -161,7 +162,7 @@ Nada importa nada.
 
 | Faça | Não faça |
 |---|---|
-| Definir `upsert` com um campo identificador de verdade | Deixá-lo indefinido e ver todo registro mesclar num só |
+| Definir `upsert` com um campo identificador de verdade | Deixá-lo indefinido e ver cada push adicionar silenciosamente um duplicado em vez de atualizar |
 | Empurrar registros parciais para atualizar os guardados | Empurrar uma substituição completa quando só um campo mudou |
 | Manter as coleções pequenas o bastante para rerrenderizar inteiras | Guardar milhares de linhas e rerrenderizar a cada mutação |
 | Tratá-lo como estado efêmero | Contar que ele sobreviva a um reload |

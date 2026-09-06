@@ -6,4 +6,4 @@
 export const setHeader = Symbol.for('setHeader')
 
 /** Module-private key; no cross-module identity needed for this one. */
-export const setter = Symbol('setter')
+export const publish = Symbol('publish')

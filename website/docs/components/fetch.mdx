@@ -125,13 +125,10 @@ const { data, error } = await fetcher.get({ id: 1 })
 | Event | Fires when | `detail` |
 |---|---|---|
 | `succeeded` | the request resolved without error | the parsed JSON body |
-| `failed` | the request or its parsing failed | `null` |
+| `failed` | the request or its parsing failed | the error |
 
-!> **`failed` carries `null`, not the error.** Both branches dispatch the
-result's `data`, which is `null` whenever `error` is set — so the reason for the
-failure never reaches the listener. Wire `failed` to something that doesn't need
-detail (`clear`, a message toggle), and `await` the method call when you need to
-inspect the error. This looks like a bug rather than a design decision.
+!> **`failed` carries the error in its `detail`.** Read it directly on the
+listener, or `await` the method call, which resolves with `\{ data, error \}`.
 
 Dispatch is deferred with `requestIdleCallback`, so listeners run after the
 response has been handled, not in the middle of it.
@@ -159,6 +156,6 @@ cancels the first. Use one element per concurrent request.
 | Do | Don't |
 |---|---|
 | Use one element per concurrent request | Share one `<kb-fetch>` between two consumers — each call aborts the other |
-| Wire `failed` to a visible reaction like `clear` | Rely on `failed`'s `detail` to explain what went wrong — it's `null` |
+| Read `failed`'s `detail` for the error, or wire it to a reaction like `clear` | Assume `detail` is the response body — on `failed` it's the error |
 | `await` the method when you need the error | Assume a rejected promise; it resolves with `\{ data, error \}` |
 | Keep API keys behind your own endpoint | Put a real credential in a `<kb-headers>` value |

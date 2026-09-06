@@ -33,22 +33,22 @@ class Fetch extends Echo(Headless(HTMLElement)) {
     return this
   }
 
-  // Cancels any in-flight request before a new one starts, then replaces the controller
-  // so the aborted signal isn't reused for the next request.
+  // Cancels any in-flight request before a new one starts. The controller renews itself
+  // lazily on the next read of `signal` (see controller.js) — not here.
   [abort](payload) {
     this.#controller.abort()
     return payload
   }
 
   // Deferred via requestIdleCallback so event dispatch doesn't block the response handling.
-  [dispatch](response) {
-    requestIdleCallback(async () => {
-      const { data, error } = await response
+  async [dispatch](response) {
+    const { data, error } = await response
+    requestIdleCallback(() => {
       error
-        ? this.dispatchEvent(customEvent('failed', data))
+        ? this.dispatchEvent(customEvent('failed', error))
         : this.dispatchEvent(customEvent('succeeded', data))
     })
-    return this
+    return { data, error }
   }
 
   @before(abort)

@@ -127,14 +127,11 @@ const { data, error } = await fetcher.get({ id: 1 })
 | Evento | Se dispara cuando | `detail` |
 |---|---|---|
 | `succeeded` | la petición resolvió sin error | el cuerpo JSON ya parseado |
-| `failed` | la petición o su parseo falló | `null` |
+| `failed` | la petición o su parseo falló | el error |
 
-!> **`failed` lleva `null`, no el error.** Ambas ramas despachan el `data` del
-resultado, que es `null` siempre que `error` está establecido — así que el
-motivo del fallo nunca llega al listener. Conecta `failed` a algo que no
-necesite detalle (`clear`, alternar un mensaje), y haz `await` sobre la llamada
-al método cuando necesites inspeccionar el error. Esto parece un bug más que una
-decisión de diseño.
+!> **`failed` lleva el error en su `detail`.** Léelo directamente en el
+listener, o haz `await` sobre la llamada al método, que resuelve con
+`\{ data, error \}`.
 
 El despacho se difiere con `requestIdleCallback`, así que los listeners se
 ejecutan después de que la respuesta se haya manejado, no a mitad de ella.
@@ -164,6 +161,6 @@ segundo cancela al primero. Usa un elemento por petición concurrente.
 | Haz | No hagas |
 |---|---|
 | Usar un elemento por petición concurrente | Compartir un `<kb-fetch>` entre dos consumidores — cada llamada aborta la otra |
-| Conectar `failed` a una reacción visible como `clear` | Confiar en el `detail` de `failed` para explicar qué salió mal — es `null` |
+| Leer el `detail` de `failed` para el error, o conectarlo a una reacción como `clear` | Suponer que `detail` es el cuerpo de la respuesta — en `failed` es el error |
 | Hacer `await` sobre el método cuando necesitas el error | Suponer una promesa rechazada; resuelve con `\{ data, error \}` |
 | Mantener las claves de API detrás de tu propio endpoint | Poner una credencial real en un valor de `<kb-headers>` |

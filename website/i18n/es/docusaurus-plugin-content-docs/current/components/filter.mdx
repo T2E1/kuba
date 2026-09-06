@@ -58,8 +58,9 @@ document.querySelector('kb-dataset').addEventListener('filtered', (event) => {
   distinguir mayúsculas, ni lógica multicampo. Filtra en tu propio código y
   empuja el resultado a un segundo `<kb-dataset>` cuando la regla sea más que
   igualdad.
-- **Filtrar algo que no es una colección del padre.** Lee
-  `parentElement.value`; sin ese padre no hace nada.
+- **Filtrar algo que no es una colección del padre.** Lee `parentElement.value`
+  sin ninguna protección — un padre sin un array en `value`, o sin padre en
+  absoluto, lanza en vez de no hacer nada.
 
 ## La inversión del padre
 
@@ -99,22 +100,29 @@ dispare último gana en el consumidor.
 
 ## Cuándo reevalúa
 
-El filtrado se ejecuta cuando **`value` cambia** — ese es el único disparador.
-Dos consecuencias:
+El filtrado se ejecuta cuando **`key` o `value` cambia** — cualquiera de los
+dos dispara una nueva pasada. Dos consecuencias:
 
-- **Es establecer el atributo lo que lo dispara**, así que un filtro con `value`
-  estático evalúa una vez, al inicializarse, contra lo que el padre contuviera
-  en ese momento.
+- **Es establecer cualquiera de los dos atributos lo que lo dispara**, así que
+  un filtro con atributos estáticos evalúa una vez, al inicializarse, contra lo
+  que el padre contuviera en ese momento. Establecer los dos al analizarse
+  cuenta como dos disparadores, pero se coalescen (ver abajo) en una sola
+  pasada.
 - **Un `push` posterior en el padre no refiltra.** El dataset despacha
-  `changed`, no `filtered`. Si la colección crece después, reasigna el `value`
-  del filtro para forzar una nueva pasada, o conecta el consumidor al `changed`
-  del padre.
+  `changed`, no `filtered`. Si la colección crece después, reasigna `key` o
+  `value` del filtro para forzar una nueva pasada, o conecta el consumidor al
+  `changed` del padre.
+
+Dos escrituras en `key` y/o `value` hechas dentro de aproximadamente 100ms una
+de la otra colapsan en una sola pasada y un solo evento `filtered`, en vez de
+uno por escritura — así que un `<kb-filter key="…" value="…">` declarado con
+los dos atributos al analizarse igual publica una sola vez.
 
 ## Atributos
 
 | Atributo | Tipo | Por defecto | Descripción |
 |---|---|---|---|
-| `key` | `string` | — | Campo del registro a comparar. |
+| `key` | `string` | — | Campo del registro a comparar. Asignarlo dispara una nueva pasada, igual que `value`. |
 | `value` | `string` | — | Valor con el que debe ser igual. Asignarlo dispara una nueva pasada. |
 | `on` | cadena de arco | — | Conexión de Echo, `origen/evento:tipo/destino`. |
 

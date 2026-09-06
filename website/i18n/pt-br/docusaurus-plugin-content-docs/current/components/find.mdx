@@ -42,7 +42,7 @@ registro em vez de um array.
 
 ```js
 document.querySelector('kb-dataset').addEventListener('found', (event) => {
-  showDetail(event.detail) // um registro, ou undefined
+  showDetail(event.detail) // um registro, ou null
 })
 ```
 
@@ -118,10 +118,15 @@ ligue com um arco no próprio find: `on="kb-card/clicked:setter/value"`.
 
 ## Quando ele reavalia
 
-A busca roda quando **`value` muda**, e só então. Um registro empurrado ao pai
-depois disso não a redispara; reatribua o `value` para forçar uma nova passada.
+A busca roda quando **`value` muda**, e só então — diferente do `<kb-filter>`,
+mudar `key` sozinho não a redispara aqui. Um registro empurrado ao pai depois
+disso também não a redispara; reatribua o `value` para forçar uma nova passada.
 Atribuir o *mesmo* valor duas vezes também não necessariamente redispara, já que
 o setter roda na mudança de atributo.
+
+Duas escritas em `value` feitas dentro de aproximadamente 100ms uma da outra
+colapsam numa única busca e num único evento `found`, em vez de uma por
+escrita.
 
 ## Atributos
 
@@ -135,9 +140,9 @@ o setter roda na mudança de atributo.
 
 | Evento | Disparado em | `detail` |
 |---|---|---|
-| `found` | **o elemento pai** | o primeiro registro correspondente, ou `undefined` |
+| `found` | **o elemento pai** | o primeiro registro correspondente, ou `null` |
 
-!> **Nenhuma correspondência dispara `undefined`, não um objeto vazio.** Um
+!> **Nenhuma correspondência dispara `null`, não um objeto vazio.** Um
 consumidor que o interpola — o `<kb-render>`, por exemplo — renderiza
 placeholders contra nada em vez de mostrar um estado vazio. Proteja-se disso
 quando uma busca sem resultado for possível.
@@ -155,5 +160,5 @@ quando uma busca sem resultado for possível.
 |---|---|
 | Apontar a `origem` do arco para o **pai** | Usar o `name` do próprio elemento find como origem |
 | Usar o `<kb-filter>` quando vários registros podem casar | Contar com o `find` e descartar o resto em silêncio |
-| Tratar o caso `undefined` de uma busca sem resultado | Supor que um registro sempre volta |
+| Tratar o caso `null` de uma busca sem resultado | Supor que um registro sempre volta |
 | Reatribuir o `value` para reavaliar depois que novos dados chegam | Esperar que um `push` posterior refaça a busca |

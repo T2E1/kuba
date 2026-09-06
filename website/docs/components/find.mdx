@@ -42,7 +42,7 @@ one record instead of an array.
 
 ```js
 document.querySelector('kb-dataset').addEventListener('found', (event) => {
-  showDetail(event.detail) // one record, or undefined
+  showDetail(event.detail) // one record, or null
 })
 ```
 
@@ -116,10 +116,14 @@ with an arc on the find itself: `on="kb-card/clicked:setter/value"`.
 
 ## When it re-evaluates
 
-The search runs when **`value` changes**, and only then. A record pushed to the
-parent afterwards doesn't re-trigger it; re-assign `value` to force a new pass.
+The search runs when **`value` changes**, and only then — unlike `<kb-filter>`,
+changing `key` alone doesn't re-trigger it here. A record pushed to the parent
+afterwards doesn't re-trigger it either; re-assign `value` to force a new pass.
 Assigning the *same* value twice doesn't necessarily re-fire either, since the
 setter runs on attribute change.
+
+Two writes to `value` made within roughly 100ms of each other collapse into a
+single search and a single `found` event, instead of one per write.
 
 ## Attributes
 
@@ -133,9 +137,9 @@ setter runs on attribute change.
 
 | Event | Dispatched on | `detail` |
 |---|---|---|
-| `found` | **the parent element** | the first matching record, or `undefined` |
+| `found` | **the parent element** | the first matching record, or `null` |
 
-!> **No match dispatches `undefined`, not an empty object.** A consumer that
+!> **No match dispatches `null`, not an empty object.** A consumer that
 interpolates it — `<kb-render>`, for instance — renders placeholders against
 nothing rather than showing an empty state. Guard for it when a miss is
 possible.
@@ -153,5 +157,5 @@ possible.
 |---|---|
 | Point the arc's `source` at the **parent** | Use the find element's own `name` as the source |
 | Use `<kb-filter>` when several records can match | Rely on `find` and silently drop the rest |
-| Handle the `undefined` case for a miss | Assume a record always comes back |
+| Handle the `null` case for a miss | Assume a record always comes back |
 | Re-assign `value` to re-evaluate after new data arrives | Expect a later `push` to re-run the search |

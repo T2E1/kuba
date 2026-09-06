@@ -1,7 +1,7 @@
 import { attributeChanged, define } from '@directive'
 import Echo from '@echo'
 import { customEvent } from '@event'
-import { around } from '@middleware'
+import { around, debounce } from '@middleware'
 import { Headless } from '@mixin'
 import { dispatch } from './interfaces'
 
@@ -31,6 +31,7 @@ class Find extends Echo(Headless(HTMLElement)) {
 
   // Waits for the parent custom element to upgrade before reading its `value`, since
   // finding relies on the parent already exposing a records collection (e.g. kb-dataset).
+  @debounce(100)
   async [dispatch]() {
     await customElements.whenDefined(this.parentElement?.localName)
     const detail = this.parentElement.value.find(

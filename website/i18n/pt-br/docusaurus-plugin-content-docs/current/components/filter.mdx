@@ -58,8 +58,9 @@ document.querySelector('kb-dataset').addEventListener('filtered', (event) => {
   diferenciar maiúsculas, não há lógica multi-campo. Filtre no seu próprio
   código e empurre o resultado para um segundo `<kb-dataset>` quando a regra for
   mais que igualdade.
-- **Filtrar algo que não é uma coleção do pai.** Ele lê `parentElement.value`;
-  sem esse pai, ele não faz nada.
+- **Filtrar algo que não é uma coleção do pai.** Ele lê `parentElement.value`
+  sem nenhuma guarda — um pai sem um array em `value`, ou sem pai nenhum, lança
+  em vez de não fazer nada.
 
 ## A inversão do pai
 
@@ -99,20 +100,27 @@ disparar por último vence no consumidor.
 
 ## Quando ele reavalia
 
-A filtragem roda quando **`value` muda** — esse é o único gatilho. Duas
-consequências:
+A filtragem roda quando **`key` ou `value` muda** — qualquer um dos dois
+dispara uma nova passada. Duas consequências:
 
-- **É definir o atributo que dispara**, então um filtro com `value` estático
-  avalia uma vez, no upgrade, contra o que o pai continha naquele momento.
+- **É definir qualquer um dos atributos que dispara**, então um filtro com
+  atributos estáticos avalia uma vez, no upgrade, contra o que o pai continha
+  naquele momento. Definir os dois no parse conta como dois gatilhos, mas eles
+  são coalescidos (ver abaixo) numa única passada.
 - **Um `push` posterior no pai não refiltra.** O dataset dispara `changed`, não
-  `filtered`. Se a coleção crescer depois, redefina o `value` do filtro para
-  forçar uma nova passada, ou ligue o consumidor ao `changed` do pai.
+  `filtered`. Se a coleção crescer depois, redefina `key` ou `value` do filtro
+  para forçar uma nova passada, ou ligue o consumidor ao `changed` do pai.
+
+Duas escritas em `key` e/ou `value` feitas dentro de aproximadamente 100ms uma
+da outra colapsam numa única passada e num único evento `filtered`, em vez de
+um por escrita — então um `<kb-filter key="…" value="…">` declarado com os dois
+atributos no parse ainda publica só uma vez.
 
 ## Atributos
 
 | Atributo | Tipo | Padrão | Descrição |
 |---|---|---|---|
-| `key` | `string` | — | Campo do registro a comparar. |
+| `key` | `string` | — | Campo do registro a comparar. Atribuí-lo dispara uma nova passada, igual a `value`. |
 | `value` | `string` | — | Valor com o qual ele precisa ser igual. Atribuí-lo dispara uma nova passada. |
 | `on` | string de arco | — | Ligação do Echo, `origem/evento:tipo/destino`. |
 

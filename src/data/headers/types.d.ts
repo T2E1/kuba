@@ -1,10 +1,4 @@
 /**
- * How `sink` is applied on {@link KUBAHeadersElement}, within its `on`
- * attribute.
- */
-type KUBAHeadersOnAttributeSink = 'method' | 'attribute' | 'setter'
-
-/**
  * Shape of the `on` attribute of {@link KUBAHeadersElement} — an arc string
  * in the form `source/event:type/sink`, optionally followed by one or more
  * `|filter=value` pairs. Inherited from the `Echo` mixin.
@@ -16,6 +10,8 @@ type KUBAHeadersOnAttributeSink = 'method' | 'attribute' | 'setter'
  * The check only applies to string literals — a value assigned from a plain
  * `string` variable falls back to unchecked `string`.
  */
+type KUBAHeadersOnAttributeSink = 'method' | 'attribute' | 'setter'
+
 type KUBAHeadersOnAttribute =
   `${string}/${string}:${KUBAHeadersOnAttributeSink}/${string}${'' | `|${string}`}`
 
@@ -49,23 +45,23 @@ export default class KUBAHeadersElement extends HTMLElement {
   key: string
 
   /**
+   * Arc string wiring an event from another element to this element, in the
+   * form `source/event:type/sink` (see {@link KUBAHeadersOnAttribute}).
+   * Inherited from the `Echo` mixin. Reflects the `on` attribute.
+   * @default undefined
+   * @example
+   * ```ts
+   * element.on = '#panel/changed:method/value' // ok
+   * ```
+   */
+  on: KUBAHeadersOnAttribute | (string & {})
+
+  /**
    * Value of the HTTP header identified by `key`. Reflects the `value`
    * attribute.
    * @default ''
    */
   value: string
-
-  /**
-   * Arc string wiring an event from another element to this host, in the
-   * form `source/event:type/sink` (see {@link KUBAHeadersOnAttribute}).
-   * Inherited from the `Echo` mixin. Reflects the `on` attribute.
-   *
-   * @example
-   * ```ts
-   * element.on = '#source/changed:setter/value' // ok
-   * ```
-   */
-  on: KUBAHeadersOnAttribute | (string & {})
 }
 
 declare global {

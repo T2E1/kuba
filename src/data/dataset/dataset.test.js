@@ -82,3 +82,59 @@ test('drives a full add-and-delete screen through arcs alone', async () => {
 
   await vi.waitFor(() => expect(dataset.value).toHaveLength(0))
 })
+
+test('push(undefined) throws, and dispatches changed with the unchanged collection anyway', async () => {
+  // @around schedules dispatch via setImmediate before the original call runs
+  // (packages/middleware/around.js:9-11), so it fires even though push throws
+  // synchronously (storage.js:25, `data[upsert]` on undefined).
+  const body = mount('<kb-dataset name="ds-invalid" upsert="id"></kb-dataset>')
+  const dataset = body.querySelector('kb-dataset')
+  const onChanged = vi.fn()
+  dataset.addEventListener('changed', onChanged)
+
+  expect(() => dataset.push(undefined)).toThrow(TypeError)
+
+  await vi.waitFor(() => expect(onChanged).toHaveBeenCalled())
+  expect(onChanged.mock.calls.at(-1)[0].detail).toEqual([])
+})
+
+test('deletes a record pushed with a numeric key using a string key', async () => {
+  const body = mount('<kb-dataset name="ds-key-num" upsert="id"></kb-dataset>')
+  const dataset = body.querySelector('kb-dataset')
+
+  dataset.push({ id: 1, name: 'Ada' })
+  dataset.delete('1')
+
+  await vi.waitFor(() => expect(dataset.value).toHaveLength(0))
+})
+
+test('deletes a record pushed with a string key using a numeric key', async () => {
+  const body = mount('<kb-dataset name="ds-key-str" upsert="id"></kb-dataset>')
+  const dataset = body.querySelector('kb-dataset')
+
+  dataset.push({ id: '1', name: 'Ada' })
+  dataset.delete(1)
+
+  await vi.waitFor(() => expect(dataset.value).toHaveLength(0))
+})
+
+test('freezes stored records so direct mutation throws and leaves them intact', async () => {
+  const body = mount('<kb-dataset name="ds-frozen" upsert="id"></kb-dataset>')
+  const dataset = body.querySelector('kb-dataset')
+  dataset.push({ id: 1, name: 'Ada' })
+
+  expect(() => {
+    dataset.value[0].name = 'Countess'
+  }).toThrow(TypeError)
+  expect(dataset.value[0].name).toBe('Ada')
+})
+
+test('gives each pushed record its own uuid when upsert is unset', async () => {
+  const body = mount('<kb-dataset name="ds-no-upsert"></kb-dataset>')
+  const dataset = body.querySelector('kb-dataset')
+
+  dataset.push({ name: 'Ada' })
+  dataset.push({ name: 'Grace' })
+
+  await vi.waitFor(() => expect(dataset.value).toHaveLength(2))
+})

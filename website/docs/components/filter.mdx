@@ -58,7 +58,8 @@ document.querySelector('kb-dataset').addEventListener('filtered', (event) => {
   match, no multi-field logic. Filter in your own code and push the result into
   a second `<kb-dataset>` when the rule is more than equality.
 - **Filtering something that isn't a parent collection.** It reads
-  `parentElement.value`; with no such parent it does nothing.
+  `parentElement.value` with no guard — a parent without a `value` array, or no
+  parent at all, throws instead of doing nothing.
 
 ## The parent inversion
 
@@ -98,21 +99,28 @@ consumer.
 
 ## When it re-evaluates
 
-Filtering runs when **`value` changes** — that's the only trigger. Two
-consequences:
+Filtering runs when **`key` or `value` changes** — either one triggers a new
+pass. Two consequences:
 
-- **Setting the attribute is what fires it**, so a filter with a static `value`
-  evaluates once, at upgrade, against whatever the parent held at that moment.
+- **Setting either attribute is what fires it**, so a filter with static
+  attributes evaluates once, at upgrade, against whatever the parent held at
+  that moment. Setting both at parse time counts as two triggers, but they're
+  coalesced (see below) into a single pass.
 - **A later `push` on the parent does not re-filter.** The dataset dispatches
   `changed`, not `filtered`. If the collection grows after the fact, re-assign
-  the filter's `value` to force a new pass, or wire the consumer to the parent's
+  `key` or `value` to force a new pass, or wire the consumer to the parent's
   `changed` instead.
+
+Two writes to `key` and/or `value` made within roughly 100ms of each other
+collapse into a single pass and a single `filtered` event, instead of one per
+write — so a `<kb-filter key="…" value="…">` declared with both attributes at
+parse time still only publishes once.
 
 ## Attributes
 
 | Attribute | Type | Default | Description |
 |---|---|---|---|
-| `key` | `string` | — | Record field to compare. |
+| `key` | `string` | — | Record field to compare. Assigning it triggers a new pass, same as `value`. |
 | `value` | `string` | — | Value it must equal. Assigning it triggers a new pass. |
 | `on` | arc string | — | Echo wiring, `source/event:type/sink`. |
 

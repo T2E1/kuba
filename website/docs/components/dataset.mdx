@@ -88,8 +88,10 @@ dataset.push({ id: 1, role: 'Countess' })
 // → [{ id: 1, name: 'Ada', role: 'Countess' }]  — name survived
 ```
 
-!> With `upsert` unset, every record's key is `undefined`, so they all collide
-into a single merged entry. Set it whenever records have any identity at all.
+!> With `upsert` unset, every `push` generates its own uuid, so no two records
+ever share a key — nothing is ever merged, and every push silently adds a new
+record instead of updating an existing one. Set it whenever records have any
+identity at all.
 
 ## Methods
 
@@ -157,7 +159,7 @@ Nothing imports anything.
 
 | Do | Don't |
 |---|---|
-| Set `upsert` to a real identifying field | Leave it unset and watch every record merge into one |
+| Set `upsert` to a real identifying field | Leave it unset and watch every push silently add a duplicate instead of updating |
 | Push partial records to patch stored ones | Push a full replacement when only one field changed |
 | Keep collections small enough to re-render whole | Store thousands of rows and re-render on each mutation |
 | Treat it as ephemeral state | Rely on it surviving a reload |
