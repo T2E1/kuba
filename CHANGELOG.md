@@ -6,6 +6,93 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) and 
 
 ---
 
+## [0.2.0-alpha.6] — 2026-09-06
+
+### Added
+
+- `debounce` joins `after`, `around` and `before` on `@t2e1/kuba/middleware`. It wraps a method so that calls made close together collapse into one, after a quiet interval — the piece that lets a declarative child react to every attribute write without talking to its parent once per character typed. It is what `<kb-filter>`, `<kb-find>` and `<kb-headers>` now use internally
+- `<kb-headers>` publishes its header whenever `key` or `value` changes, not only on connect. Both setters schedule the write and the write itself is debounced, so an arc driving the pair after connection (`type=setter`) now reaches `<kb-fetch>` — before, anything set after parse time was dropped
+- `<kb-dataset>`, `<kb-fetch>`, `<kb-filter>`, `<kb-find>`, `<kb-inset>`, `<kb-render>` and `<kb-text>` publish the `on` attribute they always had, typed as the arc-string shape inherited from `Echo` instead of being silent
+- `<kb-inset>` publishes `alt`, `height`, `hidden` and `width`, and `<kb-render>` publishes `alt` and `hidden` — properties the mixin chain always supplied and the declaration never named
+- `<kb-text>`, `<kb-inset>`, `<kb-render>`, `<kb-fetch>`, `<kb-filter>`, `<kb-find>` and `<kb-dataset>` publish type declarations that name their accepted values instead of `string`
+
+### Changed
+
+- **Breaking:** `<kb-fileupload>` is gone. The element is removed from the bundle, from the type declarations and from the documentation. `<kb-input>` covers file input for now
+- **Breaking:** `<kb-text>` accepts a closed set of values on `align`, `color`, `family`, `line-height`, `size` and `weight`, and nothing else. All six used to be interpolated into the shadow stylesheet verbatim — `align` straight into `text-align`, the rest as a custom property name — so any keyword worked, including one that closed the declaration early. Anything outside the documented set is now ignored and the property keeps its last valid value
+- **Breaking:** `<kb-inset>` accepts a closed set on `direction` (`row`, `column`) and `side` (`all`, `top`, `bottom`, `left`, `right`, `x`, `y`). `direction` reached `flex-direction` unvalidated; `side` keyed the margin map and quietly fell back to `all` when it missed. An unknown `side` no longer falls back — it is rejected before reaching the property, which keeps its last valid value
+- **Breaking:** `<kb-fetch>`'s `failed` event carries the error in its `detail`, not the response body. The two were dispatched from the same variable, so a failed request used to arrive with the successful branch's value — in practice `undefined`. `succeeded` is unchanged
+- **Breaking:** `<kb-filter>` and `<kb-find>` dispatch after a 100 ms quiet interval instead of on every write. Driving either from a text field used to dispatch one event per keystroke, each one walking the parent's whole record collection. Code that sets `value` and expects the event on the next microtask — including tests — has to wait for the interval. `<kb-filter>`'s `key` also dispatches now; it used to change the field being compared without re-running the comparison
+- **Breaking:** `<kb-dataset>` hands out frozen records. A record read back from `value` used to be the live stored object, so mutating it edited the dataset behind its back and skipped every event. Writing to one is now inert (and throws in strict mode) — go through `push` instead. Record keys are also normalized to strings, so `1` and `'1'` are the same record rather than two
+- **Breaking:** `<kb-on>` and `<kb-headers>` no longer tolerate a missing parent. Connecting either straight into a shadow root, which used to be a no-op, now throws a `TypeError`
+- **Breaking:** `layout` is gone from `<kb-render>`'s published type declarations, and `controller` from `<kb-fetch>`'s. `layout` is a styling hook read only from CSS — no mixin ever reflected it to a JS property, so the declaration promised an accessor that did not exist. `controller` exposed the `AbortController` backing the current request, which is internal bookkeeping and never something a consumer should abort by hand. `internals` also leaves `<kb-inset>` and `<kb-main>`, continuing what `0.2.0-alpha.5` did elsewhere
+- **Breaking:** `<kb-text>`'s declared class is `KUBATextElement`, not `KUBAKbTextElement` — the tag name was in it twice. It is the default export, so `import type Text from '@t2e1/kuba/typography/text/types'` is unaffected; only code naming the type explicitly changes
+
+### Fixed
+
+- The root `types.d.ts` points at the packages that exist. Six of its imports still named `packages/behavior`, `packages/component`, `packages/data`, `packages/form`, `packages/layout` and `packages/typography`, which moved under `src/` — so a consumer importing the entry declaration got a resolution error and, with `skipLibCheck`, silently no typings for every custom element
+- `<kb-fetch>` awaits the response before scheduling event dispatch, instead of awaiting inside the idle callback. The promise rejection had no handler attached in the same turn, so a network failure surfaced as an unhandled rejection alongside the `failed` event
+- `<kb-fetch>` no longer reuses an aborted signal. The controller renews itself on the next read of `signal` rather than at `abort()` time, which is the order the request path actually uses — the previous renewal point left a window where a new request started already aborted
+
+### Migration
+
+`<kb-fileupload>` has no drop-in replacement in this release. Use a plain `<input type="file">` inside `<kb-form>` until the element returns:
+
+```html
+<!-- before -->
+<kb-fileupload name="avatar" accept="image/*"></kb-fileupload>
+
+<!-- after -->
+<input type="file" name="avatar" accept="image/*" />
+```
+
+`<kb-text>`'s attributes take design-system keywords now, not arbitrary CSS. Anything outside the sets goes in CSS on the host:
+
+```html
+<!-- before: any text-align value was interpolated through -->
+<kb-text align="end">…</kb-text>
+
+<!-- after -->
+<kb-text style="text-align: end">…</kb-text>
+```
+
+A `failed` handler that read the response body now reads the error:
+
+```js
+// before: detail was the successful branch's value — in practice undefined
+fetcher.addEventListener('failed', (event) => show(event.detail.message))
+
+// after: detail is the error itself
+fetcher.addEventListener('failed', (event) => show(String(event.detail)))
+```
+
+Code waiting on `<kb-filter>`/`<kb-find>` has to account for the interval:
+
+```js
+// before: the event landed on the next microtask
+filter.value = 'ada'
+await Promise.resolve()
+
+// after: wait for the dispatch itself
+filter.value = 'ada'
+await new Promise((resolve) =>
+  filter.addEventListener('filtered', resolve, { once: true }),
+)
+```
+
+Records read from a dataset are frozen; edit through the element:
+
+```js
+// before: mutated the stored record, silently and without an event
+const [record] = dataset.value
+record.name = 'Ada'
+
+// after
+dataset.push({ id: record.id, name: 'Ada' })
+```
+
+---
+
 ## [0.2.0-alpha.5] — 2026-08-25
 
 ### Added
