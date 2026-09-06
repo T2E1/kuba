@@ -53,6 +53,17 @@ test('clear() empties the output without losing the template', async () => {
   await vi.waitFor(() => expect(render.textContent).toBe('Grace'))
 })
 
+test('reflects hidden onto internals.states', async () => {
+  const body = mount(
+    '<kb-render hidden><template>{name}</template></kb-render>',
+  )
+  const render = body.querySelector('kb-render')
+
+  await vi.waitFor(() =>
+    expect(render.internals.states.has('hidden')).toBe(true),
+  )
+})
+
 test('stays out of the accessibility tree', async () => {
   // The rendered items carry the semantics; the container holding them adds
   // nothing an assistive technology needs to hear about.

@@ -21,14 +21,15 @@ class On extends Headless(HTMLElement) {
   }
 
   /**
-   * Waits for the parent custom element to be upgraded before wiring —
-   * on connection, `parentElement` may still be an un-upgraded element
-   * without `connectArc` yet. Mutates the parent, not `this`.
+   * Waits for the parent element to be upgraded before wiring — on
+   * connection, `parentElement` may still be an un-upgraded element
+   * without `connectArc` yet. A `null` parent (connected straight into a
+   * shadow root) has nothing to wire. Mutates the parent, not `this`.
    */
   @connected
   async [setter]() {
-    await customElements.whenDefined(this.parentElement?.localName)
-    this.parentElement?.[connectArc]?.(this.value)
+    await customElements.whenDefined(this.parentElement.localName)
+    this.parentElement[connectArc]?.(this.value)
     return this
   }
 }

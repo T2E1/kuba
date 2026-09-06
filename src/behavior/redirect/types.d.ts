@@ -54,9 +54,10 @@ type KUBARedirectOnAttribute =
  */
 export default class KUBARedirectElement extends HTMLElement {
   /**
-   * Target URL used when `route` is not set. Reflects the `href`
-   * attribute. May contain `{path.to.value}` placeholders, resolved
-   * against the `params` passed to `go()`.
+   * Target URL used when `route` is not set — see `route` for the
+   * precedence when both are set. Reflects the `href` attribute. May
+   * contain `{path.to.value}` placeholders, resolved against the `params`
+   * passed to `go()`.
    *
    * @default '#'
    *
@@ -70,15 +71,6 @@ export default class KUBARedirectElement extends HTMLElement {
   href: KUBARedirectHrefAttribute | (string & {})
 
   /**
-   * Name of a router-registered route to resolve (via `urlFor`) into the
-   * target URL, taking precedence over `href` when set. Reflects the
-   * `route` attribute.
-   *
-   * @default ''
-   */
-  route: string
-
-  /**
    * Arc string wiring an event from another element to this host, in the
    * form `source/event:type/sink` (see {@link KUBARedirectOnAttribute}).
    * Inherited from the `Echo` mixin. Reflects the `on` attribute.
@@ -89,6 +81,18 @@ export default class KUBARedirectElement extends HTMLElement {
    * ```
    */
   on: KUBARedirectOnAttribute | (string & {})
+
+  /**
+   * Name of a router-registered route to resolve (via `urlFor`) into the
+   * target URL, taking precedence over `href` when set. Reflects the
+   * `route` attribute.
+   *
+   * When both `route` and `href` are set, `go()` navigates using `route`
+   * and `href` has no effect — silently, with no warning.
+   *
+   * @default ''
+   */
+  route: string
 
   /**
    * Navigates to `route` (resolved with `params` via `urlFor`) if set,

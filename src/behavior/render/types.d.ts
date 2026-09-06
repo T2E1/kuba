@@ -27,6 +27,13 @@ type KUBARenderOnAttribute =
  * dispatches a `change` event), so updates happen declaratively without a
  * manual event listener.
  *
+ * @remarks
+ * The `layout` attribute (`'list'` | `'grid'`) is purely a styling hook —
+ * `'list'` stacks the host's slotted content in a single flex column,
+ * `'grid'` arranges it in a two-column grid — read only via CSS
+ * (`:host([layout="grid"])` in `style.js`). No mixin in the chain reflects
+ * it to a JS property, so it has no corresponding member on this class.
+ *
  * @example
  * ```html
  * <!-- Template as a direct child: no `template` attribute needed -->
@@ -42,12 +49,37 @@ type KUBARenderOnAttribute =
  */
 export default class KUBARenderElement extends HTMLElement {
   /**
-   * Layout used for the host's slotted content: `'list'` stacks it in a
-   * single flex column, `'grid'` arranges it in a two-column grid.
-   * Reflects the `layout` attribute.
-   * @default 'list'
+   * Accessible name, published as the default `aria-label` through
+   * `ElementInternals` (reflects the `alt` attribute). Inherited from the
+   * `Identity` mixin. Rarely needed here: the host carries `role="none"`,
+   * so the rendered items — not the box — are what a screen reader
+   * announces.
+   * @default ''
    */
-  layout: 'list' | 'grid'
+  alt: string
+
+  /**
+   * Whether the host is hidden (reflects the `hidden` attribute).
+   * Inherited from the `Hidden` mixin. The attribute value `"false"` or
+   * `"0"` (or the attribute being absent) reads as `false`; any other
+   * value — including `""`, as in `<kb-render hidden>` — reads as `true`.
+   * Setting the property to `false` removes the attribute; a truthy value
+   * adds the `hidden` custom element state (`:host(:state(hidden))`).
+   * @default false
+   */
+  hidden: boolean
+
+  /**
+   * Arc string wiring an event from another element to this host, in the
+   * form `source/event:type/sink` (see {@link KUBARenderOnAttribute}).
+   * Inherited from the `Echo` mixin. Reflects the `on` attribute.
+   *
+   * @example
+   * ```ts
+   * element.on = '#source/changed:method/render' // ok
+   * ```
+   */
+  on: KUBARenderOnAttribute | (string & {})
 
   /**
    * Id reference to a `<template>` element elsewhere in the document,
@@ -72,16 +104,13 @@ export default class KUBARenderElement extends HTMLElement {
   template: string
 
   /**
-   * Arc string wiring an event from another element to this host, in the
-   * form `source/event:type/sink` (see {@link KUBARenderOnAttribute}).
-   * Inherited from the `Echo` mixin. Reflects the `on` attribute.
+   * Empties the element's rendered `textContent`, without touching its
+   * template. Commonly wired to an error/empty event (e.g. a fetch's
+   * `failed`) via `on`/`<kb-on>`, as the counterpart to `render()`.
    *
-   * @example
-   * ```ts
-   * element.on = '#source/changed:method/render' // ok
-   * ```
+   * @returns This element, for chaining.
    */
-  on: KUBARenderOnAttribute | (string & {})
+  clear(): this
 
   /**
    * Interpolates the element's template against `data` and updates
@@ -93,15 +122,6 @@ export default class KUBARenderElement extends HTMLElement {
    * @returns This element, for chaining.
    */
   render(data: unknown | unknown[]): this
-
-  /**
-   * Empties the element's rendered `textContent`, without touching its
-   * template. Commonly wired to an error/empty event (e.g. a fetch's
-   * `failed`) via `on`/`<kb-on>`, as the counterpart to `render()`.
-   *
-   * @returns This element, for chaining.
-   */
-  clear(): this
 }
 
 declare global {
