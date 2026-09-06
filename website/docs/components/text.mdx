@@ -41,7 +41,8 @@ one.
 
 - **Can contain**: text and inline markup — the shadow root is a single unnamed
   `<slot>`. Nested `<a>`, `<strong>` or a `<kb-icon>` inherit the color and size
-  set here.
+  set here. One or more `<kb-on>` children add arcs beyond the single `on`
+  attribute.
 - **Can be a child of**: anything. The host has no `display` of its own, so it
   behaves as inline content and participates in whatever flex or grid context
   surrounds it.
@@ -81,8 +82,8 @@ type; body copy wants `lg` or `xl`.
 
 ## Color
 
-`color` takes any suffix of `--color-*`. Use the semantic families for meaning,
-the neutral `master-*` ramp for hierarchy.
+`color` accepts any suffix of `--color-*` as a closed keyword set. Use the
+semantic families for meaning, the neutral `master-*` ramp for hierarchy.
 
 ```html preview
 <kb-stack direction="column" spacing="quarck" align="start">
@@ -94,9 +95,10 @@ the neutral `master-*` ramp for hierarchy.
 </kb-stack>
 ```
 
-An unknown keyword resolves to an undefined custom property and the text falls
-back to inherited color rather than failing visibly — check the token name if a
-color "doesn't apply".
+A keyword outside the set is ignored: the attribute change never reaches the
+property, which keeps its last valid value (`master-dark` until you set one) —
+check the token name if a color "doesn't apply". The same holds for `size`,
+`weight`, `family`, `line-height` and `align`.
 
 ## Attributes
 
@@ -108,8 +110,9 @@ color "doesn't apply".
 | `family` | `base` \| `highlight` | `base` | Resolved against `--font-family-\{value\}`. |
 | `line-height` | token step | `lg` | Resolved against `--line-height-\{value\}`. |
 | `align` | `left` \| `center` \| `right` \| `justify` | `left` | Text alignment. |
+| `on` | arc string | — | Echo wiring, `source/event:type/sink` — lets another element drive an attribute of this text. |
 
-This element dispatches no events.
+This element dispatches no events; `on` only ever receives.
 
 ## Styling
 

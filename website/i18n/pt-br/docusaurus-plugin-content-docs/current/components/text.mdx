@@ -43,7 +43,8 @@ quando estilizado como um.
 
 - **Pode conter**: texto e markup inline — o shadow root é um único `<slot>` sem
   nome. `<a>`, `<strong>` ou um `<kb-icon>` aninhados herdam a cor e o tamanho
-  definidos aqui.
+  definidos aqui. Um ou mais filhos `<kb-on>` adicionam arcos além do único
+  atributo `on`.
 - **Pode ser filho de**: qualquer coisa. O host não tem `display` próprio, então
   se comporta como conteúdo inline e participa de qualquer contexto flex ou grid
   ao redor.
@@ -83,8 +84,9 @@ tipografia grande de display; texto corrido pede `lg` ou `xl`.
 
 ## Cor
 
-`color` aceita qualquer sufixo de `--color-*`. Use as famílias semânticas para
-significado, e a rampa neutra `master-*` para hierarquia.
+`color` aceita qualquer sufixo de `--color-*` como um conjunto fechado de
+palavras-chave. Use as famílias semânticas para significado, e a rampa neutra
+`master-*` para hierarquia.
 
 ```html preview
 <kb-stack direction="column" spacing="quarck" align="start">
@@ -96,9 +98,10 @@ significado, e a rampa neutra `master-*` para hierarquia.
 </kb-stack>
 ```
 
-Uma palavra-chave desconhecida resolve para uma custom property indefinida e o
-texto cai para a cor herdada em vez de falhar de forma visível — confira o nome
-do token se uma cor "não aplica".
+Uma palavra-chave fora do conjunto é ignorada: a mudança de atributo não chega
+à propriedade, que mantém o último valor válido (`master-dark` até você definir
+um) — confira o nome do token se uma cor "não aplica". O mesmo vale para `size`,
+`weight`, `family`, `line-height` e `align`.
 
 ## Atributos
 
@@ -110,8 +113,9 @@ do token se uma cor "não aplica".
 | `family` | `base` \| `highlight` | `base` | Resolvido contra `--font-family-\{valor\}`. |
 | `line-height` | degrau de token | `lg` | Resolvido contra `--line-height-\{valor\}`. |
 | `align` | `left` \| `center` \| `right` \| `justify` | `left` | Alinhamento do texto. |
+| `on` | string de arco | — | Fiação do Echo, `source/event:type/sink` — deixa outro elemento dirigir um atributo deste texto. |
 
-Este elemento não dispara eventos.
+Este elemento não dispara eventos; `on` apenas recebe.
 
 ## Estilo
 

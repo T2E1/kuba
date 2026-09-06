@@ -43,7 +43,8 @@ siquiera cuando se estiliza como uno.
 
 - **Puede contener**: texto y markup inline — el shadow root es un único
   `<slot>` sin nombre. Un `<a>`, `<strong>` o un `<kb-icon>` anidados heredan el
-  color y el tamaño definidos aquí.
+  color y el tamaño definidos aquí. Uno o más hijos `<kb-on>` añaden arcos más
+  allá del único atributo `on`.
 - **Puede ser hijo de**: cualquier cosa. El host no tiene `display` propio, así
   que se comporta como contenido inline y participa en cualquier contexto flex o
   grid que lo rodee.
@@ -83,8 +84,9 @@ con la tipografía grande de display; el texto corrido pide `lg` o `xl`.
 
 ## Color
 
-`color` acepta cualquier sufijo de `--color-*`. Usa las familias semánticas para
-el significado, y la rampa neutra `master-*` para la jerarquía.
+`color` acepta cualquier sufijo de `--color-*` como un conjunto cerrado de
+palabras clave. Usa las familias semánticas para el significado, y la rampa
+neutra `master-*` para la jerarquía.
 
 ```html preview
 <kb-stack direction="column" spacing="quarck" align="start">
@@ -96,9 +98,10 @@ el significado, y la rampa neutra `master-*` para la jerarquía.
 </kb-stack>
 ```
 
-Una palabra clave desconocida resuelve a una custom property indefinida y el
-texto cae al color heredado en vez de fallar de forma visible — revisa el nombre
-del token si un color "no se aplica".
+Una palabra clave fuera del conjunto se ignora: el cambio de atributo no llega
+a la propiedad, que mantiene su último valor válido (`master-dark` hasta que
+definas uno) — revisa el nombre del token si un color "no se aplica". Lo mismo
+vale para `size`, `weight`, `family`, `line-height` y `align`.
 
 ## Atributos
 
@@ -110,8 +113,9 @@ del token si un color "no se aplica".
 | `family` | `base` \| `highlight` | `base` | Resuelto contra `--font-family-\{valor\}`. |
 | `line-height` | escalón de token | `lg` | Resuelto contra `--line-height-\{valor\}`. |
 | `align` | `left` \| `center` \| `right` \| `justify` | `left` | Alineación del texto. |
+| `on` | string de arco | — | Cableado de Echo, `source/event:type/sink` — deja que otro elemento controle un atributo de este texto. |
 
-Este elemento no despacha eventos.
+Este elemento no despacha eventos; `on` solo recibe.
 
 ## Estilos
 
