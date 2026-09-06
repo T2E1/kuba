@@ -26,15 +26,17 @@ const borderRadius = {
   y: '0',
 }
 
+// `side` is validated against a closed set before it reaches the property, so
+// the map lookup below always hits — no fallback needed.
 function style(inset) {
   return css`
     :host {
-      border-radius: ${borderRadius[inset.side] || borderRadius.all};
+      border-radius: ${borderRadius[inset.side]};
       box-sizing: border-box;
       display: flex;
       flex-direction: ${inset.direction};
       height: ${inset.height};
-      margin: ${margin[inset.side] || margin.all} !important;
+      margin: ${margin[inset.side]} !important;
       overflow: hidden;
       width: ${inset.width};
     }

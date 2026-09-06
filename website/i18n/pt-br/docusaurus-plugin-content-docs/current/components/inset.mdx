@@ -55,7 +55,8 @@ excesso, e arredonda os cantos que ficam para dentro.
 
 - **Pode conter**: qualquer coisa — o shadow root é um único `<slot>` sem nome.
   Mídia é o caso comum, e o `overflow: hidden` significa que uma imagem maior
-  que a caixa é cortada pelos cantos arredondados em vez de escapar deles.
+  que a caixa é cortada pelos cantos arredondados em vez de escapar deles. Um
+  ou mais filhos `<kb-on>` adicionam arcos além do único atributo `on`.
 - **Pode ser filho de**: um contêiner com padding cujo padding combine com a
   sangria. O `<kb-card>` é o pai pretendido; a sangria padrão (16px) é
   exatamente o inset do próprio card, e é por isso que os dois se alinham sem
@@ -91,8 +92,9 @@ que encontram o conteúdo fiquem retos.
 | `x` | esquerda e direita apenas | nada — a faixa fica aberta dos dois lados |
 | `y` | topo e base apenas | nada |
 
-Um valor não reconhecido cai para `all`, então um erro de digitação sangra em
-todos os lados em vez de falhar de forma visível.
+Um valor fora do conjunto é ignorado: a mudança de atributo nunca chega à
+propriedade, que mantém o último valor válido (`all` até você definir um). O
+mesmo vale para `direction`.
 
 ## Atributos
 
@@ -100,11 +102,13 @@ todos os lados em vez de falhar de forma visível.
 |---|---|---|---|
 | `side` | `all` \| `top` \| `bottom` \| `left` \| `right` \| `x` \| `y` | `all` | Quais bordas recebem a margem negativa, e quais cantos continuam arredondados. |
 | `direction` | `row` \| `column` | `column` | Direção flex do conteúdo encaixado. |
-| `width` | `auto` \| `fill` \| comprimento | `auto` | Largura do host. |
-| `height` | `auto` \| comprimento | `auto` | Altura do host. |
+| `width` | `hug` \| `fill` \| comprimento | `auto` | Largura do host, normalizada para um conjunto fechado de formas de tamanho. |
+| `height` | `hug` \| `fill` \| comprimento | `auto` | Altura do host, normalizada da mesma maneira. |
 | `hidden` | `boolean` | `false` | Remove o elemento e seu conteúdo do layout e da árvore de acessibilidade. |
+| `alt` | `string` | `''` | Nome acessível. Raramente relevante — o host é de apresentação. |
+| `on` | arc string | — | Fiação do Echo, `source/event:type/sink` — deixa outro elemento controlar um atributo deste inset. |
 
-Este elemento não dispara eventos.
+Este elemento não dispara eventos; `on` apenas recebe.
 
 ## Estilo
 

@@ -53,7 +53,8 @@ stay inside.
 
 - **Can contain**: anything — the shadow root is a single unnamed `<slot>`.
   Media is the common case, and `overflow: hidden` means an image larger than
-  the box is clipped by the rounded corners rather than escaping them.
+  the box is clipped by the rounded corners rather than escaping them. One or
+  more `<kb-on>` children add arcs beyond the single `on` attribute.
 - **Can be a child of**: a padded container whose padding matches the bleed.
   `<kb-card>` is the intended parent; the default bleed (16px) is exactly the
   card's own inset, which is why the two line up without configuration.
@@ -87,8 +88,9 @@ content go square.
 | `x` | left and right only | nothing — the band is open on both sides |
 | `y` | top and bottom only | nothing |
 
-An unrecognized value falls back to `all`, so a typo bleeds on every side rather
-than failing visibly.
+A value outside the set is ignored: the attribute change never reaches the
+property, which keeps its last valid value (`all` until you set one). The same
+holds for `direction`.
 
 ## Attributes
 
@@ -96,11 +98,13 @@ than failing visibly.
 |---|---|---|---|
 | `side` | `all` \| `top` \| `bottom` \| `left` \| `right` \| `x` \| `y` | `all` | Which edges receive the negative margin, and which corners stay rounded. |
 | `direction` | `row` \| `column` | `column` | Flex direction of the slotted content. |
-| `width` | `auto` \| `fill` \| length | `auto` | Host width. |
-| `height` | `auto` \| length | `auto` | Host height. |
+| `width` | `hug` \| `fill` \| length | `auto` | Host width, normalized to a closed set of size shapes. |
+| `height` | `hug` \| `fill` \| length | `auto` | Host height, normalized the same way. |
 | `hidden` | `boolean` | `false` | Removes the element and its content from layout and the accessibility tree. |
+| `alt` | `string` | `''` | Accessible name. Rarely meaningful — the host is presentational. |
+| `on` | arc string | — | Echo wiring, `source/event:type/sink` — lets another element drive an attribute of this inset. |
 
-This element dispatches no events.
+This element dispatches no events; `on` only ever receives.
 
 ## Styling
 
