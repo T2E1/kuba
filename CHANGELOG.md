@@ -6,6 +6,46 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) and 
 
 ---
 
+## [0.2.0-alpha.7] — 2026-09-07
+
+### Added
+
+- `<kb-form>`, `<kb-input>`, `<kb-textarea>` and `<kb-validity>` publish the `on` attribute they always had, typed as the arc-string shape inherited from `Echo` instead of being silent
+- `<kb-form>`, `<kb-input>` and `<kb-textarea>` publish `hidden`; `<kb-input>` and `<kb-textarea>` publish `width`, typed as the set of widths the mixin normalizes; `<kb-form>` publishes `template` — properties the mixin chain always supplied and the declaration never named
+- `<kb-input>`, `<kb-textarea>` and `<kb-validity>` publish `remove()`, which returns the element for chaining. All three have overridden it since they gained an internal `AbortController`; only the declaration was missing
+- Every element under `src/form/` now carries a `DESIGN.md` — a retroactive LLD specification of its contract, composition and edge cases — matching the other `src/` categories. `<kb-validity>` gains a test suite it never had
+
+### Changed
+
+- **Breaking:** `internals` leaves the published type declarations of `<kb-form>`, `<kb-input>`, `<kb-textarea>` and `<kb-validity>`, and `controller` leaves `<kb-input>`, `<kb-textarea>` and `<kb-validity>`. Both are lazy internal getters consumed by the mixins — `internals` backs custom-state reflection, `controller` backs listener teardown on disconnect — and neither is something a consumer should reach for. This continues what `0.2.0-alpha.5` and `0.2.0-alpha.6` did for `<kb-inset>`, `<kb-main>`, `<kb-fetch>` and `<kb-render>`
+- **Breaking:** `<kb-validity>`'s `state` is typed `string | undefined`, not `string`. The getter has no default, so it reads back `undefined` until the `state` attribute is set — the declaration promised a value that was never there. Under `strictNullChecks`, code that passed `state` straight into a `string` parameter now needs a guard
+
+### Migration
+
+`internals` and `controller` were internal all along; there is no replacement, because there was nothing a consumer could correctly do with either. Reflect state through the documented attributes, and let disconnection abort the listeners:
+
+```ts
+// before: reaching into the element's own bookkeeping
+input.internals.states.has('invalid')
+input.controller.abort()
+
+// after
+input.matches(':state(invalid)')
+input.remove() // aborts the internal controller and returns the element
+```
+
+`<kb-validity>`'s `state` can be `undefined` before the attribute is set:
+
+```ts
+// before: typed string, in practice undefined until parsed
+const key: string = validity.state
+
+// after
+const key = validity.state ?? 'valueMissing'
+```
+
+---
+
 ## [0.2.0-alpha.6] — 2026-09-06
 
 ### Added

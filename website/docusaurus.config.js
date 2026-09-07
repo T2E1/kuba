@@ -4,7 +4,7 @@ import previewPlugin from './src/remark/preview-plugin.js'
 
 // kuba é servido do CDN, pinado à versão publicada — a doc é um consumidor
 // real do pacote. Bump a cada release.
-const KUBA_VERSION = '0.2.0-alpha.6'
+const KUBA_VERSION = '0.2.0-alpha.7'
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {

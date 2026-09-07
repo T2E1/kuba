@@ -35,6 +35,7 @@ class Form extends Echo(Hidden(Template(HTMLElement))) {
     return (this.#internals ??= this.attachInternals())
   }
 
+  /** Shadows the native `Node.prototype.textContent`: returns the HTML from the last `render()` (`''` before the first), which `component.js` injects into the inner `<form>`. */
   get textContent() {
     return (this.#textContent ??= '')
   }
@@ -57,6 +58,7 @@ class Form extends Echo(Hidden(Template(HTMLElement))) {
     return this
   }
 
+  /** Drives the reset through the inner native `<form>` so the same `@on.reset` path a user-triggered reset takes also runs, emitting `resetted`. */
   reset() {
     const form = this.shadowRoot.querySelector('form')
     form.dispatchEvent(new Event('reset', { bubbles: true, cancelable: true }))
@@ -69,6 +71,7 @@ class Form extends Echo(Hidden(Template(HTMLElement))) {
     return this
   }
 
+  /** Drives the submit through the inner native `<form>` so the same `@on.submit` path a user-triggered submit takes also runs, emitting `submitted` with the parsed `FormData`. */
   submit() {
     const form = this.shadowRoot.querySelector('form')
     form.dispatchEvent(new Event('submit', { bubbles: true, cancelable: true }))
