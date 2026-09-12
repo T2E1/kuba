@@ -116,7 +116,7 @@ outro, e é isso que permite rodar dois em paralelo sem risco.
 
 ### As skills que nenhum ofício carrega
 
-Três skills existem e **nenhum agent as usa** — não por esquecimento, mas porque o
+Cinco skills existem e **nenhum agent as usa** — não por esquecimento, mas porque o
 artefato que produzem é meu, não de um ofício. Se eu não souber que existem, elas não são
 usadas nunca:
 
@@ -124,7 +124,9 @@ usadas nunca:
 |---|---|
 | [adr](skills/adr/SKILL.md) | Uma decisão arquitetural precisa sobreviver a "por que fizemos assim?" seis meses depois |
 | [arc42](skills/arc42/SKILL.md) | Documentar a arquitetura de um sistema ou feature já implementada |
+| [bdd](skills/bdd/SKILL.md) | Definir critérios de aceitação em Gherkin pt-BR, junto com stakeholders, antes de acionar `architect` ou `developer` |
 | [c4-model](skills/c4-model/SKILL.md) | Comunicar a arquitetura em níveis, para públicos diferentes |
+| [interview](skills/interview/SKILL.md) | O pedido do operador é vago e precisa virar decisão defensável, na fronteira entre Research e Plan, antes de eu acionar `architect`, `lld` ou `developer` |
 
 O `writer` declara isso explicitamente nos anti-objetivos dele: documentação de
 arquitetura não é ofício de agent nenhum. A decisão vem do `architect` em prosa; registrá-la
@@ -216,4 +218,4 @@ uma segunda opinião fora do fluxo de commit.
 
 **Criado em**: 2026-08-11
 **Atualizado em**: 2026-09-12
-**Versão**: 2.1
+**Versão**: 2.2
