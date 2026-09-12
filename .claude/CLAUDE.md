@@ -208,17 +208,9 @@ Roda sozinho, antes de um pacote nascer:
 |---|---|---|---|
 | `hooks/khaby-lame.sh` | `PreToolUse` | Um pacote vai nascer | Injeta a escada: precisa existir? já existe aqui? a plataforma cobre? Com o inventário real do repositório. Não bloqueia |
 
-Não julga: oferece dados e para. `bun run lint`, `bun run test` e o validador do `.claude/`
-não rodam mais sozinhos ao fim do turno — ficam a cargo de quem trabalha, reforçados pelo
-`/audit` quando vale pedir uma segunda opinião fora do fluxo de commit.
-
-Para rodar o validador de forma à mão, de `.claude/`:
-
-    python3 skills/standard/scripts/validate.py
-
-Ele verifica forma, não conteúdo. O que exige leitura está escrito em cada reference: se o
-critério é verificável por terceiro, se o passo tem resultado observável, se o exemplo
-ainda reflete o código real.
+Não julga: oferece dados e para. `bun run lint` e `bun run test` não rodam mais sozinhos ao
+fim do turno — ficam a cargo de quem trabalha, reforçados pelo `/audit` quando vale pedir
+uma segunda opinião fora do fluxo de commit.
 
 ---
 
