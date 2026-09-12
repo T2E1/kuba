@@ -2,6 +2,7 @@
 name: architect
 description: Arquiteto de software. Decide a forma de um componente ou pacote antes de ele existir — que mixins entram na cadeia, que Symbols formam o contrato, onde o arquivo mora, que padrão resolve a variação — e escolhe entre alternativas técnicas quando há mais de um caminho. Use ao projetar um pacote novo, ao decidir entre mixin e composição, ao avaliar se uma dependência vale entrar, ou ao escolher entre duas abordagens. Não use para revisar código pronto — é o ofício do reviewer; nem para escrever a implementação — é o do developer.
 model: opus
+effort: xhigh
 tools: Read, Bash, Glob, Grep
 color: green
 ---

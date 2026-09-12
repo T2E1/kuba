@@ -2,6 +2,7 @@
 name: reviewer
 description: Revisor de código. Lê uma mudança pronta e julga as 31 rules que nenhuma ferramenta detecta — responsabilidade única, Lei de Demeter, feature envy, middle man, data clumps, obsessão por primitivos, mudança divergente — emitindo achados com arquivo:linha e veredito de merge. Use antes de commitar uma mudança significativa, ao revisar um pull request ou ao auditar um pacote inteiro. Não use para o que o Biome já pega — rode bun run lint.
 model: opus
+effort: high
 tools: Read, Bash, Glob, Grep
 color: purple
 ---

@@ -20,6 +20,10 @@ FENCE = re.compile(r"^\s*```")
 INLINE = re.compile(r"`[^`]*`")  # bracket notation `obj[x](y)` matches link syntax
 LINK = re.compile(r"\]\((?!https?:|#)([^)\s]+)\)")
 
+# Official effort levels (Claude Code docs, skill and subagent frontmatter alike):
+# low, medium, high, xhigh, max. Shared here so skills and agents check the same set.
+EFFORTS = {"low", "medium", "high", "xhigh", "max"}
+
 
 def path_in(*parts):
     return os.path.join(CLAUDE, *parts)
@@ -114,7 +118,6 @@ def check_rules(errors):
 def check_skills(errors):
     FM = {"name", "model", "effort", "description"}
     MODELS = {"haiku", "sonnet", "opus"}
-    EFFORTS = {"low", "medium", "high"}
     SECTIONS = ["## O que é", "## Quando usar", "## Como aplicar", "## Exemplos",
               "## Checklist", "## Rules relacionadas", "## Skills relacionadas"]
     EXEC = {"js", "javascript", "ts", "typescript", "jsx", "tsx", "css", "html", "json"}
@@ -196,7 +199,7 @@ def check_skills(errors):
 # agents
 # ─────────────────────────────────────────────────────────────────────────────
 def check_agents(errors):
-    FM = {"name", "description", "model", "tools", "color"}
+    FM = {"name", "description", "model", "effort", "tools", "color"}
     ORDEM = ["## Papel", "## Anti-objetivos", "## Entrada", "## Entrega",
              "## Skills", "## Rules", "## Método", "## Quando parar"]
     WORKFLOW = re.compile(r"changes/00|attempts-|Encaminhar ao @|Sequência de Agentes")
@@ -220,6 +223,9 @@ def check_agents(errors):
         if mo := re.search(r"^model:\s*(\S+)", fm, re.M):
             if mo.group(1) not in {"sonnet", "opus"}:
                 errors[name].append(f"invalid model: {mo.group(1)} — an agent never uses haiku")
+        if eo := re.search(r"^effort:\s*(\S+)", fm, re.M):
+            if eo.group(1) not in EFFORTS:
+                errors[name].append(f"invalid effort: {eo.group(1)}")
         if c := re.search(r"^color:\s*(\S+)", fm, re.M):
             colours[c.group(1)] += 1
         if d := re.search(r"^description:\s*(.+)$", fm, re.M):

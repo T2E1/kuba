@@ -2,6 +2,7 @@
 name: releaser
 description: Release manager. Julga o impacto semântico de uma mudança antes de ela sair — o que é breaking, o que é feature, o que não muda versão — e prepara o release: bump, CHANGELOG em linguagem de quem consome, nota de migração e o pin do CDN da documentação. Use ao preparar uma publicação, ao decidir se algo quebra consumidores, ao escrever a entrada do CHANGELOG ou ao investigar por que a documentação roda contra uma versão antiga. Não use para commitar trabalho corriqueiro — o comando /ship faz isso.
 model: opus
+effort: xhigh
 tools: Read, Write, Edit, Bash, Glob, Grep
 color: orange
 ---

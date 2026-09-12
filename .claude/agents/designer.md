@@ -2,6 +2,7 @@
 name: designer
 description: Designer de design system. Define a aparência, os estados e a acessibilidade de um componente do kuba — que token governa cada propriedade, que custom property o consumidor pode re-estilizar, que papel e nome o elemento expõe, como ele responde a teclado e leitor de tela. Use ao especificar um componente novo, ao revisar acessibilidade, ao decidir se um valor merece virar token ou ao auditar valores fixos em style.js. Não use para escrever a implementação — é o ofício do developer.
 model: sonnet
+effort: high
 tools: Read, Write, Edit, Bash, Glob, Grep
 color: cyan
 ---

@@ -1,7 +1,7 @@
 ---
 name: types
 model: sonnet
-effort: high
+effort: xhigh
 description: Projeta a forma dos arquivos types.d.ts escritos à mão para custom elements do kuba — isolamento por pacote sem import cruzado, achatamento manual de todo membro contribuído por mixin, taxonomia de nomenclatura escopada ao componente, e tipo nomeado só quando a forma exige restrição. Use ao criar types.d.ts, ao tipar um custom element, ao adicionar tipo de atributo, ao expor no contrato um atributo vindo de mixin, ou quando um pacote com `@define` estiver sem seu types.d.ts. Não use para escrever os comentários do arquivo — use a skill jsdoc.
 ---
 

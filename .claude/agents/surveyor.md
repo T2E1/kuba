@@ -2,6 +2,7 @@
 name: surveyor
 description: Auditor de estrutura. Levanta o grafo real de dependências de um diretório, mede fan-in, confronta as fronteiras de pacote e os nomes de agrupamento contra as skills de organização, e emite achados com caminho e consequência — sem mover arquivo e sem propor a estrutura nova. Use ao avaliar se a organização de packages/ ou src/ ainda se sustenta, ao julgar uma proposta de reagrupamento, ao investigar um diretório que ninguém navega bem, ou antes de uma reestruturação, para saber o que ela precisa resolver. Não use para decidir a estrutura nova — é o ofício do architect; nem para julgar o código dentro dos arquivos — é o do reviewer.
 model: opus
+effort: high
 tools: Read, Bash, Glob, Grep
 color: pink
 ---

@@ -81,6 +81,7 @@ preservar — o que se pesquisa em agents é o conteúdo, não a forma.
 name: <igual ao nome do arquivo>
 description: <o ofício em uma frase> Use quando <gatilhos>. Não use para <escopo excluído>.
 model: <sonnet | opus>
+effort: <low | medium | high | xhigh | max>
 tools: Read, Write, Edit, Bash, Glob, Grep
 color: <cor>
 ---
@@ -93,6 +94,28 @@ color: <cor>
 - `color` distingue o agent no output. Uma cor por agent, sem repetir.
 - Sem `haiku`: todo agent decide algo. O modelo mais barato serve a skills mecânicas,
   não a ofícios.
+
+### `effort`
+
+Campo real do Claude Code para subagent — *"Effort level when this subagent is active.
+Overrides the session effort level."* A semântica **não é a mesma** da skill: uma skill
+em `effort: X` vale até o fim do turno de quem a carregou; um agent em `effort: X` vale
+só **dentro da execução isolada daquele agent** — ele começa do zero, roda com o nível
+declarado, e devolve o resultado sem que isso afete o resto da conversa do orquestrador.
+
+O critério de calibração é o mesmo eixo da skill — quanto do modelo já escolhido o
+julgamento deste ofício consome —, mas a pergunta seguinte muda com a frequência de
+invocação:
+
+| Pergunta | Por quê importa |
+|---|---|
+| Que julgamento este ofício exige — balance (`high`) ou profundidade além do padrão (`xhigh`)? | Mesmo eixo da skill: capacidade do modelo já filtrada por `model`, `effort` decide quanto dela usar |
+| Com que frequência este agent é chamado? | Um agent citado a cada `/ship` (`reviewer`) paga o custo de `xhigh` a cada chamada; um agent citado uma vez por pacote (`architect`) paga uma vez só — a mesma elevação custa ordens de grandeza diferentes |
+| O erro deste ofício é caro de reverter, ou detectável e corrigível depois? | Decisão estrutural (`architect`) ou de versão (`releaser`) que sai errada propaga; um achado de `reviewer` que passou batido ainda é pego no próximo `/audit` |
+
+Nunca `max`: nenhum dos onze ofícios tem julgamento que justifique o risco de
+*overthinking* que a documentação atribui a esse nível — a mesma ressalva do
+`effort` de skill, em [skill.md](skill.md).
 
 ## Seções do corpo
 
@@ -174,9 +197,10 @@ Rodar de `.claude/`, antes de commitar um agent novo ou alterado.
 | Item | Critério |
 |---|---|
 | `name` | Igual ao nome do arquivo |
-| Frontmatter | Exatamente `name`, `description`, `model`, `tools`, `color` |
+| Frontmatter | Exatamente `name`, `description`, `model`, `effort`, `tools`, `color` |
 | `description` | Com gatilho positivo (`Use ao…`) e negativo (`Não use para…`) |
 | `model` | `sonnet` ou `opus` — agent não usa `haiku` |
+| `effort` | Presente, e entre `low`, `medium`, `high`, `xhigh`, `max` |
 | `color` | Não repetida entre agents |
 | Seções | As oito obrigatórias, **na ordem** deste arquivo |
 | Rodapé | Criado em / Atualizado em / Versão |
@@ -198,5 +222,5 @@ script extraído de markdown silencia quando o markdown muda de forma. Rodar de 
 ---
 
 **Criado em**: 2026-08-10
-**Atualizado em**: 2026-08-10
-**Versão**: 1.1
+**Atualizado em**: 2026-09-12
+**Versão**: 1.2

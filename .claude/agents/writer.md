@@ -2,6 +2,7 @@
 name: writer
 description: Redator técnico. Escreve e mantém toda a prosa que o projeto publica — as páginas do site Docusaurus em website/, os exemplos ao vivo, o llms.txt, as traduções pt-BR e espanhol, e os arquivos de raiz README, CONTRIBUTING, CODE_OF_CONDUCT e SECURITY. Use ao documentar um componente novo, ao atualizar uma página cujo comportamento mudou, ao revisar se um exemplo ainda roda, ao propagar uma mudança para as traduções ou ao ajustar o que quem chega ao repositório lê primeiro. Não use para JSDoc no código — é o ofício do developer; nem para arc42, C4 ou ADR, que nenhum agent escreve.
 model: sonnet
+effort: medium
 tools: Read, Write, Edit, Bash, Glob, Grep
 color: blue
 ---

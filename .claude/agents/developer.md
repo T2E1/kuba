@@ -2,6 +2,7 @@
 name: developer
 description: Engenheiro de componentes. Escreve custom elements em JavaScript puro dentro de src/ (e mixins em packages/mixin/) — decorators, Shadow DOM, ElementInternals, mixins e contratos de Symbol — aplicando as 70 rules do repositório. Use ao implementar um componente ou mixin novo, ao alterar comportamento de um existente, ao corrigir um bug já diagnosticado ou ao refatorar código que viola uma rule. Não use para decidir a forma do componente antes de escrevê-lo — é o ofício do architect.
 model: sonnet
+effort: high
 tools: Read, Write, Edit, Bash, Glob, Grep
 color: yellow
 ---

@@ -82,7 +82,7 @@ No `SKILL.md`, a seção `## Exemplos` vira uma tabela apontando para os arquivo
 ---
 name: <igual ao nome da pasta>
 model: <haiku | sonnet | opus>
-effort: <low | medium | high>
+effort: <low | medium | high | xhigh | max>
 description: <o que faz> Use quando <gatilhos>. Não use para <escopo excluído>.
 ---
 ```
@@ -135,27 +135,41 @@ de arquitetura não deve depender de onde a sessão começou.
 
 ### `effort` — o ajuste fino que não troca de modelo
 
-`effort: low | medium | high` reduz o esforço de raciocínio **sem** trocar de modelo, com
-a mesma semântica de turno de `model`: vale até o fim do turno, não só enquanto a skill é
-lida. É o eixo independente de `model` — a pergunta que `model` responde é "que modelo é
-capaz o bastante"; a que `effort` responde é "quanto desse modelo este trabalho consome".
+`effort: low | medium | high | xhigh | max` reduz ou aumenta o esforço de raciocínio
+**sem** trocar de modelo, com a mesma semântica de turno de `model`: vale até o fim do
+turno, não só enquanto a skill é lida. É o eixo independente de `model` — a pergunta que
+`model` responde é "que modelo é capaz o bastante"; a que `effort` responde é "quanto
+desse modelo este trabalho consome". Os cinco valores e o que cada um significa estão
+documentados em [Model configuration](https://code.claude.com/docs/en/model-config); o
+suporte a `xhigh`/`max` depende do modelo ativo, e um valor não suportado recua para o
+mais alto que o modelo aceitar.
 
-Uma skill `opus` não é automaticamente `effort: high`: `opus` existe porque o julgamento é
-arquitetural, não porque cada aplicação dele exige o raciocínio máximo. Mas na prática, a
-maioria das skills `opus` deste repositório **é** `effort: high` — é o preço de errar
-pouco em decisão que custa caro reverter, e o próprio critério de entrada no tier `opus`
-(rebaixar aqui custa qualidade) já filtra para isso.
+Duas armadilhas nesse eixo:
+
+- **`high` já é o padrão** na maioria dos modelos (todos exceto Opus 4.7, cujo padrão é
+  `xhigh`). Declarar `effort: high` numa skill `opus`, portanto, não é "pedir raciocínio
+  extra" — é **economizar** em relação ao padrão do Opus 4.7, de propósito: a skill já
+  está no modelo certo, e "balance entre tokens e inteligência" já é o suficiente para o
+  julgamento que ela pede.
+- **`xhigh`/`max` custam tokens de verdade**, e `max` é descrito na própria documentação
+  como "propenso a *overthinking*, testar antes de adotar amplamente". Nenhuma skill
+  deste repositório declara `max` — o custo-benefício não se sustenta sem um caso
+  concreto que justifique o risco.
 
 | Effort | Quando | Sinal |
 |---|---|---|
 | `low` | A decisão é uma árvore curta de critérios objetivos, sem trade-off a pesar | A skill tem uma tabela "quando X, faça Y" e pouco mais |
 | `medium` | Aplicação de convenção com alguma composição — mais de um fator entra na decisão | É o padrão de quem aplica bem uma convenção conhecida, sem inventar nada |
-| `high` | Julgamento com trade-off real, ou onde o erro documentado já custou retrabalho | Memória de correção repetida no mesmo tema é evidência concreta para elevar aqui |
+| `high` | Julgamento arquitetural ou trade-off real, mas cujo erro é detectável e corrigível depois | É o "balance" — a maioria das skills `opus` para por aqui |
+| `xhigh` | O mesmo julgamento de `high`, mas onde o erro documentado já custou retrabalho repetido | Memória de correção repetida no mesmo tema é evidência concreta para elevar além do padrão |
+| `max` | Reservado — nenhuma skill daqui o usa hoje | Exigiria um caso onde `xhigh` já provou ser insuficiente, medido, não suposto |
 
-Duas skills deste repositório têm `effort: high` mesmo em tier `sonnet`, por essa última
-razão: `types` e `mixin` fecham contrato contra a cadeia real de `extends`, e o erro mais
-comum registrado neste projeto — contrato copiado do pacote vizinho errado — vem de
-raciocínio raso nesse passo específico, não de o modelo ser fraco demais.
+Duas skills deste repositório têm `effort: xhigh` mesmo em tier `sonnet` — mais barato que
+subir para `opus`, mas com o raciocínio no máximo dentro do modelo atual — porque o erro
+documentado é específico e recorrente: `types` e `mixin` fecham contrato contra a cadeia
+real de `extends`, e o erro mais comum registrado neste projeto — contrato copiado do
+pacote vizinho errado — vem de raciocínio raso nesse passo específico, não de o modelo
+ser fraco demais.
 
 ### `context: fork`
 
@@ -246,7 +260,7 @@ Rode antes de commitar uma skill nova ou alterada.
 |---|---|
 | `name` | Igual ao nome da pasta |
 | `model` | Presente, e entre `haiku`, `sonnet`, `opus` |
-| `effort` | Presente, e entre `low`, `medium`, `high` |
+| `effort` | Presente, e entre `low`, `medium`, `high`, `xhigh`, `max` |
 | Frontmatter | Exatamente os quatro campos; nenhum a mais, nenhum a menos |
 | `description` | Abaixo de 1024 caracteres, sem `<` nem `>` |
 | Seções | As sete obrigatórias, mais o rodapé e o título |
@@ -290,5 +304,5 @@ script extraído de markdown silencia quando o markdown muda de forma. Rodar de 
 ---
 
 **Criado em**: 2026-08-09
-**Atualizado em**: 2026-08-10
-**Versão**: 1.4
+**Atualizado em**: 2026-09-12
+**Versão**: 1.5

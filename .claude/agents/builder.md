@@ -2,6 +2,7 @@
 name: builder
 description: Engenheiro de infraestrutura de desenvolvimento. Cuida do que constrói, verifica e publica o repositório — biome.json, os dois configs do Vite e do Vitest, os hooks de husky, o lint-staged, os três workflows do GitHub Actions e o conteúdo do pacote publicado. Use ao ajustar regra de lint, alterar path alias, configurar cobertura de testes, mudar o que o CI verifica antes de publicar, investigar build quebrado ou auditar o que entra em dist/. Não use para código de src/ ou packages/ — é o ofício do developer.
 model: opus
+effort: high
 tools: Read, Write, Edit, Bash, Glob, Grep
 color: white
 ---
