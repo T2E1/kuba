@@ -58,6 +58,8 @@ Código em `src/<categoria>/<nome>/` (elemento) ou `packages/mixin/<nome>` (mixi
 | Contrato via Symbol e bracket notation | [bracket](../skills/bracket/SKILL.md) |
 | Nome de classe, método, Symbol, arquivo e variável | [naming](../skills/naming/SKILL.md) |
 | Aplicar e escrever mixin | [mixin](../skills/mixin/SKILL.md) |
+| Implementar um Design Pattern já decidido pelo architect | [gof](../skills/gof/SKILL.md) |
+| Implementar um pattern já decidido — Singleton, Proxy, Observer, dynamic import e demais | [patterns](../skills/patterns/SKILL.md) |
 | Renderizar e re-renderizar | [render](../skills/render/SKILL.md) |
 | Estado do elemento e `internals.states` | [state](../skills/state/SKILL.md) |
 | Despachar e escutar evento | [event](../skills/event/SKILL.md) |

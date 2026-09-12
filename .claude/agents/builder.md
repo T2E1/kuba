@@ -71,6 +71,7 @@ Mais o relato do que a mudança passa a garantir, e o que ela custa por commit.
 | Configuração por ambiente, e o que não pode ser hardcoded | [twelve-factor](../skills/twelve-factor/SKILL.md) |
 | Dependência que entra e o que ela custa | [package](../skills/package/SKILL.md) |
 | Ferramenta aplicada onde não serve | [anti-pattern](../skills/anti-pattern/SKILL.md) |
+| Bundle splitting, tree shaking, preload/prefetch, compressão | [patterns](../skills/patterns/SKILL.md) |
 | Que fator de qualidade a verificação defende | [quality](../skills/quality/SKILL.md) |
 | Nome de script e de alias | [naming](../skills/naming/SKILL.md) |
 | O que `dist/` e `files` expõem | [revelation](../skills/revelation/SKILL.md) |

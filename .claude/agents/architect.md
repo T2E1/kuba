@@ -53,6 +53,7 @@ Uma decisão em prosa, nunca código nem arquivo de documentação:
 | Percorrer requisitos, contrato e composição antes do projeto | [lld](../skills/lld/SKILL.md) |
 | Escrever critério de aceitação observável, em linguagem de negócio | [bdd](../skills/bdd/SKILL.md) |
 | Escolher padrão para variação de comportamento | [gof](../skills/gof/SKILL.md) |
+| Padrão de patterns.dev — design, rendering ou performance | [patterns](../skills/patterns/SKILL.md) |
 | Padrões de camada de dados e aplicação | [poeaa](../skills/poeaa/SKILL.md) |
 | Definir interface e responsabilidade de classe | [solid](../skills/solid/SKILL.md) |
 | Fronteira e dependência entre pacotes | [package](../skills/package/SKILL.md) |

@@ -57,7 +57,7 @@ Um relatório, nunca uma mudança:
 |---|---|
 | Complexidade algorítmica de um caminho quente | [big-o](../skills/big-o/SKILL.md) |
 | Medir complexidade do código lido | [complexity](../skills/complexity/SKILL.md), [cdd](../skills/cdd/SKILL.md) |
-| Reconhecer padrão em uso | [gof](../skills/gof/SKILL.md), [poeaa](../skills/poeaa/SKILL.md) |
+| Reconhecer padrão em uso | [gof](../skills/gof/SKILL.md), [poeaa](../skills/poeaa/SKILL.md), [patterns](../skills/patterns/SKILL.md) |
 | Nomear o problema estrutural encontrado | [anti-pattern](../skills/anti-pattern/SKILL.md) |
 | Avaliar desenho de classe e interface | [solid](../skills/solid/SKILL.md) |
 | Avaliar dependência entre pacotes | [package](../skills/package/SKILL.md) |

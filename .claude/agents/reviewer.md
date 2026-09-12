@@ -55,6 +55,9 @@ não é lida, e uma revisão que lista tudo esconde o que importa.
 | Desenho de classe e interface | [solid](../skills/solid/SKILL.md) |
 | As nove regras táticas dentro do método | [calisthenics](../skills/calisthenics/SKILL.md) |
 | Nomear o problema estrutural encontrado | [anti-pattern](../skills/anti-pattern/SKILL.md) |
+| Julgar se um pattern de patterns.dev foi bem ou mal aplicado | [patterns](../skills/patterns/SKILL.md) |
+| Reconhecer Design Pattern mal aplicado — Strategy que só moveu o switch, Singleton no lugar de DI | [gof](../skills/gof/SKILL.md) |
+| Herança recusada num mixin (rule 059) | [mixin](../skills/mixin/SKILL.md) |
 | Disciplina de nome, função e comentário | [clean-code](../skills/clean-code/SKILL.md) |
 | Medir complexidade do que está sendo revisado | [complexity](../skills/complexity/SKILL.md), [cdd](../skills/cdd/SKILL.md) |
 | Dependência entre pacotes e ciclo | [package](../skills/package/SKILL.md) |
