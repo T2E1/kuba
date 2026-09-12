@@ -1,6 +1,7 @@
 ---
 name: framework-design-guidelines
 model: opus
+effort: high
 description: Nomes de namespace, pacote e grupo de pastas pelas .NET Framework Design Guidelines — o template Empresa.Produto.Feature.Subnamespace, os DO/CONSIDER/DO NOT de Cwalina e Abrams, a proibição de hierarquia organizacional como base, e as regras de conflito entre nome de namespace e nome de tipo. Use ao nomear um pacote, um grupo de pastas ou um módulo publicado, ao julgar se um nome de diretório é genérico demais, ou ao decidir a hierarquia de um monorepo. Não use para nomear classe, método, variável ou arquivo — é a skill naming; nem para design token — é a skill token.
 ---
 

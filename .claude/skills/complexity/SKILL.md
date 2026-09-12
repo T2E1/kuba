@@ -1,6 +1,7 @@
 ---
 name: complexity
 model: opus
+effort: high
 description: Mede e reduz a complexidade ciclomática de métodos, mantendo CC ≤ 5 conforme a rule 022 — regras de contagem, tabela de limites por faixa e técnicas de redução (guard clause, extração de método, function map, polimorfismo). Use ao escrever ou refatorar métodos com `if`, `for`, `while`, `switch`, `catch` ou ternário, ao receber aviso de noExcessiveCognitiveComplexity do Biome, ou ao decidir se um método precisa ser quebrado. Não use para complexidade algorítmica de performance — use a skill big-o.
 ---
 

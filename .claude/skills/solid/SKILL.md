@@ -1,6 +1,7 @@
 ---
 name: solid
 model: opus
+effort: high
 description: Os 5 princípios SOLID de design orientado a objetos (SRP, OCP, LSP, ISP, DIP), com árvore de diagnóstico para identificar qual princípio uma violação quebrou. Use ao projetar classes e interfaces, ao decidir entre herança e composição, ao revisar código com "esta classe faz coisas demais", "adicionar um tipo novo exige mexer no if", "esta subclasse quebra o pai", "a interface tem método que ninguém usa" ou "o service instancia a classe concreta com new". Não use para organização de pacotes e módulos — use a skill package.
 ---
 

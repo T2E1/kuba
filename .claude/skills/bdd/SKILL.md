@@ -1,6 +1,7 @@
 ---
 name: bdd
 model: opus
+effort: high
 description: Especificação de comportamento em Gherkin pt-BR — arquivos .feature em docs/bdd/ com Funcionalidade, Cenário, Dado/Quando/Então, escritos em linguagem de negócio e livres de detalhe de implementação. Use ao definir critérios de aceitação com stakeholders, ao especificar uma regra de negócio complexa de forma executável, ou ao dar ao teste uma referência de comportamento esperado. Não use para testar implementação de componente — use a skill preview, cujo teste de interação exercita o componente de verdade.
 ---
 

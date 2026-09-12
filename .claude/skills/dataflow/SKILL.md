@@ -1,6 +1,7 @@
 ---
 name: dataflow
 model: sonnet
+effort: medium
 description: Comunicação reativa entre componentes por event bus declarativo — binding `source/event:type/sink|filtros` no template, componente `morph-on` como receptor, e filtros puros compondo a transformação do payload. Use ao conectar componentes que não se conhecem, ao criar fluxo reativo entre partes distantes da página, ou ao substituir referência direta entre componentes por binding declarativo. Não use quando um componente já tem referência legítima ao outro — chamar o método direto é mais simples.
 ---
 

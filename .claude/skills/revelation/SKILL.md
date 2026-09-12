@@ -1,6 +1,7 @@
 ---
 name: revelation
 model: haiku
+effort: low
 description: Module Revelation Pattern para arquivos index — o index é a única interface pública do módulo e contém exclusivamente imports e re-exports diretos, sem lógica, sem variável intermediária e sem `export *`. Use ao criar ou organizar o index de um pacote, ao decidir o que é público e o que é detalhe de implementação, ou ao revisar index que expõe tudo indiscriminadamente. Não use para decidir como agrupar arquivos em pacotes — use a skill package.
 ---
 

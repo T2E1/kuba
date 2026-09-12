@@ -1,6 +1,7 @@
 ---
 name: setter
 model: sonnet
+effort: medium
 description: Quando um setter se justifica apesar da rule 008 — validação da entrada, normalização antes de atribuir, sincronização com atributo HTML via `attributeChanged`, e disparo de re-renderização via `repaint` ou `retouch`. Use ao criar setter de um campo `#` em custom element, ao revisar setter que é mera atribuição, ou ao decidir entre setter e método de intenção. Não use para atribuir sem tratamento — isso é o setter puro que a rule 008 proíbe.
 ---
 

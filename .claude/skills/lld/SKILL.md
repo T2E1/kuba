@@ -1,6 +1,7 @@
 ---
 name: lld
 model: opus
+effort: high
 description: Framework de 5 passos para especificar um custom element do kuba antes de escrever código — requisitos, contrato público (attributes, properties, events, slots, parts), composição em mixins, gestão de estado (controlado vs não controlado, ElementInternals) e edge cases (teclado, leitor de tela, limites). Adapta o framework LLD de entrevistas de front-end ao paradigma de Web Components puro deste repositório, sem React, sem props, sem TSX. Use antes de implementar um componente novo, ao receber um pedido vago de feature ("adiciona um carrossel"), ou ao decidir se um attribute é controlado. Não use para a forma do types.d.ts — use a skill types; não use para nomear tokens — use a skill token.
 ---
 

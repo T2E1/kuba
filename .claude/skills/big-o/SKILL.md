@@ -1,6 +1,7 @@
 ---
 name: big-o
 model: opus
+effort: high
 description: Analisa a complexidade algorítmica em notação Big-O — classificação por faixa, detecção do padrão de código que produz cada complexidade, limites de ação e técnicas de redução (Map/Set para busca O(1), ordenação prévia, memoization). Use ao avaliar métodos que iteram sobre coleções, fazem busca dentro de loop, combinam loops aninhados ou usam recursão, e ao investigar lentidão confirmada por medição. Não use para contagem de caminhos de execução — use a skill complexity; não use para otimizar sem medir antes.
 ---
 

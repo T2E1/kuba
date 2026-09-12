@@ -1,6 +1,7 @@
 ---
 name: clean-code
 model: opus
+effort: high
 description: Práticas de Clean Code de Robert C. Martin aplicadas às rules 021–039 — nomenclatura que revela intenção, funções pequenas com até 3 parâmetros, exceções de domínio em vez de null, imutabilidade, separação Command/Query, segurança e a Regra do Escoteiro. Use ao escrever ou revisar qualquer código, ao encontrar nome abreviado ou enganoso, `return null` em regra de negócio, `catch` vazio, flag booleana em assinatura, constante mágica, comentário redundante ou função com muitos parâmetros. Não use para métricas objetivas de complexidade — use a skill complexity.
 ---
 

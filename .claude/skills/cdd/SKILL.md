@@ -1,6 +1,7 @@
 ---
 name: cdd
 model: opus
+effort: high
 description: Cognitive-Driven Development — mede a carga cognitiva de um método pela métrica ICP (complexidade ciclomática + aninhamento + responsabilidades + acoplamento), com limiares de ação e processo de revisão em três passos. Use ao avaliar se um método é complexo demais e precisar de número em vez de opinião, ao priorizar qual código refatorar primeiro entre vários candidatos, ou ao justificar objetivamente a aprovação ou rejeição de um PR. Não use como substituto da contagem de CC — a skill complexity calcula o componente base que esta consome.
 ---
 

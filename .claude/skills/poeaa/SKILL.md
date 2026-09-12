@@ -1,6 +1,7 @@
 ---
 name: poeaa
 model: opus
+effort: high
 description: Os principais Patterns of Enterprise Application Architecture de Martin Fowler, organizados por camada — lógica de domínio (Transaction Script, Domain Model, Table Module), fonte de dados (Active Record, Data Mapper, Repository, Gateways), objeto-relacional (Unit of Work, Identity Map, Lazy Load) e apresentação web (MVC, Front Controller, Page Controller). Use ao projetar a camada de domínio ou de persistência, ao decidir entre Transaction Script e Domain Model, ou entre Active Record e Data Mapper. Não use para padrões de design de classe — use a skill gof.
 ---
 

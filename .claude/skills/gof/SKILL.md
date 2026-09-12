@@ -1,6 +1,7 @@
 ---
 name: gof
 model: opus
+effort: high
 description: Os 23 Design Patterns do Gang of Four organizados em Criacionais, Estruturais e Comportamentais, com tabela de seleção por problema. Use ao precisar trocar algoritmo em runtime, criar objeto sem citar a classe concreta, notificar dependentes de uma mudança de estado, adicionar responsabilidade sem herança, simplificar um subsistema, ou ao revisar código onde um `switch` por tipo pede polimorfismo. Não use para escolher pattern sem ter o problema identificado — isso é overengineering (rule 064).
 ---
 

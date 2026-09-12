@@ -1,6 +1,7 @@
 ---
 name: method
 model: sonnet
+effort: medium
 description: Forma dos métodos de classe — nome em verbo imperativo revelando intenção, `return this` em comandos para habilitar encadeamento fluente, guard clauses no lugar de `else`, até 3 parâmetros e 15 linhas, e decorators de ciclo de vida (`connected`, `disconnected`, `didPaint`, `on.*`). Use ao criar método de ação numa classe, ao nomear uma operação de domínio, ou ao revisar método que não retorna nada e impede encadeamento. Não use para leitura ou escrita de um campo — use as skills getter e setter.
 ---
 

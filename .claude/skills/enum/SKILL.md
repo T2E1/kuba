@@ -1,6 +1,7 @@
 ---
 name: enum
 model: sonnet
+effort: medium
 description: Elimina magic strings e numbers criando enums congelados com `Object.freeze` — ativado quando um literal com significado aparece duas ou mais vezes, nomeado em `UPPER_SNAKE_CASE` e declarado no módulo dono do conceito. Use ao encontrar string ou número repetido em condicional, ao criar constantes de domínio (status, tipos, seletores, nomes de evento, atributos), ou ao revisar código com literais hardcoded. Não use para valor que aparece uma vez só e é autoexplicativo no contexto.
 ---
 

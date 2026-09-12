@@ -1,6 +1,7 @@
 ---
 name: prose
 model: sonnet
+effort: medium
 description: Remove os sinais de texto gerado por máquina e devolve voz à escrita — inflação de significado, tom promocional, análises com -ing, atribuição vaga, travessão em excesso, regra de três, paralelismo negativo, vocabulário de LLM, resíduo de conversa com chatbot e enchimento. Use ao escrever ou revisar qualquer texto que o projeto publica: página de documentação, README, CHANGELOG, comentário JSDoc, mensagem de commit, ADR, relatório de investigação. Não use para nomear identificadores no código — é a skill naming.
 ---
 

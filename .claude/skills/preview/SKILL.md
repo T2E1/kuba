@@ -1,6 +1,7 @@
 ---
 name: preview
 model: sonnet
+effort: medium
 description: Decide o que de um componente merece ser demonstrado e produz a demonstração nos dois lugares onde ela vive — o bloco ```html preview da página em website/docs/components/, que roda ao vivo contra o pacote publicado, e o teste de interação que prova cada evento documentado. Cobre a estrutura da página de componente, a hierarquia de variantes, cor como semântica, composição pai/filho e os pares do's/don'ts. Use ao documentar um componente novo, ao decidir quais estados mostrar, ao escrever a seção "when not to use" ou ao provar que um evento é realmente disparado. Não use para definir o contrato do componente — é a skill types.
 ---
 

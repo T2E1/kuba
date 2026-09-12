@@ -1,6 +1,7 @@
 ---
 name: package
 model: opus
+effort: high
 description: Os 6 princípios de design de pacotes de Robert C. Martin — coesão (REP, CCP, CRP) e acoplamento (ADP, SDP, SAP) — com as métricas de Instabilidade, Abstração e Distância da Main Sequence. Use ao criar um módulo ou pacote novo, ao decidir onde um arquivo deve morar, ao organizar a estrutura de pastas, ao detectar import circular, ao avaliar se um módulo é estável o bastante para ser dependido, ou ao definir a interface pública de um módulo. Não use para design interno de classes — use as skills solid e calisthenics.
 ---
 

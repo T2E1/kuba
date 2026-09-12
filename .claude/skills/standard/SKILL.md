@@ -1,6 +1,7 @@
 ---
 name: standard
 model: opus
+effort: high
 description: A forma dos artefatos que estendem o Claude Code neste repositório — rule, skill, agent e command. Diz a que camada uma ideia pertence, que seções e metadados cada artefato exige, e traz o validador que reprova o que sai da forma. Use ao criar ou revisar uma rule, uma skill, um agent ou um command, ao decidir se algo é limite, procedimento, ofício ou fluxo, e antes de commitar qualquer mudança em `.claude/`. Não use para o conteúdo do artefato — a forma é aqui, o assunto é da camada.
 ---
 

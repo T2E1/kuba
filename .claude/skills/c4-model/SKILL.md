@@ -1,6 +1,7 @@
 ---
 name: c4-model
 model: opus
+effort: high
 description: Diagramas de arquitetura no C4 Model — quatro níveis de abstração progressiva (System Context, Container, Component, Code) em docs/c4/, cada um com público e pergunta-chave próprios. Use ao comunicar a arquitetura para públicos diferentes, ao criar ou atualizar diagramas de contexto, container ou componente, ou quando um diagrama existente mistura níveis e ninguém entende. Não use para registrar por que a arquitetura é assim — use a skill adr.
 ---
 

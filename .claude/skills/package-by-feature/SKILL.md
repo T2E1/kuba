@@ -1,6 +1,7 @@
 ---
 name: package-by-feature
 model: opus
+effort: high
 description: A escolha do eixo de decomposição de um sistema — por feature ou por camada técnica — com o argumento de escala de "Package by feature, not layer", o teste da deleção simples, o ganho de visibilidade restrita, e os casos em que decompor por camada ainda se justifica. Use antes de criar a primeira pasta de um módulo, ao julgar uma estrutura que agrupa por controllers, services, hooks, types ou utils, ao decidir se um diretório deve ser dividido, ou ao comparar duas propostas de organização. Não use para a estrutura interna de um pacote de componente — é a skill colocation; nem para medir coesão e acoplamento depois de decidido — é a skill package.
 ---
 

@@ -1,6 +1,7 @@
 ---
 name: naming
 model: sonnet
+effort: medium
 description: Convenção de nomes deste repositório — classes de custom element em PascalCase espelhando o tag name, mixins como função que recebe a superclasse e devolve a classe, campos privados `#` espelhando o acessor público, contratos Symbol com sufixo `-able` para capacidade e `verbCallback` para ciclo de vida, funções utilitárias de palavra única com arquivo homônimo, e `component`/`style` com o parâmetro nomeado pelo elemento. Use ao criar classe, mixin, método, getter, setter, contrato Symbol, função utilitária ou arquivo novo em `packages/`, e ao revisar nome que não segue o padrão. Não use para nomear design tokens — use a skill token.
 ---
 

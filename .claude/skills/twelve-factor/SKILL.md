@@ -1,6 +1,7 @@
 ---
 name: twelve-factor
 model: opus
+effort: high
 description: Os 12 fatores da metodologia Twelve-Factor App (Heroku) aplicados às rules 040–051 — codebase única, dependências explícitas, config no ambiente, backing services anexáveis, build/release/run separados, processos stateless, port binding, concorrência, descartabilidade, paridade dev/prod, logs como fluxo de eventos e processos administrativos. Use ao configurar um projeto novo, preparar deploy, escalar horizontalmente, investigar "funciona na minha máquina", decidir onde a configuração deve morar, ou tratar logs e migrations. Não use para design de código — use as skills solid, clean-code e calisthenics.
 ---
 

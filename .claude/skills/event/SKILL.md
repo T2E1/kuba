@@ -1,6 +1,7 @@
 ---
 name: event
 model: sonnet
+effort: medium
 description: Eventos DOM e customizados em custom elements — decorator `on.{tipo}` com seletor e modificadores (`prevent`, `stop`, `enter`, `value`, `formData`, `detail`), `CustomEvent` com `bubbles` e `composed` para atravessar o Shadow DOM, e nomes em verbo no passado. Use ao criar handler de interação, ao despachar evento customizado, ou ao fazer dois componentes se comunicarem sem referência direta. Não use para fluxo reativo entre componentes distantes — use a skill dataflow.
 ---
 

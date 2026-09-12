@@ -1,6 +1,7 @@
 ---
 name: alphabetical
 model: haiku
+effort: low
 description: Ordenação alfabética de propriedades em objetos, chaves JSON, exports nomeados, interfaces e objetos de configuração — aplicada recursivamente, com exceção explícita para sequências cujo significado depende da ordem. Use ao criar ou modificar objeto literal, arquivo JSON, lista de exports ou objeto de configuração, ou ao revisar coleção de propriedades em ordem arbitrária. Não use para ordenar membros dentro de uma classe — use a skill anatomy.
 ---
 

@@ -1,6 +1,7 @@
 ---
 name: mixin
 model: sonnet
+effort: high
 description: Composição de comportamento em custom elements por mixins — funções que recebem uma classe base e retornam a classe estendida, aplicadas da direita para a esquerda, com Echo sempre na cadeia para o sistema de eventos funcionar. Use ao criar ou modificar um componente que precisa de comportamento reutilizável (largura, altura, visibilidade, valor, identidade acessível), ao substituir herança por composição, ou ao revisar uma classe base inchada de responsabilidades. Não use para decidir a ordem dos membros dentro da classe — use a skill anatomy.
 ---
 

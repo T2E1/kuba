@@ -1,6 +1,7 @@
 ---
 name: colocation
 model: sonnet
+effort: medium
 description: Colocação de arquivos em `src/` e `packages/` — o que muda junto fica junto, um pacote por custom element com implementação, template, estilo, contratos, tipos e teste lado a lado, mais a convenção de segments no interior de um pacote de infraestrutura. Use ao criar um pacote novo, ao decidir onde um arquivo deve morar, ao adicionar teste a um componente, ou ao organizar o interior de um pacote que passou de sete arquivos. Não use para escolher o eixo de decomposição do sistema — é a skill package-by-feature; nem para decidir o que o pacote exporta — é a skill revelation.
 ---
 

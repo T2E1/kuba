@@ -1,6 +1,7 @@
 ---
 name: jsdoc
 model: sonnet
+effort: medium
 description: Escreve e revisa JSDoc para classes, funções, variáveis e arquivos de declaração de tipo (.d.ts) em bases JavaScript puro — dois níveis de detalhe conforme o público, mínimo no código de implementação e completo no contrato público. Use quando o usuário pedir para "documentar", "adicionar JSDoc", "documentar os tipos", "escrever doc comments", ou ao criar e editar classes, funções, getters/setters, constructors, static blocks e arquivos types.d.ts que ainda não têm documentação. Não use para desenhar a forma do types.d.ts — use a skill types.
 ---
 

@@ -82,14 +82,17 @@ No `SKILL.md`, a seção `## Exemplos` vira uma tabela apontando para os arquivo
 ---
 name: <igual ao nome da pasta>
 model: <haiku | sonnet | opus>
+effort: <low | medium | high>
 description: <o que faz> Use quando <gatilhos>. Não use para <escopo excluído>.
 ---
 ```
 
-**Apenas estes três campos.** O Claude Code aceita outros — `when_to_use`,
-`allowed-tools`, `paths`, `effort`, `context`, `hooks`, `metadata` — e a restrição aqui é
+**Exatamente estes quatro campos.** O Claude Code aceita outros — `when_to_use`,
+`allowed-tools`, `paths`, `context`, `hooks`, `metadata` — e a restrição aqui é
 deliberada, não desconhecimento: cada campo extra é mais uma coisa a manter sincronizada
-em 44 arquivos. Um campo novo entra quando houver um problema concreto que ele resolva.
+em 45 arquivos. Um campo novo entra quando houver um problema concreto que ele resolva —
+foi o caso de `effort`: sem ele, toda skill cujo modelo já é o correto, mas cujo trabalho
+não precisa do raciocínio máximo daquele modelo, não tinha como declarar isso.
 
 `description` é o primeiro nível do *progressive disclosure* — é a única coisa
 sempre carregada no system prompt, e é por ela que a skill é escolhida.
@@ -121,7 +124,7 @@ Toda skill declara o modelo. Nenhuma fica omissa: a declaração é a decisão r
 |---|---|---|---|
 | `haiku` | 4 | O trabalho é mecânico e verificável — reordenar, marcar. Nenhuma decisão de design pendente. | `alphabetical`, `anatomy`, `revelation`, `codetags` |
 | `sonnet` | 18 | Aplicação de convenção conhecida, com julgamento limitado a um arquivo ou componente. | `bracket`, `colocation`, `constructor`, `dataflow`, `enum`, `event`, `getter`, `jsdoc`, `method`, `mixin`, `naming`, `preview`, `prose`, `render`, `setter`, `state`, `token`, `types` |
-| `opus` | 22 | Julgamento arquitetural, trade-off entre princípios, diagnóstico. Rebaixar aqui custa qualidade na decisão **e** no código que vem depois dela. | `adr`, `anti-pattern`, `api-guidelines`, `arc42`, `bdd`, `big-o`, `c4-model`, `calisthenics`, `cdd`, `clean-code`, `complexity`, `framework-design-guidelines`, `fsd`, `gof`, `lld`, `package`, `package-by-feature`, `poeaa`, `quality`, `solid`, `standard`, `twelve-factor` |
+| `opus` | 23 | Julgamento arquitetural, trade-off entre princípios, diagnóstico. Rebaixar aqui custa qualidade na decisão **e** no código que vem depois dela. | `adr`, `anti-pattern`, `api-guidelines`, `arc42`, `bdd`, `big-o`, `c4-model`, `calisthenics`, `cdd`, `clean-code`, `complexity`, `framework-design-guidelines`, `fsd`, `gof`, `lld`, `package`, `package-by-feature`, `patterns`, `poeaa`, `quality`, `solid`, `standard`, `twelve-factor` |
 
 Na dúvida, **`opus`**. O custo de um turno mais caro é menor que o de uma decisão de
 arquitetura tomada com menos capacidade.
@@ -130,13 +133,36 @@ O `opus` explícito também **sobe** o modelo quando a sessão está num mais ba
 `solid` numa sessão em Sonnet promove o resto do turno para Opus. É intencional — decisão
 de arquitetura não deve depender de onde a sessão começou.
 
-### Os outros dois campos de custo
+### `effort` — o ajuste fino que não troca de modelo
 
-- `effort: low | medium | high` — reduz o esforço de raciocínio sem trocar de modelo.
-  Mesma semântica de turno; é o ajuste mais fino quando `haiku` seria demais.
-- `context: fork` — roda a skill num subagente. Combinado com `model`, é a única forma
-  de rebaixar **sem** afetar o turno principal. Só faz sentido quando a skill produz um
-  resultado fechado, não quando a convenção precisa ficar em contexto enquanto se escreve.
+`effort: low | medium | high` reduz o esforço de raciocínio **sem** trocar de modelo, com
+a mesma semântica de turno de `model`: vale até o fim do turno, não só enquanto a skill é
+lida. É o eixo independente de `model` — a pergunta que `model` responde é "que modelo é
+capaz o bastante"; a que `effort` responde é "quanto desse modelo este trabalho consome".
+
+Uma skill `opus` não é automaticamente `effort: high`: `opus` existe porque o julgamento é
+arquitetural, não porque cada aplicação dele exige o raciocínio máximo. Mas na prática, a
+maioria das skills `opus` deste repositório **é** `effort: high` — é o preço de errar
+pouco em decisão que custa caro reverter, e o próprio critério de entrada no tier `opus`
+(rebaixar aqui custa qualidade) já filtra para isso.
+
+| Effort | Quando | Sinal |
+|---|---|---|
+| `low` | A decisão é uma árvore curta de critérios objetivos, sem trade-off a pesar | A skill tem uma tabela "quando X, faça Y" e pouco mais |
+| `medium` | Aplicação de convenção com alguma composição — mais de um fator entra na decisão | É o padrão de quem aplica bem uma convenção conhecida, sem inventar nada |
+| `high` | Julgamento com trade-off real, ou onde o erro documentado já custou retrabalho | Memória de correção repetida no mesmo tema é evidência concreta para elevar aqui |
+
+Duas skills deste repositório têm `effort: high` mesmo em tier `sonnet`, por essa última
+razão: `types` e `mixin` fecham contrato contra a cadeia real de `extends`, e o erro mais
+comum registrado neste projeto — contrato copiado do pacote vizinho errado — vem de
+raciocínio raso nesse passo específico, não de o modelo ser fraco demais.
+
+### `context: fork`
+
+Roda a skill num subagente. Combinado com `model`, é a única forma de rebaixar **sem**
+afetar o turno principal. Só faz sentido quando a skill produz um resultado fechado, não
+quando a convenção precisa ficar em contexto enquanto se escreve. Continua opcional — ao
+contrário de `effort`, nenhuma skill deste repositório o declara hoje.
 
 ## Seções do corpo
 
@@ -220,7 +246,8 @@ Rode antes de commitar uma skill nova ou alterada.
 |---|---|
 | `name` | Igual ao nome da pasta |
 | `model` | Presente, e entre `haiku`, `sonnet`, `opus` |
-| Frontmatter | Exatamente os três campos; nenhum a mais, nenhum a menos |
+| `effort` | Presente, e entre `low`, `medium`, `high` |
+| Frontmatter | Exatamente os quatro campos; nenhum a mais, nenhum a menos |
 | `description` | Abaixo de 1024 caracteres, sem `<` nem `>` |
 | Seções | As sete obrigatórias, mais o rodapé e o título |
 | Código | Nenhum bloco executável no `SKILL.md` |

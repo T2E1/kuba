@@ -1,6 +1,7 @@
 ---
 name: constructor
 model: sonnet
+effort: medium
 description: Estrutura do constructor de um custom element — `super()` primeiro, Shadow DOM em seguida quando o componente é visual, `delegatesFocus` conforme a categoria, nada de atributo, DOM externo, listener ou chamada assíncrona. Use ao criar um Web Component novo, ao implementar ou revisar o constructor de um Custom Element, ou ao investigar por que um atributo lido na inicialização vem vazio. Não use para decidir a ordem dos demais membros da classe — use a skill anatomy.
 ---
 

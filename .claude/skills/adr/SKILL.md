@@ -1,6 +1,7 @@
 ---
 name: adr
 model: opus
+effort: high
 description: Escreve Architecture Decision Records em docs/adr/ — decisão arquitetural registrada com contexto, alternativas consideradas, consequências positivas e negativas, e ciclo de vida por status (Proposed, Accepted, Deprecated, Superseded). Use ao escolher entre tecnologias, patterns ou abordagens com impacto de longo prazo, ao revisar ou substituir uma decisão anterior, ou quando alguém perguntar "por que fizemos assim?" e a resposta não estiver escrita em lugar nenhum. Não use para decisões reversíveis de baixo impacto.
 ---
 

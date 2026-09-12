@@ -112,8 +112,9 @@ def check_rules(errors):
 # skills
 # ─────────────────────────────────────────────────────────────────────────────
 def check_skills(errors):
-    FM = {"name", "model", "description"}
+    FM = {"name", "model", "effort", "description"}
     MODELS = {"haiku", "sonnet", "opus"}
+    EFFORTS = {"low", "medium", "high"}
     SECTIONS = ["## O que é", "## Quando usar", "## Como aplicar", "## Exemplos",
               "## Checklist", "## Rules relacionadas", "## Skills relacionadas"]
     EXEC = {"js", "javascript", "ts", "typescript", "jsx", "tsx", "css", "html", "json"}
@@ -143,6 +144,9 @@ def check_skills(errors):
             models[mo.group(1)] += 1
             if mo.group(1) not in MODELS:
                 errors[s].append(f"invalid model: {mo.group(1)}")
+        if eo := re.search(r"^effort:\s*(\S+)", fm, re.M):
+            if eo.group(1) not in EFFORTS:
+                errors[s].append(f"invalid effort: {eo.group(1)}")
         if d := re.search(r"^description:\s*(.+)$", fm, re.M):
             if len(d.group(1)) > 1024:
                 errors[s].append(f"description {len(d.group(1))} > 1024")

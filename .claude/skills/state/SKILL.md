@@ -1,6 +1,7 @@
 ---
 name: state
 model: sonnet
+effort: medium
 description: Estado de custom element via Element Internals API — `internals.states.add/delete` em vez de atributo `data-*`, acessível no CSS pela pseudo-classe `:state()`, com contrato Symbol e decorator `around` fazendo a ponte entre o setter e os internals. Use ao criar estado gerenciável de um componente (ativo, colapsado, desabilitado, visível), ao estilizar por estado no CSS, ou ao revisar código que usa atributo para representar estado interno. Não use para valor de dado do componente — isso é atributo refletido.
 ---
 

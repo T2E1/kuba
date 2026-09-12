@@ -1,6 +1,7 @@
 ---
 name: token
 model: sonnet
+effort: medium
 description: Projeta a arquitetura de design tokens de um design system — nomeia tokens combinando níveis (namespace, object, category, concept, property, variant, state, scale, mode) segundo a taxonomia de Nathan Curtis, decide o namespacing e a promoção de local para global, e aplica os tokens corretamente em CSS. Use quando o usuário pedir para "nomear um token", "criar um design token", "definir a taxonomia de tokens", "revisar nomes de tokens", "organizar a arquitetura de tokens", "renomear tokens de tema/dark mode", quando estiver escrevendo ou revisando CSS com cor, espaçamento ou tipografia, ou quando encontrar valores hardcoded em estilos.
 ---
 

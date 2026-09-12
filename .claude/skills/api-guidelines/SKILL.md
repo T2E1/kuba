@@ -1,6 +1,7 @@
 ---
 name: api-guidelines
 model: opus
+effort: high
 description: Design da superfície pública de uma biblioteca pelas Rust API Guidelines — o checklist de 11 categorias com os itens C-CASE, C-CONV, C-GETTER, C-WORD-ORDER, C-METHOD, C-CUSTOM-TYPE, C-BUILDER, C-VALIDATE, C-STRUCT-PRIVATE e C-NEWTYPE-HIDE, mais o idioma de interior aninhado com superfície plana. Use ao definir o que um pacote exporta, ao nomear método de conversão ou getter, ao decidir se um argumento deve ser boolean, ou ao avaliar se uma mudança quebra consumidor. Não use para organizar arquivos em pastas — é a skill colocation; nem para escrever o arquivo index — é a skill revelation.
 ---
 

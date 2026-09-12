@@ -1,6 +1,7 @@
 ---
 name: anti-pattern
 model: opus
+effort: high
 description: Catálogo de 26 anti-patterns e code smells com sintoma, severidade e refatoração — The Blob, Spaghetti Code, Long Method, Feature Envy, Shotgun Surgery, Lava Flow, Middle Man, Poltergeists e os demais, cada um mapeado para a rule correspondente. Use ao revisar código e reconhecer que algo está errado sem saber nomear, ao responder "o que há de errado neste código?", ao escrever comentário de PR que precisa de diagnóstico preciso, ou ao decidir qual refatoração aplicar. Não use para calibrar se a violação bloqueia o merge — use a skill quality.
 ---
 

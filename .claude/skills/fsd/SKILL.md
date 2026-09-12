@@ -1,6 +1,7 @@
 ---
 name: fsd
 model: opus
+effort: high
 description: Feature-Sliced Design — a arquitetura de frontend em três níveis (layer, slice, segment), com as 7 layers padronizadas, a regra de import estritamente descendente, o public API por index e a notação @x para cross-import entre entities. Use ao estruturar uma aplicação frontend, ao decidir em que layer um módulo mora, ao diagnosticar import que sobe de camada, ou ao avaliar se uma metodologia de decomposição serve ao projeto. Não use para organizar os pacotes de uma biblioteca — FSD é explicitamente para aplicações, e em biblioteca ele colapsa tudo em shared; use as skills package e colocation.
 ---
 

@@ -1,6 +1,7 @@
 ---
 name: getter
 model: sonnet
+effort: medium
 description: Quando um getter se justifica apesar da rule 008 — valor padrão via `??=`, transformação ou formatação na leitura, inicialização preguiçosa de recurso caro, e leitura derivada de um único campo privado. Use ao criar getter que precisa tratar a leitura de um campo `#`, ao revisar getter que apenas devolve o campo sem lógica, ou ao decidir entre getter e método de intenção. Não use para expor estado interno sem tratamento — isso é o getter puro que a rule 008 proíbe.
 ---
 

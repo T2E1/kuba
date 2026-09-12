@@ -1,6 +1,7 @@
 ---
 name: codetags
 model: haiku
+effort: low
 description: Marca o código com tags de comentário padronizadas no formato `// TAG(rule-id): descrição` — TODO, FIXME, OPTIMIZE, REFACTOR, HACK, SECURITY, DEPRECATED e as demais, cada uma com severidade e ação própria. Use ao registrar débito técnico que não será corrigido agora, ao anotar uma violação de rule encontrada em revisão, ao marcar bug conhecido, otimização pendente ou problema de segurança que precise ficar rastreável no código-fonte. Não use como substituto de correção quando corrigir é possível na hora.
 ---
 

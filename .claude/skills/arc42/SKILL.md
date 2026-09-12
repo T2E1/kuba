@@ -1,6 +1,7 @@
 ---
 name: arc42
 model: opus
+effort: high
 description: Documentação arquitetural no template arc42 — 12 seções em docs/arc42/ cobrindo objetivos, restrições, contexto, estratégia de solução, blocos de construção, runtime, deployment, conceitos transversais, índice de decisões, requisitos de qualidade, riscos e glossário. Use ao documentar a arquitetura de um sistema ou feature já implementada, ao atualizar a documentação após uma mudança arquitetural, ou ao criar a documentação inicial de um projeto novo. Não use para registrar uma decisão isolada — use a skill adr.
 ---
 

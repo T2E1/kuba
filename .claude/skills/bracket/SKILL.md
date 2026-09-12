@@ -1,6 +1,7 @@
 ---
 name: bracket
 model: sonnet
+effort: medium
 description: Uso de Symbol para métodos privados e contratos de interface entre mixins e componentes — toda chave de método bracket exportada por `interfaces.js`, mesmo com um único consumidor no próprio módulo, e `Symbol.for()` reservado só para contrato que atravessa pacotes. Use ao definir método privado que um decorator precisa alcançar, ao criar contrato entre mixin e componente, ou ao substituir privacidade por convenção de underscore. Não use para estado privado simples — campo `#` resolve e é mais direto.
 ---
 

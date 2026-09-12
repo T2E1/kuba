@@ -1,6 +1,7 @@
 ---
 name: anatomy
 model: haiku
+effort: low
 description: Ordem de declaração dos membros dentro de uma classe — campos privados, getters/setters, getters/setters estáticos, constructor, métodos, métodos estáticos e bloco static, nessa sequência, com ordenação alfabética dentro de cada grupo. Use ao criar ou refatorar uma classe, Web Component ou módulo com vários membros, ou ao revisar código onde a ordem dos membros parece arbitrária. Não use para ordenar propriedades de objeto literal ou imports — use a skill alphabetical.
 ---
 

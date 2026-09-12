@@ -1,6 +1,7 @@
 ---
 name: quality
 model: opus
+effort: high
 description: Modelo de Qualidade McCall — 12 fatores em três dimensões (Operação, Revisão, Transição) com sistema de pontuação de 1 a 5, usado para calibrar a severidade de uma violação e decidir se ela bloqueia ou não. Use ao revisar código e precisar decidir "isso bloqueia o merge?", ao definir critérios de aceitação de uma feature, ao priorizar cobertura de testes, ou ao justificar por que uma violação é crítica e outra é sugestão. Não use como substituto das rules — é a camada de calibração de severidade sobre elas.
 ---
 

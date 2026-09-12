@@ -1,6 +1,7 @@
 ---
 name: render
 model: sonnet
+effort: medium
 description: Renderização de custom elements pelos decorators `paint`, `repaint` e `retouch` — `paint` monta HTML e CSS na conexão, `repaint` reprocessa template e estilos quando a estrutura muda, `retouch` recalcula só os estilos quando apenas a aparência muda. Use ao criar componente visual, ao decidir qual decorator um setter recebe, ou ao investigar re-render desnecessário. Não use para estado que só afeta CSS via `:state()` — use a skill state.
 ---
 

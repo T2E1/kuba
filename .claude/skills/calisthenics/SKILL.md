@@ -1,6 +1,7 @@
 ---
 name: calisthenics
 model: opus
+effort: high
 description: As 9 regras de Object Calisthenics (Jeff Bay) para design orientado a objetos em nível tático — indentação única, sem else, encapsular primitivos, coleções de primeira classe, um ponto por linha, sem abreviações, classes pequenas, sem getters/setters, tell don't ask. Use ao escrever ou refatorar classes e métodos, ao revisar código com aninhamento profundo, `else`, `string` representando conceito de domínio, `array` cru retornado de método de domínio, encadeamento `a.getB().getC()`, nomes abreviados, classe grande ou getter/setter trivial. Não use para design de interfaces e dependências entre classes — use a skill solid.
 ---
 
