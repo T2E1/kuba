@@ -61,6 +61,7 @@ Idioma obrigatório: português brasileiro.
 | Caso | Correto | Incorreto |
 |---|---|---|
 | Seção §10 com cenários mensuráveis vs. adjetivos | [quality-requirements.valid.md](examples/quality-requirements.valid.md) | [quality-requirements.invalid.md](examples/quality-requirements.invalid.md) |
+| Seção §05 decomposta em níveis vs. níveis e código misturados | [building-block-view.valid.md](examples/building-block-view.valid.md) | [building-block-view.invalid.md](examples/building-block-view.invalid.md) |
 
 ## Checklist
 
@@ -115,5 +116,5 @@ Fonte: https://arc42.org
 ---
 
 **Criado em**: 2026-04-01
-**Atualizado em**: 2026-08-09
-**Versão**: 2.0
+**Atualizado em**: 2026-09-12
+**Versão**: 2.1

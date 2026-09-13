@@ -88,6 +88,7 @@ resposta errada.
 | Caso | Correto | Incorreto |
 |---|---|---|
 | A ideia na camada certa versus duplicada em duas | [layer-choice.valid.md](examples/layer-choice.valid.md) | [layer-choice.invalid.md](examples/layer-choice.invalid.md) |
+| Rule só com o limite vs. rule que ensina o procedimento da skill | [rule-teaches-syntax.valid.md](examples/rule-teaches-syntax.valid.md) | [rule-teaches-syntax.invalid.md](examples/rule-teaches-syntax.invalid.md) |
 
 ## Checklist
 
@@ -151,5 +152,5 @@ cita a rule na seção `Rules relacionadas`. É o par mais comum do repositório
 ---
 
 **Criado em**: 2026-08-11
-**Atualizado em**: 2026-08-11
-**Versão**: 1.0
+**Atualizado em**: 2026-09-12
+**Versão**: 1.1

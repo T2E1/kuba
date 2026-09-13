@@ -89,6 +89,7 @@ Cada arquivo em `references/` traz o exemplo problemático, o refatorado e a té
 | Caso | Correto | Incorreto |
 |---|---|---|
 | Comentário de review que nomeia o pattern e a rule | [review-comment.valid.md](examples/review-comment.valid.md) | [review-comment.invalid.md](examples/review-comment.invalid.md) |
+| Responsabilidades decompostas vs. The Blob acumulando tudo numa classe | [the-blob-decomposition.valid.js](examples/the-blob-decomposition.valid.js) | [the-blob-decomposition.invalid.js](examples/the-blob-decomposition.invalid.js) |
 
 ## Checklist
 
@@ -147,5 +148,5 @@ para rules anteriores:
 ---
 
 **Criado em**: 2026-04-01
-**Atualizado em**: 2026-08-09
-**Versão**: 2.0
+**Atualizado em**: 2026-09-12
+**Versão**: 2.1

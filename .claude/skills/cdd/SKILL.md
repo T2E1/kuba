@@ -73,6 +73,7 @@ Aplicação em code review detalhada em [code-review-application.md](references/
 | Caso | Correto | Incorreto |
 |---|---|---|
 | Cálculo de ICP com os quatro componentes decompostos | [icp-calculation.valid.md](examples/icp-calculation.valid.md) | [icp-calculation.invalid.md](examples/icp-calculation.invalid.md) |
+| Aninhamento e responsabilidades extraídos vs. três níveis misturados | [nesting-reduction.valid.js](examples/nesting-reduction.valid.js) | [nesting-reduction.invalid.js](examples/nesting-reduction.invalid.js) |
 
 ## Checklist
 
@@ -127,5 +128,5 @@ diferença de 4 indica que os dois estão contando dimensões diferentes.
 ---
 
 **Criado em**: 2026-04-01
-**Atualizado em**: 2026-08-09
-**Versão**: 2.0
+**Atualizado em**: 2026-09-12
+**Versão**: 2.1

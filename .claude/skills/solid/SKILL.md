@@ -68,6 +68,7 @@ e abstrações pequenas empurram as classes para SRP.
 | Caso | Correto | Incorreto |
 |---|---|---|
 | SRP, OCP e DIP violados juntos, e a versão com os cinco aplicados | [multiple-violations.valid.js](examples/multiple-violations.valid.js) | [multiple-violations.invalid.js](examples/multiple-violations.invalid.js) |
+| Interface segregada por cliente vs. interface gorda com Refused Bequest | [isp-fat-interface.valid.js](examples/isp-fat-interface.valid.js) | [isp-fat-interface.invalid.js](examples/isp-fat-interface.invalid.js) |
 
 ## Checklist
 
@@ -116,5 +117,5 @@ escolha deve viver numa Factory. Ver a exceção de OCP na rule 011.
 ---
 
 **Criado em**: 2026-04-01
-**Atualizado em**: 2026-08-09
-**Versão**: 2.0
+**Atualizado em**: 2026-09-12
+**Versão**: 2.1

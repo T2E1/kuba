@@ -61,6 +61,7 @@ Os diagramas são escritos em Mermaid, versionados junto com o código.
 | Caso | Correto | Incorreto |
 |---|---|---|
 | Um nível por diagrama vs. níveis misturados | [level-separation.valid.md](examples/level-separation.valid.md) | [level-separation.invalid.md](examples/level-separation.invalid.md) |
+| Nível 4 (Code) só onde a estrutura não é óbvia vs. diagrama que só copia a assinatura | [code-level-worth.valid.md](examples/code-level-worth.valid.md) | [code-level-worth.invalid.md](examples/code-level-worth.invalid.md) |
 
 ## Checklist
 
@@ -118,5 +119,5 @@ Fonte: Simon Brown, https://c4model.com
 ---
 
 **Criado em**: 2026-04-01
-**Atualizado em**: 2026-08-09
-**Versão**: 2.0
+**Atualizado em**: 2026-09-12
+**Versão**: 2.1

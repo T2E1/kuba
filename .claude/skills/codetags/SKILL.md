@@ -82,6 +82,7 @@ com severidade e uso em [tags-reference.md](references/tags-reference.md).
 | Caso | Correto | Incorreto |
 |---|---|---|
 | Tag que ensina vs. comentário livre e vago | [codetag.valid.js](examples/codetag.valid.js) | [codetag.invalid.js](examples/codetag.invalid.js) |
+| Tag conforme a natureza do problema vs. TODO genérico escondendo severidade | [tag-selection.valid.js](examples/tag-selection.valid.js) | [tag-selection.invalid.js](examples/tag-selection.invalid.js) |
 
 ## Checklist
 
@@ -138,5 +139,5 @@ Integrity — o resto tem tag própria.
 ---
 
 **Criado em**: 2026-04-01
-**Atualizado em**: 2026-08-09
-**Versão**: 2.0
+**Atualizado em**: 2026-09-12
+**Versão**: 2.1
