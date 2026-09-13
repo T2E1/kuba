@@ -54,6 +54,12 @@ sobre percentual. Afirmar um número seria inventá-lo. Configurar a medição �
 | Contexto | Skill |
 |---|---|
 | Estrutura do teste e do que se testa num componente | [preview](../skills/preview/SKILL.md) |
+| As três fases do corpo de um teste | [aaa](../skills/aaa/SKILL.md) |
+| Setup/teardown compartilhado entre testes do mesmo arquivo | [fixture](../skills/fixture/SKILL.md) |
+| Cenário fixo e nomeado, reaproveitado entre testes | [object-mother](../skills/object-mother/SKILL.md) |
+| Cenário que varia por teste, construído passo a passo | [test-data-builder](../skills/test-data-builder/SKILL.md) |
+| Interação com o componente encapsulada numa classe | [page-object](../skills/page-object/SKILL.md) |
+| Isolar dependência com Spy, Stub ou Mock | [test-double](../skills/test-double/SKILL.md) |
 | Estado do elemento e `internals.states` | [state](../skills/state/SKILL.md) |
 | Evento despachado e sua propagação | [event](../skills/event/SKILL.md) |
 | Fluxo assíncrono entre elementos | [dataflow](../skills/dataflow/SKILL.md) |
@@ -82,19 +88,26 @@ Aplicam-se ao código de teste como a qualquer outro:
    lista do que precisa ser provado; o resto é implementação.
 2. **Ler o componente** o suficiente para saber o que ele promete. Não o bastante para
    testar como ele cumpre.
-3. **Escrever um teste por comportamento**, no padrão AAA, com nome que descreve o efeito
-   observável: `dispatches clicked carrying its value`, não `tests click handler`.
+3. **Escrever um teste por comportamento**, no padrão AAA (skill `aaa`), com nome que
+   descreve o efeito observável: `dispatches clicked carrying its value`, não `tests
+   click handler`.
 4. **Usar os helpers.** `mount()` para montar markup, `inner()` para alcançar o shadow
    root — `@paint` adia o primeiro render num `requestAnimationFrame`, então nada existe
    quando o teste começa —, `clickInner()` para clicar no controle interno: listeners de
    `@on` vivem no `shadowRoot` e não veem clique no host.
-5. **Cobrir os casos extremos**: atributo ausente, valor vazio, elemento desabilitado,
+5. **Reduzir o Arrange quando ele se repetir**: um cenário fixo vira `object-mother`, um
+   cenário que varia por teste vira `test-data-builder`, o que é comum a todo teste do
+   arquivo vira `fixture`. Um componente com muitos seletores internos repetidos vira
+   `page-object`.
+6. **Isolar dependência externa com dublê** (skill `test-double`) quando o foco do teste
+   não é a dependência em si — nunca dublar o próprio componente sob teste.
+7. **Cobrir os casos extremos**: atributo ausente, valor vazio, elemento desabilitado,
    remoção do DOM durante operação pendente, evento sem listener.
-6. **Cobrir a associação a formulário** quando o elemento participa de um — `value`,
+8. **Cobrir a associação a formulário** quando o elemento participa de um — `value`,
    `willValidate`, submit e reset por um `<form>` real.
-7. **Rodar `bun run test`.** Verde é condição, não conclusão.
-8. **Perguntar de cada teste: o que quebra se eu apagar esta linha de produção?** Se nada
-   quebra, o teste não prova nada — reescrever.
+9. **Rodar `bun run test`.** Verde é condição, não conclusão.
+10. **Perguntar de cada teste: o que quebra se eu apagar esta linha de produção?** Se nada
+    quebra, o teste não prova nada — reescrever.
 
 ### Armadilhas deste ambiente
 
@@ -120,5 +133,5 @@ teste que falha e a causa observada, sem corrigir o código.
 ---
 
 **Criado em**: 2026-08-10
-**Atualizado em**: 2026-08-21
-**Versão**: 1.1
+**Atualizado em**: 2026-09-13
+**Versão**: 1.2

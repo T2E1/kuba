@@ -123,7 +123,7 @@ Toda skill declara o modelo. Nenhuma fica omissa: a declaração é a decisão r
 | Modelo | Quantas | Quando | Skills |
 |---|---|---|---|
 | `haiku` | 4 | O trabalho é mecânico e verificável — reordenar, marcar. Nenhuma decisão de design pendente. | `alphabetical`, `anatomy`, `revelation`, `codetags` |
-| `sonnet` | 18 | Aplicação de convenção conhecida, com julgamento limitado a um arquivo ou componente. | `bracket`, `colocation`, `constructor`, `dataflow`, `enum`, `event`, `getter`, `jsdoc`, `method`, `mixin`, `naming`, `preview`, `prose`, `render`, `setter`, `state`, `token`, `types` |
+| `sonnet` | 24 | Aplicação de convenção conhecida, com julgamento limitado a um arquivo ou componente. | `aaa`, `bracket`, `colocation`, `constructor`, `dataflow`, `enum`, `event`, `fixture`, `getter`, `jsdoc`, `method`, `mixin`, `naming`, `object-mother`, `page-object`, `preview`, `prose`, `render`, `setter`, `state`, `test-data-builder`, `test-double`, `token`, `types` |
 | `opus` | 24 | Julgamento arquitetural, trade-off entre princípios, diagnóstico. Rebaixar aqui custa qualidade na decisão **e** no código que vem depois dela. | `adr`, `anti-pattern`, `api-guidelines`, `arc42`, `bdd`, `big-o`, `c4-model`, `calisthenics`, `cdd`, `clean-code`, `complexity`, `framework-design-guidelines`, `fsd`, `gof`, `interview`, `lld`, `package`, `package-by-feature`, `patterns`, `poeaa`, `quality`, `solid`, `standard`, `twelve-factor` |
 
 Na dúvida, **`opus`**. O custo de um turno mais caro é menor que o de uma decisão de
