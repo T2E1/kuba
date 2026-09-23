@@ -18,7 +18,7 @@ bun install
 
 | Command | Does |
 |---|---|
-| `bun run dev` | Serves the documentation site at `localhost:3000`. |
+| `bun run dev` | Serves the documentation site at `localhost:5173`. |
 | `bun run test` | Runs the test suite in a real Chromium, via Vitest. |
 | `bun run test:watch` | The same, in watch mode. |
 | `bun run check` | Biome lint + format (also runs on pre-commit). |

@@ -30,8 +30,8 @@ jobs:
             README.md CONTRIBUTING.md SECURITY.md CODE_OF_CONDUCT.md CHANGELOG.md
           fail: true
 
-      # Built rather than read from source: '/foundations/naming' in an .mdx
-      # file is a route Docusaurus resolves at build time, not a path lychee
+      # Built rather than read from source: '/foundations/naming' in a .md
+      # file is a route VitePress resolves at build time, not a path lychee
       # can check on disk or a scheme it can filter out. Building first turns
       # every internal link into a real file lychee resolves against
       # --root-dir, and every external link into a real HTTP request — so a

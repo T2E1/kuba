@@ -24,14 +24,14 @@ jobs:
       - uses: actions/checkout@v4
 
       # The docs are a real consumer of the published package: the site loads
-      # kuba from the CDN at a pinned version (website/docusaurus.config.js).
+      # kuba from the CDN at a pinned version (website/.vitepress/config.mts).
       # A pin pointing at a version that was never published deploys a site
       # where every live example is dead, and nothing else would catch it —
       # so fail here instead of shipping it.
       - name: Verify the pinned kuba version is published
         run: |
-          version=$(grep -oP "KUBA_VERSION = '\K[^']+" website/docusaurus.config.js)
-          echo "website/docusaurus.config.js pins @t2e1/kuba@$version"
+          version=$(grep -oP "KUBA_VERSION = '\K[^']+" website/.vitepress/config.mts)
+          echo "website/.vitepress/config.mts pins @t2e1/kuba@$version"
           curl -fsSL -o /dev/null "https://cdn.jsdelivr.net/npm/@t2e1/kuba@$version/dist/kuba.js"
           curl -fsSL -o /dev/null "https://cdn.jsdelivr.net/npm/@t2e1/kuba@$version/dist/kuba.css"
 
@@ -40,7 +40,7 @@ jobs:
           # fail: during a release the two are briefly out of step by design.
           current=$(node -p "require('./package.json').version")
           if [ "$version" != "$current" ]; then
-            echo "::warning::docs pin ($version) is behind package.json ($current) — bump it in website/docusaurus.config.js"
+            echo "::warning::docs pin ($version) is behind package.json ($current) — bump it in website/.vitepress/config.mts"
           fi
 
       - uses: actions/setup-node@v4
@@ -54,6 +54,13 @@ jobs:
         run: |
           npm ci
           npm run build
+
+      # VitePress builds and exits 0 even when it finds no page to render —
+      # a wrong srcDir, or content that never got converted, produces a
+      # directory with assets and a 404 page and nothing else. Without this
+      # check, that deploys as a site where every URL is a 404.
+      - name: Verify the build produced a home page
+        run: test -f website/build/index.html
 
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3

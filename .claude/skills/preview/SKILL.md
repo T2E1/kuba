@@ -18,7 +18,7 @@ Neste repositório a demonstração vive em dois lugares, e os dois transcrevem 
 
 | Onde | O que prova | Quem escreve |
 |---|---|---|
-| ` ```html preview ` em `website/docs/components/<nome>.mdx` | Que o componente aparenta e se comporta como descrito | agent `writer` |
+| ` ```html preview ` em `website/docs/components/<nome>.md` | Que o componente aparenta e se comporta como descrito | agent `writer` |
 | `packages/<categoria>/<nome>/<nome>.test.js` | Que cada evento documentado é mesmo disparado | agent `tester` |
 
 Um fato do repositório molda todo o resto: **os exemplos da página rodam contra o pacote
@@ -107,9 +107,18 @@ não importa (rule 023).
 ### O exemplo aparece quebrado na página publicada
 
 **Causa:** usa recurso mais novo que a versão pinada em `KUBA_VERSION`, no topo de
-`website/docusaurus.config.js`.
+`website/.vitepress/config.mts`.
 **Solução:** conferir o pin. Ele fica para trás quando um release não o atualiza — é
 passo do método do `releaser`.
+
+### Nenhum bloco ` ```html preview ` renderiza ao vivo
+
+**Causa:** o plugin markdown-it `website/.vitepress/plugins/preview.js` ainda é um no-op —
+a versão remark que rodava no Docusaurus não é portável para markdown-it, e a regra sobre
+`md.renderer.rules.fence` está pendente do `developer`
+(`website/.vitepress/plugins/preview.js:11`).
+**Solução:** nada a fazer na página. O bloco cai no realce de sintaxe padrão, e volta a
+montar ao vivo quando o plugin for escrito — escrever o exemplo como se ele já rodasse.
 
 ### Não sei se um estado merece demonstração
 
@@ -149,5 +158,5 @@ conteúdo não interceptar o clique" —, não uma lista de tipos aceitos.
 ---
 
 **Criado em**: 2026-08-10
-**Atualizado em**: 2026-08-25
-**Versão**: 1.1
+**Atualizado em**: 2026-09-23
+**Versão**: 1.2

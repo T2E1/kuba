@@ -5,7 +5,7 @@ Incorreto em: `page-structure.invalid.md`
 Este par é sobre **estrutura e o que demonstrar**. Para a linguagem da prosa — o que
 denuncia texto gerado —, veja a skill [prose](../../prose/SKILL.md).
 
-Adaptado de `website/docs/components/button.mdx`.
+Adaptado de `website/docs/components/button.md`.
 
 ---
 

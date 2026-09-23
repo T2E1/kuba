@@ -61,9 +61,9 @@ entre si e não veem esta conversa — recebem o escopo que eu passo, e devolvem
 | `reviewer` | Julgar mudança pronta contra as 31 rules que o Biome não vê | O que `bun run lint` já pega |
 | `surveyor` | Medir a organização existente de um diretório — grafo real, fan-in, fronteira, nome de agrupamento — e emitir achados | Decidir a estrutura nova, ou julgar o código dentro dos arquivos |
 | `investigator` | "Por que isto acontece" sem resposta óbvia, ou mapear pacote desconhecido | Escolher entre alternativas — é do `architect` |
-| `writer` | Página de `website/docs/`, tradução, `README`, `CONTRIBUTING` | JSDoc no código — é do `developer` |
+| `writer` | Página de `website/docs/`, sua navegação, tradução, `README`, `CONTRIBUTING` | JSDoc no código — é do `developer`; mecanismo de build do site — é do `builder` |
 | `releaser` | Julgar se uma mudança quebra consumidor, e preparar versão | Commit corriqueiro — é o `/ship` |
-| `builder` | `biome.json`, os configs, hooks de husky, workflows, o que entra em `dist/` | Código de `src/` ou `packages/` |
+| `builder` | `biome.json`, os configs, hooks de husky, workflows, o que entra em `dist/`, o mecanismo de build de `website/.vitepress/` | Código de `src/` ou `packages/`; conteúdo ou navegação de `website/` |
 | `curator` | O consumidor corrige a entrega de qualquer ofício, e a lacuna que deixou passar o erro precisa ser localizada e fechada em `.claude/` | Corrigir a entrega em si, ou decidir a forma de algo novo |
 
 ### Fluxos que se repetem
@@ -110,9 +110,15 @@ precaução. Eles julgam e relatam; a edição volta para mim ou para outro ofí
 | `surveyor` | A organização **entre** os arquivos |
 
 Os outros sete escrevem, e **cada um tem um artefato exclusivo** — `developer` o código,
-`designer` token e estado visual, `tester` os `*.test.js`, `writer` o `website/`, `builder`
-os configs, `releaser` versão e CHANGELOG, `curator` o `.claude/`. Nenhum toca o arquivo de
-outro, e é isso que permite rodar dois em paralelo sem risco.
+`designer` token e estado visual, `tester` os `*.test.js`, `writer` o conteúdo e a
+navegação de `website/docs/` e `website/.vitepress/navigation/`, `builder` os configs —
+incluindo o mecanismo de build de `website/.vitepress/` (`config.mts`, `plugins/`,
+`theme/`) —, `releaser` versão e CHANGELOG — incluindo a única linha de
+`KUBA_VERSION` dentro de `website/.vitepress/config.mts` —, `curator` o `.claude/`.
+Nenhum toca o arquivo de outro, e é isso que permite rodar dois em paralelo sem risco.
+`website/.vitepress/` é o único diretório com essa divisão fina — navegação e mecanismo
+de build são coisas diferentes que mudam por razões diferentes, mesmo vizinhas no
+disco.
 
 ### As skills que nenhum ofício carrega
 

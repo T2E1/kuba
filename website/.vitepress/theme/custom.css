@@ -1,0 +1,53 @@
+/**
+ * Tokens de cor do kuba (packages/pixel/tokens/color.css) mapeados para as
+ * variáveis `--vp-c-*` que o tema padrão do VitePress usa. Porta o que
+ * `website/src/css/custom.css` fazia para o Infima (Docusaurus) — mesma
+ * escala de roxo, nenhuma paleta nova.
+ *
+ * `--color-primary*` já é carregado globalmente pelo `<link>` para
+ * `kuba.css` em `head` (ver `config.mts`) e já resolve claro/escuro sozinho
+ * via `light-dark()`. O VitePress expõe `color-scheme: dark` em `html.dark`
+ * (node_modules/vitepress/dist/client/theme-default/styles/base.css:28),
+ * então essas três linhas não precisam de bloco `.dark` separado — o
+ * mapeamento vale para os dois modos.
+ */
+:root {
+  --vp-c-brand-1: var(--color-primary);
+  --vp-c-brand-2: var(--color-primary-dark);
+  --vp-c-brand-3: var(--color-primary-darker);
+  --vp-c-brand-soft: var(--color-primary-lighter);
+
+  --vp-code-font-size: 95%;
+}
+
+/**
+ * Lacuna registrada: `--docusaurus-highlighted-code-line-bg` (fundo da linha
+ * destacada em bloco de código) não tinha um token do design system por
+ * trás — era um `rgba(0, 0, 0, ...)` solto, não algo em
+ * `packages/pixel/tokens/color.css`. Sem token de origem para portar, o
+ * equivalente `--vp-code-line-highlight-color` fica no padrão do VitePress
+ * (`--vp-c-default-soft`) em vez de recriar um valor mágico aqui.
+ */
+
+/**
+ * `--vp-c-brand-1` (#6d5cae claro / #7a5ed1 escuro) passa 4.5:1 contra o
+ * fundo da página no modo claro (~5.53:1), mas fica abaixo do mínimo de
+ * texto normal no escuro (~3.55:1 contra `--vp-c-bg`, que é #1b1b1f) —
+ * ainda acima de 3:1, o piso para texto grande e para elemento de
+ * interface. Os componentes de `home/` por isso não usam `--vp-c-brand-1`
+ * como cor de texto de corpo; reservam-no para link, heading grande,
+ * elemento de interface ou texto sobre `--vp-c-brand-soft`.
+ */
+
+@media (prefers-reduced-motion: reduce) {
+  /* Reset canônico do WCAG 2.1 SC 2.3.3 — qualquer transição ou animação
+     nos componentes de `home/` respeita a preferência do sistema. */
+  *,
+  ::before,
+  ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

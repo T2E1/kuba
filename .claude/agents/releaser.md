@@ -78,8 +78,8 @@ Sem intervalo explícito, o padrão é desde a última tag de versão em `CHANGE
 5. **Escrever a nota de migração**, se houver breaking: o que era, o que passa a ser, e
    como converter. Sem isso, um major é só um número.
 6. **Atualizar o pin do CDN.** O site carrega `@t2e1/kuba@<versão>` pela constante
-   `KUBA_VERSION` no topo de `website/docusaurus.config.js:7` — fonte única do pin — e o
-   mesmo número aparece nas três `learn/installation.mdx`. O workflow
+   `KUBA_VERSION` no topo de `website/.vitepress/config.mts:13` — fonte única do pin — e o
+   mesmo número aparece nas três `learn/installation.md`. O workflow
    `.github/workflows/pages-deploy.yml` lê essa constante para checar se a versão pinada
    já foi publicada. Ficar para trás faz os exemplos ao vivo rodarem contra código antigo
    — é dívida silenciosa, porque a página continua carregando.
@@ -127,5 +127,5 @@ do que quebra, antes do bump.
 ---
 
 **Criado em**: 2026-08-10
-**Atualizado em**: 2026-08-25
-**Versão**: 1.2
+**Atualizado em**: 2026-09-23
+**Versão**: 1.3
