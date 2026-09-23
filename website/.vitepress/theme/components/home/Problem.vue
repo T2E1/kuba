@@ -64,81 +64,99 @@ function onTabKeydown(event) {
 
 <template>
   <section class="problem">
-    <div class="intro">
-      <h2 class="title"><slot name="title" /></h2>
-      <div class="body"><slot name="body" /></div>
-    </div>
-    <div class="comparison">
-      <div class="column">
-        <p class="label" id="code-before-tablist-label"><slot name="code-before-label" /></p>
-        <div class="tablist" role="tablist" aria-labelledby="code-before-tablist-label">
-          <button
-            v-for="framework in frameworks"
-            :id="`tab-${framework}`"
-            :key="framework"
-            :ref="(element) => setTabRef(framework, element)"
-            class="tab"
-            role="tab"
-            type="button"
-            :aria-controls="`panel-${framework}`"
-            :aria-selected="activeFramework === framework ? 'true' : 'false'"
-            :tabindex="activeFramework === framework ? 0 : -1"
-            @click="selectFramework(framework)"
-            @keydown="onTabKeydown"
-          >
-            <slot :name="`code-before-${framework}-label`" />
-          </button>
-        </div>
-        <div
-          v-for="framework in frameworks"
-          v-show="activeFramework === framework"
-          :id="`panel-${framework}`"
-          :key="framework"
-          :aria-labelledby="`tab-${framework}`"
-          class="code"
-          role="tabpanel"
-          tabindex="0"
-        >
-          <slot :name="`code-before-${framework}`" />
-        </div>
+    <div class="s1-container">
+      <div class="intro">
+        <h2 class="title"><slot name="title" /></h2>
+        <div class="body"><slot name="body" /></div>
       </div>
-      <div class="column">
-        <p class="label"><slot name="code-after-label" /></p>
-        <div class="code"><slot name="code-after" /></div>
+      <div class="comparison">
+        <div class="column">
+          <p class="label" id="code-before-tablist-label"><slot name="code-before-label" /></p>
+          <div class="tablist" role="tablist" aria-labelledby="code-before-tablist-label">
+            <button
+              v-for="framework in frameworks"
+              :id="`tab-${framework}`"
+              :key="framework"
+              :ref="(element) => setTabRef(framework, element)"
+              class="tab"
+              role="tab"
+              type="button"
+              :aria-controls="`panel-${framework}`"
+              :aria-selected="activeFramework === framework ? 'true' : 'false'"
+              :tabindex="activeFramework === framework ? 0 : -1"
+              @click="selectFramework(framework)"
+              @keydown="onTabKeydown"
+            >
+              <slot :name="`code-before-${framework}-label`" />
+            </button>
+          </div>
+          <div
+            v-for="framework in frameworks"
+            v-show="activeFramework === framework"
+            :id="`panel-${framework}`"
+            :key="framework"
+            :aria-labelledby="`tab-${framework}`"
+            class="code"
+            role="tabpanel"
+            tabindex="0"
+          >
+            <slot :name="`code-before-${framework}`" />
+          </div>
+        </div>
+        <div class="column">
+          <p class="label"><slot name="code-after-label" /></p>
+          <div class="code"><slot name="code-after" /></div>
+        </div>
       </div>
     </div>
   </section>
 </template>
 
 <style scoped>
+/* Main.dc.html:88-90,93,98 — padding-top 120px (não 64px, o token de
+   espaçamento que existia aqui antes), coluna de 1040px que agora vem de
+   `.s1-container` em vez de `.problem` mesmo (a cor de fundo precisa ir de
+   ponta a ponta da viewport, não só até 1040px). */
 .problem {
-  margin: 0 auto;
-  max-width: var(--vp-layout-max-width);
-  padding: var(--spacing-xl, 64px) var(--spacing_inset-md, 32px);
+  padding: 120px 0 96px;
+  background: var(--s1-blush);
+  border-top: 2px solid var(--s1-line);
+}
+
+.intro {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
 }
 
 .title {
-  color: var(--vp-c-text-1);
-  font-size: var(--font-size-xl);
-  font-weight: var(--font-weight-bold);
-  line-height: var(--line-height-sm);
-  margin: 0 0 var(--spacing_inset-sm, 24px);
-  /* Mesma medida de leitura usada em Hero.vue — dívida de token já
-     registrada lá. */
-  max-width: 640px;
+  color: var(--s1-ink);
+  font-family: var(--s1-font-base);
+  /* Main.dc.html:92 — 72px/0.95/-0.04em, max-width 920px. */
+  font-size: clamp(2rem, 6vw, 72px);
+  font-weight: 700;
+  font-stretch: 88%;
+  letter-spacing: -0.04em;
+  line-height: 0.95;
+  margin: 0;
+  max-width: 920px;
 }
 
 .body {
-  color: var(--vp-c-text-2);
-  font-size: var(--font-size-xs);
-  line-height: var(--line-height-lg);
-  margin: 0 0 var(--spacing-lg, 56px);
+  color: var(--s1-ink);
+  font-size: 16px;
+  line-height: 25px;
+  margin-top: 48px;
   max-width: 640px;
+  text-align: left;
 }
 
 .comparison {
   display: grid;
-  gap: var(--spacing_inset-md, 32px);
+  gap: 28px;
+  margin-top: 64px;
+  width: 100%;
 }
 
 .column {
@@ -146,15 +164,16 @@ function onTabKeydown(event) {
 }
 
 .label {
-  color: var(--vp-c-text-2);
-  font-family: var(--font-family-highlight);
-  font-size: var(--font-size-xxxs);
-  font-weight: var(--font-weight-medium);
+  color: var(--s1-ink);
+  font-family: var(--s1-font-chrome);
+  font-size: 11px;
+  font-weight: 400;
+  text-transform: lowercase;
   margin: 0 0 var(--spacing_inset-quarck, 4px);
 }
 
 .tablist {
-  border-bottom: var(--border-width-hairline, 1px) solid var(--vp-c-divider);
+  border-bottom: 2px solid var(--s1-line);
   display: flex;
   flex-wrap: wrap;
   gap: var(--spacing_inset-xs, 16px);
@@ -164,15 +183,15 @@ function onTabKeydown(event) {
 .tab {
   background: none;
   border: none;
-  border-bottom: var(--border-width-thick, 4px) solid transparent;
-  color: var(--vp-c-text-2);
+  border-bottom: 4px solid transparent;
+  color: var(--s1-ink);
   cursor: pointer;
-  font-family: var(--font-family-highlight);
-  font-size: var(--font-size-xxs);
-  font-weight: var(--font-weight-medium);
-  /* Sobrepõe a borda de 1px do `.tablist` para a borda de estado ativo (4px)
+  font-family: var(--s1-font-base);
+  font-size: 14px;
+  font-weight: 600;
+  /* Sobrepõe a borda de 2px do `.tablist` para a borda de estado ativo (4px)
      nascer rente a ela, sem deslocar o texto quando a aba é selecionada. */
-  margin-bottom: calc(var(--border-width-hairline, 1px) * -1);
+  margin-bottom: -2px;
   /* 44×44px é o alvo de toque mínimo do WCAG 2.5.5 — critério fixo da
      especificação, não uma medida do design system. */
   min-height: 44px;
@@ -180,14 +199,11 @@ function onTabKeydown(event) {
 }
 
 .tab[aria-selected='true'] {
-  border-bottom-color: var(--vp-c-brand-1);
-  /* `--vp-c-brand-1` como elemento de interface (não texto de corpo) — a
-     mesma ressalva de contraste documentada em custom.css. */
-  color: var(--vp-c-brand-1);
+  border-bottom-color: var(--s1-ink);
 }
 
 .tab:focus-visible {
-  outline: var(--border-width-thin, 2px) solid var(--vp-c-brand-1);
+  outline: 3px dashed var(--s1-line);
   outline-offset: 2px;
 }
 
@@ -205,9 +221,14 @@ function onTabKeydown(event) {
  * texto cru ao lado do card do Hero. A seleção `.code` cobre os quatro
  * blocos — os três painéis de aba e o lado kuba — sem repetir a regra.
  */
+.code {
+  border: 2px solid var(--s1-line);
+  background: var(--s1-code);
+  box-shadow: var(--s1-shadow-hard-lg);
+}
+
 .code :deep(div[class*='language-']) {
-  background: var(--vp-c-bg-soft);
-  border-radius: var(--border-radius-md, 16px);
+  background: none;
   margin: 0;
   overflow-x: auto;
 }

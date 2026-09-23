@@ -14,6 +14,7 @@ defineProps({
 
 <template>
   <div class="preview">
+    <div class="bar"><i /><b>preview</b></div>
     <!--
       O HTML de `code` vem só das páginas de website/docs, escritas pelo
       próprio time — nunca de input de visitante. v-html é seguro aqui pela
@@ -39,22 +40,61 @@ defineProps({
 
 <style scoped>
 .preview {
-  border: 1px solid var(--vp-c-divider);
-  border-radius: var(--border-radius-sm, 8px);
+  border: 2px solid var(--s1-line);
+  box-shadow: var(--s1-shadow-hard-lg);
   margin: 1.5rem 0;
   overflow: hidden;
 }
 
+.bar {
+  height: var(--s1-bar-height);
+  box-sizing: border-box;
+  border-bottom: 2px solid var(--s1-line);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 6px;
+  background: var(--s1-pattern-stripe);
+  background-clip: content-box;
+}
+
+.bar i {
+  width: 12px;
+  height: 12px;
+  border: 2px solid var(--s1-line);
+  background: var(--s1-panel);
+  flex: none;
+  box-sizing: border-box;
+}
+
+.bar b {
+  background: var(--s1-panel);
+  padding: 0 10px;
+  margin: 0 auto;
+  font-family: var(--s1-font-chrome);
+  font-size: 11px;
+  font-weight: 400;
+}
+
 .stage {
   align-items: center;
+  justify-content: center;
   display: flex;
   flex-wrap: wrap;
-  gap: var(--spacing_inset-xs, 16px);
+  gap: 18px;
   padding: var(--spacing_inset-md, 32px);
+  /* Docs.dc.html:91 — 150px é a altura do primeiro preview da página; usado
+     como piso, não altura travada, porque este componente é reaproveitado
+     por qualquer página de doc — um preview com mais linhas de conteúdo
+     não pode ser cortado nos 150px de um exemplo de uma linha só. */
+  min-height: 150px;
+  background-image: var(--s1-pattern-dots);
+  background-size: var(--s1-pattern-dots-size);
+  background-color: var(--s1-stage);
 }
 
 .source {
-  border-top: 1px solid var(--vp-c-divider);
+  border-top: 2px solid var(--s1-line);
 }
 
 .source summary {

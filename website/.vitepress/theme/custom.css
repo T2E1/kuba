@@ -1,47 +1,790 @@
 /**
- * Tokens de cor do kuba (packages/pixel/tokens/color.css) mapeados para as
- * variáveis `--vp-c-*` que o tema padrão do VitePress usa. Porta o que
- * `website/src/css/custom.css` fazia para o Infima (Docusaurus) — mesma
- * escala de roxo, nenhuma paleta nova.
+ * Tema "System One" — reimplementação visual completa de `website/` sobre o
+ * tema padrão do VitePress. A referência (`theme/_extracted/**\/*.dc.html`,
+ * fora de `website/`, nunca publicada) define quatro camadas que este
+ * arquivo reproduz nesta ordem: tipografia → tokens de cor claro/escuro →
+ * mapeamento para as `--vp-c-*` que o tema padrão consome → forma
+ * (borda/sombra/padrão) aplicada componente a componente.
  *
- * `--color-primary*` já é carregado globalmente pelo `<link>` para
- * `kuba.css` em `head` (ver `config.mts`) e já resolve claro/escuro sozinho
- * via `light-dark()`. O VitePress expõe `color-scheme: dark` em `html.dark`
- * (node_modules/vitepress/dist/client/theme-default/styles/base.css:28),
- * então essas três linhas não precisam de bloco `.dark` separado — o
- * mapeamento vale para os dois modos.
+ * Cada seção abaixo cita o arquivo e o trecho da referência de onde o valor
+ * vem, para a dívida ficar rastreável quando a referência mudar.
  */
-:root {
-  --vp-c-brand-1: var(--color-primary);
-  --vp-c-brand-2: var(--color-primary-dark);
-  --vp-c-brand-3: var(--color-primary-darker);
-  --vp-c-brand-soft: var(--color-primary-lighter);
 
-  --vp-code-font-size: 95%;
+/* =========================================================================
+ * 1. TIPOGRAFIA
+ *
+ * O site hoje carrega Roboto/Roboto Condensed como `--font-family-base` /
+ * `--font-family-highlight` do kuba (packages/pixel/tokens/fontFamily.css) —
+ * esses dois tokens continuam existindo (o kuba real, carregado via CDN,
+ * ainda os usa para os próprios elementos `<kb-*>`), mas o CHROME do site
+ * (nav, sidebar, conteúdo de doc, home) passa a ler Archivo/JetBrains
+ * Mono/Silkscreen, como em Tema.dc.html:13 e Docs.dc.html:13.
+ * ========================================================================= */
+@import url("https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&family=JetBrains+Mono:wght@400;600&family=Silkscreen&display=swap");
+
+:root {
+  /* Archivo é uma fonte variável (largura 62–125, peso 400–800). O eixo de
+     largura (`font-stretch`) é ajustado por elemento — 88% em título/rótulo
+     de ênfase, 100% (padrão) no corpo — porque não há um único valor certo
+     para todo peso de texto; ver Tema.dc.html:56-59. */
+  --s1-font-base: Archivo, sans-serif;
+  --s1-font-mono: "JetBrains Mono", monospace;
+  --s1-font-chrome: Silkscreen, monospace;
+}
+
+/* =========================================================================
+ * 2. TOKENS DE COR — claro e escuro
+ *
+ * Valores copiados literalmente de Docs.dc.html:17-18 (o bloco `.light` /
+ * `.dark` é idêntico em DocsEscuro.dc.html — as duas páginas são a mesma
+ * marcação, só o `dark` prop por padrão muda). `--s1-t/-at/-s/-c` são as
+ * quatro cores de realce de sintaxe usadas nos blocos de código da
+ * referência (tag/atributo/string/comentário).
+ * ========================================================================= */
+:root {
+  --s1-bg: #f4f1ea;
+  --s1-panel: #ffffff;
+  --s1-side: #ffffff;
+  --s1-ink: #111111;
+  --s1-muted: #4a4a4a;
+  --s1-line: #111111;
+  --s1-shadow: #111111;
+  --s1-accent: #6d5cae;
+  --s1-accent-dark: #413768;
+  --s1-hl: #e2deef;
+  --s1-code: #ffffff;
+  --s1-blush: #f28aa0;
+  --s1-fog: #afbfbc;
+  --s1-stage: #f7c6d1;
+  /* Fixas nos dois modos — mesmo valor em Docs.dc.html e DocsEscuro.dc.html
+     para o rótulo "quando usar"/"quando não usar" (Docs.dc.html:117,124). */
+  --s1-success: #0e7c6b;
+  --s1-danger: #b83a36;
+  --s1-t: #6d5cae;
+  --s1-at: #b0307f;
+  --s1-s: #0e7c6b;
+  --s1-c: #6b6b6b;
+}
+
+html.dark {
+  --s1-bg: #111111;
+  --s1-panel: #1c1b19;
+  --s1-side: #161514;
+  --s1-ink: #f4f1ea;
+  --s1-muted: #b8b3a8;
+  --s1-line: #f4f1ea;
+  --s1-shadow: #6d5cae;
+  --s1-accent: #7a5ed1;
+  --s1-accent-dark: #b8acf3;
+  --s1-hl: #34257d;
+  --s1-code: #161514;
+  --s1-blush: #f28aa0;
+  --s1-fog: #3d4a48;
+  --s1-stage: #2a1f2a;
+  --s1-t: #b8acf3;
+  --s1-at: #f59bb6;
+  --s1-s: #66d4b8;
+  --s1-c: #8e8a82;
+}
+
+/* =========================================================================
+ * 3. FORMA — os quatro tokens estruturais de Tema.dc.html:63-69
+ * ========================================================================= */
+:root {
+  --s1-shadow-hard-lg: 6px 6px 0 var(--s1-shadow);
+  --s1-shadow-hard-sm: 3px 3px 0 var(--s1-shadow);
+  --s1-pattern-stripe: repeating-linear-gradient(
+    var(--s1-line) 0 1px,
+    transparent 1px 3px
+  );
+  --s1-pattern-dots: radial-gradient(var(--s1-line) 1.1px, transparent 1.5px);
+  --s1-pattern-dots-size: 9px 9px;
+  --s1-bar-height: 26px;
+}
+
+/* =========================================================================
+ * 4. MAPEAMENTO PARA `--vp-c-*` E DEMAIS VARIÁVEIS DO TEMA PADRÃO
+ *
+ * A partir daqui o tema padrão do VitePress (nav, sidebar, conteúdo,
+ * tabela, bloco de código, blocos com admoestação, rodapé) já lê os tokens
+ * do System One sem precisar de seletor extra — é o mesmo mecanismo que
+ * `--vp-c-brand-1: var(--color-primary)` já fazia antes aqui.
+ * ========================================================================= */
+:root {
+  --vp-c-bg: var(--s1-bg);
+  --vp-c-bg-alt: var(--s1-side);
+  --vp-c-bg-elv: var(--s1-panel);
+  --vp-c-bg-soft: var(--s1-panel);
+
+  --vp-c-border: var(--s1-line);
+  --vp-c-divider: var(--s1-line);
+  --vp-c-gutter: var(--s1-line);
+
+  --vp-c-text-1: var(--s1-ink);
+  --vp-c-text-2: var(--s1-muted);
+  --vp-c-text-3: var(--s1-muted);
+
+  --vp-c-brand-1: var(--s1-accent);
+  --vp-c-brand-2: var(--s1-accent-dark);
+  --vp-c-brand-3: var(--s1-accent-dark);
+  --vp-c-brand-soft: var(--s1-hl);
+
+  --vp-c-tip-soft: var(--s1-hl);
+  --vp-c-note-soft: var(--s1-hl);
+  --vp-c-success-1: var(--s1-success);
+  --vp-c-success-soft: color-mix(in srgb, var(--s1-success) 16%, transparent);
+  --vp-c-danger-1: var(--s1-danger);
+  --vp-c-danger-soft: color-mix(in srgb, var(--s1-danger) 16%, transparent);
+  --vp-c-warning-soft: color-mix(in srgb, var(--s1-blush) 30%, transparent);
+
+  --vp-font-family-base: var(--s1-font-base);
+  --vp-font-family-mono: var(--s1-font-mono);
+
+  --vp-code-font-size: 13px;
+  --vp-code-line-height: 21px;
+  --vp-code-color: var(--s1-t);
+  --vp-code-bg: var(--s1-code);
+  --vp-code-block-color: var(--s1-ink);
+  --vp-code-block-bg: var(--s1-code);
+  --vp-code-block-divider-color: var(--s1-line);
+  --vp-code-lang-color: var(--s1-ink);
+  --vp-code-line-highlight-color: var(--s1-hl);
+  --vp-code-copy-code-border-color: var(--s1-line);
+  --vp-code-copy-code-bg: var(--s1-panel);
+  --vp-code-copy-code-hover-bg: var(--s1-hl);
+
+  --vp-button-brand-border: var(--s1-line);
+  --vp-button-brand-text: #ffffff;
+  --vp-button-brand-bg: var(--s1-accent);
+  --vp-button-brand-hover-border: var(--s1-line);
+  --vp-button-brand-hover-bg: var(--s1-accent-dark);
+  --vp-button-alt-border: var(--s1-line);
+  --vp-button-alt-bg: var(--s1-panel);
+  --vp-button-alt-text: var(--s1-ink);
+  --vp-button-alt-hover-bg: var(--s1-hl);
+
+  /* Docs.dc.html:39 — 64px é o padrão do site (a maior parte das páginas é
+     doc). A landing pede 56px (Main.dc.html:33); `.s1-home` sombreia esta
+     mesma variável mais abaixo, só onde a página é a home. */
+  --vp-nav-height: 64px;
+  --vp-nav-bg-color: var(--s1-side);
+  --vp-local-nav-bg-color: var(--s1-side);
+  --vp-sidebar-width: 280px;
+  --vp-sidebar-bg-color: var(--s1-side);
+
+  --vp-home-hero-name-color: var(--s1-accent);
+
+  --vp-custom-block-info-bg: var(--s1-hl);
+  --vp-custom-block-tip-bg: var(--s1-hl);
+  --vp-custom-block-warning-bg: color-mix(
+    in srgb,
+    var(--s1-blush) 35%,
+    var(--s1-panel)
+  );
+  --vp-custom-block-danger-bg: color-mix(
+    in srgb,
+    var(--s1-danger) 12%,
+    var(--s1-panel)
+  );
+
+  --vp-local-search-highlight-bg: var(--s1-accent);
+  --vp-local-search-highlight-text: #ffffff;
+}
+
+/* =========================================================================
+ * 5. RESET DE FORMA — raio zero em tudo
+ *
+ * Tema.dc.html:65 — "sm, md e lg colapsam para 0; pill e circular ficam
+ * para avatar e ícone." `:where()` mantém a especificidade em zero, então
+ * qualquer seletor mais específico (badge tipo pill, avatar) sobrepõe esta
+ * regra sem precisar de `!important`.
+ * ========================================================================= */
+:where(*) {
+  border-radius: 0;
+}
+
+.VPBadge,
+.VPSwitchAppearance,
+.VPSwitchAppearance .check {
+  border-radius: 9999px;
+}
+
+/* =========================================================================
+ * 6. TIPOGRAFIA DE DESTAQUE (Archivo 700, wdth 88%, letter-spacing -0.045em)
+ *
+ * Tema.dc.html:56 — aplicada a todo heading, ao nome da home hero e aos
+ * títulos dos componentes de `home/`.
+ * ========================================================================= */
+h1,
+h2,
+h3 {
+  font-stretch: 88%;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+}
+
+code,
+kbd,
+pre,
+.vp-doc code {
+  font-family: var(--s1-font-mono);
+}
+
+/* Tamanho literal dos títulos de doc — o tema padrão fixa 32/24/20px
+   (node_modules/vitepress/dist/client/theme-default/styles/components/vp-doc.css:16-35),
+   substituído pelos valores exatos de Docs.dc.html:86,103. O `<h2>` de doc
+   não carrega a régua/`padding-top` que o tema padrão desenha por cima de
+   todo `h2` — a referência não tem essa linha. */
+.vp-doc h1 {
+  margin: 14px 0 0;
+  font-size: 104px;
+  line-height: 0.88;
+  font-stretch: 88%;
+  font-weight: 700;
+  letter-spacing: -0.05em;
+}
+
+.vp-doc h2 {
+  margin: 72px 0 0;
+  border-top: none;
+  padding-top: 0;
+  font-size: 44px;
+  line-height: 1;
+  font-stretch: 88%;
+  font-weight: 700;
+  letter-spacing: -0.035em;
+}
+
+.vp-doc h2 .header-anchor {
+  top: 0;
+}
+
+.vp-doc h3 {
+  font-size: 30px;
+  line-height: 1;
+  font-stretch: 88%;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+}
+
+/* Parágrafo de abertura logo após o `<h1>` — Docs.dc.html:87: 19px/29px,
+   maior que o corpo comum da página (16px/26px, ajustado logo abaixo). */
+.vp-doc h1 + p {
+  margin-top: 22px;
+  font-size: 19px;
+  line-height: 29px;
+}
+
+.vp-doc p {
+  line-height: 26px;
+}
+
+/* =========================================================================
+ * 7. BARRA DE NAVEGAÇÃO E SIDEBAR
+ * ========================================================================= */
+.VPNavBar {
+  border-bottom: 2px solid var(--s1-line);
+}
+
+.VPNavBar .divider,
+.VPNavBar .divider-line {
+  display: none;
+}
+
+/* `.s1-home` é a classe que `theme/Layout.vue` acrescenta ao `.Layout` só
+   nas três home pages — 56px é literal de Main.dc.html:33, contra os 64px
+   (padrão, seção 4) de Docs.dc.html:39. Mesmo `VPNavBar`, dois contextos. */
+.s1-home .VPNavBar {
+  --vp-nav-height: 56px;
+}
+
+@media (min-width: 960px) {
+  .s1-home .VPSidebar {
+    padding-top: 56px;
+  }
+}
+
+.VPSidebar {
+  border-right: 2px solid var(--s1-line);
+  /* Docs.dc.html:61 — 28px 20px, contra os 32px 32px 96px do tema padrão. */
+  padding: 28px 20px 96px;
+  box-shadow: none;
+}
+
+@media (min-width: 960px) {
+  .VPSidebar {
+    padding-top: calc(var(--vp-nav-height) + 28px);
+  }
+}
+
+.dark .VPSidebar {
+  box-shadow: none;
+}
+
+.VPSidebar .curtain {
+  background-color: var(--s1-side);
+}
+
+/* =========================================================================
+ * 7.1 LARGURA FIXA DO CONTEÚDO DE DOC — 280/820/260px
+ *
+ * Docs.dc.html:61,84,200: as três colunas são `flex: none` com largura
+ * literal, não fluida. O tema padrão do VitePress usa `max-width: 688px`
+ * para o conteúdo central quando há aside (VPDoc.vue:190-192) e
+ * `max-width: 256px` para a coluna direita (VPDoc.vue:126) — os dois
+ * substituídos abaixo pelos valores exatos da referência.
+ * ========================================================================= */
+@media (min-width: 1280px) {
+  /* `!important` justificado: `VPDoc.vue` declara `.VPDoc.has-aside
+     .content-container` e `.VPDoc .aside` no próprio `<style scoped>`, que
+     ganha um atributo `data-v-*` extra — especificidade maior que a mesma
+     cadeia de classes escrita aqui, mesmo em `@media` mais específico.
+     Sem `!important`, os 688px/256px do tema padrão vencem (confirmado por
+     medição em runtime — ver relatório). */
+  .VPDoc.has-aside .content-container {
+    max-width: 820px !important;
+  }
+
+  .VPDoc .aside {
+    max-width: 260px !important;
+    padding-left: 20px !important;
+  }
+
+  .VPDoc .aside-container {
+    width: 260px !important;
+    padding-top: calc(var(--vp-nav-height) + 48px) !important;
+  }
+}
+
+@media (min-width: 960px) {
+  /* `VPDoc.vue:78-80` soma 32px de padding horizontal PRÓPRIO por fora de
+     `.content` — a referência não tem essa segunda camada de respiro: só
+     `.content` (72px/60px) e `.aside` (20px) têm padding próprio
+     (Docs.dc.html:61,84,200). Sem zerar o padding do `.VPDoc`, sobra menos
+     que 820px para `.content-container` mesmo com o `max-width` correto
+     (confirmado por medição em runtime — ver relatório). */
+  .VPDoc {
+    padding: 48px 0 0 !important;
+  }
+
+  .VPDoc .content {
+    /* Docs.dc.html:84 — padding-bottom literal é 0; o respiro antes do
+       rodapé escuro vem do próprio `SiteFooter.vue` (56px de padding-top). */
+    padding: 0 60px 0 72px !important;
+  }
+}
+
+/* Rótulo de grupo ("aprender", "fundamentos"…) em Silkscreen minúsculo —
+   Docs.dc.html:63-65. */
+.VPSidebarItem.level-0 > .item > .link > .text,
+.VPSidebarItem.level-0 > .item > .text {
+  font-family: var(--s1-font-chrome);
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  text-transform: lowercase;
+}
+
+.VPSidebarItem.level-1 .items,
+.VPSidebarItem.level-2 .items,
+.VPSidebarItem.level-3 .items {
+  border-left: 2px solid var(--s1-line);
+}
+
+/* Item ativo: fundo tinta, texto papel — Docs.dc.html:70. */
+.VPSidebarItem.is-active > .item > .link {
+  background-color: var(--s1-ink);
+}
+
+.VPSidebarItem.is-active > .item > .link > .text {
+  color: var(--s1-bg) !important;
+  font-weight: 700;
+  padding-left: 8px;
+}
+
+.VPSidebarItem .indicator {
+  display: none;
+}
+
+/* =========================================================================
+ * 8. BUSCA — caixa "ctrl k" (Docs.dc.html:45-48)
+ * ========================================================================= */
+@media (min-width: 768px) {
+  .DocSearch-Button {
+    border: 2px solid var(--s1-line) !important;
+    background-color: var(--s1-panel) !important;
+  }
+
+  .DocSearch-Button:hover {
+    border-color: var(--s1-accent) !important;
+  }
+}
+
+.DocSearch-Button-Key {
+  border-color: var(--s1-line) !important;
+  font-family: var(--s1-font-chrome) !important;
+}
+
+/* =========================================================================
+ * 9. BOTÃO DE APARÊNCIA (claro/escuro) — sombra dura, "afunda" ao pressionar
+ * ========================================================================= */
+.VPSwitchAppearance {
+  border: 2px solid var(--s1-line);
+  box-shadow: var(--s1-shadow-hard-sm);
+  padding: 2px;
+}
+
+.VPSwitchAppearance:active {
+  box-shadow: none;
+  transform: translate(3px, 3px);
+}
+
+/* =========================================================================
+ * 10. BLOCO DE CÓDIGO — vira uma "janela": borda 2px, sombra dura, barra de
+ * título listrada com o `span.lang` centralizado como rótulo.
+ * Tema.dc.html:18-21 (`.win`/`.bar`) + Docs.dc.html:97-100 (uso real).
+ * ========================================================================= */
+.vp-doc div[class*="language-"] {
+  position: relative;
+  border: 2px solid var(--s1-line);
+  border-radius: 0;
+  box-shadow: var(--s1-shadow-hard-lg);
+  margin: 24px 0;
+}
+
+.vp-doc div[class*="language-"]::before {
+  content: "";
+  display: block;
+  height: var(--s1-bar-height);
+  background: var(--s1-pattern-stripe);
+  background-clip: content-box;
+  padding: 5px 6px;
+  box-sizing: border-box;
+  border-bottom: 2px solid var(--s1-line);
+}
+
+.vp-doc [class*="language-"] pre {
+  padding-top: 14px;
+}
+
+/* Rótulo centralizado na barra listrada, como o `<b>` de `.bar` em
+   Tema.dc.html:20 — `left/right: 0` com `width: fit-content; margin: 0 auto`
+   centra o rótulo sem precisar saber a largura do texto. */
+.vp-doc [class*="language-"] > span.lang {
+  top: 6px;
+  right: 0;
+  left: 0;
+  width: fit-content;
+  margin: 0 auto;
+  background: var(--s1-panel);
+  padding: 0 10px;
+  pointer-events: none;
+  color: var(--s1-ink);
+  font-family: var(--s1-font-chrome);
+  font-size: 11px;
+  font-weight: 400;
+  opacity: 1 !important;
+}
+
+.vp-doc [class*="language-"] > button.copy {
+  top: 3px;
+  right: 3px;
+  width: 20px;
+  height: 20px;
+  border-radius: 0;
+  background-size: 12px;
+}
+
+/* =========================================================================
+ * 11. TABELA — grade fina, cabeçalho em Silkscreen. `.tbl` de
+ * Docs.dc.html:29-32: `padding:12px 14px`, `font-size:14px`,
+ * `line-height:20px` — diferente da tabela da landing (16px, ver
+ * `Comparison.vue`, que não herda daqui por não ter `.vp-doc` como
+ * ancestral em `layout: page`).
+ * ========================================================================= */
+.vp-doc table {
+  border: 2px solid var(--s1-line);
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.vp-doc th,
+.vp-doc td {
+  border: 1px solid var(--s1-line);
+  border-top: none;
+  border-right: none;
+  padding: 12px 14px;
+}
+
+.vp-doc tr:first-child th {
+  border-top: none;
+}
+
+.vp-doc th:first-child,
+.vp-doc td:first-child {
+  border-left: none;
+}
+
+.vp-doc thead tr {
+  background-color: var(--s1-panel);
+}
+
+.vp-doc th {
+  font-family: var(--s1-font-chrome);
+  font-size: 11px;
+  font-weight: 400;
+  text-transform: lowercase;
+  border-bottom: 2px solid var(--s1-line);
+}
+
+.vp-doc tr:nth-child(2n) {
+  background-color: transparent;
+}
+
+/* =========================================================================
+ * 12. BLOCOS COM ADMOESTAÇÃO — a faixa colorida vira o cabeçalho de
+ * `.custom-block-title`, no lugar do ícone lateral da referência
+ * (Docs.dc.html:117,124,183): mesma intenção (verde = pode, vermelho = não
+ * pode, rosa = atenção), sem exigir marcação nova.
+ * ========================================================================= */
+.vp-doc .custom-block {
+  border: 2px solid var(--s1-line);
+  padding: 0 16px 16px;
+}
+
+.vp-doc .custom-block-title {
+  display: block;
+  margin: 0 -16px 14px;
+  padding: 8px 16px;
+  border-bottom: 2px solid var(--s1-line);
+  font-family: var(--s1-font-chrome);
+  font-size: 11px;
+  text-transform: lowercase;
+}
+
+.vp-doc .custom-block.tip .custom-block-title,
+.vp-doc .custom-block.info .custom-block-title {
+  background-color: var(--s1-success);
+  color: #ffffff;
+}
+
+.vp-doc .custom-block.warning .custom-block-title {
+  background-color: var(--s1-blush);
+  color: var(--s1-ink);
+}
+
+.vp-doc .custom-block.danger .custom-block-title {
+  background-color: var(--s1-danger);
+  color: #ffffff;
+}
+
+/* =========================================================================
+ * 13. RODAPÉ DE DOC — "editar esta página" + cards anterior/próxima
+ * (já existentes no tema padrão: `.edit-link-button`, `.pager-link`).
+ * Docs.dc.html:194-197.
+ * ========================================================================= */
+.edit-link-button {
+  font-family: var(--s1-font-chrome);
+  font-size: 11px;
+  text-transform: lowercase;
+  color: var(--s1-ink) !important;
+}
+
+.pager-link {
+  border: 2px solid var(--s1-line);
+  transition: none;
+}
+
+.pager-link:hover {
+  border-color: var(--s1-line);
+  box-shadow: var(--s1-shadow-hard-sm);
+}
+
+.pager-link .desc {
+  font-family: var(--s1-font-chrome);
+  text-transform: lowercase;
+}
+
+.pager-link .title {
+  color: var(--s1-ink) !important;
+  font-size: 22px;
+  font-weight: 700;
+  font-stretch: 88%;
+}
+
+/* =========================================================================
+ * 14. "NESTA PÁGINA" — o sumário lateral vira janela com barra listrada.
+ * Docs.dc.html:200-211.
+ * ========================================================================= */
+.VPDocAsideOutline.has-outline {
+  border: 2px solid var(--s1-line);
+  box-shadow: var(--s1-shadow-hard-lg);
+  padding-top: var(--s1-bar-height);
+  position: relative;
+}
+
+.VPDocAsideOutline.has-outline::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: var(--s1-bar-height);
+  background: var(--s1-pattern-stripe);
+  background-clip: content-box;
+  padding: 5px 6px;
+  box-sizing: border-box;
+  border-bottom: 2px solid var(--s1-line);
+}
+
+.VPDocAsideOutline .content {
+  border-left: none;
+  padding: 12px 0 16px;
+}
+
+.VPDocAsideOutline .outline-title {
+  display: none;
+}
+
+.VPDocAsideOutline .outline-marker {
+  display: none;
 }
 
 /**
- * Lacuna registrada: `--docusaurus-highlighted-code-line-bg` (fundo da linha
- * destacada em bloco de código) não tinha um token do design system por
- * trás — era um `rgba(0, 0, 0, ...)` solto, não algo em
- * `packages/pixel/tokens/color.css`. Sem token de origem para portar, o
- * equivalente `--vp-code-line-highlight-color` fica no padrão do VitePress
- * (`--vp-c-default-soft`) em vez de recriar um valor mágico aqui.
+ * `:deep()` é sintaxe de `<style scoped>` de componente Vue — não existe
+ * fora de um `.vue`, e num seletor de CSS puro como este arquivo o
+ * navegador trata `:deep(...)` como pseudo-classe desconhecida, invalidando
+ * a regra inteira. Docs.dc.html:203-208 — item ativo com borda esquerda de
+ * 4px na cor de ação e negrito; os demais com recuo de 4px para o texto
+ * ficar alinhado ao item ativo apesar da borda que só ele carrega.
  */
+.VPDocAsideOutline .outline-link {
+  font-family: var(--s1-font-base);
+  padding: 6px 16px 6px 20px;
+  border-left: 4px solid transparent;
+  line-height: 20px;
+}
 
-/**
- * `--vp-c-brand-1` (#6d5cae claro / #7a5ed1 escuro) passa 4.5:1 contra o
- * fundo da página no modo claro (~5.53:1), mas fica abaixo do mínimo de
- * texto normal no escuro (~3.55:1 contra `--vp-c-bg`, que é #1b1b1f) —
- * ainda acima de 3:1, o piso para texto grande e para elemento de
- * interface. Os componentes de `home/` por isso não usam `--vp-c-brand-1`
- * como cor de texto de corpo; reservam-no para link, heading grande,
- * elemento de interface ou texto sobre `--vp-c-brand-soft`.
- */
+.VPDocAsideOutline .outline-link.active {
+  border-left-color: var(--s1-accent);
+  color: var(--s1-ink) !important;
+  font-weight: 700;
+  padding-left: 16px;
+}
 
+/* =========================================================================
+ * 15. RODAPÉ DO SITE — o `VPFooter` padrão fica escondido em páginas com
+ * sidebar (`.VPFooter.has-sidebar { display: none }`, ver
+ * node_modules/vitepress/dist/client/theme-default/components/VPFooter.vue:27-29),
+ * e o conteúdo dele (só `message`/`copyright`, texto simples) não comporta
+ * o logo + comando `npm install` + navegação da referência
+ * (Main.dc.html:344-358, Docs.dc.html:214-218). Por isso `SiteFooter.vue`
+ * substitui inteiramente o `VPFooter` nativo, injetado via slot
+ * `layout-bottom` em `theme/Layout.vue` — sempre visível, em toda página.
+ * ========================================================================= */
+.VPFooter {
+  display: none !important;
+}
+
+/* =========================================================================
+ * 16. BREADCRUMB — Docs.dc.html:85, acima do `<h1>`.
+ * ========================================================================= */
+.s1-breadcrumb {
+  font-family: var(--s1-font-chrome);
+  font-size: 11px;
+  color: var(--s1-muted);
+  text-transform: lowercase;
+  margin: 0 0 14px;
+}
+
+/* =========================================================================
+ * 17. COLUNA DE CONTEÚDO DA LANDING — 1040px, literal e repetido em toda
+ * seção de Main.dc.html (linhas 56, 90, 179, 212, 243, 273, 327, 345 —
+ * sempre `width: 1040px; margin: 0 auto`, nunca fluido). As nove seções de
+ * `home/*.vue` usavam `max-width: var(--vp-layout-max-width)` (1440px, o
+ * mesmo teto do `<VPNavBar>`) — essa é a divergência de layout mais visível
+ * contra a referência: a cor de fundo de cada seção precisa ir de ponta a
+ * ponta da viewport (por isso ela continua no elemento `<section>`, sem
+ * `max-width`), enquanto só o CONTEÚDO fica preso a 1040px. `.s1-container`
+ * é essa segunda camada, um nível abaixo do `<section>` em cada componente.
+ * Abaixo de 1064px de viewport, os 12px de padding evitam que o texto
+ * encoste na borda — acima disso, `max-width` + `margin: 0 auto` já reproduz
+ * os ~200px de vão de cada lado que a referência mostra a 1440px.
+ * ========================================================================= */
+.s1-container {
+  width: 100%;
+  max-width: 1040px;
+  margin: 0 auto;
+  box-sizing: border-box;
+  padding: 0 20px;
+}
+
+@media (min-width: 1064px) {
+  .s1-container {
+    padding: 0;
+  }
+}
+
+/* =========================================================================
+ * 18. FUNDO PONTILHADO — usado pelos componentes de `home/` para reproduzir
+ * a seção "como funciona" (Main.dc.html:184) e o estágio de preview
+ * (Docs.dc.html:91, `--stage`). Classe utilitária única em vez de repetir a
+ * declaração em cada `home/*.vue` — DRY entre os nove arquivos.
+ * ========================================================================= */
+.s1-dots {
+  background-image: var(--s1-pattern-dots);
+  background-size: var(--s1-pattern-dots-size);
+}
+
+.s1-win {
+  border: 2px solid var(--s1-line);
+  background: var(--s1-panel);
+  box-shadow: var(--s1-shadow-hard-lg);
+}
+
+.s1-bar {
+  height: var(--s1-bar-height);
+  box-sizing: border-box;
+  border-bottom: 2px solid var(--s1-line);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 6px;
+  background: var(--s1-pattern-stripe);
+  background-clip: content-box;
+}
+
+.s1-bar > i {
+  width: 12px;
+  height: 12px;
+  border: 2px solid var(--s1-line);
+  background: var(--s1-panel);
+  flex: none;
+  box-sizing: border-box;
+}
+
+.s1-bar > b {
+  background: var(--s1-panel);
+  padding: 0 10px;
+  margin: 0 auto;
+  font-family: var(--s1-font-chrome);
+  font-size: 11px;
+  font-weight: 400;
+}
+
+/* =========================================================================
+ * 19. `<Preview>` (website/.vitepress/theme/components/Preview.vue) — a
+ * janela de exemplo ao vivo é estilizada no próprio componente (o único
+ * artefato deste ofício, e a especificidade de `<style scoped>` venceria um
+ * override daqui de qualquer forma). Ver `Preview.vue` — mesma janela do
+ * bloco de código, estágio pontilhado, Docs.dc.html:89-100.
+ * ========================================================================= */
+
+/* =========================================================================
+ * 20. REDUZIR MOVIMENTO — preservado do custom.css anterior (WCAG 2.1 SC
+ * 2.3.3): nenhuma transição nova introduzida acima ignora a preferência.
+ * ========================================================================= */
 @media (prefers-reduced-motion: reduce) {
-  /* Reset canônico do WCAG 2.1 SC 2.3.3 — qualquer transição ou animação
-     nos componentes de `home/` respeita a preferência do sistema. */
   *,
   ::before,
   ::after {
@@ -51,3 +794,11 @@
     scroll-behavior: auto !important;
   }
 }
+
+/**
+ * Lacuna registrada (herdada do custom.css anterior): sem token de origem
+ * em packages/pixel/tokens/color.css para a linha destacada de bloco de
+ * código — `--vp-code-line-highlight-color` aqui usa `--s1-hl`, a superfície
+ * de destaque mais próxima do System One, no lugar de recriar um valor
+ * mágico novo.
+ */

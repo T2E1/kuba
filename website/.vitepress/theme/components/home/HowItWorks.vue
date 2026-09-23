@@ -1,37 +1,50 @@
 <template>
   <section class="how-it-works">
-    <h2 class="title"><slot name="title" /></h2>
-    <div class="body"><slot name="body" /></div>
+    <div class="s1-container">
+      <h2 class="title"><slot name="title" /></h2>
+      <div class="body"><slot name="body" /></div>
+    </div>
   </section>
 </template>
 
 <style scoped>
+/* Main.dc.html:177,179,181-182 — padding-top 120px, h2 88px, corpo 620px. */
 .how-it-works {
-  background: var(--vp-c-bg-soft);
-  margin: 0 auto;
-  max-width: var(--vp-layout-max-width);
-  padding: var(--spacing-xl, 64px) var(--spacing_inset-md, 32px);
+  background: var(--s1-blush);
+  border-top: 2px solid var(--s1-line);
+  padding: 120px 0 96px;
+  text-align: center;
 }
 
 .title {
-  color: var(--vp-c-text-1);
-  font-size: var(--font-size-xl);
-  font-weight: var(--font-weight-bold);
-  line-height: var(--line-height-sm);
-  margin: 0 0 var(--spacing_inset-sm, 24px);
+  color: var(--s1-ink);
+  font-family: var(--s1-font-base);
+  font-size: clamp(2.25rem, 7vw, 88px);
+  font-weight: 700;
+  font-stretch: 88%;
+  letter-spacing: -0.045em;
+  line-height: 0.95;
+  margin: 0;
 }
 
+/* Main.dc.html:182 centraliza só a frase de abertura; o resto do corpo
+   (lista `source/event/type/sink`, blocos de código, parágrafo final) lê
+   melhor alinhado à esquerda — é prosa técnica, não uma legenda curta. */
 .body {
-  color: var(--vp-c-text-2);
-  font-size: var(--font-size-xs);
-  line-height: var(--line-height-lg);
-  /* Medida de leitura mais generosa que Problem.vue/Hero.vue: este corpo
-     intercala prosa com bloco de código, que se beneficia de mais largura. */
-  max-width: 720px;
+  color: var(--s1-ink);
+  font-size: 18px;
+  line-height: 27px;
+  margin: 22px auto 0;
+  max-width: 620px;
+  text-align: left;
+}
+
+.body :deep(p:first-child) {
+  text-align: center;
 }
 
 .body :deep(strong) {
-  color: var(--vp-c-text-1);
+  color: var(--s1-ink);
 }
 
 /**
@@ -57,15 +70,17 @@
 /* Termo em destaque: o `<strong>` inicial de cada item vira o rótulo da
    definição, em vez de só um trecho em negrito no meio da frase. */
 .body :deep(li strong:first-child) {
-  color: var(--vp-c-brand-1);
+  color: var(--s1-ink);
   display: inline-block;
-  font-family: var(--vp-font-family-mono);
+  font-family: var(--s1-font-mono);
+  font-weight: 600;
   margin-inline-end: var(--spacing_inset-quarck, 4px);
 }
 
 .body :deep(div[class*='language-']) {
-  background: var(--vp-c-bg);
-  border-radius: var(--border-radius-md, 16px);
+  border: 2px solid var(--s1-line);
+  background: var(--s1-code);
+  box-shadow: var(--s1-shadow-hard-lg);
   margin: var(--spacing_inset-sm, 24px) 0;
   overflow-x: auto;
 }

@@ -61,139 +61,192 @@ function reset() {
 
 <template>
   <section class="playground">
-    <h2 class="title"><slot name="title" /></h2>
-    <div class="body"><slot name="body" /></div>
-    <div class="workbench">
-      <div class="pane">
-        <div class="pane-header">
-          <span class="pane-label">Edit</span>
-          <button type="button" class="reset" @click="reset">Reset</button>
+    <div class="s1-container">
+      <h2 class="title"><slot name="title" /></h2>
+      <div class="body"><slot name="body" /></div>
+      <div class="workbench">
+        <div class="pane pane-edit">
+          <div class="pane-header">
+            <span class="pane-label">Edit</span>
+            <button type="button" class="reset" @click="reset">Reset</button>
+          </div>
+          <!--
+            O visitante só edita o próprio texto, renderizado só na própria
+            aba — nenhum dado sai daqui. v-html abaixo é o mesmo padrão
+            documentado em Preview.vue, aplicado a uma fonte editável em vez
+            de fixa.
+          -->
+          <textarea
+            v-model="source"
+            class="code-input"
+            spellcheck="false"
+            aria-label="kuba markup, editable"
+            @input="schedule"
+          />
         </div>
-        <!--
-          O visitante só edita o próprio texto, renderizado só na própria
-          aba — nenhum dado sai daqui. v-html abaixo é o mesmo padrão
-          documentado em Preview.vue, aplicado a uma fonte editável em vez
-          de fixa.
-        -->
-        <textarea
-          v-model="source"
-          class="code-input"
-          spellcheck="false"
-          aria-label="kuba markup, editable"
-          @input="schedule"
-        />
-      </div>
-      <div class="pane">
-        <div class="pane-header">
-          <span class="pane-label">Live</span>
+        <div class="pane pane-live">
+          <div class="pane-header">
+            <span class="pane-label">Live</span>
+          </div>
+          <div class="stage" v-html="rendered" />
         </div>
-        <div class="stage" v-html="rendered" />
       </div>
     </div>
   </section>
 </template>
 
 <style scoped>
+/**
+ * Esta seção é uma "ilha escura" fixa — Main.dc.html:271 a mostra sempre
+ * preta, com painéis sempre claros por dentro, independente de um alternador
+ * claro/escuro (a referência não tem um). Como o site real tem `html.dark`
+ * (que reatribui `--s1-line/panel/code/ink/hl/stage` globalmente — ver
+ * `custom.css`, seção 2), sombrear essas seis variáveis aqui as prende no
+ * valor do modo claro só dentro de `.playground`, em vez de o card branco
+ * virar um card escuro-sobre-escuro quando o site está em modo escuro.
+ */
 .playground {
-  margin: 0 auto;
-  max-width: var(--vp-layout-max-width);
-  padding: var(--spacing-xl, 64px) var(--spacing_inset-md, 32px);
+  --s1-line: #111111;
+  --s1-panel: #ffffff;
+  --s1-code: #ffffff;
+  --s1-ink: #111111;
+  --s1-hl: #e2deef;
+  --s1-stage: #f7c6d1;
+  background: #111111;
+  color: #f4f1ea;
+  border-top: 2px solid var(--s1-line);
+  /* Main.dc.html:271,273 — padding-top 120px. */
+  padding: 120px 0 96px;
+  text-align: center;
 }
 
 .title {
-  color: var(--vp-c-text-1);
-  font-size: var(--font-size-xl);
-  font-weight: var(--font-weight-bold);
-  line-height: var(--line-height-sm);
-  margin: 0 0 var(--spacing_inset-sm, 24px);
+  color: #f4f1ea;
+  font-family: var(--s1-font-base);
+  /* Main.dc.html:275 — 88px/0.95/-0.045em. */
+  font-size: clamp(2.25rem, 7vw, 88px);
+  font-weight: 700;
+  font-stretch: 88%;
+  letter-spacing: -0.045em;
+  line-height: 0.95;
+  margin: 0;
 }
 
 .body {
-  color: var(--vp-c-text-2);
-  font-size: var(--font-size-xs);
-  line-height: var(--line-height-lg);
-  margin: 0 0 var(--spacing-lg, 56px);
-  max-width: 640px;
+  color: #d8d4cb;
+  font-size: 18px;
+  line-height: 27px;
+  margin: 22px auto 0;
+  max-width: 600px;
 }
 
 .workbench {
-  display: grid;
-  gap: var(--spacing_inset-md, 32px);
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  margin-top: 56px;
+  color: var(--s1-ink);
+  text-align: left;
 }
 
 .pane {
-  border: var(--border-width-hairline, 1px) solid var(--vp-c-divider);
-  border-radius: var(--border-radius-md, 16px);
+  border: 2px solid var(--s1-line);
+  background: var(--s1-panel);
+  box-shadow: var(--s1-shadow-hard-lg);
   overflow: hidden;
 }
 
 .pane-header {
   align-items: center;
-  background: var(--vp-c-bg-soft);
-  border-bottom: var(--border-width-hairline, 1px) solid var(--vp-c-divider);
+  height: var(--s1-bar-height);
+  box-sizing: border-box;
+  background: var(--s1-pattern-stripe);
+  background-clip: content-box;
+  border-bottom: 2px solid var(--s1-line);
   display: flex;
   justify-content: space-between;
-  padding: var(--spacing_inset-nano, 8px) var(--spacing_inset-xs, 16px);
+  padding: 5px 6px;
 }
 
 .pane-label {
-  color: var(--vp-c-text-2);
-  font-family: var(--font-family-highlight);
-  font-size: var(--font-size-xxxs);
-  font-weight: var(--font-weight-medium);
+  background: var(--s1-panel);
+  color: var(--s1-ink);
+  font-family: var(--s1-font-chrome);
+  font-size: 11px;
+  font-weight: 400;
+  padding: 0 10px;
 }
 
 .reset {
-  background: transparent;
-  border: var(--border-width-hairline, 1px) solid var(--vp-c-divider);
-  border-radius: var(--border-radius-sm, 8px);
-  color: var(--vp-c-text-2);
+  background: var(--s1-panel);
+  border: 2px solid var(--s1-line);
+  color: var(--s1-ink);
   cursor: pointer;
-  font-size: var(--font-size-xxxs);
+  font-family: var(--s1-font-chrome);
+  font-size: 11px;
   /* Alvo de toque >= 44x44px mesmo em um botão pequeno de texto. */
-  min-height: 44px;
-  padding: 0 var(--spacing_inset-xs, 16px);
-  transition: border-color 0.15s ease;
+  min-height: 32px;
+  padding: 0 10px;
 }
 
 .reset:hover,
 .reset:focus-visible {
-  border-color: var(--vp-c-brand-1);
-  color: var(--vp-c-brand-1);
+  background: var(--s1-hl);
+}
+
+.reset:active {
+  transform: translate(2px, 2px);
 }
 
 .code-input {
-  background: var(--vp-c-bg-alt);
+  background: var(--s1-code);
   border: 0;
   box-sizing: border-box;
-  color: var(--vp-c-text-1);
+  color: var(--s1-ink);
   display: block;
-  font-family: var(--vp-font-family-mono);
-  font-size: var(--font-size-xxxs);
-  line-height: var(--line-height-lg);
+  font-family: var(--s1-font-mono);
+  /* Main.dc.html:281 — pre do editor: 12px/19px. */
+  font-size: 12px;
+  line-height: 19px;
   min-height: 320px;
-  padding: var(--spacing_inset-xs, 16px);
+  padding: 16px;
   resize: vertical;
   width: 100%;
 }
 
 .code-input:focus-visible {
-  outline: var(--border-width-thin, 2px) solid var(--vp-c-brand-1);
-  outline-offset: -2px;
+  outline: 3px dashed var(--s1-line);
+  outline-offset: -3px;
 }
 
 .stage {
   align-items: center;
   display: flex;
   flex-wrap: wrap;
-  gap: var(--spacing_inset-xs, 16px);
+  gap: 16px;
   min-height: 320px;
-  padding: var(--spacing_inset-md, 32px);
+  padding: 28px 24px;
+  background-image: var(--s1-pattern-dots);
+  background-size: var(--s1-pattern-dots-size);
+  background-color: var(--s1-stage);
 }
 
-@media (min-width: 960px) {
+/* Main.dc.html:278-303 — os dois painéis não dividem o espaço igualmente:
+   o editor tem largura própria (540px) e o "ao vivo" cresce para preencher
+   o resto (`flex-grow: 1`), em vez do `1fr 1fr` que existia aqui antes. */
+@media (min-width: 860px) {
   .workbench {
-    grid-template-columns: 1fr 1fr;
+    flex-direction: row;
+    align-items: stretch;
+  }
+
+  .pane-edit {
+    flex: 0 0 540px;
+  }
+
+  .pane-live {
+    flex: 1 1 auto;
+    min-width: 0;
   }
 }
 </style>

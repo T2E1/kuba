@@ -1,36 +1,55 @@
 <template>
   <section class="accessible">
-    <h2 class="title"><slot name="title" /></h2>
-    <div class="body"><slot name="body" /></div>
+    <div class="s1-container">
+      <div class="card">
+        <h2 class="title"><slot name="title" /></h2>
+        <div class="body"><slot name="body" /></div>
+      </div>
+    </div>
   </section>
 </template>
 
 <style scoped>
+/* Ver a nota de layout em `Boundary.vue` sobre o grid de 3 colunas da
+   referência (Main.dc.html:210-238) não replicado aqui. */
 .accessible {
-  background: var(--vp-c-bg-soft);
+  background: var(--s1-blush);
+  padding: 48px 0 96px;
+}
+
+.card {
+  border: 2px solid var(--s1-line);
+  background: var(--s1-panel);
+  box-shadow: var(--s1-shadow-hard-lg);
   margin: 0 auto;
-  max-width: var(--vp-layout-max-width);
-  padding: var(--spacing-xl, 64px) var(--spacing_inset-md, 32px);
-  text-align: center;
+  max-width: 640px;
+  padding: 22px 22px 26px;
+  text-align: left;
 }
 
 .title {
-  color: var(--vp-c-text-1);
-  font-size: var(--font-size-lg);
-  font-weight: var(--font-weight-bold);
-  line-height: var(--line-height-sm);
-  margin: 0 0 var(--spacing_inset-sm, 24px);
+  color: var(--s1-ink);
+  font-family: var(--s1-font-base);
+  font-size: 30px;
+  font-weight: 700;
+  font-stretch: 88%;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  margin: 0 0 14px;
 }
 
 .body {
-  color: var(--vp-c-text-2);
-  font-size: var(--font-size-xs);
-  line-height: var(--line-height-lg);
-  margin: 0 auto;
-  max-width: 640px;
+  color: var(--s1-ink);
+  font-size: 15px;
+  line-height: 23px;
 }
 
 .body :deep(code) {
-  font-size: 0.9em;
+  font-family: var(--s1-font-mono);
+  font-size: 0.85em;
+}
+
+.body :deep(p + p) {
+  margin-top: 14px;
 }
 </style>
