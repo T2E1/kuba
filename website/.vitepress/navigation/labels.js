@@ -1,8 +1,8 @@
 // Texto da navegação, por locale.
 //
 // `categories` é o nome de um agrupamento da sidebar; `nav`, o de um item do
-// navbar; `pages`, o título de uma página, com a rota (sem o prefixo do
-// locale) como chave.
+// navbar; `outline`, o título do sumário lateral ("Nesta página"); `pages`, o
+// título de uma página, com a rota (sem o prefixo do locale) como chave.
 //
 // Título que não se traduz — nome de elemento (`Button`) ou de pacote (`dom`) —
 // não entra aqui: vive junto da forma, em `sidebar.js`.
@@ -14,6 +14,7 @@ const labels = {
       docs: 'Docs',
       components: 'Components',
     },
+    outline: 'On this page',
     categories: {
       learn: 'Learn',
       foundations: 'Foundations',
@@ -63,6 +64,7 @@ const labels = {
       docs: 'Docs',
       components: 'Componentes',
     },
+    outline: 'Nesta página',
     categories: {
       learn: 'Aprender',
       foundations: 'Fundamentos',
@@ -112,6 +114,7 @@ const labels = {
       docs: 'Docs',
       components: 'Componentes',
     },
+    outline: 'En esta página',
     categories: {
       learn: 'Aprender',
       foundations: 'Fundamentos',

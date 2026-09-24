@@ -663,10 +663,29 @@ pre,
 .VPDocAsideOutline .content {
   border-left: none;
   padding: 12px 0 16px;
+  /* Estático para o título abaixo se posicionar pela janela inteira (o
+     `nav`), e não pelo `.content` — é assim que ele sobe para a barra. */
+  position: static;
 }
 
+/* O título do sumário ("nesta página", de `labels.js`) vira o rótulo
+   centralizado da barra listrada, como o `<b>` de `.s1-bar` — Docs.dc.html:
+   201. Continua sendo o `role="heading"` que nomeia o `nav` para leitor de
+   tela; só muda de lugar. */
 .VPDocAsideOutline .outline-title {
-  display: none;
+  position: absolute;
+  top: 5px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--s1-panel);
+  color: var(--s1-ink);
+  font-family: var(--s1-font-chrome);
+  font-size: 11px;
+  font-weight: 400;
+  line-height: 12px;
+  padding: 0 10px;
+  text-transform: lowercase;
+  white-space: nowrap;
 }
 
 .VPDocAsideOutline .outline-marker {
