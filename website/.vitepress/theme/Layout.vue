@@ -2,6 +2,8 @@
 import { useData } from 'vitepress'
 import DefaultTheme from 'vitepress/theme'
 import { computed } from 'vue'
+import Breadcrumb from './components/Breadcrumb.vue'
+import SiteFooter from './components/SiteFooter.vue'
 
 /**
  * Estende o `Layout` padrão só pelos slots que ele já expõe — nenhuma parte
@@ -19,16 +21,17 @@ import { computed } from 'vue'
  *   diferença de altura só existe como variação de contexto — a classe
  *   troca `--vp-nav-height` (ver `custom.css`) sem duplicar o componente.
  *   `relativePath` identifica a home nas três traduções sem comparar rota
- *   contra `base`/prefixo de locale.
+ *   contra `base`/prefixo de locale. Manifesto e Sobre (`about.md`) são
+ *   páginas de apresentação como a home, e usam o mesmo cabeçalho de 56px.
  */
 const { page } = useData()
 const { Layout } = DefaultTheme
 
-const isHome = computed(() =>
-  ['index.md', 'pt-br/index.md', 'es/index.md'].includes(
-    page.value.relativePath,
-  ),
+const LANDING_PAGES = ['index.md', 'manifesto.md', 'about.md'].flatMap(
+  (file) => [file, `pt-br/${file}`, `es/${file}`],
 )
+
+const isHome = computed(() => LANDING_PAGES.includes(page.value.relativePath))
 </script>
 
 <template>

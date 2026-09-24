@@ -1,6 +1,7 @@
 <template>
-  <section class="comparison">
+  <section class="comparison s1-light-island s1-rails">
     <div class="s1-container">
+      <p class="s1-chip"><slot name="eyebrow" /></p>
       <h2 class="title"><slot name="title" /></h2>
       <!--
         #table chega como markdown já compilado para `<table><thead>…` puro —
@@ -8,7 +9,10 @@
         seletor de Shadow DOM e não se aplica aqui; o equivalente do Vue é
         `:deep()` em CSS com escopo, usado abaixo.
       -->
-      <div class="table-wrapper"><slot name="table" /></div>
+      <div class="s1-win table-window">
+        <div class="s1-bar"><i /><b>comparison.tbl</b></div>
+        <div class="table-wrapper"><slot name="table" /></div>
+      </div>
     </div>
   </section>
 </template>
@@ -17,8 +21,10 @@
 /* Main.dc.html:241,243,245-246 — padding-top 110px, h2 72px/-0.04em à
    esquerda (não centralizado, diferente de Problem.vue/HowItWorks.vue),
    tabela com margin-top 44px. */
+/* Ilha clara: o fog da referência (#afbfbc) nos dois modos, não o fog
+   escurecido de `html.dark`. */
 .comparison {
-  background: var(--s1-fog);
+  background: #afbfbc;
   border-top: 2px solid var(--s1-line);
   padding: 110px 0 96px;
 }
@@ -31,14 +37,14 @@
   font-stretch: 88%;
   letter-spacing: -0.04em;
   line-height: 0.95;
-  margin: 0;
+  margin: 24px 0 0;
+}
+
+.table-window {
+  margin-top: 44px;
 }
 
 .table-wrapper {
-  border: 2px solid var(--s1-line);
-  background: var(--s1-panel);
-  box-shadow: var(--s1-shadow-hard-lg);
-  margin-top: 44px;
   overflow-x: auto;
 }
 
@@ -87,13 +93,13 @@
    igual Main.dc.html:255,259-263. */
 .table-wrapper :deep(th:last-child),
 .table-wrapper :deep(td:last-child) {
-  background: var(--s1-hl);
+  background: #e2deef;
   border-left: 2px solid var(--s1-line);
 }
 
 .table-wrapper :deep(th:last-child) {
-  background: var(--s1-ink);
-  color: var(--s1-bg);
+  background: #111111;
+  color: #ffffff;
 }
 
 .table-wrapper :deep(td:last-child) {

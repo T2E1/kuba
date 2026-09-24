@@ -1,5 +1,5 @@
 <script setup>
-import { useData } from 'vitepress'
+import { useData, withBase } from 'vitepress'
 
 /**
  * Substitui o `VPFooter` nativo em toda página (home e doc). O nativo se
@@ -98,7 +98,7 @@ const { site, theme } = useData()
   margin: 0;
 }
 
-/* Main.dc.html:350 — mesma janela com sombra rosa que `Cta.vue` usa. */
+/* Main.dc.html:350 — janela de instalação com sombra rosa. */
 .s1-footer-install code {
   font-family: var(--s1-font-mono);
   font-size: 15px;

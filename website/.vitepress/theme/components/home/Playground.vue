@@ -62,9 +62,10 @@ function reset() {
 <template>
   <section class="playground">
     <div class="s1-container">
+      <p class="eyebrow"><slot name="eyebrow" /></p>
       <h2 class="title"><slot name="title" /></h2>
       <div class="body"><slot name="body" /></div>
-      <div class="workbench">
+      <div class="workbench s1-light-island">
         <div class="pane pane-edit">
           <div class="pane-header">
             <span class="pane-label">Edit</span>
@@ -97,27 +98,26 @@ function reset() {
 
 <style scoped>
 /**
- * Esta seção é uma "ilha escura" fixa — Main.dc.html:271 a mostra sempre
- * preta, com painéis sempre claros por dentro, independente de um alternador
- * claro/escuro (a referência não tem um). Como o site real tem `html.dark`
- * (que reatribui `--s1-line/panel/code/ink/hl/stage` globalmente — ver
- * `custom.css`, seção 2), sombrear essas seis variáveis aqui as prende no
- * valor do modo claro só dentro de `.playground`, em vez de o card branco
- * virar um card escuro-sobre-escuro quando o site está em modo escuro.
+ * Main.dc.html:270-305 — seção sempre preta, com os dois painéis sempre
+ * claros por dentro (`.s1-light-island` no `.workbench`) e sombras duras
+ * coloridas: violeta no editor, magenta no ao vivo.
  */
 .playground {
-  --s1-line: #111111;
-  --s1-panel: #ffffff;
-  --s1-code: #ffffff;
-  --s1-ink: #111111;
-  --s1-hl: #e2deef;
-  --s1-stage: #f7c6d1;
   background: #111111;
   color: #f4f1ea;
-  border-top: 2px solid var(--s1-line);
-  /* Main.dc.html:271,273 — padding-top 120px. */
+  border-top: 2px solid #111111;
   padding: 120px 0 96px;
   text-align: center;
+}
+
+.eyebrow {
+  display: inline-block;
+  border: 2px solid #f4f1ea;
+  font-family: var(--s1-font-chrome);
+  font-size: 11px;
+  margin: 0 0 24px;
+  padding: 3px 8px;
+  text-transform: lowercase;
 }
 
 .title {
@@ -152,8 +152,15 @@ function reset() {
 .pane {
   border: 2px solid var(--s1-line);
   background: var(--s1-panel);
-  box-shadow: var(--s1-shadow-hard-lg);
   overflow: hidden;
+}
+
+.pane-edit {
+  box-shadow: 6px 6px 0 #6d5cae;
+}
+
+.pane-live {
+  box-shadow: 6px 6px 0 #e03ad2;
 }
 
 .pane-header {
@@ -191,7 +198,7 @@ function reset() {
 
 .reset:hover,
 .reset:focus-visible {
-  background: var(--s1-hl);
+  background: #e2deef;
 }
 
 .reset:active {
@@ -228,7 +235,7 @@ function reset() {
   padding: 28px 24px;
   background-image: var(--s1-pattern-dots);
   background-size: var(--s1-pattern-dots-size);
-  background-color: var(--s1-stage);
+  background-color: #f7c6d1;
 }
 
 /* Main.dc.html:278-303 — os dois painéis não dividem o espaço igualmente:

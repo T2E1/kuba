@@ -7,6 +7,8 @@
  */
 function nav(prefix, label) {
   return [
+    { text: label.nav.manifesto, link: `${prefix}/manifesto` },
+    { text: label.nav.about, link: `${prefix}/about` },
     { text: label.nav.docs, link: `${prefix}/learn/introduction` },
     { text: label.nav.components, link: `${prefix}/components/` },
   ]

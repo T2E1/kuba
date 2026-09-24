@@ -294,7 +294,10 @@ pre,
 /* `.s1-home` é a classe que `theme/Layout.vue` acrescenta ao `.Layout` só
    nas três home pages — 56px é literal de Main.dc.html:33, contra os 64px
    (padrão, seção 4) de Docs.dc.html:39. Mesmo `VPNavBar`, dois contextos. */
-.s1-home .VPNavBar {
+/* No `.Layout` inteiro, não só no `VPNavBar`: o `VPContent` também lê
+   `--vp-nav-height` para o recuo do topo, e com 64px ali sobrava uma
+   faixa de 8px entre o cabeçalho e a primeira seção. */
+.s1-home {
   --vp-nav-height: 56px;
 }
 
@@ -770,6 +773,118 @@ pre,
   font-family: var(--s1-font-chrome);
   font-size: 11px;
   font-weight: 400;
+}
+
+/* Ilha clara: superfícies que ficam claras nos dois modos (faixas blush,
+   fog e magenta; a arte do Manifesto) trazem a tinta escura de volta. Os
+   tokens derivados (listra, pontilhado, sombra dura) são recalculados aqui
+   porque `var()` dentro de uma custom property resolve onde ela é
+   declarada — em `:root` — e não herdaria a tinta sobrescrita. */
+.s1-light-island {
+  --s1-ink: #111111;
+  --s1-line: #111111;
+  --s1-shadow: #111111;
+  --s1-muted: #3a3a3a;
+  --s1-panel: #ffffff;
+  --s1-code: #ffffff;
+  --s1-shadow-hard-lg: 6px 6px 0 #111111;
+  --s1-shadow-hard-sm: 3px 3px 0 #111111;
+  --s1-pattern-stripe: repeating-linear-gradient(
+    #111111 0 1px,
+    transparent 1px 3px
+  );
+  --s1-pattern-dots: radial-gradient(#111111 1.1px, transparent 1.5px);
+  color: #111111;
+}
+
+/* O realce do Shiki troca para as cores escuras sob `html.dark` (ver
+   `vp-code.css` do tema padrão); numa ilha clara o fundo continua branco,
+   então o código volta às cores claras. */
+.dark .s1-light-island .vp-code span {
+  color: var(--shiki-light, inherit);
+}
+
+/* Fios da coluna: as duas linhas finas verticais que marcam a coluna de
+   1040px em toda seção da landing (Main.dc.html:55, 89, 178…). Vão atrás
+   do conteúdo e somem quando a viewport não tem folga para elas. */
+.s1-rails {
+  position: relative;
+}
+
+.s1-rails::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: calc(50% - 520px);
+  width: 1040px;
+  border-left: 1px solid rgba(17, 17, 17, 0.35);
+  border-right: 1px solid rgba(17, 17, 17, 0.35);
+  pointer-events: none;
+}
+
+.s1-rails > * {
+  position: relative;
+}
+
+@media (max-width: 1080px) {
+  .s1-rails::before {
+    display: none;
+  }
+}
+
+/* Etiqueta Silkscreen com borda de 2px ("01 — nossa missão") — repetida em
+   toda seção da landing, do Manifesto e da Sobre (Main.dc.html:90,
+   Manifesto.dc.html). Só a forma: a margem fica com quem a posiciona. */
+.s1-chip {
+  display: inline-block;
+  background: var(--s1-panel);
+  border: 2px solid var(--s1-line);
+  color: var(--s1-ink);
+  font-family: var(--s1-font-chrome);
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  line-height: 1.4;
+  padding: 3px 8px;
+  text-transform: lowercase;
+}
+
+/* Texto corrido das páginas de apresentação (fora de `.vp-doc`, que a
+   `layout: page` não aplica): parágrafos espaçados, `<mark>` em blush,
+   `<code>` em caixinha de 1px e nota de rodapé `<sup>` em Silkscreen —
+   Manifesto.dc.html, seções 01–05. */
+.s1-prose {
+  font-size: 16px;
+  line-height: 25px;
+}
+
+.s1-prose p {
+  margin: 0;
+}
+
+.s1-prose p + p {
+  margin-top: 16px;
+}
+
+.s1-prose mark {
+  background: var(--s1-blush);
+  color: #111111;
+  padding: 0 3px;
+}
+
+.s1-prose code {
+  font-family: var(--s1-font-mono);
+  font-size: 0.86em;
+  border: 1px solid var(--s1-line);
+  background: var(--s1-panel);
+  padding: 0 4px;
+}
+
+.s1-prose sup {
+  font-family: var(--s1-font-chrome);
+  font-size: 0.6em;
+  line-height: 0;
 }
 
 /* =========================================================================
