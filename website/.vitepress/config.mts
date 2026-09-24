@@ -25,7 +25,11 @@ const ROOT_LOCALE = 'en'
 const navigationFor = (locale: string) => {
   const prefix = locale === ROOT_LOCALE ? '' : `/${locale}`
   const label = labels[locale]
-  return { nav: nav(prefix, label), sidebar: sidebar(prefix, label) }
+  return {
+    nav: nav(prefix, label),
+    sidebar: sidebar(prefix, label),
+    outline: { label: label.outline },
+  }
 }
 
 export default defineConfig({
