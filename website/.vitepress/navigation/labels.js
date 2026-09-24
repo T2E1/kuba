@@ -9,6 +9,8 @@
 const labels = {
   en: {
     nav: {
+      manifesto: 'Manifesto',
+      about: 'About',
       docs: 'Docs',
       components: 'Components',
     },
@@ -56,6 +58,8 @@ const labels = {
 
   'pt-br': {
     nav: {
+      manifesto: 'Manifesto',
+      about: 'Sobre',
       docs: 'Docs',
       components: 'Componentes',
     },
@@ -103,6 +107,8 @@ const labels = {
 
   es: {
     nav: {
+      manifesto: 'Manifiesto',
+      about: 'Acerca de',
       docs: 'Docs',
       components: 'Componentes',
     },

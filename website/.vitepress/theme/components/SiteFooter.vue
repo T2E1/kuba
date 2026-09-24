@@ -1,5 +1,5 @@
 <script setup>
-import { useData } from 'vitepress'
+import { useData, withBase } from 'vitepress'
 
 /**
  * Substitui o `VPFooter` nativo em toda página (home e doc). O nativo se

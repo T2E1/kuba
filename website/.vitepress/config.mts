@@ -132,6 +132,7 @@ export default defineConfig({
     resolve: {
       alias: {
         '@home': resolve(import.meta.dirname, 'theme/components/home'),
+        '@page': resolve(import.meta.dirname, 'theme/components/page'),
       },
     },
   },
