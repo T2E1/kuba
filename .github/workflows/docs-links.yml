@@ -22,6 +22,8 @@ jobs:
 
       - name: Repository markdown — files and URLs
         uses: lycheeverse/lychee-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           args: >-
             --no-progress
@@ -48,6 +50,8 @@ jobs:
           npm run build
       - name: Documentation site — internal routes and external URLs
         uses: lycheeverse/lychee-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           args: >-
             --no-progress
