@@ -64,9 +64,11 @@ const { site, theme } = useData()
   --s1-ink: #111111;
   --s1-bg: #f4f1ea;
   --s1-muted: #b8b3a8;
-  --s1-line: #111111;
   background: var(--s1-ink);
   color: var(--s1-bg);
+  /* A mesma linha do cabeçalho (`--s1-line` da página, sem sombrear aqui):
+     clara no modo escuro, onde o rodapé preto encostaria no fundo escuro
+     sem nenhum limite visível. */
   border-top: 2px solid var(--s1-line);
   padding: 80px 24px 40px;
 }
