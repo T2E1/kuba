@@ -294,7 +294,10 @@ pre,
 /* `.s1-home` é a classe que `theme/Layout.vue` acrescenta ao `.Layout` só
    nas três home pages — 56px é literal de Main.dc.html:33, contra os 64px
    (padrão, seção 4) de Docs.dc.html:39. Mesmo `VPNavBar`, dois contextos. */
-.s1-home .VPNavBar {
+/* No `.Layout` inteiro, não só no `VPNavBar`: o `VPContent` também lê
+   `--vp-nav-height` para o recuo do topo, e com 64px ali sobrava uma
+   faixa de 8px entre o cabeçalho e a primeira seção. */
+.s1-home {
   --vp-nav-height: 56px;
 }
 
@@ -792,6 +795,42 @@ pre,
   );
   --s1-pattern-dots: radial-gradient(#111111 1.1px, transparent 1.5px);
   color: #111111;
+}
+
+/* O realce do Shiki troca para as cores escuras sob `html.dark` (ver
+   `vp-code.css` do tema padrão); numa ilha clara o fundo continua branco,
+   então o código volta às cores claras. */
+.dark .s1-light-island .vp-code span {
+  color: var(--shiki-light, inherit);
+}
+
+/* Fios da coluna: as duas linhas finas verticais que marcam a coluna de
+   1040px em toda seção da landing (Main.dc.html:55, 89, 178…). Vão atrás
+   do conteúdo e somem quando a viewport não tem folga para elas. */
+.s1-rails {
+  position: relative;
+}
+
+.s1-rails::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: calc(50% - 520px);
+  width: 1040px;
+  border-left: 1px solid rgba(17, 17, 17, 0.35);
+  border-right: 1px solid rgba(17, 17, 17, 0.35);
+  pointer-events: none;
+}
+
+.s1-rails > * {
+  position: relative;
+}
+
+@media (max-width: 1080px) {
+  .s1-rails::before {
+    display: none;
+  }
 }
 
 /* Etiqueta Silkscreen com borda de 2px ("01 — nossa missão") — repetida em

@@ -63,15 +63,16 @@ function onTabKeydown(event) {
 </script>
 
 <template>
-  <section class="problem">
+  <section class="problem s1-light-island s1-rails">
     <div class="s1-container">
       <div class="intro">
+        <p class="s1-chip"><slot name="eyebrow" /></p>
         <h2 class="title"><slot name="title" /></h2>
         <div class="body"><slot name="body" /></div>
       </div>
       <div class="comparison">
-        <div class="column">
-          <p class="label" id="code-before-tablist-label"><slot name="code-before-label" /></p>
+        <div class="column s1-win">
+          <div class="s1-bar"><i /><b id="code-before-tablist-label"><slot name="code-before-label" /></b></div>
           <div class="tablist" role="tablist" aria-labelledby="code-before-tablist-label">
             <button
               v-for="framework in frameworks"
@@ -103,24 +104,32 @@ function onTabKeydown(event) {
             <slot :name="`code-before-${framework}`" />
           </div>
         </div>
-        <div class="column">
-          <p class="label"><slot name="code-after-label" /></p>
-          <div class="code"><slot name="code-after" /></div>
+        <div class="column column-after">
+          <div class="s1-win">
+            <div class="s1-bar"><i /><b><slot name="code-after-label" /></b></div>
+            <div class="code"><slot name="code-after" /></div>
+          </div>
+          <div class="caption"><slot name="code-after-caption" /></div>
         </div>
+      </div>
+      <div class="stat">
+        <p class="stat-figure"><slot name="stat" /></p>
+        <p class="stat-caption"><slot name="stat-caption" /></p>
       </div>
     </div>
   </section>
 </template>
 
 <style scoped>
-/* Main.dc.html:88-90,93,98 — padding-top 120px (não 64px, o token de
-   espaçamento que existia aqui antes), coluna de 1040px que agora vem de
-   `.s1-container` em vez de `.problem` mesmo (a cor de fundo precisa ir de
-   ponta a ponta da viewport, não só até 1040px). */
+/**
+ * Main.dc.html:88-172 — etiqueta, título de 72px, dois parágrafos em
+ * colunas, as duas janelas de código lado a lado (a do kuba descida 56px)
+ * e o número grande no fim. Ilha clara em blush nos dois modos.
+ */
 .problem {
-  padding: 120px 0 96px;
-  background: var(--s1-blush);
-  border-top: 2px solid var(--s1-line);
+  background: #f28aa0;
+  border-top: 2px solid #111111;
+  padding: 120px 0 104px;
 }
 
 .intro {
@@ -131,25 +140,27 @@ function onTabKeydown(event) {
 }
 
 .title {
-  color: var(--s1-ink);
   font-family: var(--s1-font-base);
-  /* Main.dc.html:92 — 72px/0.95/-0.04em, max-width 920px. */
-  font-size: clamp(2rem, 6vw, 72px);
+  font-size: clamp(2rem, 6.5vw, 72px);
   font-weight: 700;
   font-stretch: 88%;
   letter-spacing: -0.04em;
   line-height: 0.95;
-  margin: 0;
+  margin: 24px 0 0;
   max-width: 920px;
 }
 
 .body {
-  color: var(--s1-ink);
   font-size: 16px;
   line-height: 25px;
   margin-top: 48px;
-  max-width: 640px;
   text-align: left;
+  display: grid;
+  gap: 24px 48px;
+}
+
+.body :deep(p) {
+  margin: 0;
 }
 
 .comparison {
@@ -157,76 +168,54 @@ function onTabKeydown(event) {
   gap: 28px;
   margin-top: 64px;
   width: 100%;
+  align-items: start;
 }
 
 .column {
   min-width: 0;
 }
 
-.label {
-  color: var(--s1-ink);
-  font-family: var(--s1-font-chrome);
-  font-size: 11px;
-  font-weight: 400;
-  text-transform: lowercase;
-  margin: 0 0 var(--spacing_inset-quarck, 4px);
+.column-after {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
 .tablist {
-  border-bottom: 2px solid var(--s1-line);
+  border-bottom: 2px solid #111111;
   display: flex;
   flex-wrap: wrap;
-  gap: var(--spacing_inset-xs, 16px);
-  margin: 0 0 var(--spacing_inset-xs, 16px);
+  gap: 4px;
+  padding: 0 8px;
 }
 
 .tab {
   background: none;
   border: none;
   border-bottom: 4px solid transparent;
-  color: var(--s1-ink);
+  color: #111111;
   cursor: pointer;
-  font-family: var(--s1-font-base);
-  font-size: 14px;
-  font-weight: 600;
-  /* Sobrepõe a borda de 2px do `.tablist` para a borda de estado ativo (4px)
-     nascer rente a ela, sem deslocar o texto quando a aba é selecionada. */
+  font-family: var(--s1-font-chrome);
+  font-size: 11px;
   margin-bottom: -2px;
-  /* 44×44px é o alvo de toque mínimo do WCAG 2.5.5 — critério fixo da
-     especificação, não uma medida do design system. */
+  /* 44×44px é o alvo de toque mínimo do WCAG 2.5.5. */
   min-height: 44px;
-  padding: var(--spacing_inset-quarck, 4px) var(--spacing_inset-xs, 16px);
+  padding: 4px 12px;
+  text-transform: lowercase;
 }
 
 .tab[aria-selected='true'] {
-  border-bottom-color: var(--s1-ink);
+  border-bottom-color: #111111;
 }
 
 .tab:focus-visible {
-  outline: 3px dashed var(--s1-line);
-  outline-offset: 2px;
+  outline: 3px dashed #111111;
+  outline-offset: -3px;
 }
 
-/**
- * Sem `.vp-doc` como ancestral (esta página usa `layout: page`, que não
- * envolve o conteúdo nessa classe — ver `node_modules/vitepress/dist/client/theme-default/composables/sidebar.js`
- * e `VPContent.vue`), o bloco de código do Shiki chega sem o
- * `overflow-x: auto` que `.vp-doc [class*='language-'] pre` normalmente
- * aplica. Sem ele, uma linha longa (o `jsx` de `#code-before-react`, por
- * exemplo) estica o `<pre>` além da faixa do grid — que só tem
- * `min-width: 0` no `.column`, não largura travada — e o texto invade
- * visualmente a coluna vizinha. `overflow-x: auto` mantém a rolagem
- * dentro da própria coluna; o card por trás replica o tratamento que
- * `Hero.vue` já dá ao bloco `#proof`, para as colunas não ficarem como
- * texto cru ao lado do card do Hero. A seleção `.code` cobre os quatro
- * blocos — os três painéis de aba e o lado kuba — sem repetir a regra.
- */
-.code {
-  border: 2px solid var(--s1-line);
-  background: var(--s1-code);
-  box-shadow: var(--s1-shadow-hard-lg);
-}
-
+/* Fora de `.vp-doc` (`layout: page`), o bloco do Shiki chega sem rolagem
+   horizontal, botão de copiar posicionado nem rótulo de linguagem — a
+   moldura de janela já nomeia o arquivo, então os dois somem. */
 .code :deep(div[class*='language-']) {
   background: none;
   margin: 0;
@@ -235,27 +224,78 @@ function onTabKeydown(event) {
 
 .code :deep(pre) {
   margin: 0;
-  padding: var(--spacing_inset-xs, 16px);
+  padding: 16px;
+  font-size: 12.5px;
+  line-height: 20px;
 }
 
-/**
- * `button.copy` e `span.lang` só ganham aparência (ícone, posição,
- * esconder-até-hover) via `.vp-doc [class*='language-'] > button.copy` e
- * `.vp-doc [class*='language-'] > span.lang` — de novo, fora do alcance
- * sem `.vp-doc`. Sem essas regras os dois viram um botão vazio e um rótulo
- * de texto cru colados à primeira linha do código, e o rótulo já é
- * redundante com os rótulos das abas / `#code-after-label` acima do bloco.
- * Mais simples esconder os dois aqui do que recriar o posicionamento
- * absoluto e o hover só para este bloco.
- */
 .code :deep(button.copy),
 .code :deep(span.lang) {
   display: none;
 }
 
+.caption {
+  font-size: 15px;
+  line-height: 23px;
+  padding: 0 4px;
+}
+
+.caption :deep(p) {
+  margin: 0;
+}
+
+.caption :deep(code) {
+  font-family: var(--s1-font-mono);
+  font-size: 0.86em;
+}
+
+.caption :deep(a) {
+  color: #111111;
+  font-weight: 700;
+  text-underline-offset: 4px;
+}
+
+.stat {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+  margin-top: 96px;
+  border-top: 2px solid #111111;
+  padding-top: 28px;
+}
+
+.stat-figure {
+  font-family: var(--s1-font-base);
+  font-size: clamp(3rem, 10vw, 104px);
+  font-weight: 700;
+  font-stretch: 88%;
+  letter-spacing: -0.05em;
+  line-height: 0.9;
+  margin: 0;
+}
+
+.stat-caption {
+  font-family: var(--s1-font-chrome);
+  font-size: 11px;
+  line-height: 18px;
+  margin: 0;
+  max-width: 260px;
+  text-align: right;
+}
+
 @media (min-width: 768px) {
-  .comparison {
+  .body {
     grid-template-columns: 1fr 1fr;
+  }
+
+  .comparison {
+    grid-template-columns: minmax(0, 490fr) minmax(0, 522fr);
+  }
+
+  .column-after {
+    margin-top: 56px;
   }
 }
 </style>

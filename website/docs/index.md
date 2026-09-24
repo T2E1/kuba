@@ -4,29 +4,46 @@ sidebar: false
 ---
 
 <!--
-  This page composes nine section components under `.vitepress/theme/components/home/`
-  (imported here through the `@home` alias). Those nine `.vue` files do not
-  exist yet — building them is `designer`/`developer` work, not this page's.
-  This file only carries the structure and the copy each section receives
-  through props and slots; treat a missing `@home/*.vue` file as pending work,
-  not as a mistake in this page.
+  The sections below live in `.vitepress/theme/components/home/`, imported
+  through the `@home` alias. This file only carries the copy each section
+  receives through slots; the layout and the look belong to the components.
 -->
 
 <script setup>
 import Hero from '@home/Hero.vue'
 import Problem from '@home/Problem.vue'
 import HowItWorks from '@home/HowItWorks.vue'
-import Boundary from '@home/Boundary.vue'
-import ZeroFramework from '@home/ZeroFramework.vue'
-import Accessible from '@home/Accessible.vue'
+import Principles from '@home/Principles.vue'
+import Principle from '@home/Principle.vue'
 import Comparison from '@home/Comparison.vue'
 import Playground from '@home/Playground.vue'
-import Cta from '@home/Cta.vue'
+import Faq from '@home/Faq.vue'
 </script>
 
 <Hero>
-  <template #eyebrow>kuba</template>
-  <template #title>Components that talk to each other.<br>No framework. No state to manage.</template>
+  <template #source>
+
+```html
+<kb-input name="dog">…</kb-input>
+```
+
+  </template>
+  <template #arc>dog/changed:method/get</template>
+  <template #sink>
+
+```html
+<kb-fetch name="api" url="…/search?q={}">
+  <kb-on value="dog/changed:method/get"></kb-on>
+</kb-fetch>
+```
+
+One arc. When `dog` dispatches `changed`, `<kb-fetch>` calls its own `get` —
+no listener written by hand.
+
+  </template>
+  <template #meta>Web Components · Zero dependencies · MIT</template>
+  <template #title>Components that talk to each other.</template>
+  <template #tagline>No framework. No state to manage.</template>
   <template #subtitle>
 
 A declarative event bus wires elements together right in the markup — an
@@ -34,24 +51,15 @@ A declarative event bus wires elements together right in the markup — an
 write by hand to make two components agree.
 
   </template>
-  <template #proof>
+  <template #actions>
 
-```html
-<kb-input name="dog">…</kb-input>
-
-<kb-fetch name="api" url="…/search?q={}">
-  <kb-on value="dog/changed:method/get"></kb-on>
-</kb-fetch>
-```
-
-One arc: `dog/changed:method/get`. When `<kb-input name="dog">` dispatches
-`changed`, `<kb-fetch name="api">` calls its own `get` — no listener written by
-hand, no reference from one element to the other.
+[Read the docs](/learn/introduction) [View on GitHub](https://github.com/T2E1/kuba)
 
   </template>
 </Hero>
 
 <Problem>
+  <template #eyebrow>01 — the problem</template>
   <template #title>Every interface ends up needing a framework — just so two components can talk.</template>
   <template #body>
 
@@ -235,45 +243,60 @@ export class DogSearchComponent {
 </kb-fetch>
 ```
 
+  </template>
+  <template #code-after-caption>
+
 No `useState`, no `useEffect`, no `AbortController` written by hand — `<kb-fetch>`
 aborts a stale request on its own. Full walkthrough:
 [Search as you type](/build-ui/patterns/search-as-you-type).
 
   </template>
+  <template #stat>0 useState.<br>0 useEffect.</template>
+  <template #stat-caption>Same breed search.<br>Same behavior.<br>Just markup.</template>
 </Problem>
 
 <HowItWorks>
-  <template #title>How it works</template>
-  <template #body>
+  <template #eyebrow>02 — how it works</template>
+  <template #title>One arc. Four parts.</template>
+  <template #intro>
 
-Every kuba element that reacts to another carries an `on` (or `<kb-on>`)
-attribute describing one connection — an **arc**:
+Every kuba element that reacts to another carries an `on` attribute (or a
+`<kb-on>`) describing one connection — an **arc**.
 
-```
-source/event:type/sink
-```
+  </template>
+  <template #source>
 
-- **`source`** is the `name` of the element that dispatches the event.
-- **`event`** is the event name — `changed`, `succeeded`, `failed`, whatever
-  the source publishes.
-- **`type`** is what the arc drives on the sink: `method` calls a function,
-  `property` assigns a value, `attribute` sets one on the DOM.
-- **`sink`** is what gets called, assigned, or set.
+The `name` of the element that dispatches the event.
 
-```html
-<kb-on value="dog/changed:method/get"></kb-on>
-```
+  </template>
+  <template #event>
 
-reads as: *when the element named `dog` dispatches `changed`, call this
-element's `get` method with the event's payload.* Echo — the bus underneath —
-listens for the native `CustomEvent`, resolves `source` by `name`, and makes
-the call. No element holds a reference to another; they only agree on a name
-and an event.
+The event name — `changed`, `succeeded`, `failed`, whatever the source publishes.
+
+  </template>
+  <template #type>
+
+What the arc drives: `method` calls a function, `property` assigns a value, `attribute` writes to the DOM.
+
+  </template>
+  <template #sink>
+
+What gets called, assigned, or set on the element that carries the arc.
+
+  </template>
+  <template #reading>
+
+Reads as: *when the element named `dog` dispatches `changed`, call this
+element's `get` method with the event's payload.* Echo listens for the native
+`CustomEvent`, resolves the source by name, and makes the call. No element
+holds a reference to another.
 
   </template>
 </HowItWorks>
 
-<Boundary>
+<Principles>
+
+<Principle file="not.txt">
   <template #title>What kuba is not</template>
   <template #body>
 
@@ -286,9 +309,9 @@ kuba removes the communication glue between components. It does not replace
 the decisions your application still has to make.
 
   </template>
-</Boundary>
+</Principle>
 
-<ZeroFramework>
+<Principle file="zero-framework.txt">
   <template #title>Zero framework</template>
   <template #body>
 
@@ -300,9 +323,9 @@ Django template, or a static `.html` file, and every tag below works exactly
 the same way.
 
   </template>
-</ZeroFramework>
+</Principle>
 
-<Accessible>
+<Principle file="a11y.txt">
   <template #title>Accessible by default</template>
   <template #body>
 
@@ -313,9 +336,12 @@ custom states like `:state(invalid)` through `ElementInternals` instead of
 reimplementing what `<form>` already does natively.
 
   </template>
-</Accessible>
+</Principle>
+
+</Principles>
 
 <Comparison>
+  <template #eyebrow>03 — where it fits</template>
   <template #title>Where kuba sits</template>
   <template #table>
 
@@ -331,7 +357,8 @@ reimplementing what `<form>` already does natively.
 </Comparison>
 
 <Playground>
-  <template #title>Try it</template>
+  <template #eyebrow>04 — try it</template>
+  <template #title>Change an attribute.<br>Watch it react.</template>
   <template #body>
 
 The same search-dog-breeds feature from the top of this page, editable live —
@@ -340,10 +367,42 @@ change an attribute, add an arc, see it react immediately.
   </template>
 </Playground>
 
-<Cta>
-  <template #install>npm install kuba</template>
-  <template #docs-label>Read the docs</template>
-  <template #docs-link>/learn/introduction</template>
-  <template #github-label>View on GitHub</template>
-  <template #github-link>https://github.com/T2E1/kuba</template>
-</Cta>
+<Faq>
+  <template #title>Questions</template>
+
+<details>
+<summary>Does kuba replace my framework?</summary>
+
+It replaces the communication glue between components, not the decisions your application makes. kuba does not model your domain: the arc is the whole contract, and what the payload means stays with the elements at each end.
+
+</details>
+
+<details>
+<summary>Do I need a bundler or a build step?</summary>
+
+No. Every element is a standard custom element, registered once, running on `CustomEvent`. A `<script>` and a `<link>` are the whole installation.
+
+</details>
+
+<details>
+<summary>Does it work with my backend?</summary>
+
+With any of them. In a static page, a PHP template, a Rails view, or a Django template, every tag works the same way.
+
+</details>
+
+<details>
+<summary>Where does state live?</summary>
+
+In the DOM and in your own objects. No element holds a reference to another: they connect through a name and an event.
+
+</details>
+
+<details>
+<summary>Is it accessible?</summary>
+
+Keyboard support and ARIA live in the mixins every element is built from. Form fields use the Constraint Validation API and report state through `ElementInternals`.
+
+</details>
+
+</Faq>
