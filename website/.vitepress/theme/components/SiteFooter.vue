@@ -66,10 +66,10 @@ const { site, theme } = useData()
   --s1-muted: #b8b3a8;
   background: var(--s1-ink);
   color: var(--s1-bg);
-  /* A mesma linha do cabeçalho (`--s1-line` da página, sem sombrear aqui):
-     clara no modo escuro, onde o rodapé preto encostaria no fundo escuro
-     sem nenhum limite visível. */
-  border-top: 2px solid var(--s1-line);
+  /* Linha clara nos dois modos — a mesma cor do texto do rodapé (papel),
+     delimitando o bloco escuro também no modo escuro, onde ele encostaria
+     no fundo da página sem nenhum limite visível. */
+  border-top: 2px solid var(--s1-bg);
   padding: 80px 24px 40px;
 }
 
