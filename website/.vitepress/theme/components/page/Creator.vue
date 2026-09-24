@@ -1,8 +1,9 @@
 <script setup>
 /**
- * Cartão do criador — Sobre.dc.html, seção 01: janela com foto, faixa preta
- * com o nome, papel em Silkscreen, bio e links em botões; as janelas de
- * fatos (`Window.vue`) entram pelo slot padrão, numa coluna ao lado.
+ * Cartão do criador — Sobre.dc.html, seção 01, no arranjo da página de time
+ * do typesafe: a janela com foto no centro e as janelas de fatos
+ * (`Window.vue`) espalhadas em volta dela, em duas colunas desencontradas
+ * (`#left` e `#right`), cada janela deslocada um pouco da vizinha.
  */
 defineProps({
   photo: { type: String, required: true },
@@ -12,8 +13,9 @@ defineProps({
 
 <template>
   <div class="creator">
+    <div class="side side-left"><slot name="left" /></div>
     <article class="s1-win card">
-      <div class="s1-bar"><i></i><b>creator.jpg</b></div>
+      <div class="s1-bar"><i /><b>creator.jpg</b></div>
       <div class="photo s1-dots">
         <img :src="photo" :alt="alt" width="400" height="360" loading="lazy" />
       </div>
@@ -24,25 +26,22 @@ defineProps({
         <div class="links"><slot name="links" /></div>
       </div>
     </article>
-    <div class="facts">
-      <slot />
-    </div>
+    <div class="side side-right"><slot name="right" /></div>
   </div>
 </template>
 
 <style scoped>
 .creator {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: flex-start;
+  display: grid;
   gap: 28px;
   width: 100%;
+  align-items: start;
 }
 
 .card {
-  flex: 0 1 400px;
   color: var(--s1-ink);
+  position: relative;
+  z-index: 1;
 }
 
 .photo {
@@ -87,6 +86,7 @@ defineProps({
 .role {
   font-family: var(--s1-font-chrome);
   font-size: 11px;
+  line-height: 16px;
   margin: 0;
   text-transform: lowercase;
 }
@@ -114,14 +114,61 @@ defineProps({
   text-decoration: none;
 }
 
-.facts {
-  flex: 0 1 280px;
+.side {
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 28px;
 }
 
-.facts :deep(.content) {
+.side :deep(.content) {
   padding: 14px 16px 16px;
+}
+
+.side :deep(.text) {
+  font-size: 14px;
+  line-height: 21px;
+}
+
+.side :deep(.text ul) {
+  list-style: square;
+  margin: 0;
+  padding-left: 18px;
+}
+
+/* Em tela larga, as colunas descem em alturas diferentes e cada janela sai
+   um pouco da linha da vizinha — o "espalhado em volta" da referência. As
+   janelas chegam perto da foto e passam por baixo dela (`z-index` do
+   cartão), como os cartões sobrepostos do typesafe. */
+@media (min-width: 1000px) {
+  .creator {
+    grid-template-columns: minmax(0, 300px) 400px minmax(0, 300px);
+    justify-content: center;
+    gap: 0 20px;
+  }
+
+  .side-left {
+    padding-top: 72px;
+  }
+
+  .side-right {
+    padding-top: 8px;
+  }
+
+  .side-left > :deep(:nth-child(odd)) {
+    margin-right: 36px;
+  }
+
+  .side-left > :deep(:nth-child(even)) {
+    margin-left: 28px;
+    margin-right: -24px;
+  }
+
+  .side-right > :deep(:nth-child(odd)) {
+    margin-left: -24px;
+  }
+
+  .side-right > :deep(:nth-child(even)) {
+    margin-left: 32px;
+  }
 }
 </style>

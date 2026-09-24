@@ -33,33 +33,60 @@ import Closing from '@page/Closing.vue'
 
 <Creator photo="https://github.com/deMGoncalves.png" alt="Retrato de Cleber de M. Goncalves">
   <template #name>Cleber de M. Goncalves</template>
-  <template #role>creador y mantenedor de kuba</template>
+  <template #role>creador de kuba · principal & staff frontend engineer · são paulo, br</template>
   <template #bio>
 
-Escribe y mantiene kuba — los custom elements, el bus de Echo y este sitio.
+Veinte años construyendo interfaces que escalan a decenas de millones de usuarios — Web Components, rendimiento y liderazgo técnico de punta a punta.
 
   </template>
   <template #links>
 
-[github/deMGoncalves](https://github.com/deMGoncalves)
+[github/deMGoncalves](https://github.com/deMGoncalves) [in/demgoncalves](https://www.linkedin.com/in/demgoncalves)
 
   </template>
+  <template #left>
 
-<Window file="stack.txt">
-
-JavaScript puro, Web Components, Bun, Biome, Vitest y Playwright.
-
-</Window>
-<Window file="org.txt">
-
-Publica kuba como `@t2e1/kuba`, bajo la organización **T2E1**, con licencia MIT.
-
-</Window>
 <Window file="ahora.txt">
 
-Trabajando hacia la primera versión estable.
+**Technical Leader en Mercado Libre** — One Chat, el chat unificado de la mayor plataforma de América Latina.
 
 </Window>
+<Window file="impacto.txt">
+
+- **68M** clientes al día atendidos — framework de McDonald's, 119 países
+- **+1020%** de throughput de entregas
+- **+352%** de tráfico orgánico
+- **−92%** de costo de infraestructura
+
+</Window>
+<Window file="confian.txt">
+
+Mercado Libre, McDonald's, PagBank, Stone, C&A, WGSN y B2W.
+
+</Window>
+
+  </template>
+  <template #right>
+
+<Window file="memoize.txt">
+
+**[Memoize](https://memoize.cards)** — aprendizaje guiado por IA: flashcards con FSRS, 100% offline, lógica en WebAssembly, sync P2P y frontend en Web Components sobre HDA + DataFlow.
+
+</Window>
+<Window file="stack.txt">
+
+TypeScript, React, Web Components, micro-frontends, design systems, OpenTelemetry, Rust y WASM.
+
+</Window>
+<Window file="premios.txt">
+
+- Elite LATAM — agilidad
+- UX Design Awards — a11y
+- Good Design Awards — rendimiento
+
+</Window>
+
+  </template>
 </Creator>
 
 </Band>

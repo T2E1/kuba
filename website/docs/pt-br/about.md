@@ -33,33 +33,60 @@ import Closing from '@page/Closing.vue'
 
 <Creator photo="https://github.com/deMGoncalves.png" alt="Retrato de Cleber de M. Goncalves">
   <template #name>Cleber de M. Goncalves</template>
-  <template #role>criador e mantenedor do kuba</template>
+  <template #role>criador do kuba · principal & staff frontend engineer · são paulo, br</template>
   <template #bio>
 
-Escreve e mantém o kuba — os custom elements, o barramento do Echo e este site.
+Vinte anos arquitetando interfaces que escalam para dezenas de milhões de usuários — Web Components, performance e liderança técnica de ponta a ponta.
 
   </template>
   <template #links>
 
-[github/deMGoncalves](https://github.com/deMGoncalves)
+[github/deMGoncalves](https://github.com/deMGoncalves) [in/demgoncalves](https://www.linkedin.com/in/demgoncalves)
 
   </template>
+  <template #left>
 
-<Window file="stack.txt">
-
-JavaScript puro, Web Components, Bun, Biome, Vitest e Playwright.
-
-</Window>
-<Window file="org.txt">
-
-Publica o kuba como `@t2e1/kuba`, pela organização **T2E1**, sob licença MIT.
-
-</Window>
 <Window file="agora.txt">
 
-Trabalhando rumo à primeira versão estável.
+**Technical Leader no Mercado Livre** — One Chat, o chat unificado da maior plataforma da América Latina.
 
 </Window>
+<Window file="impacto.txt">
+
+- **68M** clientes por dia atendidos — framework do McDonald's, 119 países
+- **+1020%** de throughput de entregas
+- **+352%** de tráfego orgânico
+- **−92%** de custo de infra
+
+</Window>
+<Window file="confiam.txt">
+
+Mercado Livre, McDonald's, PagBank, Stone, C&A, WGSN e B2W.
+
+</Window>
+
+  </template>
+  <template #right>
+
+<Window file="memoize.txt">
+
+**[Memoize](https://memoize.cards)** — aprendizado guiado por IA: flashcards com FSRS, 100% offline, lógica em WebAssembly, sync P2P e frontend em Web Components sob HDA + DataFlow.
+
+</Window>
+<Window file="stack.txt">
+
+TypeScript, React, Web Components, micro-frontends, design systems, OpenTelemetry, Rust e WASM.
+
+</Window>
+<Window file="premios.txt">
+
+- Elite LATAM — agilidade
+- UX Design Awards — a11y
+- Good Design Awards — performance
+
+</Window>
+
+  </template>
 </Creator>
 
 </Band>

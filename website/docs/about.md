@@ -33,33 +33,60 @@ import Closing from '@page/Closing.vue'
 
 <Creator photo="https://github.com/deMGoncalves.png" alt="Portrait of Cleber de M. Goncalves">
   <template #name>Cleber de M. Goncalves</template>
-  <template #role>creator and maintainer of kuba</template>
+  <template #role>creator of kuba · principal & staff frontend engineer · são paulo, br</template>
   <template #bio>
 
-Writes and maintains kuba — the custom elements, the Echo bus, and this site.
+Twenty years building interfaces that scale to tens of millions of users — Web Components, performance, and technical leadership end to end.
 
   </template>
   <template #links>
 
-[github/deMGoncalves](https://github.com/deMGoncalves)
+[github/deMGoncalves](https://github.com/deMGoncalves) [in/demgoncalves](https://www.linkedin.com/in/demgoncalves)
 
   </template>
+  <template #left>
 
-<Window file="stack.txt">
-
-Plain JavaScript, Web Components, Bun, Biome, Vitest and Playwright.
-
-</Window>
-<Window file="org.txt">
-
-Publishes kuba as `@t2e1/kuba`, under the **T2E1** organization, MIT licensed.
-
-</Window>
 <Window file="now.txt">
 
-Working toward the first stable release.
+**Technical Leader at Mercado Livre** — One Chat, the unified chat of the largest platform in Latin America.
 
 </Window>
+<Window file="impact.txt">
+
+- **68M** customers a day served — McDonald's framework, 119 countries
+- **+1020%** delivery throughput
+- **+352%** organic traffic
+- **−92%** infrastructure cost
+
+</Window>
+<Window file="trusted-by.txt">
+
+Mercado Livre, McDonald's, PagBank, Stone, C&A, WGSN and B2W.
+
+</Window>
+
+  </template>
+  <template #right>
+
+<Window file="memoize.txt">
+
+**[Memoize](https://memoize.cards)** — AI-guided learning: FSRS flashcards, 100% offline, logic in WebAssembly, P2P sync, and a Web Components frontend on HDA + DataFlow.
+
+</Window>
+<Window file="stack.txt">
+
+TypeScript, React, Web Components, micro-frontends, design systems, OpenTelemetry, Rust and WASM.
+
+</Window>
+<Window file="awards.txt">
+
+- Elite LATAM — agility
+- UX Design Awards — a11y
+- Good Design Awards — performance
+
+</Window>
+
+  </template>
 </Creator>
 
 </Band>
