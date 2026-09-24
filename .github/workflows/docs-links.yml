@@ -25,10 +25,18 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
+          # github.com throttles plain page requests hard, independent of the
+          # API token: high concurrency (lychee defaults to 128) makes it
+          # backoff for minutes at a time. A low concurrency and a bounded
+          # retry budget keep the check fast and let it fail loud instead of
+          # hammering the same host until the job gets cancelled.
           args: >-
             --no-progress
             --cache
             --max-cache-age 1d
+            --max-concurrency 5
+            --retry-wait-time 5
+            --max-retries 2
             README.md CONTRIBUTING.md SECURITY.md CODE_OF_CONDUCT.md CHANGELOG.md
           fail: true
 
@@ -57,6 +65,9 @@ jobs:
             --no-progress
             --cache
             --max-cache-age 1d
+            --max-concurrency 5
+            --retry-wait-time 5
+            --max-retries 2
             --scheme https
             --scheme http
             --root-dir ${{ github.workspace }}/website/build
