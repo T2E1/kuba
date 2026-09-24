@@ -135,14 +135,15 @@ defineProps({
 }
 
 /* Em tela larga, as colunas descem em alturas diferentes e as janelas
-   alternam o recuo — o "espalhado em volta" da referência. O recuo sempre
-   se afasta da foto (`translateX` para fora), e o vão de 48px entre as
-   colunas garante que nenhuma janela encoste no cartão. */
+   alternam o recuo — o "espalhado em volta" da referência. O recuo é
+   `margin` (reserva espaço real, ao contrário de `transform`), sempre para
+   fora do cartão central, e o vão de 32px entre as colunas garante que
+   nenhuma janela encoste na foto. */
 @media (min-width: 1000px) {
   .creator {
     grid-template-columns: minmax(0, 280px) 400px minmax(0, 280px);
     justify-content: center;
-    gap: 0 48px;
+    gap: 0 32px;
   }
 
   .side-left {
@@ -154,11 +155,11 @@ defineProps({
   }
 
   .side-left > :deep(:nth-child(even)) {
-    transform: translateX(-32px);
+    margin-right: 24px;
   }
 
   .side-right > :deep(:nth-child(even)) {
-    transform: translateX(32px);
+    margin-left: 24px;
   }
 }
 </style>
