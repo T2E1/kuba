@@ -3,7 +3,8 @@
  * Cartão do criador — Sobre.dc.html, seção 01, no arranjo da página de time
  * do typesafe: a janela com foto no centro e as janelas de fatos
  * (`Window.vue`) espalhadas em volta dela, em duas colunas desencontradas
- * (`#left` e `#right`), cada janela deslocada um pouco da vizinha.
+ * (`#left` e `#right`), cada janela deslocada um pouco da vizinha, sem
+ * nunca encostar na foto.
  */
 defineProps({
   photo: { type: String, required: true },
@@ -40,8 +41,6 @@ defineProps({
 
 .card {
   color: var(--s1-ink);
-  position: relative;
-  z-index: 1;
 }
 
 .photo {
@@ -135,15 +134,15 @@ defineProps({
   padding-left: 18px;
 }
 
-/* Em tela larga, as colunas descem em alturas diferentes e cada janela sai
-   um pouco da linha da vizinha — o "espalhado em volta" da referência. As
-   janelas chegam perto da foto e passam por baixo dela (`z-index` do
-   cartão), como os cartões sobrepostos do typesafe. */
+/* Em tela larga, as colunas descem em alturas diferentes e as janelas
+   alternam o recuo — o "espalhado em volta" da referência. O recuo sempre
+   se afasta da foto (`translateX` para fora), e o vão de 48px entre as
+   colunas garante que nenhuma janela encoste no cartão. */
 @media (min-width: 1000px) {
   .creator {
-    grid-template-columns: minmax(0, 300px) 400px minmax(0, 300px);
+    grid-template-columns: minmax(0, 280px) 400px minmax(0, 280px);
     justify-content: center;
-    gap: 0 20px;
+    gap: 0 48px;
   }
 
   .side-left {
@@ -154,21 +153,12 @@ defineProps({
     padding-top: 8px;
   }
 
-  .side-left > :deep(:nth-child(odd)) {
-    margin-right: 36px;
-  }
-
   .side-left > :deep(:nth-child(even)) {
-    margin-left: 28px;
-    margin-right: -24px;
-  }
-
-  .side-right > :deep(:nth-child(odd)) {
-    margin-left: -24px;
+    transform: translateX(-32px);
   }
 
   .side-right > :deep(:nth-child(even)) {
-    margin-left: 32px;
+    transform: translateX(32px);
   }
 }
 </style>
