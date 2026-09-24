@@ -61,6 +61,11 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
+          # VitePress prints an "edit this page" link on every single page,
+          # all pointing at github.com/T2E1/kuba/edit/main/<path> — a
+          # predictable pattern, guaranteed valid whenever the source file
+          # exists, and the actual source of the 429s: thousands of requests
+          # to the same host for links that carry no risk of rotting.
           args: >-
             --no-progress
             --cache
@@ -68,6 +73,7 @@ jobs:
             --max-concurrency 5
             --retry-wait-time 5
             --max-retries 2
+            --exclude 'github\.com/T2E1/kuba/edit/main/'
             --scheme https
             --scheme http
             --root-dir ${{ github.workspace }}/website/build
