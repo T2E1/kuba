@@ -424,13 +424,22 @@ pre,
  * 8. BUSCA — caixa "ctrl k" (Docs.dc.html:45-48)
  * ========================================================================= */
 @media (min-width: 768px) {
+  /* Mesma sombra dura de 3px e o mesmo "afundar" ao pressionar do botão
+     de aparência (seção 9) — os dois controles do cabeçalho seguem o
+     padrão de controle do Tema (Tema.dc.html:78-83). */
   .DocSearch-Button {
     border: 2px solid var(--s1-line) !important;
     background-color: var(--s1-panel) !important;
+    box-shadow: var(--s1-shadow-hard-sm) !important;
   }
 
   .DocSearch-Button:hover {
     border-color: var(--s1-accent) !important;
+  }
+
+  .DocSearch-Button:active {
+    box-shadow: none !important;
+    transform: translate(3px, 3px);
   }
 }
 
