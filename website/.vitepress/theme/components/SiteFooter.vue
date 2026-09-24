@@ -56,6 +56,11 @@ const { site, theme } = useData()
    usamos o layout da landing, mais completo, nos dois lugares, já que o
    `SiteFooter.vue` é compartilhado). */
 .s1-footer {
+  /* Acima da sidebar fixa das docs (z 25 no desktop), abaixo do cabeçalho
+     (z 30): no fim da página o rodapé ocupa a largura inteira, como na
+     landing, em vez de a sidebar branca cobrir a parte esquerda dele. */
+  position: relative;
+  z-index: 26;
   --s1-ink: #111111;
   --s1-bg: #f4f1ea;
   --s1-muted: #b8b3a8;

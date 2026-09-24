@@ -284,6 +284,12 @@ pre,
  * ========================================================================= */
 .VPNavBar {
   border-bottom: 2px solid var(--s1-line);
+  /* O tema padrão deixa o `VPNavBar` transparente e só pinta o
+     `.content-body`, que termina na largura máxima do layout — em tela
+     larga, o trecho depois dele mostrava o fundo da página (bege) em vez
+     do fundo do cabeçalho. `!important` porque a regra do tema padrão é
+     `<style scoped>` — o atributo `data-v` vence este seletor. */
+  background-color: var(--s1-side) !important;
 }
 
 /* Com sidebar, o `.content-body` do `VPNavBar` tem fundo próprio e a altura
@@ -374,8 +380,10 @@ pre,
      (Docs.dc.html:61,84,200). Sem zerar o padding do `.VPDoc`, sobra menos
      que 820px para `.content-container` mesmo com o `max-width` correto
      (confirmado por medição em runtime — ver relatório). */
+  /* 96px no fim: respiro entre os cards anterior/próxima e o rodapé
+     escuro, que antes encostavam. */
   .VPDoc {
-    padding: 48px 0 0 !important;
+    padding: 48px 0 96px !important;
   }
 
   /* `>` e não descendente: `.VPDocAsideOutline` (o sumário lateral) também
@@ -726,6 +734,14 @@ pre,
  * ========================================================================= */
 .VPFooter {
   display: none !important;
+}
+
+/* O degradê que o tema padrão pinta no pé do sumário lateral (para o texto
+   rolar "por baixo" dele) é fixo na viewport e aparecia como um retângulo
+   claro por cima do rodapé escuro. Sem rolagem própria no sumário do Tema,
+   ele não tem função. */
+.VPDoc .aside-curtain {
+  display: none;
 }
 
 /* =========================================================================
