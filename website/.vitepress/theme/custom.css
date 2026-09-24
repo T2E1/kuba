@@ -286,6 +286,14 @@ pre,
   border-bottom: 2px solid var(--s1-line);
 }
 
+/* Com sidebar, o `.content-body` do `VPNavBar` tem fundo próprio e a altura
+   inteira da barra, e cobria a linha de baixo no trecho do conteúdo — a
+   linha só aparecia sobre a sidebar e depois da coluna. A mesma linha,
+   desenhada por dentro dele, fecha o trecho. */
+.VPNavBar .content-body {
+  box-shadow: inset 0 -2px 0 var(--s1-line);
+}
+
 .VPNavBar .divider,
 .VPNavBar .divider-line {
   display: none;
@@ -370,7 +378,10 @@ pre,
     padding: 48px 0 0 !important;
   }
 
-  .VPDoc .content {
+  /* `>` e não descendente: `.VPDocAsideOutline` (o sumário lateral) também
+     tem um `.content` dentro do `.VPDoc`, e herdava estes 72px à esquerda —
+     os itens do "Nesta página" apareciam centralizados e cortados. */
+  .VPDoc > .container > .content {
     /* Docs.dc.html:84 — padding-bottom literal é 0; o respiro antes do
        rodapé escuro vem do próprio `SiteFooter.vue` (56px de padding-top). */
     padding: 0 60px 0 72px !important;
