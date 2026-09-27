@@ -66,6 +66,17 @@ Every connection is an **arc** — `source/event:type/sink`. `<kb-input name="do
 
 No component references another in code — they only agree on event names. **[The full example, running →](https://t2e1.github.io/kuba/build-ui/patterns/search-as-you-type)**
 
+## One arc, four parts
+
+An arc has the shape `source/event:type/sink`:
+
+- **source** — the `name` of the element that dispatches the event. `dog` and `api` above.
+- **event** — the event's name: `changed`, `succeeded`, `failed`.
+- **type** — what the arc drives: `method` calls a function, `property` assigns a value, `attribute` writes to the DOM.
+- **sink** — what gets called, assigned, or set.
+
+`dog/changed:method/get` reads: when the element named `dog` dispatches `changed`, call this element's `get` method with the event's payload. Echo listens for the native `CustomEvent`, resolves the source by name, and makes the call. No element holds a reference to another.
+
 ## Two schools of thought, and the gap between them
 
 Modern frontend development has converged on two competing philosophies, and each one solves only half of the problem.
@@ -78,9 +89,19 @@ kuba closes exactly that gap: **client-side dataflow without leaving HTML, and w
 
 The argument in full — including how the DOM event system closes the gap — is in the [Introduction](https://t2e1.github.io/kuba/learn/introduction); the grammar itself is in [Events and Echo](https://t2e1.github.io/kuba/foundations/events-and-echo).
 
+## Where kuba sits
+
+| | Hand-rolled Web Components | Component library | Full framework | kuba |
+|---|---|---|---|---|
+| Cross-component wiring | Written by hand, every time | Not its job | A state runtime | Declarative arcs in markup |
+| Build step | None | Usually none | Required | None |
+| Runtime shipped to the browser | None | Varies | A framework runtime | Zero dependencies |
+| Backend requirement | None | None | Often a matching backend | None — any stack |
+| Where state lives | Wherever you put it | Wherever you put it | A JS state tree | The DOM and your own objects |
+
 ## Packages
 
-kuba ships as one npm package (`@t2e1/kuba`) but is internally organized as many small packages under `packages/` — custom elements (`kb-` when visual, `k-` when headless) and the utilities they are built from, each independently importable through its own subpath export:
+kuba ships as one npm package (`@t2e1/kuba`) but is internally organized as many small packages — custom elements (`kb-` when visual, `k-` when headless) under `src/`, and the utilities they are built from under `packages/`, each independently importable through its own subpath export:
 
 ```js
 import { css, html } from '@t2e1/kuba/dom'

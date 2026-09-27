@@ -31,14 +31,15 @@ The repository has no runtime dependencies, so `bun install` only fetches the to
 ## Project structure
 
 ```
-packages/
+src/
 ├── behavior/    custom elements — behavioral (on, redirect, render)
 ├── component/   custom elements — visual components
 ├── typography/  custom elements — text (text, label, helper)
 ├── form/        custom elements — form controls
 ├── layout/      custom elements — layout primitives
 ├── data/        custom elements — headless data (k-* prefix)
-│
+
+packages/
 ├── dom/         utility — template helpers
 ├── echo/        utility — the dataflow bus (event primitives)
 ├── router/      utility — client-side routing
@@ -46,18 +47,21 @@ packages/
 └── ...
 ```
 
+Every custom element lives under `src/`, grouped by the categories above. `packages/` holds the utilities elements are built from — imported through their own subpath export (see the [Packages](./README.md#packages) section of the README).
+
 Each package is self-contained. Changes to one package should not require changes to another.
 
 ---
 
 ## What a change to an element ships with
 
-A visual custom element lives in one `packages/<group>/<name>/` folder and is only complete with all four:
+A visual custom element lives in one `src/<group>/<name>/` folder and is only complete with all five:
 
 1. **The implementation** — `<name>.ts`, plus its `component.js` and `style.js`.
 2. **A hand-written `types.d.ts` beside it**, describing only the public surface and registering the tag in `HTMLElementTagNameMap`. An implementation with no `types.d.ts` isn't a public element.
 3. **A `<name>.test.js` beside it**, running against the real browser API the element depends on.
-4. **A page under `website/docs/components/`**, following the shape of the existing ones: live example, when to use and when not to, composition, attributes, events, styling, accessibility, do's and don'ts.
+4. **A `DESIGN.md` beside it** — the LLD specification of its contract, composition and edge cases.
+5. **A page under `website/docs/components/`**, following the shape of the existing ones: live example, when to use and when not to, composition, attributes, events, styling, accessibility, do's and don'ts.
 
 Every visual decision is a `--<name>-*` custom property defaulting to a design token — no literals in `style.js`.
 
@@ -85,7 +89,7 @@ The prefix isn't decoration — it drives the version bump. `feat` and `fix` bum
 - Include a clear description of *why*, not just *what*
 - Do not add runtime dependencies — kuba ships with zero, by design
 - Do not break subpath exports or change the public API without discussion
-- A new or changed element ships with its `types.d.ts`, its test and its docs page in the same PR
+- A new or changed element ships with its `types.d.ts`, its `DESIGN.md`, its test and its docs page in the same PR
 
 Open an issue first for anything beyond a small bug fix or typo.
 
