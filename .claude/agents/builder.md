@@ -65,7 +65,6 @@ Mais o relato do que a mudança passa a garantir, e o que ela custa por commit.
 | `commitlint.config.js` | Conventional Commits |
 | `.github/workflows/npm-publish.yml` | `bun run test` e `bun run release` antes de publicar |
 | `.github/workflows/pages-deploy.yml` | Build do VitePress em `website/` e publicação no GitHub Pages |
-| `.github/workflows/docs-links.yml` | Links quebrados na documentação, via lychee |
 | `package.json` → `files`, `exports`, `scripts` | O que vai para o npm e como se chama |
 | `website/.vitepress/config.mts` (exceto `KUBA_VERSION`) | Composition root do site: `base`, `srcDir`, `outDir`, `locales`, `markdown`, `vite` |
 | `website/.vitepress/plugins/` · `website/.vitepress/theme/` | Mecanismo de build do site — nunca conteúdo ou navegação |
