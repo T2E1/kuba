@@ -55,8 +55,8 @@ const gateway: PaymentGateway = new StripeAdapter(new StripeClient())
 - [facade.md](facade.md): complementa — Facade simplifica interface complexa; Adapter converte interface incompatível
 - [proxy.md](proxy.md): complementa — Proxy controla acesso; Adapter converte interface; ambos encapsulam outro objeto
 - [bridge.md](bridge.md): complementa — Bridge separa abstração de implementação desde o design; Adapter reconcilia interfaces existentes
-- [rule 061 - Proibição de Middle Man](../../../rules/061_proibicao-middle-man.md): reforça — Adapter deve agregar valor real de conversão, não apenas delegar
-- [rule 014 - Princípio da Inversão de Dependência](../../../rules/014_principio-inversao-dependencia.md): reforça — domínio depende de interface, não da implementação externa
+- [rule 061 - Proibição de Middle Man](../../../rules/035_middle-man.md): reforça — Adapter deve agregar valor real de conversão, não apenas delegar
+- [rule 014 - Princípio da Inversão de Dependência](../../solid/references/dip.md): reforça — domínio depende de interface, não da implementação externa
 
 ---
 

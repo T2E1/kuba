@@ -72,9 +72,9 @@ order.ship()
 
 - [strategy.md](strategy.md): complementa — State realiza transições automaticamente entre comportamentos; Strategy permite troca manual de algoritmo
 - [memento.md](memento.md): complementa — Memento pode salvar e restaurar estados de máquinas State
-- [rule 002 - Proibição da Cláusula ELSE](../../../rules/002_proibicao-clausula-else.md): reforça — State elimina if/else baseados no estado atual
-- [rule 011 - Princípio Aberto/Fechado](../../../rules/011_principio-aberto-fechado.md): reforça — adicione novo estado sem modificar a lógica existente
-- [rule 022 - Priorização da Simplicidade e Clareza](../../../rules/022_priorizacao-simplicidade-clareza.md): reforça — não use State para 2-3 estados simples onde if é mais claro
+- [rule 002 - Proibição da Cláusula ELSE](../../calisthenics/references/rule-02-no-else.md): reforça — State elimina if/else baseados no estado atual
+- [rule 011 - Princípio Aberto/Fechado](../../solid/references/ocp.md): reforça — adicione novo estado sem modificar a lógica existente
+- [rule 022 - Priorização da Simplicidade e Clareza](../../clean-code/references/code-structure.md): reforça — não use State para 2-3 estados simples onde if é mais claro
 
 ---
 

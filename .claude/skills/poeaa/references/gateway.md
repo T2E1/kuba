@@ -33,8 +33,8 @@ class StripePaymentGateway implements PaymentGateway {
 ## Relacionado com
 
 - [service-stub.md](service-stub.md): complementa — o Gateway é o que se troca por um Service Stub em teste
-- [regra 014 - Inversão de Dependência](../../../rules/014_principio-inversao-dependencia.md): reforça — o domínio depende da interface do Gateway, não do SDK concreto
-- [regra 061 - Proibição de Middle Man](../../../rules/061_proibicao-middle-man.md): reforça — o risco de virar repasse puro
+- [regra 014 - Inversão de Dependência](../../solid/references/dip.md): reforça — o domínio depende da interface do Gateway, não do SDK concreto
+- [regra 061 - Proibição de Middle Man](../../../rules/035_middle-man.md): reforça — o risco de virar repasse puro
 
 ---
 

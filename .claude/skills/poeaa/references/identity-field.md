@@ -35,7 +35,7 @@ class Order {
 
 - [data-mapper.md](data-mapper.md): complementa — o mapper preenche o Identity Field ao inserir
 - [identity-map.md](identity-map.md): depende de — a chave é o que indexa o mapa
-- [regra 003 - Encapsulamento de Primitivos](../../../rules/003_encapsulamento-primitivos.md): reforça — o id deve ser um tipo próprio, não uma string crua espalhada
+- [regra 003 - Encapsulamento de Primitivos](../../calisthenics/references/rule-03-wrap-primitives.md): reforça — o id deve ser um tipo próprio, não uma string crua espalhada
 
 ---
 

@@ -103,11 +103,11 @@ renderização.
 
 ## Rules relacionadas
 
-- [036 — Restrição de Efeitos Colaterais](../../rules/036_restricao-funcoes-efeitos-colaterais.md): `component` e `style` são puras.
-- [069 — Proibição de Otimização Prematura](../../rules/069_proibicao-otimizacao-prematura.md): escolher `retouch` não é otimização especulativa — é usar o decorator correto.
-- [022 — Simplicidade e Clareza](../../rules/022_priorizacao-simplicidade-clareza.md): o ciclo tem quatro fases nomeadas, sem controle manual.
-- [010 — Responsabilidade Única](../../rules/010_principio-responsabilidade-unica.md): HTML e CSS em funções separadas.
-- [024 — Constantes Mágicas](../../rules/024_proibicao-constantes-magicas.md): valores de estilo são tokens.
+- [036 — Restrição de Efeitos Colaterais](../clean-code/references/immutability.md): `component` e `style` são puras.
+- [069 — Proibição de Otimização Prematura](../../rules/012_otimizacao-prematura.md): escolher `retouch` não é otimização especulativa — é usar o decorator correto.
+- [022 — Simplicidade e Clareza](../clean-code/references/code-structure.md): o ciclo tem quatro fases nomeadas, sem controle manual.
+- [010 — Responsabilidade Única](../solid/references/srp.md): HTML e CSS em funções separadas.
+- [024 — Constantes Mágicas](../clean-code/references/code-structure.md): valores de estilo são tokens.
 
 ## Skills relacionadas
 

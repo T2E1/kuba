@@ -62,8 +62,8 @@ chain.handle(50)
 
 - [command.md](command.md): complementa — Command encapsula a requisição; Chain of Responsibility define quem a processa
 - [observer.md](observer.md): complementa — Observer notifica todos os assinantes; Chain para no primeiro handler que processa
-- [rule 002 - Proibição da Cláusula ELSE](../../../rules/002_proibicao-clausula-else.md): reforça — cada handler usa guard clause para decidir se processa ou repassa adiante
-- [rule 064 - Proibição de Overengineering](../../../rules/064_proibicao-overengineering.md): reforça — não crie cadeias longas sem justificativa
+- [rule 002 - Proibição da Cláusula ELSE](../../calisthenics/references/rule-02-no-else.md): reforça — cada handler usa guard clause para decidir se processa ou repassa adiante
+- [rule 064 - Proibição de Overengineering](../../../rules/013_overengineering.md): reforça — não crie cadeias longas sem justificativa
 
 ---
 

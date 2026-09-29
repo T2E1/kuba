@@ -1,7 +1,7 @@
 # ADP — Acyclic Dependencies Principle
 
 **Grupo:** Acoplamento
-**Rule deMGoncalves:** [018 - Princípio de Dependências Acíclicas](../../../rules/018_principio-dependencias-aciclicas.md)
+**Rule deMGoncalves:** [018 - Princípio de Dependências Acíclicas](adp.md)
 **Pergunta:** O grafo de dependências entre pacotes é acíclico (DAG)?
 
 ## O Que É

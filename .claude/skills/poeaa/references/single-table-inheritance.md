@@ -36,7 +36,7 @@ class PaymentMapper {
 
 - [class-table-inheritance.md](class-table-inheritance.md): complementa — alternativa para hierarquias com muitos campos específicos
 - [concrete-table-inheritance.md](concrete-table-inheritance.md): complementa — alternativa para hierarquias voláteis
-- [regra 011 - Aberto/Fechado](../../../rules/011_principio-aberto-fechado.md): reinforces — o discriminador não deve virar `switch` espalhado fora do mapper
+- [regra 011 - Aberto/Fechado](../../solid/references/ocp.md): reinforces — o discriminador não deve virar `switch` espalhado fora do mapper
 
 ---
 

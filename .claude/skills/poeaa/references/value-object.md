@@ -38,8 +38,8 @@ class DateRange {
 
 - [embedded-value.md](embedded-value.md): depende de — Embedded Value é a técnica de persistir um Value Object
 - [money.md](money.md): complementa — Money é o Value Object canônico do catálogo
-- [regra 003 - Encapsulamento de Primitivos](../../../rules/003_encapsulamento-primitivos.md): é a mesma técnica descrita como rule deste repositório
-- [regra 029 - Imutabilidade de Objetos](../../../rules/029_imutabilidade-objetos-freeze.md): reforça — todo Value Object deve ser congelado
+- [regra 003 - Encapsulamento de Primitivos](../../calisthenics/references/rule-03-wrap-primitives.md): é a mesma técnica descrita como rule deste repositório
+- [regra 029 - Imutabilidade de Objetos](../../clean-code/references/immutability.md): reforça — todo Value Object deve ser congelado
 
 ---
 

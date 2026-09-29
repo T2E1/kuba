@@ -103,10 +103,10 @@ Esta seção documenta onde e como o sistema é executado: infraestrutura físic
 ## Related to
 
 - [06_runtime_view.md](06_runtime_view.md): complementa — §6 mostra o fluxo; §7 mostra onde ele executa
-- [rule 046 Port Binding](../../../rules/046_port-binding.md): complementa — serviço deve se auto-configurar via porta
-- [rule 047 Concorrência via Processos](../../../rules/047_concorrencia-via-processos.md): complementa — stateless permite horizontal scaling
-- [rule 045 Processos Stateless](../../../rules/045_processos-stateless.md): complementa — nós de execução devem ser stateless
-- [rule 030 Funções Inseguras](../../../rules/030_proibicao-funcoes-inseguras.md): complementa — secrets via env, nunca hardcoded
+- [rule 046 Port Binding](../../twelve-factor/references/07-port-binding.md): complementa — serviço deve se auto-configurar via porta
+- [rule 047 Concorrência via Processos](../../twelve-factor/references/08-concurrency.md): complementa — stateless permite horizontal scaling
+- [rule 045 Processos Stateless](../../twelve-factor/references/06-processes.md): complementa — nós de execução devem ser stateless
+- [rule 030 Funções Inseguras](../../clean-code/references/security.md): complementa — secrets via env, nunca hardcoded
 
 ---
 

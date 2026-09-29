@@ -1,7 +1,7 @@
 # SDP — Stable Dependencies Principle
 
 **Grupo:** Acoplamento
-**Rule deMGoncalves:** [019 - Princípio de Dependências Estáveis](../../../rules/019_principio-dependencias-estaveis.md)
+**Rule deMGoncalves:** [019 - Princípio de Dependências Estáveis](sdp.md)
 **Pergunta:** As dependências apontam na direção da estabilidade (módulos instáveis dependem de estáveis)?
 
 ## O Que É

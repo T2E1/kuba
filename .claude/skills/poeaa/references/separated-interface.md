@@ -30,9 +30,9 @@ export class StripePaymentGateway implements PaymentGateway { /* ... */ }
 
 ## Relacionado com
 
-- [regra 014 - Inversão de Dependência](../../../rules/014_principio-inversao-dependencia.md): é a mesma técnica em nível de pacote
-- [regra 019 - Dependências Estáveis](../../../rules/019_principio-dependencias-estaveis.md): reforça — a interface fica no pacote estável, a implementação no volátil
-- [regra 018 - Dependências Acíclicas](../../../rules/018_principio-dependencias-aciclicas.md): reforça — a técnica clássica para quebrar um ciclo entre pacotes
+- [regra 014 - Inversão de Dependência](../../solid/references/dip.md): é a mesma técnica em nível de pacote
+- [regra 019 - Dependências Estáveis](../../package/references/sdp.md): reforça — a interface fica no pacote estável, a implementação no volátil
+- [regra 018 - Dependências Acíclicas](../../package/references/adp.md): reforça — a técnica clássica para quebrar um ciclo entre pacotes
 
 ---
 

@@ -76,8 +76,8 @@ Esta seção ajuda a distinguir termos de negócio (usados por stakeholders) de 
 
 - [01_introduction_and_goals.md](01_introduction_and_goals.md): complementa — termos usados nos RF e stakeholders devem estar aqui
 - [03_context_and_scope.md](03_context_and_scope.md): complementa — atores e sistemas externos introduzem termos que pertencem ao glossário
-- [rule 006 Nomes Abreviados](../../../rules/006_proibicao-nomes-abreviados.md): complementa — nomes no código devem refletir termos do glossário
-- [rule 035 Nomes Enganosos](../../../rules/035_proibicao-nomes-enganosos.md): complementa — nomes de variáveis devem ser consistentes com definições do glossário
+- [rule 006 Nomes Abreviados](../../clean-code/references/naming.md): complementa — nomes no código devem refletir termos do glossário
+- [rule 035 Nomes Enganosos](../../clean-code/references/naming.md): complementa — nomes de variáveis devem ser consistentes com definições do glossário
 
 ---
 

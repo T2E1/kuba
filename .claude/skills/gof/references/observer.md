@@ -58,8 +58,8 @@ stock.setPrice(100)
 
 - [mediator.md](mediator.md): complementa — Observer define dependência um-para-muitos; Mediator centraliza comunicação muitos-para-muitos
 - [chain-of-responsibility.md](chain-of-responsibility.md): complementa — Observer notifica todos; Chain para no primeiro handler que processa
-- [rule 070 - Proibição de Estado Mutável Compartilhado](../../../rules/070_proibicao-estado-mutavel-compartilhado.md): reforça — não esqueça de fazer `unsubscribe` para evitar memory leaks e referências obsoletas
-- [rule 036 - Restrição de Funções com Efeitos Colaterais](../../../rules/036_restricao-funcoes-efeitos-colaterais.md): complementa — `notify()` tem efeito colateral intencional e documentado
+- [rule 070 - Proibição de Estado Mutável Compartilhado](../../../rules/008_estado-mutavel-compartilhado.md): reforça — não esqueça de fazer `unsubscribe` para evitar memory leaks e referências obsoletas
+- [rule 036 - Restrição de Funções com Efeitos Colaterais](../../clean-code/references/immutability.md): complementa — `notify()` tem efeito colateral intencional e documentado
 
 ---
 

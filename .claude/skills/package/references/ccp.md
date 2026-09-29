@@ -1,7 +1,7 @@
 # CCP — Common Closure Principle
 
 **Grupo:** Coesão
-**Rule deMGoncalves:** [016 - Princípio do Fechamento Comum](../../../rules/016_principio-fechamento-comum.md)
+**Rule deMGoncalves:** [016 - Princípio do Fechamento Comum](ccp.md)
 **Pergunta:** Classes que mudam juntas pelo mesmo motivo estão empacotadas juntas?
 
 ## O Que É

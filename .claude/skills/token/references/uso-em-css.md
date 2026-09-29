@@ -119,4 +119,4 @@ Estas aceitam valor direto — não existe token e inventar um seria ruído:
 | Tom `dark` em `background` | Usar `*-lighter` ou `*-lightest` |
 | Tom `light` em `color` de texto | Usar `*-darker` ou `*-dark` |
 
-Todas caem sob [024 — Proibição de Constantes Mágicas](../../../rules/024_proibicao-constantes-magicas.md).
+Todas caem sob [024 — Proibição de Constantes Mágicas](../../clean-code/references/code-structure.md).

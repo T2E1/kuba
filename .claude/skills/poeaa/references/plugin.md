@@ -29,7 +29,7 @@ function loadPaymentGateway(env: 'production' | 'test'): PaymentGateway {
 
 - [separated-interface.md](separated-interface.md): depende de — o Plugin liga uma implementação a uma interface separada
 - [service-stub.md](service-stub.md): complementa — o caso de uso mais comum do Plugin é trocar por um stub em teste
-- [regra 014 - Inversão de Dependência](../../../rules/014_principio-inversao-dependencia.md): reforça — a ligação tardia depende do consumidor conhecer só a abstração
+- [regra 014 - Inversão de Dependência](../../solid/references/dip.md): reforça — a ligação tardia depende do consumidor conhecer só a abstração
 
 ---
 

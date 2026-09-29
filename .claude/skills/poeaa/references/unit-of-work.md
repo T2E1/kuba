@@ -74,7 +74,7 @@ async function transferFunds(fromId: string, toId: string, amount: number): Prom
 
 - [repository.md](repository.md): complementa — repositórios registram objetos no Unit of Work em vez de persistir diretamente
 - [identity-map.md](identity-map.md): complementa — Identity Map garante que o Unit of Work rastreie instâncias únicas por identidade
-- [regra 021 - Proibição de Duplicação de Lógica](../../../rules/021_proibicao-duplicacao-logica.md): reforça — centraliza toda a lógica de persistência em um único ponto de commit
+- [regra 021 - Proibição de Duplicação de Lógica](../../clean-code/references/code-structure.md): reforça — centraliza toda a lógica de persistência em um único ponto de commit
 
 ---
 

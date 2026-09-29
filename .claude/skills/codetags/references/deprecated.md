@@ -74,5 +74,5 @@ const config = {
 
 ## Relacionado a
 
-- Rules: [023](../../../rules/023_proibicao-funcionalidade-especulativa.md), [015](../../../rules/015_principio-equivalencia-lancamento-reuso.md)
+- Rules: [023](../../clean-code/references/code-structure.md), [015](../../package/references/rep.md)
 - Tags similares: DEPRECATED tem cronograma e alternativa, código morto é deletado imediatamente

@@ -1,6 +1,6 @@
 # Fator 10 — Dev/Prod Parity
 
-**Regra deMGoncalves:** [049 - Paridade Dev/Prod](../../../rules/049_paridade-dev-prod.md)
+**Regra deMGoncalves:** [049 - Paridade Dev/Prod](10-dev-prod-parity.md)
 **Questão:** Dev ≈ Staging ≈ Prod (stack tecnológica + tempo de deploy + pessoas)?
 
 ## O que é

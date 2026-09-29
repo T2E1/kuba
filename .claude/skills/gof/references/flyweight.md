@@ -59,8 +59,8 @@ factory.getGlyph('A', 'Arial', 12).render({ x: 0, y: 0 })
 
 - [singleton.md](singleton.md): complementa — Singleton garante uma instância; Flyweight gerencia pool de instâncias compartilhadas
 - [factory-method.md](factory-method.md): depende — GlyphFactory usa padrão factory para gerenciar o pool de Flyweights
-- [rule 069 - Proibição de Otimização Prematura](../../../rules/069_proibicao-otimizacao-prematura.md): reforça — use apenas com evidência de problema de memória medido
-- [rule 029 - Imutabilidade de Objetos](../../../rules/029_imutabilidade-objetos-freeze.md): reforça — Flyweights devem ser imutáveis pois são compartilhados entre contextos
+- [rule 069 - Proibição de Otimização Prematura](../../../rules/012_otimizacao-prematura.md): reforça — use apenas com evidência de problema de memória medido
+- [rule 029 - Imutabilidade de Objetos](../../clean-code/references/immutability.md): reforça — Flyweights devem ser imutáveis pois são compartilhados entre contextos
 
 ---
 

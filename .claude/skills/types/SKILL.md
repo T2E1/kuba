@@ -2,7 +2,7 @@
 name: types
 model: sonnet
 effort: xhigh
-description: Projeta a forma dos arquivos types.d.ts escritos à mão para custom elements do kuba — isolamento por pacote sem import cruzado, achatamento manual de todo membro contribuído por mixin, taxonomia de nomenclatura escopada ao componente, e tipo nomeado só quando a forma exige restrição. Use ao criar types.d.ts, ao tipar um custom element, ao adicionar tipo de atributo, ao expor no contrato um atributo vindo de mixin, ou quando um pacote com `@define` estiver sem seu types.d.ts. Não use para escrever os comentários do arquivo — use a skill jsdoc.
+description: Projeta a forma dos arquivos types.d.ts escritos à mão para custom elements desta biblioteca — isolamento por pacote sem import cruzado, achatamento manual de todo membro contribuído por mixin, taxonomia de nomenclatura escopada ao componente, e tipo nomeado só quando a forma exige restrição. Use ao criar types.d.ts, ao tipar um custom element, ao adicionar tipo de atributo, ao expor no contrato um atributo vindo de mixin, ou quando um pacote com `@define` estiver sem seu types.d.ts. Não use para escrever os comentários do arquivo — use a skill jsdoc.
 ---
 
 # Types
@@ -67,9 +67,9 @@ Catálogo completo em `references/achatamento-mixins.md`.
 
 | Construto | Padrão | Exemplo |
 |---|---|---|
-| Classe do elemento | `KUBA<PascalName>Element` | `KUBARedirectElement` |
-| Atributo string com formato restrito | `KUBA<PascalName><PascalAttribute>Attribute` | `KUBARedirectHrefAttribute` |
-| Conjunto fechado dentro dessa forma | `KUBA<PascalName><PascalAttribute>AttributeSink` (ou o substantivo que couber) | `KUBARedirectOnAttributeSink` |
+| Classe do elemento | `Acme<PascalName>Element` | `AcmeRedirectElement` |
+| Atributo string com formato restrito | `Acme<PascalName><PascalAttribute>Attribute` | `AcmeRedirectHrefAttribute` |
+| Conjunto fechado dentro dessa forma | `Acme<PascalName><PascalAttribute>AttributeSink` (ou o substantivo que couber) | `AcmeRedirectOnAttributeSink` |
 | Interface de evento disparado | `<PascalEventName>Event` | `ClickedEvent` |
 
 `<PascalName>` é sempre o segmento do tag name em PascalCase (`redirect` → `Redirect`),
@@ -79,13 +79,13 @@ igual ao nome da classe já exportada na implementação. Não derive outra graf
 
 Tipo nomeado só quando a forma precisa de restrição além do que o primitivo expressa —
 template literal ou união fechada. Booleano vindo de mixin e `string` sem restrição
-permanecem exatamente isso. Não invente `KUBAXHiddenAttribute = boolean` por simetria
+permanecem exatamente isso. Não invente `AcmeXHiddenAttribute = boolean` por simetria
 (rule 064).
 
 **Exceção obrigatória, não opcional:** se o setter do atributo usa `enumerating(ENUM)`
 (skill `enum`), o membro **nunca** permanece `string` — a Regra 4 não se aplica a esse
 caso, porque a restrição já existe em runtime e o contrato público precisa da mesma
-restrição em tempo de compilação. `color` de `kb-button` é `KUBAButtonColorAttribute`,
+restrição em tempo de compilação. `color` de `kb-button` é `AcmeButtonColorAttribute`,
 não `string`, mesmo a "forma" sendo só uma lista de literais sem estrutura interna.
 Confira `references/formas-atributos.md` antes de decidir que um atributo validado por
 enum fica sem tipo nomeado — a leitura isolada da Regra 4 permite esse erro.
@@ -232,12 +232,12 @@ porque a tabela de atributos transcreve daqui (skill `preview`).
 
 ## Rules relacionadas
 
-- [017 — Princípio do Reuso Comum](../../rules/017_principio-reuso-comum.md): quem consome um componente não deve depender do vocabulário de outro.
-- [015 — Equivalência de Lançamento e Reuso](../../rules/015_principio-equivalencia-lancamento-reuso.md): o pacote precisa poder ser versionado sozinho.
-- [021 — Proibição de Duplicação](../../rules/021_proibicao-duplicacao-logica.md): a exceção para repetições estruturais é o que autoriza a Regra 1.
-- [064 — Proibição de Overengineering](../../rules/064_proibicao-overengineering.md): tipo nomeado só quando restringe de fato.
-- [013 — Segregação de Interfaces](../../rules/013_principio-segregacao-interfaces.md): o contrato expõe o que o consumidor usa.
-- [031 — Proibição de Imports Relativos](../../rules/031_restricao-imports-relativos.md): o isolamento é absoluto — nem alias, nem relativo.
+- [017 — Princípio do Reuso Comum](../package/references/crp.md): quem consome um componente não deve depender do vocabulário de outro.
+- [015 — Equivalência de Lançamento e Reuso](../package/references/rep.md): o pacote precisa poder ser versionado sozinho.
+- [021 — Proibição de Duplicação](../clean-code/references/code-structure.md): a exceção para repetições estruturais é o que autoriza a Regra 1.
+- [064 — Proibição de Overengineering](../../rules/013_overengineering.md): tipo nomeado só quando restringe de fato.
+- [013 — Segregação de Interfaces](../solid/references/isp.md): o contrato expõe o que o consumidor usa.
+- [031 — Proibição de Imports Relativos](../clean-code/references/security.md): o isolamento é absoluto — nem alias, nem relativo.
 
 ## Skills relacionadas
 

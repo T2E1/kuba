@@ -1,7 +1,7 @@
 # REP — Release Reuse Equivalency Principle
 
 **Grupo:** Coesão
-**Rule deMGoncalves:** [015 - Princípio de Equivalência de Lançamento e Reuso](../../../rules/015_principio-equivalencia-lancamento-reuso.md)
+**Rule deMGoncalves:** [015 - Princípio de Equivalência de Lançamento e Reuso](rep.md)
 **Pergunta:** A granularidade de reuso é a mesma da granularidade de release?
 
 ## O Que É

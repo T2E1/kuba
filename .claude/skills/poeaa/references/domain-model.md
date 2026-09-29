@@ -57,8 +57,8 @@ class Order {
 - [data-mapper.md](data-mapper.md): depende — Domain Model precisa de Data Mapper para persistência sem acoplamento ao banco
 - [repository.md](repository.md): depende — Repository abstrai o acesso às entidades de domínio
 - [unit-of-work.md](unit-of-work.md): complementa — Unit of Work coordena a persistência de múltiplas entidades de domínio
-- [regra 010 - Princípio da Responsabilidade Única](../../../rules/010_principio-responsabilidade-unica.md): reforça — cada entidade encapsula exatamente sua responsabilidade de negócio
-- [regra 014 - Princípio de Inversão de Dependência](../../../rules/014_principio-inversao-dependencia.md): reforça — domínio não depende de infraestrutura
+- [regra 010 - Princípio da Responsabilidade Única](../../solid/references/srp.md): reforça — cada entidade encapsula exatamente sua responsabilidade de negócio
+- [regra 014 - Princípio de Inversão de Dependência](../../solid/references/dip.md): reforça — domínio não depende de infraestrutura
 
 ---
 

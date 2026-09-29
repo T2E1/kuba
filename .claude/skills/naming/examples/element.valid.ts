@@ -10,7 +10,7 @@ import style from './style.js'
 
 // Tag: `kb-` + palavra única, sem hífen interno.
 // Classe: a mesma palavra em PascalCase — a derivação é mecânica, e é o que
-// permite à skill `types` montar KUBAFileuploadElement sem exceções.
+// permite à skill `types` montar AcmeFileuploadElement sem exceções.
 @define('kb-fileupload')
 @paint(component, style)
 class Fileupload extends Echo(Hidden(Value(HTMLElement))) {

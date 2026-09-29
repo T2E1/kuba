@@ -122,14 +122,14 @@ permitida da regra, mas a legibilidade continua valendo.
 
 ## Rules relacionadas
 
-- [034 — Nomes Consistentes](../../rules/034_nomes-classes-metodos-consistentes.md): método é verbo, em `camelCase`.
-- [009 — Diga, Não Pergunte](../../rules/009_diga-nao-pergunte.md): o método é a forma de dizer.
-- [038 — Separação Command-Query](../../rules/038_conformidade-principio-inversao-consulta.md): comando devolve `this`; consulta devolve valor.
-- [010 — Responsabilidade Única](../../rules/010_principio-responsabilidade-unica.md): uma responsabilidade por método.
-- [033 — Limite de Parâmetros](../../rules/033_limite-parametros-funcao.md): máximo 3.
-- [007 — Máximo de Linhas](../../rules/007_limite-maximo-linhas-classe.md) e [055 — Linhas por Método](../../rules/055_limite-maximo-linhas-metodo.md): 15 linhas.
-- [002 — Proibição de ELSE](../../rules/002_proibicao-clausula-else.md): guard clauses.
-- [037 — Argumentos Sinalizadores](../../rules/037_proibicao-argumentos-sinalizadores.md): nenhuma flag decidindo o caminho.
+- [034 — Nomes Consistentes](../clean-code/references/naming.md): método é verbo, em `camelCase`.
+- [009 — Diga, Não Pergunte](../calisthenics/references/rule-09-tell-dont-ask.md): o método é a forma de dizer.
+- [038 — Separação Command-Query](../clean-code/references/immutability.md): comando devolve `this`; consulta devolve valor.
+- [010 — Responsabilidade Única](../solid/references/srp.md): uma responsabilidade por método.
+- [033 — Limite de Parâmetros](../clean-code/references/functions.md): máximo 3.
+- [007 — Máximo de Linhas](../calisthenics/references/rule-07-small-classes.md) e [055 — Linhas por Método](../../rules/033_limite-maximo-linhas-metodo.md): 15 linhas.
+- [002 — Proibição de ELSE](../calisthenics/references/rule-02-no-else.md): guard clauses.
+- [037 — Argumentos Sinalizadores](../clean-code/references/functions.md): nenhuma flag decidindo o caminho.
 
 ## Skills relacionadas
 

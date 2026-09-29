@@ -62,8 +62,8 @@ editor.restore(history.pop()!)
 
 - [command.md](command.md): complementa — Command registra operações para undo; Memento salva snapshots de estado para rollback
 - [state.md](state.md): complementa — State define transições; Memento pode salvar e restaurar estados de objetos
-- [rule 029 - Imutabilidade de Objetos](../../../rules/029_imutabilidade-objetos-freeze.md): reforça — EditorMemento deve ser imutável após criação para garantir integridade do snapshot
-- [rule 069 - Proibição de Otimização Prematura](../../../rules/069_proibicao-otimizacao-prematura.md): reforça — salvar mementos excessivamente pode consumir memória sem necessidade real
+- [rule 029 - Imutabilidade de Objetos](../../clean-code/references/immutability.md): reforça — EditorMemento deve ser imutável após criação para garantir integridade do snapshot
+- [rule 069 - Proibição de Otimização Prematura](../../../rules/012_otimizacao-prematura.md): reforça — salvar mementos excessivamente pode consumir memória sem necessidade real
 
 ---
 

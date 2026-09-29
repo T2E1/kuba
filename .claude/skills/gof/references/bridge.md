@@ -65,9 +65,9 @@ new Circle(50, new SVGRenderer()).draw()
 - [adapter.md](adapter.md): complementa — Adapter reconcilia interfaces existentes; Bridge separa abstração de implementação desde o design
 - [abstract-factory.md](abstract-factory.md): complementa — Abstract Factory pode criar objetos de implementação para o Bridge
 - [strategy.md](strategy.md): complementa — Strategy substitui algoritmo em tempo de execução; Bridge separa hierarquias permanentemente
-- [rule 014 - Princípio da Inversão de Dependência](../../../rules/014_principio-inversao-dependencia.md): reforça — abstração depende da interface Renderer, não das implementações concretas
-- [rule 011 - Princípio Aberto/Fechado](../../../rules/011_principio-aberto-fechado.md): reforça — adicione novas formas ou renderizadores sem modificar código existente
-- [rule 064 - Proibição de Overengineering](../../../rules/064_proibicao-overengineering.md): reforça — não use quando há apenas uma implementação
+- [rule 014 - Princípio da Inversão de Dependência](../../solid/references/dip.md): reforça — abstração depende da interface Renderer, não das implementações concretas
+- [rule 011 - Princípio Aberto/Fechado](../../solid/references/ocp.md): reforça — adicione novas formas ou renderizadores sem modificar código existente
+- [rule 064 - Proibição de Overengineering](../../../rules/013_overengineering.md): reforça — não use quando há apenas uma implementação
 
 ---
 

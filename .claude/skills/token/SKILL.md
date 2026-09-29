@@ -138,15 +138,15 @@ Fonte da taxonomia: Nathan Curtis, "Naming Tokens in Design Systems" (EightShape
 
 ## Rules relacionadas
 
-- [024 — Proibição de Constantes Mágicas](../../rules/024_proibicao-constantes-magicas.md):
+- [024 — Proibição de Constantes Mágicas](../clean-code/references/code-structure.md):
   literais em CSS são constantes mágicas; tokens nomeados são a forma de eliminá-las.
-- [006 — Proibição de Nomes Abreviados](../../rules/006_proibicao-nomes-abreviados.md):
+- [006 — Proibição de Nomes Abreviados](../clean-code/references/naming.md):
   níveis do token são escritos por extenso; `bg` e `clr` são proibidos.
-- [035 — Proibição de Nomes Enganosos](../../rules/035_proibicao-nomes-enganosos.md):
+- [035 — Proibição de Nomes Enganosos](../clean-code/references/naming.md):
   homônimos como `type` e `size` desinformam sobre o que o token realmente é.
-- [016 — Princípio do Fechamento Comum](../../rules/016_principio-fechamento-comum.md):
+- [016 — Princípio do Fechamento Comum](../package/references/ccp.md):
   mudanças de tema ficam localizadas nos tokens, sem tocar componentes.
-- [023 — Proibição de Funcionalidade Especulativa](../../rules/023_proibicao-funcionalidade-especulativa.md):
+- [023 — Proibição de Funcionalidade Especulativa](../clean-code/references/code-structure.md):
   a regra dos 3 componentes impede globalizar tokens antes de existir demanda real.
 
 ## Skills relacionadas

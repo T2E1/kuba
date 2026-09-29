@@ -105,8 +105,8 @@ Esta seção documenta como o sistema se comporta em tempo de execução: a sequ
 
 - [05_building_block_view.md](05_building_block_view.md): depende — §6 anima os blocos estáticos de §5
 - [07_deployment_view.md](07_deployment_view.md): complementa — deployment define onde cada componente roda
-- [rule 028 Exceção Assíncrona](../../../rules/028_tratamento-excecao-assincrona.md): complementa — error paths devem seguir a regra de tratamento assíncrono
-- [rule 027 Erros de Domínio](../../../rules/027_qualidade-tratamento-erros-dominio.md): complementa — erros nos fluxos devem ser de domínio
+- [rule 028 Exceção Assíncrona](../../clean-code/references/error-handling.md): complementa — error paths devem seguir a regra de tratamento assíncrono
+- [rule 027 Erros de Domínio](../../clean-code/references/error-handling.md): complementa — erros nos fluxos devem ser de domínio
 
 ---
 

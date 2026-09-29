@@ -93,8 +93,8 @@ Qualidade do Sistema
 
 - [01_introduction_and_goals.md](01_introduction_and_goals.md): depende — quality tree deriva dos RNF de §1
 - [11_technical_risks.md](11_technical_risks.md): complementa — falhas nos cenários de qualidade viram riscos em §11
-- [rule 032 Cobertura de Testes](../../../rules/032_cobertura-teste-minima-qualidade.md): complementa — meta de 85% é regra obrigatória
-- [rule 022 Simplicidade e Clareza](../../../rules/022_priorizacao-simplicidade-clareza.md): complementa — complexidade ciclomática ≤ 5
+- [rule 032 Cobertura de Testes](../../clean-code/references/testing.md): complementa — meta de 85% é regra obrigatória
+- [rule 022 Simplicidade e Clareza](../../clean-code/references/code-structure.md): complementa — complexidade ciclomática ≤ 5
 
 ---
 

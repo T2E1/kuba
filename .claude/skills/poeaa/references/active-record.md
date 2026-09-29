@@ -57,7 +57,7 @@ class User {
 - [data-mapper.md](data-mapper.md): substitui quando o domínio se torna complexo e precisa ser isolado da infraestrutura
 - [transaction-script.md](transaction-script.md): complementa — Active Record é a escolha natural de persistência para Transaction Script
 - [row-data-gateway.md](row-data-gateway.md): substitui quando a lógica de domínio cresce além do simples acesso a dados
-- [regra 064 - Proibição de Overengineering](../../../rules/064_proibicao-overengineering.md): reforça — usar Active Record quando Data Mapper não agrega valor real
+- [regra 064 - Proibição de Overengineering](../../../rules/013_overengineering.md): reforça — usar Active Record quando Data Mapper não agrega valor real
 
 ---
 

@@ -1,6 +1,6 @@
 # Fator 07 — Port Binding
 
-**Regra deMGoncalves:** [046 - Port Binding](../../../rules/046_port-binding.md)
+**Regra deMGoncalves:** [046 - Port Binding](07-port-binding.md)
 **Questão:** Aplicação autocontida com servidor HTTP embutido (não depende de servidor externo)?
 
 ## O que é

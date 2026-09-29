@@ -54,5 +54,5 @@ function calculateAverage(items: number[]): number {
 
 ## Relacionado a
 
-- Rules: [027](../../../rules/027_qualidade-tratamento-erros-dominio.md), [039](../../../rules/039_regra-escoteiro-refatoracao-continua.md)
+- Rules: [027](../../clean-code/references/error-handling.md), [039](../../clean-code/references/boy-scout-rule.md)
 - Tags similares: FIXME é imediato, BUG é planejado

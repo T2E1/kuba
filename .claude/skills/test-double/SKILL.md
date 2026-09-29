@@ -76,10 +76,10 @@ próximo teste (rule 070).
 
 ## Rules relacionadas
 
-- [032 — Cobertura Mínima e Qualidade](../../rules/032_cobertura-teste-minima-qualidade.md): este projeto testa em navegador real; o dublê isola a dependência, não o componente.
-- [070 — Proibição de Estado Mutável Compartilhado](../../rules/070_proibicao-estado-mutavel-compartilhado.md): `spyOn` sem restauração vaza entre testes.
-- [028 — Tratamento de Exceção Assíncrona](../../rules/028_tratamento-excecao-assincrona.md): stub de chamada assíncrona ainda exige `await` no teste.
-- [038 — Separação Comando-Consulta (CQS)](../../rules/038_conformidade-principio-inversao-consulta.md): Spy observa (consulta), Mock verifica interação (comando) — escolher o dublê certo evita confundir os dois papéis no mesmo teste.
+- [032 — Cobertura Mínima e Qualidade](../clean-code/references/testing.md): este projeto testa em navegador real; o dublê isola a dependência, não o componente.
+- [070 — Proibição de Estado Mutável Compartilhado](../../rules/008_estado-mutavel-compartilhado.md): `spyOn` sem restauração vaza entre testes.
+- [028 — Tratamento de Exceção Assíncrona](../clean-code/references/error-handling.md): stub de chamada assíncrona ainda exige `await` no teste.
+- [038 — Separação Comando-Consulta (CQS)](../clean-code/references/immutability.md): Spy observa (consulta), Mock verifica interação (comando) — escolher o dublê certo evita confundir os dois papéis no mesmo teste.
 
 ## Skills relacionadas
 

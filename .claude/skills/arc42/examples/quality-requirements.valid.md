@@ -17,7 +17,7 @@
 
 ### Q-01 — Tempo de primeiro render
 
-**Fonte:** usuário navega para uma página com 20 componentes kuba.
+**Fonte:** usuário navega para uma página com 20 componentes da biblioteca.
 **Estímulo:** carregamento inicial, cache frio.
 **Ambiente:** conexão 4G simulada, dispositivo de referência.
 **Resposta:** todos os custom elements definidos e renderizados.

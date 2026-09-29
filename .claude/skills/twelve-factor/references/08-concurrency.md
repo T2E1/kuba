@@ -1,6 +1,6 @@
 # Fator 08 — Concurrency
 
-**Regra deMGoncalves:** [047 - Escalabilidade via Modelo de Processos](../../../rules/047_concorrencia-via-processos.md)
+**Regra deMGoncalves:** [047 - Escalabilidade via Modelo de Processos](08-concurrency.md)
 **Questão:** Aplicação escala via múltiplos processos (não threads ou processo único)?
 
 ## O que é

@@ -61,9 +61,9 @@ new QueryBuilder().from('users').where('active = true').limit(10).build()
 
 - [abstract-factory.md](abstract-factory.md): complementa — Abstract Factory cria famílias; Builder constrói um único produto complexo
 - [prototype.md](prototype.md): complementa — Prototype pode ser usado quando o objeto final do Builder precisa ser clonado
-- [rule 033 - Limite de Parâmetros por Função](../../../rules/033_limite-parametros-funcao.md): reforça — Builder elimina construtores com muitos parâmetros
-- [rule 064 - Proibição de Overengineering](../../../rules/064_proibicao-overengineering.md): reforça — não use para objetos simples
-- [rule 005 - Máximo Uma Chamada por Linha](../../../rules/005_maximo-uma-chamada-por-linha.md): complementa — a interface fluente do Builder é exceção permitida ao encadeamento
+- [rule 033 - Limite de Parâmetros por Função](../../clean-code/references/functions.md): reforça — Builder elimina construtores com muitos parâmetros
+- [rule 064 - Proibição de Overengineering](../../../rules/013_overengineering.md): reforça — não use para objetos simples
+- [rule 005 - Máximo Uma Chamada por Linha](../../calisthenics/references/rule-05-one-dot-per-line.md): complementa — a interface fluente do Builder é exceção permitida ao encadeamento
 
 ---
 

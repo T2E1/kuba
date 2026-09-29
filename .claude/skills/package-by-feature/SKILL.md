@@ -165,12 +165,12 @@ só é cerimônia (rule 064).
 
 ## Rules relacionadas
 
-- [016 — Princípio do Fechamento Comum](../../rules/016_principio-fechamento-comum.md): o eixo por feature é CCP no primeiro nível — o que muda pela mesma razão fica junto.
-- [058 — Proibição de Shotgun Surgery](../../rules/058_proibicao-shotgun-surgery.md): o requisito pequeno que toca oito arquivos é o sintoma direto do eixo por camada.
-- [017 — Princípio do Reuso Comum](../../rules/017_principio-reuso-comum.md): o que é usado junto fica junto, e é o que impede a feature de virar depósito.
-- [056 — Proibição de Código Zombie](../../rules/056_proibicao-codigo-zombie-lava-flow.md): o teste da deleção simples existe porque a remoção incompleta é a origem mais comum de código morto.
-- [064 — Proibição de Overengineering](../../rules/064_proibicao-overengineering.md): recortar feature fina demais produz pastas de um arquivo, que é o erro oposto e igualmente caro.
-- [010 — Princípio da Responsabilidade Única](../../rules/010_principio-responsabilidade-unica.md): a feature tem uma razão para mudar, e é o que dá nome a ela.
+- [016 — Princípio do Fechamento Comum](../package/references/ccp.md): o eixo por feature é CCP no primeiro nível — o que muda pela mesma razão fica junto.
+- [058 — Proibição de Shotgun Surgery](../../rules/038_shotgun-surgery.md): o requisito pequeno que toca oito arquivos é o sintoma direto do eixo por camada.
+- [017 — Princípio do Reuso Comum](../package/references/crp.md): o que é usado junto fica junto, e é o que impede a feature de virar depósito.
+- [056 — Proibição de Código Zombie](../../rules/004_codigo-zombie-lava-flow.md): o teste da deleção simples existe porque a remoção incompleta é a origem mais comum de código morto.
+- [064 — Proibição de Overengineering](../../rules/013_overengineering.md): recortar feature fina demais produz pastas de um arquivo, que é o erro oposto e igualmente caro.
+- [010 — Princípio da Responsabilidade Única](../solid/references/srp.md): a feature tem uma razão para mudar, e é o que dá nome a ela.
 
 ## Skills relacionadas
 

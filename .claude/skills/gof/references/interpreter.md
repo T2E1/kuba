@@ -61,8 +61,8 @@ new AddExpression(
 
 - [composite.md](composite.md): complementa — gramáticas compostas formam árvores; Composite é a estrutura natural para o Interpreter
 - [visitor.md](visitor.md): complementa — Visitor pode percorrer a árvore de expressões do Interpreter para operações distintas
-- [rule 068 - Proibição do Martelo de Ouro](../../../rules/068_proibicao-martelo-de-ouro.md): reforça — para gramáticas complexas, use ferramenta especializada em vez de Interpreter manual
-- [rule 022 - Priorização da Simplicidade e Clareza](../../../rules/022_priorizacao-simplicidade-clareza.md): reforça — prefira Interpreter apenas quando a DSL é genuinamente simples
+- [rule 068 - Proibição do Martelo de Ouro](../../../rules/010_martelo-de-ouro.md): reforça — para gramáticas complexas, use ferramenta especializada em vez de Interpreter manual
+- [rule 022 - Priorização da Simplicidade e Clareza](../../clean-code/references/code-structure.md): reforça — prefira Interpreter apenas quando a DSL é genuinamente simples
 
 ---
 

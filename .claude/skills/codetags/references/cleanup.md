@@ -91,5 +91,5 @@ function getCurrentPrice(product: Product): number {
 
 ## Relacionado a
 
-- Rules: [023](../../../rules/023_proibicao-funcionalidade-especulativa.md), [039](../../../rules/039_regra-escoteiro-refatoracao-continua.md)
+- Rules: [023](../../clean-code/references/code-structure.md), [039](../../clean-code/references/boy-scout-rule.md)
 - Tags similares: CLEANUP remove ruído, REFACTOR muda estrutura

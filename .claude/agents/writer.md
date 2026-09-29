@@ -88,10 +88,10 @@ que aconteceu com a lista de scripts, que ficou com entradas diferentes nos dois
 
 ## Rules
 
-- [026 — Comentário Explica o Porquê](../rules/026_qualidade-comentarios-porque.md): vale para a prosa. Documentar o que o nome já diz é ruído.
-- [021 — DRY](../rules/021_proibicao-duplicacao-logica.md): a explicação de um conceito mora numa página; as outras linkam.
-- [035 — Nomes Enganosos](../rules/035_proibicao-nomes-enganosos.md): o texto usa o mesmo vocabulário do código. Chamar de "propriedade" o que é atributo desinforma.
-- [056 — Código Zombie](../rules/056_proibicao-codigo-zombie-lava-flow.md): página que documenta o que não existe mais é a versão em prosa disso.
+- [026 — Comentário Explica o Porquê](../skills/clean-code/references/code-structure.md): vale para a prosa. Documentar o que o nome já diz é ruído.
+- [021 — DRY](../skills/clean-code/references/code-structure.md): a explicação de um conceito mora numa página; as outras linkam.
+- [035 — Nomes Enganosos](../skills/clean-code/references/naming.md): o texto usa o mesmo vocabulário do código. Chamar de "propriedade" o que é atributo desinforma.
+- [056 — Código Zombie](../rules/004_codigo-zombie-lava-flow.md): página que documenta o que não existe mais é a versão em prosa disso.
 
 ## Método
 
@@ -112,13 +112,13 @@ que aconteceu com a lista de scripts, que ficou com entradas diferentes nos dois
    mais evita erro de quem lê — e a que documentação genérica costuma pular.
 4. **Escrever exemplos que rodam.** Os blocos ` ```html preview ` são transformados pelo
    plugin markdown-it `website/.vitepress/plugins/preview.js`, que renderiza o HTML ao vivo
-   contra o kuba carregado do CDN. Um exemplo com atributo inexistente aparece quebrado na
+   contra o pacote carregado do CDN. Um exemplo com atributo inexistente aparece quebrado na
    página para todo mundo. O plugin ainda é um no-op enquanto a versão remark não é
    reescrita sobre `md.renderer.rules.fence` (`website/.vitepress/plugins/preview.js:11`,
    pendência do `developer`): por ora o bloco cai no realce de sintaxe padrão. Escrever o
    exemplo como se ele rodasse — ele volta a rodar sem a página mudar.
-5. **Verificar a versão pinada.** O site carrega `@t2e1/kuba@<versão>` do jsDelivr pela
-   constante `KUBA_VERSION` no topo de `website/.vitepress/config.mts`, e o mesmo pin
+5. **Verificar a versão pinada.** O site carrega `@acme/lib@<versão>` do jsDelivr pela
+   constante `LIB_VERSION` no topo de `website/.vitepress/config.mts`, e o mesmo pin
    aparece nas três `learn/installation.md`. Um exemplo que usa recurso mais novo que o
    pin não funciona — verificar antes de documentar comportamento recente.
 6. **Propagar para as traduções.** `website/docs/pt-br/` e `website/docs/es/` espelham a

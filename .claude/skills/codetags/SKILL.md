@@ -121,11 +121,11 @@ Integrity — o resto tem tag própria.
 
 ## Rules relacionadas
 
-- [026 — Qualidade de Comentários: o Porquê](../../rules/026_qualidade-comentarios-porque.md): as tags são a exceção explícita — marcação especial permitida, desde que ensine.
-- [039 — Regra do Escoteiro](../../rules/039_regra-escoteiro-refatoracao-continua.md): define a fronteira entre corrigir e marcar.
-- [023 — Funcionalidade Especulativa](../../rules/023_proibicao-funcionalidade-especulativa.md): limita a 5% as linhas marcadas como pendentes.
-- [056 — Proibição de Código Zombie](../../rules/056_proibicao-codigo-zombie-lava-flow.md): tag sem prazo acumulada vira Lava Flow.
-- [024 — Proibição de Constantes Mágicas](../../rules/024_proibicao-constantes-magicas.md): o formato padronizado elimina marcação ad-hoc.
+- [026 — Qualidade de Comentários: o Porquê](../clean-code/references/code-structure.md): as tags são a exceção explícita — marcação especial permitida, desde que ensine.
+- [039 — Regra do Escoteiro](../clean-code/references/boy-scout-rule.md): define a fronteira entre corrigir e marcar.
+- [023 — Funcionalidade Especulativa](../clean-code/references/code-structure.md): limita a 5% as linhas marcadas como pendentes.
+- [056 — Proibição de Código Zombie](../../rules/004_codigo-zombie-lava-flow.md): tag sem prazo acumulada vira Lava Flow.
+- [024 — Proibição de Constantes Mágicas](../clean-code/references/code-structure.md): o formato padronizado elimina marcação ad-hoc.
 
 ## Skills relacionadas
 

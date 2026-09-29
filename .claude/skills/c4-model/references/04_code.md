@@ -99,10 +99,10 @@ Symbol** — não hierarquia de herança única nem injeção de dependência.
 - [skill mixin](../../mixin/SKILL.md): depende — a cadeia diagramada aqui é o assunto dela
 - [skill bracket](../../bracket/SKILL.md): depende — os contratos de Symbol e sua invocação
 - [skill anatomy](../../anatomy/SKILL.md): complementa — a ordem dos membros dentro da classe
-- [rule 007 Limite de Linhas](../../../rules/007_limite-maximo-linhas-classe.md): reforça — máximo 50 linhas por classe
-- [rule 010 SRP](../../../rules/010_principio-responsabilidade-unica.md): reforça — cada classe tem responsabilidade única
-- [rule 031 Imports Relativos](../../../rules/031_restricao-imports-relativos.md): reforça — path alias obrigatório
-- [rule 029 Imutabilidade](../../../rules/029_imutabilidade-objetos-freeze.md): reforça — Value Objects são frozen
+- [rule 007 Limite de Linhas](../../calisthenics/references/rule-07-small-classes.md): reforça — máximo 50 linhas por classe
+- [rule 010 SRP](../../solid/references/srp.md): reforça — cada classe tem responsabilidade única
+- [rule 031 Imports Relativos](../../clean-code/references/security.md): reforça — path alias obrigatório
+- [rule 029 Imutabilidade](../../clean-code/references/immutability.md): reforça — Value Objects são frozen
 
 ---
 

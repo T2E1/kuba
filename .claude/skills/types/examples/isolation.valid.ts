@@ -5,18 +5,18 @@
 // Nenhum import. O redirect nomeia o próprio atributo `on`, mesmo que a
 // forma coincida exatamente com o atributo `value` de <kb-on>.
 
-type KUBARedirectOnAttributeSink = 'method' | 'attribute' | 'setter'
+type AcmeRedirectOnAttributeSink = 'method' | 'attribute' | 'setter'
 
-type KUBARedirectOnAttribute =
-  `${string}/${string}:${KUBARedirectOnAttributeSink}/${string}${'' | `|${string}`}`
+type AcmeRedirectOnAttribute =
+  `${string}/${string}:${AcmeRedirectOnAttributeSink}/${string}${'' | `|${string}`}`
 
-export default class KUBARedirectElement extends HTMLElement {
-  on: KUBARedirectOnAttribute | (string & {})
+export default class AcmeRedirectElement extends HTMLElement {
+  on: AcmeRedirectOnAttribute | (string & {})
 }
 
 declare global {
   interface HTMLElementTagNameMap {
-    'kb-redirect': KUBARedirectElement
+    'kb-redirect': AcmeRedirectElement
   }
 }
 

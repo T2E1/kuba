@@ -60,8 +60,8 @@ source.write('data')
 - [composite.md](composite.md): complementa — Composite agrega múltiplos objetos; Decorator envolve um único objeto com comportamento adicional
 - [proxy.md](proxy.md): complementa — Proxy controla acesso; Decorator adiciona comportamento; estrutura similar, intenção diferente
 - [strategy.md](strategy.md): complementa — Strategy substitui algoritmo por composição; Decorator adiciona comportamento empilhando wrappers
-- [rule 011 - Princípio Aberto/Fechado](../../../rules/011_principio-aberto-fechado.md): reforça — adiciona comportamento sem modificar classes existentes
-- [rule 060 - Proibição de Spaghetti Code](../../../rules/060_proibicao-codigo-spaghetti.md): reforça — empilhar muitos Decorators cria complexidade difícil de acompanhar
+- [rule 011 - Princípio Aberto/Fechado](../../solid/references/ocp.md): reforça — adiciona comportamento sem modificar classes existentes
+- [rule 060 - Proibição de Spaghetti Code](../../../rules/003_codigo-spaghetti.md): reforça — empilhar muitos Decorators cria complexidade difícil de acompanhar
 
 ---
 

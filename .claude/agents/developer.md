@@ -60,7 +60,7 @@ Código em `src/<categoria>/<nome>/` (elemento) ou `packages/mixin/<nome>` (mixi
 | Nome de classe, método, Symbol, arquivo e variável | [naming](../skills/naming/SKILL.md) |
 | Aplicar e escrever mixin | [mixin](../skills/mixin/SKILL.md) |
 | Implementar um Design Pattern já decidido pelo architect | [gof](../skills/gof/SKILL.md) |
-| Implementar um pattern já decidido — Singleton, Proxy, Observer, dynamic import e demais | [patterns](../skills/patterns/SKILL.md) |
+| Implementar um padrão de carregamento já decidido — dynamic import, preload/prefetch e demais | [web-performance](../skills/web-performance/SKILL.md) |
 | Renderizar e re-renderizar | [render](../skills/render/SKILL.md) |
 | Estado do elemento e `internals.states` | [state](../skills/state/SKILL.md) |
 | Despachar e escutar evento | [event](../skills/event/SKILL.md) |
@@ -84,15 +84,15 @@ Código em `src/<categoria>/<nome>/` (elemento) ou `packages/mixin/<nome>` (mixi
 
 Bloqueiam a entrega:
 
-- [001 — Nível Único de Indentação](../rules/001_nivel-unico-indentacao.md) · [002 — Proibição de ELSE](../rules/002_proibicao-clausula-else.md) · [003 — Encapsulamento de Primitivos](../rules/003_encapsulamento-primitivos.md)
-- [007 — Máximo de Linhas por Classe](../rules/007_limite-maximo-linhas-classe.md): 50 linhas por arquivo, 15 por método.
-- [008 — Getters/Setters](../rules/008_proibicao-getters-setters.md) · [009 — Diga, Não Pergunte](../rules/009_diga-nao-pergunte.md) · [010 — SRP](../rules/010_principio-responsabilidade-unica.md)
-- [021 — DRY](../rules/021_proibicao-duplicacao-logica.md) · [024 — Constantes Mágicas](../rules/024_proibicao-constantes-magicas.md) · [025 — The Blob](../rules/025_proibicao-anti-pattern-the-blob.md)
-- [028 — Exceção Assíncrona](../rules/028_tratamento-excecao-assincrona.md) · [030 — Funções Inseguras](../rules/030_proibicao-funcoes-inseguras.md)
-- [031 — Imports Relativos](../rules/031_restricao-imports-relativos.md): `../` proibido.
-- [035 — Nomes Enganosos](../rules/035_proibicao-nomes-enganosos.md) · [036 — Efeitos Colaterais](../rules/036_restricao-funcoes-efeitos-colaterais.md)
+- [001 — Nível Único de Indentação](../skills/calisthenics/references/rule-01-single-indentation.md) · [002 — Proibição de ELSE](../skills/calisthenics/references/rule-02-no-else.md) · [003 — Encapsulamento de Primitivos](../skills/calisthenics/references/rule-03-wrap-primitives.md)
+- [007 — Máximo de Linhas por Classe](../skills/calisthenics/references/rule-07-small-classes.md): 50 linhas por arquivo, 15 por método.
+- [008 — Getters/Setters](../skills/calisthenics/references/rule-08-no-getters-setters.md) · [009 — Diga, Não Pergunte](../skills/calisthenics/references/rule-09-tell-dont-ask.md) · [010 — SRP](../skills/solid/references/srp.md)
+- [021 — DRY](../skills/clean-code/references/code-structure.md) · [024 — Constantes Mágicas](../skills/clean-code/references/code-structure.md) · [025 — The Blob](../rules/001_anti-pattern-the-blob.md)
+- [028 — Exceção Assíncrona](../skills/clean-code/references/error-handling.md) · [030 — Funções Inseguras](../skills/clean-code/references/security.md)
+- [031 — Imports Relativos](../skills/clean-code/references/security.md): `../` proibido.
+- [035 — Nomes Enganosos](../skills/clean-code/references/naming.md) · [036 — Efeitos Colaterais](../skills/clean-code/references/immutability.md)
 
-Corrigir antes de entregar: [004](../rules/004_colecoes-primeira-classe.md), [005](../rules/005_maximo-uma-chamada-por-linha.md), [006](../rules/006_proibicao-nomes-abreviados.md), [022](../rules/022_priorizacao-simplicidade-clareza.md), [029](../rules/029_imutabilidade-objetos-freeze.md), [033](../rules/033_limite-parametros-funcao.md), [034](../rules/034_nomes-classes-metodos-consistentes.md), [037](../rules/037_proibicao-argumentos-sinalizadores.md), [038](../rules/038_conformidade-principio-inversao-consulta.md).
+Corrigir antes de entregar: [004](../skills/calisthenics/references/rule-04-first-class-collections.md), [005](../skills/calisthenics/references/rule-05-one-dot-per-line.md), [006](../skills/clean-code/references/naming.md), [022](../skills/clean-code/references/code-structure.md), [029](../skills/clean-code/references/immutability.md), [033](../skills/clean-code/references/functions.md), [034](../skills/clean-code/references/naming.md), [037](../skills/clean-code/references/functions.md), [038](../skills/clean-code/references/immutability.md).
 
 Conflito entre rules: prevalece a de maior severidade; empate, a mais específica ao contexto.
 

@@ -4,7 +4,7 @@
 import { variantable } from './interface.js' // singular: o padrão é plural
 
 // Tag com hífen interno: quebra a derivação mecânica do nome da classe, que
-// a skill `types` pressupõe para montar KUBA<PascalName>Element.
+// a skill `types` pressupõe para montar Acme<PascalName>Element.
 @define('kb-file-upload')
 @paint(component, style)
 // Classe não espelha o tag: FileUploadComponent contra kb-file-upload.

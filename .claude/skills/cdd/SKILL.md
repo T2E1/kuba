@@ -112,11 +112,11 @@ diferença de 4 indica que os dois estão contando dimensões diferentes.
 
 ## Rules relacionadas
 
-- [022 — Simplicidade e Clareza](../../rules/022_priorizacao-simplicidade-clareza.md): o limite CC ≤ 5 alimenta o `CC_base`.
-- [001 — Nível Único de Indentação](../../rules/001_nivel-unico-indentacao.md): o componente de aninhamento é a medida dessa regra.
-- [010 — Responsabilidade Única](../../rules/010_principio-responsabilidade-unica.md): o componente de responsabilidades quantifica SRP.
-- [014 — Inversão de Dependência](../../rules/014_principio-inversao-dependencia.md): reduzir acoplamento é reduzir esse componente.
-- [055 — Limite de Linhas por Método](../../rules/055_limite-maximo-linhas-metodo.md): o gatilho da varredura do passo 1.
+- [022 — Simplicidade e Clareza](../clean-code/references/code-structure.md): o limite CC ≤ 5 alimenta o `CC_base`.
+- [001 — Nível Único de Indentação](../calisthenics/references/rule-01-single-indentation.md): o componente de aninhamento é a medida dessa regra.
+- [010 — Responsabilidade Única](../solid/references/srp.md): o componente de responsabilidades quantifica SRP.
+- [014 — Inversão de Dependência](../solid/references/dip.md): reduzir acoplamento é reduzir esse componente.
+- [055 — Limite de Linhas por Método](../../rules/033_limite-maximo-linhas-metodo.md): o gatilho da varredura do passo 1.
 
 ## Skills relacionadas
 

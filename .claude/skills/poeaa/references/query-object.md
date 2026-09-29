@@ -36,8 +36,8 @@ class UserQuery {
 ## Relacionado com
 
 - [repository.md](repository.md): complementa — o Repository recebe um Query Object para consultas dinâmicas
-- [regra 014 - Inversão de Dependência](../../../rules/014_principio-inversao-dependencia.md): reforça — o domínio monta o critério sem conhecer SQL
-- [regra 030 - Proibição de Funções Inseguras](../../../rules/030_proibicao-funcoes-inseguras.md): reforça — parametriza a query em vez de concatenar entrada do usuário
+- [regra 014 - Inversão de Dependência](../../solid/references/dip.md): reforça — o domínio monta o critério sem conhecer SQL
+- [regra 030 - Proibição de Funções Inseguras](../../clean-code/references/security.md): reforça — parametriza a query em vez de concatenar entrada do usuário
 
 ---
 

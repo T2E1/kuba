@@ -155,13 +155,13 @@ ver a skill `state` e o exemplo de `hidden.ts` (`[hideable]`).
 
 ## Rules relacionadas
 
-- [008 — Proibição de Getters/Setters](../../rules/008_proibicao-getters-setters.md): a regra que esta skill delimita.
-- [009 — Diga, Não Pergunte](../../rules/009_diga-nao-pergunte.md): `agendar()` em vez de `setStatus('agendado')`.
-- [010 — Responsabilidade Única](../../rules/010_principio-responsabilidade-unica.md): atribuir e sincronizar estado são duas responsabilidades — não cabem no mesmo setter.
-- [036 — Restrição de Efeitos Colaterais](../../rules/036_restricao-funcoes-efeitos-colaterais.md): o setter afeta o próprio campo e o render, nada além.
-- [028 — Exceção Assíncrona](../../rules/028_tratamento-excecao-assincrona.md): por que setter é sempre síncrono.
-- [027 — Erros de Domínio](../../rules/027_qualidade-tratamento-erros-dominio.md): validação que falha lança erro nomeado, não devolve `null`.
-- [007 — Máximo de Linhas](../../rules/007_limite-maximo-linhas-classe.md): 15 linhas.
+- [008 — Proibição de Getters/Setters](../calisthenics/references/rule-08-no-getters-setters.md): a regra que esta skill delimita.
+- [009 — Diga, Não Pergunte](../calisthenics/references/rule-09-tell-dont-ask.md): `agendar()` em vez de `setStatus('agendado')`.
+- [010 — Responsabilidade Única](../solid/references/srp.md): atribuir e sincronizar estado são duas responsabilidades — não cabem no mesmo setter.
+- [036 — Restrição de Efeitos Colaterais](../clean-code/references/immutability.md): o setter afeta o próprio campo e o render, nada além.
+- [028 — Exceção Assíncrona](../clean-code/references/error-handling.md): por que setter é sempre síncrono.
+- [027 — Erros de Domínio](../clean-code/references/error-handling.md): validação que falha lança erro nomeado, não devolve `null`.
+- [007 — Máximo de Linhas](../calisthenics/references/rule-07-small-classes.md): 15 linhas.
 
 ## Skills relacionadas
 

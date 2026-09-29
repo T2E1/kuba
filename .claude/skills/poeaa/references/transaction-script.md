@@ -48,7 +48,7 @@ async function createOrder(
 - [domain-model.md](domain-model.md): substitui quando a complexidade do domínio cresce
 - [row-data-gateway.md](row-data-gateway.md): complementa — Row Data Gateway é o padrão natural de dados para Transaction Script
 - [active-record.md](active-record.md): complementa — Active Record é alternativa de acesso a dados para Transaction Script
-- [regra 022 - Priorização da Simplicidade e Clareza](../../../rules/022_priorizacao-simplicidade-clareza.md): reforça — usar quando o domínio não justifica complexidade adicional
+- [regra 022 - Priorização da Simplicidade e Clareza](../../clean-code/references/code-structure.md): reforça — usar quando o domínio não justifica complexidade adicional
 
 ---
 

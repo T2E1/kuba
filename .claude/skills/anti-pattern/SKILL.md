@@ -133,9 +133,9 @@ Origem: *AntiPatterns* (Brown, Malveau, McCormick, Mowbray, 1998); *Refactoring*
 As rules 052 a 070 são este catálogo com critérios objetivos. As demais entradas mapeiam
 para rules anteriores:
 
-- [003 — Encapsulamento de Primitivos](../../rules/003_encapsulamento-primitivos.md) · [005 — Encadeamento de Chamadas](../../rules/005_maximo-uma-chamada-por-linha.md) · [007 — Máximo de Linhas por Classe](../../rules/007_limite-maximo-linhas-classe.md)
-- [021 — Proibição de Duplicação](../../rules/021_proibicao-duplicacao-logica.md) · [023 — Funcionalidade Especulativa](../../rules/023_proibicao-funcionalidade-especulativa.md) · [025 — The Blob](../../rules/025_proibicao-anti-pattern-the-blob.md)
-- [039 — Regra do Escoteiro](../../rules/039_regra-escoteiro-refatoracao-continua.md): define o escopo em que a refatoração acontece.
+- [003 — Encapsulamento de Primitivos](../calisthenics/references/rule-03-wrap-primitives.md) · [005 — Encadeamento de Chamadas](../calisthenics/references/rule-05-one-dot-per-line.md) · [007 — Máximo de Linhas por Classe](../calisthenics/references/rule-07-small-classes.md)
+- [021 — Proibição de Duplicação](../clean-code/references/code-structure.md) · [023 — Funcionalidade Especulativa](../clean-code/references/code-structure.md) · [025 — The Blob](../../rules/001_anti-pattern-the-blob.md)
+- [039 — Regra do Escoteiro](../clean-code/references/boy-scout-rule.md): define o escopo em que a refatoração acontece.
 
 ## Skills relacionadas
 

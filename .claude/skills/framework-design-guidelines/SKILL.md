@@ -141,11 +141,11 @@ consumidor tem vida curta; o assunto não. Desambiguar pela tecnologia, ou fundi
 
 ## Rules relacionadas
 
-- [035 — Proibição de Nomes Enganosos](../../rules/035_proibicao-nomes-enganosos.md): o nome de agrupamento que promete o que não entrega é desinformação, e engana mais que o genérico.
-- [006 — Proibição de Nomes Abreviados](../../rules/006_proibicao-nomes-abreviados.md): o teste de imediatismo é o mesmo critério, aplicado ao agrupamento em vez de ao identificador.
-- [034 — Nomes de Classes e Métodos Consistentes](../../rules/034_nomes-classes-metodos-consistentes.md): substantivo para o que é uma coisa — o agrupamento segue a mesma gramática.
-- [016 — Princípio do Fechamento Comum](../../rules/016_principio-fechamento-comum.md): um grupo só tem nome bom quando tem assunto, e o assunto vem da razão-para-mudar comum.
-- [064 — Proibição de Overengineering](../../rules/064_proibicao-overengineering.md): grupo de um membro só é cerimônia, e nenhum nome o salva.
+- [035 — Proibição de Nomes Enganosos](../clean-code/references/naming.md): o nome de agrupamento que promete o que não entrega é desinformação, e engana mais que o genérico.
+- [006 — Proibição de Nomes Abreviados](../clean-code/references/naming.md): o teste de imediatismo é o mesmo critério, aplicado ao agrupamento em vez de ao identificador.
+- [034 — Nomes de Classes e Métodos Consistentes](../clean-code/references/naming.md): substantivo para o que é uma coisa — o agrupamento segue a mesma gramática.
+- [016 — Princípio do Fechamento Comum](../package/references/ccp.md): um grupo só tem nome bom quando tem assunto, e o assunto vem da razão-para-mudar comum.
+- [064 — Proibição de Overengineering](../../rules/013_overengineering.md): grupo de um membro só é cerimônia, e nenhum nome o salva.
 
 ## Skills relacionadas
 

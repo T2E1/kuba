@@ -64,7 +64,7 @@ class UserController {
 
 - [front-controller.md](front-controller.md): complementa — Front Controller é o ponto de entrada que despacha para os Controllers do MVC
 - [page-controller.md](page-controller.md): complementa — Page Controller é uma implementação simplificada do papel de Controller no MVC
-- [regra 010 - Princípio da Responsabilidade Única](../../../rules/010_principio-responsabilidade-unica.md): reforça — separa claramente as responsabilidades de dados, apresentação e coordenação
+- [regra 010 - Princípio da Responsabilidade Única](../../solid/references/srp.md): reforça — separa claramente as responsabilidades de dados, apresentação e coordenação
 
 ---
 

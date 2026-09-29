@@ -54,7 +54,7 @@ class OrderTable {
 
 - [table-data-gateway.md](table-data-gateway.md): depende — Table Data Gateway é o padrão natural de acesso a dados para Table Module
 - [domain-model.md](domain-model.md): substitui quando é necessário comportamento rico de objetos individuais
-- [regra 022 - Priorização da Simplicidade e Clareza](../../../rules/022_priorizacao-simplicidade-clareza.md): complementa — adequado para domínios moderadamente complexos
+- [regra 022 - Priorização da Simplicidade e Clareza](../../clean-code/references/code-structure.md): complementa — adequado para domínios moderadamente complexos
 
 ---
 

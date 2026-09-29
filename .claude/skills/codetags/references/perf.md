@@ -74,5 +74,5 @@ function SearchComponent() {
 
 ## Relacionado a
 
-- Rules: [022 - KISS](../../../rules/022_priorizacao-simplicidade-clareza.md) (código simples é mais performático)
+- Rules: [022 - KISS](../../clean-code/references/code-structure.md) (código simples é mais performático)
 - Tags similares: PERF (problema real) vs OPTIMIZE (oportunidade teórica)

@@ -51,8 +51,8 @@ const db = DatabaseConnection.getInstance(process.env.DATABASE_URL)
 
 - [flyweight.md](flyweight.md): complementa — ambos controlam instâncias; Flyweight para muitas, Singleton para uma
 - [factory-method.md](factory-method.md): complementa — Factory Method pode retornar a instância Singleton
-- [rule 014 - Princípio da Inversão de Dependência](../../../rules/014_principio-inversao-dependencia.md): reforça — não use Singleton como substituto de DI
-- [rule 070 - Proibição de Estado Mutável Compartilhado](../../../rules/070_proibicao-estado-mutavel-compartilhado.md): reforça — instância única com estado mutável é arriscada
+- [rule 014 - Princípio da Inversão de Dependência](../../solid/references/dip.md): reforça — não use Singleton como substituto de DI
+- [rule 070 - Proibição de Estado Mutável Compartilhado](../../../rules/008_estado-mutavel-compartilhado.md): reforça — instância única com estado mutável é arriscada
 
 ---
 

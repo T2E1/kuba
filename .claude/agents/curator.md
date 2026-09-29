@@ -78,9 +78,9 @@ Um relatório de causa raiz, e a edição aplicada quando ela se justifica:
 Não faz cumprir rules de código — faz cumprir a integridade do `.claude/` que as expressa.
 As que mais explicam por que uma correção generaliza:
 
-- [039 — Regra do Escoteiro](../rules/039_regra-escoteiro-refatoracao-continua.md): a mesma disciplina de melhoria contínua aplicada ao tooling, não só ao código.
-- [021 — Proibição de Duplicação](../rules/021_proibicao-duplicacao-logica.md): a correção repetida em dois lugares de `.claude/` é sinal de que a informação está no artefato errado.
-- [064 — Proibição de Overengineering](../rules/064_proibicao-overengineering.md): editar uma rule a partir de um caso isolado é a mesma generalização especulativa que esta rule proíbe em código.
+- [039 — Regra do Escoteiro](../skills/clean-code/references/boy-scout-rule.md): a mesma disciplina de melhoria contínua aplicada ao tooling, não só ao código.
+- [021 — Proibição de Duplicação](../skills/clean-code/references/code-structure.md): a correção repetida em dois lugares de `.claude/` é sinal de que a informação está no artefato errado.
+- [064 — Proibição de Overengineering](../rules/013_overengineering.md): editar uma rule a partir de um caso isolado é a mesma generalização especulativa que esta rule proíbe em código.
 
 ## Método
 

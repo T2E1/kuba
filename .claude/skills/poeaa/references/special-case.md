@@ -34,9 +34,9 @@ class GuestCustomer implements Customer {
 
 ## Relacionado com
 
-- [regra 027 - Tratamento de Erros de Domínio](../../../rules/027_qualidade-tratamento-erros-dominio.md): complementa — Special Case é para ausência esperada, exceção é para ausência que é erro
-- [regra 002 - Proibição da Cláusula ELSE](../../../rules/002_proibicao-clausula-else.md): reforça — elimina o `if (customer) ... else ...` repetido no cliente
-- [regra 012 - Substituição de Liskov](../../../rules/012_principio-substituicao-liskov.md): reforça — o Special Case deve honrar o mesmo contrato da classe regular
+- [regra 027 - Tratamento de Erros de Domínio](../../clean-code/references/error-handling.md): complementa — Special Case é para ausência esperada, exceção é para ausência que é erro
+- [regra 002 - Proibição da Cláusula ELSE](../../calisthenics/references/rule-02-no-else.md): reforça — elimina o `if (customer) ... else ...` repetido no cliente
+- [regra 012 - Substituição de Liskov](../../solid/references/lsp.md): reforça — o Special Case deve honrar o mesmo contrato da classe regular
 
 ---
 

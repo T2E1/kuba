@@ -111,12 +111,12 @@ a rule 021.
 
 ## Rules relacionadas
 
-- [010 — Responsabilidade Única](../../rules/010_principio-responsabilidade-unica.md): uma responsabilidade por mixin é a aplicação direta.
-- [021 — Proibição de Duplicação](../../rules/021_proibicao-duplicacao-logica.md): o mixin é o mecanismo de reuso que evita a cópia.
-- [016 — Fechamento Comum](../../rules/016_principio-fechamento-comum.md): o comportamento e seu atributo mudam juntos, então vivem juntos.
-- [007 — Máximo de Linhas por Classe](../../rules/007_limite-maximo-linhas-classe.md): extrair mixin é o caminho quando a classe passa de 50 linhas.
-- [064 — Proibição de Overengineering](../../rules/064_proibicao-overengineering.md): limita a criação de mixin sem consumidor real.
-- [059 — Proibição de Herança Recusada](../../rules/059_proibicao-heranca-refusao.md): a composição evita o componente herdar o que não usa.
+- [010 — Responsabilidade Única](../solid/references/srp.md): uma responsabilidade por mixin é a aplicação direta.
+- [021 — Proibição de Duplicação](../clean-code/references/code-structure.md): o mixin é o mecanismo de reuso que evita a cópia.
+- [016 — Fechamento Comum](../package/references/ccp.md): o comportamento e seu atributo mudam juntos, então vivem juntos.
+- [007 — Máximo de Linhas por Classe](../calisthenics/references/rule-07-small-classes.md): extrair mixin é o caminho quando a classe passa de 50 linhas.
+- [064 — Proibição de Overengineering](../../rules/013_overengineering.md): limita a criação de mixin sem consumidor real.
+- [059 — Proibição de Herança Recusada](../../rules/030_heranca-refusao.md): a composição evita o componente herdar o que não usa.
 
 ## Skills relacionadas
 

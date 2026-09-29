@@ -100,10 +100,10 @@ Fonte: https://arc42.org
 
 ## Rules relacionadas
 
-- [026 — Qualidade de Comentários: o Porquê](../../rules/026_qualidade-comentarios-porque.md): a documentação carrega o porquê que não cabe no código.
-- [021 — Proibição de Duplicação](../../rules/021_proibicao-duplicacao-logica.md): a §9 indexa ADRs e a §5 referencia o C4 — nada é copiado.
-- [040 — Base de Código Única](../../rules/040_base-codigo-unica.md): a documentação vive no mesmo repositório que descreve.
-- [012 — Glossário de domínio](../../rules/006_proibicao-nomes-abreviados.md): a §12 é o que torna os nomes do código verificáveis.
+- [026 — Qualidade de Comentários: o Porquê](../clean-code/references/code-structure.md): a documentação carrega o porquê que não cabe no código.
+- [021 — Proibição de Duplicação](../clean-code/references/code-structure.md): a §9 indexa ADRs e a §5 referencia o C4 — nada é copiado.
+- [040 — Base de Código Única](../twelve-factor/references/01-codebase.md): a documentação vive no mesmo repositório que descreve.
+- [012 — Glossário de domínio](../clean-code/references/naming.md): a §12 é o que torna os nomes do código verificáveis.
 
 ## Skills relacionadas
 

@@ -41,7 +41,7 @@ NNN_titulo-em-kebab-case.md
 
 - `NNN` — três dígitos com zero à esquerda, na faixa da categoria (ver abaixo).
 - Título do arquivo em **português**, kebab-case, descrevendo a restrição:
-  `037_proibicao-argumentos-sinalizadores.md`.
+  `../../clean-code/references/functions.md`.
 - Um arquivo por rule. Nunca duas rules no mesmo arquivo.
 - Rules não são deletadas quando perdem validade — são marcadas e substituídas, como
   ADRs. A numeração nunca é reciclada.
@@ -159,7 +159,7 @@ Duas subseções obrigatórias:
 Links para outras rules, com o rótulo em inglês e a relação declarada:
 
 ```markdown
-- [010 - Single Responsibility Principle (SRP)](../../../rules/010_principio-responsabilidade-unica.md): reinforces
+- [010 - Single Responsibility Principle (SRP)](../../solid/references/srp.md): reinforces
 ```
 
 Vocabulário, com o uso real nas 70:

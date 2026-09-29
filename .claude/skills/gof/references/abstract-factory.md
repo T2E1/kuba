@@ -60,8 +60,8 @@ factory.createButton().render()
 - [factory-method.md](factory-method.md): depende — Abstract Factory é composto de Factory Methods
 - [builder.md](builder.md): complementa — Builder constrói um produto complexo; Abstract Factory cria famílias
 - [prototype.md](prototype.md): complementa — Prototype pode ser usado dentro do Abstract Factory para criar produtos por clonagem
-- [rule 014 - Princípio da Inversão de Dependência](../../../rules/014_principio-inversao-dependencia.md): reforça — clientes dependem da interface UIFactory, não das classes concretas
-- [rule 011 - Princípio Aberto/Fechado](../../../rules/011_principio-aberto-fechado.md): reforça — adicione nova família sem modificar clientes existentes
+- [rule 014 - Princípio da Inversão de Dependência](../../solid/references/dip.md): reforça — clientes dependem da interface UIFactory, não das classes concretas
+- [rule 011 - Princípio Aberto/Fechado](../../solid/references/ocp.md): reforça — adicione nova família sem modificar clientes existentes
 
 ---
 

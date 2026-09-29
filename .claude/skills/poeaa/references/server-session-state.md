@@ -26,7 +26,7 @@ Cliente envia sessionId → servidor busca estado em cache (ex: Redis) por esse 
 
 - [client-session-state.md](client-session-state.md): complementa — trade-off oposto
 - [database-session-state.md](database-session-state.md): complementa — alternativa quando o estado precisa sobreviver ao servidor
-- [regra 045 - Processos Stateless](../../../rules/045_processos-stateless.md): complementa — o cache externo mantém o processo em si stateless
+- [regra 045 - Processos Stateless](../../twelve-factor/references/06-processes.md): complementa — o cache externo mantém o processo em si stateless
 
 ---
 

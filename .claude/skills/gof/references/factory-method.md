@@ -53,8 +53,8 @@ new EmailNotificationService().notify('Pedido confirmado')
 - [abstract-factory.md](abstract-factory.md): complementa — Abstract Factory usa Factory Methods internamente para criar famílias
 - [template-method.md](template-method.md): complementa — ambos usam herança para delegar comportamento às subclasses
 - [singleton.md](singleton.md): complementa — Factory Method pode controlar e retornar a instância Singleton
-- [rule 011 - Princípio Aberto/Fechado](../../../rules/011_principio-aberto-fechado.md): reforça — adicione novos tipos sem modificar código existente
-- [rule 014 - Princípio da Inversão de Dependência](../../../rules/014_principio-inversao-dependencia.md): reforça — depende de abstração, não de classe concreta
+- [rule 011 - Princípio Aberto/Fechado](../../solid/references/ocp.md): reforça — adicione novos tipos sem modificar código existente
+- [rule 014 - Princípio da Inversão de Dependência](../../solid/references/dip.md): reforça — depende de abstração, não de classe concreta
 
 ---
 

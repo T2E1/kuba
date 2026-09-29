@@ -114,7 +114,7 @@ Os outros sete escrevem, e **cada um tem um artefato exclusivo** — `developer`
 navegação de `website/docs/` e `website/.vitepress/navigation/`, `builder` os configs —
 incluindo o mecanismo de build de `website/.vitepress/` (`config.mts`, `plugins/`,
 `theme/`) —, `releaser` versão e CHANGELOG — incluindo a única linha de
-`KUBA_VERSION` dentro de `website/.vitepress/config.mts` —, `curator` o `.claude/`.
+`LIB_VERSION` dentro de `website/.vitepress/config.mts` —, `curator` o `.claude/`.
 Nenhum toca o arquivo de outro, e é isso que permite rodar dois em paralelo sem risco.
 `website/.vitepress/` é o único diretório com essa divisão fina — navegação e mecanismo
 de build são coisas diferentes que mudam por razões diferentes, mesmo vizinhas no

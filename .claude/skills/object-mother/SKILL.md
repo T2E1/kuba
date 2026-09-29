@@ -71,10 +71,10 @@ mesma referência entre invocações.
 
 ## Rules relacionadas
 
-- [021 — Proibição de Duplicação](../../rules/021_proibicao-duplicacao-logica.md): a mother elimina a cópia do mesmo Arrange em múltiplos testes.
-- [023 — Proibição de Funcionalidade Especulativa](../../rules/023_proibicao-funcionalidade-especulativa.md): não extrair mother para um cenário usado uma vez só.
-- [037 — Proibição de Argumentos Sinalizadores](../../rules/037_proibicao-argumentos-sinalizadores.md): uma mother com flag de variação é um Test Data Builder mal nomeado.
-- [070 — Proibição de Estado Mutável Compartilhado](../../rules/070_proibicao-estado-mutavel-compartilhado.md): cada chamada devolve instância nova, nunca a mesma referência reaproveitada.
+- [021 — Proibição de Duplicação](../clean-code/references/code-structure.md): a mother elimina a cópia do mesmo Arrange em múltiplos testes.
+- [023 — Proibição de Funcionalidade Especulativa](../clean-code/references/code-structure.md): não extrair mother para um cenário usado uma vez só.
+- [037 — Proibição de Argumentos Sinalizadores](../clean-code/references/functions.md): uma mother com flag de variação é um Test Data Builder mal nomeado.
+- [070 — Proibição de Estado Mutável Compartilhado](../../rules/008_estado-mutavel-compartilhado.md): cada chamada devolve instância nova, nunca a mesma referência reaproveitada.
 
 ## Skills relacionadas
 

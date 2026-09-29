@@ -110,14 +110,14 @@ Rules 026 e 062.
 
 ## Rules relacionadas
 
-- [026 — Qualidade de Comentários: Apenas o Porquê](../../rules/026_qualidade-comentarios-porque.md):
+- [026 — Qualidade de Comentários: Apenas o Porquê](../clean-code/references/code-structure.md):
   a regra de ouro desta skill; JSDoc redundante é a violação mais comum dela.
-- [062 — Proibição de Código Inteligente](../../rules/062_proibicao-codigo-inteligente-clever-code.md):
+- [062 — Proibição de Código Inteligente](../../rules/025_codigo-inteligente-clever-code.md):
   comentário-ruído entra na mesma categoria de poluição.
-- [034 — Nomes Consistentes](../../rules/034_nomes-classes-metodos-consistentes.md) e
-  [035 — Proibição de Nomes Enganosos](../../rules/035_proibicao-nomes-enganosos.md):
+- [034 — Nomes Consistentes](../clean-code/references/naming.md) e
+  [035 — Proibição de Nomes Enganosos](../clean-code/references/naming.md):
   um nome bom elimina a necessidade do comentário; um nome ruim não se conserta com JSDoc.
-- [013 — Segregação de Interfaces](../../rules/013_principio-segregacao-interfaces.md):
+- [013 — Segregação de Interfaces](../solid/references/isp.md):
   o contrato público documentado é o mesmo que a interface deve manter enxuto.
 
 ## Skills relacionadas

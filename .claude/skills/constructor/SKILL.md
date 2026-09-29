@@ -119,11 +119,11 @@ instância.
 
 ## Rules relacionadas
 
-- [010 — Responsabilidade Única](../../rules/010_principio-responsabilidade-unica.md): o constructor inicializa estrutura; lógica de negócio é método.
-- [022 — Simplicidade e Clareza](../../rules/022_priorizacao-simplicidade-clareza.md): constructor previsível, síncrono e sem ramificação.
-- [007 — Máximo de Linhas por Classe](../../rules/007_limite-maximo-linhas-classe.md): limite de 15 linhas para o método.
-- [036 — Restrição de Efeitos Colaterais](../../rules/036_restricao-funcoes-efeitos-colaterais.md): o constructor não toca DOM externo.
-- [028 — Tratamento de Exceção Assíncrona](../../rules/028_tratamento-excecao-assincrona.md): nenhuma Promise nasce aqui, porque não há onde tratá-la.
+- [010 — Responsabilidade Única](../solid/references/srp.md): o constructor inicializa estrutura; lógica de negócio é método.
+- [022 — Simplicidade e Clareza](../clean-code/references/code-structure.md): constructor previsível, síncrono e sem ramificação.
+- [007 — Máximo de Linhas por Classe](../calisthenics/references/rule-07-small-classes.md): limite de 15 linhas para o método.
+- [036 — Restrição de Efeitos Colaterais](../clean-code/references/immutability.md): o constructor não toca DOM externo.
+- [028 — Tratamento de Exceção Assíncrona](../clean-code/references/error-handling.md): nenhuma Promise nasce aqui, porque não há onde tratá-la.
 
 ## Skills relacionadas
 

@@ -58,10 +58,10 @@ Sem intervalo explícito, o padrão é desde a última tag de versão em `CHANGE
 
 ## Rules
 
-- [015 — REP](../rules/015_principio-equivalencia-lancamento-reuso.md): a granularidade do reuso é a do release. É a rule que define este ofício.
-- [040 — Base de Código Única](../rules/040_base-codigo-unica.md): um repositório, muitos deploys — a versão é uma só.
-- [044 — Separação Build, Release, Run](../rules/044_separacao-build-release-run.md): release é imutável; versão publicada não se reescreve.
-- [042 — Configurações via Ambiente](../rules/042_configuracoes-via-ambiente.md): nenhum segredo no que é publicado.
+- [015 — REP](../skills/package/references/rep.md): a granularidade do reuso é a do release. É a rule que define este ofício.
+- [040 — Base de Código Única](../skills/twelve-factor/references/01-codebase.md): um repositório, muitos deploys — a versão é uma só.
+- [044 — Separação Build, Release, Run](../skills/twelve-factor/references/05-build-release-run.md): release é imutável; versão publicada não se reescreve.
+- [042 — Configurações via Ambiente](../skills/twelve-factor/references/03-config.md): nenhum segredo no que é publicado.
 
 ## Método
 
@@ -77,8 +77,8 @@ Sem intervalo explícito, o padrão é desde a última tag de versão em `CHANGE
    efeito observável, e explicam a razão quando ela não é óbvia.
 5. **Escrever a nota de migração**, se houver breaking: o que era, o que passa a ser, e
    como converter. Sem isso, um major é só um número.
-6. **Atualizar o pin do CDN.** O site carrega `@t2e1/kuba@<versão>` pela constante
-   `KUBA_VERSION` no topo de `website/.vitepress/config.mts:13` — fonte única do pin — e o
+6. **Atualizar o pin do CDN.** O site carrega `@acme/lib@<versão>` pela constante
+   `LIB_VERSION` no topo de `website/.vitepress/config.mts:13` — fonte única do pin — e o
    mesmo número aparece nas três `learn/installation.md`. O workflow
    `.github/workflows/pages-deploy.yml` lê essa constante para checar se a versão pinada
    já foi publicada. Ficar para trás faz os exemplos ao vivo rodarem contra código antigo

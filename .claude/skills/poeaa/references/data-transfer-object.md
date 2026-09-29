@@ -39,8 +39,8 @@ function toDto(order: Order): OrderDto {
 ## Relacionado com
 
 - [remote-facade.md](remote-facade.md): complementa — o DTO é o que a fachada troca através da fronteira
-- [regra 029 - Imutabilidade de Objetos](../../../rules/029_imutabilidade-objetos-freeze.md): reforça — DTO deve ser imutável, puro transporte
-- [regra 010 - Responsabilidade Única](../../../rules/010_principio-responsabilidade-unica.md): reforça — proíbe o DTO ganhar comportamento de domínio
+- [regra 029 - Imutabilidade de Objetos](../../clean-code/references/immutability.md): reforça — DTO deve ser imutável, puro transporte
+- [regra 010 - Responsabilidade Única](../../solid/references/srp.md): reforça — proíbe o DTO ganhar comportamento de domínio
 
 ---
 

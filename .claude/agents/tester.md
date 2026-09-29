@@ -74,13 +74,13 @@ sobre percentual. Afirmar um número seria inventá-lo. Configurar a medição �
 
 Bloqueiam o veredito de aprovado:
 
-- [032 — Cobertura Mínima e Qualidade](../rules/032_cobertura-teste-minima-qualidade.md): AAA, sem lógica de controle no corpo do teste, no máximo 2 asserções.
-- [028 — Exceção Assíncrona](../rules/028_tratamento-excecao-assincrona.md): toda Promise consumida — `await` faltando é falso verde.
+- [032 — Cobertura Mínima e Qualidade](../skills/clean-code/references/testing.md): AAA, sem lógica de controle no corpo do teste, no máximo 2 asserções.
+- [028 — Exceção Assíncrona](../skills/clean-code/references/error-handling.md): toda Promise consumida — `await` faltando é falso verde.
 
 Aplicam-se ao código de teste como a qualquer outro:
 
-- [021 — DRY](../rules/021_proibicao-duplicacao-logica.md): setup repetido vira helper em `vitest.helpers.js`.
-- [024 — Constantes Mágicas](../rules/024_proibicao-constantes-magicas.md) · [035 — Nomes Enganosos](../rules/035_proibicao-nomes-enganosos.md) · [026 — Comentário Explica o Porquê](../rules/026_qualidade-comentarios-porque.md).
+- [021 — DRY](../skills/clean-code/references/code-structure.md): setup repetido vira helper em `vitest.helpers.js`.
+- [024 — Constantes Mágicas](../skills/clean-code/references/code-structure.md) · [035 — Nomes Enganosos](../skills/clean-code/references/naming.md) · [026 — Comentário Explica o Porquê](../skills/clean-code/references/code-structure.md).
 
 ## Método
 

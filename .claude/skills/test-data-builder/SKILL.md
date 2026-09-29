@@ -72,10 +72,10 @@ existindo para o que realmente varia.
 
 ## Rules relacionadas
 
-- [037 — Proibição de Argumentos Sinalizadores](../../rules/037_proibicao-argumentos-sinalizadores.md): o builder substitui a função com múltiplos parâmetros booleanos.
-- [023 — Proibição de Funcionalidade Especulativa](../../rules/023_proibicao-funcionalidade-especulativa.md): método do builder sem teste que o use é código especulativo.
-- [005 — Restrição de Encadeamento](../../rules/005_maximo-uma-chamada-por-linha.md): a fluent interface do builder é a exceção explícita desta rule.
-- [033 — Limite de Parâmetros por Função](../../rules/033_limite-parametros-funcao.md): o builder é a alternativa para quando o cenário exigiria mais de 3 parâmetros.
+- [037 — Proibição de Argumentos Sinalizadores](../clean-code/references/functions.md): o builder substitui a função com múltiplos parâmetros booleanos.
+- [023 — Proibição de Funcionalidade Especulativa](../clean-code/references/code-structure.md): método do builder sem teste que o use é código especulativo.
+- [005 — Restrição de Encadeamento](../calisthenics/references/rule-05-one-dot-per-line.md): a fluent interface do builder é a exceção explícita desta rule.
+- [033 — Limite de Parâmetros por Função](../clean-code/references/functions.md): o builder é a alternativa para quando o cenário exigiria mais de 3 parâmetros.
 
 ## Skills relacionadas
 

@@ -25,8 +25,8 @@ Requisição HTTP → cookie/token assinado carrega { cartId, itemCount } → se
 ## Relacionado com
 
 - [server-session-state.md](server-session-state.md): complementa — trade-off oposto
-- [regra 045 - Processos Stateless](../../../rules/045_processos-stateless.md): reforça — Client Session State é o que permite o servidor ser stateless
-- [regra 030 - Proibição de Funções Inseguras](../../../rules/030_proibicao-funcoes-inseguras.md): reforça — o estado vindo do cliente é entrada não confiável e deve ser validado
+- [regra 045 - Processos Stateless](../../twelve-factor/references/06-processes.md): reforça — Client Session State é o que permite o servidor ser stateless
+- [regra 030 - Proibição de Funções Inseguras](../../clean-code/references/security.md): reforça — o estado vindo do cliente é entrada não confiável e deve ser validado
 
 ---
 

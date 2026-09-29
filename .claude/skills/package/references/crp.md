@@ -1,7 +1,7 @@
 # CRP — Common Reuse Principle
 
 **Grupo:** Coesão
-**Rule deMGoncalves:** [017 - Princípio do Reuso Comum](../../../rules/017_principio-reuso-comum.md)
+**Rule deMGoncalves:** [017 - Princípio do Reuso Comum](crp.md)
 **Pergunta:** Classes em um pacote são reutilizadas em conjunto? Se você usa uma, usa todas?
 
 ## O Que É

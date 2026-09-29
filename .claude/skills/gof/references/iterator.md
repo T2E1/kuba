@@ -58,8 +58,8 @@ for (const n of new Range(1, 10, 2)) {
 
 - [composite.md](composite.md): complementa — Iterator frequentemente usado para percorrer estruturas Composite
 - [visitor.md](visitor.md): complementa — Visitor pode usar Iterator para percorrer elementos de coleção
-- [rule 004 - Coleções de Primeira Classe](../../../rules/004_colecoes-primeira-classe.md): complementa — Iterator implementa comportamento de percurso encapsulado na coleção
-- [rule 008 - Proibição de Getters e Setters](../../../rules/008_proibicao-getters-setters.md): reforça — Iterator expõe comportamento de percurso, não o estado interno da coleção
+- [rule 004 - Coleções de Primeira Classe](../../calisthenics/references/rule-04-first-class-collections.md): complementa — Iterator implementa comportamento de percurso encapsulado na coleção
+- [rule 008 - Proibição de Getters e Setters](../../calisthenics/references/rule-08-no-getters-setters.md): reforça — Iterator expõe comportamento de percurso, não o estado interno da coleção
 
 ---
 

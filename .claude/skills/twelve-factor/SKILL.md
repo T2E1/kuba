@@ -37,18 +37,18 @@ configuração de *ambiente* (`process.env`) — só a segunda é o fator 03.
 
 | # | Fator | Rule | Pergunta-chave | Detalhe |
 |---|---|---|---|---|
-| 01 | Codebase | [040](../../rules/040_base-codigo-unica.md) | Uma app = um repositório? | [01-codebase.md](references/01-codebase.md) |
-| 02 | Dependencies | [041](../../rules/041_declaracao-explicita-dependencias.md) | Toda dependência declarada no manifesto? | [02-dependencies.md](references/02-dependencies.md) |
-| 03 | Config | [042](../../rules/042_configuracoes-via-ambiente.md) | Config no ambiente, não no código? | [03-config.md](references/03-config.md) |
-| 04 | Backing Services | [043](../../rules/043_servicos-apoio-recursos.md) | Serviço anexável por URL de config? | [04-backing-services.md](references/04-backing-services.md) |
-| 05 | Build, Release, Run | [044](../../rules/044_separacao-build-release-run.md) | Três estágios separados e imutáveis? | [05-build-release-run.md](references/05-build-release-run.md) |
-| 06 | Processes | [045](../../rules/045_processos-stateless.md) | Stateless e share-nothing? | [06-processes.md](references/06-processes.md) |
-| 07 | Port Binding | [046](../../rules/046_port-binding.md) | Autocontido, sem servidor externo obrigatório? | [07-port-binding.md](references/07-port-binding.md) |
-| 08 | Concurrency | [047](../../rules/047_concorrencia-via-processos.md) | Escala por múltiplos processos? | [08-concurrency.md](references/08-concurrency.md) |
-| 09 | Disposability | [048](../../rules/048_descartabilidade-processos.md) | Sobe rápido, desliga com graça? | [09-disposability.md](references/09-disposability.md) |
-| 10 | Dev/Prod Parity | [049](../../rules/049_paridade-dev-prod.md) | Dev ≈ staging ≈ prod? | [10-dev-prod-parity.md](references/10-dev-prod-parity.md) |
-| 11 | Logs | [050](../../rules/050_logs-fluxo-eventos.md) | Logs para stdout, não arquivo? | [11-logs.md](references/11-logs.md) |
-| 12 | Admin Processes | [051](../../rules/051_processos-administrativos.md) | Tarefa admin é processo one-off versionado? | [12-admin-processes.md](references/12-admin-processes.md) |
+| 01 | Codebase | [040](references/01-codebase.md) | Uma app = um repositório? | [01-codebase.md](references/01-codebase.md) |
+| 02 | Dependencies | [041](references/02-dependencies.md) | Toda dependência declarada no manifesto? | [02-dependencies.md](references/02-dependencies.md) |
+| 03 | Config | [042](references/03-config.md) | Config no ambiente, não no código? | [03-config.md](references/03-config.md) |
+| 04 | Backing Services | [043](references/04-backing-services.md) | Serviço anexável por URL de config? | [04-backing-services.md](references/04-backing-services.md) |
+| 05 | Build, Release, Run | [044](references/05-build-release-run.md) | Três estágios separados e imutáveis? | [05-build-release-run.md](references/05-build-release-run.md) |
+| 06 | Processes | [045](references/06-processes.md) | Stateless e share-nothing? | [06-processes.md](references/06-processes.md) |
+| 07 | Port Binding | [046](references/07-port-binding.md) | Autocontido, sem servidor externo obrigatório? | [07-port-binding.md](references/07-port-binding.md) |
+| 08 | Concurrency | [047](references/08-concurrency.md) | Escala por múltiplos processos? | [08-concurrency.md](references/08-concurrency.md) |
+| 09 | Disposability | [048](references/09-disposability.md) | Sobe rápido, desliga com graça? | [09-disposability.md](references/09-disposability.md) |
+| 10 | Dev/Prod Parity | [049](references/10-dev-prod-parity.md) | Dev ≈ staging ≈ prod? | [10-dev-prod-parity.md](references/10-dev-prod-parity.md) |
+| 11 | Logs | [050](references/11-logs.md) | Logs para stdout, não arquivo? | [11-logs.md](references/11-logs.md) |
+| 12 | Admin Processes | [051](references/12-admin-processes.md) | Tarefa admin é processo one-off versionado? | [12-admin-processes.md](references/12-admin-processes.md) |
 
 ### Diagnóstico por sintoma
 
@@ -111,19 +111,19 @@ Fonte: https://12factor.net
 
 ## Rules relacionadas
 
-- [040 — Base de Código Única](../../rules/040_base-codigo-unica.md)
-- [041 — Declaração Explícita de Dependências](../../rules/041_declaracao-explicita-dependencias.md)
-- [042 — Configurações via Ambiente](../../rules/042_configuracoes-via-ambiente.md)
-- [043 — Serviços de Apoio como Recursos](../../rules/043_servicos-apoio-recursos.md)
-- [044 — Separação Build, Release, Run](../../rules/044_separacao-build-release-run.md)
-- [045 — Processos Stateless](../../rules/045_processos-stateless.md)
-- [046 — Port Binding](../../rules/046_port-binding.md)
-- [047 — Concorrência via Processos](../../rules/047_concorrencia-via-processos.md)
-- [048 — Descartabilidade de Processos](../../rules/048_descartabilidade-processos.md)
-- [049 — Paridade Dev/Prod](../../rules/049_paridade-dev-prod.md)
-- [050 — Logs como Fluxo de Eventos](../../rules/050_logs-fluxo-eventos.md)
-- [051 — Processos Administrativos](../../rules/051_processos-administrativos.md)
-- [030 — Proibição de Funções Inseguras](../../rules/030_proibicao-funcoes-inseguras.md): reforça o fator 03 no ponto dos segredos.
+- [040 — Base de Código Única](references/01-codebase.md)
+- [041 — Declaração Explícita de Dependências](references/02-dependencies.md)
+- [042 — Configurações via Ambiente](references/03-config.md)
+- [043 — Serviços de Apoio como Recursos](references/04-backing-services.md)
+- [044 — Separação Build, Release, Run](references/05-build-release-run.md)
+- [045 — Processos Stateless](references/06-processes.md)
+- [046 — Port Binding](references/07-port-binding.md)
+- [047 — Concorrência via Processos](references/08-concurrency.md)
+- [048 — Descartabilidade de Processos](references/09-disposability.md)
+- [049 — Paridade Dev/Prod](references/10-dev-prod-parity.md)
+- [050 — Logs como Fluxo de Eventos](references/11-logs.md)
+- [051 — Processos Administrativos](references/12-admin-processes.md)
+- [030 — Proibição de Funções Inseguras](../clean-code/references/security.md): reforça o fator 03 no ponto dos segredos.
 
 ## Skills relacionadas
 

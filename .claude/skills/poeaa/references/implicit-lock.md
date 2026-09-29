@@ -33,7 +33,7 @@ class UnitOfWork {
 
 - [optimistic-offline-lock.md](optimistic-offline-lock.md): depende de — o mecanismo que o Implicit Lock automatiza
 - [unit-of-work.md](unit-of-work.md): complementa — local natural para centralizar a aquisição implícita
-- [regra 021 - Proibição de Duplicação de Lógica](../../../rules/021_proibicao-duplicacao-logica.md): reforça — evita repetir a chamada de lock em cada ponto de acesso
+- [regra 021 - Proibição de Duplicação de Lógica](../../clean-code/references/code-structure.md): reforça — evita repetir a chamada de lock em cada ponto de acesso
 
 ---
 

@@ -35,7 +35,7 @@ async function save(order: Order, db: Database): Promise<void> {
 
 - [pessimistic-offline-lock.md](pessimistic-offline-lock.md): complementa — trade-off oposto (bloqueia antecipadamente em vez de detectar tarde)
 - [unit-of-work.md](unit-of-work.md): complementa — a verificação de versão normalmente acontece no commit da Unit of Work
-- [regra 027 - Tratamento de Erros de Domínio](../../../rules/027_qualidade-tratamento-erros-dominio.md): reforça — o conflito deve virar uma exceção de domínio, nunca um `return false` silencioso
+- [regra 027 - Tratamento de Erros de Domínio](../../clean-code/references/error-handling.md): reforça — o conflito deve virar uma exceção de domínio, nunca um `return false` silencioso
 
 ---
 

@@ -119,10 +119,10 @@ if (!result.success) {
 
 ## Related to
 
-- [rule 027 Erros de Domínio](../../../rules/027_qualidade-tratamento-erros-dominio.md): complementa — hierarquia de erros aqui documentada
-- [rule 050 Logs como Eventos](../../../rules/050_logs-fluxo-eventos.md): complementa — estratégia de logging baseada nesta regra
-- [rule 030 Funções Inseguras](../../../rules/030_proibicao-funcoes-inseguras.md): complementa — secrets via env, validação de inputs
-- [rule 028 Exceção Assíncrona](../../../rules/028_tratamento-excecao-assincrona.md): complementa — tratamento de promises
+- [rule 027 Erros de Domínio](../../clean-code/references/error-handling.md): complementa — hierarquia de erros aqui documentada
+- [rule 050 Logs como Eventos](../../twelve-factor/references/11-logs.md): complementa — estratégia de logging baseada nesta regra
+- [rule 030 Funções Inseguras](../../clean-code/references/security.md): complementa — secrets via env, validação de inputs
+- [rule 028 Exceção Assíncrona](../../clean-code/references/error-handling.md): complementa — tratamento de promises
 
 ---
 

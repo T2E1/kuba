@@ -102,12 +102,12 @@ execução.
 
 ## Rules relacionadas
 
-- [022 — Simplicidade e Clareza (KISS)](../../rules/022_priorizacao-simplicidade-clareza.md): fixa o limite CC ≤ 5.
-- [001 — Nível Único de Indentação](../../rules/001_nivel-unico-indentacao.md): aninhamento é o maior gerador de CC.
-- [002 — Proibição da Cláusula ELSE](../../rules/002_proibicao-clausula-else.md): cada `else if` soma +1.
-- [010 — Responsabilidade Única](../../rules/010_principio-responsabilidade-unica.md): CC alta é sintoma de responsabilidades misturadas.
-- [055 — Limite de Linhas por Método](../../rules/055_limite-maximo-linhas-metodo.md): 15 linhas limitam naturalmente o espaço para ramificar.
-- [060 — Proibição de Código Spaghetti](../../rules/060_proibicao-codigo-spaghetti.md): CC > 15 é o critério objetivo de spaghetti.
+- [022 — Simplicidade e Clareza (KISS)](../clean-code/references/code-structure.md): fixa o limite CC ≤ 5.
+- [001 — Nível Único de Indentação](../calisthenics/references/rule-01-single-indentation.md): aninhamento é o maior gerador de CC.
+- [002 — Proibição da Cláusula ELSE](../calisthenics/references/rule-02-no-else.md): cada `else if` soma +1.
+- [010 — Responsabilidade Única](../solid/references/srp.md): CC alta é sintoma de responsabilidades misturadas.
+- [055 — Limite de Linhas por Método](../../rules/033_limite-maximo-linhas-metodo.md): 15 linhas limitam naturalmente o espaço para ramificar.
+- [060 — Proibição de Código Spaghetti](../../rules/003_codigo-spaghetti.md): CC > 15 é o critério objetivo de spaghetti.
 
 ## Skills relacionadas
 

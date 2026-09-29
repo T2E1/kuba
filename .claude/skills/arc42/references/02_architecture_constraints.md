@@ -37,8 +37,8 @@ Esta seção documenta as restrições que limitam as opções de design arquite
 | Convenção | Descrição | Referência |
 |-----------|-----------|------------|
 | Regras 001–070 | Todas as 70 regras arquiteturais do .claude/rules/ são obrigatórias | [rules/](../../../rules/) |
-| Path Aliases | Imports relativos com `../` são proibidos | [rule 031](../../../rules/031_restricao-imports-relativos.md) |
-| Cobertura ≥ 85% | Domínio deve ter cobertura mínima de linha | [rule 032](../../../rules/032_cobertura-teste-minima-qualidade.md) |
+| Path Aliases | Imports relativos com `../` são proibidos | [rule 031](../../clean-code/references/security.md) |
+| Cobertura ≥ 85% | Domínio deve ter cobertura mínima de linha | [rule 032](../../clean-code/references/testing.md) |
 | Estrutura de pacote | `packages/<categoria>/<nome>/` — um elemento por pasta | [colocation](../../colocation/SKILL.md) |
 
 ## Restrições Legais / Regulatórias
@@ -61,8 +61,8 @@ Esta seção documenta as restrições que limitam as opções de design arquite
 - [01_introduction_and_goals.md](01_introduction_and_goals.md): depende — objetivos de §1 geram parte das restrições
 - [04_solution_strategy.md](04_solution_strategy.md): reforça — estratégia deve respeitar todas as restrições aqui listadas
 - [09_architecture_decisions.md](09_architecture_decisions.md): complementa — ADRs devem referenciar restrições que motivaram a decisão
-- [rule 031 Imports Relativos](../../../rules/031_restricao-imports-relativos.md): complementa
-- [rule 041 Dependências Explícitas](../../../rules/041_declaracao-explicita-dependencias.md): complementa
+- [rule 031 Imports Relativos](../../clean-code/references/security.md): complementa
+- [rule 041 Dependências Explícitas](../../twelve-factor/references/02-dependencies.md): complementa
 
 ---
 

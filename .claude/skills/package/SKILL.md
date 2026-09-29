@@ -39,12 +39,12 @@ são esperados.
 
 | Princípio | Grupo | Rule | Pergunta-chave | Detalhe |
 |---|---|---|---|---|
-| **REP** Release Reuse Equivalency | Coesão | [015](../../rules/015_principio-equivalencia-lancamento-reuso.md) | Reuso e release têm a mesma granularidade? | [rep.md](references/rep.md) |
-| **CCP** Common Closure | Coesão | [016](../../rules/016_principio-fechamento-comum.md) | Classes que mudam juntas estão juntas? | [ccp.md](references/ccp.md) |
-| **CRP** Common Reuse | Coesão | [017](../../rules/017_principio-reuso-comum.md) | Quem usa uma classe usa todas as do pacote? | [crp.md](references/crp.md) |
-| **ADP** Acyclic Dependencies | Acoplamento | [018](../../rules/018_principio-dependencias-aciclicas.md) | O grafo é um DAG? | [adp.md](references/adp.md) |
-| **SDP** Stable Dependencies | Acoplamento | [019](../../rules/019_principio-dependencias-estaveis.md) | Instabilidade I < 0.5 nos módulos críticos? | [sdp.md](references/sdp.md) |
-| **SAP** Stable Abstractions | Acoplamento | [020](../../rules/020_principio-abstracoes-estaveis.md) | Abstração alta onde a instabilidade é baixa? | [sap.md](references/sap.md) |
+| **REP** Release Reuse Equivalency | Coesão | [015](references/rep.md) | Reuso e release têm a mesma granularidade? | [rep.md](references/rep.md) |
+| **CCP** Common Closure | Coesão | [016](references/ccp.md) | Classes que mudam juntas estão juntas? | [ccp.md](references/ccp.md) |
+| **CRP** Common Reuse | Coesão | [017](references/crp.md) | Quem usa uma classe usa todas as do pacote? | [crp.md](references/crp.md) |
+| **ADP** Acyclic Dependencies | Acoplamento | [018](references/adp.md) | O grafo é um DAG? | [adp.md](references/adp.md) |
+| **SDP** Stable Dependencies | Acoplamento | [019](references/sdp.md) | Instabilidade I < 0.5 nos módulos críticos? | [sdp.md](references/sdp.md) |
+| **SAP** Stable Abstractions | Acoplamento | [020](references/sap.md) | Abstração alta onde a instabilidade é baixa? | [sap.md](references/sap.md) |
 
 ### Diagnóstico por sintoma
 
@@ -133,13 +133,13 @@ introduzindo abstrações na fronteira.
 
 ## Rules relacionadas
 
-- [015 — Equivalência de Lançamento e Reuso](../../rules/015_principio-equivalencia-lancamento-reuso.md)
-- [016 — Princípio do Fechamento Comum](../../rules/016_principio-fechamento-comum.md)
-- [017 — Princípio do Reuso Comum](../../rules/017_principio-reuso-comum.md)
-- [018 — Princípio de Dependências Acíclicas](../../rules/018_principio-dependencias-aciclicas.md)
-- [019 — Princípio de Dependências Estáveis](../../rules/019_principio-dependencias-estaveis.md)
-- [020 — Princípio de Abstrações Estáveis](../../rules/020_principio-abstracoes-estaveis.md)
-- [031 — Proibição de Imports Relativos](../../rules/031_restricao-imports-relativos.md): path aliases tornam o grafo legível.
+- [015 — Equivalência de Lançamento e Reuso](references/rep.md)
+- [016 — Princípio do Fechamento Comum](references/ccp.md)
+- [017 — Princípio do Reuso Comum](references/crp.md)
+- [018 — Princípio de Dependências Acíclicas](references/adp.md)
+- [019 — Princípio de Dependências Estáveis](references/sdp.md)
+- [020 — Princípio de Abstrações Estáveis](references/sap.md)
+- [031 — Proibição de Imports Relativos](../clean-code/references/security.md): path aliases tornam o grafo legível.
 
 ## Skills relacionadas
 

@@ -202,12 +202,12 @@ certo — nenhuma delas tem uma segunda peça.
 
 ## Rules relacionadas
 
-- [016 — Princípio do Fechamento Comum](../../rules/016_principio-fechamento-comum.md): a regra que esta skill materializa em diretórios.
-- [017 — Princípio do Reuso Comum](../../rules/017_principio-reuso-comum.md): o contrapeso — o pacote não deve carregar o que o consumidor não usa.
-- [058 — Proibição de Shotgun Surgery](../../rules/058_proibicao-shotgun-surgery.md): a organização por tipo técnico é o que a produz.
-- [031 — Proibição de Imports Relativos](../../rules/031_restricao-imports-relativos.md): entre pacotes, sempre path alias.
-- [015 — Equivalência de Lançamento e Reuso](../../rules/015_principio-equivalencia-lancamento-reuso.md): o pacote é a unidade de release.
-- [010 — Responsabilidade Única](../../rules/010_principio-responsabilidade-unica.md): um pacote, um componente.
+- [016 — Princípio do Fechamento Comum](../package/references/ccp.md): a regra que esta skill materializa em diretórios.
+- [017 — Princípio do Reuso Comum](../package/references/crp.md): o contrapeso — o pacote não deve carregar o que o consumidor não usa.
+- [058 — Proibição de Shotgun Surgery](../../rules/038_shotgun-surgery.md): a organização por tipo técnico é o que a produz.
+- [031 — Proibição de Imports Relativos](../clean-code/references/security.md): entre pacotes, sempre path alias.
+- [015 — Equivalência de Lançamento e Reuso](../package/references/rep.md): o pacote é a unidade de release.
+- [010 — Responsabilidade Única](../solid/references/srp.md): um pacote, um componente.
 
 ## Skills relacionadas
 

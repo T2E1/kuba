@@ -8,7 +8,7 @@ Checklist per exported public member:
 - What it is / what it does (one sentence).
 - `@default` if there's an implicit value.
 - `@example` when usage isn't obvious from the signature (mandatory for methods with more than one reasonable way to call them).
-- `@throws` for every error condition the consumer might encounter (`.claude/rules/027_qualidade-tratamento-erros-dominio.md`).
+- `@throws` for every error condition the consumer might encounter (`../../clean-code/references/error-handling.md`).
 - `@see` for related members.
 - `@deprecated` with a migration path, never just "don't use this anymore."
 
@@ -145,7 +145,7 @@ export function onResize(callback: (entry: ResizeObserverEntry) => void): () => 
 
 ## `declare global` / tag name maps
 
-This doesn't need its own JSDoc — it's structural TypeScript boilerplate, and commenting each entry would be repetitive noise (`.claude/rules/062_proibicao-codigo-inteligente-clever-code.md`). The JSDoc was already written on the referenced class (`Button`).
+This doesn't need its own JSDoc — it's structural TypeScript boilerplate, and commenting each entry would be repetitive noise (`../../../rules/025_codigo-inteligente-clever-code.md`). The JSDoc was already written on the referenced class (`Button`).
 
 ```ts
 declare global {

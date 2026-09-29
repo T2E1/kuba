@@ -1,7 +1,7 @@
 # SAP — Stable Abstractions Principle
 
 **Grupo:** Acoplamento
-**Rule deMGoncalves:** [020 - Princípio de Abstrações Estáveis](../../../rules/020_principio-abstracoes-estaveis.md)
+**Rule deMGoncalves:** [020 - Princípio de Abstrações Estáveis](sap.md)
 **Pergunta:** Um pacote estável (I baixo) é abstrato (A alto)? Um pacote instável (I alto) é concreto (A baixo)?
 
 ## O Que É

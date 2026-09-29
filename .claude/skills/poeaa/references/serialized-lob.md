@@ -33,7 +33,7 @@ class PreferencesMapper {
 ## Relacionado com
 
 - [embedded-value.md](embedded-value.md): complementa — Embedded Value para valores simples, Serialized LOB para grafos profundos
-- [regra 064 - Proibição de Overengineering](../../../rules/064_proibicao-overengineering.md): reforça — evita modelar relacionalmente o que nunca é consultado em partes
+- [regra 064 - Proibição de Overengineering](../../../rules/013_overengineering.md): reforça — evita modelar relacionalmente o que nunca é consultado em partes
 
 ---
 

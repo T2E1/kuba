@@ -74,10 +74,10 @@ execuções (rule 070).
 
 ## Rules relacionadas
 
-- [070 — Proibição de Estado Mutável Compartilhado](../../rules/070_proibicao-estado-mutavel-compartilhado.md): fixture sem teardown é a fonte mais comum de teste que depende de ordem de execução.
-- [023 — Proibição de Funcionalidade Especulativa](../../rules/023_proibicao-funcionalidade-especulativa.md): extrair fixture antes de 3 testes compartilharem o setup é indireção sem ganho.
-- [021 — Proibição de Duplicação](../../rules/021_proibicao-duplicacao-logica.md): a fixture elimina a repetição do mesmo setup em todo teste do arquivo.
-- [002 — Proibição da Cláusula ELSE](../../rules/002_proibicao-clausula-else.md): `if`/`else` dentro do `beforeEach` decidindo cenário é sinal de que a variação não pertence à fixture.
+- [070 — Proibição de Estado Mutável Compartilhado](../../rules/008_estado-mutavel-compartilhado.md): fixture sem teardown é a fonte mais comum de teste que depende de ordem de execução.
+- [023 — Proibição de Funcionalidade Especulativa](../clean-code/references/code-structure.md): extrair fixture antes de 3 testes compartilharem o setup é indireção sem ganho.
+- [021 — Proibição de Duplicação](../clean-code/references/code-structure.md): a fixture elimina a repetição do mesmo setup em todo teste do arquivo.
+- [002 — Proibição da Cláusula ELSE](../calisthenics/references/rule-02-no-else.md): `if`/`else` dentro do `beforeEach` decidindo cenário é sinal de que a variação não pertence à fixture.
 
 ## Skills relacionadas
 

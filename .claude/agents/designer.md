@@ -1,6 +1,6 @@
 ---
 name: designer
-description: Designer de design system. Define a aparência, os estados e a acessibilidade de um componente do kuba — que token governa cada propriedade, que custom property o consumidor pode re-estilizar, que papel e nome o elemento expõe, como ele responde a teclado e leitor de tela. Use ao especificar um componente novo, ao revisar acessibilidade, ao decidir se um valor merece virar token ou ao auditar valores fixos em style.js. Não use para escrever a implementação — é o ofício do developer.
+description: Designer de design system. Define a aparência, os estados e a acessibilidade de um componente da biblioteca — que token governa cada propriedade, que custom property o consumidor pode re-estilizar, que papel e nome o elemento expõe, como ele responde a teclado e leitor de tela. Use ao especificar um componente novo, ao revisar acessibilidade, ao decidir se um valor merece virar token ou ao auditar valores fixos em style.js. Não use para escrever a implementação — é o ofício do developer.
 model: sonnet
 effort: high
 tools: Read, Write, Edit, Bash, Glob, Grep
@@ -66,11 +66,11 @@ Uma especificação que o `developer` implementa sem adivinhar:
 
 ## Rules
 
-- [024 — Constantes Mágicas](../rules/024_proibicao-constantes-magicas.md): cor, espaço, raio e tamanho vêm de token. É a rule que este ofício mais faz cumprir.
-- [021 — DRY](../rules/021_proibicao-duplicacao-logica.md): o mesmo valor repetido em três `style.js` é um token que falta.
-- [035 — Nomes Enganosos](../rules/035_proibicao-nomes-enganosos.md): `--button-color-accent` precisa governar a cor de destaque, nada mais.
-- [064 — Overengineering](../rules/064_proibicao-overengineering.md): estado que nenhum design pede não é criado por precaução.
-- [023 — YAGNI](../rules/023_proibicao-funcionalidade-especulativa.md): variante sem uso real não entra.
+- [024 — Constantes Mágicas](../skills/clean-code/references/code-structure.md): cor, espaço, raio e tamanho vêm de token. É a rule que este ofício mais faz cumprir.
+- [021 — DRY](../skills/clean-code/references/code-structure.md): o mesmo valor repetido em três `style.js` é um token que falta.
+- [035 — Nomes Enganosos](../skills/clean-code/references/naming.md): `--button-color-accent` precisa governar a cor de destaque, nada mais.
+- [064 — Overengineering](../rules/013_overengineering.md): estado que nenhum design pede não é criado por precaução.
+- [023 — YAGNI](../skills/clean-code/references/code-structure.md): variante sem uso real não entra.
 
 ## Método
 

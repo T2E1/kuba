@@ -103,10 +103,10 @@ Fonte: Simon Brown, https://c4model.com
 
 ## Rules relacionadas
 
-- [021 — Proibição de Duplicação](../../rules/021_proibicao-duplicacao-logica.md): cada informação num nível só; a §5 do arc42 referencia, não copia.
-- [026 — Qualidade de Comentários: o Porquê](../../rules/026_qualidade-comentarios-porque.md): o diagrama mostra o quê; o porquê fica no ADR.
-- [006 — Proibição de Nomes Abreviados](../../rules/006_proibicao-nomes-abreviados.md): a consistência de nomes entre níveis vale a mesma disciplina do código.
-- [018 — Dependências Acíclicas](../../rules/018_principio-dependencias-aciclicas.md): o nível 3 é onde um ciclo entre componentes fica visível.
+- [021 — Proibição de Duplicação](../clean-code/references/code-structure.md): cada informação num nível só; a §5 do arc42 referencia, não copia.
+- [026 — Qualidade de Comentários: o Porquê](../clean-code/references/code-structure.md): o diagrama mostra o quê; o porquê fica no ADR.
+- [006 — Proibição de Nomes Abreviados](../clean-code/references/naming.md): a consistência de nomes entre níveis vale a mesma disciplina do código.
+- [018 — Dependências Acíclicas](../package/references/adp.md): o nível 3 é onde um ciclo entre componentes fica visível.
 
 ## Skills relacionadas
 

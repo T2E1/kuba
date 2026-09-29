@@ -141,12 +141,12 @@ Fonte: [Wikipedia:Signs of AI writing](https://en.wikipedia.org/wiki/Wikipedia:S
 
 ## Rules relacionadas
 
-- [026 — Qualidade de Comentários: o Porquê](../../rules/026_qualidade-comentarios-porque.md): a skill é essa rule aplicada a toda prosa, não só a comentário.
-- [022 — Simplicidade e Clareza](../../rules/022_priorizacao-simplicidade-clareza.md): *serve como* no lugar de *é* é complexidade sem ganho.
-- [035 — Proibição de Nomes Enganosos](../../rules/035_proibicao-nomes-enganosos.md): atribuição vaga é desinformação com aparência de fonte.
-- [021 — Proibição de Duplicação](../../rules/021_proibicao-duplicacao-logica.md): ciclo de sinônimos é a mesma frase repetida com roupa nova.
-- [062 — Proibição de Código Inteligente](../../rules/062_proibicao-codigo-inteligente-clever-code.md): a mesma preferência por clareza sobre esperteza, na prosa.
-- [024 — Proibição de Constantes Mágicas](../../rules/024_proibicao-constantes-magicas.md): "significativamente mais rápido" é o número mágico da prosa — diga quanto.
+- [026 — Qualidade de Comentários: o Porquê](../clean-code/references/code-structure.md): a skill é essa rule aplicada a toda prosa, não só a comentário.
+- [022 — Simplicidade e Clareza](../clean-code/references/code-structure.md): *serve como* no lugar de *é* é complexidade sem ganho.
+- [035 — Proibição de Nomes Enganosos](../clean-code/references/naming.md): atribuição vaga é desinformação com aparência de fonte.
+- [021 — Proibição de Duplicação](../clean-code/references/code-structure.md): ciclo de sinônimos é a mesma frase repetida com roupa nova.
+- [062 — Proibição de Código Inteligente](../../rules/025_codigo-inteligente-clever-code.md): a mesma preferência por clareza sobre esperteza, na prosa.
+- [024 — Proibição de Constantes Mágicas](../clean-code/references/code-structure.md): "significativamente mais rápido" é o número mágico da prosa — diga quanto.
 
 ## Skills relacionadas
 

@@ -36,8 +36,8 @@ class ProductMapper {
 ## Relacionado com
 
 - [dependent-mapping.md](dependent-mapping.md): complementa — alternativa quando o valor precisa de tabela própria
-- [regra 003 - Encapsulamento de Primitivos](../../../rules/003_encapsulamento-primitivos.md): reinforces — Embedded Value é a técnica de persistência natural de um Value Object
-- [regra 029 - Imutabilidade de Objetos](../../../rules/029_imutabilidade-objetos-freeze.md): reforça — o valor embutido deve ser imutável
+- [regra 003 - Encapsulamento de Primitivos](../../calisthenics/references/rule-03-wrap-primitives.md): reinforces — Embedded Value é a técnica de persistência natural de um Value Object
+- [regra 029 - Imutabilidade de Objetos](../../clean-code/references/immutability.md): reforça — o valor embutido deve ser imutável
 
 ---
 

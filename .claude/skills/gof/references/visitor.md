@@ -58,8 +58,8 @@ elements.map(el => el.accept(exporter)).join('')
 - [composite.md](composite.md): complementa — Visitor frequentemente aplicado sobre estruturas Composite para executar operações distintas
 - [iterator.md](iterator.md): complementa — Iterator percorre a estrutura; Visitor executa operação em cada elemento
 - [interpreter.md](interpreter.md): complementa — Visitor pode percorrer a árvore de expressões do Interpreter
-- [rule 011 - Princípio Aberto/Fechado](../../../rules/011_principio-aberto-fechado.md): reforça — adicione nova operação via novo Visitor sem alterar as classes de elemento
-- [rule 010 - Princípio da Responsabilidade Única](../../../rules/010_principio-responsabilidade-unica.md): reforça — cada Visitor tem responsabilidade de uma única operação
+- [rule 011 - Princípio Aberto/Fechado](../../solid/references/ocp.md): reforça — adicione nova operação via novo Visitor sem alterar as classes de elemento
+- [rule 010 - Princípio da Responsabilidade Única](../../solid/references/srp.md): reforça — cada Visitor tem responsabilidade de uma única operação
 
 ---
 

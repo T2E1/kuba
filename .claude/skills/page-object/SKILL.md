@@ -75,10 +75,10 @@ camada (não vale); se for só a segunda, voltar a chamar `inner()` direto.
 
 ## Rules relacionadas
 
-- [061 — Proibição de Middle Man](../../rules/061_proibicao-middle-man.md): o limite entre Page Object útil e camada que só repassa chamadas.
-- [009 — Diga, Não Pergunte](../../rules/009_diga-nao-pergunte.md): o método devolve decisão de negócio, não o nó para o teste perguntar sobre ele.
-- [021 — Proibição de Duplicação](../../rules/021_proibicao-duplicacao-logica.md): elimina a repetição do mesmo seletor em vários testes do mesmo componente.
-- [058 — Proibição de Shotgun Surgery](../../rules/058_proibicao-shotgun-surgery.md): um seletor interno que muda corrige um arquivo, não N testes.
+- [061 — Proibição de Middle Man](../../rules/035_middle-man.md): o limite entre Page Object útil e camada que só repassa chamadas.
+- [009 — Diga, Não Pergunte](../calisthenics/references/rule-09-tell-dont-ask.md): o método devolve decisão de negócio, não o nó para o teste perguntar sobre ele.
+- [021 — Proibição de Duplicação](../clean-code/references/code-structure.md): elimina a repetição do mesmo seletor em vários testes do mesmo componente.
+- [058 — Proibição de Shotgun Surgery](../../rules/038_shotgun-surgery.md): um seletor interno que muda corrige um arquivo, não N testes.
 
 ## Skills relacionadas
 

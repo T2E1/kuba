@@ -33,7 +33,7 @@ class OrderFacade {
 ## Relacionado com
 
 - [data-transfer-object.md](data-transfer-object.md): depende de — a fachada troca DTOs, não entidades de domínio, através da fronteira
-- [regra 064 - Proibição de Overengineering](../../../rules/064_proibicao-overengineering.md): reforça — só introduzir fronteira remota quando ela existe de fato
+- [regra 064 - Proibição de Overengineering](../../../rules/013_overengineering.md): reforça — só introduzir fronteira remota quando ela existe de fato
 
 ---
 

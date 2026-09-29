@@ -10,10 +10,10 @@
 //   <kb-redirect> passa a precisar saber que <kb-on> existe (rule 017).
 // - O vocabulário de <kb-on> deixa de poder mudar sem forçar um release de
 //   <kb-redirect> (rule 015).
-// - "KUBAOnValueAttribute" não significa nada no contexto do redirect: o
+// - "AcmeOnValueAttribute" não significa nada no contexto do redirect: o
 //   nome descreve o atributo `value` de outro elemento.
-import type { KUBAOnValueAttribute } from '@behavior/on/types'
+import type { AcmeOnValueAttribute } from '@behavior/on/types'
 
-export default class KUBARedirectElement extends HTMLElement {
-  on: KUBAOnValueAttribute | (string & {})
+export default class AcmeRedirectElement extends HTMLElement {
+  on: AcmeOnValueAttribute | (string & {})
 }

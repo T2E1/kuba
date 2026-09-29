@@ -32,7 +32,7 @@ para um domínio rico é dívida garantida.
 
 Não use para padrões internos de classe — isso é `gof`. Este repositório é uma biblioteca
 de componentes sem camada de persistência, então a maior parte do catálogo se aplica a
-aplicações que **consomem** o kuba, não ao kuba em si.
+aplicações que **consomem** a biblioteca, não à biblioteca em si.
 
 ## Como aplicar
 
@@ -190,11 +190,11 @@ Fonte: Martin Fowler, *Patterns of Enterprise Application Architecture* (2002).
 
 ## Rules relacionadas
 
-- [014 — Inversão de Dependência](../../rules/014_principio-inversao-dependencia.md): é o que separa Data Mapper de Active Record.
-- [022 — Simplicidade e Clareza](../../rules/022_priorizacao-simplicidade-clareza.md): condiciona Domain Model a existir domínio que o justifique.
-- [010 — Responsabilidade Única](../../rules/010_principio-responsabilidade-unica.md): a proibição de misturar negócio e persistência na mesma classe.
-- [061 — Proibição de Middle Man](../../rules/061_proibicao-middle-man.md): o risco mais comum ao adotar Repository.
-- [019 — Dependências Estáveis](../../rules/019_principio-dependencias-estaveis.md): domínio é a camada estável; persistência é a volátil.
+- [014 — Inversão de Dependência](../solid/references/dip.md): é o que separa Data Mapper de Active Record.
+- [022 — Simplicidade e Clareza](../clean-code/references/code-structure.md): condiciona Domain Model a existir domínio que o justifique.
+- [010 — Responsabilidade Única](../solid/references/srp.md): a proibição de misturar negócio e persistência na mesma classe.
+- [061 — Proibição de Middle Man](../../rules/035_middle-man.md): o risco mais comum ao adotar Repository.
+- [019 — Dependências Estáveis](../package/references/sdp.md): domínio é a camada estável; persistência é a volátil.
 
 ## Skills relacionadas
 

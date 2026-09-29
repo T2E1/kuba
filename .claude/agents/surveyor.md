@@ -89,17 +89,17 @@ e o que ela não resolve** — as duas listas, explícitas.
 
 O foco são as que governam pacote e fronteira, nenhuma com detecção automática de Biome:
 
-**Coesão** — [015](../rules/015_principio-equivalencia-lancamento-reuso.md) release e reuso na mesma granularidade · [016](../rules/016_principio-fechamento-comum.md) o que muda junto fica junto · [017](../rules/017_principio-reuso-comum.md) o que é usado junto fica junto
+**Coesão** — [015](../skills/package/references/rep.md) release e reuso na mesma granularidade · [016](../skills/package/references/ccp.md) o que muda junto fica junto · [017](../skills/package/references/crp.md) o que é usado junto fica junto
 
-**Acoplamento** — [018](../rules/018_principio-dependencias-aciclicas.md) grafo acíclico · [019](../rules/019_principio-dependencias-estaveis.md) depender na direção da estabilidade · [020](../rules/020_principio-abstracoes-estaveis.md) estável deve ser abstrato · [031](../rules/031_restricao-imports-relativos.md) só path alias
+**Acoplamento** — [018](../skills/package/references/adp.md) grafo acíclico · [019](../skills/package/references/sdp.md) depender na direção da estabilidade · [020](../skills/package/references/sap.md) estável deve ser abstrato · [031](../skills/clean-code/references/security.md) só path alias
 
-**Sintomas de fronteira errada** — [054](../rules/054_proibicao-mudanca-divergente.md) mudança divergente · [058](../rules/058_proibicao-shotgun-surgery.md) shotgun surgery · [021](../rules/021_proibicao-duplicacao-logica.md) DRY entre pacotes
+**Sintomas de fronteira errada** — [054](../rules/036_mudanca-divergente.md) mudança divergente · [058](../rules/038_shotgun-surgery.md) shotgun surgery · [021](../skills/clean-code/references/code-structure.md) DRY entre pacotes
 
-**Nome e resíduo** — [035](../rules/035_proibicao-nomes-enganosos.md) nome que promete o que não há · [006](../rules/006_proibicao-nomes-abreviados.md) nome que não se entende sozinho · [056](../rules/056_proibicao-codigo-zombie-lava-flow.md) pacote que ninguém usa · [067](../rules/067_proibicao-dependencia-barco-ancora.md) dependência declarada e não usada
+**Nome e resíduo** — [035](../skills/clean-code/references/naming.md) nome que promete o que não há · [006](../skills/clean-code/references/naming.md) nome que não se entende sozinho · [056](../rules/004_codigo-zombie-lava-flow.md) pacote que ninguém usa · [067](../rules/007_dependencia-barco-ancora.md) dependência declarada e não usada
 
-**Excesso** — [064](../rules/064_proibicao-overengineering.md) grupo ou segment sem problema que o justifique · [023](../rules/023_proibicao-funcionalidade-especulativa.md) contrato público sem consumidor
+**Excesso** — [064](../rules/013_overengineering.md) grupo ou segment sem problema que o justifique · [023](../skills/clean-code/references/code-structure.md) contrato público sem consumidor
 
-**Relato** — [072](../rules/072_proibicao-afirmacao-nao-verificada.md) toda afirmação sobre um arquivo cita `arquivo:linha` lido nesta execução
+**Relato** — [072](../rules/017_afirmacao-nao-verificada.md) toda afirmação sobre um arquivo cita `arquivo:linha` lido nesta execução
 
 ## Método
 

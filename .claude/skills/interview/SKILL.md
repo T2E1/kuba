@@ -100,13 +100,13 @@ direto quando a tarefa é pequena o bastante para não delegar (ver "Quando não
 
 ## Rules relacionadas
 
-- [072 — Proibição de Afirmação Não Verificada](../../rules/072_proibicao-afirmacao-nao-verificada.md):
+- [072 — Proibição de Afirmação Não Verificada](../../rules/017_afirmacao-nao-verificada.md):
   o passo 2 obriga explorar o código antes de perguntar — o mesmo princípio de citar
   `arquivo:linha` em vez de assumir aplicado à fase de alinhamento.
-- [023 — Proibição de Funcionalidade Especulativa (YAGNI)](../../rules/023_proibicao-funcionalidade-especulativa.md):
+- [023 — Proibição de Funcionalidade Especulativa (YAGNI)](../clean-code/references/code-structure.md):
   cada ramo descartado pelo operador na entrevista é escopo especulativo cortado antes de
   virar código morto.
-- [064 — Proibição de Overengineering](../../rules/064_proibicao-overengineering.md):
+- [064 — Proibição de Overengineering](../../rules/013_overengineering.md):
   a fronteira impede perguntar (e portanto projetar) para variação hipotética que o
   operador ainda não confirmou que existe.
 

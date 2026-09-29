@@ -2,7 +2,7 @@
 
 Audience: another developer reading/maintaining this file. They already see the code and the names — don't repeat that. Document only what the code doesn't expose on its own: the reason behind a decision, an invariant that must hold, a side effect, or decorator/mixin behavior that only makes sense once you've read several layers.
 
-Practical rule: if deleting the comment loses nothing for someone who already reads the code, delete the comment. This is `.claude/rules/026_qualidade-comentarios-porque.md` applied to JSDoc.
+Practical rule: if deleting the comment loses nothing for someone who already reads the code, delete the comment. This is `../../clean-code/references/code-structure.md` applied to JSDoc.
 
 All comment text must be written in English.
 
@@ -10,7 +10,7 @@ All comment text must be written in English.
 
 ## Class
 
-Document the class **only** if it has a responsibility that isn't obvious from the name, or if it composes mixins/decorators whose order matters (`.claude/rules/011_principio-aberto-fechado.md`, `.claude/rules/068_proibicao-martelo-de-ouro.md`). Don't document what a clear noun name already solves (`.claude/rules/034_nomes-classes-metodos-consistentes.md`).
+Document the class **only** if it has a responsibility that isn't obvious from the name, or if it composes mixins/decorators whose order matters (`../../solid/references/ocp.md`, `../../../rules/010_martelo-de-ouro.md`). Don't document what a clear noun name already solves (`../../clean-code/references/naming.md`).
 
 ```js
 /**
@@ -35,11 +35,11 @@ constructor() {
 }
 ```
 
-Don't write `/** Creates a Button instance */` — that's noise (`.claude/rules/062_proibicao-codigo-inteligente-clever-code.md`).
+Don't write `/** Creates a Button instance */` — that's noise (`../../../rules/025_codigo-inteligente-clever-code.md`).
 
 ## Getter
 
-"Pure" getters (return a private field with a fallback) **carry no JSDoc** — the name already says it all (`.claude/rules/008_proibicao-getters-setters.md` questions the existence of such getters at all, let alone commenting them).
+"Pure" getters (return a private field with a fallback) **carry no JSDoc** — the name already says it all (`../../calisthenics/references/rule-08-no-getters-setters.md` questions the existence of such getters at all, let alone commenting them).
 
 ```js
 get width() {
@@ -92,10 +92,10 @@ Fields like `#color`, `#type`, `#variant` that only back a same-named getter/set
 
 ## Method
 
-Apply `.claude/rules/055_limite-maximo-linhas-metodo.md` (short methods) before documenting — a well-sliced method rarely needs JSDoc beyond cases with:
+Apply `../../../rules/033_limite-maximo-linhas-metodo.md` (short methods) before documenting — a well-sliced method rarely needs JSDoc beyond cases with:
 - non-obvious asynchronous behavior,
-- side effects on external objects (`.claude/rules/036_restricao-funcoes-efeitos-colaterais.md`),
-- domain exceptions thrown (`.claude/rules/027_qualidade-tratamento-erros-dominio.md`) that the caller must handle.
+- side effects on external objects (`../../clean-code/references/immutability.md`),
+- domain exceptions thrown (`../../clean-code/references/error-handling.md`) that the caller must handle.
 
 ```js
 /**
@@ -129,7 +129,7 @@ static get formAssociated() {
 }
 ```
 
-Static initialization blocks (`static { ... }`) only need a comment if they initialize state shared across instances — in that case, confirm the sharing is intentional (`.claude/rules/070_proibicao-estado-mutavel-compartilhado.md`) before documenting it as if it were normal.
+Static initialization blocks (`static { ... }`) only need a comment if they initialize state shared across instances — in that case, confirm the sharing is intentional (`../../../rules/008_estado-mutavel-compartilhado.md`) before documenting it as if it were normal.
 
 ## Function (not a class member)
 
@@ -147,18 +147,18 @@ function closestShadowRoot(node) {
 
 ## Arrow function / inline callback
 
-Rarely deserves its own JSDoc — if it needs documentation, that's a sign it should be extracted into a named function instead (`.claude/rules/063_proibicao-inferno-callbacks.md`, `.claude/rules/034_nomes-classes-metodos-consistentes.md`). Document the extracted named function, not the inline callback.
+Rarely deserves its own JSDoc — if it needs documentation, that's a sign it should be extracted into a named function instead (`../../../rules/009_inferno-callbacks.md`, `../../clean-code/references/naming.md`). Document the extracted named function, not the inline callback.
 
 ## `const` / `let` / `var`
 
-- A module-level `const` with a self-explanatory value (`const MAX_RETRIES = 3`): **no JSDoc**, but follow `.claude/rules/024_proibicao-constantes-magicas.md` — the name should already replace the "magic number"; if the *why* behind the value isn't obvious, a one-line comment (not JSDoc) is enough:
+- A module-level `const` with a self-explanatory value (`const MAX_RETRIES = 3`): **no JSDoc**, but follow `../../clean-code/references/code-structure.md` — the name should already replace the "magic number"; if the *why* behind the value isn't obvious, a one-line comment (not JSDoc) is enough:
   ```js
   // 3 attempts: matches the browser's default fetch retry timeout.
   const MAX_RETRIES = 3
   ```
-- An exported `const`/`let` representing shared module configuration or state (a candidate for `.claude/rules/070_proibicao-estado-mutavel-compartilhado.md`) deserves JSDoc justifying why it's safe to share:
+- An exported `const`/`let` representing shared module configuration or state (a candidate for `../../../rules/008_estado-mutavel-compartilhado.md`) deserves JSDoc justifying why it's safe to share:
   ```js
-  /** Frozen — never mutate; see `.claude/rules/029_imutabilidade-objetos-freeze.md`. */
+  /** Frozen — never mutate; see `../../clean-code/references/immutability.md`. */
   export const defaultTheme = Object.freeze({ color: 'primary' })
   ```
 - Local `let`/`var` inside a function: never carry JSDoc — if they need explaining, extract into a named function.
@@ -176,4 +176,4 @@ When decorators are used heavily in a codebase, document the decorator's **defin
 export function retouch(target, context) { /* ... */ }
 ```
 
-At the decorator's **usage site** (`@retouch` on top of a specific setter), don't redocument the contract — that's duplication (`.claude/rules/021_proibicao-duplicacao-logica.md`).
+At the decorator's **usage site** (`@retouch` on top of a specific setter), don't redocument the contract — that's duplication (`../../clean-code/references/code-structure.md`).

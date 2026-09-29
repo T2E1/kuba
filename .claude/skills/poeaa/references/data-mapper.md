@@ -56,7 +56,7 @@ class UserMapper {
 - [active-record.md](active-record.md): substitui quando o domínio é simples e o acoplamento ao banco é aceitável
 - [repository.md](repository.md): complementa — Repository usa Data Mapper internamente para isolar o domínio
 - [domain-model.md](domain-model.md): depende — Data Mapper é o padrão natural de persistência para Domain Model
-- [regra 014 - Princípio de Inversão de Dependência](../../../rules/014_principio-inversao-dependencia.md): reforça — mantém o domínio desacoplado da infraestrutura de dados
+- [regra 014 - Princípio de Inversão de Dependência](../../solid/references/dip.md): reforça — mantém o domínio desacoplado da infraestrutura de dados
 
 ---
 

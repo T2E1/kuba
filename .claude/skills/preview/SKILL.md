@@ -76,7 +76,7 @@ componente tem — variante, cor e tamanho — estão em
 |---|---|
 | Cada variante, quando mudam a ênfase da ação | Toda combinação de variante × cor × tamanho |
 | Estado que o consumidor precisa reconhecer — erro, carregando, desabilitado | Estado que o navegador já dá de graça, como `:hover` |
-| Composição real com outro elemento do kuba | Slot vazio |
+| Composição real com outro elemento da biblioteca | Slot vazio |
 | O caso que quase todo mundo escreve errado | Variação que só muda um pixel |
 
 A varredura combinatória é a tentação padrão, e ela esconde o que importa no meio do que
@@ -106,7 +106,7 @@ não importa (rule 023).
 
 ### O exemplo aparece quebrado na página publicada
 
-**Causa:** usa recurso mais novo que a versão pinada em `KUBA_VERSION`, no topo de
+**Causa:** usa recurso mais novo que a versão pinada em `LIB_VERSION`, no topo de
 `website/.vitepress/config.mts`.
 **Solução:** conferir o pin. Ele fica para trás quando um release não o atualiza — é
 passo do método do `releaser`.
@@ -139,11 +139,11 @@ conteúdo não interceptar o clique" —, não uma lista de tipos aceitos.
 
 ## Rules relacionadas
 
-- [023 — Proibição de Funcionalidade Especulativa](../../rules/023_proibicao-funcionalidade-especulativa.md): a varredura combinatória de variantes é YAGNI aplicado à demonstração.
-- [024 — Proibição de Constantes Mágicas](../../rules/024_proibicao-constantes-magicas.md): a página cita o token, não o valor hexadecimal.
-- [032 — Cobertura Mínima e Qualidade](../../rules/032_cobertura-teste-minima-qualidade.md): o teste de interação segue AAA, sem lógica de controle no corpo.
-- [035 — Proibição de Nomes Enganosos](../../rules/035_proibicao-nomes-enganosos.md): a página usa o mesmo vocabulário do código — atributo é atributo, propriedade é propriedade.
-- [056 — Proibição de Código Zombie](../../rules/056_proibicao-codigo-zombie-lava-flow.md): exemplo que não roda mais é a versão publicada disso.
+- [023 — Proibição de Funcionalidade Especulativa](../clean-code/references/code-structure.md): a varredura combinatória de variantes é YAGNI aplicado à demonstração.
+- [024 — Proibição de Constantes Mágicas](../clean-code/references/code-structure.md): a página cita o token, não o valor hexadecimal.
+- [032 — Cobertura Mínima e Qualidade](../clean-code/references/testing.md): o teste de interação segue AAA, sem lógica de controle no corpo.
+- [035 — Proibição de Nomes Enganosos](../clean-code/references/naming.md): a página usa o mesmo vocabulário do código — atributo é atributo, propriedade é propriedade.
+- [056 — Proibição de Código Zombie](../../rules/004_codigo-zombie-lava-flow.md): exemplo que não roda mais é a versão publicada disso.
 
 ## Skills relacionadas
 

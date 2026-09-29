@@ -1,6 +1,6 @@
 # Fator 04 — Backing Services
 
-**Regra deMGoncalves:** [043 - Serviços de Apoio como Recursos](../../../rules/043_servicos-apoio-recursos.md)
+**Regra deMGoncalves:** [043 - Serviços de Apoio como Recursos](04-backing-services.md)
 **Questão:** Serviços externos anexáveis via URL/config (sem alteração de código)?
 
 ## O que é

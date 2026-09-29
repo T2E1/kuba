@@ -53,7 +53,7 @@ Uma decisão em prosa, nunca código nem arquivo de documentação:
 |---|---|
 | Percorrer requisitos, contrato e composição antes do projeto | [lld](../skills/lld/SKILL.md) |
 | Escolher padrão para variação de comportamento | [gof](../skills/gof/SKILL.md) |
-| Padrão de patterns.dev — design, rendering ou performance | [patterns](../skills/patterns/SKILL.md) |
+| Decidir quando o código chega ao usuário — divisão, adiamento, primeira tela | [web-performance](../skills/web-performance/SKILL.md) |
 | Padrões de camada de dados e aplicação | [poeaa](../skills/poeaa/SKILL.md) |
 | Definir interface e responsabilidade de classe | [solid](../skills/solid/SKILL.md) |
 | Fronteira e dependência entre pacotes | [package](../skills/package/SKILL.md) |
@@ -75,17 +75,17 @@ Uma decisão em prosa, nunca código nem arquivo de documentação:
 
 Bloqueiam a decisão — um projeto que as viola não é entregue:
 
-- [010 — Responsabilidade Única](../rules/010_principio-responsabilidade-unica.md): no máximo 7 métodos públicos por classe.
-- [014 — Inversão de Dependência](../rules/014_principio-inversao-dependencia.md): alto nível não instancia concreto.
-- [018 — Dependências Acíclicas](../rules/018_principio-dependencias-aciclicas.md): o grafo entre pacotes é um DAG.
-- [031 — Imports Relativos](../rules/031_restricao-imports-relativos.md): `../` proibido; path alias obrigatório.
+- [010 — Responsabilidade Única](../skills/solid/references/srp.md): no máximo 7 métodos públicos por classe.
+- [014 — Inversão de Dependência](../skills/solid/references/dip.md): alto nível não instancia concreto.
+- [018 — Dependências Acíclicas](../skills/package/references/adp.md): o grafo entre pacotes é um DAG.
+- [031 — Imports Relativos](../skills/clean-code/references/security.md): `../` proibido; path alias obrigatório.
 
 Verificar antes de entregar:
 
-- [011 — Aberto/Fechado](../rules/011_principio-aberto-fechado.md) · [012 — Liskov](../rules/012_principio-substituicao-liskov.md) · [013 — Segregação de Interfaces](../rules/013_principio-segregacao-interfaces.md)
-- [015 — REP](../rules/015_principio-equivalencia-lancamento-reuso.md) · [016 — CCP](../rules/016_principio-fechamento-comum.md) · [017 — CRP](../rules/017_principio-reuso-comum.md) · [019 — SDP](../rules/019_principio-dependencias-estaveis.md) · [020 — SAP](../rules/020_principio-abstracoes-estaveis.md)
-- [064 — Overengineering](../rules/064_proibicao-overengineering.md): abstração sem problema concreto é violação, não previdência.
-- [067 — Dependência Barco-Âncora](../rules/067_proibicao-dependencia-barco-ancora.md) · [068 — Martelo de Ouro](../rules/068_proibicao-martelo-de-ouro.md): ao avaliar o que entra no projeto.
+- [011 — Aberto/Fechado](../skills/solid/references/ocp.md) · [012 — Liskov](../skills/solid/references/lsp.md) · [013 — Segregação de Interfaces](../skills/solid/references/isp.md)
+- [015 — REP](../skills/package/references/rep.md) · [016 — CCP](../skills/package/references/ccp.md) · [017 — CRP](../skills/package/references/crp.md) · [019 — SDP](../skills/package/references/sdp.md) · [020 — SAP](../skills/package/references/sap.md)
+- [064 — Overengineering](../rules/013_overengineering.md): abstração sem problema concreto é violação, não previdência.
+- [067 — Dependência Barco-Âncora](../rules/007_dependencia-barco-ancora.md) · [068 — Martelo de Ouro](../rules/010_martelo-de-ouro.md): ao avaliar o que entra no projeto.
 
 ## Método
 

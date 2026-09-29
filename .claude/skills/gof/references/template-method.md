@@ -54,8 +54,8 @@ new CSVReport().generate([{ name: 'Alice', age: 30 }])
 
 - [factory-method.md](factory-method.md): complementa — Factory Method é frequentemente um passo no Template Method
 - [strategy.md](strategy.md): substitui — Strategy usa composição; Template Method usa herança; prefira Strategy para evitar acoplamento por herança
-- [rule 059 - Proibição de Herança Recusada](../../../rules/059_proibicao-heranca-refusao.md): reforça — subclasses não devem sobrescrever o template method, apenas os passos abstratos
-- [rule 011 - Princípio Aberto/Fechado](../../../rules/011_principio-aberto-fechado.md): reforça — adicione nova variante sem alterar o algoritmo base
+- [rule 059 - Proibição de Herança Recusada](../../../rules/030_heranca-refusao.md): reforça — subclasses não devem sobrescrever o template method, apenas os passos abstratos
+- [rule 011 - Princípio Aberto/Fechado](../../solid/references/ocp.md): reforça — adicione nova variante sem alterar o algoritmo base
 
 ---
 

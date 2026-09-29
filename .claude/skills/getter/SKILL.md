@@ -94,11 +94,11 @@ com comportamento, o cliente deveria estar dizendo, não perguntando.
 
 ## Rules relacionadas
 
-- [008 — Proibição de Getters/Setters](../../rules/008_proibicao-getters-setters.md): a regra que esta skill delimita — getter com tratamento é a exceção legítima.
-- [009 — Diga, Não Pergunte](../../rules/009_diga-nao-pergunte.md): getter que existe para o cliente decidir por fora é o sintoma que a regra combate.
-- [038 — Separação Command-Query](../../rules/038_conformidade-principio-inversao-consulta.md): leitura não altera estado observável.
-- [010 — Responsabilidade Única](../../rules/010_principio-responsabilidade-unica.md): um getter, um campo.
-- [007 — Máximo de Linhas](../../rules/007_limite-maximo-linhas-classe.md): 15 linhas.
+- [008 — Proibição de Getters/Setters](../calisthenics/references/rule-08-no-getters-setters.md): a regra que esta skill delimita — getter com tratamento é a exceção legítima.
+- [009 — Diga, Não Pergunte](../calisthenics/references/rule-09-tell-dont-ask.md): getter que existe para o cliente decidir por fora é o sintoma que a regra combate.
+- [038 — Separação Command-Query](../clean-code/references/immutability.md): leitura não altera estado observável.
+- [010 — Responsabilidade Única](../solid/references/srp.md): um getter, um campo.
+- [007 — Máximo de Linhas](../calisthenics/references/rule-07-small-classes.md): 15 linhas.
 
 ## Skills relacionadas
 

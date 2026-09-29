@@ -107,10 +107,10 @@ Fonte: Michael Nygard, *Documenting Architecture Decisions* (2011).
 
 ## Rules relacionadas
 
-- [026 — Qualidade de Comentários: o Porquê](../../rules/026_qualidade-comentarios-porque.md): o ADR é onde o porquê arquitetural mora, fora do código.
-- [064 — Proibição de Overengineering](../../rules/064_proibicao-overengineering.md): admite complexidade quando há decisão arquitetural documentada — este é o documento.
-- [023 — Funcionalidade Especulativa](../../rules/023_proibicao-funcionalidade-especulativa.md): exigir alternativas e consequências expõe decisões tomadas por especulação.
-- [068 — Proibição do Martelo de Ouro](../../rules/068_proibicao-martelo-de-ouro.md): a tabela de alternativas é o antídoto para "sempre usamos X".
+- [026 — Qualidade de Comentários: o Porquê](../clean-code/references/code-structure.md): o ADR é onde o porquê arquitetural mora, fora do código.
+- [064 — Proibição de Overengineering](../../rules/013_overengineering.md): admite complexidade quando há decisão arquitetural documentada — este é o documento.
+- [023 — Funcionalidade Especulativa](../clean-code/references/code-structure.md): exigir alternativas e consequências expõe decisões tomadas por especulação.
+- [068 — Proibição do Martelo de Ouro](../../rules/010_martelo-de-ouro.md): a tabela de alternativas é o antídoto para "sempre usamos X".
 
 ## Skills relacionadas
 

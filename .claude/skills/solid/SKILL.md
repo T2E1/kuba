@@ -100,11 +100,11 @@ escolha deve viver numa Factory. Ver a exceção de OCP na rule 011.
 
 ## Rules relacionadas
 
-- [010 — Princípio da Responsabilidade Única](../../rules/010_principio-responsabilidade-unica.md): o S, com limite de 7 métodos públicos.
-- [011 — Princípio Aberto/Fechado](../../rules/011_principio-aberto-fechado.md): o O, com limite de 3 ramificações por tipo.
-- [012 — Princípio de Substituição de Liskov](../../rules/012_principio-substituicao-liskov.md): o L, proibindo `instanceof` em código cliente.
-- [013 — Princípio de Segregação de Interfaces](../../rules/013_principio-segregacao-interfaces.md): o I, com limite de 5 métodos por interface.
-- [014 — Princípio de Inversão de Dependência](../../rules/014_principio-inversao-dependencia.md): o D, proibindo `new` em alto nível.
+- [010 — Princípio da Responsabilidade Única](references/srp.md): o S, com limite de 7 métodos públicos.
+- [011 — Princípio Aberto/Fechado](references/ocp.md): o O, com limite de 3 ramificações por tipo.
+- [012 — Princípio de Substituição de Liskov](references/lsp.md): o L, proibindo `instanceof` em código cliente.
+- [013 — Princípio de Segregação de Interfaces](references/isp.md): o I, com limite de 5 métodos por interface.
+- [014 — Princípio de Inversão de Dependência](references/dip.md): o D, proibindo `new` em alto nível.
 
 ## Skills relacionadas
 

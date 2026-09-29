@@ -14,7 +14,7 @@ Quick reference. Use alongside `references/internal-code.md` (minimal) or `refer
 | `@deprecated` | Marks obsolete API | Yes, if applicable | Yes, always with a migration path |
 | `@template` | Documents a generic type parameter | If the generic isn't obvious | Yes, whenever the class/function is generic |
 | `@internal` | Marks a technical export that isn't public API but must be exported (e.g. for tests) | — | Use in `.d.ts` to exclude from generated docs |
-| `@override` | Marks an explicit override of an inherited method | Yes, reinforces `.claude/rules/012_principio-substituicao-liskov.md` | Yes |
+| `@override` | Marks an explicit override of an inherited method | Yes, reinforces `../../solid/references/lsp.md` | Yes |
 | `@readonly` | Read-only property not expressed via `readonly` in the type | Rare | Use when the type doesn't already express it via `readonly` |
 
 ## Formatting rules

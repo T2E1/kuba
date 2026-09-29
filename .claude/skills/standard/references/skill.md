@@ -205,9 +205,9 @@ o que a rule **exige**. Cada item declara a rule e explica como ela sustenta a s
 ```markdown
 ## Rules relacionadas
 
-- [010 — Princípio da Responsabilidade Única](../../../rules/010_principio-responsabilidade-unica.md):
+- [010 — Princípio da Responsabilidade Única](../../solid/references/srp.md):
   a skill operacionaliza o limite de 7 métodos públicos ao dividir a classe.
-- [024 — Proibição de Constantes Mágicas](../../../rules/024_proibicao-constantes-magicas.md):
+- [024 — Proibição de Constantes Mágicas](../../clean-code/references/code-structure.md):
   todo literal de estilo vira token nomeado.
 ```
 

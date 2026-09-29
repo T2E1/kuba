@@ -113,12 +113,12 @@ chamar o método é mais legível (rule 022).
 
 ## Rules relacionadas
 
-- [018 — Dependências Acíclicas](../../rules/018_principio-dependencias-aciclicas.md): o grafo de fluxo também precisa ser acíclico.
-- [009 — Diga, Não Pergunte](../../rules/009_diga-nao-pergunte.md): o emissor anuncia o fato; quem escuta decide.
-- [036 — Efeitos Colaterais](../../rules/036_restricao-funcoes-efeitos-colaterais.md): filtros são puros.
-- [014 — Inversão de Dependência](../../rules/014_principio-inversao-dependencia.md): nenhum dos dois depende do concreto do outro.
-- [022 — Simplicidade e Clareza](../../rules/022_priorizacao-simplicidade-clareza.md): o desacoplamento custa rastreabilidade — só onde compensa.
-- [070 — Estado Mutável Compartilhado](../../rules/070_proibicao-estado-mutavel-compartilhado.md): o payload trafega, não é buffer compartilhado.
+- [018 — Dependências Acíclicas](../package/references/adp.md): o grafo de fluxo também precisa ser acíclico.
+- [009 — Diga, Não Pergunte](../calisthenics/references/rule-09-tell-dont-ask.md): o emissor anuncia o fato; quem escuta decide.
+- [036 — Efeitos Colaterais](../clean-code/references/immutability.md): filtros são puros.
+- [014 — Inversão de Dependência](../solid/references/dip.md): nenhum dos dois depende do concreto do outro.
+- [022 — Simplicidade e Clareza](../clean-code/references/code-structure.md): o desacoplamento custa rastreabilidade — só onde compensa.
+- [070 — Estado Mutável Compartilhado](../../rules/008_estado-mutavel-compartilhado.md): o payload trafega, não é buffer compartilhado.
 
 ## Skills relacionadas
 

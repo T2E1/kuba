@@ -60,7 +60,7 @@ controller.register('/users/:id', new UserController())
 - [mvc.md](mvc.md): complementa — Front Controller é o ponto de entrada que encaminha requisições aos Controllers do MVC
 - [page-controller.md](page-controller.md): complementa — Page Controllers são os handlers registrados e despachados pelo Front Controller
 - [application-controller.md](application-controller.md): complementa — Application Controller pode determinar qual handler o Front Controller deve usar
-- [regra 021 - Proibição de Duplicação de Lógica](../../../rules/021_proibicao-duplicacao-logica.md): reforça — centraliza lógica comum (autenticação, logging) que seria duplicada em cada Page Controller
+- [regra 021 - Proibição de Duplicação de Lógica](../../clean-code/references/code-structure.md): reforça — centraliza lógica comum (autenticação, logging) que seria duplicada em cada Page Controller
 
 ---
 

@@ -63,8 +63,8 @@ image.display()
 
 - [adapter.md](adapter.md): complementa — Adapter converte interface; Proxy mantém a mesma interface e controla acesso
 - [decorator.md](decorator.md): complementa — estrutura similar; Decorator adiciona comportamento; Proxy controla acesso ao objeto real
-- [rule 061 - Proibição de Middle Man](../../../rules/061_proibicao-middle-man.md): reforça — Proxy deve adicionar controle real (cache, acesso, lazy load), não apenas delegar
-- [rule 036 - Restrição de Funções com Efeitos Colaterais](../../../rules/036_restricao-funcoes-efeitos-colaterais.md): complementa — efeitos colaterais do Proxy (cache, log) devem ser documentados e intencionais
+- [rule 061 - Proibição de Middle Man](../../../rules/035_middle-man.md): reforça — Proxy deve adicionar controle real (cache, acesso, lazy load), não apenas delegar
+- [rule 036 - Restrição de Funções com Efeitos Colaterais](../../clean-code/references/immutability.md): complementa — efeitos colaterais do Proxy (cache, log) devem ser documentados e intencionais
 
 ---
 

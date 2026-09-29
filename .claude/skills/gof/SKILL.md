@@ -129,11 +129,11 @@ Fonte: Gamma, Helm, Johnson, Vlissides, *Design Patterns* (1994).
 
 ## Rules relacionadas
 
-- [011 — Princípio Aberto/Fechado](../../rules/011_principio-aberto-fechado.md): Strategy, State e Template Method são as formas de satisfazê-lo; a Factory é a exceção que centraliza o `switch`.
-- [014 — Inversão de Dependência](../../rules/014_principio-inversao-dependencia.md): Factory e Abstract Factory são o mecanismo; Singleton é o antipadrão comum contra ela.
-- [064 — Proibição de Overengineering](../../rules/064_proibicao-overengineering.md): limita quando o pattern se justifica.
-- [023 — Funcionalidade Especulativa](../../rules/023_proibicao-funcionalidade-especulativa.md): pattern para caso hipotético é Speculative Generality.
-- [012 — Substituição de Liskov](../../rules/012_principio-substituicao-liskov.md): toda implementação de um pattern polimórfico precisa respeitá-la.
+- [011 — Princípio Aberto/Fechado](../solid/references/ocp.md): Strategy, State e Template Method são as formas de satisfazê-lo; a Factory é a exceção que centraliza o `switch`.
+- [014 — Inversão de Dependência](../solid/references/dip.md): Factory e Abstract Factory são o mecanismo; Singleton é o antipadrão comum contra ela.
+- [064 — Proibição de Overengineering](../../rules/013_overengineering.md): limita quando o pattern se justifica.
+- [023 — Funcionalidade Especulativa](../clean-code/references/code-structure.md): pattern para caso hipotético é Speculative Generality.
+- [012 — Substituição de Liskov](../solid/references/lsp.md): toda implementação de um pattern polimórfico precisa respeitá-la.
 
 ## Skills relacionadas
 

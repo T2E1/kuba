@@ -27,7 +27,7 @@
 
 - [single-table-inheritance.md](single-table-inheritance.md): complementa — trade-off oposto para hierarquias consultadas em conjunto
 - [class-table-inheritance.md](class-table-inheritance.md): complementa — evita a duplicação de campos herdados que este padrão aceita
-- [regra 058 - Proibição de Shotgun Surgery](../../../rules/058_proibicao-shotgun-surgery.md): reforça — mudança na superclasse não deve tocar N tabelas sem necessidade
+- [regra 058 - Proibição de Shotgun Surgery](../../../rules/038_shotgun-surgery.md): reforça — mudança na superclasse não deve tocar N tabelas sem necessidade
 
 ---
 

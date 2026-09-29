@@ -25,7 +25,7 @@ Domínio → [Estágio 1: modelo lógico de página, ex: XML intermediário]
 ## Relacionado com
 
 - [template-view.md](template-view.md): complementa — Two Step View pode usar Template View no segundo estágio
-- [regra 064 - Proibição de Overengineering](../../../rules/064_proibicao-overengineering.md): reforça — dois estágios só se justificam com mudança de aparência global frequente
+- [regra 064 - Proibição de Overengineering](../../../rules/013_overengineering.md): reforça — dois estágios só se justificam com mudança de aparência global frequente
 
 ---
 

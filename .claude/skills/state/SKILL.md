@@ -116,11 +116,11 @@ pelo mesmo fluxo.
 
 ## Rules relacionadas
 
-- [008 — Proibição de Getters/Setters](../../rules/008_proibicao-getters-setters.md): o estado não é exposto por acessor cru; a manipulação passa pelo contrato.
-- [010 — Responsabilidade Única](../../rules/010_principio-responsabilidade-unica.md): um estado por método de contrato.
-- [029 — Imutabilidade](../../rules/029_imutabilidade-objetos-freeze.md): a mudança de estado é explícita e localizada, nunca acidental.
-- [070 — Estado Mutável Compartilhado](../../rules/070_proibicao-estado-mutavel-compartilhado.md): o estado pertence ao elemento, não a um objeto global.
-- [013 — Segregação de Interfaces](../../rules/013_principio-segregacao-interfaces.md): cada Symbol é um contrato de um estado só.
+- [008 — Proibição de Getters/Setters](../calisthenics/references/rule-08-no-getters-setters.md): o estado não é exposto por acessor cru; a manipulação passa pelo contrato.
+- [010 — Responsabilidade Única](../solid/references/srp.md): um estado por método de contrato.
+- [029 — Imutabilidade](../clean-code/references/immutability.md): a mudança de estado é explícita e localizada, nunca acidental.
+- [070 — Estado Mutável Compartilhado](../../rules/008_estado-mutavel-compartilhado.md): o estado pertence ao elemento, não a um objeto global.
+- [013 — Segregação de Interfaces](../solid/references/isp.md): cada Symbol é um contrato de um estado só.
 
 ## Skills relacionadas
 

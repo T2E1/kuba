@@ -58,7 +58,7 @@ Um relatório, nunca uma mudança:
 |---|---|
 | Complexidade algorítmica de um caminho quente | [big-o](../skills/big-o/SKILL.md) |
 | Medir complexidade do código lido | [complexity](../skills/complexity/SKILL.md), [cdd](../skills/cdd/SKILL.md) |
-| Reconhecer padrão em uso | [gof](../skills/gof/SKILL.md), [poeaa](../skills/poeaa/SKILL.md), [patterns](../skills/patterns/SKILL.md) |
+| Reconhecer padrão em uso | [gof](../skills/gof/SKILL.md), [poeaa](../skills/poeaa/SKILL.md) |
 | Nomear o problema estrutural encontrado | [anti-pattern](../skills/anti-pattern/SKILL.md) |
 | Avaliar desenho de classe e interface | [solid](../skills/solid/SKILL.md) |
 | Avaliar dependência entre pacotes | [package](../skills/package/SKILL.md) |
@@ -73,11 +73,11 @@ Um relatório, nunca uma mudança:
 Não faz cumprir rules — reporta violações como evidência. As que mais aparecem em
 investigação de causa raiz neste repositório:
 
-- [052 — Mutação Acidental](../rules/052_proibicao-mutacao-acidental.md) e [070 — Estado Mutável Compartilhado](../rules/070_proibicao-estado-mutavel-compartilhado.md): a origem da mutação está longe do ponto de falha.
-- [028 — Exceção Assíncrona](../rules/028_tratamento-excecao-assincrona.md): Promise não consumida engole o erro.
-- [036 — Efeitos Colaterais](../rules/036_restricao-funcoes-efeitos-colaterais.md): consulta que escreve estado.
-- [018 — Dependências Acíclicas](../rules/018_principio-dependencias-aciclicas.md): ciclo entre pacotes explicando ordem de inicialização.
-- [056 — Código Zombie](../rules/056_proibicao-codigo-zombie-lava-flow.md): o caminho investigado nunca executa.
+- [052 — Mutação Acidental](../rules/037_mutacao-acidental.md) e [070 — Estado Mutável Compartilhado](../rules/008_estado-mutavel-compartilhado.md): a origem da mutação está longe do ponto de falha.
+- [028 — Exceção Assíncrona](../skills/clean-code/references/error-handling.md): Promise não consumida engole o erro.
+- [036 — Efeitos Colaterais](../skills/clean-code/references/immutability.md): consulta que escreve estado.
+- [018 — Dependências Acíclicas](../skills/package/references/adp.md): ciclo entre pacotes explicando ordem de inicialização.
+- [056 — Código Zombie](../rules/004_codigo-zombie-lava-flow.md): o caminho investigado nunca executa.
 
 ## Método
 

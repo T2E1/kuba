@@ -3,7 +3,7 @@
 Todo atributo string refletido começa como candidato a um tipo nomeado e
 restrito. Só dê a ele um quando a restrição for real e útil para quem
 consome o tipo em tempo de compilação; caso contrário, deixe `string`
-(Regra 4 no `SKILL.md`, `.claude/rules/064_proibicao-overengineering.md`).
+(Regra 4 no `SKILL.md`, `../../../rules/013_overengineering.md`).
 Este arquivo cataloga as formas já estabelecidas neste repositório para que
 um novo `types.d.ts` reaproveite o *padrão*, não o *tipo* (nunca faça
 `import` entre pacotes — Regra 1).
@@ -33,7 +33,7 @@ relativo solto, fácil de confundir com outro tipo de referência (ex.: um
 nome de rota).
 
 ```ts
-type KUBA<PascalName><PascalAttribute>Attribute =
+type Acme<PascalName><PascalAttribute>Attribute =
   | `${'http' | 'https'}://${string}`
   | `/${string}`
   | `#${string}`
@@ -41,7 +41,7 @@ type KUBA<PascalName><PascalAttribute>Attribute =
 ```
 
 Implementação de referência: `src/behavior/redirect/types.d.ts`
-(`KUBARedirectHrefAttribute`).
+(`AcmeRedirectHrefAttribute`).
 
 ## Padrão: Arc string (o `on` do Echo)
 
@@ -55,15 +55,15 @@ conseguem validar gramática arbitrária (conjuntos de caracteres, filtros
 repetidos).
 
 ```ts
-type KUBA<PascalName>OnAttributeSink = 'method' | 'attribute' | 'setter'
+type Acme<PascalName>OnAttributeSink = 'method' | 'attribute' | 'setter'
 
-type KUBA<PascalName>OnAttribute =
-  `${string}/${string}:${KUBA<PascalName>OnAttributeSink}/${string}${'' | `|${string}`}`
+type Acme<PascalName>OnAttribute =
+  `${string}/${string}:${Acme<PascalName>OnAttributeSink}/${string}${'' | `|${string}`}`
 ```
 
 Implementações de referência: `src/behavior/redirect/types.d.ts`
-(`KUBARedirectOnAttribute`), `src/behavior/on/types.d.ts`
-(`KUBAOnValueAttribute`, aplicado ao próprio atributo `value` de `<kb-on>`
+(`AcmeRedirectOnAttribute`), `src/behavior/on/types.d.ts`
+(`AcmeOnValueAttribute`, aplicado ao próprio atributo `value` de `<kb-on>`
 em vez de `on`, já que esse elemento expressa o arco como seu valor
 inteiro). Não importe nenhum dos dois em um terceiro componente — copie o
 padrão com o nome próprio daquele componente.
@@ -79,14 +79,14 @@ volta para `string` e anularia o propósito da checagem de literais) no
 membro da classe, não no alias de tipo em si:
 
 ```ts
-export default class KUBARedirectElement extends HTMLElement {
-  href: KUBARedirectHrefAttribute | (string & {})
+export default class AcmeRedirectElement extends HTMLElement {
+  href: AcmeRedirectHrefAttribute | (string & {})
 }
 ```
 
 Documente essa contrapartida no JSDoc do alias de tipo (conforme a
 `jsdoc-standard`) — veja o parágrafo já existente acima de
-`KUBARedirectHrefAttribute` em `src/behavior/redirect/types.d.ts`
+`AcmeRedirectHrefAttribute` em `src/behavior/redirect/types.d.ts`
 para o texto a reaproveitar.
 
 ## Padrão: enum fechado codificado como string
@@ -96,14 +96,14 @@ adicional (sem necessidade de template literal) — ex.: um atributo `color`,
 `variant` ou `type`.
 
 **Se o setter usa `enumerating(ENUM)`** (skill `enum`), o alias nomeado é
-**obrigatório**, mesmo para um membro só: `KUBA<PascalName><PascalAttribute>Attribute`,
+**obrigatório**, mesmo para um membro só: `Acme<PascalName><PascalAttribute>Attribute`,
 conforme a taxonomia (Regra 3). Não é opcional por ter um único consumidor —
-`KUBAButtonColorAttribute` existe e é usado por `color` sozinho. O nome é o que
+`AcmeButtonColorAttribute` existe e é usado por `color` sozinho. O nome é o que
 liga o tipo ao enum em runtime (`COLORS` em `color.js`) para quem lê o contrato;
 uma união anônima esconde essa origem.
 
 ```ts
-type KUBAButtonColorAttribute =
+type AcmeButtonColorAttribute =
   | 'master'
   | 'primary'
   | 'complete'
@@ -115,7 +115,7 @@ type KUBAButtonColorAttribute =
 ```
 
 *(Débito conhecido: `button.type` também usa `enumerating(TYPES)` mas ficou como união
-inline `'submit' | 'reset' | 'button'`, sem `KUBAButtonTypeAttribute` — divergência
+inline `'submit' | 'reset' | 'button'`, sem `AcmeButtonTypeAttribute` — divergência
 pré-existente, não corrigida por esta revisão. Um `types.d.ts` novo segue a regra acima,
 não esse caso.)*
 
@@ -125,7 +125,7 @@ para nomear o tipo. Se isso acontecer, vale perguntar primeiro se o setter
 deveria estar validando com `enumerating` também (skill `enum`).
 
 Implementação de referência: `src/component/button/types.d.ts`
-(`KUBAButtonColorAttribute`, `KUBAButtonVariantAttribute`) e
-`src/component/icon/types.d.ts` (`KUBAIconColorAttribute`,
-`KUBAIconSizeAttribute`) — duplicado do `button` por decisão de pacote
+(`AcmeButtonColorAttribute`, `AcmeButtonVariantAttribute`) e
+`src/component/icon/types.d.ts` (`AcmeIconColorAttribute`,
+`AcmeIconSizeAttribute`) — duplicado do `button` por decisão de pacote
 (Regra 1), não importado.

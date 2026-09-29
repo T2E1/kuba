@@ -36,8 +36,8 @@ class ServiceRegistry {
 
 ## Relacionado com
 
-- [regra 070 - Proibição de Estado Mutável Compartilhado](../../../rules/070_proibicao-estado-mutavel-compartilhado.md): reforça — o risco central do Registry mal usado
-- [regra 014 - Inversão de Dependência](../../../rules/014_principio-inversao-dependencia.md): complementa — injeção de dependência é preferível na maioria dos casos
+- [regra 070 - Proibição de Estado Mutável Compartilhado](../../../rules/008_estado-mutavel-compartilhado.md): reforça — o risco central do Registry mal usado
+- [regra 014 - Inversão de Dependência](../../solid/references/dip.md): complementa — injeção de dependência é preferível na maioria dos casos
 
 ---
 

@@ -98,8 +98,8 @@ Esta seção documenta os riscos técnicos identificados: o que pode dar errado,
 
 - [10_quality_requirements.md](10_quality_requirements.md): complementa — falhas nos cenários de qualidade geram riscos
 - [09_architecture_decisions.md](09_architecture_decisions.md): complementa — ADRs de mitigação referenciam riscos aqui documentados
-- [rule 027 Erros de Domínio](../../../rules/027_qualidade-tratamento-erros-dominio.md): complementa — tratamento correto de erros mitiga riscos de runtime
-- [rule 032 Cobertura de Testes](../../../rules/032_cobertura-teste-minima-qualidade.md): complementa — cobertura insuficiente é risco de qualidade
+- [rule 027 Erros de Domínio](../../clean-code/references/error-handling.md): complementa — tratamento correto de erros mitiga riscos de runtime
+- [rule 032 Cobertura de Testes](../../clean-code/references/testing.md): complementa — cobertura insuficiente é risco de qualidade
 
 ---
 

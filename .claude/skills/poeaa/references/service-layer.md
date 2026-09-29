@@ -40,8 +40,8 @@ class SubscriptionService {
 
 - [domain-model.md](domain-model.md): depende de — Service Layer orquestra o domínio, não substitui suas regras
 - [repository.md](repository.md): complementa — Service Layer consome repositórios para orquestrar persistência
-- [regra 010 - Responsabilidade Única](../../../rules/010_principio-responsabilidade-unica.md): reforça — coordena, não contém regra de negócio
-- [regra 061 - Proibição de Middle Man](../../../rules/061_proibicao-middle-man.md): reforça — o risco de virar repasse puro ao domínio
+- [regra 010 - Responsabilidade Única](../../solid/references/srp.md): reforça — coordena, não contém regra de negócio
+- [regra 061 - Proibição de Middle Man](../../../rules/035_middle-man.md): reforça — o risco de virar repasse puro ao domínio
 
 ---
 

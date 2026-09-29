@@ -2,7 +2,7 @@
 name: lld
 model: opus
 effort: high
-description: Framework de 5 passos para especificar um custom element do kuba antes de escrever código — requisitos, contrato público (attributes, properties, events, slots, parts), composição em mixins, gestão de estado (controlado vs não controlado, ElementInternals) e edge cases (teclado, leitor de tela, limites). Adapta o framework LLD de entrevistas de front-end ao paradigma de Web Components puro deste repositório, sem React, sem props, sem TSX. Use antes de implementar um componente novo, ao receber um pedido vago de feature ("adiciona um carrossel"), ou ao decidir se um attribute é controlado. Não use para a forma do types.d.ts — use a skill types; não use para nomear tokens — use a skill token.
+description: Framework de 5 passos para especificar um custom element desta biblioteca antes de escrever código — requisitos, contrato público (attributes, properties, events, slots, parts), composição em mixins, gestão de estado (controlado vs não controlado, ElementInternals) e edge cases (teclado, leitor de tela, limites). Adapta o framework LLD de entrevistas de front-end ao paradigma de Web Components puro deste repositório, sem React, sem props, sem TSX. Use antes de implementar um componente novo, ao receber um pedido vago de feature ("adiciona um carrossel"), ou ao decidir se um attribute é controlado. Não use para a forma do types.d.ts — use a skill types; não use para nomear tokens — use a skill token.
 ---
 
 # LLD — Low-Level Design de Componentes
@@ -132,13 +132,13 @@ implementação, não comentário de code review depois dela.
 
 ## Rules relacionadas
 
-- [037 — Proibição de Argumentos Sinalizadores](../../rules/037_proibicao-argumentos-sinalizadores.md):
+- [037 — Proibição de Argumentos Sinalizadores](../clean-code/references/functions.md):
   o passo 2 barra attribute booleano de comportamento antes de ele nascer.
-- [064 — Proibição de Overengineering](../../rules/064_proibicao-overengineering.md):
+- [064 — Proibição de Overengineering](../../rules/013_overengineering.md):
   o passo 3 mantém a composição rasa em vez de fragmentar preventivamente.
-- [023 — Proibição de Funcionalidade Especulativa (YAGNI)](../../rules/023_proibicao-funcionalidade-especulativa.md):
+- [023 — Proibição de Funcionalidade Especulativa (YAGNI)](../clean-code/references/code-structure.md):
   o passo 1 corta variação hipotética antes de ela virar código morto.
-- [010 — Princípio da Responsabilidade Única](../../rules/010_principio-responsabilidade-unica.md):
+- [010 — Princípio da Responsabilidade Única](../solid/references/srp.md):
   o passo 3 usa o mesmo critério — um sub-elemento só nasce quando tem razão própria de mudar.
 
 ## Skills relacionadas

@@ -135,12 +135,12 @@ ISO/IEC 25010:2011 (SQuaRE).
 
 ## Rules relacionadas
 
-- [032 — Cobertura Mínima de Teste e Qualidade](../../rules/032_cobertura-teste-minima-qualidade.md): Testability tem piso mensurável de 85%.
-- [030 — Proibição de Funções Inseguras](../../rules/030_proibicao-funcoes-inseguras.md): o núcleo de Integrity.
-- [027 — Qualidade no Tratamento de Erros](../../rules/027_qualidade-tratamento-erros-dominio.md) e [028 — Exceção Assíncrona](../../rules/028_tratamento-excecao-assincrona.md): sustentam Reliability.
-- [014 — Inversão de Dependência](../../rules/014_principio-inversao-dependencia.md): é o que torna Testability e Flexibility possíveis.
-- [022 — Simplicidade e Clareza](../../rules/022_priorizacao-simplicidade-clareza.md) e [007 — Máximo de Linhas por Classe](../../rules/007_limite-maximo-linhas-classe.md): sustentam Maintainability.
-- [042 — Configurações via Ambiente](../../rules/042_configuracoes-via-ambiente.md): sustenta Adaptability e Portability.
+- [032 — Cobertura Mínima de Teste e Qualidade](../clean-code/references/testing.md): Testability tem piso mensurável de 85%.
+- [030 — Proibição de Funções Inseguras](../clean-code/references/security.md): o núcleo de Integrity.
+- [027 — Qualidade no Tratamento de Erros](../clean-code/references/error-handling.md) e [028 — Exceção Assíncrona](../clean-code/references/error-handling.md): sustentam Reliability.
+- [014 — Inversão de Dependência](../solid/references/dip.md): é o que torna Testability e Flexibility possíveis.
+- [022 — Simplicidade e Clareza](../clean-code/references/code-structure.md) e [007 — Máximo de Linhas por Classe](../calisthenics/references/rule-07-small-classes.md): sustentam Maintainability.
+- [042 — Configurações via Ambiente](../twelve-factor/references/03-config.md): sustenta Adaptability e Portability.
 
 ## Skills relacionadas
 

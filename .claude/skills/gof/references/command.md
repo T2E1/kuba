@@ -68,9 +68,9 @@ history.execute(new InsertCommand(editor, 'Hello'))
 
 - [memento.md](memento.md): complementa — Command registra operações para undo; Memento salva estado para rollback
 - [chain-of-responsibility.md](chain-of-responsibility.md): complementa — Chain define quem processa; Command encapsula o que é processado
-- [rule 010 - Princípio da Responsabilidade Única](../../../rules/010_principio-responsabilidade-unica.md): reforça — cada Command encapsula uma única operação reversível
-- [rule 036 - Restrição de Funções com Efeitos Colaterais](../../../rules/036_restricao-funcoes-efeitos-colaterais.md): reforça — execute() é Command explícito com efeito colateral intencional e documentado
-- [rule 064 - Proibição de Overengineering](../../../rules/064_proibicao-overengineering.md): reforça — não use sem necessidade real de undo ou histórico
+- [rule 010 - Princípio da Responsabilidade Única](../../solid/references/srp.md): reforça — cada Command encapsula uma única operação reversível
+- [rule 036 - Restrição de Funções com Efeitos Colaterais](../../clean-code/references/immutability.md): reforça — execute() é Command explícito com efeito colateral intencional e documentado
+- [rule 064 - Proibição de Overengineering](../../../rules/013_overengineering.md): reforça — não use sem necessidade real de undo ou histórico
 
 ---
 

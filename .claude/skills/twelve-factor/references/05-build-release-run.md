@@ -1,6 +1,6 @@
 # Fator 05 — Build, Release, Run
 
-**Regra deMGoncalves:** [044 - Separação de Build, Release, Run](../../../rules/044_separacao-build-release-run.md)
+**Regra deMGoncalves:** [044 - Separação de Build, Release, Run](05-build-release-run.md)
 **Questão:** Três estágios separados e imutáveis (Build → Release → Run)?
 
 ## O que é

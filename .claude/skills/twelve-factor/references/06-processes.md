@@ -1,6 +1,6 @@
 # Fator 06 — Processes
 
-**Regra deMGoncalves:** [045 - Processos Stateless](../../../rules/045_processos-stateless.md)
+**Regra deMGoncalves:** [045 - Processos Stateless](06-processes.md)
 **Questão:** Processos stateless + share-nothing (estado em backing service)?
 
 ## O que é

@@ -40,8 +40,8 @@
 
 | Container | Tipo | Tecnologia | Responsabilidade |
 |-----------|------|------------|-----------------|
-| **[Bundle]** | Módulo ESM publicado | [ex: `dist/kuba.js`, JavaScript puro] | [Define os custom elements no registro do navegador] |
-| **[Folha de tokens]** | CSS publicado | [ex: `dist/kuba.css`, custom properties] | [Fornece os tokens que os elementos consomem] |
+| **[Bundle]** | Módulo ESM publicado | [ex: `dist/lib.js`, JavaScript puro] | [Define os custom elements no registro do navegador] |
+| **[Folha de tokens]** | CSS publicado | [ex: `dist/lib.css`, custom properties] | [Fornece os tokens que os elementos consomem] |
 | **[Declarações de tipo]** | `.d.ts` publicados | [ex: `packages/**/types.d.ts`] | [Descreve o contrato público para o editor do consumidor] |
 | **[Site de documentação]** | Site estático | [ex: VitePress, Markdown compilado no build] | [Ensina o uso; roda os exemplos contra o pacote publicado] |
 

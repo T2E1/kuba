@@ -36,7 +36,7 @@ class LockManager {
 
 - [optimistic-offline-lock.md](optimistic-offline-lock.md): complementa — trade-off oposto
 - [coarse-grained-lock.md](coarse-grained-lock.md): complementa — trava um grupo de objetos relacionados com um único lock
-- [regra 070 - Proibição de Estado Mutável Compartilhado](../../../rules/070_proibicao-estado-mutavel-compartilhado.md): reforça — o lock é a coordenação explícita que falta ao estado compartilhado descontrolado
+- [regra 070 - Proibição de Estado Mutável Compartilhado](../../../rules/008_estado-mutavel-compartilhado.md): reforça — o lock é a coordenação explícita que falta ao estado compartilhado descontrolado
 
 ---
 

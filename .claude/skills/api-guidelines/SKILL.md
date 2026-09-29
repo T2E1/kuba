@@ -185,12 +185,12 @@ sintoma — declare primeiro.
 
 ## Rules relacionadas
 
-- [008 — Proibição de Getters e Setters](../../rules/008_proibicao-getters-setters.md): `C-GETTER` chega ao mesmo lugar pela previsibilidade, não pelo encapsulamento.
-- [037 — Proibição de Argumentos Sinalizadores](../../rules/037_proibicao-argumentos-sinalizadores.md): é `C-CUSTOM-TYPE` — o argumento carrega significado por tipo, nunca por boolean.
-- [003 — Encapsulamento de Primitivos de Domínio](../../rules/003_encapsulamento-primitivos.md): é `C-NEWTYPE`, com outro nome e a mesma justificativa.
-- [033 — Limite de Parâmetros por Função](../../rules/033_limite-parametros-funcao.md): `C-BUILDER` é a saída prescrita quando a construção passa do limite.
-- [027 — Qualidade no Tratamento de Erros](../../rules/027_qualidade-tratamento-erros-dominio.md): `C-VALIDATE` valida na fronteira e lança erro de domínio em vez de devolver nulo.
-- [035 — Proibição de Nomes Enganosos](../../rules/035_proibicao-nomes-enganosos.md): o prefixo de conversão que mente sobre custo é desinformação com aparência de convenção.
+- [008 — Proibição de Getters e Setters](../calisthenics/references/rule-08-no-getters-setters.md): `C-GETTER` chega ao mesmo lugar pela previsibilidade, não pelo encapsulamento.
+- [037 — Proibição de Argumentos Sinalizadores](../clean-code/references/functions.md): é `C-CUSTOM-TYPE` — o argumento carrega significado por tipo, nunca por boolean.
+- [003 — Encapsulamento de Primitivos de Domínio](../calisthenics/references/rule-03-wrap-primitives.md): é `C-NEWTYPE`, com outro nome e a mesma justificativa.
+- [033 — Limite de Parâmetros por Função](../clean-code/references/functions.md): `C-BUILDER` é a saída prescrita quando a construção passa do limite.
+- [027 — Qualidade no Tratamento de Erros](../clean-code/references/error-handling.md): `C-VALIDATE` valida na fronteira e lança erro de domínio em vez de devolver nulo.
+- [035 — Proibição de Nomes Enganosos](../clean-code/references/naming.md): o prefixo de conversão que mente sobre custo é desinformação com aparência de convenção.
 
 ## Skills relacionadas
 

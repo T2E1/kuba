@@ -32,7 +32,7 @@ async function loadSalesReport(db: Database): Promise<RecordSet> {
 ## Relacionado com
 
 - [transaction-script.md](transaction-script.md): complementa — combinação comum em relatórios simples sem Domain Model
-- [regra 064 - Proibição de Overengineering](../../../rules/064_proibicao-overengineering.md): reforça — evita modelar domínio rico para dado puramente de exibição
+- [regra 064 - Proibição de Overengineering](../../../rules/013_overengineering.md): reforça — evita modelar domínio rico para dado puramente de exibição
 
 ---
 

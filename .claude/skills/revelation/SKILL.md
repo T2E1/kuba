@@ -92,12 +92,12 @@ ajuda do lado dos consumidores.
 
 ## Rules relacionadas
 
-- [010 — Responsabilidade Única](../../rules/010_principio-responsabilidade-unica.md): o index expõe a interface, e é só isso que faz.
-- [017 — Princípio do Reuso Comum](../../rules/017_principio-reuso-comum.md): `export *` força o consumidor a depender do que não usa.
-- [015 — Equivalência de Lançamento e Reuso](../../rules/015_principio-equivalencia-lancamento-reuso.md): a superfície pública define a unidade de release.
-- [013 — Segregação de Interfaces](../../rules/013_principio-segregacao-interfaces.md): expor só o que o cliente usa.
-- [031 — Proibição de Imports Relativos](../../rules/031_restricao-imports-relativos.md): o alias aponta para a raiz do pacote, que é o index.
-- [022 — Simplicidade e Clareza](../../rules/022_priorizacao-simplicidade-clareza.md): index direto se lê em segundos.
+- [010 — Responsabilidade Única](../solid/references/srp.md): o index expõe a interface, e é só isso que faz.
+- [017 — Princípio do Reuso Comum](../package/references/crp.md): `export *` força o consumidor a depender do que não usa.
+- [015 — Equivalência de Lançamento e Reuso](../package/references/rep.md): a superfície pública define a unidade de release.
+- [013 — Segregação de Interfaces](../solid/references/isp.md): expor só o que o cliente usa.
+- [031 — Proibição de Imports Relativos](../clean-code/references/security.md): o alias aponta para a raiz do pacote, que é o index.
+- [022 — Simplicidade e Clareza](../clean-code/references/code-structure.md): index direto se lê em segundos.
 
 ## Skills relacionadas
 

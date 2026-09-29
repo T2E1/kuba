@@ -68,9 +68,9 @@ deste teste some para uma chamada só.
 
 ## Rules relacionadas
 
-- [032 — Cobertura Mínima e Qualidade](../../rules/032_cobertura-teste-minima-qualidade.md): a rule que exige AAA e proíbe lógica de controle e mais de duas asserções.
-- [028 — Tratamento de Exceção Assíncrona](../../rules/028_tratamento-excecao-assincrona.md): toda Promise do Act precisa de `await`; sem isso o Assert roda antes do efeito.
-- [022 — Simplicidade e Clareza](../../rules/022_priorizacao-simplicidade-clareza.md): um Act com uma ação só é a aplicação de KISS ao teste.
+- [032 — Cobertura Mínima e Qualidade](../clean-code/references/testing.md): a rule que exige AAA e proíbe lógica de controle e mais de duas asserções.
+- [028 — Tratamento de Exceção Assíncrona](../clean-code/references/error-handling.md): toda Promise do Act precisa de `await`; sem isso o Assert roda antes do efeito.
+- [022 — Simplicidade e Clareza](../clean-code/references/code-structure.md): um Act com uma ação só é a aplicação de KISS ao teste.
 
 ## Skills relacionadas
 

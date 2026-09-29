@@ -66,8 +66,8 @@ menu.add(new MenuItem('Hambúrguer', 25))
 - [decorator.md](decorator.md): complementa — Decorator adiciona responsabilidades a um único objeto; Composite agrega objetos em árvore
 - [iterator.md](iterator.md): complementa — Iterator frequentemente usado para percorrer estruturas Composite
 - [visitor.md](visitor.md): complementa — Visitor frequentemente aplicado sobre estruturas Composite para executar operações
-- [rule 004 - Coleções de Primeira Classe](../../../rules/004_colecoes-primeira-classe.md): complementa — MenuCategory encapsula coleção com comportamento de domínio
-- [rule 064 - Proibição de Overengineering](../../../rules/064_proibicao-overengineering.md): reforça — não use para estruturas não hierárquicas
+- [rule 004 - Coleções de Primeira Classe](../../calisthenics/references/rule-04-first-class-collections.md): complementa — MenuCategory encapsula coleção com comportamento de domínio
+- [rule 064 - Proibição de Overengineering](../../../rules/013_overengineering.md): reforça — não use para estruturas não hierárquicas
 
 ---
 

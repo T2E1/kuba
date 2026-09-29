@@ -59,9 +59,9 @@ const namedProfile = adminProfile.withName('admin')
 
 - [abstract-factory.md](abstract-factory.md): complementa — Prototype pode ser usado dentro do Abstract Factory para criar produtos por clonagem
 - [builder.md](builder.md): complementa — Prototype pode clonar o resultado final de um Builder
-- [rule 052 - Proibição de Mutação Acidental](../../../rules/052_proibicao-mutacao-acidental.md): reforça — cópias superficiais em objetos com referências aninhadas causam mutação acidental
-- [rule 029 - Imutabilidade de Objetos](../../../rules/029_imutabilidade-objetos-freeze.md): reforça — clonar e congelar garante a imutabilidade do protótipo
-- [rule 064 - Proibição de Overengineering](../../../rules/064_proibicao-overengineering.md): reforça — não use quando a criação direta é suficiente
+- [rule 052 - Proibição de Mutação Acidental](../../../rules/037_mutacao-acidental.md): reforça — cópias superficiais em objetos com referências aninhadas causam mutação acidental
+- [rule 029 - Imutabilidade de Objetos](../../clean-code/references/immutability.md): reforça — clonar e congelar garante a imutabilidade do protótipo
+- [rule 064 - Proibição de Overengineering](../../../rules/013_overengineering.md): reforça — não use quando a criação direta é suficiente
 
 ---
 

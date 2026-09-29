@@ -19,7 +19,7 @@ Sem jargão, sem tecnologia. Alguém de negócio entende sem explicação.
 
 ```mermaid
 graph TD
-    Usuario[Usuário] --> Web["Aplicação Web<br/>[JavaScript, kuba]"]
+    Usuario[Usuário] --> Web["Aplicação Web<br/>[JavaScript, Web Components]"]
     Web -->|JSON/HTTPS| API["API<br/>[Bun]"]
     API -->|SQL| Banco[("Banco de Dados<br/>[PostgreSQL]")]
     API -->|HTTPS| Stripe[Stripe]

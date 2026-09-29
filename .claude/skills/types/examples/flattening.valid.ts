@@ -11,14 +11,14 @@
 
 // Regra 3 — nome escopado ao componente, nunca ao mixin. O sufixo `Sink`
 // nomeia o conjunto fechado dentro da forma.
-type KUBAHighlightOnAttributeSink = 'method' | 'attribute' | 'setter'
+type AcmeHighlightOnAttributeSink = 'method' | 'attribute' | 'setter'
 
 // Regra 4 — tipo nomeado justificado: a forma é um template literal, que o
 // primitivo `string` não expressa.
-type KUBAHighlightOnAttribute =
-  `${string}/${string}:${KUBAHighlightOnAttributeSink}/${string}${'' | `|${string}`}`
+type AcmeHighlightOnAttribute =
+  `${string}/${string}:${AcmeHighlightOnAttributeSink}/${string}${'' | `|${string}`}`
 
-export default class KUBAHighlightElement extends HTMLElement {
+export default class AcmeHighlightElement extends HTMLElement {
   // Próprio do Highlight. Regra 4: `string` sem restrição permanece
   // `string` — nenhum alias por simetria.
   color: string
@@ -27,7 +27,7 @@ export default class KUBAHighlightElement extends HTMLElement {
   value: string | undefined
 
   // Contribuído pelo mixin Echo, achatado manualmente.
-  on: KUBAHighlightOnAttribute | (string & {})
+  on: AcmeHighlightOnAttribute | (string & {})
 
   // Próprio do Highlight. `this` porque o método é comando encadeável
   // (skill method).
@@ -37,7 +37,7 @@ export default class KUBAHighlightElement extends HTMLElement {
 // Sem isto, document.querySelector('kb-highlight') devolve Element genérico.
 declare global {
   interface HTMLElementTagNameMap {
-    'kb-highlight': KUBAHighlightElement
+    'kb-highlight': AcmeHighlightElement
   }
 }
 

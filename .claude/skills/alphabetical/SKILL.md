@@ -86,10 +86,10 @@ Se não muda, não há significado, e a alfabética vale.
 
 ## Rules relacionadas
 
-- [022 — Simplicidade e Clareza](../../rules/022_priorizacao-simplicidade-clareza.md): ordem previsível elimina o custo de descobrir a ordem.
-- [016 — Fechamento Comum](../../rules/016_principio-fechamento-comum.md): o agrupamento coeso é a exceção legítima.
-- [006 — Proibição de Nomes Abreviados](../../rules/006_proibicao-nomes-abreviados.md): nome completo é o que torna a busca alfabética útil.
-- [024 — Constantes Mágicas](../../rules/024_proibicao-constantes-magicas.md): objetos de configuração ordenados tornam o valor faltante visível.
+- [022 — Simplicidade e Clareza](../clean-code/references/code-structure.md): ordem previsível elimina o custo de descobrir a ordem.
+- [016 — Fechamento Comum](../package/references/ccp.md): o agrupamento coeso é a exceção legítima.
+- [006 — Proibição de Nomes Abreviados](../clean-code/references/naming.md): nome completo é o que torna a busca alfabética útil.
+- [024 — Constantes Mágicas](../clean-code/references/code-structure.md): objetos de configuração ordenados tornam o valor faltante visível.
 
 ## Skills relacionadas
 

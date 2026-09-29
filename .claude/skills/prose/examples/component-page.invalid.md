@@ -10,7 +10,7 @@ comentário aponta o padrão do `references/catalogo.md`.
 ```markdown
 # Progress
 
-The `<kb-progress>` component stands as a **pivotal** element in the kuba design
+The `<acme-progress>` component stands as a **pivotal** element in the library's design
 system, serving as a testament to the library's commitment to accessible,
 intuitive, and powerful user interfaces. Nestled at the intersection of form and
 function, it marks a significant step in the evolution of progress indication.
@@ -29,7 +29,7 @@ interplay between visual feedback and user confidence.
 Experts in accessibility recommend progress indicators for long-running tasks.
 Industry reports suggest that users abandon interfaces that appear unresponsive.
 
-Despite its versatility, `<kb-progress>` faces challenges typical of progress
+Despite its versatility, `<acme-progress>` faces challenges typical of progress
 components — including determinate-only behavior. Despite these challenges, it
 continues to serve as a vital part of the toolkit.
 
@@ -37,7 +37,7 @@ While specific details about browser support are limited based on available
 information, it could potentially be argued that it might work in most modern
 environments.
 
-The future looks bright for progress indication in kuba. Exciting improvements
+The future looks bright for progress indication in this library. Exciting improvements
 lie ahead! Let me know if you'd like me to expand on any section.
 ```
 

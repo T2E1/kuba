@@ -2,7 +2,7 @@
 
 Incorreto em: `rule-teaches-syntax.invalid.md`
 
-**`rules/033_limite-parametros-funcao.md`** fica só com o limite verificável:
+**`../../clean-code/references/functions.md`** fica só com o limite verificável:
 
 ```markdown
 ## Objective Criteria

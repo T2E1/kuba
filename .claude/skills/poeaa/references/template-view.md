@@ -30,7 +30,7 @@
 
 - [transform-view.md](transform-view.md): complementa — trade-off oposto (transforma dado em vez de preencher marcação)
 - [two-step-view.md](two-step-view.md): complementa — Two Step View separa o template em dois estágios
-- [regra 060 - Proibição de Código Spaghetti](../../../rules/060_proibicao-codigo-spaghetti.md): reforça — lógica de controle não deve se acumular dentro do template
+- [regra 060 - Proibição de Código Spaghetti](../../../rules/003_codigo-spaghetti.md): reforça — lógica de controle não deve se acumular dentro do template
 
 ---
 

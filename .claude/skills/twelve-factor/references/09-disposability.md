@@ -1,6 +1,6 @@
 # Fator 09 — Disposability
 
-**Regra deMGoncalves:** [048 - Descartabilidade de Processos](../../../rules/048_descartabilidade-processos.md)
+**Regra deMGoncalves:** [048 - Descartabilidade de Processos](09-disposability.md)
 **Questão:** Startup rápido (<10s) + shutdown graceful (SIGTERM tratado)?
 
 ## O que é

@@ -28,7 +28,7 @@
 
 - [single-table-inheritance.md](single-table-inheritance.md): complementa — trade-off oposto (menos nulos, mais joins)
 - [foreign-key-mapping.md](foreign-key-mapping.md): depende de — a ligação entre tabela mãe e filha é uma chave estrangeira compartilhada
-- [regra 069 - Proibição de Otimização Prematura](../../../rules/069_proibicao-otimizacao-prematura.md): complementa — só trocar por Single Table após medir o custo real do join
+- [regra 069 - Proibição de Otimização Prematura](../../../rules/012_otimizacao-prematura.md): complementa — só trocar por Single Table após medir o custo real do join
 
 ---
 

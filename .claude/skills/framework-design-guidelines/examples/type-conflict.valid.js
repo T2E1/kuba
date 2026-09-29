@@ -5,13 +5,13 @@
 // `EventDetail`, não `Detail`. `EventTargetRef`, não `Target`.
 // A qualificação carrega o contexto para o ponto de uso, onde o import já
 // perdeu a informação da pasta de origem.
-export const EventDetail = Symbol.for('kuba:event-detail')
-export const EventTargetRef = Symbol.for('kuba:event-target-ref')
+export const EventDetail = Symbol.for('acme:event-detail')
+export const EventTargetRef = Symbol.for('acme:event-target-ref')
 
 // ── packages/kernel/dom/interfaces.js ───────────────────────────────────────
 // `PaintCallback`, não `Callback`. `RenderTemplate`, não `Template`.
-export const PaintCallback = Symbol.for('kuba:paint-callback')
-export const RenderTemplate = Symbol.for('kuba:render-template')
+export const PaintCallback = Symbol.for('acme:paint-callback')
+export const RenderTemplate = Symbol.for('acme:render-template')
 
 // ── packages/navigation/router/matching/params.js ───────────────────────────
 // `RouteParams`, não `Params`. O prefixo diz de que rota se trata.

@@ -63,9 +63,9 @@ sorter.sort([3, 1, 2])
 - [state.md](state.md): complementa — Strategy troca algoritmo manualmente; State realiza transições de comportamento automaticamente baseado em estado
 - [template-method.md](template-method.md): substitui — Strategy usa composição; Template Method usa herança; prefira Strategy quando quiser evitar herança
 - [decorator.md](decorator.md): complementa — Decorator adiciona comportamento empilhando wrappers; Strategy substitui comportamento central
-- [rule 011 - Princípio Aberto/Fechado](../../../rules/011_principio-aberto-fechado.md): reforça — adicione nova estratégia sem modificar o Sorter
-- [rule 014 - Princípio da Inversão de Dependência](../../../rules/014_principio-inversao-dependencia.md): reforça — Sorter depende da interface SortStrategy, não das implementações concretas
-- [rule 064 - Proibição de Overengineering](../../../rules/064_proibicao-overengineering.md): reforça — não use quando há apenas um algoritmo
+- [rule 011 - Princípio Aberto/Fechado](../../solid/references/ocp.md): reforça — adicione nova estratégia sem modificar o Sorter
+- [rule 014 - Princípio da Inversão de Dependência](../../solid/references/dip.md): reforça — Sorter depende da interface SortStrategy, não das implementações concretas
+- [rule 064 - Proibição de Overengineering](../../../rules/013_overengineering.md): reforça — não use quando há apenas um algoritmo
 
 ---
 

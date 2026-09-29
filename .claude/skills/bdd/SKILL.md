@@ -100,10 +100,10 @@ ainda não foi nomeado.
 
 ## Rules relacionadas
 
-- [032 — Cobertura Mínima de Teste](../../rules/032_cobertura-teste-minima-qualidade.md): `Dado/Quando/Então` é o padrão AAA em linguagem de negócio.
-- [006 — Proibição de Nomes Abreviados](../../rules/006_proibicao-nomes-abreviados.md): o cenário usa os termos do domínio por extenso.
-- [026 — Qualidade de Comentários: o Porquê](../../rules/026_qualidade-comentarios-porque.md): o `.feature` guarda a intenção de negócio que o teste sozinho não expressa.
-- [003 — Encapsulamento de Primitivos](../../rules/003_encapsulamento-primitivos.md): os conceitos nomeados no Gherkin costumam ser os Value Objects que faltam no código.
+- [032 — Cobertura Mínima de Teste](../clean-code/references/testing.md): `Dado/Quando/Então` é o padrão AAA em linguagem de negócio.
+- [006 — Proibição de Nomes Abreviados](../clean-code/references/naming.md): o cenário usa os termos do domínio por extenso.
+- [026 — Qualidade de Comentários: o Porquê](../clean-code/references/code-structure.md): o `.feature` guarda a intenção de negócio que o teste sozinho não expressa.
+- [003 — Encapsulamento de Primitivos](../calisthenics/references/rule-03-wrap-primitives.md): os conceitos nomeados no Gherkin costumam ser os Value Objects que faltam no código.
 
 ## Skills relacionadas
 

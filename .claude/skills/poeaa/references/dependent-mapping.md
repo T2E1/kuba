@@ -36,7 +36,7 @@ class OrderMapper {
 
 - [foreign-key-mapping.md](foreign-key-mapping.md): complementa — o dependente carrega a chave estrangeira para a mãe
 - [embedded-value.md](embedded-value.md): complementa — alternativa quando o dependente não precisa de tabela própria
-- [regra 010 - Responsabilidade Única](../../../rules/010_principio-responsabilidade-unica.md): reforça — só a mãe decide o ciclo de vida do dependente
+- [regra 010 - Responsabilidade Única](../../solid/references/srp.md): reforça — só a mãe decide o ciclo de vida do dependente
 
 ---
 

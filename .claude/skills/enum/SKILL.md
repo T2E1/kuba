@@ -104,7 +104,7 @@ e pelo próprio enum no default do getter.
 **O contrato público muda junto.** Todo atributo validado por `enumerating(ENUM)` precisa
 de um tipo de união fechada correspondente em `types.d.ts` — nunca `string` solto. Não é
 opcional nem posterior: é a mesma mudança, a skill `types` (Regra 4) decide a forma exata.
-Ver `KUBAButtonColorAttribute` em `src/component/button/types.d.ts` como o par de
+Ver `AcmeButtonColorAttribute` em `src/component/button/types.d.ts` como o par de
 `COLORS` em `color.js` — um enum sem essa contrapartida é `enumerating` fechando a
 property e o `types.d.ts` deixando passar qualquer string em tempo de compilação.
 
@@ -146,13 +146,13 @@ polimorfismo (rule 011).
 
 ## Rules relacionadas
 
-- [024 — Proibição de Constantes Mágicas](../../rules/024_proibicao-constantes-magicas.md): a regra que ativa esta skill.
-- [029 — Imutabilidade de Objetos](../../rules/029_imutabilidade-objetos-freeze.md): `Object.freeze` obrigatório.
-- [021 — Proibição de Duplicação](../../rules/021_proibicao-duplicacao-logica.md): o valor tem uma fonte de verdade.
-- [016 — Fechamento Comum](../../rules/016_principio-fechamento-comum.md): o enum vive com o conceito que define.
-- [070 — Estado Mutável Compartilhado](../../rules/070_proibicao-estado-mutavel-compartilhado.md): enum não congelado é estado global mutável.
-- [006 — Nomes Abreviados](../../rules/006_proibicao-nomes-abreviados.md): valores revelam intenção.
-- [023 — Funcionalidade Especulativa](../../rules/023_proibicao-funcionalidade-especulativa.md): uma ocorrência não justifica enum.
+- [024 — Proibição de Constantes Mágicas](../clean-code/references/code-structure.md): a regra que ativa esta skill.
+- [029 — Imutabilidade de Objetos](../clean-code/references/immutability.md): `Object.freeze` obrigatório.
+- [021 — Proibição de Duplicação](../clean-code/references/code-structure.md): o valor tem uma fonte de verdade.
+- [016 — Fechamento Comum](../package/references/ccp.md): o enum vive com o conceito que define.
+- [070 — Estado Mutável Compartilhado](../../rules/008_estado-mutavel-compartilhado.md): enum não congelado é estado global mutável.
+- [006 — Nomes Abreviados](../clean-code/references/naming.md): valores revelam intenção.
+- [023 — Funcionalidade Especulativa](../clean-code/references/code-structure.md): uma ocorrência não justifica enum.
 
 ## Skills relacionadas
 

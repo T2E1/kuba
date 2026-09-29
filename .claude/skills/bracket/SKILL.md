@@ -101,11 +101,11 @@ for genuinamente impossível.
 
 ## Rules relacionadas
 
-- [008 — Proibição de Getters/Setters](../../rules/008_proibicao-getters-setters.md): Symbol dá encapsulamento real em vez de expor o interno por acessor.
-- [013 — Segregação de Interfaces](../../rules/013_principio-segregacao-interfaces.md): cada Symbol é um contrato granular, exportado só quando público.
-- [010 — Responsabilidade Única](../../rules/010_principio-responsabilidade-unica.md): um Symbol representa um contrato, não vários.
-- [006 — Proibição de Nomes Abreviados](../../rules/006_proibicao-nomes-abreviados.md): a descrição do Symbol é o que aparece ao depurar.
-- [035 — Proibição de Nomes Enganosos](../../rules/035_proibicao-nomes-enganosos.md): `_método` promete privacidade que não existe.
+- [008 — Proibição de Getters/Setters](../calisthenics/references/rule-08-no-getters-setters.md): Symbol dá encapsulamento real em vez de expor o interno por acessor.
+- [013 — Segregação de Interfaces](../solid/references/isp.md): cada Symbol é um contrato granular, exportado só quando público.
+- [010 — Responsabilidade Única](../solid/references/srp.md): um Symbol representa um contrato, não vários.
+- [006 — Proibição de Nomes Abreviados](../clean-code/references/naming.md): a descrição do Symbol é o que aparece ao depurar.
+- [035 — Proibição de Nomes Enganosos](../clean-code/references/naming.md): `_método` promete privacidade que não existe.
 
 ## Skills relacionadas
 

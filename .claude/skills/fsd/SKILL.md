@@ -34,7 +34,7 @@ destila. Ler `## Quando usar` antes de aplicar.
 
 **Não use quando:**
 
-- **O projeto é biblioteca, não aplicação.** É o caso do `kuba`. FSD recorta por
+- **O projeto é biblioteca, não aplicação.** É o caso deste repositório. FSD recorta por
   significado de negócio, e uma biblioteca de componentes não tem negócio para recortar —
   traduzida ao pé da letra, ela colapsa `packages/` inteiro em `shared`, que por definição
   não tem slices. Use `package` e `colocation`.
@@ -162,11 +162,11 @@ por razão-para-mudar — `package` e `colocation`.
 
 ## Rules relacionadas
 
-- [018 — Princípio de Dependências Acíclicas](../../rules/018_principio-dependencias-aciclicas.md): a regra de import descendente produz o DAG por construção, em vez de por disciplina.
-- [019 — Princípio de Dependências Estáveis](../../rules/019_principio-dependencias-estaveis.md): as layers de baixo são as estáveis, e a direção do import é a da estabilidade.
-- [016 — Princípio do Fechamento Comum](../../rules/016_principio-fechamento-comum.md): a slice é CCP aplicado ao domínio — o que muda pela mesma razão de negócio fica junto.
-- [064 — Proibição de Overengineering](../../rules/064_proibicao-overengineering.md): segment criado sem complexidade que o peça é o modo mais comum de errar com FSD.
-- [031 — Proibição de Imports Relativos](../../rules/031_restricao-imports-relativos.md): o import entre slices é por alias, e o relativo fica restrito ao interior da slice.
+- [018 — Princípio de Dependências Acíclicas](../package/references/adp.md): a regra de import descendente produz o DAG por construção, em vez de por disciplina.
+- [019 — Princípio de Dependências Estáveis](../package/references/sdp.md): as layers de baixo são as estáveis, e a direção do import é a da estabilidade.
+- [016 — Princípio do Fechamento Comum](../package/references/ccp.md): a slice é CCP aplicado ao domínio — o que muda pela mesma razão de negócio fica junto.
+- [064 — Proibição de Overengineering](../../rules/013_overengineering.md): segment criado sem complexidade que o peça é o modo mais comum de errar com FSD.
+- [031 — Proibição de Imports Relativos](../clean-code/references/security.md): o import entre slices é por alias, e o relativo fica restrito ao interior da slice.
 
 ## Skills relacionadas
 

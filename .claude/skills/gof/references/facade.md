@@ -51,9 +51,9 @@ new VideoPlayerFacade().play('video.mp4')
 
 - [adapter.md](adapter.md): complementa — Adapter converte interface incompatível; Facade simplifica interface existente
 - [mediator.md](mediator.md): complementa — ambos simplificam dependências; Mediator coordena objetos que se conhecem mutuamente; Facade define interface simples para subsistema
-- [rule 025 - Proibição do Anti-Pattern The Blob](../../../rules/025_proibicao-anti-pattern-the-blob.md): reforça — Facade não deve conter lógica de negócio, apenas delegar
-- [rule 061 - Proibição de Middle Man](../../../rules/061_proibicao-middle-man.md): reforça — Facade deve simplificar, não ser wrapper vazio
-- [rule 014 - Princípio da Inversão de Dependência](../../../rules/014_principio-inversao-dependencia.md): complementa — clientes dependem da Facade, isolados das classes concretas do subsistema
+- [rule 025 - Proibição do Anti-Pattern The Blob](../../../rules/001_anti-pattern-the-blob.md): reforça — Facade não deve conter lógica de negócio, apenas delegar
+- [rule 061 - Proibição de Middle Man](../../../rules/035_middle-man.md): reforça — Facade deve simplificar, não ser wrapper vazio
+- [rule 014 - Princípio da Inversão de Dependência](../../solid/references/dip.md): complementa — clientes dependem da Facade, isolados das classes concretas do subsistema
 
 ---
 

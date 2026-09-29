@@ -37,8 +37,8 @@ class Money {
 ## Relacionado com
 
 - [value-object.md](value-object.md): depende de — Money é uma especialização de Value Object
-- [regra 003 - Encapsulamento de Primitivos](../../../rules/003_encapsulamento-primitivos.md): reforça — o exemplo canônico de valor de domínio que não pode ser um `number` cru
-- [regra 024 - Proibição de Constantes Mágicas](../../../rules/024_proibicao-constantes-magicas.md): complementa — evita que o código de moeda apareça como string mágica solta
+- [regra 003 - Encapsulamento de Primitivos](../../calisthenics/references/rule-03-wrap-primitives.md): reforça — o exemplo canônico de valor de domínio que não pode ser um `number` cru
+- [regra 024 - Proibição de Constantes Mágicas](../../clean-code/references/code-structure.md): complementa — evita que o código de moeda apareça como string mágica solta
 
 ---
 

@@ -134,7 +134,7 @@ um segment que cresceu até parecer outra coisa.
 
 ## Por que isto não se aplica a uma biblioteca
 
-Traduzido ao pé da letra para uma biblioteca de componentes como o `kuba`, o resultado é
+Traduzido ao pé da letra para uma biblioteca de componentes, o resultado é
 mecânico: nenhum pacote tem significado de produto, então tudo cai em `shared` — e
 `shared` não tem slices, só segments. FSD devolveria a lista plana de pacotes.
 

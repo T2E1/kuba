@@ -114,15 +114,15 @@ comparação, validação. Se não há nenhuma, o primitivo não era de domínio
 
 ## Rules relacionadas
 
-- [001 — Nível Único de Indentação](../../rules/001_nivel-unico-indentacao.md)
-- [002 — Proibição da Cláusula ELSE](../../rules/002_proibicao-clausula-else.md)
-- [003 — Encapsulamento de Primitivos](../../rules/003_encapsulamento-primitivos.md)
-- [004 — Coleções de Primeira Classe](../../rules/004_colecoes-primeira-classe.md)
-- [005 — Restrição de Encadeamento de Chamadas](../../rules/005_maximo-uma-chamada-por-linha.md)
-- [006 — Proibição de Nomes Abreviados](../../rules/006_proibicao-nomes-abreviados.md)
-- [007 — Limite Máximo de Linhas por Classe](../../rules/007_limite-maximo-linhas-classe.md)
-- [008 — Proibição de Getters/Setters](../../rules/008_proibicao-getters-setters.md)
-- [009 — Diga, Não Pergunte](../../rules/009_diga-nao-pergunte.md)
+- [001 — Nível Único de Indentação](references/rule-01-single-indentation.md)
+- [002 — Proibição da Cláusula ELSE](references/rule-02-no-else.md)
+- [003 — Encapsulamento de Primitivos](references/rule-03-wrap-primitives.md)
+- [004 — Coleções de Primeira Classe](references/rule-04-first-class-collections.md)
+- [005 — Restrição de Encadeamento de Chamadas](references/rule-05-one-dot-per-line.md)
+- [006 — Proibição de Nomes Abreviados](../clean-code/references/naming.md)
+- [007 — Limite Máximo de Linhas por Classe](references/rule-07-small-classes.md)
+- [008 — Proibição de Getters/Setters](references/rule-08-no-getters-setters.md)
+- [009 — Diga, Não Pergunte](references/rule-09-tell-dont-ask.md)
 
 ## Skills relacionadas
 

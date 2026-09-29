@@ -64,5 +64,5 @@ setTimeout(() => {
 
 ## Relacionado a
 
-- Rules: [022](../../../rules/022_priorizacao-simplicidade-clareza.md), [026](../../../rules/026_qualidade-comentarios-porque.md)
+- Rules: [022](../../clean-code/references/code-structure.md), [026](../../clean-code/references/code-structure.md)
 - Tags similares: XXX é alerta de perigo, FIXME é bug para corrigir, SECURITY é vulnerabilidade, HACK é temporário

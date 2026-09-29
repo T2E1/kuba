@@ -36,7 +36,7 @@ class Order extends Entity {
 ## Relacionado com
 
 - [identity-field.md](identity-field.md): complementa — o Layer Supertype de domínio tipicamente carrega o Identity Field
-- [regra 059 - Proibição de Herança Recusada](../../../rules/059_proibicao-heranca-refusao.md): reforça — o supertype não deve forçar métodos que a subclasse não usa
+- [regra 059 - Proibição de Herança Recusada](../../../rules/030_heranca-refusao.md): reforça — o supertype não deve forçar métodos que a subclasse não usa
 
 ---
 

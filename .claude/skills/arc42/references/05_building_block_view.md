@@ -95,7 +95,7 @@ Esta seção decompõe o sistema em blocos de construção (building blocks) em 
 - [c4model Level 3](../../c4-model/references/03_component.md): equivalente — componentes do C4 correspondem ao Nível 2 aqui
 - [06_runtime_view.md](06_runtime_view.md): complementa — §6 mostra como estes blocos interagem em runtime
 - [03_context_and_scope.md](03_context_and_scope.md): complementa — §3 mostra a fronteira externa; §5 mostra o interior
-- [rule 010 SRP](../../../rules/010_principio-responsabilidade-unica.md): reforça — cada bloco deve ter responsabilidade única
+- [rule 010 SRP](../../solid/references/srp.md): reforça — cada bloco deve ter responsabilidade única
 
 ---
 

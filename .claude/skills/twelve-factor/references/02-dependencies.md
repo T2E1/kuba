@@ -1,6 +1,6 @@
 # Fator 02 — Dependencies
 
-**Regra deMGoncalves:** [041 - Declaração Explícita de Dependências](../../../rules/041_declaracao-explicita-dependencias.md)
+**Regra deMGoncalves:** [041 - Declaração Explícita de Dependências](02-dependencies.md)
 **Questão:** 100% das dependências explícitas no manifesto (package.json)?
 
 ## O que é

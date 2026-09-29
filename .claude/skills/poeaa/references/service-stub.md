@@ -31,7 +31,7 @@ class StubPaymentGateway implements PaymentGateway {
 
 - [gateway.md](gateway.md): depende de — o Service Stub implementa a mesma interface do Gateway real
 - [plugin.md](plugin.md): complementa — o Plugin é o mecanismo que troca o Gateway real pelo stub em teste
-- [regra 032 - Cobertura Mínima de Testes](../../../rules/032_cobertura-teste-minima-qualidade.md): reforça — viabiliza testar o domínio sem depender de infraestrutura externa
+- [regra 032 - Cobertura Mínima de Testes](../../clean-code/references/testing.md): reforça — viabiliza testar o domínio sem depender de infraestrutura externa
 
 ---
 

@@ -60,8 +60,8 @@ room.register(alice)
 
 - [observer.md](observer.md): complementa — Observer define dependência um-para-muitos; Mediator centraliza comunicação muitos-para-muitos
 - [facade.md](facade.md): complementa — ambos simplificam relações; Facade simplifica interface para subsistema; Mediator coordena objetos que se conhecem mutuamente
-- [rule 025 - Proibição do Anti-Pattern The Blob](../../../rules/025_proibicao-anti-pattern-the-blob.md): reforça — Mediator não deve acumular lógica de negócio, apenas coordenar
-- [rule 070 - Proibição de Estado Mutável Compartilhado](../../../rules/070_proibicao-estado-mutavel-compartilhado.md): reforça — Mediator centraliza comunicação, não estado compartilhado
+- [rule 025 - Proibição do Anti-Pattern The Blob](../../../rules/001_anti-pattern-the-blob.md): reforça — Mediator não deve acumular lógica de negócio, apenas coordenar
+- [rule 070 - Proibição de Estado Mutável Compartilhado](../../../rules/008_estado-mutavel-compartilhado.md): reforça — Mediator centraliza comunicação, não estado compartilhado
 
 ---
 

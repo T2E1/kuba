@@ -30,7 +30,7 @@ class OrderLockManager {
 
 - [pessimistic-offline-lock.md](pessimistic-offline-lock.md): depende de — Coarse-Grained Lock é um lock pessimista aplicado a um agregado
 - [dependent-mapping.md](dependent-mapping.md): complementa — o mesmo agrupamento que justifica o Dependent Mapping justifica o lock único
-- [regra 016 - Princípio do Fechamento Comum](../../../rules/016_principio-fechamento-comum.md): reforça — objetos que mudam juntos devem ser travados juntos
+- [regra 016 - Princípio do Fechamento Comum](../../package/references/ccp.md): reforça — objetos que mudam juntos devem ser travados juntos
 
 ---
 

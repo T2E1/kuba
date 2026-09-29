@@ -56,8 +56,8 @@ não é lida, e uma revisão que lista tudo esconde o que importa.
 | Desenho de classe e interface | [solid](../skills/solid/SKILL.md) |
 | As nove regras táticas dentro do método | [calisthenics](../skills/calisthenics/SKILL.md) |
 | Nomear o problema estrutural encontrado | [anti-pattern](../skills/anti-pattern/SKILL.md) |
-| Julgar se um pattern de patterns.dev foi bem ou mal aplicado | [patterns](../skills/patterns/SKILL.md) |
 | Reconhecer Design Pattern mal aplicado — Strategy que só moveu o switch, Singleton no lugar de DI | [gof](../skills/gof/SKILL.md) |
+| Julgar se um padrão de carregamento ou entrega foi bem ou mal aplicado | [web-performance](../skills/web-performance/SKILL.md) |
 | Herança recusada num mixin (rule 059) | [mixin](../skills/mixin/SKILL.md) |
 | Disciplina de nome, função e comentário | [clean-code](../skills/clean-code/SKILL.md) |
 | Medir complexidade do que está sendo revisado | [complexity](../skills/complexity/SKILL.md), [cdd](../skills/cdd/SKILL.md) |
@@ -77,15 +77,15 @@ não é lida, e uma revisão que lista tudo esconde o que importa.
 
 O foco são as 31 sem detecção automática. As que mais aparecem em código deste repositório:
 
-**Estrutura e responsabilidade** — [007](../rules/007_limite-maximo-linhas-classe.md) 50 linhas por arquivo · [010](../rules/010_principio-responsabilidade-unica.md) 7 métodos públicos · [025](../rules/025_proibicao-anti-pattern-the-blob.md) The Blob · [054](../rules/054_proibicao-mudanca-divergente.md) mudança divergente · [058](../rules/058_proibicao-shotgun-surgery.md) shotgun surgery
+**Estrutura e responsabilidade** — [007](../skills/calisthenics/references/rule-07-small-classes.md) 50 linhas por arquivo · [010](../skills/solid/references/srp.md) 7 métodos públicos · [025](../rules/001_anti-pattern-the-blob.md) The Blob · [054](../rules/036_mudanca-divergente.md) mudança divergente · [058](../rules/038_shotgun-surgery.md) shotgun surgery
 
-**Encapsulamento** — [003](../rules/003_encapsulamento-primitivos.md) obsessão por primitivos · [004](../rules/004_colecoes-primeira-classe.md) coleções de primeira classe · [008](../rules/008_proibicao-getters-setters.md) getters/setters · [009](../rules/009_diga-nao-pergunte.md) Lei de Demeter · [005](../rules/005_maximo-uma-chamada-por-linha.md) encadeamento
+**Encapsulamento** — [003](../skills/calisthenics/references/rule-03-wrap-primitives.md) obsessão por primitivos · [004](../skills/calisthenics/references/rule-04-first-class-collections.md) coleções de primeira classe · [008](../skills/calisthenics/references/rule-08-no-getters-setters.md) getters/setters · [009](../skills/calisthenics/references/rule-09-tell-dont-ask.md) Lei de Demeter · [005](../skills/calisthenics/references/rule-05-one-dot-per-line.md) encadeamento
 
-**Acoplamento** — [013](../rules/013_principio-segregacao-interfaces.md) ISP · [014](../rules/014_principio-inversao-dependencia.md) DIP · [018](../rules/018_principio-dependencias-aciclicas.md) ciclos · [057](../rules/057_proibicao-feature-envy.md) feature envy · [061](../rules/061_proibicao-middle-man.md) middle man
+**Acoplamento** — [013](../skills/solid/references/isp.md) ISP · [014](../skills/solid/references/dip.md) DIP · [018](../skills/package/references/adp.md) ciclos · [057](../rules/029_feature-envy.md) feature envy · [061](../rules/035_middle-man.md) middle man
 
-**Assinatura** — [033](../rules/033_limite-parametros-funcao.md) 3 parâmetros · [037](../rules/037_proibicao-argumentos-sinalizadores.md) flag argument · [053](../rules/053_proibicao-agrupamentos-dados-repetidos.md) data clumps · [038](../rules/038_conformidade-principio-inversao-consulta.md) CQS
+**Assinatura** — [033](../skills/clean-code/references/functions.md) 3 parâmetros · [037](../skills/clean-code/references/functions.md) flag argument · [053](../rules/018_agrupamentos-dados-repetidos.md) data clumps · [038](../skills/clean-code/references/immutability.md) CQS
 
-**Excesso e falta** — [021](../rules/021_proibicao-duplicacao-logica.md) DRY · [064](../rules/064_proibicao-overengineering.md) overengineering · [023](../rules/023_proibicao-funcionalidade-especulativa.md) YAGNI · [056](../rules/056_proibicao-codigo-zombie-lava-flow.md) código morto · [026](../rules/026_qualidade-comentarios-porque.md) comentário redundante
+**Excesso e falta** — [021](../skills/clean-code/references/code-structure.md) DRY · [064](../rules/013_overengineering.md) overengineering · [023](../skills/clean-code/references/code-structure.md) YAGNI · [056](../rules/004_codigo-zombie-lava-flow.md) código morto · [026](../skills/clean-code/references/code-structure.md) comentário redundante
 
 ## Método
 

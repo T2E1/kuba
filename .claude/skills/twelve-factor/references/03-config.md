@@ -1,6 +1,6 @@
 # Fator 03 — Config
 
-**Regra deMGoncalves:** [042 - Configurações via Ambiente](../../../rules/042_configuracoes-via-ambiente.md)
+**Regra deMGoncalves:** [042 - Configurações via Ambiente](03-config.md)
 **Questão:** Configurações em variáveis de ambiente (não hardcoded)?
 
 ## O que é

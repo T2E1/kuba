@@ -108,8 +108,8 @@ packages/
 - [arc42 §5 — Building Block View](../../arc42/references/05_building_block_view.md): equivalente — Nível 2 de §5 corresponde aos componentes aqui
 - [c4model Level 2 — Container](02_container.md): depende — Level 3 decompõe um container específico de Level 2
 - [c4model Level 4 — Code](04_code.md): complementa — Level 4 mostra a implementação interna de cada componente aqui
-- [rule 010 SRP](../../../rules/010_principio-responsabilidade-unica.md): reforça — cada componente deve ter responsabilidade única
-- [rule 018 ADP](../../../rules/018_principio-dependencias-aciclicas.md): reforça — o grafo entre pacotes é acíclico
+- [rule 010 SRP](../../solid/references/srp.md): reforça — cada componente deve ter responsabilidade única
+- [rule 018 ADP](../../package/references/adp.md): reforça — o grafo entre pacotes é acíclico
 - [skill colocation](../../colocation/SKILL.md): complementa — define onde cada arquivo do pacote mora
 
 ---

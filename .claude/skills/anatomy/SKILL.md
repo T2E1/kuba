@@ -78,11 +78,11 @@ não problema de ordenação.
 
 ## Rules relacionadas
 
-- [022 — Simplicidade e Clareza](../../rules/022_priorizacao-simplicidade-clareza.md): estrutura previsível reduz o custo de leitura.
-- [010 — Responsabilidade Única](../../rules/010_principio-responsabilidade-unica.md): a organização torna visível quantas responsabilidades a classe acumula.
-- [007 — Máximo de Linhas por Classe](../../rules/007_limite-maximo-linhas-classe.md): 50 linhas por classe, 15 por método.
-- [008 — Proibição de Getters/Setters](../../rules/008_proibicao-getters-setters.md): o grupo 2 existe para os que se justificam, não para expor estado.
-- [039 — Regra do Escoteiro](../../rules/039_regra-escoteiro-refatoracao-continua.md): reordenar o arquivo tocado é melhoria de escopo aceitável.
+- [022 — Simplicidade e Clareza](../clean-code/references/code-structure.md): estrutura previsível reduz o custo de leitura.
+- [010 — Responsabilidade Única](../solid/references/srp.md): a organização torna visível quantas responsabilidades a classe acumula.
+- [007 — Máximo de Linhas por Classe](../calisthenics/references/rule-07-small-classes.md): 50 linhas por classe, 15 por método.
+- [008 — Proibição de Getters/Setters](../calisthenics/references/rule-08-no-getters-setters.md): o grupo 2 existe para os que se justificam, não para expor estado.
+- [039 — Regra do Escoteiro](../clean-code/references/boy-scout-rule.md): reordenar o arquivo tocado é melhoria de escopo aceitável.
 
 ## Skills relacionadas
 

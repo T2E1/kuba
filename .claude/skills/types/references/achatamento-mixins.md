@@ -18,7 +18,7 @@ diretamente na classe do componente, nomeado(s) conforme
 | `Width` | `@mixin` | `width: string` — reflete o atributo `width`, padrão `"auto"`. | `string` puro, a menos que o componente restrinja o formato ainda mais. |
 | `Value` | `@mixin` | `value: string \| undefined` — reflete o atributo `value`. | `string` puro (adicione `\| undefined` só se o componente realmente puder ficar sem valor — confira o getter na implementação). |
 | `Template` | `@mixin` | `template: string` — markup resolvido a partir de um `<template>` referenciado. | `string` puro, somente leitura se a implementação só expuser um getter. |
-| `Echo` | `@echo` | `on: <forma de arc string>` — o atributo que conecta um evento de outro elemento a este host (ver `packages/echo/types.d.ts` para a gramática completa do arco: `source/event:type/sink[|filter=value...]`). | Tipo template-literal local ao componente, ex.: `KUBA<PascalName>OnAttribute` — ver `references/formas-atributos.md` § "Arc string (o `on` do Echo)". |
+| `Echo` | `@echo` | `on: <forma de arc string>` — o atributo que conecta um evento de outro elemento a este host (ver `packages/echo/types.d.ts` para a gramática completa do arco: `source/event:type/sink[|filter=value...]`). | Tipo template-literal local ao componente, ex.: `Acme<PascalName>OnAttribute` — ver `references/formas-atributos.md` § "Arc string (o `on` do Echo)". |
 
 ## Como identificar quais mixins estão em jogo
 

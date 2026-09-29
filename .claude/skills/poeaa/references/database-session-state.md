@@ -33,7 +33,7 @@ class DatabaseSessionStore {
 ## Relacionado com
 
 - [server-session-state.md](server-session-state.md): complementa — trade-off oposto (durabilidade vs. latência)
-- [regra 045 - Processos Stateless](../../../rules/045_processos-stateless.md): complementa — o banco assume a durabilidade que o processo não precisa carregar
+- [regra 045 - Processos Stateless](../../twelve-factor/references/06-processes.md): complementa — o banco assume a durabilidade que o processo não precisa carregar
 
 ---
 

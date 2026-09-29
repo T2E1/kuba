@@ -1,6 +1,6 @@
 # Fator 11 — Logs
 
-**Regra deMGoncalves:** [050 - Logs como Fluxo de Eventos](../../../rules/050_logs-fluxo-eventos.md)
+**Regra deMGoncalves:** [050 - Logs como Fluxo de Eventos](11-logs.md)
 **Questão:** Logs → stdout (não arquivos locais)?
 
 ## O que é

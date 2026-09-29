@@ -223,19 +223,19 @@ em `mixin/hidden/hidden.ts`.
 
 ## Rules relacionadas
 
-- [034 — Nomes de Classes e Métodos Consistentes](../../rules/034_nomes-classes-metodos-consistentes.md): classe é substantivo, método é verbo, `PascalCase` e `camelCase`.
-- [035 — Proibição de Nomes Enganosos](../../rules/035_proibicao-nomes-enganosos.md): o sufixo do Symbol promete a natureza do contrato — e precisa cumprir.
-- [006 — Proibição de Nomes Abreviados](../../rules/006_proibicao-nomes-abreviados.md): nome por extenso; a descrição do Symbol é o que se lê ao depurar.
-- [024 — Proibição de Constantes Mágicas](../../rules/024_proibicao-constantes-magicas.md): nome de atributo e evento vira constante nomeada, como `on` em `echo/interfaces.js`.
-- [022 — Simplicidade e Clareza](../../rules/022_priorizacao-simplicidade-clareza.md): arquivo, função e export com o mesmo nome eliminam a indireção mental.
-- [013 — Segregação de Interfaces](../../rules/013_principio-segregacao-interfaces.md): um Symbol, um contrato.
-- [039 — Regra do Escoteiro](../../rules/039_regra-escoteiro-refatoracao-continua.md): nome fora do padrão no arquivo tocado é corrigido.
+- [034 — Nomes de Classes e Métodos Consistentes](../clean-code/references/naming.md): classe é substantivo, método é verbo, `PascalCase` e `camelCase`.
+- [035 — Proibição de Nomes Enganosos](../clean-code/references/naming.md): o sufixo do Symbol promete a natureza do contrato — e precisa cumprir.
+- [006 — Proibição de Nomes Abreviados](../clean-code/references/naming.md): nome por extenso; a descrição do Symbol é o que se lê ao depurar.
+- [024 — Proibição de Constantes Mágicas](../clean-code/references/code-structure.md): nome de atributo e evento vira constante nomeada, como `on` em `echo/interfaces.js`.
+- [022 — Simplicidade e Clareza](../clean-code/references/code-structure.md): arquivo, função e export com o mesmo nome eliminam a indireção mental.
+- [013 — Segregação de Interfaces](../solid/references/isp.md): um Symbol, um contrato.
+- [039 — Regra do Escoteiro](../clean-code/references/boy-scout-rule.md): nome fora do padrão no arquivo tocado é corrigido.
 
 ## Skills relacionadas
 
 - [bracket](../bracket/SKILL.md): depends on — decide quando usar Symbol; esta decide como nomeá-lo.
 - [anatomy](../anatomy/SKILL.md): complements — a ordem dos membros que estes nomes ocupam.
-- [types](../types/SKILL.md): depends on — a taxonomia `KUBA<PascalName>Element` deriva do nome da classe.
+- [types](../types/SKILL.md): depends on — a taxonomia `Acme<PascalName>Element` deriva do nome da classe.
 - [mixin](../mixin/SKILL.md): complements — a forma da função que estes nomes descrevem.
 - [enum](../enum/SKILL.md): reinforces — `UPPER_SNAKE_CASE` para as constantes de valor.
 - [token](../token/SKILL.md): complements — a taxonomia paralela, para nomes de design token.

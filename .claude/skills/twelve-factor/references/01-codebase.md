@@ -1,6 +1,6 @@
 # Fator 01 — Codebase
 
-**Regra deMGoncalves:** [040 - Base de Código Única](../../../rules/040_base-codigo-unica.md)
+**Regra deMGoncalves:** [040 - Base de Código Única](01-codebase.md)
 **Questão:** Uma aplicação = um repositório rastreado em controle de versão?
 
 ## O que é

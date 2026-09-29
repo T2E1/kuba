@@ -132,12 +132,12 @@ escopo de um componente único.
 
 ## Rules relacionadas
 
-- [009 — Diga, Não Pergunte](../../rules/009_diga-nao-pergunte.md): o evento notifica o que aconteceu; quem escuta decide o que fazer.
-- [018 — Dependências Acíclicas](../../rules/018_principio-dependencias-aciclicas.md): comunicação por evento evita o ciclo que a referência direta criaria.
-- [024 — Constantes Mágicas](../../rules/024_proibicao-constantes-magicas.md): nome de evento repetido vira constante.
-- [034 — Nomes Consistentes](../../rules/034_nomes-classes-metodos-consistentes.md): verbo no passado para fato consumado.
-- [036 — Efeitos Colaterais](../../rules/036_restricao-funcoes-efeitos-colaterais.md): modificadores são puros.
-- [048 — Descartabilidade](../../rules/048_descartabilidade-processos.md): todo listener registrado é removido.
+- [009 — Diga, Não Pergunte](../calisthenics/references/rule-09-tell-dont-ask.md): o evento notifica o que aconteceu; quem escuta decide o que fazer.
+- [018 — Dependências Acíclicas](../package/references/adp.md): comunicação por evento evita o ciclo que a referência direta criaria.
+- [024 — Constantes Mágicas](../clean-code/references/code-structure.md): nome de evento repetido vira constante.
+- [034 — Nomes Consistentes](../clean-code/references/naming.md): verbo no passado para fato consumado.
+- [036 — Efeitos Colaterais](../clean-code/references/immutability.md): modificadores são puros.
+- [048 — Descartabilidade](../twelve-factor/references/09-disposability.md): todo listener registrado é removido.
 
 ## Skills relacionadas
 

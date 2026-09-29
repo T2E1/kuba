@@ -30,7 +30,7 @@ function usersToCsv(users: User[]): string {
 ## Relacionado com
 
 - [template-view.md](template-view.md): complementa — trade-off oposto (marcação como base em vez de dado como base)
-- [regra 021 - Proibição de Duplicação de Lógica](../../../rules/021_proibicao-duplicacao-logica.md): reforça — cada transformação deve viver em uma única função reutilizável
+- [regra 021 - Proibição de Duplicação de Lógica](../../clean-code/references/code-structure.md): reforça — cada transformação deve viver em uma única função reutilizável
 
 ---
 

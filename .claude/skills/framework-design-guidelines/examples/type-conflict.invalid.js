@@ -5,17 +5,17 @@
 // ERRO 1 — nomes que não sobrevivem fora da própria pasta.
 // Dentro de event/ o contexto salva; no ponto de uso, `Detail` e `Target`
 // não dizem de que evento se trata.
-export const Detail = Symbol.for('kuba:detail')
-export const Target = Symbol.for('kuba:target')
+export const Detail = Symbol.for('acme:detail')
+export const Target = Symbol.for('acme:target')
 
 // ── packages/kernel/dom/interfaces.js ───────────────────────────────────────
 // ERRO 2 — colisão com nome da plataforma.
 // `Element` e `Node` são tipos globais do DOM. Sombreá-los é a colisão que a
 // diretriz cita nominalmente: o leitor não sabe se está diante do tipo do
 // navegador ou do da biblioteca.
-export const Element = Symbol.for('kuba:element')
-export const Node = Symbol.for('kuba:node')
-export const Template = Symbol.for('kuba:template')
+export const Element = Symbol.for('acme:element')
+export const Node = Symbol.for('acme:node')
+export const Template = Symbol.for('acme:template')
 
 // ── packages/navigation/router/matching/params.js ───────────────────────────
 // ERRO 3 — genérico e já tomado dentro do próprio repositório.

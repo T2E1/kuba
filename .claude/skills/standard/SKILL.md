@@ -136,11 +136,11 @@ cita a rule na seção `Rules relacionadas`. É o par mais comum do repositório
 
 ## Rules relacionadas
 
-- [021 — Proibição de Duplicação](../../rules/021_proibicao-duplicacao-logica.md): a mesma tabela em dois artefatos é a violação que a escolha de camada evita.
-- [010 — Responsabilidade Única](../../rules/010_principio-responsabilidade-unica.md): um artefato, uma razão para mudar — vale para rule, skill, agent e command.
-- [035 — Proibição de Nomes Enganosos](../../rules/035_proibicao-nomes-enganosos.md): o artefato precisa ser o que o nome e a camada prometem.
-- [026 — Comentário Explica o Porquê](../../rules/026_qualidade-comentarios-porque.md): o reference diz por que a forma é assim, não só qual é.
-- [064 — Proibição de Overengineering](../../rules/064_proibicao-overengineering.md): camada nova exige problema concreto; quatro cobrem o que existe.
+- [021 — Proibição de Duplicação](../clean-code/references/code-structure.md): a mesma tabela em dois artefatos é a violação que a escolha de camada evita.
+- [010 — Responsabilidade Única](../solid/references/srp.md): um artefato, uma razão para mudar — vale para rule, skill, agent e command.
+- [035 — Proibição de Nomes Enganosos](../clean-code/references/naming.md): o artefato precisa ser o que o nome e a camada prometem.
+- [026 — Comentário Explica o Porquê](../clean-code/references/code-structure.md): o reference diz por que a forma é assim, não só qual é.
+- [064 — Proibição de Overengineering](../../rules/013_overengineering.md): camada nova exige problema concreto; quatro cobrem o que existe.
 
 ## Skills relacionadas
 

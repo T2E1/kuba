@@ -67,8 +67,8 @@ class InMemoryUserRepository implements UserRepository {
 - [data-mapper.md](data-mapper.md): depende — Repository delega o mapeamento objeto-relacional ao Data Mapper
 - [unit-of-work.md](unit-of-work.md): complementa — Unit of Work coordena commits de múltiplos repositórios atomicamente
 - [identity-map.md](identity-map.md): complementa — Identity Map evita carregamentos duplicados dentro do repositório
-- [regra 014 - Princípio de Inversão de Dependência](../../../rules/014_principio-inversao-dependencia.md): reforça — isola completamente o domínio da infraestrutura de dados
-- [regra 032 - Cobertura Mínima de Testes](../../../rules/032_cobertura-teste-minima-qualidade.md): complementa — a interface do repositório permite substituição por fake em testes unitários
+- [regra 014 - Princípio de Inversão de Dependência](../../solid/references/dip.md): reforça — isola completamente o domínio da infraestrutura de dados
+- [regra 032 - Cobertura Mínima de Testes](../../clean-code/references/testing.md): complementa — a interface do repositório permite substituição por fake em testes unitários
 
 ---
 

@@ -1,6 +1,6 @@
 # Fator 12 — Admin Processes
 
-**Regra deMGoncalves:** [051 - Processos Administrativos](../../../rules/051_processos-administrativos.md)
+**Regra deMGoncalves:** [051 - Processos Administrativos](12-admin-processes.md)
 **Questão:** Tarefas administrativas executadas como processos one-off (não scripts separados)?
 
 ## O que é

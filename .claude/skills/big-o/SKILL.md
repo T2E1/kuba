@@ -126,11 +126,11 @@ Classificar com os tamanhos reais, não com a forma do código.
 
 ## Rules relacionadas
 
-- [069 — Proibição de Otimização Prematura](../../rules/069_proibicao-otimizacao-prematura.md): condiciona toda aplicação desta skill a haver medição.
-- [062 — Proibição de Código Inteligente](../../rules/062_proibicao-codigo-inteligente-clever-code.md): o limite de até onde vale trocar clareza por desempenho.
-- [001 — Nível Único de Indentação](../../rules/001_nivel-unico-indentacao.md): loop aninhado viola a regra antes mesmo de virar problema de performance.
-- [010 — Responsabilidade Única](../../rules/010_principio-responsabilidade-unica.md): loops aninhados costumam ser duas responsabilidades no mesmo método.
-- [039 — Regra do Escoteiro](../../rules/039_regra-escoteiro-refatoracao-continua.md): melhorar o algoritmo do trecho tocado faz parte da refatoração contínua.
+- [069 — Proibição de Otimização Prematura](../../rules/012_otimizacao-prematura.md): condiciona toda aplicação desta skill a haver medição.
+- [062 — Proibição de Código Inteligente](../../rules/025_codigo-inteligente-clever-code.md): o limite de até onde vale trocar clareza por desempenho.
+- [001 — Nível Único de Indentação](../calisthenics/references/rule-01-single-indentation.md): loop aninhado viola a regra antes mesmo de virar problema de performance.
+- [010 — Responsabilidade Única](../solid/references/srp.md): loops aninhados costumam ser duas responsabilidades no mesmo método.
+- [039 — Regra do Escoteiro](../clean-code/references/boy-scout-rule.md): melhorar o algoritmo do trecho tocado faz parte da refatoração contínua.
 
 ## Skills relacionadas
 

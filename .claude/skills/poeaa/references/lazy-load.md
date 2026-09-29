@@ -63,7 +63,7 @@ class LazyOrderCollection {
 ## Relacionado com
 
 - [identity-map.md](identity-map.md): complementa — Identity Map evita carregamentos duplicados quando Lazy Load é acionado múltiplas vezes
-- [regra 069 - Proibição de Otimização Prematura](../../../rules/069_proibicao-otimizacao-prematura.md): reforça — meça antes de introduzir Lazy Load; pode criar N+1 se usado sem critério
+- [regra 069 - Proibição de Otimização Prematura](../../../rules/012_otimizacao-prematura.md): reforça — meça antes de introduzir Lazy Load; pode criar N+1 se usado sem critério
 
 ---
 

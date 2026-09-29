@@ -44,7 +44,7 @@ class CheckPaymentMapper extends PaymentMapper {
 
 - [single-table-inheritance.md](single-table-inheritance.md): complementa — a estratégia de tabela que o mapper implementa
 - [data-mapper.md](data-mapper.md): depende de — é uma organização interna do próprio Data Mapper
-- [regra 021 - Proibição de Duplicação de Lógica](../../../rules/021_proibicao-duplicacao-logica.md): reforça — centraliza o carregamento comum entre subclasses
+- [regra 021 - Proibição de Duplicação de Lógica](../../clean-code/references/code-structure.md): reforça — centraliza o carregamento comum entre subclasses
 
 ---
 

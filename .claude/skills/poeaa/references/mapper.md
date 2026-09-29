@@ -28,7 +28,7 @@ interface Mapper<Domain, External> {
 
 - [data-mapper.md](data-mapper.md): depende de — Data Mapper é a especialização deste padrão para persistência relacional
 - [data-transfer-object.md](data-transfer-object.md): complementa — o Mapper frequentemente produz e consome DTOs
-- [regra 014 - Inversão de Dependência](../../../rules/014_principio-inversao-dependencia.md): reforça — o mapper é o ponto único de acoplamento entre os dois modelos
+- [regra 014 - Inversão de Dependência](../../solid/references/dip.md): reforça — o mapper é o ponto único de acoplamento entre os dois modelos
 
 ---
 

@@ -30,7 +30,7 @@ class User {
 ## Relacionado com
 
 - [data-mapper.md](data-mapper.md): complementa — Metadata Mapping é uma forma de gerar Data Mappers a partir de configuração
-- [regra 068 - Proibição de Martelo de Ouro](../../../rules/068_proibicao-martelo-de-ouro.md): reforça — não adotar um ORM completo só porque "sempre usamos"
+- [regra 068 - Proibição de Martelo de Ouro](../../../rules/010_martelo-de-ouro.md): reforça — não adotar um ORM completo só porque "sempre usamos"
 
 ---
 

@@ -24,7 +24,7 @@ cada commit e em cada CI, e toda verificação ausente custa um defeito publicad
 - NÃO decide versão nem escreve CHANGELOG — é o ofício do `releaser`.
 - NÃO edita `website/docs/` nem `website/.vitepress/navigation/` — conteúdo e a
   navegação que o descreve são do `writer`.
-- NÃO edita a constante `KUBA_VERSION` em `website/.vitepress/config.mts` — o pin de
+- NÃO edita a constante `LIB_VERSION` em `website/.vitepress/config.mts` — o pin de
   versão é do `releaser`, a cada release.
 - NÃO afrouxa verificação para fazer um commit passar. Regra que atrapalha se discute;
   não se desliga em silêncio.
@@ -66,7 +66,7 @@ Mais o relato do que a mudança passa a garantir, e o que ela custa por commit.
 | `.github/workflows/npm-publish.yml` | `bun run test` e `bun run release` antes de publicar |
 | `.github/workflows/pages-deploy.yml` | Build do VitePress em `website/` e publicação no GitHub Pages |
 | `package.json` → `files`, `exports`, `scripts` | O que vai para o npm e como se chama |
-| `website/.vitepress/config.mts` (exceto `KUBA_VERSION`) | Composition root do site: `base`, `srcDir`, `outDir`, `locales`, `markdown`, `vite` |
+| `website/.vitepress/config.mts` (exceto `LIB_VERSION`) | Composition root do site: `base`, `srcDir`, `outDir`, `locales`, `markdown`, `vite` |
 | `website/.vitepress/plugins/` · `website/.vitepress/theme/` | Mecanismo de build do site — nunca conteúdo ou navegação |
 | `website/package.json` | Dependências e scripts do site, mesmo critério do `package.json` da raiz |
 
@@ -77,7 +77,7 @@ Mais o relato do que a mudança passa a garantir, e o que ela custa por commit.
 | Configuração por ambiente, e o que não pode ser hardcoded | [twelve-factor](../skills/twelve-factor/SKILL.md) |
 | Dependência que entra e o que ela custa | [package](../skills/package/SKILL.md) |
 | Ferramenta aplicada onde não serve | [anti-pattern](../skills/anti-pattern/SKILL.md) |
-| Bundle splitting, tree shaking, preload/prefetch, compressão | [patterns](../skills/patterns/SKILL.md) |
+| Bundle splitting, tree shaking, preload/prefetch, compressão | [web-performance](../skills/web-performance/SKILL.md) |
 | Que fator de qualidade a verificação defende | [quality](../skills/quality/SKILL.md) |
 | Nome de script e de alias | [naming](../skills/naming/SKILL.md) |
 | O que `dist/` e `files` expõem | [revelation](../skills/revelation/SKILL.md) |
@@ -85,13 +85,13 @@ Mais o relato do que a mudança passa a garantir, e o que ela custa por commit.
 
 ## Rules
 
-- [041 — Declaração Explícita de Dependências](../rules/041_declaracao-explicita-dependencias.md): nada implícito do sistema operacional. O CI instala o Chromium explicitamente.
-- [044 — Separação Build, Release, Run](../rules/044_separacao-build-release-run.md): os três estágios separados; release imutável.
-- [042 — Configurações via Ambiente](../rules/042_configuracoes-via-ambiente.md): token de publicação vem do ambiente, nunca do repositório.
-- [049 — Paridade Dev/Prod](../rules/049_paridade-dev-prod.md): o CI roda o mesmo `bun run test` que você roda.
-- [031 — Imports Relativos](../rules/031_restricao-imports-relativos.md): é `vite.config.js` que torna a rule possível — sem o alias, ela não tem como ser cumprida.
-- [067 — Dependência Barco-Âncora](../rules/067_proibicao-dependencia-barco-ancora.md): ferramenta instalada e não usada sai.
-- [030 — Funções Inseguras](../rules/030_proibicao-funcoes-inseguras.md): nenhum segredo no que é versionado.
+- [041 — Declaração Explícita de Dependências](../skills/twelve-factor/references/02-dependencies.md): nada implícito do sistema operacional. O CI instala o Chromium explicitamente.
+- [044 — Separação Build, Release, Run](../skills/twelve-factor/references/05-build-release-run.md): os três estágios separados; release imutável.
+- [042 — Configurações via Ambiente](../skills/twelve-factor/references/03-config.md): token de publicação vem do ambiente, nunca do repositório.
+- [049 — Paridade Dev/Prod](../skills/twelve-factor/references/10-dev-prod-parity.md): o CI roda o mesmo `bun run test` que você roda.
+- [031 — Imports Relativos](../skills/clean-code/references/security.md): é `vite.config.js` que torna a rule possível — sem o alias, ela não tem como ser cumprida.
+- [067 — Dependência Barco-Âncora](../rules/007_dependencia-barco-ancora.md): ferramenta instalada e não usada sai.
+- [030 — Funções Inseguras](../skills/clean-code/references/security.md): nenhum segredo no que é versionado.
 
 ## Método
 

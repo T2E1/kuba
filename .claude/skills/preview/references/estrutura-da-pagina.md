@@ -29,7 +29,7 @@ Um bloco ` ```html preview ` logo depois do propósito, antes de qualquer `##`. 
 caso mais comum e as variantes principais lado a lado — o leitor vê antes de ler.
 
 O plugin markdown-it `website/.vitepress/plugins/preview.js` transforma esses blocos no
-componente `<Preview>`, que renderiza o HTML ao vivo contra o kuba carregado do CDN. Só
+componente `<Preview>`, que renderiza o HTML ao vivo contra o pacote carregado do CDN. Só
 use atributo que existe na versão pinada.
 
 O plugin ainda é um no-op (`website/.vitepress/plugins/preview.js:11`): a versão remark do
