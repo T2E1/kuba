@@ -1,3 +1,7 @@
+---
+description: "El elemento personalizado kb-redirect: navegación declarativa con history.pushState, conectada al clicked de un botón. Placeholders en href o rutas del router."
+---
+
 # Redirect
 
 Navega mediante `history.pushState` cuando se ejecuta su método `go()`, sin

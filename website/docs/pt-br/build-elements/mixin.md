@@ -1,3 +1,7 @@
+---
+description: "Referência dos mixins de atributo do kuba para custom elements: Hidden, Identity, Headless, Width, Height, Value e Template, e como compô-los em cadeia."
+---
+
 # mixin
 
 ```js

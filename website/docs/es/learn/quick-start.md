@@ -1,3 +1,7 @@
+---
+description: "Construye un formulario de registro con elementos personalizados de kuba: validación nativa, error por regla, datos parseados y un arco entre dos elementos."
+---
+
 # Inicio rápido
 
 Vas a construir un formulario de registro funcionando — campos etiquetados,

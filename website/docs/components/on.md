@@ -1,3 +1,7 @@
+---
+description: "The kb-on custom element: attaches extra Echo arcs, source/event:type/sink, to its parent element when the single on attribute is not enough."
+---
+
 # On
 
 Attaches one additional arc — `source/event:type/sink` — to its parent Echo

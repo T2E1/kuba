@@ -1,6 +1,7 @@
 ---
 layout: page
 sidebar: false
+description: "A web components library with no build step and zero dependencies. Declarative custom elements talk through event arcs written in plain HTML."
 ---
 
 <!--

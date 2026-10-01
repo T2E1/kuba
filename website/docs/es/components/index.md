@@ -1,3 +1,7 @@
+---
+description: "Todos los elementos personalizados de kuba en un mapa: interfaz, layout, tipografía, formularios y elementos headless de datos, con solo dos etiquetas."
+---
+
 # Componentes
 
 Cada elemento viene ya registrado — no hay nada que instalar por componente.

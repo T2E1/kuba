@@ -1,3 +1,7 @@
+---
+description: "O custom element kb-on: anexa arcos Echo extras, source/event:type/sink, ao elemento pai quando o atributo on, que aceita um só arco, não basta."
+---
+
 # On
 
 Anexa um arco adicional — `origem/evento:tipo/destino` — ao host Echo que é seu

@@ -1,3 +1,7 @@
+---
+description: "Referência do mixin Echo e do decorator dispatchEvent: crie custom elements que publicam eventos e assinam arcos num barramento compartilhado."
+---
+
 # echo
 
 ```js

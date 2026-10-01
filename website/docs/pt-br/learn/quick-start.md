@@ -1,3 +1,7 @@
+---
+description: "Monte um formulário de cadastro com custom elements do kuba: validação nativa, erro por regra, dados do submit parseados e dois elementos ligados por um arco."
+---
+
 # Início rápido
 
 Você vai construir um formulário de cadastro funcionando — campos rotulados,

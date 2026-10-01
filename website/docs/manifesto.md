@@ -2,6 +2,7 @@
 layout: page
 sidebar: false
 title: Manifesto
+description: "Why kuba exists: client-side dataflow inside HTML, built on native DOM events, with no JavaScript state runtime and zero runtime dependencies."
 ---
 
 <script setup>

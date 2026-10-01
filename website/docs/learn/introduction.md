@@ -1,3 +1,7 @@
+---
+description: "What kuba is and why it exists: a web components library that uses native DOM events as its dataflow layer, so the HTML stays the application."
+---
+
 # Introduction
 
 Web Components, the browser itself as the dataflow layer, and no promise to

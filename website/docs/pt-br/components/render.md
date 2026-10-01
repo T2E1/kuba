@@ -1,3 +1,7 @@
+---
+description: "O custom element kb-render: interpola um template com dados para renderizar listas e grades, e limpa o conteúdo, ligado a eventos por arcos do Echo."
+---
+
 # Render
 
 Renderiza conteúdo interpolando um template contra dados arbitrários, fornecidos

@@ -2,6 +2,7 @@
 layout: page
 sidebar: false
 title: Acerca de
+description: "Acerca de kuba y su creador, Cleber de M. Goncalves: una biblioteca de web components hecha a mano sobre la plataforma, y los valores que guían cada decisión."
 ---
 
 <script setup>

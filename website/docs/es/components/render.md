@@ -1,3 +1,7 @@
+---
+description: "Elemento personalizado kb-render: interpola una plantilla con datos para renderizar listas y cuadrículas, y las limpia. Se conecta con arcos de Echo."
+---
+
 # Render
 
 Renderiza contenido interpolando una plantilla contra datos arbitrarios,

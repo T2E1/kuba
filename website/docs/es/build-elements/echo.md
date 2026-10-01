@@ -1,3 +1,7 @@
+---
+description: "Referencia del mixin Echo y del decorator dispatchEvent: crea elementos personalizados que publican eventos y se suscriben a arcos en un bus compartido."
+---
+
 # echo
 
 ```js

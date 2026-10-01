@@ -1,3 +1,7 @@
+---
+description: "Qué es kuba y por qué existe: biblioteca web components que usa los eventos del DOM como capa de flujo de datos y mantiene el HTML como la aplicación."
+---
+
 # Introducción
 
 Web Components, el propio navegador como capa de flujo de datos, y ninguna

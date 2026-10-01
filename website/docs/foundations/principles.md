@@ -1,3 +1,7 @@
+---
+description: "The three principles behind kuba's web components, simple, accessible and flexible, and how design tokens keep every element visually consistent."
+---
+
 # Principles
 
 Principles exist to take the subjectivity out of decisions. Each one fits in a

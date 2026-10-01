@@ -1,3 +1,7 @@
+---
+description: "Instala kuba desde un CDN con dos etiquetas o desde npm como módulos ES. Sin paso de build: fija la versión alpha y carga la hoja de estilos."
+---
+
 # Instalación
 
 kuba se distribuye como módulos ES y no requiere paso de build. Elige la

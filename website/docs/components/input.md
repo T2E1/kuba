@@ -1,3 +1,7 @@
+---
+description: "The kb-input custom element: a single-line, form-associated text field with native validation, per-rule messages, a changed event and CSS tokens."
+---
+
 # Input
 
 A single-line text field that behaves like a native one from the form's point of

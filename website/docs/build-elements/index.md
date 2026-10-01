@@ -1,3 +1,7 @@
+---
+description: "The @t2e1/kuba package map: subpath imports for directives, DOM rendering, mixins, Echo, events, HTTP and router, plus the design token scales."
+---
+
 # Packages
 
 kuba is one package with subpath exports. Importing `@t2e1/kuba` registers every

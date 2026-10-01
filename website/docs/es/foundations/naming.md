@@ -1,3 +1,7 @@
+---
+description: "Convenciones de nomenclatura de los componentes web de kuba: prefijo kb- en las etiquetas, design tokens, Elements y Blocks, y eventos con nombre en pasado."
+---
+
 # Nomenclatura
 
 No usamos Atomic Design. Lo intentamos al principio, pero gastar energía

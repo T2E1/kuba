@@ -4,6 +4,8 @@ import labels from './navigation/labels.js'
 import nav from './navigation/nav.js'
 import sidebar from './navigation/sidebar.js'
 import previewPlugin from './plugins/preview.js'
+import { createSeo, localeByKey, SITE_URL } from './plugins/seo/index.js'
+import { trailTo } from './theme/components/trail.js'
 
 // kuba é servido do CDN, pinado à versão publicada — a doc é um consumidor
 // real do pacote. Bump a cada release.
@@ -14,10 +16,11 @@ const KUBA_VERSION = '0.2.0-alpha.7'
 
 const CDN = `https://cdn.jsdelivr.net/npm/@t2e1/kuba@${KUBA_VERSION}/dist`
 
-// O site é servido de https://t2e1.github.io/kuba/. O VitePress resolve a base
-// nos links e no logo, mas não no que é declarado em `head` — ali a base entra
-// à mão.
-const BASE = '/kuba/'
+// O site é servido de SITE_URL (`plugins/seo/site.js`), e a base é o caminho
+// dela: trocar de domínio é trocar aquela constante. O VitePress resolve a
+// base nos links e no logo, mas não no que é declarado em `head` — ali a base
+// entra à mão.
+const BASE = new URL(SITE_URL).pathname
 
 // Inglês na raiz; pt-br e es ganham prefixo de rota.
 const ROOT_LOCALE = 'en'
@@ -29,12 +32,34 @@ const navigationFor = (locale: string) => {
     nav: nav(prefix, label),
     sidebar: sidebar(prefix, label),
     outline: { label: label.outline },
+    // Rótulo do "última atualização" que o tema desenha no rodapé de cada
+    // página de doc — sem ele, o tema escreve "Last updated" em todo idioma.
+    lastUpdated: { text: label.lastUpdated },
   }
 }
 
+// `lang`, descrição e modelo de título vêm de `plugins/seo/locales.js`, a
+// mesma tabela que gera o hreflang — `<html lang>` e `hreflang` não divergem.
+const localeConfig = (locale: string, label: string) => {
+  const seoLocale = localeByKey(locale)
+  return {
+    label,
+    lang: seoLocale.lang,
+    description: seoLocale.description,
+    titleTemplate: seoLocale.titleTemplate,
+    themeConfig: navigationFor(locale),
+  }
+}
+
+// A trilha de migalhas do JSON-LD lê a mesma sidebar que `Breadcrumb.vue`.
+const trailFor = (relativePath: string, locale: string) =>
+  trailTo(navigationFor(locale).sidebar, relativePath) ?? []
+
+const seo = createSeo({ version: KUBA_VERSION, trailFor })
+
 export default defineConfig({
   title: 'kuba',
-  description: 'Lightweight Web Components primitives and custom elements',
+  description: localeByKey(ROOT_LOCALE).description,
   base: BASE,
 
   // `.vitepress/` mora em `website/`, então a raiz do projeto é `website/` e
@@ -43,16 +68,30 @@ export default defineConfig({
   srcDir: 'docs',
 
   // `build` em vez do padrão `.vitepress/dist`: `pages-deploy.yml` publica
-  // `website/build` e `docs-links.yml` varre `website/build/**/*.html`.
+  // `website/build`, e `scripts/check-seo.mjs` varre `website/build/**/*.html`.
   outDir: 'build',
 
   // Herdado do `onBrokenLinks: 'throw'` do Docusaurus: um link interno morto
   // falha o build, não a leitura de quem chega pela primeira vez.
   ignoreDeadLinks: false,
 
-  // URLs com `.html`, como as que o Docusaurus gerava: `docs-links.yml`
-  // resolve cada link contra um arquivo real em `website/build`.
+  // URLs com `.html`, como as que o Docusaurus gerava: o GitHub Pages serve o
+  // arquivo como está, e o canonical (`plugins/seo/url.js`) aponta para ele.
   cleanUrls: false,
+
+  // Data do último commit de cada página, em três lugares: o rodapé visível
+  // das páginas de doc ("Última atualização: …", rótulo traduzido por locale
+  // em `navigationFor`), o `dateModified` do JSON-LD e o `<lastmod>` do
+  // sitemap. Exige histórico completo no CI (`fetch-depth: 0` em
+  // `pages-deploy.yml`) — num clone raso, toda página mostraria a data do
+  // último commit do repositório.
+  lastUpdated: true,
+
+  // Canonical, hreflang, Open Graph, JSON-LD e sitemap — ver
+  // `plugins/seo/index.js`.
+  transformPageData: seo.transformPageData,
+  transformHead: seo.transformHead,
+  sitemap: seo.sitemap,
 
   head: [
     ['link', { rel: 'icon', href: `${BASE}img/logo.svg` }],
@@ -91,21 +130,9 @@ export default defineConfig({
   ],
 
   locales: {
-    root: {
-      label: 'English',
-      lang: 'en',
-      themeConfig: navigationFor('en'),
-    },
-    'pt-br': {
-      label: 'Português (Brasil)',
-      lang: 'pt-BR',
-      themeConfig: navigationFor('pt-br'),
-    },
-    es: {
-      label: 'Español',
-      lang: 'es',
-      themeConfig: navigationFor('es'),
-    },
+    root: localeConfig(ROOT_LOCALE, 'English'),
+    'pt-br': localeConfig('pt-br', 'Português (Brasil)'),
+    es: localeConfig('es', 'Español'),
   },
 
   themeConfig: {

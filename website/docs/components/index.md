@@ -1,3 +1,7 @@
+---
+description: "Every kuba custom element on one map: interface, layout, typography, forms, and headless data and behavior elements, all registered by two tags."
+---
+
 # Components
 
 Every element ships registered — there is nothing to install per component. Add

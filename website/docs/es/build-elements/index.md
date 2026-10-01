@@ -1,3 +1,7 @@
+---
+description: "Mapa del paquete @t2e1/kuba: imports por subruta para directives, renderizado del DOM, mixins, Echo, eventos, HTTP y router, y las escalas de design tokens."
+---
+
 # Paquetes
 
 kuba es un solo paquete con exports por subruta. Importar `@t2e1/kuba` registra

@@ -1,3 +1,7 @@
+---
+description: "The kb-fetch custom element: declarative HTTP requests in markup. It interpolates the URL, aborts stale requests and publishes succeeded or failed events."
+---
+
 # Fetch
 
 Wraps HTTP requests to the URL in its `url` attribute, interpolating the payload

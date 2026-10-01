@@ -1,3 +1,7 @@
+---
+description: "The kb-form custom element: renders fields from a template, validates natively and turns submit and reset into events that carry parsed data."
+---
+
 # Form
 
 A form wraps a native `<form>` and turns its two moments into custom events:

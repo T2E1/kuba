@@ -1,3 +1,7 @@
+---
+description: "Build a signup form with kuba custom elements: native validation, per-rule error messages, parsed submit data, and an arc that wires two elements."
+---
+
 # Quick start
 
 You'll build a working signup form — labelled fields, native validation,

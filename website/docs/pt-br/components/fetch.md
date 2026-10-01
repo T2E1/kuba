@@ -1,3 +1,7 @@
+---
+description: "O custom element kb-fetch: requisições HTTP declarativas no markup. Interpola a URL, aborta requisições obsoletas e publica os eventos succeeded e failed."
+---
+
 # Fetch
 
 Embrulha requisições HTTP para a URL do seu atributo `url`, interpolando o

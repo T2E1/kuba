@@ -1,3 +1,7 @@
+---
+description: "Reference for kuba's attribute mixins for custom elements: Hidden, Identity, Headless, Width, Height, Value and Template, and how to compose them."
+---
+
 # mixin
 
 ```js

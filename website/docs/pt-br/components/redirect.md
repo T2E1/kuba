@@ -1,3 +1,7 @@
+---
+description: "O custom element kb-redirect: navegação declarativa no app com history.pushState, ligada ao clicked de um botão. Placeholders em href ou rotas do router."
+---
+
 # Redirect
 
 Navega via `history.pushState` quando seu método `go()` roda, sem recarregar a

@@ -1,3 +1,7 @@
+---
+description: "Elemento personalizado kb-fetch: peticiones HTTP declarativas en el markup. Interpola la URL, aborta peticiones obsoletas y publica succeeded o failed."
+---
+
 # Fetch
 
 Envuelve peticiones HTTP a la URL de su atributo `url`, interpolando el payload

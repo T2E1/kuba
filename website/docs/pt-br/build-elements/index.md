@@ -1,3 +1,7 @@
+---
+description: "Mapa do pacote @t2e1/kuba: imports por subcaminho para directives, renderização do DOM, mixins, Echo, eventos, HTTP e router, e as escalas de design tokens."
+---
+
 # Pacotes
 
 kuba é um pacote só, com exports por subcaminho. Importar `@t2e1/kuba` registra

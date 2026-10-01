@@ -1,3 +1,7 @@
+---
+description: "El elemento personalizado kb-input: campo de texto de una línea asociado a formulario, con validación nativa, mensajes por regla, evento changed y tokens CSS."
+---
+
 # Input
 
 Un campo de texto de una línea que se comporta como uno nativo desde el punto de

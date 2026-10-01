@@ -21,7 +21,15 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+      # Full history: `lastUpdated: true` (website/.vitepress/config.mts) reads
+      # each page's last commit date — shown to readers in the doc footer
+      # ("Last updated" / "Última atualização" / "Última actualización"), and
+      # published as the JSON-LD `dateModified` and the sitemap `<lastmod>`.
+      # A shallow clone would stamp every page with the date of the latest
+      # commit, visibly wrong on every page.
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       # The docs are a real consumer of the published package: the site loads
       # kuba from the CDN at a pinned version (website/.vitepress/config.mts).
@@ -61,6 +69,20 @@ jobs:
       # check, that deploys as a site where every URL is a 404.
       - name: Verify the build produced a home page
         run: test -f website/build/index.html
+
+      # Description, canonical, reciprocal hreflang, Open Graph with an image
+      # that exists, and a JSON-LD graph whose every cited @id exists — plus a
+      # sitemap with exactly the built pages and the same alternates as each
+      # <head>. None of it is visible on the page, so a regression would
+      # deploy silently without this.
+      #
+      # robots.txt is only checked for a Sitemap line that matches the site
+      # address. At t2e1.github.io/kuba/ no crawler reads it (robots.txt only
+      # counts at the host root); until the site has its own domain, the
+      # sitemap is submitted by hand in Search Console and Bing Webmaster Tools.
+      - name: Verify SEO metadata
+        working-directory: website
+        run: npm run seo:check
 
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3

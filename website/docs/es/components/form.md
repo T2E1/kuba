@@ -1,3 +1,7 @@
+---
+description: "El elemento personalizado kb-form: renderiza campos desde un template, valida de forma nativa y convierte submit y reset en eventos con los datos ya parseados."
+---
+
 # Form
 
 Un form envuelve un `<form>` nativo y convierte sus dos momentos en eventos

@@ -1,3 +1,7 @@
+---
+description: "Install kuba from a CDN with two tags, or from npm as ES modules. Custom elements need no build step; pin the alpha version and load the stylesheet."
+---
+
 # Installation
 
 kuba ships as ES modules with no build step required. Pick whichever of the two

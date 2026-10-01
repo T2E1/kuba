@@ -1,6 +1,6 @@
 # kuba
 
-> Lightweight Web Components primitives and custom elements. No framework, no build step — the browser is the runtime and HTML is the API. Components are custom elements configured by attributes; they communicate through native DOM events, wired declaratively in markup with `on="source/event:type/sink"` arcs. Visual elements use the `kb-` prefix, headless ones use `k-`.
+> Lightweight Web Components primitives and custom elements. No framework, no build step — the browser is the runtime and HTML is the API. Components are custom elements configured by attributes; they communicate through native DOM events, wired declaratively in markup with `on="source/event:type/sink"` arcs. Every element, visual or headless, uses the `kb-` prefix.
 
 Every page below is the markdown this documentation site renders. Translations live under `/pt-br/` and `/es/`, each mirroring the same page tree as the English root.
 
@@ -46,5 +46,7 @@ Every page below is the markdown this documentation site renders. Translations l
 
 ## Optional
 
+- [Manifesto](https://t2e1.github.io/kuba/manifesto): why kuba exists, and what it believes about the DOM
+- [About](https://t2e1.github.io/kuba/about): who builds kuba, and the values behind it
 - [Contributing](https://t2e1.github.io/kuba/contributing): local setup, commit conventions, what a change ships with
 - [Repository](https://github.com/T2E1/kuba): source, issues and discussions

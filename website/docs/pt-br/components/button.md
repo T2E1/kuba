@@ -1,3 +1,7 @@
+---
+description: "O custom element kb-button: botão que dispara ações da página e emite clicked. Variantes, cores, larguras, estado disabled, acessibilidade e tokens CSS."
+---
+
 # Button
 
 Um botão dispara uma ação síncrona que pertence à página em que ele está —

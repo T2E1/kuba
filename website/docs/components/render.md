@@ -1,3 +1,7 @@
+---
+description: "The kb-render custom element: interpolates a template with data to render lists and grids, then clears them, wired to events through Echo arcs."
+---
+
 # Render
 
 Renders content by interpolating a template against arbitrary data, supplied via

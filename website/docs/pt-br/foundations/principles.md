@@ -1,3 +1,7 @@
+---
+description: "Os três princípios por trás dos componentes web do kuba, simples, acessível e flexível, e como os design tokens mantêm cada elemento consistente."
+---
+
 # Princípios
 
 Princípios existem para tirar a subjetividade das decisões. Cada um cabe em uma

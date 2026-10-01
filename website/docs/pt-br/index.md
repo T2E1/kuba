@@ -1,6 +1,7 @@
 ---
 layout: page
 sidebar: false
+description: "Biblioteca web components sem framework: custom elements declarativos que conversam por arcos de eventos no HTML, sem etapa de build e sem dependências."
 ---
 
 <!--

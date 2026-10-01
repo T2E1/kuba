@@ -1,3 +1,7 @@
+---
+description: "Reference for the Echo mixin and the dispatchEvent decorator: build custom elements that publish events and subscribe through arcs on a shared bus."
+---
+
 # echo
 
 ```js

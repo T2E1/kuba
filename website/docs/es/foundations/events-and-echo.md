@@ -1,3 +1,7 @@
+---
+description: "Cómo se comunican los elementos de kuba: CustomEvents en pasado y la gramática de arcos de Echo, source/event:type/sink, que conecta elementos en el HTML."
+---
+
 # Eventos y Echo
 
 Los elementos de kuba nunca se importan entre sí. Disparan eventos, y Echo los

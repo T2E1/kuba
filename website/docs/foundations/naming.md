@@ -1,3 +1,7 @@
+---
+description: "Naming conventions for kuba web components: the kb- tag prefix, design tokens, Elements and Blocks, and event names written in the past tense."
+---
+
 # Naming
 
 We don't use Atomic Design. We tried it early on, but spending energy sorting

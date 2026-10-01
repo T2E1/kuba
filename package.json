@@ -16,7 +16,15 @@
     "declarative",
     "dom",
     "router",
-    "reactive"
+    "reactive",
+    "webcomponents",
+    "html-first",
+    "declarative-ui",
+    "event-driven",
+    "custom-events",
+    "no-build",
+    "no-framework",
+    "zero-dependency"
   ],
   "files": [
     "dist",
@@ -52,7 +60,7 @@
   "bugs": {
     "url": "https://github.com/T2E1/kuba/issues"
   },
-  "homepage": "https://github.com/T2E1/kuba#readme",
+  "homepage": "https://t2e1.github.io/kuba/",
   "engines": {
     "node": ">=20.0.0"
   },

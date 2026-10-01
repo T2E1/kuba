@@ -1,3 +1,7 @@
+---
+description: "How kuba custom elements communicate: past-tense CustomEvents and the Echo arc grammar, source/event:type/sink, that wires elements together in HTML."
+---
+
 # Events and Echo
 
 kuba elements never import each other. They dispatch events, and Echo connects

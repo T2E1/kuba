@@ -1,3 +1,7 @@
+---
+description: "Elemento personalizado kb-card: superficie flex que agrupa contenido relacionado, con tokens --card-*. Sin acción propia: coloca un botón dentro para los clics."
+---
+
 # Card
 
 Una tarjeta agrupa contenido relacionado en un contenedor flex, estilizado

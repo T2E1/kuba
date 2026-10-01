@@ -1,3 +1,7 @@
+---
+description: "The kb-button web component: a button that triggers page actions and dispatches clicked. Variants, colors, widths, disabled state, accessibility, CSS tokens."
+---
+
 # Button
 
 A button triggers a synchronous action owned by the page it's on — form

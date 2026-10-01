@@ -1,3 +1,7 @@
+---
+description: "The kb-card custom element: a flex surface that groups related content, styled by --card-* tokens. It has no action of its own; slot a button for clicks."
+---
+
 # Card
 
 A card groups related content into one flex container, styled by `--card-*`

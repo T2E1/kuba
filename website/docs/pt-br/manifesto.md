@@ -2,6 +2,7 @@
 layout: page
 sidebar: false
 title: Manifesto
+description: "Por que o kuba existe: fluxo de dados no cliente dentro do HTML, com eventos nativos do DOM, sem runtime de estado em JavaScript e zero dependências em runtime."
 ---
 
 <script setup>

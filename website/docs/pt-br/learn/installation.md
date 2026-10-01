@@ -1,3 +1,7 @@
+---
+description: "Instale o kuba por CDN, com duas tags, ou pelo npm como módulos ES. Os custom elements dispensam build; fixe a versão alpha e carregue a folha de estilo."
+---
+
 # Instalação
 
 kuba é distribuído como módulos ES e não exige etapa de build. Escolha a

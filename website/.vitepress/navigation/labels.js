@@ -14,6 +14,7 @@ const labels = {
       docs: 'Docs',
       components: 'Components',
     },
+    lastUpdated: 'Last updated',
     outline: 'On this page',
     categories: {
       learn: 'Learn',
@@ -64,6 +65,7 @@ const labels = {
       docs: 'Docs',
       components: 'Componentes',
     },
+    lastUpdated: 'Última atualização',
     outline: 'Nesta página',
     categories: {
       learn: 'Aprender',
@@ -114,6 +116,7 @@ const labels = {
       docs: 'Docs',
       components: 'Componentes',
     },
+    lastUpdated: 'Última actualización',
     outline: 'En esta página',
     categories: {
       learn: 'Aprender',
