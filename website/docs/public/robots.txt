@@ -1,0 +1,46 @@
+# kuba documentation — every page is public, for search engines and for AI
+# crawlers alike. The named agents below are allowed explicitly so the intent
+# survives any future default that blocks them.
+#
+# NOT READ TODAY. Crawlers only read robots.txt at the root of a host. While
+# the site lives at https://t2e1.github.io/kuba/, this file is served at
+# /kuba/robots.txt and no crawler looks there — the host root belongs to
+# the t2e1.github.io repository. Until the site moves to its own domain,
+# submit the sitemap by hand in Google Search Console and Bing Webmaster
+# Tools. This file is kept so the move to a domain is one constant
+# (SITE_URL in .vitepress/plugins/seo/site.js) plus this Sitemap line.
+#
+# scripts/check-seo.mjs keeps the Sitemap line in step with SITE_URL; that
+# check proves the line is coherent, not that any crawler reads it.
+
+User-agent: *
+Allow: /
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-User
+Allow: /
+
+User-agent: Claude-SearchBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+Sitemap: https://t2e1.github.io/kuba/sitemap.xml
