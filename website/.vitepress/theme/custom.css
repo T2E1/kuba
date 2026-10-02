@@ -794,6 +794,24 @@ pre,
   background-size: var(--s1-pattern-dots-size);
 }
 
+/* Estágio de exemplo ao vivo — o `<Preview>` das páginas de doc e o painel
+   "Live" do Playground da home. Sempre claro, nos dois modos do site, com um
+   pontilhado bem leve: o que importa ali é o componente, e o fundo não pode
+   competir com ele.
+
+   `color-scheme: light` é o que mantém os `<kb-*>` legíveis: os tokens do
+   kuba são `light-dark()` (ver docs/build-ui/theming.md, "Dark mode") e
+   seguem o `color-scheme` herdado. Sob `html.dark` o VitePress declara
+   `dark`, e os campos sairiam escuros sobre o fundo claro; aqui o estágio
+   fixa o claro só para o que está dentro dele. */
+.s1-stage {
+  color-scheme: light;
+  color: #111111;
+  background-color: #ffffff;
+  background-image: radial-gradient(rgba(17, 17, 17, 0.14) 1px, transparent 1.4px);
+  background-size: 12px 12px;
+}
+
 .s1-win {
   border: 2px solid var(--s1-line);
   background: var(--s1-panel);

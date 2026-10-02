@@ -89,7 +89,7 @@ function reset() {
           <div class="pane-header">
             <span class="pane-label">Live</span>
           </div>
-          <div class="stage" v-html="rendered" />
+          <div class="stage s1-stage" v-html="rendered" />
         </div>
       </div>
     </div>
@@ -233,9 +233,7 @@ function reset() {
   gap: 16px;
   min-height: 320px;
   padding: 28px 24px;
-  background-image: var(--s1-pattern-dots);
-  background-size: var(--s1-pattern-dots-size);
-  background-color: #f7c6d1;
+  /* Fundo, pontilhado e esquema de cor: `.s1-stage` em custom.css. */
 }
 
 /* Main.dc.html:278-303 — os dois painéis não dividem o espaço igualmente:

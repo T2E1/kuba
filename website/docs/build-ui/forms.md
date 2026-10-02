@@ -177,5 +177,5 @@ A common pattern is a form that clears itself after a successful add:
 
 - **[Form](/components/form)**, **[Input](/components/input)**,
   **[Validity](/components/validity)** — the full contracts.
-- **[Cookbook › User CRUD](/build-ui/patterns/user-crud)** — a form wired to a dataset
-  and a list, with no listeners at all.
+- **[Cookbook › Address by CEP](/build-ui/patterns/address-by-cep)** — a form whose
+  fields are filled by a request, with no listeners at all.

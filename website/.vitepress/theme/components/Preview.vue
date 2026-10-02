@@ -1,5 +1,7 @@
 <script setup>
-defineProps({
+import { onMounted, ref } from 'vue'
+
+const props = defineProps({
   /**
    * Marcação HTML executada ao vivo no estágio — a mesma fonte que aparece
    * no bloco "Code" abaixo, quando o slot padrão não fornece uma versão já
@@ -10,6 +12,20 @@ defineProps({
     required: true,
   },
 })
+
+/**
+ * O exemplo é montado só no cliente. No SSR o estágio sai vazio: os `<kb-*>`
+ * só ganham comportamento depois que o `kuba.js` do CDN define os elementos,
+ * e um `v-html` hidratado compararia a marcação do servidor com um DOM que os
+ * próprios elementos já alteraram (slots atribuídos, shadow roots), gerando
+ * mismatch. Montar em `onMounted` também cobre a navegação SPA: cada página
+ * monta o seu estágio de novo, e o Echo religa os arcos no `connectedCallback`.
+ */
+const stage = ref(null)
+
+onMounted(() => {
+  stage.value.innerHTML = props.code
+})
 </script>
 
 <template>
@@ -17,19 +33,19 @@ defineProps({
     <div class="bar"><i /><b>preview</b></div>
     <!--
       O HTML de `code` vem só das páginas de website/docs, escritas pelo
-      próprio time — nunca de input de visitante. v-html é seguro aqui pela
+      próprio time — nunca de input de visitante. innerHTML é seguro aqui pela
       mesma razão que dangerouslySetInnerHTML era seguro na versão React
       (website/src/components/Preview/index.jsx): a fonte é confiável, não
       é dado externo.
     -->
-    <div class="stage" v-html="code" />
+    <div ref="stage" class="stage s1-stage" />
     <details class="source">
       <summary>Code</summary>
       <!--
         O plugin markdown-it (`.vitepress/plugins/preview.js`) injeta aqui o
-        HTML já destacado pelo Shiki no build, via o slot padrão. Enquanto o
-        plugin for um no-op, não há conteúdo de slot — o fallback abaixo
-        mostra a fonte como texto plano em vez de quebrar a página.
+        HTML já destacado pelo Shiki no build, via o slot padrão. Usado fora
+        do plugin, sem slot, o fallback abaixo mostra a fonte como texto
+        plano.
       -->
       <slot>
         <pre class="source-fallback"><code>{{ code }}</code></pre>
@@ -88,9 +104,7 @@ defineProps({
      por qualquer página de doc — um preview com mais linhas de conteúdo
      não pode ser cortado nos 150px de um exemplo de uma linha só. */
   min-height: 150px;
-  background-image: var(--s1-pattern-dots);
-  background-size: var(--s1-pattern-dots-size);
-  background-color: var(--s1-stage);
+  /* Fundo, pontilhado e esquema de cor: `.s1-stage` em custom.css. */
 }
 
 .source {

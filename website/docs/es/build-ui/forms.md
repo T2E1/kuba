@@ -178,5 +178,5 @@ Un patrón común es un formulario que se limpia tras una alta exitosa:
 
 - **[Form](/components/form)**, **[Input](/components/input)**,
   **[Validity](/components/validity)** — los contratos completos.
-- **[Recetario › CRUD de usuarios](/build-ui/patterns/user-crud)** — un formulario
-  conectado a un dataset y una lista, sin ningún listener.
+- **[Recetario › Dirección por CEP](/es/build-ui/patterns/address-by-cep)** — un
+  formulario cuyos campos completa una petición, sin ningún listener.

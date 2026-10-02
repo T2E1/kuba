@@ -41,8 +41,7 @@ Every page below is the markdown this documentation site renders. Translations l
 
 - [Recipes](https://t2e1.github.io/kuba/build-ui/patterns/)
 - [Search as you type](https://t2e1.github.io/kuba/build-ui/patterns/search-as-you-type)
-- [User CRUD](https://t2e1.github.io/kuba/build-ui/patterns/user-crud)
-- [Declarative navigation](https://t2e1.github.io/kuba/build-ui/patterns/declarative-navigation)
+- [Address by CEP](https://t2e1.github.io/kuba/build-ui/patterns/address-by-cep)
 
 ## Optional
 

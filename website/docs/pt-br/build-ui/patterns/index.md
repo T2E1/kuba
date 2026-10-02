@@ -13,12 +13,9 @@ boa parte do que as deixa curtas é fiação por arcos.
 - **[Busca enquanto digita](/build-ui/patterns/search-as-you-type)** — um input
   disparando uma requisição, resultados renderizados de um template, com estados
   de erro e vazio. Três elementos, nenhum listener.
-- **[CRUD de usuários](/build-ui/patterns/user-crud)** — adicionar, listar e
-  excluir registros. Quatro arcos fechando um ciclo: formulário → dataset →
-  lista → dataset.
-- **[Navegação declarativa](/build-ui/patterns/declarative-navigation)** — um botão
-  que navega sem conhecer o destino, e um único redirect servindo uma lista
-  inteira.
+- **[Endereço pelo CEP](/build-ui/patterns/address-by-cep)** — um formulário
+  de endereço preenchido pela ViaCEP a partir do CEP. Uma requisição espalhada
+  por seis campos, cada arco pegando a chave de que precisa.
 
 ## Uma nota sobre nomes
 
@@ -26,6 +23,7 @@ O barramento do Echo é compartilhado pela página, e um arco casa sua origem po
 `id`, `name` ou nome de tag. Duas funcionalidades que nomeiem um elemento como
 `users` vão se cruzar — o arco dispara para qualquer uma delas.
 
-As receitas aqui prefixam seus nomes (`crud-users`, `crud-form`) porque este site
-renderiza vários exemplos ao vivo por página. Numa aplicação, dê aos nomes o
-escopo da funcionalidade pelo mesmo motivo.
+Cada receita aqui roda um único exemplo ao vivo, então os nomes ficam curtos
+(`breed`, `cep`). Numa aplicação, onde várias funcionalidades dividem a mesma
+página, dê aos nomes o escopo da funcionalidade (`checkout-cep`) para que não se
+cruzem.

@@ -178,5 +178,6 @@ Um padrão comum é um formulário que se limpa após uma inclusão bem-sucedida
 
 - **[Form](/components/form)**, **[Input](/components/input)**,
   **[Validity](/components/validity)** — os contratos completos.
-- **[Receitas › CRUD de usuários](/build-ui/patterns/user-crud)** — um formulário
-  conectado a um dataset e a uma lista, sem listener nenhum.
+- **[Receitas › Endereço pelo CEP](/pt-br/build-ui/patterns/address-by-cep)** — um
+  formulário cujos campos são preenchidos por uma requisição, sem listener
+  nenhum.
