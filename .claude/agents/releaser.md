@@ -77,12 +77,12 @@ Sem intervalo explícito, o padrão é desde a última tag de versão em `CHANGE
    efeito observável, e explicam a razão quando ela não é óbvia.
 5. **Escrever a nota de migração**, se houver breaking: o que era, o que passa a ser, e
    como converter. Sem isso, um major é só um número.
-6. **Atualizar o pin do CDN.** O site carrega `@acme/lib@<versão>` pela constante
-   `LIB_VERSION` no topo de `website/.vitepress/config.mts:13` — fonte única do pin — e o
-   mesmo número aparece nas três `learn/installation.md`. O workflow
-   `.github/workflows/pages-deploy.yml` lê essa constante para checar se a versão pinada
-   já foi publicada. Ficar para trás faz os exemplos ao vivo rodarem contra código antigo
-   — é dívida silenciosa, porque a página continua carregando.
+6. **Atualizar o pin do CDN.** O site carrega o pacote do jsDelivr pela constante de
+   versão no topo de `website/.vitepress/config.mts` — fonte única do pin, e a mesma que
+   `.github/workflows/pages-deploy.yml` extrai por grep para checar se a versão pinada já
+   foi publicada. O mesmo número aparece nas três `learn/installation.md`. Ficar para trás
+   faz os exemplos ao vivo rodarem contra código antigo — é dívida silenciosa, porque a
+   página continua carregando.
 7. **Verificar antes de entregar:** `bun run test` verde e `bun run release` construindo.
 
 ### Tabela de impacto
@@ -127,5 +127,5 @@ do que quebra, antes do bump.
 ---
 
 **Criado em**: 2026-08-10
-**Atualizado em**: 2026-09-23
-**Versão**: 1.3
+**Atualizado em**: 2026-10-02
+**Versão**: 1.4

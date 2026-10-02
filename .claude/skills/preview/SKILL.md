@@ -106,7 +106,7 @@ não importa (rule 023).
 
 ### O exemplo aparece quebrado na página publicada
 
-**Causa:** usa recurso mais novo que a versão pinada em `LIB_VERSION`, no topo de
+**Causa:** usa recurso mais novo que a versão pinada na constante de versão, no topo de
 `website/.vitepress/config.mts`.
 **Solução:** conferir o pin. Ele fica para trás quando um release não o atualiza — é
 passo do método do `releaser`.
@@ -158,5 +158,5 @@ conteúdo não interceptar o clique" —, não uma lista de tipos aceitos.
 ---
 
 **Criado em**: 2026-08-10
-**Atualizado em**: 2026-09-23
-**Versão**: 1.2
+**Atualizado em**: 2026-10-02
+**Versão**: 1.3

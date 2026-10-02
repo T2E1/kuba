@@ -24,8 +24,8 @@ cada commit e em cada CI, e toda verificação ausente custa um defeito publicad
 - NÃO decide versão nem escreve CHANGELOG — é o ofício do `releaser`.
 - NÃO edita `website/docs/` nem `website/.vitepress/navigation/` — conteúdo e a
   navegação que o descreve são do `writer`.
-- NÃO edita a constante `LIB_VERSION` em `website/.vitepress/config.mts` — o pin de
-  versão é do `releaser`, a cada release.
+- NÃO edita a constante de versão no topo de `website/.vitepress/config.mts` — o pin do
+  CDN é do `releaser`, a cada release.
 - NÃO afrouxa verificação para fazer um commit passar. Regra que atrapalha se discute;
   não se desliga em silêncio.
 
@@ -66,7 +66,7 @@ Mais o relato do que a mudança passa a garantir, e o que ela custa por commit.
 | `.github/workflows/npm-publish.yml` | `bun run test` e `bun run release` antes de publicar |
 | `.github/workflows/pages-deploy.yml` | Build do VitePress em `website/` e publicação no GitHub Pages |
 | `package.json` → `files`, `exports`, `scripts` | O que vai para o npm e como se chama |
-| `website/.vitepress/config.mts` (exceto `LIB_VERSION`) | Composition root do site: `base`, `srcDir`, `outDir`, `locales`, `markdown`, `vite` |
+| `website/.vitepress/config.mts` (exceto a constante de versão pinada) | Composition root do site: `base`, `srcDir`, `outDir`, `locales`, `markdown`, `vite` |
 | `website/.vitepress/plugins/` · `website/.vitepress/theme/` | Mecanismo de build do site — nunca conteúdo ou navegação |
 | `website/package.json` | Dependências e scripts do site, mesmo critério do `package.json` da raiz |
 
@@ -134,5 +134,5 @@ parte da entrega, não verificação opcional.
 ---
 
 **Criado em**: 2026-08-10
-**Atualizado em**: 2026-09-23
-**Versão**: 1.3
+**Atualizado em**: 2026-10-02
+**Versão**: 1.4

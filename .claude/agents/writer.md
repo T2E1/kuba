@@ -44,8 +44,8 @@ antes de saber que tem: qual dos elementos serve para o meu caso.
 - **`website/docs/public/llms.txt`** atualizado quando uma página entra ou muda de propósito.
 - **`website/.vitepress/navigation/sidebar.js`** quando a navegação muda — mais o título
   em `labels.js`, nos três idiomas, e `nav.js` quando o item é de navbar. A `sidebar.js`
-  lê o texto de `labels.js` (`website/.vitepress/navigation/sidebar.js:15`): página nova
-  sem entrada lá aparece na sidebar sem título.
+  lê o texto de `labels.js` (a função `page` de `website/.vitepress/navigation/sidebar.js`):
+  página nova sem entrada lá aparece na sidebar sem título.
 - **Arquivos de raiz** — `README.md`, `CONTRIBUTING.md`, `CODE_OF_CONDUCT.md`,
   `SECURITY.md` — quando o que eles descrevem muda.
 - **Relato** dos exemplos que não rodam mais e do que os quebrou.
@@ -117,16 +117,16 @@ que aconteceu com a lista de scripts, que ficou com entradas diferentes nos dois
    reescrita sobre `md.renderer.rules.fence` (`website/.vitepress/plugins/preview.js:11`,
    pendência do `developer`): por ora o bloco cai no realce de sintaxe padrão. Escrever o
    exemplo como se ele rodasse — ele volta a rodar sem a página mudar.
-5. **Verificar a versão pinada.** O site carrega `@acme/lib@<versão>` do jsDelivr pela
-   constante `LIB_VERSION` no topo de `website/.vitepress/config.mts`, e o mesmo pin
-   aparece nas três `learn/installation.md`. Um exemplo que usa recurso mais novo que o
-   pin não funciona — verificar antes de documentar comportamento recente.
+5. **Verificar a versão pinada.** O site carrega o pacote do jsDelivr pela constante de
+   versão no topo de `website/.vitepress/config.mts`, e o mesmo pin aparece nas três
+   `learn/installation.md`. Um exemplo que usa recurso mais novo que o pin não funciona —
+   verificar antes de documentar comportamento recente.
 6. **Propagar para as traduções.** `website/docs/pt-br/` e `website/docs/es/` espelham a
    árvore inteira de `website/docs/` — inclusive Components e Contributing
-   (`website/docs/pt-br/components/button.md:1`). Cada locale é uma árvore própria
-   (`website/.vitepress/config.mts:89`), sem fallback de idioma: página em inglês sem par
-   traduzido é rota que não existe, e `ignoreDeadLinks: false`
-   (`website/.vitepress/config.mts:47`) faz o link para ela quebrar o build.
+   (`website/docs/pt-br/components/button.md:1`). Cada locale é uma árvore própria (a
+   chave `locales` de `website/.vitepress/config.mts`), sem fallback de idioma: página em
+   inglês sem par traduzido é rota que não existe, e `ignoreDeadLinks: false`, no mesmo
+   arquivo, faz o link para ela quebrar o build.
 7. **Atualizar `website/docs/public/llms.txt`** quando uma página nasce ou muda de
    propósito. É o índice que descreve cada página em uma linha, com URL de rota limpa e
    sem sufixo `.md`.
@@ -156,5 +156,5 @@ exemplo não roda, o achado é o exemplo que não roda.
 ---
 
 **Criado em**: 2026-08-10
-**Atualizado em**: 2026-09-23
-**Versão**: 1.3
+**Atualizado em**: 2026-10-02
+**Versão**: 1.4
